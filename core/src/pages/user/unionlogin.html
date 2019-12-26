@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" type="text/css" href="/union-login#((skin)).css?v=${version}">
+</head>
+
+<body ng-app="appControllers" ng-controller="unionLoginCtrl">
+    <!-- 头部 -->
+    <!--<div class="container" id="unionlogin-page">
+        <div class="login-success">
+            <p class="info"><img width="38" height="36" src="/images/ok.png?v=${version}"> {{i18n('正在登录')}}，{{i18n('请稍等')}}！</p>
+            <p><a href="login.html">{{i18n('点击返回')}}</a></p>
+        </div>
+        <div class="clear"></div>
+    </div>-->
+    <div check-code-tip error-message-tip="errorMessageTip" error="error" btn-class="btn" is-ie="isIE"></div>
+    <!-- <div class="modal" ng-style="{display:errorMessageTip.config.display?'block':'none','z-index':9999}">
+        <div class="dialog {{errorMessageTip.config.size||'sm'}}" name="delConfirmDialog" ng-class="{'notie':!isIE}" ng-style="{display:errorMessageTip.config.display?'block':'none'}">
+            <a href="javascript:void(0);" target="_self" class="dialog-close" ng-class="{'dialog-close-ie':isIE,'dialog-close-notie':!isIE}"
+                ng-show="errorMessageTip.config.close&&!errorMessageTip.config.btnGoBack" ng-click="error.closeTip()">&times;</a>
+            <div class="dialog-content">
+                <div class="dialog-header" ng-class="{'dialog-header-notie':!isIE}">
+                    <h5 class="dialog-title">{{errorMessageTip.config.title}}</h5>
+                </div>
+                <div class="dialog-body" ng-show="!errorMessageTip.config.isHtml">
+                    {{errorMessageTip.config.message}}
+                </div>
+                <div class="dialog-body" ng-include="errorMessageTip.config.message" ng-if="errorMessageTip.config.isHtml"></div>
+                <div class="dialog-footer">
+                    <button type="button" class="btn ok" ng-show="errorMessageTip.config.btnOK" ng-click="errorMessageTip.config.ok()">{{errorMessageTip.config.btnOKText}}
+                    </button>
+                    <button type="button" class="btn cancel" ng-show="errorMessageTip.config.btnCancel" ng-click="errorMessageTip.config.cancel()">{{errorMessageTip.config.btnCancelText}}
+                    </button>
+                    <button type="button" class="btn ok" ng-show="errorMessageTip.config.btnGoBack" ng-click="errorMessageTip.config.goBack(errorMessageTip.config.btnGoBackUrl)">
+                        {{errorMessageTip.config.btnGoBackText}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    @@include("script.html")
+    <script type="text/javascript" src="/union-login.js?v=${version}"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=unionlogin"></script>
+</body>
+
+</html>

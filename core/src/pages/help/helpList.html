@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <!-- <title>帮助中心</title> -->
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/cms/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/help#((skin)).css?v=${version}">
+</head>
+<base target="_self"/>
+<body ng-app="appControllers" ng-controller="helpListCtrl" class="help-page">
+  @@include("trade-header.html")
+<div class="notification with-nav"></div><!-- #3a3f51 -->
+<span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+    @@include("global-nav.html")
+</span>
+<div class="help-top help-shadow mgB20">
+    <div class="help-title">
+        <h1>
+          <a target="_self" href="/index.html">
+              <img class="headerImg" src="../images/company/loading.gif" width="180" alt="" id="g_logo" ng-src="{{frontBasicSetting.websiteLogo}}">
+          </a>
+          <a target="_self" href="/index.html">
+            <img
+              class="headerImg"
+              src="../images/stb_logo.png"
+              alt=""
+              width="142"
+              ng-src="{{ companyLogoUrl }}"
+            />
+          </a>
+          <span class="help-center" href="/help.html">{{isShowHelpTitle?i18n('帮助中心'):i18n('资讯')}}</span>
+        </h1>
+        <p ng-show="isShowHelpTitle">
+            <input name="keyword" ng-model="keyword" ng-enter="search()" placeholder="{{i18n('输入问题关键字')}}，{{i18n('找到答案')}}"/>
+            <span class="" ng-click="search()">{{i18n('搜索')}}</span>
+        </p>
+    </div>
+</div>
+<div class="container">
+    <div class="help-nav" ng-if="!isShowSearch && isShowHelpTitle"><a href="/help.html">{{i18n('首页')}}</a>
+        <i class="icon-arrow-right4 mgL10 mgR10"></i>
+        <span ng-repeat="e in categoryList">
+            <a ng-href="/help.html">{{i18n('帮助中心')}}</a>
+            <i class="icon-arrow-right4 mgL10 mgR10"></i>
+        </span>
+        <span ng-repeat="e in categoryList">
+            <a ng-href="/helpList.html?categoryId={{e.id}}">{{e.categoryName}}</a>
+            <!-- <i class="icon-arrow-right4 mgL10 mgR10"></i> -->
+        </span>
+        <!-- <span ng-repeat="e in categoryList">
+            <a ng-href="/helpVideoList.html?objUser=1">{{i18n('视频列表')}}</a>
+            <i class="icon-arrow-right4 mgL10 mgR10"></i>
+        </span> -->
+    </div>
+
+    <!-- help-container -->
+    <div class="help-container clearfix">
+      <!-- help-sider -->
+      <div class="help-sider">
+        <h3>常见问题分类</h3>
+        <dl class="active">
+          <dt><span></span>购物指南</dt>
+          <dd>
+            <ul>
+              <li><a class="active" href="">会员权益</a></li>
+              <li><a href="">审批订单</a></li>
+              <li><a href="">关于协议采购</a></li>
+              <li><a href="">快速订单</a></li>
+            </ul>
+          </dd>
+        </dl>
+        <dl class="">
+          <dt><span></span>支付购买</dt>
+          <dd>
+            <ul>
+              <li><a href="">支付购买</a></li>
+              <li><a href="">会员权益</a></li>
+              <li><a href="">会员权益</a></li>
+              <li><a href="">会员权益</a></li>
+              <li><a href="">会员权益</a></li>
+            </ul>
+          </dd>
+        </dl>
+        <dl class="">
+          <dt><span></span>购物指南</dt>
+          <dd>
+            <ul>
+              <li><a href="">会员权益</a></li>
+              <li><a href="">会员权益</a></li>
+              <li><a href="">会员权益</a></li>
+              <li><a href="">会员权益</a></li>
+              <li><a href="">会员权益</a></li>
+            </ul>
+          </dd>
+        </dl>
+        <dl class="">
+          <dt><span></span>购物指南</dt>
+          <dd>
+            <ul>
+              <li><a href="">购物指南</a></li>
+              <li><a href="">购物指南</a></li>
+              <li><a href="">购物指南</a></li>
+              <li><a href="">购物指南</a></li>
+              <li><a href="">会员权益</a></li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
+
+      <!-- help-text-content -->
+      <div class="help-content">
+        <div class="help-content-title">企业会员权益说明</div>
+        <div class="help-content-article">
+          <p>这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容</p>
+        </div>
+
+        <div class="help-content-article">
+          <div class="subtitle">分段标题</div>
+          <p>这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容</p>
+        </div>
+
+        <div class="help-content-article">
+          <div class="subtitle">分段标题</div>
+          <p>这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容这是一段正文内容</p>
+        </div>
+
+        <div class="help-content-footnote">
+          END
+        </div>
+      </div>
+    </div>
+    <!-- help-continer end -->
+
+    <div class="helpBox-list">
+        <h2 ng-show="isShowSearch">{{searchResultDesc}}</h2>
+        <ul>
+            <li ng-repeat="e in searchArticleList">
+                <span><a href="/helpDetail.html?id={{e.id}}&isHelp={{isHelp}}">{{e.displayTitle}}</a></span>
+                {{i18n('发表于')}}{{e.createTime | date:'yyyy年MM月dd日 HH:mm:ss'}}
+            </li>
+        </ul>
+    </div>
+
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount" total-page="totalPage" ng-if="isShowPage"></div>
+</div>
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/helpList.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=helpList"></script>
+
+</body>
+</html>

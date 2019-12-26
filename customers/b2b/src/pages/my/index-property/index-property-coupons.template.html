@@ -1,0 +1,141 @@
+<div id="coupon" class="award-page">
+    <div class="home-allTitle award-title-cg">
+        <span>优惠券</span>
+    </div>
+    <div class="award-nav award-nav-cg">
+        <span ng-click="activeNum=1" ng-class="{'goods-active':activeNum==1}" class="text hand">可使用</span>
+        <span class="line"></span>
+        <span class="text hand" ng-click="activeNum=2" ng-class="{'goods-active':activeNum==2}">已使用</span>
+        <span class="line"></span>
+        <span class="text hand" ng-click="activeNum=3" ng-class="{'goods-active':activeNum==3}">已过期</span>
+    </div>
+    <div class="coupon-bigBox" ng-show="activeNum==1">
+        <div class="cg-coupon-box">
+            <div class="coupon-list-box" ng-repeat="couponL in couponList">
+                <div class="coupon-left">
+                    <div class="left-top">
+                        <span class="money-icon">￥</span>
+                        <span class="money-num">{{couponL.couponValue}}</span>
+                        <span class="money-text" ng-if="couponL.couponDiscountType == 0">抵用券</span>
+                    </div>
+                    <div class="left-low-top">
+                        <span>{{couponL.moneyRule}}</span>
+                    </div>
+                    <div class="left-low-bottom">
+                        <span class="low-bottom-text">{{couponL.refDescription}}</span>
+                        <i class="bottom-arrow" ng-click="isShowDesc=!isShowDesc"></i>
+                        <div class="bottom-text-position" ng-show="isShowDesc">
+                            <i class="close-bottom-position" ng-click="isShowDesc=!isShowDesc"></i>
+                            <span>说明：{{couponL.refDescription}}</span>
+                        </div>
+                    </div>
+                    <div class="left-bottom">
+                        <span>有效期：{{couponL.startTime | date: 'yyyy-MM-dd '}}-{{couponL.endTime | date: 'yyyy-MM-dd '}}</span>
+                    </div>
+                </div>
+                <div class="coupon-right">
+                    <span class="right-img">
+                        <span class="right-img-two-text">可使用</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="award-none" ng-if="isShowIcon">
+            <div class="award-left">
+                <span></span>
+            </div>
+            <div class="award-right">
+                <span>您还没有优惠券</span>
+            </div>
+        </div>
+    </div>
+
+    <!--已使用-->
+    <div class="runout-bigBox" ng-show="activeNum==2">
+        <div class="cg-coupon-box">
+            <div class="coupon-list-box" ng-repeat="couponL in couponList">
+                <div class="coupon-left">
+                    <div class="left-top">
+                        <span class="money-icon">￥</span>
+                        <span class="money-num">{{couponL.couponValue}}</span>
+                        <span class="money-text" ng-if="couponL.couponDiscountType == 0">抵用券</span>
+                    </div>
+                    <div class="left-low-top">
+                        <span>{{couponL.moneyRule}}</span>
+                    </div>
+                    <div class="left-low-bottom">
+                        <span class="low-bottom-text">全品类（特例商品除外）全品类（特例商品除外</span>
+                        <i class="bottom-arrow" ng-click="isShowDesc=!isShowDesc"></i>
+                        <div class="bottom-text-position" ng-show="isShowDesc">
+                            <i class="close-bottom-position" ng-click="isShowDesc=!isShowDesc"></i>
+                            <span>说明：活动说明活动说明活动说明活动说明活动说明活动说明活动说明活动说明活动说明</span>
+                        </div>
+                    </div>
+                    <div class="left-bottom">
+                        <span>有效期：{{couponL.startTime | date: 'yyyy-MM-dd '}}-{{couponL.endTime | date: 'yyyy-MM-dd '}}</span>
+                    </div>
+                </div>
+                <div class="coupon-right">
+                    <span class="right-img-two">
+                        <span class="right-img-two-text">已使用</span>
+                    </span>
+                </div>
+            </div>
+            <div class="award-none" ng-if="isShowIcon">
+                <div class="award-left">
+                    <span></span>
+                </div>
+                <div class="award-right">
+                    <span>您还没有优惠券</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--已过期-->
+    <div class="expired" ng-show="activeNum==3">
+        <div class="cg-coupon-box">
+            <div class="coupon-list-box" ng-repeat="couponL in couponList">
+                <div class="coupon-left">
+                    <div class="left-top">
+                        <span class="money-icon">￥</span>
+                        <span class="money-num">{{couponL.couponValue}}</span>
+                        <span class="money-text" ng-if="couponL.couponDiscountType == 0">抵用券</span>
+                    </div>
+                    <div class="left-low-top">
+                        <span>{{couponL.moneyRule}}</span>
+                    </div>
+                    <div class="left-low-bottom">
+                        <span class="low-bottom-text">全品类（特例商品除外）全品类（特例商品除外</span>
+                        <i class="bottom-arrow" ng-click="isShowDesc=!isShowDesc"></i>
+                        <div class="bottom-text-position" ng-show="isShowDesc">
+                            <i class="close-bottom-position" ng-click="isShowDesc=!isShowDesc"></i>
+                            <span>说明：活动说明活动说明活动说明活动说明活动说明活动说明活动说明活动说明活动说明</span>
+                        </div>
+                    </div>
+                    <div class="left-bottom">
+                        <span>有效期：{{couponL.startTime | date: 'yyyy-MM-dd '}}-{{couponL.endTime | date: 'yyyy-MM-dd '}}</span>
+                    </div>
+                </div>
+                <div class="coupon-right">
+                    <span class="right-img-two">
+                        <span class="right-img-two-text">已过期</span>
+                    </span>
+                </div>
+            </div>
+            <div class="award-none" ng-if="isShowIcon">
+                <div class="award-left">
+                    <span></span>
+                </div>
+                <div class="award-right">
+                    <span>您还没有优惠券</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 有优惠券的时候 end -->
+    <!-- 分页 begin -->
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+         total-page="totalPage" ng-if="isShowPage"></div>
+    <!-- 分页 end -->
+
+</div>

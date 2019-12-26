@@ -1,0 +1,115 @@
+<div class='content authorizate'>
+    <div class='home-allTitle pdL20 disIB w100 border-box'>
+        {{i18n('审批单')}}
+        <!-- <p class="fanhui fr">
+            << {{i18n('返回')}}
+        </p> -->
+    </div>
+    <div class='info'>
+        <div class='info-top'>
+                <ul class="input datetimepicker pdL20 clearfix">
+                    <li>
+                        <div class="datetimepicker">
+                            <span class="date-title f14">{{i18n('下单时间')}}：</span>
+                            <div class="dis datetimepicker-content">
+                                <div class="input-group">
+                                    <input datetimepicker ng-model="queryOrderParams.orderMinTime" options="datetimepickerOptions1" max-date="queryOrderParams.orderMaxTime" type="text" class="timeiconbg date-time-picker-input">
+                                    <span class="input-group-addon">至</span>
+                                    <input datetimepicker ng-model="queryOrderParams.orderMaxTime" options="datetimepickerOptions2" min-date="queryOrderParams.orderMinTime" type="text" class="timeiconbg date-time-picker-input">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span>{{i18n('订单编号')}}：</span>
+                        <input type="text" ng-model="queryOrderParams.orderId">
+                    </li>
+                    <li>
+                        <div class="datetimepicker">
+                            <span class="date-title f14">{{i18n('审批时间')}}：</span>
+                            <div class="dis datetimepicker-content">
+                                <div class="input-group">
+                                    <input datetimepicker ng-model="queryOrderParams.approvalMinTime" options="datetimepickerOptions3" max-date="queryOrderParams.approvalMaxTime" type="text"class="timeiconbg date-time-picker-input" value="">
+                                    <span class="input-group-addon">至</span>
+                                    <input datetimepicker ng-model="queryOrderParams.approvalMaxTime" options="datetimepickerOptions4" min-date="queryOrderParams.approvalMinTime" type="text" class="timeiconbg date-time-picker-input">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <span class='xdr'>{{i18n('下单人')}}：</span>
+                        <input type="text" ng-model="queryOrderParams.orderPerson">
+                    </li>
+                    <li>
+                        <span>{{i18n('申请人部门')}}：</span>
+                        <select ng-model="queryOrderParams.costCenterId" class='sqbm'>
+                            <option value="-1">{{i18n('全部')}}</option>
+                            <option ng-repeat="costCenter in costCenterList" ng-value="costCenter.id">{{costCenter.costName}}</option>
+                        </select>
+                    </li>
+                </ul>
+                <div class="operation txtcenter">
+                    <button ng-click="clickQuery()" class="search mgR5">{{i18n('查询')}}</button>
+                    <button ng-click="resetParams()" class="reset" >{{i18n('重置')}}</button>
+                </div>
+        </div>
+        <div class='info-tab clearfix'>
+            <ul>
+                <li ng-click="filterStatus(0)" ng-class="approvalStatus==0?'show':''" style="cursor: pointer;">{{i18n('待审批')}}</li>
+                <li> | </li>
+                <li ng-click="filterStatus(2)" ng-class="approvalStatus==2?'show':''" style="cursor: pointer;">{{i18n('审批通过')}}</li>
+                <li> | </li>
+                <li ng-click="filterStatus(3)" ng-class="approvalStatus==3?'show':''" style="cursor: pointer;">{{i18n('审批不通过')}}</li>
+                <li> | </li>
+                <li ng-click="filterStatus(-1)" ng-class="approvalStatus==-1?'show':''" style="cursor: pointer;">{{i18n('全部')}}</li>
+            </ul>
+        </div>
+        <div ng-if="approvalStatus==0||approvalStatus==-1" class='pliang'>
+            <a ng-click="batchChangeOrderStatus(2)" href="javascript:;">{{i18n('批量审批通过')}}</a>
+            <a ng-click="batchChangeOrderStatus(3)" href="javascript:;">{{i18n('批量审批拒绝')}}</a>
+        </div>
+        <div style="margin-top: 10px">
+            <ul class='alltitle clearfix'>
+                <!-- <li> <div class='default-img'></div></li> -->
+                <li><input type="checkbox" ng-model="allCheck" ng-change="changeAllCheck()"></li>
+                <li>{{i18n('订单编号')}}</li>
+                <li>{{i18n('订单金额')}}</li>
+                <li>{{i18n('下单人')}}</li>
+                <li>{{i18n('下单人部门')}}</li>
+                <li>{{i18n('下单日期')}}</li>
+                <li>{{i18n('预计发货日期')}}</li>
+                <li>{{i18n('审批状态')}}</li>
+                <li>{{i18n('审批时间')}}</li>
+                <li>{{i18n('操作')}}</li>
+            </ul>
+            <div class='content1'>
+                <div ng-if="orderApprovalList.length==0" style="text-align: center">无数据</div>
+                <ul ng-repeat="order in orderApprovalList" class='allcontent clearfix'>
+                    <li><input ng-if="order.approvalStatus==0" type="checkbox" ng-model="order.isSelected" ng-change="changeCheckBox()">&nbsp;</li>
+
+                    <li>
+                        <a href="/costDetail.html?id={{order.id}}&orderCode={{order.orderCode}}">{{order.orderCode}}</a>
+                    </li>
+
+                    <li title="{{order.orderAmount | currency:'￥'}}">{{order.orderAmount | currency:'￥'}}</li>
+                    <li>{{order.nickName || '&nbsp;'}}</li>
+                    <li>{{order.costName || '&nbsp;'}}</li>
+                    <li>{{order.orderDate.slice(0,10) || '&nbsp;'}}</li>
+                    <li>{{order.shipmentDate || '&nbsp;'}}</li>
+                    <li>{{order.approvalStatusName || '&nbsp;'}}</li>
+                    <li>{{order.approvalDate || '&nbsp;'}}</li>
+                    <li>
+                        <em ng-if="order.approvalStatus==0" ng-click="changeOrderStatus(order, 2)">{{i18n('通过')}}</em>
+                        <em ng-if="order.approvalStatus==0" ng-click="changeOrderStatus(order, 3)">{{i18n('拒绝')}}</em>
+                        <em ng-if="order.approvalStatus==0" ng-click="changeOrderStatus(order, 4)">{{i18n('退回')}}</em>
+                    </li>
+                </ul>
+                <div class='money'>
+                    <span>{{i18n('订单总金额')}}: <em>{{totalMoney | currency:'￥'}}</em></span>
+                    <span>{{i18n('当页金额')}}: <em>{{currentMoney | currency:'￥'}}</em></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div pagination page-size="pageSize" page-no="currentPage" total-page="totalPage"></div>
+</div>

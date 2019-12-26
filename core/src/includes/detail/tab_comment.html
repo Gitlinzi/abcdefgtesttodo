@@ -1,0 +1,118 @@
+<div id="evaluation" class="content" ng-if="$parent.switchConfig.guide.item.goodNavigation.goodEvaluation">
+    <div ng-if="comment.mpLabelList.length<0&&comment.commentList.length<0" class="evaluation-none">
+        {{i18n('商品还没有收到过评价哦')}}~
+    </div>
+    <div ng-if="comment.mpLabelList.length>=0||comment.commentList.length>=0">
+        <div class="evaluation-title">
+            <span>{{i18n('商品评价')}}</span>
+        </div>
+        <div class="Praise-num">
+            <span>{{i18n('好评度')}}</span>
+            <span class="change-cs">{{comment.positiveRate||0}}%</span>
+        </div>
+        <div class="container-title">
+            <label class="comment-default" ng-repeat="appraise in comment.mpLabelList | uniqueText:'labelflag'" ng-class="{'comment-checked': comment.rateFlag == appraise.labelflag}" ng-click="comment.clickEvaluationList(appraise.labelflag)">
+                <span>{{appraise.labelName}}({{appraise.labelNum}})</span>
+            </label>
+        </div>
+        <div class="evaluation-box">
+            <div class="chase-bigBox"  ng-repeat="coment in comment.commentList">
+                <dl class="clearfix">
+                    <dt>
+                        <a href="">
+                            <img width="30" height="30" src="../../images/temporary/bind-img.png" ng-src="{{coment.userImg}}" alt="">
+                            <span ng-if="coment.nickName">{{coment.nickName}}</span>
+                            <span ng-if="!coment.nickName">{{coment.userUsername}}</span>
+                        </a>
+                    </dt>
+                    <dd>
+                        <div class="stars">
+                            <span class="no-active" ng-class="{'active':coment.rate>=1}"></span>
+                            <span class="no-active" ng-class="{'active':coment.rate>=2}"></span>
+                            <span class="no-active" ng-class="{'active':coment.rate>=3}"></span>
+                            <span class="no-active" ng-class="{'active':coment.rate>=4}"></span>
+                            <span class="no-active" ng-class="{'active':coment.rate>=5}"></span>
+                        </div>
+                        <div class="evaluation-text">
+                            <span>{{coment.content}}</span>
+                        </div>
+                        <ul class="eva-img clearfix"  ng-if="coment.imgArr.length > 0">
+                            <!-- transverse CSS属性表示照片横放 -->
+                            <!-- vertical CSS属性表示照片竖放 -->
+                            <li ng-class="{'active': img.on}" class="transverse" ng-click="pcIteminfo.switchImg(coment, $index)" ng-repeat="img in coment.imgArr">
+                                <img width="48" height="36" ng-src="{{img.url}}" alt="">
+                            </li>
+                        </ul>
+                        <!--大图部分 begin-->
+                        <dl class="bigPic clearfix" ng-show="coment.imgFold">
+                            <dd class="marb20px">
+                                <div class="fold" ng-click="coment.imgFold = false"><i class="icon icon-fold"></i> {{i18n('收起')}}</div>
+                                <div class="slider">
+                                    <img ng-repeat="img in coment.imgArr" ng-class="{on: img.on}" ng-src="{{img.url}}" alt="">
+                                    <div class="direction left" ng-show="coment.imgOnIndex > 0">
+                                        <div class="btn" ng-click="pcIteminfo.switchImg(coment, coment.imgOnIndex-1)"></div>
+                                    </div>
+                                    <div class="direction right" ng-show="coment.imgOnIndex < coment.imgArr.length-1">
+                                        <div class="btn" ng-click="pcIteminfo.switchImg(coment, coment.imgOnIndex+1)"></div>
+                                    </div>
+                                </div>
+
+                            </dd>
+                        </dl>
+                        <!-- 商家回复 begin -->
+                        <div ng-if="coment.replyContent.length>0" class="reply-box">
+                            <div class="reply-text">
+                                <span>{{i18n('商家回复')}}：</span>
+                                <span class="width728 c3">{{coment.replyContent}}</span>
+                            </div>
+                            <span class="reply-time">{{coment.replyContentTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                        </div>
+                        <!-- 商家回复 end -->
+                        <!-- 追评 begin -->
+                        <div style="position: relative;" ng-repeat="addComent in coment.addMPCommentVOList" ng-if="coment.addMPCommentVOList.length>0 && $parent.switchConfig.guide.item.addComment">
+                            <div class="chase-comment">
+                                <span class="f12" ng-if= "!parseInt((addComent.addContentTime-coment.createTime)/86400000)">{{i18n('当天追加')}}</span>
+                                <span class="f12" ng-if= "parseInt((addComent.addContentTime-coment.createTime)/86400000)">{{parseInt((addComent.addContentTime-coment.createTime)/86400000)}} {{i18n('天追加')}}</span>
+                            </div>
+                            <span class="c3 f12" ng-class="{'mgB15 transverse-inline-block': addComent.addMpShinePicList.length<=0}">
+                                    {{addComent.addContent}}
+                                </span>
+                            <ul class="eva-img clearfix add-img"  ng-if="addComent.addMpShinePicList.length > 0">
+                                <!-- transverse CSS属性表示照片横放 -->
+                                <!-- vertical CSS属性表示照片竖放 -->
+                                <li ng-class="{'active': img.on}" class="transverse" ng-click="pcIteminfo.switchImg(addComent, $index)" ng-repeat="img in addComent.addImgArr track by $index">
+                                    <img width="48" height="36" ng-src="{{img.url}}" alt="">
+                                </li>
+                            </ul>
+                            <dl class="bigPic clearfix" ng-show="addComent.addImgFold">
+                                <dd class="marb20px">
+                                    <div class="fold" ng-click="addComent.addImgFold = false"><i class="icon icon-fold"></i> {{i18n('收起')}}</div>
+                                    <div class="slider">
+                                        <img ng-repeat="img in addComent.addImgArr" ng-class="{on: img.on}" ng-src="{{img.url}}" alt="">
+                                        <div class="direction left" ng-show="addComent.imgOnIndex > 0">
+                                            <div class="btn" ng-click="pcIteminfo.switchImg(addComent, addComent.imgOnIndex-1)"></div>
+                                        </div>
+                                        <div class="direction right" ng-show="addComent.imgOnIndex < addComent.addMpShinePicList.length-1">
+                                            <div class="btn" ng-click="pcIteminfo.switchImg(addComent, addComent.imgOnIndex+1)"></div>
+                                        </div>
+                                    </div>
+                                </dd>
+                            </dl>
+                            <!-- 商家回复 begin -->
+                            <div ng-if="addComent.replyAddContent.length>0" class="reply-box">
+                                <div class="reply-text">
+                                    <span>{{i18n('商家回复')}}：</span>
+                                    <span class="width728">{{addComent.replyAddContent}}</span>
+                                </div>
+                                <span class="reply-time">{{addComent.replyAddContentTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                            </div>
+                            <!-- 商家回复 end -->
+                        </div>
+                    </dd>
+                </dl>
+            </div>
+            <div pagination page-size="comment.pageSize" page-no="comment.pageNo" total-count="comment.totalCount" total-page="comment.totalPage"></div>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>

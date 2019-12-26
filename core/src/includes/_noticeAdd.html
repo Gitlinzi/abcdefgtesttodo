@@ -1,0 +1,55 @@
+<form class="form add-user" id="addressEdit" name="addressEdit" novalidate style="display: block">
+        <div class="add-title clearfix">
+            <span class="title-text">{{i18n('新增公告')}}</span>
+            <span class="close-img" ng-click="notice.wangFuEditcancel()"></span>
+        </div>
+        <div ng-init="hasError={color:'#ff0000'}">
+            <dl class="clearfix">
+                <dt>
+                    <span class="colorRed">*</span>
+                    <span>{{i18n('标题')}}:</span>
+                </dt>
+                <dd>
+                    <input type="text" class="input seem-height"placeholder="{{i18n('请输入')}}"id="title"style="padding-left:10px;" maxlength="20"
+                             name="title"
+                             ng-model="notice.title"
+                             ng-blur="validateStatus.nameTipShow=false"
+                             ng-focus="validateStatus.nameTipShow=true"
+                             ng-pattern="/^[\u4E00-\u9FA5\w\d-]{1,20}$/"
+                             required>
+                        <span ng-show="addressEdit.userName.$error.required">{{i18n('标题不能为空')}}</span>
+                        <span ng-show="addressEdit.userName.$error.pattern">{{i18n('仅支持')}}20{{i18n('个字符以内的中文')}}、{{i18n('英文或数字')}}</span>
+                    </div>
+                    <div class="clear"></div>
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>
+                    <span class="colorRed">*</span>
+                    <span>{{i18n('支持终端')}}:</span>
+                </dt>
+                <dd>
+                    <span ng-repeat="terminal in notice.terminalList track by $index"> 
+                        <i class="{{terminal.checked ?'terChecked':'terminal'}}" ng-click="terminal.checked=!terminal.checked"></i> {{terminal.name}}
+                    </span>
+                    <!-- <span ng-repeat="terminal in notice.terminalList track by $index">
+                        <input type="checkbox" style="width: 24px;vertical-align: middle;border: solid 1px #cccccc;"/>{{terminal.name}}
+                    </span> -->
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>
+                    <span class="colorRed">*</span>
+                    <span>{{i18n('文章内容')}}:</span>
+                </dt>
+                <dd style="width: 80%">
+                    <div id="noticeEditor" ng-model="notice.ContentPromt"></div>
+                </dd>
+            </dl>
+            <div class="notice-bottom">
+                <input type="button" class="sure-btn nob" value="{{i18n('保存')}}" ng-click="SaveOpra()"/>
+                <input type="button" class="cancle-btn nob" value="{{i18n('取消')}}" ng-click="notice.wangFuEditcancel()"/>
+            </div>
+        </div>
+    </form>
+    

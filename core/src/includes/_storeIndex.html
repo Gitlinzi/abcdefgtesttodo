@@ -1,0 +1,52 @@
+<div class="module">
+    <div class="mt">
+        <h2>{{i18n('热门产品')}}</h2>
+    </div>
+    <div class="mc">
+        <div id="store-pro">
+            <a href="item.html?itemId={{prod.mpId}}" class="pro" ng-repeat="prod in storehotprod">
+                <i ng-class="{'icon-bargain':prod.isBargain==2 || prod.isBargain==3,'icon-presale':prod.saleType==3}" ng-if="prod.isBargain==2 || prod.isBargain==3 || prod.saleType==3"></i>
+                <img width="220" height="220" ng-src="{{ prod.picUrl }}" alt="{{ pro.name }}">
+                <p class="price" ng-if="prod.isBargain != 3">{{prod.price | currency:'￥'}}</p>
+                <h5>{{ prod.name }}</h5>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="module">
+    <!--<div class="mt">
+        <h2>{{i18n('公司简介')}}</h2>
+    </div>
+    <div class="mc">
+        <img class="lazy" src="/images/loading.jpg" data-original="/images/store-cmp.jpg?v=${version}" alt="">
+    </div>-->
+
+</div>
+<!--<div class="module">
+    <div class="mt">
+        <h2>{{i18n('发货说明')}}</h2>
+    </div>
+    <div class="mc">
+        <ul class="example1">
+            <li>{{i18n('上海客户发申通快递')}}（{{i18n('或我司安排发货')}}）{{i18n('包邮')}}。</li>
+            <li>{{i18n('上海以外的客户')}}，{{i18n('由于全国各地的物流运费不统一')}}，{{i18n('选购之前请联系客服确认实际运费')}}！</li>
+            <li>{{i18n('由于宝贝的体积重大')}}，{{i18n('运输过程中难免碰撞')}}，{{i18n('如造成小面积的油漆划痕等不影响使用的小问题')}}，{{i18n('敬请朋友谅解')}}！</li>
+            <li>{{i18n('该宝贝为大件商品')}}，{{i18n('物流公司只送到楼下')}}，{{i18n('不送上门')}}，{{i18n('请知晓')}}！</li>
+            <li>{{i18n('此处自由编辑')}}。</li>
+        </ul>
+    </div>
+</div>-->
+<!--<div class="module">
+    <div class="mt">
+        <h2>{{i18n('关于发票')}}</h2>
+    </div>
+    <div class="mc">
+        <ul class="example2">
+            <li>{{i18n('本店的所有宝贝都可以免费开具正规')}}17{{i18n('个点的增值税发票或普通票')}}，{{i18n('发票真伪可在税局网站查询')}}。</li>
+            <li>{{i18n('请有需要的亲们在付款后提供开票资料给客服办理')}}。</li>
+            <li>{{i18n('发票采用快递单独寄送')}}，{{i18n('免收快递费用')}}，{{i18n('费用由我方承担')}}。</li>
+            <li>{{i18n('不开票宝贝价格不变')}}，{{i18n('谢谢合作')}}。</li>
+            <li>{{i18n('此处自由编辑')}}。</li>
+        </ul>
+    </div>
+</div>-->

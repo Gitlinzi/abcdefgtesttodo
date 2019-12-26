@@ -1,0 +1,220 @@
+/* 头部导航 */
+
+#h-nav {
+    background-color:  @themeColor;
+    border-bottom: 2px solid @themeColor;
+    & .container {
+        position: relative;
+        height: 39px;
+        z-index: 120;
+        background-color: transparent;
+    }
+    & .icon-arrow-bottom {
+        position: absolute;
+        top: 20px;
+        right: 8px;
+    }
+    & .icon-arrow-right {
+        position: absolute;
+        top: 16px;
+        right: 10px;
+        z-index: 10;
+    }
+    & .icon-jiao {
+        position: absolute;
+        top: -6px;
+        right: 132px;
+        width: 0;
+        height: 0;
+        border-bottom: 6px solid @clearColor;
+        border-left: 12px solid transparent;
+    }
+    & .side-nav {
+        position: relative;
+        float: left;
+        width: 175px;
+        height: 41px;
+        padding-left: 15px;
+        color: @whiteColor;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 40px; //background-color: darken(@themeColor, 4%);
+        background-color: rgba(70, 70, 70, 0.9);
+    }
+    & .side-ul {
+        //padding-top: 14px;
+        display: none;
+        //height: 386px;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 190px;
+        font-size: 0;
+        font-weight: normal;
+        background-color: rgb(70, 70, 70);    /*不支持rgba的浏览器*/
+        background-color: rgba(70, 70, 70, 0.9);  /*支持rgba的浏览器*/
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#e5707070,endColorstr=#e5707070);
+        background: none\9;
+        overflow: inherit;
+        height: 393px;
+        padding-top: 8px;
+        & li {
+            *margin-top: -1px;
+            _margin-top: 0;
+            // border-bottom: 1px solid @88GreyColor;
+            *zoom: 1; //&:hover a,
+            &.active .nav-type a {
+                border-left: 0;
+            }
+            &.active a {
+                color: @blackColor;
+                background-color: @whiteColor;
+                border-left: 1px solid @44GreyColor;
+                &:hover {
+                    color: @clearColor;
+                }
+            }
+            &.active .highlight {
+                color: @clearColor;
+            }
+        }
+        .highlight {
+            color: @clearColor;
+        }
+        & a {
+            position: relative;
+            display: block;
+            padding-left: 15px;
+            color: @whiteColor;
+            font-size: 14px;
+            // line-height: 42px;
+            line-height: 35px;
+            &:hover {
+                color: @clearColor;
+            }
+        }
+        &.active {
+            display: block;
+        }
+        &.fixed {
+            display: block;
+        }
+        & .square{
+            position: absolute;
+            height:14px;
+            width:14px;
+            background-color: @indexSquare;
+            top:9px;
+            left:15px;
+            -webkit-border-radius:7px;
+            -moz-border-radius:7px;
+            border-radius:7px;
+        }
+    }
+    & .nav-items {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 190px; //width: 684px;
+        width: 988px;
+        min-height: 380px;
+        padding: 20px 20px 0 0;
+        background-color: @whiteColor;
+        border-right: 1px solid @navColor;
+        border-bottom: 1px solid @navColor; //overflow: hidden;
+        -webkit-box-shadow: 2px 0px 7px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 2px 0px 7px rgba(0, 0, 0, 0.2);
+        box-shadow: 2px 0px 7px rgba(0, 0, 0, 0.2);
+        & .hide {
+            display: none;
+        }
+        & .nav-left {
+            width: 960px;
+            float: left;
+        }
+        & .nav-right {
+            width: 960px;
+            float: left;
+        }
+        & .nav-type {
+            float: left;
+            width: 960px;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: normal;
+            .highlight {
+                color: @clearColor;
+            }
+            & ul {
+                line-height: 0;
+            }
+            & li {
+                display: inline-block;
+                height: 16px;
+                padding: 0 9px 0 10px;
+                margin-bottom: 7px;
+                line-height: 16px;
+                border-left: 1px solid @ddGreyColor;
+                *display: inline;
+                *zoom: 1;
+                border-bottom: 0;
+                &:first-child {
+                    padding-left: 0;
+                    border-left: none;
+                }
+            }
+            & a {
+                padding: 0;
+                line-height: 14px;
+                color: @55GreyColor;
+                &:hover {
+                    color: @clearColor;
+                }
+            }
+            & .hot a {
+                color: @themeColor;
+                &:hover {
+                    color: @clearColor;
+                }
+            }
+        }
+        & h5 {
+            margin: 0 0 7px 0;
+            padding-bottom: 9px;
+            font-size: 14px;
+            word-wrap: break-word;
+            word-break: break-all;
+            border-bottom: 1px dashed @ccGreyColor;
+        }
+    }
+    & .main-nav {
+        font-size: 16px;
+         font-weight: bold;
+
+        margin-top: 1px; //border-bottom: 1px solid @themeColor;
+        & li {
+            position: relative;
+            float: left;
+            margin: 0 20px;
+            position: relative;
+            & .op-icons-hot {
+                position: absolute;
+                top: 5px;
+            }
+            & .op-icons-new{
+                position: absolute;
+                top:5px;
+            }
+        }
+        & a {
+            display: inline-block; //color: @bbGreyColor;
+            line-height: 40px;
+            color: @whiteColor;
+
+        }
+        & .active a {
+            color: @whiteColor;
+        }
+    }
+}

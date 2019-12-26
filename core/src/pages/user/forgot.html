@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/regis#((skin)).css?v=${version}">
+</head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-142699369-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'UA-142699369-1');
+  window.onload = function () {
+    // Feature detects Navigation Timing API support.
+    if (window.performance) {
+      // Gets the number of milliseconds since page load
+      // (and rounds the result since the value must be an integer).
+      var timeSincePageLoad = Math.round(performance.now());
+      // Sends the timing event to Google Analytics.
+      gtag('event', 'timing_complete', {
+        'name': 'load',
+        'value': timeSincePageLoad,
+        'event_category': 'JS Dependencies'
+      });
+    }
+  }
+</script>
+
+<body ng-app="appControllers" ng-controller="forgotCtrl">
+	<!-- 头部 -->
+	@@include("userheader.html")
+	<span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+	    @@include("global-nav.html")
+	</span>
+	<div class="forgot-box">
+		<div class="container" id="bregis-page" ng-cloak>
+			<!-- 字-->
+			<div class="loginTitle loginTitle-two">{{i18n('忘记密码')}}</div>
+			<!-- <div  class="yiyou">{{i18n('已有账号')}}?<a href="/login.html">{{i18n('请登录')}}</a></div> -->
+			<div class="yiyou" ng-show="step == 0 || step == 1" ng-click="step = 3"><a href="#">{{i18n('邮箱找回密码')}}</a></div>
+			<!-- <div class="yiyou" ng-show="step == 3 || step == 4" ng-click="step = 0"><a href="#">{{i18n('手机号找回密码')}}</a></div> -->
+			<div ng-show="step == 0">
+				<!--<ul class="shaft listeps wider">
+					<li class="active"><span>1</span>{{i18n('验证信息')}}</li>
+					<li><span>2</span>{{i18n('修改密码')}}</li>
+				</ul>-->
+				<form class="form" name="userForm" novalidate>
+				<!--忘记密码流程-->
+				<div class="buyStepNumBox">
+					<ul>
+						<li class="active">
+							<span class="num" ng-class="{'bged8d8d':step==1}">1</span>
+							<span class="line_bg lbg-l" ng-class="{'bged8d8d':step==1}"></span>
+							<span class="line_bg lbg-r" ng-class="{'bged8d8d':step==1}"></span>
+							<h4 class="lbg-txt">{{i18n('输入手机验证码')}}</h4>
+						</li>
+						<li>
+							<span class="num">2</span>
+							<span class="line_bg lbg-l"></span>
+							<span class="line_bg lbg-r"></span>
+							<h4 class="lbg-txt">{{i18n('重新设置密码')}}</h4>
+						</li>
+					</ul>
+				</div>
+					<!-- <img src="../../images/pwd.png" alt="" class="pwd-img"> -->
+					<!--<div class="form-group">-->
+					<!--<label>用户名：</label>-->
+					<!--<input type="text" class="input" name="username" ng-model="username" ng-blur="repeatUsername()" ng-pattern="/^[a-z0-9_-]{6,18}$/" value="{{usernameFocus}}" required>-->
+					<!--<div ng-show="userForm.username.$dirty && userForm.username.$invalid" class="tip err">用户名由6-18位英文、数字组成</div>-->
+					<!--<div ng-show="unameerr" class="tip err">用户名和号码不匹配!</div>-->
+					<!--<div ng-hide="isRepeat" class="tip err">用户名不存在！</div>-->
+					<!--<div class="clear"></div>-->
+					<!--</div>-->
+					<div class="form-group">
+						<!--<label>手机号：</label>-->
+						<input type="text" class="input" name="mobile" ng-pattern="/^[0-9]{11}$/" ng-model="mobile" ng-focus="mobileErr=false"
+						    required placeholder="{{i18n('手机号')}}">
+						<div ng-show="userForm.mobile.$dirty && userForm.mobile.$invalid" class="tip err">{{i18n('请输入')}}11{{i18n('位手机号码')}}</div>
+						<div ng-show="mobileErr && !userForm.mobile.$invalid" class="tip err">{{i18n('手机号不存在')}}！</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form-group">
+						<!--<label>验证码：</label>-->
+						<input type="text" class="input sms" name="captchas" ng-pattern="/^[0-9]{6}$/" ng-model="captchas" required placeholder="{{i18n('验证码')}}">
+						<input id="smsBtn" type="button" class="btn" value="{{i18n('获取短信验证码')}}"  ng-disabled="userForm.mobile.$invalid" ng-click="checkMobile()" ng-class="{'smsBtn': userForm.mobile.$invalid, 'smsBtnHigh': !userForm.mobile.$invalid}">
+						<div ng-show="checkSms" class="tip err">{{i18n('验证码输入错误')}}！</div>
+						<div ng-show="sendErr" class="tip err">{{i18n('验证码发送失败')}}！</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form-group">
+						<!--<label></label>-->
+						<input type="button" id="nextStepBtn" class="btn" value="{{i18n('下一步')}}"  ng-disabled="userForm.$invalid" ng-click="checkCaptchas()" ng-class="{'smsBtnreg': userForm.$invalid}">
+						<div class="clear"></div>
+					</div>
+				</form>
+			</div>
+			<div ng-show="step == 1">
+				<!--<ul class="shaft listeps wider">
+					<li><span>1</span>{{i18n('验证信息')}}</li>
+					<li class="active"><span>2</span>{{i18n('修改密码')}}</li>
+				</ul>-->
+				<form class="form" name="passwdForm" novalidate>
+					<!--忘记密码流程-->
+					<div class="buyStepNumBox">
+						<ul>
+							<li>
+								<span class="num" ng-class="{'bged8d8d':step==1}">1</span>
+								<span class="line_bg lbg-l" ng-class="{'bged8d8d':step==1}"></span>
+								<span class="line_bg lbg-r" ng-class="{'bged8d8d':step==1}"></span>
+								<h4 class="lbg-txt" ng-class="{'ced8d8d':step==4}">{{i18n('输入手机验证码')}}</h4>
+							</li>
+							<li class="active">
+								<span class="num">2</span>
+								<span class="line_bg lbg-l"></span>
+								<span class="line_bg lbg-r"></span>
+								<h4 class="lbg-txt">{{i18n('重新设置密码')}}</h4>
+							</li>
+						</ul>
+					</div>
+					<!-- <img src="../../images/pwd2.png" alt="" class="pwd-img"> -->
+					<div class="msg">{{ msg }}</div>
+					<div class="form-group">
+						<!--<label>新密码：</label>-->
+						<input type="password" class="input" ng-minlength="6" ng-maxlength="18" ng-pattern="passwordRegExp" ng-model="password1" placeholder="{{i18n('设置密码')}}"
+							name="password1" required>
+						<div class="tip err" ng-show="showTips">
+							<span>密码安全度低，建议数字和字母组合</span>
+						</div>
+						<div ng-show="passwdForm.password1.$dirty && passwdForm.password1.$invalid" class="tip err">
+							<span ng-show="passwdForm.password1.$error.required">{{i18n('密码不能为空')}}</span>
+							<span ng-show="passwdForm.password1.$error.pattern">{{i18n('仅支持')}}6-18{{i18n('个字符的英文字母')}}、{{i18n('符号')}}、{{i18n('数字')}}</span>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form-group">
+						<!--<label>确认密码：</label>-->
+						<input type="password" class="input" placeholder="{{i18n('确认密码')}}" ng-model="password2" pw-check="password1" name="password2" required>
+						<div ng-show="passwdForm.password2.$dirty && passwdForm.password2.$invalid" class="tip err"><span>{{i18n('两次密码不一致')}}</span></div>
+						<div class="clear"></div>
+					</div>
+					<div class="form-group">
+						<label></label>
+						<input ng-disabled="passwdForm.$invalid || showTips" type="button" class="btn" value="{{i18n('完成')}}" ng-click="updPasswd()">
+						<div class="clear"></div>
+					</div>
+				</form>
+			</div>
+			<div ng-show="step == 2">
+				<div class="regis-success">
+					<p class="info1"><img width="38" height="36" src="/images/ok.png?v=${version}"> {{i18n('密码修改成功')}}！</p>
+					<p><a href="login.html" class="btn">{{i18n('去登录')}}</a></p>
+				</div>
+			</div>
+			<!-- 支持邮箱找回密码 step=3 第一步-->
+			<div ng-show="step == 3">
+				<form class="form" name="userEmail" novalidate>
+					<!--忘记密码流程-->
+					<div class="buyStepNumBox">
+						<ul>
+							<li class="active">
+								<span class="num" ng-class="{'bged8d8d':step==4}">1</span>
+								<span class="line_bg lbg-l" ng-class="{'bged8d8d':step==4}"></span>
+								<span class="line_bg lbg-r" ng-class="{'bged8d8d':step==4}"></span>
+								<h4 class="lbg-txt" ng-class="{'ced8d8d':step==4}">{{i18n('输入用户名')}}</h4>
+							</li>
+							<li>
+								<span class="num">2</span>
+								<span class="line_bg lbg-l"></span>
+								<span class="line_bg lbg-r"></span>
+								<h4 class="lbg-txt">{{i18n('重新设置密码')}}</h4>
+							</li>
+						</ul>
+					</div>
+					<div class="form-group">
+						<input class="input" type="text" name="username" ng-model="username"
+						    required placeholder="{{i18n('用户名')}}" ng-focus="emailErrMessage = false">
+						<div ng-show="userEmail.username.$dirty && userEmail.username.$invalid" class="tip err">{{i18n('请输入正确的用户名')}}</div>
+						<div ng-show="emailErrMessage && !userEmail.username.$invalid" class="tip err">{{emailErrMessage}}！</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form-group">
+						<input class="input phone-user sms" placeholder="{{i18n('验证码')}}" type="text" ng-model="vicode" name="vicode" ng-blur="checkVicode = ''" ng-change="checkVicode=''">
+						<input id="smsBtns" type="button" class="btn" value="{{i18n('获取验证码')}}"  ng-disabled="userEmail.email.$invalid" ng-click="getEmailCode()" ng-class="{'smsBtn': userEmail.email.$invalid, 'smsBtnHigh': !userEmail.email.$invalid }">
+						<div ng-show="sendErrs" class="tip err">{{i18n('验证码发送失败')}}！</div>
+						<div class="clear"></div>
+						<!-- <div class="phone-code">
+							<img width="100" height="40" class="vicode" id="vicode" ng-src="{{ checkImage }}" ng-click="cantSee()">
+						</div> -->
+						<div ng-show="userEmail.vicode.$dirty && userEmail.vicode.$invalid || checkVicode" class="tip err">{{checkVicode}}</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form-group">
+						<input type="button" id="nextStepBtn" class="btn" value="{{i18n('下一步')}}"  ng-disabled="userEmail.$invalid || !vicode" ng-click="nextStep()" ng-class="{'smsBtnreg': userEmail.$invalid}">
+						<div class="clear"></div>
+					</div>
+				</form>
+			</div>
+			<!-- 支持邮箱找回密码 step=4 第二步-->
+			<div ng-show="step == 4">
+				<form class="form" name="passwdForm2" novalidate>
+					<!--忘记密码流程-->
+					<div class="buyStepNumBox">
+						<ul>
+							<li>
+								<span class="num" ng-class="{'bged8d8d':step==4}">1</span>
+								<span class="line_bg lbg-l" ng-class="{'bged8d8d':step==4}"></span>
+								<span class="line_bg lbg-r" ng-class="{'bged8d8d':step==4}"></span>
+								<h4 class="lbg-txt" ng-class="{'ced8d8d':step==4}">{{i18n('输入邮箱地址')}}</h4>
+							</li>
+							<li class="active">
+								<span class="num">2</span>
+								<span class="line_bg lbg-l"></span>
+								<span class="line_bg lbg-r"></span>
+								<h4 class="lbg-txt">{{i18n('重新设置密码')}}</h4>
+							</li>
+						</ul>
+					</div>
+					<div class="msg">{{ msg }}</div>
+					<div class="form-group">
+						<!--<label>新密码：</label>-->
+						<input type="password" class="input" ng-minlength="6" ng-maxlength="18" ng-pattern="passwordRegExp" ng-model="password3" placeholder="{{i18n('设置密码')}}"
+							name="password3" required>
+						<div class="tip err" ng-show="showTips2">
+							<span>密码安全度低，建议数字和字母组合</span>
+						</div>
+						<div ng-show="passwdForm2.password3.$dirty && passwdForm2.password3.$invalid" class="tip err">
+							<span ng-show="passwdForm2.password3.$error.required">{{i18n('密码不能为空')}}</span>
+							<span ng-show="passwdForm2.password3.$error.pattern">{{i18n('仅支持')}}6-18{{i18n('个字符的英文字母')}}、{{i18n('符号')}}、{{i18n('数字')}}</span>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="form-group">
+						<!--<label>确认密码：</label>-->
+						<input type="password" class="input" placeholder="{{i18n('确认密码')}}" ng-model="password4" pw-check="password3" name="password4" required>
+						<div ng-show="passwdForm2.password4.$dirty && passwdForm2.password4.$invalid" class="tip err"><span>{{i18n('两次密码不一致')}}</span></div>
+						<div class="clear"></div>
+					</div>
+					<div class="form-group">
+						<label></label>
+						<input ng-disabled="passwdForm2.$invalid || showTips2" type="button" class="btn" value="{{i18n('完成')}}" ng-click="updEmailPasswd()">
+						<div class="clear"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	@@include("footer.html") @@include("script.html")
+	<script type="text/javascript" src="/forgot.js?v=${version}"></script>
+	<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=forgot"></script>
+</body>
+
+</html>

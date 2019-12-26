@@ -1,0 +1,45 @@
+<div class="credit-box">
+    <div class="credit-top">
+        <span class="top-text">信用额度</span>
+    </div>
+    <div class="credit-data">
+        <span class="useCredit">可用信用额度：</span><span class="useCreditColor">{{myCreditAccount.availableCreditAmount|currencySymbol:'￥'}}</span>
+        <span class="system">系统信用额度：</span><span class="systemColor">{{myCreditAccount.creditLinesAmount|currencySymbol:'￥'}}</span>
+    </div>
+    <div class="credit-container">
+        <div class="container-top" ng-init="activeNum=0">
+            <span ng-click="activeNum=0"  ng-class="{'active':activeNum==0}"  class="all-data">全部</span>
+            <span class="line"></span>
+            <span ng-click="activeNum=2"  ng-class="{'active':activeNum==2}"  class="income-data">收入</span>
+            <span class="line"></span>
+            <span ng-click="activeNum=1"  ng-class="{'active':activeNum==1}"  class="expenditure-data">支出</span>
+        </div>
+        <div class="container-banner">
+            <span class="time">时间</span>
+            <span class="money-text">涉及金额(元)</span>
+            <span class="explain">说明</span>
+        </div>
+        <div class="container-content" ng-repeat="credit in creditList">
+            <div class="content-left">
+                <span>{{credit.transTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+            </div>
+            <div class="content-main">
+                <span>{{credit.transAmountText | currencySymbol:''}}</span>
+            </div>
+            <div class="content-right">
+                <span>{{credit.remark}}</span>
+            </div>
+        </div>
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+         total-page="totalPage" ng-if="isShowPage"></div>
+    <!-- 缺省图 -->
+    <div class="none-credit" ng-if="isShowIcon">
+        <div class="none-left">
+            <span class="none-left-img"></span>
+        </div>
+        <div class="none-right">
+            <span>{{i18n('暂无额度')}}~</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "code": "0",
+  "message": "请求成功",
+  "errMsg": null,
+  "data": {
+    "amountBalance": 10,
+    "amountFreezed": 2,
+    "amountExpiring": 0
+  },
+  "trace": "46!$6#@16%&172!$,null,61722789498150425510197"
+}

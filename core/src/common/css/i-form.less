@@ -1,0 +1,216 @@
+/* 表单样式 */
+.form-group{
+	margin-bottom: 15px;
+	*zoom: 1;
+
+	&:after{
+		content: "";
+		display: block;
+		width: 0;
+		height: 0;
+		clear: both;
+	}
+	& .input{
+		width: 228px;
+		padding: 7px 10px;
+		line-height: 20px;
+		height: 20px;
+		font-size: 14px;
+		border: 1px solid @ddGreyColor;
+		-webkit-transition: border-color linear 0.5s;
+		transition: border-color linear 0.5s;
+
+		&:focus{
+			border-color: @themeColor;
+		}
+		&.big{
+			width: 248px;
+			padding: 9px 10px;
+		}
+		&.md{
+		  width: 248px;
+		  padding: 2px 10px;
+		}
+		&[type=password] {
+			letter-spacing: 2px;
+		}
+	}
+	& .select{
+		border: 1px solid @ddGreyColor;
+		width: 250px;
+		height: 36px;
+	}
+	& .textarea{
+		border: 1px solid @ddGreyColor;
+		width: 228px;
+		padding: 10px;
+		margin: 0;
+		padding: 10px;
+		resize:none;
+	}
+	& .has-prefix{
+		position: relative;
+
+		& .input{
+			width: 208px;
+			// padding-left: 30px;
+		}
+		& .big{
+			width: 228px;
+		}
+	}
+	& .has-suffix{
+		position: relative;
+
+		& .input{
+			width: 208px;
+			padding-right: 30px;
+		}
+	  	& .icon-date{
+			position: absolute;
+			top: 10px;
+			right: 20px;
+		}
+	}
+  	&.upload{
+	  	& .updBtn{
+		  	margin: 0;
+		}
+	}
+}
+
+.form{
+	width: 100%;
+
+	& .form-group{
+		position: relative;
+	}
+	& label{
+		float: left;
+		width: 240px;
+		height: 28px;
+		padding-top: 7px;
+		font-size: 16px;
+		font-size: 14px;
+		text-align: right;
+		margin-right: 10px;
+
+		&.radio-inline,
+		&.checkbox-inline{
+			height: auto;
+			padding: 0;
+			width: 250px;
+			font-size: 14px;
+			text-align: left;
+		}
+	}
+	& .input{
+		float: left;
+	}
+	& .tip{
+		position: absolute;
+		top: 0;
+		right: -285px;
+		width: 280px;
+		padding: 9px 4px;
+		margin-left: 5px;
+		font-size: 12px;
+		//border: 1px solid @eeGreyColor;
+		//background-color: lighten(@fontColor, 60%);
+
+		&.upd{
+			right: -378px;
+		}
+		&.err{
+			color: @clearColor;
+		}
+		&.succ{
+			color: green;
+		}
+	}
+  	& .addr{
+		display: block;
+		position: initial;
+		float: left;
+		padding: 1px 4px;
+	  	color: @redColor;
+	}
+	& .select{
+		float: left;
+	}
+	& .textarea{
+		float: left;
+	}
+	& .msg{
+		padding-left: 250px;
+		margin-bottom: 15px;
+		color: @redColor;
+	}
+}
+.require{
+	position: relative;
+	top: 2px;
+	color: @redColor;
+	font-size: 14px;
+	margin-right: 3px;
+}
+/* 
+.radioStyle{
+  margin-right: 20px;
+  display:inline-block;
+  cursor:pointer;
+  input[type="radio"]{
+	appearance: none;
+	-webkit-appearance: none;
+	outline: none;
+	display:none
+  }
+  input[type="radio"] + span{
+	width:12px;
+	height:12px;
+	margin-right: 5px;
+	display:inline-block;
+	background: url('../../images/company/company-icon.png') no-repeat -94px -143px;
+  }
+  input[type="radio"]:checked + span{
+	background-position: -511px -11px
+  }
+}
+
+.checkboxStyle{
+  margin-right: 20px;
+  display:inline-block;
+  cursor:pointer;
+  input[type="checkbox"]{
+	appearance: none;
+	-webkit-appearance: none;
+	outline: none;
+	display:none
+  }
+  input[type="checkbox"] + span{
+	width:12px;
+	height:12px;
+	margin-right: 5px;
+	display:inline-block;
+	background: url('../../images/company/company-icon.png') no-repeat -360px -169px;
+  }
+  input[type="checkbox"]:checked + span{
+	background-position: -195px -142px
+  }
+  input[type="radio"] {
+	appearance: none;
+	-webkit-appearance: none;
+	outline: none;
+	display: none
+  }
+  input[type="radio"] + span {
+	width: 12px;
+	height: 12px;
+	margin-right: 5px;
+	display: inline-block;
+	background: url('../../images/company/company-icon.png') no-repeat -360px -169px;
+  }
+  input[type="radio"]:checked + span {
+	background-position: -195px -142px
+  }
+} */

@@ -1,0 +1,151 @@
+<!--多少已销售-->
+<div class="clearfix" ng-if="!$parent.switchConfig.common.showChoosePackingMethod&&!btnEndLoading&&!endOtherLoading">
+    <div ng-if="itemlist.isSeckill && openSeckill">
+        <div class="dom-amount mgL15">
+            <span class="ce62128">{{100*itemlist.checkVolume4sale/(itemlist.stockNum+itemlist.checkVolume4sale) | number:2}}% {{i18n('已抢购')}}</span>
+        </div>
+        <div class="dom-content">
+            <div class="ui-progress">
+                <span ng-style="{width:(100*itemlist.checkVolume4sale/(itemlist.stockNum+itemlist.checkVolume4sale) | number:2)+'%'}"></span>
+            </div>
+        </div>
+        <div class="dom-amount" ng-if="itemlist.individualLimitNum>0">
+            <span>{{i18n('限量')}}{{itemlist.individualLimitNum}}</span>
+        </div>
+        <div class="dom-amount mgL15" ng-if="showCountDown&&currentTime<itemlist.promotionEndTime">
+            <i class="icon-clock mgR10"></i>
+            <span count-down show-count-down="showCountDown" end-time="getData" current-time="promotionInfo.promotions[0].endTime" ng-if="activityIng">{{i18n('结束')}}</span>
+        </div>
+    </div>
+    <!-- 商品普通页面 begin -->
+    <div ng-if="!itemlist.isSeckill && !itemlist.isPresell" class="buy buy-inner" style="left: 10px;" ng-init="itemlist.amount=pcIteminfo.itemAmount">
+        <!-- <a href="javascript:void(0)" class="btn-none btn addCart mgL10" ng-class="{'bgc':code==4||code==5,'car-color':code!=4&&code!=5}" ng-click="oneKey._buy(itemlist)"
+           ng-if="itemlist.stockNum>0&&itemlist.managementState&&itemlist.isAreaSale&&!isPointPro">{{i18n('立即购买')}}</a> -->
+        <a href="javascript:void(0)" class="btn-none btn addCart mgL10 " ng-class="{'car-colors':canExchange,'good-dead':!canExchange}" ng-click="oneKey._buy(itemlist)"
+           ng-if="itemlist.stockNum>0&&itemlist.managementState&&itemlist.isAreaSale&&isPointPro">{{i18n('立即兑换')}}</a>
+        <!-- 让按钮变灰的操作 ng-class="{disabled:item.isVirtual}" -->
+        <a add-to-cart href="javascript:void(0)" class="btn addCart mgL0 btn-none" ng-class="{'bgc':code==4||code==5}" ng-if="itemlist.stockNum>0 && !isPointPro && itemlist.isBargain != 3 && itemlist.managementState&&itemlist.isAreaSale" prod="itemlist" handle="addCart" num="pcIteminfo.itemAmount" options="{isV:itemlist.typeOfProduct,isPresell:itemlist.isPresell}">
+            <i class="cart-icon mgR10"></i>{{i18n('加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}
+        </a>
+        <!-- <a ng-click="arrivalShowFunc()" href="javascript:void(0)" class="mgL0 coment-begin" ng-if="itemlist.stockNum<=0&&itemlist.managementState">{{i18n('商品下架/无库存')}}</a> -->
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.managementState">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.isAreaSale&&itemlist.managementState" style="margin-right: 20px">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="btn-none btn addCart mgL10 car-color" ng-click="oneKey._addAdvance(itemlist)"
+           ng-if="itemlist.stockNum>0&&itemlist.managementState&&itemlist.isAreaSale&&!isPointPro&&code!=4&&code!=5">{{i18n('加入预置订单')}}</a>
+        <!-- <span ng-if="itemlist.stockNum>0 && itemlist.isBargain != 3 && itemlist.managementState" ng-mouseover="phoneBox=true" ng-mouseleave="phoneBox=false" class="phone-buy-box">
+            {{i18n('手机购买')}}<i class="icon-top-down" ng-class="{active:phoneBox}"></i>
+            <span class="erweima-box">
+                <div id="code" ng-show="phoneBox"></div>
+            </span>
+        </span> -->
+    </div>
+    <!-- 商品普通页面 end -->
+    <!-- 秒杀页面 begin -->
+    <div ng-if="itemlist.isSeckill" class="buy buy-inner" style="left: 10px;" ng-init="itemlist.amount=pcIteminfo.itemAmount">
+        <a href="javascript:void(0)" class="btn-none btn addCart mgL10 car-color" ng-click="oneKey._buy(itemlist)"
+           ng-if="itemlist.stockNum>0&&itemlist.managementState&&itemlist.isAreaSale&&!isPointPro">{{i18n('立即购买')}}</a>
+        <a href="javascript:void(0)" class="btn-none btn addCart mgL10 " ng-class="{'car-colors':canExchange,'good-dead':!canExchange}" ng-click="oneKey._buy(itemlist)"
+           ng-if="itemlist.stockNum>0&&itemlist.managementState&&itemlist.isAreaSale&&isPointPro">{{i18n('立即兑换')}}</a>
+        <!-- 让按钮变灰的操作 ng-class="{disabled:item.isVirtual}" -->
+        <a add-to-cart href="javascript:void(0)" class="btn addCart mgL0 btn-none" ng-if="itemlist.stockNum>0 && !isPointPro && itemlist.isBargain != 3 && itemlist.managementState&&itemlist.isAreaSale" prod="itemlist" handle="addCart" num="pcIteminfo.itemAmount" options="{isV:itemlist.typeOfProduct,isPresell:itemlist.isPresell}">
+            <i class="cart-icon mgR10"></i>{{i18n('加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}
+        </a>
+        <a ng-click="arrivalShowFunc()" href="javascript:void(0)" class="mgL0 coment-begin" ng-if="itemlist.stockNum<=0&&itemlist.managementState">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.managementState">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.isAreaSale&&itemlist.managementState" style="margin-right: 20px">{{i18n('商品下架/无库存')}}</a>
+        <!-- <span ng-if="itemlist.stockNum>0 && itemlist.isBargain != 3 && itemlist.managementState" ng-mouseover="phoneBox=true" ng-mouseleave="phoneBox=false" class="phone-buy-box">
+            {{i18n('手机购买')}}<i class="icon-top-down" ng-class="{active:phoneBox}"></i>
+            <span class="erweima-box">
+                <div id="code" ng-show="phoneBox"></div>
+            </span>
+        </span> -->
+    </div>
+    <!-- 秒杀页面 end -->
+    <!-- 商品预售页面时候 begin -->
+    <div ng-if="itemlist.isPresell" class="buy buy-inner" style="left: 10px;" ng-init="itemlist.amount=pcIteminfo.itemAmount">
+        <!-- 原价购买加入购物车的逻辑 -->
+        <a add-to-cart prod="itemlist" handle="addCart" num="pcIteminfo.itemAmount" options="{isV:itemlist.typeOfProduct,isPresell:itemlist.isPresell}" class="pre-sale-box" href="javascript:void(0)" class="btn-none btn addCart mgL10 car-color" ng-class="{disabled:itemlist.isVirtual}" ng-if="itemlist.stockNum>0 && itemlist.managementState&&itemlist.isAreaSale">
+            <span class="span-one" ng-style="{top: itemlist.originalPrice? '3px': '12px'}">{{i18n('原价购买')}}</span>
+            <span class="span-two" ng-if="itemlist.originalPrice && !$parent.hideProductPrice">￥{{itemlist.originalPrice}}</span>
+            <span class="span-two price-small-text" ng-if="itemlist.originalPrice && $parent.hideProductPrice">{{$parent.switchConfig.common.showMinTextWhenHidePrice}}</span>
+        </a>
+        <a ng-if="itemlist.stockNum>0 && itemlist.managementState&&itemlist.isAreaSale" href="javascript:void(0)" ng-click="oneKey._buyDeposit(itemlist)" class="pay-sale-box" ng-class="{disabled:itemlist.isVirtual}">
+            <span class="span-one">{{i18n('支付定金')}}</span>
+            <span class="span-two" ng-if="!$parent.hideProductPrice">￥{{itemlist.presellDownPrice}}</span>
+            <span class="span-two price-small-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showMinTextWhenHidePrice}}</span>
+        </a>
+        <a ng-click="arrivalShowFunc()" href="javascript:void(0)" class="mgL0 coment-begin" ng-if="itemlist.stockNum<=0&&itemlist.managementState">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.managementState">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.isAreaSale&&itemlist.managementState" style="margin-right: 20px">{{i18n('商品下架/无库存')}}</a>
+        <!-- 手机二维码 样式 begin -->
+        <!-- <span ng-if="itemlist.stockNum>0 && itemlist.isBargain != 3 && itemlist.managementState" ng-mouseover="phoneBox=true" ng-mouseleave="phoneBox=false"  class="phone-buy-box">
+            {{i18n('手机购买')}}<i class="icon-top-down" ng-class="{active:phoneBox}"></i>
+            <span class="erweima-box">
+                <div id="code"  ng-show="phoneBox"></div>
+            </span>
+        </span> -->
+        <!-- 手机二维码 样式 end -->
+    </div>
+</div>
+<div class="clearfix" ng-if="$parent.switchConfig.common.showChoosePackingMethod&&!btnEndLoading&&!endOtherLoading">
+    <div ng-if="itemlist.isSeckill && openSeckill">
+        <div class="dom-amount mgL15">
+            <span class="ce62128">{{100*itemlist.checkVolume4sale/(itemlist.stockNum+itemlist.checkVolume4sale) | number:2}}% {{i18n('已抢购')}}</span>
+        </div>
+        <div class="dom-content">
+            <div class="ui-progress">
+                <span ng-style="{width:(100*itemlist.checkVolume4sale/(itemlist.stockNum+itemlist.checkVolume4sale) | number:2)+'%'}"></span>
+            </div>
+        </div>
+        <div class="dom-amount" ng-if="itemlist.individualLimitNum>0">
+            <span>{{i18n('限量')}}{{itemlist.individualLimitNum}}</span>
+        </div>
+        <div class="dom-amount mgL15" ng-if="showCountDown&&currentTime<itemlist.promotionEndTime">
+            <i class="icon-clock mgR10"></i>
+            <span count-down show-count-down="showCountDown" end-time="getData" current-time="promotionInfo.promotions[0].endTime" ng-if="activityIng">{{i18n('结束')}}</span>
+        </div>
+    </div>
+    <!-- 商品普通页面 begin -->
+    <div ng-if="!itemlist.isSeckill && !itemlist.isPresell" class="buy buy-inner" style="left: 10px;" ng-init="itemlist.amount=pcIteminfo.itemAmount">
+        <a href="javascript:void(0)" class="btn-none btn addCart mgL10 car-color" ng-click="packingKey._packingBuy(itemlist)"
+           ng-if="itemlist.stockNum>=0&&itemlist.managementState&&itemlist.isAreaSale">{{i18n('立即购买')}}</a>
+        <!-- 让按钮变灰的操作 ng-class="{disabled:item.isVirtual}" -->
+        <a href="javascript:void(0)" class="btn addCart mgL0 btn-none" ng-if="itemlist.stockNum>=0&&itemlist.isBargain != 3 && itemlist.managementState&&itemlist.isAreaSale" ng-click="packingKey._packingAddToCart(itemlist)">
+            <i class="cart-icon mgR10"></i>{{i18n('加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}
+        </a>
+        <a ng-click="arrivalShowFunc()" href="javascript:void(0)" class="mgL0 coment-begin" ng-if="itemlist.stockNum<0&&itemlist.managementState">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.managementState">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.isAreaSale&&itemlist.managementState" style="margin-right: 20px">{{i18n('商品下架/无库存')}}</a>
+    </div>
+    <!-- 商品普通页面 end -->
+    <!-- 秒杀页面 begin -->
+    <div ng-if="itemlist.isSeckill" class="buy buy-inner" style="left: 10px;">
+        <a href="javascript:void(0)" class="btn-none btn addCart mgL10 car-color" ng-click="packingKey._packingBuy(itemlist)"
+           ng-if="itemlist.stockNum>=0&&itemlist.managementState&&itemlist.isAreaSale">{{i18n('立即购买')}}</a>
+        <a href="javascript:void(0)" class="btn addCart mgL0 btn-none" ng-if="itemlist.stockNum>=0 && itemlist.isBargain != 3 && itemlist.managementState&&itemlist.isAreaSale" ng-click="packingKey._packingAddToCart(itemlist)">
+            <i class="cart-icon mgR10"></i>{{i18n('加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}
+        </a>
+        <a ng-click="arrivalShowFunc()" href="javascript:void(0)" class="mgL0 coment-begin" ng-if="itemlist.stockNum<0&&itemlist.managementState">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.managementState">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.isAreaSale&&itemlist.managementState" style="margin-right: 20px">{{i18n('商品下架/无库存')}}</a>
+    </div>
+    <!-- 秒杀页面 end -->
+    <!-- 商品预售页面时候 begin -->
+    <div ng-if="itemlist.isPresell" class="buy buy-inner" style="left: 10px;">
+        <!-- 原价购买加入购物车的逻辑 -->
+        <a class="pre-sale-box" href="javascript:void(0)" class="btn-none btn addCart mgL10 car-color" ng-class="{disabled:itemlist.isVirtual}" ng-if="itemlist.stockNum>=0 && itemlist.managementState&&itemlist.isAreaSale" ng-click="packingKey._packingAddToCart(itemlist)">
+            <span class="span-one" ng-style="{top: itemlist.originalPrice? '3px': '12px'}">{{i18n('原价购买')}}</span>
+            <span class="span-two" ng-if="itemlist.originalPrice && !$parent.hideProductPrice">￥{{itemlist.originalPrice}}</span>
+            <span class="span-two price-small-text" ng-if="itemlist.originalPrice && $parent.hideProductPrice">{{$parent.switchConfig.common.showMinTextWhenHidePrice}}</span>
+        </a>
+        <a ng-if="itemlist.stockNum>=0 && itemlist.managementState&&itemlist.isAreaSale" href="javascript:void(0)" ng-click="packingKey._packingBuyBuyDeposit(itemlist)" class="pay-sale-box" ng-class="{disabled:itemlist.isVirtual}">
+            <span class="span-one">{{i18n('支付定金')}}</span>
+            <span class="span-two" ng-if="!$parent.hideProductPrice">￥{{itemlist.presellDownPrice}}</span>
+            <span class="span-two price-small-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showMinTextWhenHidePrice}}</span>
+        </a>
+        <a ng-click="arrivalShowFunc()" href="javascript:void(0)" class="mgL0 coment-begin" ng-if="itemlist.stockNum<0&&itemlist.managementState">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.managementState">{{i18n('商品下架/无库存')}}</a>
+        <a href="javascript:void(0)" class="good-dead" ng-if="!itemlist.isAreaSale&&itemlist.managementState" style="margin-right: 20px">{{i18n('商品下架/无库存')}}</a>
+    </div>
+</div>
+<!-- 商品预售页面时候 end-->

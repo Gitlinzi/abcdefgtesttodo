@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>试用报告详情</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/trialReport#((skin)).css?v=${version}">
+
+</head>
+<base target="_blank"/>
+<body ng-app="appControllers" ng-controller="trialReportCtrl">
+
+    @@include("header.html")
+    @@include("global-nav.html")
+    <dl ng-include="'includes/_location.html'"></dl>
+    <div class="container">
+        <div class="navigation-nav"><a href="../index.html">{{i18n('首页')}}</a><i class="icon-arrow-right4 mgL10 mgR10"></i><a
+                ng-repeat-start="crumb in reportDetail.crumbList"
+                href="search.html?navCategoryIds={{crumb.categoryId}}">{{crumb.categoryName}}</a><i
+                class="icon-arrow-right4 mgL10 mgR10" ng-repeat-end></i>{{reportDetail.productInfo.mpName|textLengthFormat:30}}
+        </div>
+        <div class="trial-report">
+            <dl>
+                <dt>
+                    <img ng-src="{{reportDetail.reportInfo.pic}}" alt="">
+                </dt>
+                <dd>
+                    <h4>{{reportDetail.reportInfo.mpName}}</h4>
+                    <h5>{{i18n('价格')}}: <span>{{reportDetail.reportInfo.price|currency:'￥' }}</span><em style="cursor: pointer;" ng-click="reportDetail.toItemPage(reportDetail.reportInfo.mpId)">{{i18n('我要购买')}}</em></h5>
+                    <div class="trial-infor">
+                        <!--<ul>
+                            <li>
+                                <em>{{i18n('免费提供')}}：</em>
+                                <span class="f16"><cite>{{reportDetail.productInfo.trialLimit-reportDetail.productInfo.hasApplicedCount}}</cite>{{i18n('份')}}</span>
+                            </li>
+                            <li>
+                                <em>{{i18n('已申请人数')}}：</em>
+                                <span class="f16"><cite>{{reportDetail.productInfo.hasApplicedCount}}</cite>{{i18n('人')}}</span>
+                            </li>
+                        </ul>-->
+                    </div>
+                </dd>
+            </dl>
+            <div class="trial-report-detail">
+                <div class="trial-report-infor">
+                    <h4>{{i18n('试用报告')}}</h4>
+                    <dl>
+                        <dt>
+                            <span><img ng-src="{{reportDetail.reportInfo.socialUUserVo.headPicUrl}}" alt="">{{reportDetail.reportInfo.socialUUserVo.nickname}}</span>
+                            <!--金牌会员-->
+                        </dt>
+                        <dd>
+                            <span>{{reportDetail.reportInfo.decodeVariables.process.label}}</span>
+                            <p>
+                                {{reportDetail.reportInfo.decodeVariables.process.value}}
+                                <img ng-src="{{img}}" alt="" ng-repeat="img in reportDetail.reportInfo.decodeVariables.image.value">
+                            </p>
+                            <span>{{reportDetail.reportInfo.decodeVariables.experience.label}}</span>
+                            <p>
+                                {{reportDetail.reportInfo.decodeVariables.experience.value}}
+                            </p>
+                            <!--<p>缺点：暂时还没有发现缺点，一切都觉得挺满意的</p>-->
+                            <h6>{{reportDetail.reportInfo.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</h6>
+                        </dd>
+                    </dl>
+                </div>
+                <div class="trial-report-evaluate">
+                    <h4>{{i18n('该商品其他人试用评价')}}</h4>
+                    <ul>
+                        <li ng-repeat="report in reportDetail.reportList"><img ng-src="{{report.socialUUserVo.headPicUrl}}" alt="">{{report.socialUUserVo.nickname}}</li>
+                        <p>
+                            <i class="icon-arrow-up" ng-class="{'not-clickable':pageNo == totalPage}" ng-click="reportDetail.changePageNum(1)"></i>
+                            <i class="icon-arrow-down" ng-class="{'not-clickable':pageNo == 1}" ng-click="reportDetail.changePageNum(0)"></i>
+
+                        </p>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include("footer.html")
+    @@include("script.html")
+    <script type="text/javascript" src="/trialReport.js?v=${version}"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=trialReport"></script>
+</body>
+</html>

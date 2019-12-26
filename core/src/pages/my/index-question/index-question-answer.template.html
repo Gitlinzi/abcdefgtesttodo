@@ -1,0 +1,50 @@
+<div class="question-answer" ng-init="init()">
+    <div class="question-left">
+        <dl>
+            <dt>
+                <img ng-src="{{answerDetail.pictureUrl}}" alt="">
+                <!--<span>{{i18n('自定义')}}</span>-->
+            </dt>
+            <dd>
+                <h4>{{answerDetail.chineseName}}</h4>
+                <p class="c3">{{baseInfo.availablePrice |currency:'￥'}}</p>
+                <p>{{i18n('累计销量')}} <span class="mgR20">{{baseInfo.checkVolume4sale}}</span>{{i18n('评价')}}<span>{{evaluationNum}}</span></p>
+            </dd>
+        </dl>
+    </div>
+    <div class="question-right">
+        <div class="question-box">
+            <div class="question-infor">
+                <h4>
+                    <span><i>{{i18n('问')}}</i>{{answerDetail.content}}</span>
+                    <em>{{answerDetail.createTime |date:'yyyy-MM-dd HH:mm:ss'}}</em>
+                </h4>
+                <div ng-if="flag">
+                    <p>
+                        <textarea name="" maxlength="500" rows="4" ng-model="answerToQuestion.params.content"></textarea>
+                        <span>{{i18n('还可输入')}}{{500-answerToQuestion.params.content.length}}{{i18n('字')}}</span>
+                    </p>
+                    <p>
+                        <button type="button" ng-click="answerToQuestion.saveAnswer()">{{i18n('发布')}}</button>
+                        <input type="checkbox" name="" ng-model="answerToQuestion.isChecked">  {{i18n('匿名回答')}}
+                    </p>
+                </div>
+            </div>
+            <div class="question-list" ng-repeat="answer in answerDetail.listObj">
+                <h4 ng-if="$first"><i>{{i18n('答')}}</i>{{i18n('已有')}}{{totalCount}}人回{{i18n('答')}}</h4>
+                <ol>
+                    <dl>
+                        <dt>{{answer.content}}</dt>
+                        <dd>
+                            {{answer.userTelephone|phoneDate}}
+                            <span>{{answer.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                        </dd>
+                    </dl>
+                </ol>
+            </div>
+        </div>
+        <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+             total-page="totalPage" ng-if="isShowPage"></div>
+    </div>
+
+</div>

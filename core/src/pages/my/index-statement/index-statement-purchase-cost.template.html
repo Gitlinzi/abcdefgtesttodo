@@ -1,0 +1,46 @@
+<div class="statement-page">
+
+	<div class="home-allTitle pdL20">{{i18n('采购额成本中心报表')}}</div>
+
+    <div class="query clearfix">
+        <ul class="clearfix">
+            <li>
+                <div class="datetimepicker">
+                    <span class="date-title">{{i18n('时间范围')}}:&nbsp;&nbsp;</span>
+                    <div class="input-group">
+                        <input datetimepicker ng-change="currentDateTab=0" ng-model="createTimeStart" options="datetimepickerOptions1" max-date="createTimeEnd" type="text" class="timeiconbg date-time-picker-input"/>
+                        <span class="input-group-addon">{{i18n('至')}}</span>
+                        <input datetimepicker ng-change="currentDateTab=0" ng-model="createTimeEnd" options="datetimepickerOptions2" min-date="createTimeStart" type="text" class="timeiconbg date-time-picker-input"/>
+                    </div>
+                </div>
+            </li>
+            <li style="margin-left:10px"><button class="date-button" ng-class="{'active':currentDateTab==1}" ng-click="clickDateTab(1)">昨天</button></li>
+            <li><button class="date-button" ng-class="{'active':currentDateTab==7}" ng-click="clickDateTab(7)">近7天</button></li>
+            <li><button class="date-button" ng-class="{'active':currentDateTab==30}" ng-click="clickDateTab(30)">近30天</button></li>
+            <li style="float:right">
+                <button ng-click="clickSearch()" class="search">{{i18n('查询')}}</button>
+                <button ng-click="clickReset()" class="reset">{{i18n('重置')}}</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="clearfix" style="margin-top: 20px">
+        <button ng-click="clickDownload()" style="float:right" class="search">{{i18n('下载')}}</button>
+    </div>
+
+	<div class="statement-table">
+        <ul>
+            <li class="row">
+                <div class="table-cell table-title">{{i18n('成本中心')}}</div>
+                <div class="table-cell table-title">{{i18n('采购金额')}}</div>
+            </li>
+            <li ng-repeat="info in purchaseInfoList" class="row">
+                <div class="table-cell">{{info.costName}}</div>
+                <div class="table-cell">{{info.amount | currencySymbol:'¥'}}</div>
+            </li>
+        </ul>
+    </div>
+
+    <div ng-if="totalPage>1" pagination page-size="pageSize" page-no="currentPage" total-page="totalPage"></div>
+
+</div>

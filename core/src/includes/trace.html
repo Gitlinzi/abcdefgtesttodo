@@ -1,0 +1,11 @@
+
+<!--埋点的地方-->
+<span class="im_online_chat" id="onlineChatSpan" ng-click="imFrontService().openTalkDialog_(1,2)">
+	<a title="{{i18n('联系在线客服')}}" href="javascript:void(0)"
+       ng-class="{'online':pointLinkClass.onlineFlg == true,
+       'offline':pointLinkClass.onlineFlg == false,
+       'online_icon_small': pointLinkClass.iconType==1,
+       'online_icon_middle': pointLinkClass.iconType==2,
+       'online_icon_big': pointLinkClass.iconType==3}"><img width="171" height="32" src="/images/ctservices.gif?v=${version}" alt="{{i18n('客服')}}">联系{{i18n('客服')}}
+    </a>
+</span>

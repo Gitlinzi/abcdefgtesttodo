@@ -1,0 +1,45 @@
+<div class='base-mes-box' ng-init="modify.init()">
+    <p class='home-allTitle pdL20'>{{i18n('账户中心')}}</p>
+    <div class='base-mes'>
+        <div class='base-mes-left'>
+            <form class="form" name="angularForm">
+                <div class="form-group">
+                    <label style="width: 73px;">{{i18n('当前密码')}} :</label>
+                    <input class="input" type="password" name="oldPwd" ng-model="modifys.oldPwd"required>
+                    <span ng-show="angularForm.oldPwd.$dirty || modifys.oldErrmess" style="padding-left: 10px;line-height: 30px;">
+                        <span class="colorRed" ng-show="angularForm.oldPwd == ''">{{i18n('原密码不能为空')}}</span>
+                        <span class="colorRed" ng-show="modifys.oldErrmess">{{i18n('旧密码输入错误，请重试')}}</span>
+                    </span>
+                    <div class="clear"></div>
+                </div>
+                <!-- style="width: 240px;height: 30px;line-height:30px;border: solid 1px #cccccc;padding-left:5px;" -->
+                <div class="form-group">
+                    <label style="width: 73px;">{{i18n('新密码')}} :</label>
+                    <input class="input" type="password" name="newPwd" ng-model="modifys.newPwd" ng-pattern="/^[A-Za-z0-9\.\,\`\~\!\@\#\$\%\\\^\&\*\(\)\-\_\=\+\[\{\]\}\|\;\:\‘\’\“\”\<\>\/?]{6,18}$/"required>
+                    <span style="padding-left: 10px;line-height: 30px;" ng-show="showTips">
+                        <span class="colorRed">密码安全度低，建议数字和字母组合</span>
+                    </span>
+                    <span ng-show="angularForm.newPwd.$dirty" style="padding-left: 10px;line-height: 30px;">
+                        <span class="colorRed" ng-show="angularForm.newPwd == ''">{{i18n('新密码不能为空')}}</span>
+                        <span class="colorRed" ng-show="angularForm.newPwd.$error.pattern">{{i18n('仅支持')}}6-18{{i18n('个字符的英文字母')}}、{{i18n('符号')}}、{{i18n('数字')}}</span>
+                    </span>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <label style="width: 73px;">{{i18n('确认密码')}} :</label>
+                    <input class="input" type="password" name="newPwdConfirm" ng-model="modifys.newPwdConfirm" compare-pwd="newPwd"required>
+                    <span ng-show="angularForm.newPwdConfirm.$dirty"  style="padding-left: 10px;line-height: 30px;">
+                        <span class="colorRed" ng-show="angularForm.newPwdConfirm == ''">{{i18n('确认密码不能为空')}}</span>
+                        <span class="colorRed"ng-show="modifys.newPwdConfirm != modifys.newPwd">{{i18n('两次输入的密码不一致')}}</span>
+                    <div class="clear"></div>
+                </div>
+            </form>
+            <div class="operation" style="margin-top: 30px;padding-left: 60px">
+                <button style="width: 150px;height: 50px;list-style: 50px;" class="search mgR5" ng-click="checkOldPwd()"
+                    ng-disabled="!angularForm.$valid">{{i18n('保存')}}</button>
+                <button style="width: 150px;height: 50px;list-style: 50px;" class="reset"
+                    ng-click="resetInfo()">{{i18n('重置')}}</button>
+            </div>
+        </div>
+    </div>
+</div>

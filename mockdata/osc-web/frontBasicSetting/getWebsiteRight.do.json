@@ -1,0 +1,23 @@
+{
+    "code": 0,
+    "message": "success",
+    "resultData": {
+        "websiteDomain": null,
+        "websiteName": null,
+        "websiteTitle": null,
+        "websiteLogo": null,
+        "personPageLogo": null,
+        "websiteFavicon": null,
+        "websiteLoading": null,
+        "websitePhone": null,
+        "websiteRight": "<p>Copyright © 2019 史泰博电子商务（上海）有限公司 版权所有 沪ICP备17046864号-2&nbsp;<a href=\"http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31010502004926\" target=\"_blank\"><span style=\"color:#333333\">沪公网安备 31010502004926号</span></a></p>",
+        "registerProtocol": null,
+        "registerProtocolName": null,
+        "companyId": 259
+    },
+    "gitVersion": {
+        "trace": null,
+        "git.commit.id": "c5873010bca91782d229644c192d16e1e3596575",
+        "git.branch": "origin/master"
+    }
+}

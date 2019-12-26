@@ -1,0 +1,53 @@
+<script type="text/ng-template" id="delivery">
+    <div class="cancel-close" ng-show="orderCommon.showDelivery">
+        <div class="logistics-bomb">
+            <div class="cancel-title clearfix">
+                <span class="title-text">{{i18n('物流跟踪')}}</span>
+                <span class="close-img" ng-click="orderCommon.showDelivery=false"></span>
+            </div>
+            <div class="delivery-order-list">
+                <a class="delivery-order" href="" ng-class="{current: $index!==orderCommon.deliveryOrderCodeList.length-1,active: orderCommon.currentIndex == $index}" ng-repeat="deliverylist in orderCommon.deliveryOrderCodeList track by $index" ng-click="orderCommon.swicthDeliVeryOrder(deliverylist,$index)">交货单{{$index+1}}</a>
+            </div>
+            <div class="third-code">交货单号：{{orderCommon.deliveryOrderCodeList[orderCommon.currentIndex]}}</div>
+            <div class="logistics-title" >
+                <a ng-repeat="pack in orderCommon.allPackages track by $index" ng-class="{'a-active':$index == orderCommon.packageCurrentIndex}" href="" ng-click="orderCommon.changeDelivery($index)"><i></i> {{i18n('包裹')}}{{$index+1}}</a>
+            </div>
+            <div class="logistics-main">
+                <!-- ng-repeat="pack in orderCommon.packages track by $index" -->
+                <div class="logistics-detail">
+                    <ul ng-init="vm.logisticsTab=1">
+                        <li ng-class="{active: vm.logisticsTab == 1}" ng-click="vm.logisticsTab = 1">{{i18n('物流跟踪')}}</li>
+                        <li class="line-li"></li>
+                        <li ng-class="{active: vm.logisticsTab == 2}" ng-click="vm.logisticsTab = 2">{{i18n('包裹信息')}}</li>
+                    </ul>
+                    <div  class="logistics-detail-box" style="background: #f7f7f7;">
+                        <div class="mes-big-box" ng-show="vm.logisticsTab == 1">
+                            <div class="mes-one" ng-repeat="msg in orderCommon.allPackages[orderCommon.packageCurrentIndex].logis">
+                                <span ng-class="{'first-span':$first,'two-span':!$first}">{{msg.context}}</span>
+                                <span class="colorA">{{msg.createTime}}</span>
+                            </div>
+                            <div class="mes-one" ng-if="!orderCommon.allPackages[orderCommon.packageCurrentIndex].logis || !orderCommon.allPackages[orderCommon.packageCurrentIndex].logis.length">
+                                <span>{{i18n('暂无数据')}}</span>
+                            </div>
+                        </div>
+                        <div class="mes-big-box" ng-show="vm.logisticsTab == 2">
+                            <ol>
+                                <!-- ng-repeat="pro in orderCommon.activeDelivery.orderInfo.productList" -->
+                                <dl>
+                                    <dt><img width="80" height="80" ng-src="{{orderCommon.allPackages[orderCommon.packageCurrentIndex].goodPicUrl}}" alt=""></dt>
+                                    <dd>
+                                        <h4>{{orderCommon.allPackages[orderCommon.packageCurrentIndex].goodname}}</h4>
+                                        <p>
+                                            <!-- <span ng-repeat="property in pro.propertyTags">{{property.name}}:{{property.value}}</span> -->
+                                            <em ng-class="{'mart24':!pro.propertyTags}">x{{orderCommon.allPackages[orderCommon.packageCurrentIndex].goodnum}}</em>
+                                        </p>
+                                    </dd>
+                                </dl>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!--<title>结算页</title>-->
+    <script
+      type="text/javascript"
+      src="/view/cms,frontier_guide/pc/templateJS.json"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/settlement#((skin)).css?v=${version}"
+    />
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}" />
+  </head>
+
+  <body ng-app="appControllers" ng-controller="settlementCtrl" ng-init="init()">
+    @@include("trade-header.html")
+    <span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+      @@include("global-nav.html")
+    </span>
+    <!--弹框组件调用-->
+    <div settle-tips settle-data="serData"></div>
+    <div settle-tips settle-data="receiverData"></div>
+    <div settle-tips settle-data="receiverNullData"></div>
+    <!-- 订单信息 -->
+    <div class="container posR">
+      <!--购物进度-->
+      <div class="buyStepNumBox">
+        <ul class="clearfix">
+          <li class="current">
+            <span class="num">1</span>
+            <h4 class="lbg-txt">
+              {{i18n('我的')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}
+            </h4>
+            <!-- <span class="line_bg lbg-l"></span> -->
+            <span class="line_bg lbg-r"></span>
+          </li>
+          <li class="active">
+            <span class="num">2</span>
+            <h4 class="lbg-txt">{{i18n('填写核对订单信息')}}</h4>
+            <!-- <span class="line_bg lbg-l"></span> -->
+            <span class="line_bg lbg-r"></span>
+          </li>
+          <li>
+            <span class="num">3</span>
+            <h4 class="lbg-txt">{{i18n('成功提交订单')}}</h4>
+            <!-- <span class="line_bg lbg-l"></span> -->
+            <span class="line_bg lbg-r"></span>
+          </li>
+        </ul>
+      </div>
+      <!--结算页-->
+      <div id="shopTitle">
+        <span>{{i18n('结算页')}}</span>
+      </div>
+      <div bomb-box cart-data="deleteData"></div>
+      <div bomb-box cart-data="referralCodeData"></div>
+
+      <!-- Code By Joenix -->
+      <div class="settlement">
+        <div class="settlement-section">
+          <h4 class="settlement-section-title">
+            {{i18n('已关联人')}} -- 接口未接
+          </h4>
+          <div class="settlement-section-container">
+            <div class="grid-row-12">
+              <span class="grid-col-6">
+                <select class="select" name="costDepartment" id="?" required="">
+                  <option value="">--{{i18n('请选择')}}--</option>
+                </select>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="settlement-section">
+          <h4 class="settlement-section-title">{{i18n('成本中心')}}</h4>
+          <div class="settlement-section-container">
+            <div class="grid-row-12">
+              <span class="grid-col-6">
+                <select
+                  class="select"
+                  name="costDepartment "
+                  id="searchunits"
+                  required=""
+                  ng-model="costCenter.costDepartment"
+                  ng-change="costCenter._saveCostCenterId($event.target.value)"
+                  ng-options="pro.id as pro.costName for pro in costCenter.costCenterList"
+                >
+                  <option value="">--{{i18n('请选择')}}--</option>
+                </select>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="settlement-section">
+          <h4 class="settlement-section-title">{{i18n('收货信息')}}</h4>
+          <div class="settlement-section-container">
+            <div class="grid-row-12">
+              <div class="grid-col-6">
+                <label class="must">{{i18n('预计发货')}}</label>
+                <div>
+                  <p>{{consignee.orderDeliveryTimeStr}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="grid-row-12">
+              <div class="grid-col-6">
+                <label class="must">{{i18n(' 收货人')}}</label>
+                <div>
+                  <select
+                    name="consSeleckedName"
+                    id="searchunits"
+                    required=""
+                    ng-model="consignee.consSelecked"
+                    ng-change="consignee.saveProxyMsg()"
+                    ng-options="pro as pro.receiverName for pro in consignee.consNameList"
+                  >
+                  </select>
+                </div>
+              </div>
+              <div class="grid-col-6">
+                <label>{{i18n('代收人')}}</label>
+                <div>
+                  <input
+                    name="receiver"
+                    ng-model="consignee.receiver"
+                    placeholder="{{i18n('请输入')}}"
+                    ng-blur="consignee.saveProxyMsg()"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="grid-row-12">
+              <div class="grid-col-6">
+                <label class="must">{{i18n('固定电话')}}</label>
+                <div>
+                  <input
+                    type="text"
+                    name="fixedMobile"
+                    ng-model="consignee.fixedMobile"
+                    placeholder="{{consignee.consSelecked.telephone}}"
+                    disabled="disabled"
+                  />
+                </div>
+              </div>
+              <div class="grid-col-6">
+                <label>{{i18n('代收人手机号')}}</label>
+                <div>
+                  <input
+                    type="text"
+                    name="receiverPhone"
+                    ng-model="consignee.receiverPhone"
+                    placeholder="{{i18n('请输入')}}"
+                    ng-blur="consignee.saveProxyMsg()"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="grid-row-12">
+              <div class="grid-col-6">
+                <label class="must">{{i18n('固定电话2')}}</label>
+                <div>
+                  <input
+                    type="text"
+                    name="fixedMobile2"
+                    ng-model="consignee.fixedMobile2"
+                    placeholder="{{consignee.consSelecked.telephone2}}"
+                    disabled="disabled"
+                  />
+                </div>
+              </div>
+              <div class="grid-col-6">
+                <label class="must">{{i18n('收货人地址')}}</label>
+                <div>
+                  <select
+                    type="text"
+                    name="consSeleckedAdress"
+                    id="searchunits"
+                    required=""
+                    ng-model="consignee.AdreSelecked"
+                    ng-change="consignee._chooseAdress()"
+                    ng-options="pro as pro.detailAddress for pro in consignee.consAdressList"
+                  ></select>
+                </div>
+              </div>
+            </div>
+            <div class="grid-row-12">
+              <div class="grid-col-6">
+                <label class="must">{{i18n('手机号')}}</label>
+                <div>
+                  <input
+                    type="text"
+                    name="consPhone"
+                    ng-model="consignee.consPhone"
+                    placeholder="{{consignee.consSelecked.mobile}}"
+                    disabled="disabled"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settlement-section">
+          <h4 class="settlement-section-title">{{i18n('发票信息')}}</h4>
+          <div class="settlement-section-container">
+            <div class="grid-row-12">
+              <div class="grid-col-6">
+                <!-- Check Invoice -->
+                <div class="need-invoice">
+                  <bdo
+                    ng-class="{true : 'invoice-sure',false : 'invoice-false' }[invoice.needInvoice]"
+                    ng-click="invoice.invoiceSave()"
+                  ></bdo>
+                  <span>{{i18n('暂不开票')}}</span>
+                </div>
+              </div>
+            </div>
+
+            <div ng-show="!invoice.needInvoice">
+              <div class="grid-row-12">
+                <div class="grid-col-6">
+                  <label class="must">{{i18n('发票类型')}}</label>
+                  <div>
+                    <select
+                      class="select"
+                      name="invoiceTypeChecked"
+                      id="searchunits"
+                      required=""
+                      ng-model="invoice.invoiceTypeChecked"
+                      ng-options="pro as pro.name for pro in invoice.invoiceType"
+                    >
+                      <option value="">--{{i18n('请选择')}}--</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="grid-col-6">
+                  <label class="must">{{i18n('发票抬头')}}</label>
+                  <div>
+                    <select
+                      class="select"
+                      name="invoiceTitleChecked"
+                      id="searchunits"
+                      required=""
+                      ng-model="invoice.invoiceTitleChecked"
+                      ng-options="pro as pro.invoiceTitleContent for pro in invoice.invoiceTitleType"
+                    >
+                      <!-- <option value="">--{{i18n('请选择')}}--</option>
+										<option value="{{pro.id}}" ng-selected="pro.deft" ng-repeat="pro in invoice.invoiceTitleType">{{i18n(pro.invoiceTitleContent)}}</option> -->
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="grid-row-12">
+                <div class="grid-col-6">
+                  <label>{{i18n('PO编号')}}</label>
+                  <div>
+                    <input
+                      type="text"
+                      name="PoNumber"
+                      ng-model="invoice.PoNumber"
+                      placeholder="{{i18n('请输入')}}"
+                      ng-blur="invoice.saveinvoice()"
+                    />
+                  </div>
+                </div>
+                <div class="grid-col-6">
+                  <label>{{i18n('PO金额含税')}}</label>
+                  <div>
+                    <input
+                      type="text"
+                      name="PoAmountincludingTax"
+                      ng-model="invoice.PoAmountincludingTax"
+                      placeholder="{{i18n('请输入')}}"
+                      ng-blur="invoice.saveinvoice()"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="grid-row-12">
+                <div class="grid-col-6">
+                  <label>{{i18n('PO金额不含税')}}</label>
+                  <div>
+                    <input
+                      type="text"
+                      name="PoAmount"
+                      ng-model="consignee.PoAmount"
+                      placeholder="{{i18n('请输入')}}"
+                      ng-blur="invoice.saveinvoice()"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="grid-row-12">
+                <div class="grid-col-6 select-panel">
+                  <label class="no-colon"></label>
+                  <div>
+                    <span class="select-panel-error">
+                      <a
+                        href="javascript:;"
+                        name="certificate"
+                        ngf-select="invoice.upload()"
+                        ng-model="invoice.uploadFileUrl"
+                      >
+                        选择文件
+                      </a>
+                    </span>
+                    <div href="javascript:;" class="select-panel-name">
+                      {{invoice.fileName}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settlement-section">
+          <h4 class="settlement-section-title">{{i18n('支付方式')}}</h4>
+          <div class="settlement-section-container">
+            <div class="grid-row-12">
+              <div class="grid-col-6">
+                <span class="cell colorE st-error-text">
+                  {{i18n('为了保证及时处理您的订单')}}，{{i18n('请及时付款')}}
+                </span>
+              </div>
+            </div>
+            <div class="grid-row-12">
+              <div class="grid-col-6">
+                <div class="methods" ng-init="hidePayWay = true">
+                  <div
+                    ng-repeat="payment in merchantProductList.payments track by $index"
+                    ng-class="{'pay-active':payment.paymentId==paymentUtil.selectedPaymentId}"
+                    ng-if="payment.paymentId == 3 || (payment.paymentId == 4 && payment.canOwe == 1)"
+                  >
+                    <span
+                      ng-class="{active:payment.selected == 1}"
+                      ng-value="payment.paymentId"
+                      ng-model="paymentUtil.selectedPaymentId"
+                      ng-click="paymentUtil.paymentSelect(payment.paymentId,payment.name)"
+                    >
+                      {{payment.name}}
+                    </span>
+                  </div>
+                  <div
+                    class="cell errorText"
+                    ng-show="payment.name=='月结'&&payMentErrorShow"
+                  >
+                    {{payMentErrorText}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settlement-section">
+          <h4 class="settlement-section-title">{{i18n('商品信息')}}</h4>
+          <div class="settlement-section-container">
+            <div
+              class="production-list"
+              ng-repeat="merchant in merchantProductList.merchantList"
+            >
+              <!-- Production Head -->
+              <div class="grid-row-12 production-list-title">
+                <div class="grid-col-4">
+                  {{i18n('商品')}}
+                </div>
+                <div class="grid-col-2">
+                  {{i18n('规则')}}
+                </div>
+                <div class="grid-col-2">
+                  {{i18n('单价（元）')}}
+                </div>
+                <div class="grid-col-2">
+                  {{i18n('数量')}}
+                </div>
+                <div class="grid-col-2">
+                  {{i18n('合计')}}
+                </div>
+              </div>
+
+              <!-- Production Content -->
+              <div
+                class="grid-row-12 production-list-content"
+                ng-repeat="prod in merchant.productList|orderBy:'isGift' track by $index"
+              >
+                <div class="grid-col-4">
+                  <a class="picture" href="item.html?itemId={{prod.mpId}}">
+                    <img
+                      width="80"
+                      height="80"
+                      ng-src="{{prod.picUrl}}"
+                      alt="{{prod.name}}"
+                    />
+                  </a>
+
+                  <a class="context" href="item.html?itemId={{prod.mpId}}"
+                    >{{prod.name}}
+                    <div
+                      ng-if="prod.mpType == 88"
+                      class="combation"
+                      ng-click="combation(prod.mpId,$event)"
+                    >
+                      {{i18n('查看组合商品')}}
+                    </div>
+                  </a>
+                </div>
+                <div class="grid-col-2">
+                  <div
+                    ng-if="prod.propertyTags && prod.propertyTags.length>0"
+                    ng-cloak
+                  >
+                    <span ng-repeat="p in prod.propertyTags"
+                      >{{p.name}}：{{p.value}}</span
+                    >
+                  </div>
+                </div>
+                <div class="grid-col-2">
+                  <div class="cell td2 c3" ng-if="prod.pointsPrice">
+                    <span ng-if="prod.price > 0">￥{{prod.price}}</span
+                    ><span
+                      ><span ng-if="prod.price > 0"><br />+</span
+                      >{{prod.pointsPrice}}{{i18n('积分')}}</span
+                    >
+                  </div>
+                  <div class="cell td2 c3" ng-if="!prod.pointsPrice">
+                    <span>￥{{prod.price}}</span>
+                  </div>
+                </div>
+                <div class="grid-col-2">
+                  <div class="cell td3">{{prod.num}}</div>
+                </div>
+                <div class="grid-col-2">
+                  <div
+                    class="cell colorRed td4 ce62128"
+                    ng-if="prod.pointsPrice"
+                  >
+                    <span ng-if="prod.productAmount > 0"
+                      >{{(prod.productAmount||0)|currency:'￥'}}</span
+                    ><span ng-if="prod.pointsPrice"
+                      ><span ng-if="prod.productAmount > 0"><br />+</span
+                      >{{prod.pointsPrice*prod.num}}{{i18n('积分')}}</span
+                    >
+                  </div>
+                  <div
+                    class="cell colorRed td4 ce62128"
+                    ng-if="!prod.pointsPrice"
+                  >
+                    {{(prod.productAmount||0)|currency:'￥'}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settlement-section">
+          <h4 class="settlement-section-title">
+            {{i18n('买家备注')}}
+            <span
+              >({{i18n('提示')}}：{{i18n('请勿填写有关支付')}}、{{i18n('收货')}}、{{i18n('发票方面的信息')}})</span
+            >
+          </h4>
+          <div class="settlement-section-container">
+            <div class="input-editor">
+              <textarea
+                ng-model="merchant.remark"
+                ng-blur="_saveRemarks(merchant.id,merchant.remark)"
+                placeholder="{{i18n('选填')}}，{{i18n('限')}}50{{i18n('个字')}}（{{i18n('对本次交易的说明')}}，{{i18n('建议先与卖家达成一致')}}）"
+                maxlength="50"
+              ></textarea>
+              <p>{{merchant.remark.length || 0}}/<span>50</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="settlement-section settlement-end"
+          ng-show="consignee.consSelecked && consignee.AdreSelecked"
+        >
+          <div class="settlement-section-container">
+            <div class="grid-row-12 settlement-total">
+              <div class="grid-col-8">
+                <ul>
+                  <li>
+                    <label>{{i18n('寄送至')}}</label>
+                    <strong>
+                      {{consignee.AdreSelecked.provinceName}}{{consignee.AdreSelecked.cityName}}{{consignee.AdreSelecked.regionName}}/{{consignee.AdreSelecked.detailAddress}}
+                    </strong>
+                  </li>
+                  <li>
+                    <label>{{i18n('收货人')}}</label>
+                    <strong>
+                      {{consignee.consSelecked.receiverName}}
+                      {{consignee.consSelecked.mobile}}
+                    </strong>
+                  </li>
+                  <li>
+                    <label>{{i18n('联系电话')}}</label>
+                    <strong>
+                      ？？？
+                    </strong>
+                  </li>
+                  <li>
+                    <label>{{i18n('配送时间')}}</label>
+                    <strong>
+                      ？？？
+                    </strong>
+                  </li>
+                </ul>
+              </div>
+              <div class="grid-col-4">
+                <ul ng-if="merchantProductList.businessType != 5">
+                  <li ng-repeat="sumOne in merchantProductList.expenseList">
+                    <span ng-if="$index == 0">
+                      {{i18n('共')}}
+                      <span class="colorRed">
+                        {{merchantProductList.totalNum}}
+                      </span>
+                      {{i18n('件商品')}}，
+                    </span>
+                    {{sumOne.label}}：{{sumOne.operator}}{{sumOne.value|currency:'￥'}}
+                  </li>
+                  <li ng-show="merchantProductList.businessType == 6">
+                    {{i18n('已支付定金')}}
+                    <span class="colorRed">
+                      {{merchantProductList.presell.downPrice|currency:'￥'}}
+                    </span>
+                  </li>
+                  <li ng-show="merchantProductList.businessType == 6">
+                    {{merchantProductList.presell.downPrice|currency:'-￥'}}
+                  </li>
+                </ul>
+                <ul ng-if="merchantProductList.businessType == 5">
+                  <li>
+                    {{i18n('待支付定金')}}：
+                    <span class="colorRed">
+                      {{merchantProductList.presell.downPrice|currency:'￥'}}
+                    </span>
+                    <span class="reduce">
+                      {{i18n('抵扣')}}{{merchantProductList.presell.offsetPrice|currency:'￥'}}
+                    </span>
+                  </li>
+                  <li>
+                    {{merchantProductList.presell.startTime|date : 'yyyy-MM-dd
+                    HH:mm:ss'}}{{i18n('开始支付尾款')}}：
+                  </li>
+                  <li>
+                    {{merchantProductList.presell.finalPayment|currency:'￥'}}
+                  </li>
+                  <li>
+                    {{i18n('付款当日我们会以消息的方式提示您')}}
+                  </li>
+                </ul>
+                <ul
+                  ng-if="merchantProductList.presell&&merchantProductList.presell.canReturnDownPrice == 0"
+                >
+                  <li>
+                    <span class="time-over-icon"
+                      >{{i18n('下单后定金恕不退还')}}</span
+                    >
+                  </li>
+                </ul>
+                <div class="time-over" ng-if="merchantProductList.countdown">
+                  <span
+                    count-down
+                    class="time-over-icon"
+                    show-count-down="true"
+                    end-time="merchantProductList.countdown*1000"
+                    current-time="0"
+                  >
+                  </span>
+                  {{i18n('内完成订单')}}，{{i18n('可享受限时特价折扣')}}
+                </div>
+                <div class="settlement-pay">
+                  {{i18n('应付总额')}}：
+                  <strong>{{merchantProductList.amount|currency:'￥'}}</strong>
+                  <span ng-if="merchantProductList.totalPoints">
+                    +{{merchantProductList.totalPoints ?
+                    merchantProductList.totalPoints : 0}}{{i18n('积分')}}
+                  </span>
+                </div>
+
+                <div class="settlement-publish">
+                  <a
+                    ng-if="merchantProductList.businessType != 5 && merchantProductList.businessType != 6&&!switchConfig.trade.settle.showSureOrder"
+                    href=""
+                    class="f24 cf btn bth-buy"
+                    ng-click="_submitOrder()"
+                    >{{i18n('确认订单')}}</a
+                  >
+                  <a
+                    ng-if="merchantProductList.businessType != 5 && merchantProductList.businessType != 6&&switchConfig.trade.settle.showSureOrder"
+                    href="javascript:void(0)"
+                    class="f24 cf btn bth-buy"
+                    ng-click="cgSubmitOrder()"
+                    >{{i18n('提交订单')}}</a
+                  >
+                  <a
+                    ng-if="merchantProductList.businessType == 5"
+                    href="javascript:void(0)"
+                    class="f24 cf btn bth-buy"
+                    ng-click="_submitOrder()"
+                    >{{i18n('支付定金')}}</a
+                  >
+                  <a
+                    ng-if="merchantProductList.businessType == 6"
+                    href="javascript:void(0)"
+                    class="f24 cf btn bth-buy"
+                    ng-click="_submitOrder()"
+                    >{{i18n('支付尾款')}}</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+      <!-- Code By Joenix -- End -->
+
+    </script>
+    @@include("cart-footer.html") @@include("script.html")
+    <script type="text/javascript" src="/settlement.js?v=${version}"></script>
+    <script
+      type="text/javascript"
+      src="/plugins/areaJson.js?v=${version}"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/api/i18n.do?response=angular&poolName=pc&group=settlement"
+    ></script>
+  </body>
+</html>

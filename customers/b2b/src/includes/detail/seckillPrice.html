@@ -1,0 +1,27 @@
+<dl class='first-dl'>
+    <dt>{{i18n('秒杀价')}}</dt>
+    <dd ng-if="!item.isSeries">
+        <div class='money'>
+            <span ng-show="item.managementState && !$parent.hideProductPrice" class="num"><span class='money-img'>￥</span>{{item.availablePrice}}</span>
+            <span ng-show="item.managementState && $parent.hideProductPrice" class="num"><span class='money-img'></span>{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+            <span style="color: #000;" ng-show="!item.managementState">{{i18n('暂无价格')}}</span>
+            <span class="member-price-box" ng-show="item.availablePriceText">
+                <span class="member-price-text">{{item.availablePriceText}}</span>
+            </span>&nbsp;&nbsp;
+            <span ng-show="item.originalPrice && !$parent.hideProductPrice" class="originalPrice">{{item.originalPrice | currency : "￥"}}</span>
+        </div>
+    </dd>
+    <dd ng-if="item.isSeries">
+        <div class='money'>
+            <span ng-show="item.managementState && !$parent.hideProductPrice" class="num">
+                <span class='money-img'>￥</span>{{item.availablePrice}}
+                <span ng-if="item.highestPrice">&nbsp;-&nbsp;<span class='money-img'>￥</span>{{item.highestPrice}}</span>
+            </span>
+            <span ng-show="item.managementState && $parent.hideProductPrice" class="num"><span class='money-img'></span>{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+            <span style="color: #000;" ng-show="!item.managementState">{{i18n('暂无价格')}}</span>
+            <span class="member-price-box" ng-show="item.availablePriceText">
+                <span class="member-price-text">{{item.availablePriceText}}</span>
+            </span>
+        </div>
+    </dd>
+</dl>

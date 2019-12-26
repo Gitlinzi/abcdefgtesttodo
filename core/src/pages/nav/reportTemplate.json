@@ -1,0 +1,23 @@
+{
+  "experience": {
+    "type": "experience",
+    "label": "试用心得",
+    "length": "",
+    "sort": 1,
+    "value": ""
+  },
+  "process": {
+    "type": "process",
+    "label": "试用体验与过程",
+    "length": "",
+    "sort": 2,
+    "value": ""
+  },
+  "image": {
+    "type": "image",
+    "label": "图片",
+    "length": "",
+    "sort": 3,
+    "value": ""
+  }
+}

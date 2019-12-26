@@ -1,0 +1,18 @@
+
+<div class="custom-header">
+
+    <div class="wait" ng-hide="true"></div>
+    <div class="clearfix visual">
+        <visual-directive module-name="header"></visual-directive>
+
+        <div class="clear"></div>
+        <div id="h-banner" class="container user-head" style="width: 500px">
+            <div class="logo user-logo">
+                    <img src="../images/company/loading.gif" alt="" id="g_logo" width="120px" height="50px" ng-src="{{frontBasicSetting.websiteLogo}}"> 
+            </div>
+            <div class="logo2" style="margin-top: 0" ng-if="companyLogoUrl">
+                    <img src="../images/company/loading.gif" alt="" id="g_logo2" ng-src="{{companyLogoUrl}}">
+            </div>
+        </div>
+    </div>
+</div>

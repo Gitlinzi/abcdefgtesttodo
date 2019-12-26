@@ -1,0 +1,1723 @@
+@import url('../../common/css/i-var_${skin}.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-global-nav.less');
+@import url('../../common/css/i-feedback.less');
+@import url('../../common/css/reset.less');
+@import url('../../common/css/common.less');
+
+@import url('../../common/css/i-paging.less');
+@import url('../../common/css/i-var_${skin}.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-carousel.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-header-nav.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-substep.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-global-nav.less');
+@import url('../../common/css/i-directives.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-cms-directives.less');
+@import url('../../common/css/i-jumbotron.less');
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-feedback.less');
+@import url('../../common/css/reset.less');
+@import url('../../common/css/common.less');
+@import url('../../common/css/i-directive-gooditem.less');
+
+@import url('../../common/css/i-datepicker.less');
+@import url('../../common/css/i-paging.less');
+/* 购物车 */
+html {
+	// width: 200px;
+	// overflow: hidden;
+}
+.f23030{
+	color: @f2RedColor;
+}
+.f18{
+	font-size: 18px;
+}
+.bgf23030{
+	background-color: @f2RedColor;
+}
+p{
+	margin:0;
+}
+.fr{
+	float: right;
+}
+.fl{
+	float: left;
+}
+.marL10{
+	margin-left: 10px;
+}
+
+.checkbox-all{
+
+	input:checked + span{
+		width: 16px;
+		height: 16px;
+		position: relative;
+		background: none;
+		border: 1px solid #ddd;
+
+		&:after{
+			width: 8px;
+			height: 8px;
+			display: block;
+			content: '';
+			margin-left: -4px;
+			margin-top: -4px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			background: #CC0000;
+			border-radius: 1px;
+		}
+	}
+}
+
+#cart{
+
+	.bgColor() {
+		background-color: @whiteColor;
+	}
+	.border() {
+		border: 1px solid #f2f2f2;
+	}
+	.border2() {
+		border-bottom: 2px solid @eeGreyColor;
+	}
+	.bgffe6cd(){
+		background-color: @orderCurrentProgressBarColor;
+	}
+	.bgf23030(){
+		background-color: @f2RedColor;
+	}
+
+	&-title{
+		position: relative;
+		& h2{
+			float: left;
+			margin: 0;
+			font-size: 18px;
+			font-weight: normal;
+			padding-top:14px;
+		}
+		& dl{
+			float: left;
+			margin-left: 19px;
+			overflow: hidden;
+			*zoom: 1;
+
+			& dt,
+			& dd{
+				float: left;
+			}
+			& dt{
+				color: @88GreyColor;
+				width: 80px;
+				padding-top: 5px;
+			}
+			& dd{
+				width: 528px;
+				color: @66GreyColor;
+			}
+		}
+		& .spaddress{
+			display: inline-block;
+			padding: 0 5px;
+			line-height: 22px;
+			border: 1px solid @bbGreyColor;
+			& i{
+				margin-left: 5px;
+			}
+		}
+		& .adschange{
+			position: absolute;
+			top: 39px;
+			right: 0;
+			width: 450px;
+			padding: 5px 5px 30px 5px;
+			border: 1px solid @ddGreyColor;
+			background-color: @whiteColor;
+			z-index: 100;
+			& li{
+				display: inline-block;
+				cursor: pointer;
+				font-size: 12px;
+			}
+			& .tab{
+				height: 30px;
+				font-size: 0;
+				border-bottom: 1px solid @bodyBgColor;
+				border-left: 1px solid @bodyBgColor;
+
+				& li{
+					padding: 0 10px;
+					line-height: 29px;
+					border-top: 1px solid @bodyBgColor;
+					border-right: 1px solid @bodyBgColor;
+					background-color: @backgroundColor;
+				}
+				& .active{
+					border-bottom: 1px solid @blackColor;
+					background-color: @whiteColor;
+				}
+			}
+			& .content{
+				display: none;
+				margin-top: 5px;
+
+				& li{
+					width: 90px;
+					padding: 0 8px;
+					margin: 5px 0;
+
+					&:hover{
+						color: @themeColor;
+					}
+					&.col2{
+						width: 196px;
+					}
+				}
+				&.active{
+					display: block;
+				}
+			}
+		}
+		& .cart-unlogin{
+			width:1000px;
+			height:40px;
+			background: @ffe6cdOrangeColor;
+			overflow: hidden;
+				& .cart-icon{
+					width:20px;
+					height:20px;
+				  //background: url('../../images/company/company-default.png') no-repeat -686px -13px;
+					.common-product-company-default(-686px,-13px);
+					float: left;
+					margin: 10px 14px 10px 18px;
+				}
+				& p{
+					height:40px;
+					line-height:40px;
+					float: left;
+					margin:0;
+				}
+				& .cart-login{
+					float: left;
+					width:90px;
+					height: 25px;
+					line-height:25px;
+					border-radius: 25px;
+					.bgf23030();
+					margin: 7px 0 0 17px;
+					text-align: center;
+					color: @whiteColor;
+					cursor: pointer;
+				}
+			}
+		& #cart-address {
+			overflow: hidden;
+			float: right;
+			padding: 14px 0;
+			& dd,dt{
+				display: inline-block;
+			}
+		}
+	}
+	&-msg{
+		margin-top: 10px;
+		padding: 5px 24px;
+		.border();
+		background-color: @lightThemeColor;
+	}
+	&-main{
+		& .cell{
+			//padding-left: 10px;
+		}
+		& .title-c0{
+			margin-top: 3px!important;
+			padding-left: 0;
+		}
+		& .title-label{
+			margin-right: 0;
+		}
+
+		& .c0{
+			line-height:0;
+			margin-top: 12px;
+			margin-right: 20px;
+			padding-left: 15px;
+		}
+		& .c1{
+			width: 96px;
+		}
+		& .c2{
+			width: 200px;
+			margin-right: 30px;
+		}
+		& .c22{
+			width: 145px
+		}
+		& .c3{
+			width: 100px;
+			padding-left: 0;
+			text-align: center;
+		}
+		& .c4{
+			width: 135px;
+			padding-left: 0;
+			text-align: center;
+		}
+		& .c5{
+			width: 150px;
+			text-align: center;
+		}
+		& .c6{
+		}
+		& .tool-bar{
+			line-height: 40px;
+			// .border();
+			// .bgColor();
+
+			border: 1px solid #f2f2f2;
+			background-color: #fff;
+
+			& .chk{
+				*margin:14px 0;
+			}
+		}
+		& .caption{
+			margin-top: 15px;
+			padding-bottom: 15px;
+			font-size: 16px;
+			.border2();
+			& .merchant-name{
+				padding-left: 10px;
+				position: relative;
+				& .coupon-icon{
+					display: inline-block;
+					width:64px;
+					height:20px;
+					background: url('../images/company/cart-icon.png') no-repeat -427px -74px;
+					position: absolute;
+					left:20px;
+					cursor: pointer;
+					text-align: center;
+					font-size: 12px;
+					line-height: 20px;
+					color: @redColor;
+				}
+				& .coupon-container{
+					width:280px;
+					position: absolute;
+					top:25px;
+					left: 20px;
+					z-index: 666;
+					border:5px solid @ddGreyColor;
+					font-size: 12px;
+					padding:12px;
+					background: @whiteColor;
+					max-height: 430px;
+					overflow: auto;
+					& .coupon-header{
+						& li{
+							float: left;
+							padding:4px 8px;
+						}
+						& .line{
+							border-right:2px solid @ddGreyColor;
+						}
+						& .active{
+							& a{
+								color: @redColor;
+							}
+							border-bottom: 2px solid @redColor;
+						}
+					}
+				}
+				& .coupon-box{
+					height: 100px;
+					& .coupon-one{
+						width: 262px;
+						height: 147px;
+						float: left;
+						box-sizing: border-box;
+						padding:0px 10px;
+						margin-top: 10px;
+						border-radius: 5px;
+						overflow: hidden;
+						position: relative;
+						background: url('../../images/prod-coupons.png') no-repeat -2px -2px;
+						& .coupon-one-top{
+							height:100px;
+							& .couponMoney{
+								color: @whiteColor;
+								padding-top: 24px;
+							}
+							& .moneySymbol{
+								position: absolute;
+								font-size: 22px;
+								margin-top: 8px;
+							}
+							& .couponMoneyNumChinese{
+								font-size: 30px;
+								font-weight: bold;
+								margin-left: 20px;
+								& strong{
+									position: absolute;
+									margin-top: 15px;
+								}
+							}
+							.couponBox{
+								position: absolute;
+								margin-left:5px;
+								.reducerPrice{
+									display: block;
+									font-size: 14px;
+									color:@adRedColor;
+									margin-top: 15px;
+									margin-bottom: 5px;
+								}
+							}
+							& .go-coupon{
+								position: absolute;
+								right: 15px;
+								top: 28px;
+								padding: 2px 8px;
+								border: 1px solid @whiteColor;
+								border-radius: 20px;
+								color: @whiteColor;
+								cursor: pointer;
+							}
+							.ticketChinese{
+								font-size: 12px;
+								color:@whiteColor;
+								padding: 2px 4px;
+								display: inline-block;
+								max-width: 175px;
+								overflow: hidden;
+								text-overflow:ellipsis;
+								white-space: nowrap;
+							}
+						}
+						& .coupon-one-footer{
+							height: 45px;
+							line-height: 45px;
+							position: relative;
+							span{
+								color:@66GreyColor;
+							}
+							.overdate{
+								border: 1px solid @redColor;
+								padding: 2px 7px;
+								border-radius: 12px;
+								color: @redColor;
+								margin-left: 7px;
+							}
+						}
+					}
+					& .coupon-tips{
+						padding-top: 40px;
+						text-align: center;
+					}
+				}
+				& a{
+					float: left;
+				}
+			}
+			& .c0{
+				padding-left: 15px;
+			}
+			&-name{
+				margin-left: 45px;
+			}
+		}
+		& .coupon-container{
+			position: absolute;
+			top: 0px;
+			left:0px;
+		}
+		& .privilegeName{
+			margin: 0 10px;
+			background: @cartPromotionColor;
+			color: @whiteColor;
+			padding: 4px 7px;
+			position: relative;
+			&:after{
+				content:'';
+				width:0;
+				height:0;
+				border-width:0 0 4px 4px;
+				border-style:solid;
+				border-color: transparent transparent transparent @cartPromotionColor;
+				position:absolute;
+				bottom: -4px;left: 0;
+			}
+		}
+		& .event{
+			padding: 0 5px;
+			color: @btnBgColor;
+			//background-color: #ff8686;
+			background-color: @whiteColor;
+			border: 1px solid @btnBgColor;
+		}
+		& .label-box{
+			max-width: 450px;
+			display: inline-block;
+		}
+		& .label-tips{
+			margin-top: 3px;
+			margin-left: 5px;
+		}
+		& .label{
+			margin-left: 16px;
+            margin-top:3px;
+			color: @ff53RedColor;
+			word-wrap: break-word;
+			word-break: break-all;
+			font-weight: normal;
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 1;
+			overflow: hidden;
+		}
+		& .goods{
+			border-left: 1px solid #f2f2f2;
+			border-right: 1px solid #f2f2f2;
+			border-bottom: 1px solid #f2f2f2;
+			word-break: break-all;
+			.myRow{
+				overflow: visible;
+				position: relative;
+				& .count-down{
+					position: absolute;
+					left:34px;
+					bottom:2px;
+					background-color: @ffe6cdOrangeColor;
+					color:@ff53RedColor;
+					padding:6px;
+				}
+				& .server-name{
+					position: absolute;
+					top:100px;
+					left:34px;
+					color: @fontColor;
+					overflow: hidden;
+					&-detail{
+						max-width: 130px;
+						overflow: hidden;
+						word-wrap: break-word;
+						word-break: break-all;
+						display: -webkit-box;
+						-webkit-box-orient: vertical;
+						-webkit-line-clamp: 1;
+					}
+					& span{
+						float: left;
+						margin-right: 5px;
+					}
+					& .server-delete{
+						display: none;
+						cursor: pointer;
+					}
+					&:hover .server-delete{
+						display: inline-block;
+					}
+				}
+				& .product-gift{
+					padding-left: 51px;
+					margin:5px 0;
+					overflow: hidden;
+					&-one{
+						overflow: hidden;
+						float: left;
+						margin-right: 10px;
+						span{
+							float: left	;
+						}
+						.name{
+							max-width: 300px;
+							overflow: hidden;
+							word-wrap: break-word;
+							word-break: break-all;
+							display: -webkit-box;
+							-webkit-box-orient: vertical;
+							-webkit-line-clamp: 1;
+							margin:0 10px;
+							cursor: pointer;
+						}
+						.description{
+							max-width: 500px;
+						}
+					}
+				}
+			}
+
+			& .row{
+				zoom: 1;
+				border-bottom: 1px solid @borderColor;
+				&:last-child{
+					border-bottom: none;
+				}
+				.willchoose{
+					display: none;
+					position: absolute;
+					max-width: 570px;
+					min-width: 370px;
+					left: -1px;
+					top: 100%;
+					border: 1px solid @borderColor;
+					z-index: 1;
+					background: white;
+					dl{
+						margin: 17px 0 19px;
+						padding: 0 10px;
+						dt{
+							color: @88GreyColor;
+							width: 80px;
+							float: left;
+						}
+						dd{
+							float: left;
+							.series{
+								position: relative;
+								display: inline-block;
+								margin-top: 5px;
+								margin-right: 5px;
+								line-height: 26px;
+								border: 1px solid @99GreyColor;
+								//width: 58px;
+								text-align: center;
+								cursor: pointer;
+								padding: 0 6px;
+							}
+							.active{
+								color: @btnBgColor !important;
+								border-color: @btnBgColor;
+							}
+							.active a{
+								color: @btnBgColor;
+							}
+						}
+						.footBtn{
+							margin-left: 80px;
+							.series1 {
+								position: relative;
+								display: inline-block;
+								margin-top: -5px;
+								margin-right: 5px;
+								line-height: 26px;
+								padding: 2px 15px;
+							}
+							.series2 {
+								background: @f2RedColor;
+								border-radius: 5px;
+								a{
+									color: @whiteColor;
+								}
+							}
+							.series3 {
+								a{
+									color: @lightThemeColor;
+								}
+							}
+						}
+					}
+					dl:after{
+						visibility:hidden;
+						display:block;
+						font-size:0;
+						content:" ";
+						clear:both;
+						height:0;
+					}
+				}
+				.willchoose:before{
+					position: absolute;
+					left: 40px;
+					top: -7px;
+					content: "";
+					width: 11px;
+					height: 13px;
+					background: url('../images/jiantou.png') no-repeat;
+				}
+				.server{
+					padding: 10px;
+					border: 1px solid @ddGreyColor;
+					margin: 6px 0 5px -10px;
+					background-color: @whiteColor;
+					position: relative;
+					z-index: 300;
+					.select-server-top:hover ul{
+						display: block;
+					}
+					.select-server-top:hover .arrow{
+						transform: rotate(-180deg);
+					}
+					.select-server{
+						width:16px;
+						height:16px;
+						display: inline-block;
+						.common-product-company-default(-685px,-37px);
+						margin-right: 5px;
+					}
+					.arrow{
+						width:11px;
+						height:6px;
+						display: inline-block;
+						.common-product-company-default(-22px,-34px);
+						margin-left: 5px;
+						transform: rotate(0deg);
+					}
+					ul{
+						display: none;
+					}
+					li{
+						& .no-select-icon{
+							width:20px;
+							height:20px;
+							.common-product-company-default(-686px,-13px);
+							float: left;
+						}
+						line-height: 20px;
+						overflow: hidden;
+						& input[class*='checkBox']+ label{
+							margin-right:10px ;
+						}
+						& input[class*='checkBox']:checked + label:after {
+							content: '\2714';
+							position: absolute;
+							top: -5px;
+							left: 1px;
+							color: @btnBgColor;
+							font-size: 12px;
+						}
+					}
+				}
+				.specification{
+					//border: 1px solid @ddGreyColor;
+					background-color: @whiteColor;
+					padding:10px;
+					margin-bottom: 6px;
+					.specification-title{
+						word-break: break-all;
+					}
+					.specification-title:hover ul{
+						display: block;
+					}
+					.specification-title:hover .arrow{
+						transform: rotate(-180deg);
+					}
+					.specification-title:hover .border{
+						display: block;
+					}
+					.arrow{
+						width:11px;
+						height:6px;
+						display: inline-block;
+					  	//background: url('../../images/company/company-default.png') no-repeat -685px -37px;
+						.common-product-company-default(-685px,-37px);
+						margin-left: 5px;
+						transform: rotate(0deg);
+					}
+					.border{
+						width:143px;
+						height:1px;
+						background-color: @whiteColor;
+						position: relative;
+						top:12px;
+						left:-10px;
+						z-index: 100;
+						display: none;
+					}
+					ul{
+						width:230px;
+						padding: 10px;
+						background-color: @whiteColor;
+						border:1px solid @ddGreyColor;
+						display: none;
+						position: relative;
+						top:11px;
+						left:-11px;
+					}
+					li{
+						height:40px;
+						line-height: 40px;
+						overflow: hidden;
+						& img{
+							margin-top: 5px;
+							margin-right: 5px;
+							float: left;
+						}
+						& input[class*='checkBox']+ label{
+							margin-right:10px ;
+							float: left;
+							margin-top: 14px;
+						}
+						& input[class*='checkBox']:checked + label:after {
+							content: '\2714';
+							position: absolute;
+							top: -15px;
+							left: 1px;
+							color: @btnBgColor;
+							font-size: 12px;
+						}
+					}
+				}
+			}
+			& .row:after{
+				visibility:hidden;
+				display:block;
+				font-size:0;
+				content:" ";
+				clear:both;
+				height:0;
+			}
+			.group-style-unchecked{
+				border-bottom: 1px solid @whiteColor;
+				width: 50px;
+				top: -1px;
+				position: relative;
+			}
+			& .marB35{
+				margin-bottom: 35px;
+			}
+			& .cell{
+				//border-top: 1px solid @borderColor;
+			}
+			& .c0{
+				padding-top: 39px;
+				border-top: 0;
+				.disable{
+					font-size: 10px;
+					border-radius: 5px;
+					padding: 8px;
+				}
+			}
+			& .c1{
+				padding-top: 20px;
+				padding-left: 0;
+				padding-bottom: 20px;
+			}
+			& .c2{
+				padding-top: 20px;
+				*zoom: 1;
+				.privilegeAlter,.outPrivilegeAlter{
+					clear: both;
+					background: @lightThemeColor;
+					padding: 5px;
+					.privilegeAlterTime{
+						font-size: 14px;
+						color: @clearColor;
+						padding: 0 2px;
+					}
+				}
+			}
+			& .c22{
+				padding-top: 20px;
+			}
+			& .c3{
+				text-align: center;
+				& .price-type{
+					border:1px solid @f2RedColor;
+					padding:4px 10px;
+				}
+			}
+			& .c3,
+			& .c5,
+			& .c6{
+				padding-top: 20px;
+			}
+			& .c6{
+				width: 60px;
+				& a{
+					display: inline-block;
+					margin-bottom: 10px;
+				}
+			}
+			& .c4{
+				padding-top: 20px;
+				position: relative;
+			}
+			& .pname h5,
+			& .attr h5{
+				color: @88GreyColor;
+				font-size: 14px;
+				word-wrap: break-word;
+				word-break:break-all;
+				font-weight: normal;
+				margin: 10px 0 19px 0;
+			}
+			& .pname{
+				float: left;
+				& a{
+					color: @33GreyColor;
+					word-wrap: break-word;
+					word-break: break-all;
+					display: -webkit-box;
+					-webkit-box-orient: vertical;
+					-webkit-line-clamp: 4;
+					overflow: hidden;
+				}
+			}
+			& .attr{
+				float: left;
+				border: 1px solid transparent;
+				position: relative;
+				cursor: pointer;
+				word-break: break-all;
+				word-wrap: break-word;
+				display: -webkit-box;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 4;
+				overflow: hidden;
+				//margin-top: 10px;
+				.attrChange{
+					float: right;
+					background: @f2RedColor;
+					color: @whiteColor;
+					padding: 0 2px;
+					display: none;
+					font-size: 10px;
+					cursor: pointer;
+				}
+				 .willchoose{
+					 position: absolute;
+					 .title{
+						padding-left: 10px;
+						color: @btnBgColor;
+						font-size: 0;
+						background-color: @lightBtnBgColor;
+					}
+					.active{
+						border: 1px solid @btnBgColor;
+
+						 .title{
+							font-size: 12px;
+							line-height: 28px;
+						}
+					}
+				}
+			}
+			& .attr:hover{
+				border: 1px solid @bodyBgColor;
+				background-color: @whiteColor;
+				padding: 10px;
+				overflow: inherit;
+				.attrChange{
+					display: inline-block;
+					position: absolute;
+					right: 0;
+					top: 0;
+				}
+				.willchoose{
+					display: block;
+				}
+			}
+			& .attr-hover:hover{
+				border: 1px solid @lightThemeColor;
+				background-color: inherit;
+				padding: 0;
+			}
+			& .attr-gray:hover{
+				border: 1px solid @borderColor;
+				background-color: inherit;
+				padding: 0;
+			}
+			& .attr-white:hover{
+				border: 1px solid @whiteColor;
+				background-color: inherit;
+				padding: 0;
+			}
+			& .numbox{
+				height: 28px;
+				margin: 0 auto;
+				border: 1px solid @bbGreyColor;
+				position: relative;
+				display: inline-block;
+				& input[type=text][disabled],input[type=button][disabled], button[type=button][disabled]{
+					background: @whiteColor!important;
+				}
+				& button{
+					float: left;
+					width: 28px;
+					height: 28px;
+					padding: 0;
+					font-size: 14px;
+					border: 0 none;
+					background-color: @whiteColor;
+					cursor: pointer;
+				}
+				& input{
+					float: left;
+					width: 36px;
+					height: 28px;
+					padding: 0;
+					text-align: center;
+					line-height: 28px;
+					border: 0 none;
+					border-right:1px solid @ddGreyColor;
+					border-left:1px solid @ddGreyColor;
+				}
+			}
+			& .nomuch{
+				width: 96px;
+				height: 26px;
+				position: absolute;
+				top:50px;
+				left:20px;
+				color: @whiteColor;
+				text-align: center;
+				line-height: 26px;
+				background-color: @ccGreyColor;
+			}
+			& .stock{
+				width: 96px;
+				height: 26px;
+				text-align: left;
+				position: absolute;
+				top:50px;
+				left:20px;
+				color: #999;
+				line-height: 26px;
+			}
+			& .limit{
+				padding: 9px;
+				background-color: @ffe6cdOrangeColor;
+				color: @f2RedColor;
+				position: absolute;
+				top:50px;
+				left:19px;
+				width:240px;
+				text-align: left;
+			}
+			& .tipmsg{
+				width: 92px;
+				margin: 0 auto;
+				color: @f2RedColor;
+				text-align: center;
+				line-height: 16px;
+				border: 1px solid @ff86RedColor;
+				// background-color: @tool-bar;
+				font-size: 12px;
+				text-align: left;
+			}
+			& .manJian{
+				height:40px;
+				line-height:40px;
+				.danation{
+					margin:0 11px;
+					padding: 4px 6px;
+					background: @f2RedColor;
+					color: @whiteColor;
+					cursor: pointer;
+				}
+			}
+			& .privilegeTarget{
+				float: left;
+				margin-top: 3px;
+				margin-left: 5px;
+			}
+		}
+		& .mctcount{
+			padding: 15px 0;
+			border-right: 1px solid @borderColor;
+			border-bottom: 1px solid @borderColor;
+			border-left: 1px solid @borderColor;
+
+			& .blue{
+				margin-left: 15px;
+			}
+			& .short-btn{
+				background-color: @f2RedColor;
+				color: @whiteColor;
+				padding:4px;
+				margin-left: 16px;
+				margin-top: -1px;
+				float: left;
+			}
+			& .group-btn{
+				float: right;
+				margin-right:10px;
+				margin-top: 3px;
+			}
+			& .group-check{
+				float: left;
+				padding-left: 15px;
+				padding-top: 5px;
+				margin-right: 10px;
+				& input[class*='checkBox']:checked + label:after{
+					top: -3px;
+					left: 1px;
+				}
+			}
+		}
+	}
+	&-bar{
+		height: 55px;
+		margin-top: 12px;
+		padding:0 0 0 15px;
+		.border();
+		.bgColor();
+		& .chk{
+			margin-right: 12px;
+			_margin: 17px 12px 17px 0;
+			_vertical-align: middle;
+		}
+		& .orange{
+			font-size: 20px;
+		}
+		& li{
+			float: left;
+			line-height:55px;
+		}
+		& .cart-totle{
+			line-height:27px;
+
+			& > .price{
+				font-size: 20px;
+			}
+		}
+		& .tool{
+			float: left;
+			& li{
+				margin-right: 10px;
+				font-size: 12px;
+			}
+		}
+
+		& .goslmt{
+			float: right;
+
+			& li{
+				margin-left: 16px;
+			}
+			& .btn{
+				height: 55px;
+				padding: 0 40px;
+				line-height: 55px;
+				font-weight: bold;
+				border-radius: 0;
+			}
+		}
+	}
+	&-null{
+		width:1000px;
+		padding: 100px 0;
+		overflow: hidden;
+		text-align: center;
+		& .cart-null-box{
+			width:350px;
+            margin: 0 auto;
+            height: 60px;
+		}
+		& .cart-icon-null{
+			width:60px;
+			height:56px;
+		  	background: url('../../images/company/cart-icon.png') no-repeat -218px -73px;
+			float: left;
+		}
+		& .go-login{
+			float: left;
+			width:90px;
+			height: 25px;
+			line-height:25px;
+			border-radius: 25px;
+			.bgf23030();
+			margin: 7px 0 0 17px;
+			text-align: center;
+			color: @whiteColor;
+			cursor: pointer;
+		}
+		& .go-shopping{
+			float: left;
+			margin-top: 10px;
+			margin-left: 15px;
+			cursor: pointer;
+		}
+		& .cart-null-right{
+			margin-left: 20px;
+		}
+	}
+	&-load{
+		height: 300px;
+		text-align: center;
+		line-height: 300px;
+	}
+}
+.amount-msg {
+	background-color: @ffe6cdOrangeColor;
+	border: 1px solid @ffe2OrangeColor;
+	box-shadow: 1px 1px 6px @borderColor;
+	color: @55GreyColor;
+	height: 22px;
+	left: -20px;
+	line-height: 20px;
+	position: absolute;
+	text-align: center;
+	top: -30px;
+	width: 100px;
+	font-size: 12px;
+
+	& em{
+		width: 0;
+		height: 0;
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-top: 5px solid @ffe6cdOrangeColor;
+		font-size: 0;
+		line-height: 0;
+		position: absolute;
+		left: 50%;
+		top:22px;
+		margin-left: -5px;
+	}
+}
+.amount-msg.addSty {
+	left: -6px;
+	top: -30px;
+}
+.cart-search{
+	height: 50px;
+	width: 426px;
+	position: absolute;
+	right: 0;
+	top: 40px;
+	overflow: hidden;
+	.cart-search-box{
+		float: right;
+	}
+	.cart-input{
+		width:296px;
+		height:31px;
+		border:2px solid @themeColor;
+		float: left;
+		padding:0 0 0 15px;
+	}
+	.cart-button{
+		width:62px;
+		height:35px;
+		line-height:35px;
+		color: @whiteColor;
+		background-color: @themeColor;
+		float: left;
+		border:0;
+	}
+}
+.shopTitle{
+	//background: url("../images/shopTitle.png") no-repeat;
+	font-size: 20px;
+	height: 50px;
+	width: 426px;
+	position: absolute;
+	left: 380px;
+	top: -68px;
+}
+.container{
+	width:1000px;
+	position: relative;
+}
+.color0721{
+	color: @00BlueColor;
+}
+.jingYong{
+	background: @eeGreyColor;
+	color: @99GreyColor !important;
+}
+.fff2f2{
+	background: #fff9f9;
+}
+.bdDash{
+	border: 1px dashed @borderColor !important;
+}
+
+//模态框
+.dialog-header{
+	background: @backgroundColor;
+	color: @fontColor;
+	//background: transparent !important;
+	//border-bottom: 2px solid @ccGreyColor !important;
+	.iconClick{
+		position: absolute;
+		right: 0;
+		//background: @eeGreyColor;
+		width: 30px;
+		height: 20px;
+		margin-right: 0;
+		border-bottom-left-radius: 50%;
+		border-top-left-radius: 50%;
+	}
+	.iconYuan{
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		//background: @whiteColor;
+		margin-left: 2px;
+		text-align: center;
+		font-size: 18px;
+	}
+	.fontWeight{
+		font-weight: bold;
+		font-size: 15px;
+	}
+}
+.header-title{
+	display: inline-block;
+	//color: @blackColor;
+	margin: 10px;
+
+}
+.dialog-body_{
+	max-height: 461px;
+	overflow-x: auto;
+	.row{
+		border-bottom: 1px solid @ccGreyColor;
+	}
+	& .c0{
+		padding-top: 60px;
+		padding-right: 12px;
+		border-top: 0;
+		width: 10%;
+		text-align: center;
+		&.disabled {
+			width: 10px;
+			.input {
+				display:none;
+			}
+		}
+	}
+	& .c1{
+		padding: 15px 0;
+		width: 20%;
+	}
+	& .c2{
+		padding-top: 15px;
+		*zoom: 1;
+		width: 45%;
+		.privilegeAlter,.outPrivilegeAlter{
+			clear: both;
+			background: @lightThemeColor;
+			padding: 5px;
+			.privilegeAlterTime{
+				font-size: 14px;
+				color: @clearColor;
+				padding: 0 2px;
+			}
+		}
+		& .pname{
+			float: left;
+			//加上系列属性要改成130px
+			//width: 300px;
+			width: 160px;
+			overflow: hidden;
+		}
+		& .attr{
+			float: right;
+			width: 150px;
+			padding-left: 10px;
+			border: 1px solid transparent;
+			margin-left: 38px;
+			margin-top: -30px;
+			padding-top: 10px;
+			.attrChange{
+				float: right;
+				background: @f2RedColor;
+				color: @whiteColor;
+				padding: 0 2px;
+				display: none;
+				font-size: 10px;
+				cursor: pointer;
+			}
+			.willchoose{
+				display: none;
+				position: relative;
+				max-width: 340px;
+				min-width: 160px;
+				border: 1px solid @borderColor;
+				border-top: 2px solid @borderColor;
+				background: white;
+				z-index: 2000!important;
+				dl{
+					margin: 17px 0 19px;
+					padding: 0 10px;
+					word-break: break-all;
+					dt{
+						color: @88GreyColor;
+						width: 80px;
+						float: left;
+					}
+					dd{
+						float: left;
+						.series{
+							position: relative;
+							display: inline-block;
+							margin-top: 5px;
+							margin-right: 5px;
+							line-height: 26px;
+							border: 1px solid @99GreyColor;
+							text-align: center;
+							cursor: pointer;
+							padding: 0 6px;
+						}
+						.active{
+							color: @f2RedColor !important;
+							border-color: @f2RedColor;
+						}
+						.active a{
+							color: @f2RedColor;
+						}
+					}
+					.footBtn{
+						//margin-left: 80px;
+						.series1 {
+							position: relative;
+							display: inline-block;
+							margin-top: -5px;
+							margin-right: 5px;
+							line-height: 26px;
+							padding: 2px 15px;
+						}
+						.series2 {
+							background: @f2RedColor;
+							border-radius: 5px;
+							a{
+								color: @whiteColor;
+							}
+						}
+						.series3 {
+							a{
+								color: @lightThemeColor;
+							}
+						}
+					}
+				}
+				dl:after{
+					visibility:hidden;
+					display:block;
+					font-size:0;
+					content:" ";
+					clear:both;
+					height:0;
+				}
+			}
+			.willchoose:before{
+				position: absolute;
+				left: 40px;
+				top: -9px;
+				content: "";
+				width: 11px;
+				height: 13px;
+				background: url('../images/jiantou.png') no-repeat;
+			}
+			.willchoose{
+				position: relative;
+				left: -11px;
+				bottom: -1px;
+				.title{
+					padding-left: 10px;
+					color: @btnBgColor;
+					font-size: 0;
+					background-color: @lightBtnBgColor;
+				}
+				.active{
+					border: 1px solid @btnBgColor;
+
+					.title{
+						font-size: 12px;
+						line-height: 28px;
+					}
+				}
+			}
+		}
+
+		& .attr:hover{
+			border: 1px dashed @clearColor;
+			.attrChange{
+				display: inline-block;
+				position: relative;
+				right: -1px;
+				top: -11px;
+			}
+			.willchoose{
+				display: block;
+			}
+		}
+	}
+	& .c3{
+		text-align: center;
+		width: 11%;
+		padding-top: 15px;
+	}
+}
+#cart-foot{
+	position: fixed;
+	bottom:0;
+	left:0;
+	width:100%;
+	height:55px;
+	background-color: @lightBackgroundColor;
+	z-index: 1000;
+	display: none;
+}
+.cart-bar-fixed{
+	width:985px;
+	position: fixed;
+	bottom:0;
+	left:50%;
+	margin-left: -500px;
+	z-index: 2000;
+}
+.modal-footer{
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	.footBtn{
+		font-size: 15px;
+		width: 100px;
+	}
+	.btn{
+		display: inline-block;
+		height: 36px;
+		text-align: center;
+		line-height: 36px;
+		width:100px;
+		border-radius: 36px;
+		cursor: pointer;
+	}
+	.btn:nth-child(1):hover{
+		color: @whiteColor;
+	}
+	.btn:nth-child(2):hover{
+		color: @ccGreyColor;
+	}
+}
+.bgRed{
+	background-color: @f2RedColor !important;
+}
+.bgWhite{
+	border:1px solid @ccGreyColor;
+	background-color: @whiteColor !important;
+	color: @blackColor;
+}
+.modal{
+	background-color: rgb(0, 0, 0);    /*不支持rgba的浏览器*/
+	background-color: rgba(0, 0, 0, 0.4);  /*支持rgba的浏览器*/
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#66000000,endColorstr=#66000000);
+	background: none\9;
+}
+.bg-modal{
+	z-index: 1000;
+	overflow: auto;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background: rgb(0, 0, 0);    /*不支持rgba的浏览器*/
+	background: rgba(51, 51, 51, 0.3);  /*支持rgba的浏览器*/
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000,endColorstr=#B2000000);
+	filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000, endColorstr=#B2000000)";
+	background: none\9;
+}
+label[for='checkBoxFoot']{
+	line-height:0;
+	float: left;
+}
+.checkboxMT{
+	margin-top: 20px;
+	margin-right:20px;
+}
+.attrActive{
+	border: 2px solid @clearColor!important;
+}
+.attrDisabled{
+	pointer-events: none!important;;
+	color: @ddGreyColor!important;;
+}
+.attr-box{
+	overflow: hidden;
+}
+.attr-name{
+	float: left;
+}
+.attr-style{
+	overflow: hidden;
+	word-wrap: break-word;
+	word-break: break-all;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 4;
+	float: left;
+}
+//组合商品的弹框
+.add-dialog {
+	padding: 0 20px;
+	height: 338px;
+	overflow-y:auto;
+	li {
+		padding-top:15px;
+		padding-bottom: 20px;
+		border-bottom: 1px solid #ccc;
+	}
+	.img-box {
+			width: 80px;
+			height: 80px;
+			margin-right: 16px;
+			img {
+				width: 100%;
+				height: 100%;
+			}
+	}
+	.content {
+		width: 202px;
+		margin-right: 92px;
+	}
+	.descr {
+		width: 146px;
+		margin-right: 32px;
+	}
+}
+.combation {
+	width: 100px;
+	height: 25px;
+	border-radius: 13px;
+	display: block;
+	border: 1px solid #f23030;
+	text-align: center;
+	position: relative;
+	left: -20px;
+	line-height: 25px;
+	color:#f23030;
+	&:hover {
+		color:#f23030!important;
+	}
+}
+.goods-show {
+	position: relative;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	& .guess-you {
+		position: relative;
+		height: 40px;
+		line-height: 40px;
+		background-color: #fff; //@backgroundColor
+		border: 1px solid #f2f2f2;
+		border-bottom: none;
+		& .guess-like {
+			float: left;
+			color: #CC0000;
+			font-size: 14px;
+			border-bottom: 2px solid #CC0000;
+		}
+		&::after {
+			content: '';
+			width: 2px;
+			height: 16px;
+			position: absolute;
+			background-color: @themeColor;
+			top: 15px;
+			left: 0;
+		}
+        & .take-all {
+            float: right;
+        }
+    }
+    & .show-good {
+        border: 1px solid #f2f2f2; //border-left: 1px solid @bodyBgColor;
+        padding: 20px 35px 20px 52px; //padding:25px 23px 0px 27px;
+        & .goods-box {
+            overflow: hidden; //padding-left: 27px;
+        }
+        & ul {
+            width: 30000px;
+        }
+        & a {
+            display: block;
+            // height: 221px;
+        }
+        & li {
+            float: left;
+            width: 210px;
+            margin-right: 19px;
+
+						.choose-btns{
+							height: 40px;
+							line-height: 38px;
+
+							.addCarts{
+								margin-left: 0;
+								text-align: center;
+								border: 1px solid #CC0000;
+								border-radius: 2px;
+
+							}
+						}
+        }
+        & h5 {
+            margin: 10px 0 5px 0;
+            font-weight: 900;
+            font-size: 14px;
+            color: @themeColor;
+            // text-align: center;
+        }
+        & span {
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            // display: block;
+        }
+    }
+    & .arrowLeft .arrowLeft-icon {
+        background: url('../../images/company/company-default.png') no-repeat -277px -135px;
+    }
+    & .arrowLeft .arrowLeft-icon-disabled {
+        //background: url('../../images/company/company-default.png') no-repeat -277px -206px;
+        .common-product-company-default(-277px,-206px);
+    }
+    & .arrowRight .arrowRight-icon {
+        //background: url('../../images/company/company-default.png') no-repeat -277px -34px;
+        .common-product-company-default(-277px,-34px);
+    }
+    & .arrowRight .arrowRight-icon-disabled {
+        background: url('../../images/company/company-default.png') no-repeat -277px -100px;
+    }
+    & .arrowLeft {
+        left: 8px;
+    }
+    & .arrowRight {
+        right: 8px;
+    }
+    & .arrow-box {
+        position: absolute;
+        top: 50%;
+        margin-top: -11px;
+        & span {
+            display: block;
+            width: 14px;
+            height: 23px;
+            cursor: pointer;
+        }
+    }
+}

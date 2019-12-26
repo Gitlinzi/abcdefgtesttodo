@@ -1,0 +1,77 @@
+{
+  "code": "0",
+  "message": "操作成功",
+  "errMsg": null,
+  "data": {
+    "orderRefundVOs": [
+      {
+        "applyTime": 1472893559000,
+        "id": 19,
+        "orderCode": "160903962413378927",
+        "applyReturnAmount": 42.8,
+        "returnStatus": 1,
+        "cancelStatus": null,
+        "refundStatus": 1,
+        "actualReturnAmount": null,
+        "afterSalesProductVOs": [
+          {
+            "id": 19,
+            "mpId": 212,
+            "productPicPath": "http://cdn.oudianyun.com/lyf-local/trunk/back-cms/1501471264432_4596_81.jpg@base@tag=imgScale&q=80",
+            "productItemNum": 3,
+            "chineseName": "边牧",
+            "returnProductItemNum": 1,
+            "mayReturnProductItemNum": null,
+            "productPayPrice": null,
+            "productPriceFinal": 33.330,
+            "returnId": 19,
+            "productItemAmount": null
+          },
+          {
+            "id": 20,
+            "mpId": 213,
+            "productPicPath": "http://cdn.oudianyun.com/lyf-local/trunk/back-cms/1501471233043_3756_53.jpg@base@tag=imgScale&q=80",
+            "productItemNum": 4,
+            "chineseName": "斗牛犬",
+            "returnProductItemNum": 1,
+            "mayReturnProductItemNum": null,
+            "productPayPrice": null,
+            "productPriceFinal": 44.444,
+            "returnId": 19,
+            "productItemAmount": null
+          },
+          {
+            "id": 21,
+            "mpId": 214,
+            "productPicPath": "http://cdn.oudianyun.com/lyf-local/trunk/back-cms/1501471250540_3971_66.jpg@base@tag=imgScale&q=80",
+            "productItemNum": 5,
+            "chineseName": "拉布拉多",
+            "returnProductItemNum": 1,
+            "mayReturnProductItemNum": null,
+            "productPayPrice": null,
+            "productPriceFinal": 55.555,
+            "returnId": 19,
+            "productItemAmount": null
+          },
+          {
+            "id": 22,
+            "mpId": 215,
+            "productPicPath": "http://cdn.oudianyun.com/lyf-local/trunk/back-cms/1501471213711_9560_55.jpg@base@tag=imgScale&q=80",
+            "productItemNum": 6,
+            "chineseName": null,
+            "returnProductItemNum": 1,
+            "mayReturnProductItemNum": null,
+            "productPayPrice": null,
+            "productPriceFinal": 66.666,
+            "returnId": 19,
+            "productItemAmount": null
+          }
+        ],
+        "productAmount": 3,
+        "type": 2
+      }
+    ],
+    "total": 1
+  },
+  "trace": "124!$1#@168%&192!$,77380,61777633687275397880790"
+}

@@ -1,0 +1,88 @@
+<div class='change-password name-prove' ng-init="binds.init()">
+    <p class='home-allTitle pdL20'>{{i18n('账号绑定')}}</p>
+    <div class='bind-account pdL20 pdR20'>
+        <dl class='bind' ng-click="bindShow(2)" ng-if="$parent.switchConfig.center.accountBindFunction.supportWeiXin">
+            <dt class='clearfix mat19'>
+                <span class='bind-number bind-wechat'>{{i18n('绑定微信账号')}}</span>
+                <span class='now-bind' ng-show="binds.wxIsBind">{{i18n('已绑定')}}</span>
+                <span class="wei-bind" ng-show="!binds.wxIsBind">{{i18n('未绑定')}}</span>
+                <a href=""><span class='unbind' ng-show="!binds.wxIsBind" ng-click="weixinLogin()">{{i18n('绑定')}}</span></a>
+                <span class='unbind'  ng-show="!bindWX && binds.wxIsBind" ng-click="binds.confirmRemoveUnion($event,2)">{{i18n('解绑')}}</span>
+                <span class='unbind' ng-show="bindWX" ng-click="closeBind($event,2)">{{i18n('收起')}}</span>
+            </dt>
+            <div class="bind-content" ng-show="bindWX">
+                <dd class='mat19'>{{i18n('您正在使用的账号关联')}}1{{i18n('个微信账号')}}</dd>
+                <dd class='please mat19'>{{i18n('请您牢记该账号')}}：HI，{{binds.wxName}}</dd>
+                <dd>1、{{i18n('解绑后需要使用此账号进行登录')}}，{{i18n('解绑后的账号仍可正常使用')}}，{{i18n('订单等信息不会丢失')}}，{{i18n('忘记密码请在登录页找回密码')}}；</dd>
+                <dd class='mat19'>2、{{i18n('该账号下关联微信账号将全部解绑')}}</dd>
+                <dd>
+                    <input type="button" value="{{i18n('解除绑定')}}" ng-click="binds.confirmRemoveUnion($event,2)">
+                </dd>
+            </div>
+        </dl>
+        <dl class='bind' ng-click="bindShow(1)" ng-if="$parent.switchConfig.center.accountBindFunction.supportQQ">
+            <dt class='clearfix mat19'>
+                <span class='bind-number bind-QQ'>{{i18n('绑定')}}QQ{{i18n('账号')}}</span>
+                <span class='now-bind' ng-show="binds.qqIsBind">{{i18n('已绑定')}}</span>
+                <span class="wei-bind" ng-show="!binds.qqIsBind">{{i18n('未绑定')}}</span>
+                <a href=""><span class='unbind' ng-show="!binds.qqIsBind" ng-click="qqLogin()">{{i18n('绑定')}}</span></a>
+                <span class='unbind' ng-show="!bindQQ && binds.qqIsBind" ng-click="binds.confirmRemoveUnion($event,1)">{{i18n('解绑')}}</span>
+                <span class='unbind' ng-show="bindQQ" ng-click="closeBind($event,1)">{{i18n('收起')}}</span>
+            </dt>
+            <div class="bind-content"  ng-show="bindQQ">
+                <dd class='mat19'>{{i18n('您正在使用的账号关联')}}1{{i18n('个')}}QQ{{i18n('账号')}}</dd>
+                <dd class='please mat19'>{{i18n('请您牢记该账号')}}：HI，{{binds.qqName}}</dd>
+                <dd>1、{{i18n('解绑后需要使用此账号进行登录')}}，{{i18n('解绑后的账号仍可正常使用')}}，{{i18n('订单等信息不会丢失')}}，{{i18n('忘记密码请在登录页找回密码')}}；</dd>
+                <dd class='mat19'>2、{{i18n('该账号下关联')}}QQ{{i18n('账号将全部解绑')}}</dd>
+                <dd>
+                    <input type="button" value="{{i18n('解除绑定')}}" ng-click="binds.confirmRemoveUnion($event,1)">
+                </dd>
+            </div>
+        </dl>
+        
+        <dl class='bind' ng-click="bindShow(3)" ng-if="$parent.switchConfig.center.accountBindFunction.supportWeiBo">
+            <dt class='clearfix mat19' >
+                <span class='bind-number bind-weibo'>{{i18n('绑定微博账号')}}</span>
+                <span class='now-bind' ng-show="binds.wbIsBind">{{i18n('已绑定')}}</span>
+                <span class="wei-bind" ng-show="!binds.wbIsBind">{{i18n('未绑定')}}</span>
+                <a href=""><span class='unbind' ng-show="!binds.wbIsBind" ng-click="weiboLogin()">{{i18n('绑定')}}</span></a>
+                <span class='unbind' ng-show="!bindWB && binds.wbIsBind" ng-click="binds.confirmRemoveUnion($event,3)">{{i18n('解绑')}}</span>
+                <span class='unbind' ng-show="bindWB" ng-click="closeBind($event,3)">{{i18n('收起')}}</span>
+            </dt>
+            <div class="bind-content" ng-show="bindWB">
+                <dd class='mat19'>{{i18n('您正在使用的账号关联')}}1{{i18n('个微博账号')}}</dd>
+                <dd class='please mat19'>{{i18n('请您牢记该账号')}}：HI，{{binds.wbName}}</dd>
+                <dd>1、{{i18n('解绑后需要使用此账号进行登录')}}，{{i18n('解绑后的账号仍可正常使用')}}，{{i18n('订单等信息不会丢失')}}，{{i18n('忘记密码请在登录页找回密码')}}；</dd>
+                <dd class='mat19'>2、{{i18n('该账号下关联微博账号将全部解绑')}}</dd>
+                <dd>
+                    <input type="button" value="{{i18n('解除绑定')}}" ng-click="binds.confirmRemoveUnion($event,3)">
+                </dd>
+            </div>
+        </dl>
+
+        <dl class='bind' ng-click="bindShow(4)" ng-if="$parent.switchConfig.center.accountBindFunction.supportZhiFuBao">
+            <dt class='clearfix mat19'>
+                <span class='bind-number bind-zfb'>{{i18n('绑定支付宝账号')}}</span>
+                <!--<span class='now-bind'>已绑定</span>
+                &lt;!&ndash;<span class='unbind' ng-click="bindShow()">{{i18n('解绑')}}</span>&ndash;&gt;
+                <a href="javascript:void(0)"  ng-click="alipayLogin()"><span class='unbind' >绑定</span></a>-->
+                <span class='now-bind' ng-show="binds.zfbIsBind">{{i18n('已绑定')}}</span>
+                <span class="wei-bind" ng-show="!binds.zfbIsBind">{{i18n('未绑定')}}</span>
+                <a href=""><span class='unbind' ng-show="!binds.zfbIsBind" ng-click="alipayLogin()">{{i18n('绑定')}}</span></a>
+                <span class='unbind' ng-show="!bindZFB && binds.zfbIsBind" ng-click="binds.confirmRemoveUnion($event,4)">{{i18n('解绑')}}</span>
+                <span class='unbind' ng-show="bindZFB" ng-click="closeBind($event,4)">{{i18n('收起')}}</span>
+            </dt>
+            <div class="bind-content" ng-show="bindZFB">
+                <dd class='mat19'>{{i18n('您正在使用的账号关联')}}1{{i18n('个支付宝账号')}}</dd>
+                <dd class='please mat19'>{{i18n('请您牢记该账号')}}：HI，{{binds.zfbName}}</dd>
+                <dd>1、{{i18n('解绑后需要使用此账号进行登录')}}，{{i18n('解绑后的账号仍可正常使用')}}，{{i18n('订单等信息不会丢失')}}，{{i18n('忘记密码请在登录页找回密码')}}；</dd>
+                <dd class='mat19'>2、{{i18n('该账号下关联支付宝账号将全部解绑')}}</dd>
+                <dd>
+                    <input type="button" value="{{i18n('解除绑定')}}" ng-click="binds.confirmRemoveUnion($event,4)">
+                </dd>
+            </div>
+        </dl>
+        
+    </div>
+</div>
+</div>

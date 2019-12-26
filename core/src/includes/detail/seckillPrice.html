@@ -1,0 +1,15 @@
+<dl class='first-dl'>
+    <dt>{{i18n('秒杀价')}}</dt>
+    <dd>
+        <div class='money'>
+            <span ng-show="itemlist.managementState && !$parent.hideProductPrice" class="num"><span class='money-img'>￥</span>{{itemlist.availablePrice}}</span>
+            <span ng-show="itemlist.managementState && $parent.hideProductPrice" class="num"><span class='money-img'></span>{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+            <span style="color: #000;" ng-show="!itemlist.managementState">{{i18n('暂无价格')}}</span>
+            <span ng-show="itemlist.originalPrice && !$parent.hideProductPrice" class="originalPrice">{{itemlist.originalPrice | currency : "￥"}}</span>
+            <span class="member-price-box" ng-show="itemlist.availablePriceText">
+                <span class="member-price-text">{{itemlist.availablePriceText}}</span>
+            </span>&nbsp;&nbsp;
+            <span ng-show="code == 4 || code == 5" class="starDown">{{i18n('非卖品')}}</span>
+        </div>
+    </dd>
+</dl>

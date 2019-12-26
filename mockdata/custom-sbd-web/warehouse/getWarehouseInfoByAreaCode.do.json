@@ -1,0 +1,18 @@
+{
+    "code": "0",
+    "message": "操作成功",
+    "errMsg": null,
+    "data": {
+        "id": 1010119900000011,
+        "code": "guizhou",
+        "name": "贵州仓发货",
+        "provinceCode": 24,
+        "cityCode": 2196,
+        "districtCode": 2198,
+        "region": null,
+        "merchantId": 0,
+        "remake": null,
+        "isAvailable": 1
+    },
+    "stackTrace": null
+}

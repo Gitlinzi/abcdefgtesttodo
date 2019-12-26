@@ -1,0 +1,47 @@
+<div class="statement-page">
+
+    <div class="home-allTitle pdL20">{{i18n('采购数据-按目录')}}</div>
+
+    <div class="query">
+        <div class="datetimepicker">
+            <span class="date-title">{{i18n('采购日期')}}:&nbsp;&nbsp;</span>
+            <div class="input-group">
+                <input datetimepicker ng-model="createTimeStart" options="datetimepickerOptions1" max-date="createTimeEnd" type="text" class="timeiconbg date-time-picker-input"/>
+                <span class="input-group-addon">{{i18n('至')}}</span>
+                <input datetimepicker ng-model="createTimeEnd" options="datetimepickerOptions2" min-date="createTimeStart" type="text" class="timeiconbg date-time-picker-input"/>
+            </div>
+        </div>
+        <div style="float:right">
+            <button class="search" ng-click="clickSearch()">{{i18n('查询')}}</button>
+            <button class="reset" ng-click="clickReset()">{{i18n('重置')}}</button>
+        </div>
+    </div>
+
+    <div class="graph">
+        <div class="chart" id="category-chart"></div>
+    </div>
+
+    <div class="statement-table" style="margin-bottom: 50px">
+        <ul>
+            <li class="row">
+                <div class="table-cell table-title">{{i18n('商品类别')}}</div>
+                <div class="table-cell table-title">{{i18n('采购金额')}}</div>
+                <div class="table-cell table-title">{{i18n('采购金额占比')}}</div>
+                <div class="table-cell table-title">{{i18n('采购商品数量')}}</div>
+            </li>
+            <li ng-repeat="item in purchaseInfoList" class="row">
+                <div class="table-cell">{{item.categoryName}}</div>
+                <div class="table-cell">{{item.amount | currency:'¥'}}</div>
+                <div class="table-cell">{{item.percent}}%</div>
+                <div class="table-cell">{{item.num}}</div>
+            </li>
+            <li class="row">
+                <div class="table-cell table-title">{{i18n('总计：')}}</div>
+                <div class="table-cell table-title">{{totalMoney}}</div>
+                <div class="table-cell table-title">{{totalPercent}}%</div>
+                <div class="table-cell table-title">{{totalProducts}}</div>
+            </li>
+        </ul>
+    </div>
+
+</div>

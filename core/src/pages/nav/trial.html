@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>试用中心</title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/trial#((skin)).css?v=${version}">
+
+</head>
+<base target="_blank"/>
+<body ng-app="appControllers" ng-controller="trialCtrl">
+
+@@include("header.html")
+@@include("global-nav.html")
+<dl ng-include="'includes/_location.html'"></dl>
+<div class="trial-nav">
+    <div class="container">
+        <span><em>{{i18n('试用')}}</em>{{i18n('中心')}}</span>
+        <div class="tab-left">
+            <ul>
+                <li ng-class="{active: trialTab == 1}" ng-click="trialTab = 1">{{i18n('全部试用')}}</li>
+                <li ng-class="{active: trialTab == 2}" ng-click="trialTab = 2">{{i18n('试用报告')}}</li>
+                <li ng-class="{active: trialTab == 3}" ng-click="trialTab = 3">{{i18n('我的试用')}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--全部试用-->
+<div class="bgf8f8f8 pdT20 pdB20">
+    <div class="container" ng-show="trialTab == 1">
+        <div ng-repeat="tl in allTrial.trialList">
+            <ol class="trail-list">
+                <dl ng-repeat="prod in tl.merchantProducts">
+                    <dt><a href="/trialDetail.html?mpId={{prod.mpId}}&activityId={{prod.promotionId}}"><img ng-src="{{prod.picUrl}}" alt=""></a></dt>
+                    <dd>
+                        <h4>{{prod.name}}</h4>
+                        <h5>{{i18n('价格')}}: <span>{{prod.originalPrice |currency:'￥' }}</span></h5>
+                        <div class="trial-infor">
+                            <ul>
+                                <li>
+                                    <em>{{i18n('免费提供')}}</em>
+                                    <p><span class="f40">{{prod.totalLimit}}</span>{{i18n('份')}}</p>
+                                </li>
+                                <li>
+                                    <em>{{i18n('已申请人数')}}</em>
+                                    <p><span class="f40">{{prod.applicedCount}}</span>{{i18n('人')}}</p>
+                                </li>
+                                <li>
+                                    <em>{{i18n('剩余时间')}}</em>
+                                    <p class="f16 mgT20"><span ng-if="nowTime>0" count-down show-count-down="true" end-time="tl.endTime" current-time="nowTime"></span></p>
+                                </li>
+                            </ul>
+                            <a href="/trialDetail.html?mpId={{prod.mpId}}&activityId={{prod.promotionId}}">{{i18n('免费试用')}}</a>
+                        </div>
+                    </dd>
+                </dl>
+            </ol>
+        </div>
+        <div class="txtcenter" ng-if="allTrial.showIcon">
+            {{i18n('很抱歉')}}！{{i18n('本商城暂无试用商品')}}  <a target="_blank" href="/index.html">{{i18n('首页')}}</a>
+        </div>
+        <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount" total-page="totalPage"
+             ng-if="allTrial.showPage"></div>
+    </div>
+
+    <!--试用报告-->
+    <div class="container bgf8f8f8" ng-show="trialTab == 2">
+        <div class="trial-report clearfix">
+            <ul>
+                <li ng-repeat="report in trialReport.reportList">
+                    <img ng-src="{{report.pic}}" alt="" ng-click="trialReport.toProductDetail(report.mpId)">
+                    <h4><span><img ng-src="{{report.socialUUserVo.headPicUrl}}"></span>{{report.socialUUserVo.mobile|hidePhone}}</h4>
+                    <a href="/trialReport.html?trialReportId={{report.id}}"><p>{{report.deccodeVariables.experience.value}}</p></a>
+                </li>
+            </ul>
+        </div>
+        <div class="txtcenter" ng-if="trialReport.showIcon">
+            {{i18n('很抱歉')}}！{{i18n('暂无试用报告')}}
+        </div>
+        <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount" total-page="totalPage"
+             ng-if="trialReport.showPage"></div>
+    </div>
+
+    <!--我的试用-->
+    <div class="container bgf8f8f8" ng-show="trialTab == 3">
+        <div class="my-trial">
+            <div class="my-trial-left">
+                <h4>
+                    <span><img ng-src="{{myTrial.myInfo.headPicUrl}}" alt=""></span>
+                    {{myTrial.myInfo.nickname}}
+                </h4>
+                <p>
+                    <span ng-class="{current:myTrial.statu==0}" ng-click="myTrial.statu=0">{{i18n('申请中')}}</span>
+                    <span ng-class="{current:myTrial.statu==1}" ng-click="myTrial.statu=1">{{i18n('申请成功')}}</span>
+                    <span ng-class="{current:myTrial.statu==2}" ng-click="myTrial.statu=2">{{i18n('申请失败')}}</span>
+                </p>
+            </div>
+            <div class="my-trial-right">
+                <h4 ng-if="myTrial.statu == 0">{{i18n('申请中')}}</h4>
+                <h4 ng-if="myTrial.statu == 1">{{i18n('申请成功')}}</h4>
+                <h4 ng-if="myTrial.statu == 2">{{i18n('申请失败')}}</h4>
+                <table>
+                    <thead>
+                    <tr>
+                        <th width="400">{{i18n('试用商品')}}</th>
+                        <th>{{i18n('申请时间')}}</th>
+                        <th>{{i18n('申请状态')}}</th>
+                        <th ng-if="myTrial.statu == 1">{{i18n('试用报告状态')}}</th>
+                        <th>{{i18n('操作')}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="trial in myTrial.myTrialList">
+                        <td width="400">
+                            <dl>
+                                <dt><img ng-src="{{trial.picUrl}}" alt=""></dt>
+                                <dd>
+                                    <h4>{{trial.mpName}}</h4>
+                                    <p>{{i18n('商品价格')}}：{{trial.price |currency:'￥' }}</p>
+                                </dd>
+                            </dl>
+                        </td>
+                        <td>{{trial.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td ng-if="trial.status == 0">{{i18n('待审核')}}</td>
+                        <td ng-if="trial.status == 1">{{i18n('审核通过')}}</td>
+                        <td ng-if="trial.status == 2">{{i18n('失败')}}</td>
+                        <td ng-if="myTrial.statu == 1">{{myTrial.trialReportStatus[trial.trialReportPO.status]}}</td>
+                        <td ng-if="myTrial.statu == 1 && trial.trialReportPO.status == 0"><a href="/trialReportFill.html?id={{trial.trialReportPO.id}}">{{i18n('填写试用报告')}}</a></td>
+                        <td ng-if="myTrial.statu == 1 && (trial.trialReportPO.status == 1||trial.trialReportPO.status == 2)"><a href="/trialReportFill.html?id={{trial.trialReportPO.id}}">{{i18n('编辑试用报告')}}</a></td>
+                        <td ng-if="myTrial.statu == 1 && (trial.trialReportPO.status == 3||trial.trialReportPO.status == 4)"><a href="/trialReport.html?trialReportId={{trial.trialReportPO.id}}">{{i18n('查看试用报告')}}</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="txtcenter" style="padding:40px 0 70px" ng-if="myTrial.showIcon">
+                    {{i18n('您还没有试用数据')}}，<a href="javascript:;" ng-click="$parent.trialTab = 1" class="blueColor">{{i18n('去试用首页')}}</a>
+                </div>
+            </div>
+        </div>
+        <div pagination page-size="myTrial.pageSize" page-no="pageNo" total-count="totalCount" total-page="totalPage"
+             ng-if="myTrial.showPage"></div>
+    </div>
+</div>
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/trial.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=trial"></script>
+</body>
+</html>

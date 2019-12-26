@@ -1,0 +1,877 @@
+@import url('../../common/css/i-var.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-form.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-substep.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-global-nav.less');
+@import url('../../common/css/i-feedback.less');
+
+/* 注册页面 */
+.dis{
+  display: inline-block;
+}
+.f0{
+  font-size: 0;
+}
+.forgot-box {
+  background-color: @whiteColor;
+  border-top: 1px solid @ddGreyColor;
+  #cregis-page {
+    padding-top: 50px;
+    & .form {
+      padding-bottom: 42px;
+      width: 420px;
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 20px;
+  & .tipsPosition{
+    top:-3px;
+    right:-300px;
+  }
+  & .tipsPositionThree{
+    top:-3px;
+    right:-350px;
+  }
+  & .tipsPosition-two{
+    top:-3px;
+    right:-360px;
+  }
+  & .pwdPosition{
+    top:-3px;
+    right:-295px;
+  }
+  & .Numberadd{
+    top:-3px;
+    right:-295px;
+  }
+  & .pwd-add{
+    top:-4px;
+    right:-365px;
+  }
+  & .default-text{
+    position: absolute;
+    top: 13px;
+    left: 15px;
+  }
+  .input {
+    width: 301px;
+    padding: 7px 20px 7px 97px;
+    line-height: 29px;
+  }
+  & .new-input {
+    padding:7px 10px;
+    width:398px;
+  }
+  .tip {
+    padding: 16px 0;
+  }
+  .err_new {
+    top: -17px;
+  }
+  .tips {
+    position: absolute;
+    top: 0;
+    left: -60px;
+    width: 60px;
+    padding: 16px 0px;
+    margin-left: 5px;
+    font-size: 12px;
+  }
+  & .phone-code {
+    position: absolute;
+    top: 4px;
+    right: 8px;
+    height: 38px;
+    & span {
+      display: inline-block;
+      width: 40px;
+      height: 28px;
+      margin-top: 4px;
+      margin-left: 15px;
+      float: right;
+      font-size: 12px;
+      color: @bbGreyColor;
+    }
+  }
+  & .phone-code-two{
+    top:3px;
+    right:-51px;
+  }
+}
+
+.cregis-left {
+  float: left;
+}
+
+.form {
+  float: left;
+  margin-left: 138px;
+  .pwd-img {
+    padding-bottom: 70px;
+  }
+  & label {
+    width: 165px;
+    font-size: 14px;
+    padding-top: 12px;
+    &.checkbox-inline {
+      font-size: 12px;
+      width: 360px!important;
+      text-align: center!important;
+    }
+  }
+  .pwd {
+    margin-bottom: 20px;
+  }
+}
+.form-forgot{
+  margin: 0 auto;
+  float: none;
+}
+
+.container {
+  position: relative;
+  .loginTitle {
+    position: absolute;
+    width: 426px;
+    left: 50px;
+    top: -59px;
+    font-size: 20px;
+    color: @fontColor;
+  }
+  .loginText{
+    position: absolute;
+    width: 426px;
+    left: 400px;
+    top: -59px;
+    font-size: 24px;
+    color: @33GreyColor;
+    z-index: 1000;
+  }
+}
+
+#cregis-page,
+#bregis-page {
+  & .form {
+    width: 360px; //margin-left: 200px;
+    //padding-bottom: 43px;
+    padding-bottom: 82px; // overflow: hidden;
+  }
+  & .sms {
+    //width: 103px;
+    width: 170px;
+  }
+  & .file {
+    width: 143px;
+  }
+  & input[type="file"] {
+    position: absolute;
+    left: 249px;
+    top: 0px;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    z-index: 99;
+    font-family: "微软雅黑";
+  }
+  & .slt-pre {
+    width: 70px;
+  }
+  & .slt-sux {
+    width: 153px;
+    margin-left: 5px;
+  }
+  & .slt-area {
+    width: 80px;
+  }
+  & .ml5 {
+    margin-left: 5px;
+  }
+  & .btn {
+    //width: 250px;
+    height: 45px;
+    line-height: 45px;
+    width: 420px;
+    border-radius: 5px;
+  }
+  & .wd5 {
+    width: 122px;
+  }
+  & .smsBtn,
+  & .updBtn {
+    float: left; //width: 120px;
+    width: 115px; //margin-left: 5px;
+    margin-left: 15px; //color: @77GreyColor;
+    font-size: 12px; //background-color: @ddGreyColor;
+    background-color: @buttonDisable!important;
+    color: @whiteColor!important;
+    border-radius: 0;
+    &.del {
+      position: absolute;
+      right: -80px;
+    }
+  }
+  & .smsBtnreg{
+    background-color: @eeGreyColor!important;
+    color: @33GreyColor!important;
+  }
+  & .smsBtnregTwo{
+    background-color: @eeGreyColor!important;
+    color: @whiteColor!important;
+  }
+  & .smsBtnHigh {
+    float: left!important; //width: 120px;
+    width: 116px!important; //margin-left: 5px;
+    margin-left: 15px!important; //color: @77GreyColor;
+    font-size: 12px!important; //background-color: @ddGreyColor;
+    background-color: @ffecPinkColor;
+    border:1px solid @themeColor;
+    border-radius: 0!important;
+    color: @themeColor;
+  }
+  & .smsBtnHighTwo{
+    float: left; //width: 120px;
+    width: 115px; //margin-left: 5px;
+    margin-left: 15px; //color: @77GreyColor;
+    font-size: 12px; //background-color: @ddGreyColor;
+    border:none;
+    color: @whiteColor;
+  }
+  & .updBtn {
+    width: 80px;
+  }
+  & .has-suffix {
+    float: left;
+    width: 115px;
+    height: 36px;
+  }
+  & .date {
+    float: none;
+    width: 73px;
+  }
+  & .join {
+    float: left;
+    width: 14px;
+    padding-top: 6px;
+    margin: 0 2px;
+  }
+  & .icon-date {
+    position: absolute;
+    top: 9px;
+    right: 8px;
+  }
+  & .checkbox-inline a {
+    color: @themeColor;
+  }
+  & .regis-success {
+    padding: 60px 0 200px;
+    text-align: center;
+    & h2{
+      font-size: 20px;
+      color: @33GreyColor;
+      & b{
+        font-weight: normal;
+        color: @themeColor;
+      }
+    }
+    & .info2 {
+      color: @33GreyColor;
+      font-size: 16px;
+    }
+    & img {
+      margin-right: 15px;
+      vertical-align: text-bottom;
+    }
+    & .goLeave{
+      display: block;
+      width: 170px;
+      height:40px;
+      background-color: @themeColor;
+      color: @whiteColor;
+      text-align: center;
+      line-height: 40px;
+      margin:0 auto;
+    }
+  }
+  & .msg {
+    padding-left: 0px;
+    // height: 20px;
+  }
+}
+
+#cregis-page {
+  //padding-top: 74px;
+  padding-top: 78px; //border-top: 2px solid @eeGreyColor;
+}
+
+#bregis-page {
+  padding-top: 50px;
+  & .form {
+    //margin-top: 30px;
+  }
+}
+
+
+/* 注册协议 */
+
+.agmt {
+  // position: absolute;
+  // bottom: 0;
+  // left: 0;
+  // width: 700px;
+  // height: 400px;
+  // padding: 20px;
+  // background-color: @whiteColor;
+  // border-top: 2px solid red;
+  // border-right: 1px solid @ccGreyColor;
+  // border-bottom: 1px solid @ccGreyColor;
+  // border-left: 1px solid @ccGreyColor;
+  // box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  // z-index: 1000;
+  width: 900px;
+  position: fixed;
+  z-index: 10000;
+  display: block;
+  overflow: hidden;
+  top: 173px;
+  left: 50%;
+  margin-left: -450px;
+  background-color: @whiteColor;
+  border: 5px solid rgba(51, 51, 51, 0.3);
+  -webkit-border-radius: 5px;
+  box-shadow: 0 3px 10px @ccGreyColor;
+  & .header {
+    height: 40px;
+    overflow: hidden;
+    background-color: @eeGreyColor;
+    line-height: 40px;
+    padding: 0 18px;
+  }
+  .close {
+    float: right;
+    color: @ccGreyColor;
+    font-size: 26px;
+    line-height: 40px;
+    cursor: pointer;
+    &:hover {
+      color: @33GreyColor;
+    }
+  }
+  & h2 {
+    float: left;
+    margin: 0;
+    font-weight: normal;
+    font-size: 14px;
+    span {
+      border-right: 1px solid @ccGreyColor;
+    }
+  }
+  & .body {
+    height: 426px;
+    overflow: auto;
+    margin: 0 15px;
+    padding-bottom: 25px;
+    &::-webkit-scrollbar {
+      width: 9px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color:@whiteColor;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color:@ddGreyColor;
+    }
+  }
+  & p {
+    margin: 10px 0;
+    font-size: 12px;
+  }
+  & h5 {
+    margin: 10px 0;
+  }
+  & .protocol-button{
+    margin: 20px 0;
+    button{
+      margin: 0 auto;
+      display: block;
+      width: 308px;
+      height: 40px;
+      color: @whiteColor;
+      background: @f2RedColor;
+      border: 0;
+      font-size: 16px;
+      font-family: '微软雅黑' !important;
+    }
+  }
+}
+
+.pc-icons-cregis {
+  position: absolute;
+  top: -68px;
+  left: 380px;
+  z-index: 999;
+}
+
+.come {
+  width: 200px;
+  float: right;
+  font-size: 18px;
+  position: relative;
+  top: -80px;
+}
+
+.yiyou {
+  z-index: 999;
+  position: absolute;
+  right: 70px;
+  top: -61px;
+  color: @greyColor;
+  & a {
+    width: 82px;
+    color: @fontColor;
+  }
+}
+.width425{
+  width:425px;
+}
+.must-icon{
+  position: absolute;
+  right: -15px;
+  top: 15px;
+  color: @f2RedColor;
+}
+.must-icon-two{
+  position: absolute;
+  right: -10px;
+  top: 15px;
+  color: @f2RedColor;
+}
+.must-icon-three{
+  right:-75px;
+  position: absolute;
+  top: 15px;
+  color: @f2RedColor;
+}
+.noLogin-text{
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  & a{
+    font-weight: normal;
+    color: @themeColor;
+  }
+}
+.goLogin{
+  z-index: 999;
+  position: absolute;
+  right: 0px;
+  top: -61px;
+  font-size: 18px;
+  color: @themeColor;
+}
+.marl15{
+  margin-left: 15px;
+}
+.marr15{
+  margin-right:15px;
+}
+.marb15{
+  margin-bottom: 15px;
+}
+.mart15{
+  margin-top:15px;
+}
+.text{
+  text-align: center;
+}
+.parr15{
+  padding-right: 15px;
+}
+.parl15{
+  padding-left:15px;
+}
+.part15{
+  padding-top: 15px;
+}
+.parb15{
+  padding-bottom:15px;
+}
+.join-container {
+  & div{
+    position: relative;
+    margin-bottom: 20px;
+    & .error-text{
+      position: absolute;
+      top:13px;
+      right:270px;
+      padding-left: 21px;
+      color: @starColor;
+      & .error-img{
+        position: absolute;
+        top:2px;
+        left:0px;
+        height:16px;
+        width:16px;
+        //background: url('../../images/company/company-default.png') no-repeat -703px -101px;
+        .common-product-company-default(-703px,-101px);
+      }
+    }
+    & .error-text-two{
+      right:190px;
+    }
+    & .error-text-three{
+      right:228px;
+    }
+    & .error-text-fore {
+      right:-180px;
+    }
+    & .error-text-six {
+      right:-165px;
+    }
+    & .wujiaoxing{
+      color: @starColor;
+    }
+    & .text-position{
+      position: absolute;
+      top: 13px;
+      left: 450px;
+      font-size: 14px;
+    }
+    & input[type=text] {
+      width: 343px;
+      height: 46px;
+      padding-left: 15px;
+    }
+    & select {
+      width:360px;
+      height:50px;
+      padding-left: 15px;
+      &:focus{
+        border:1px solid @00BlueColor;
+      }
+      & option:hover {
+        height:30px;
+        line-height:30px;
+        background: @f5GreyColor ;
+      }
+    }
+  }
+  & .merchant-add{
+    & .wujiaoxing {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    & .add-text-box{
+      display: inline-block;
+      padding-left: 15px;
+      text-align: left;
+      width: 343px;
+      height: 33px;
+      padding-top:15px;
+      border: 1px solid @ddGreyColor;
+      vertical-align: middle;
+      margin-bottom: 0;
+      & .text-position{
+        top:13px;
+        left:15px;
+      }
+      & .merchant-text{
+        position: absolute;
+        top: 48px;
+        left: -1px;
+        z-index: 100;
+        background: white;
+        width: 328px;
+        border: 1px solid @darkThemeColor;
+        padding: 0px 15px;
+        & .title-icon-right{
+          position: absolute;
+          height:13px;
+          width:25px;
+          top:18px;
+          right:-11px;
+          cursor: pointer;
+          background-position: -20px -45px;
+        }
+        & .title-text{
+          margin: 0;
+          text-align: left;
+          line-height: 50px;
+          font-size: 15px;
+          position: relative;
+        }
+        & .box-top{
+          & .first-box {
+            height: 29px;
+            line-height: 29px;
+            font-size: 12px;
+            color: @greyColor;
+            border-bottom: 1px solid @ddGreyColor;
+            border-left: 1px solid @ddGreyColor;
+            & .addess-li{
+              float: left;
+              padding:0 35px 0 10px;
+              border-top: 1px solid @ddGreyColor;
+              border-right:1px solid @ddGreyColor;
+              position: relative;
+              background: @whiteColor ;
+            }
+          }
+          & .box-container{
+            font-size: 12px;
+            margin: 5px 0px 0px 0px;
+            text-align: left;
+            .first-adeess{
+              color: @99GreyColor;
+              margin-right: 10px;
+            }
+            .second-addess{
+              display: inline-block;
+              line-height:25px;
+              padding:0 8px;
+              &:hover{
+                cursor: pointer;
+                background:  @themeColor;
+                color: @whiteColor;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  & .chose-box{
+    & .chose-express{
+      display: inline-block;
+      padding:15px 0px 0px 15px;
+      width: 343px;
+      height: 33px;
+      border: 1px solid @ddGreyColor;
+      text-align: left;
+      vertical-align: middle;
+      margin-bottom: 0;
+      & .merchant-text{
+        position: absolute;
+        top: 48px;
+        left: -1px;
+        z-index: 100;
+        background: @whiteColor;
+        width: 328px;
+        border: 1px solid @darkThemeColor;
+        padding: 0px 15px;
+        & .title-icon-right{
+          position: absolute;
+          height:13px;
+          width:25px;
+          top:18px;
+          right:-11px;
+          cursor: pointer;
+          background-position: -20px -45px;
+        }
+        & .title-text{
+          margin: 0;
+          text-align: left;
+          line-height: 50px;
+          font-size: 15px;
+          position: relative;
+        }
+        & .box-top{
+          & .first-box {
+            height: 29px;
+            line-height: 29px;
+            font-size: 12px;
+            color: @greyColor;
+            border-bottom: 1px solid @ddGreyColor;
+            border-left: 1px solid @ddGreyColor;
+            & .addess-li{
+              float: left;
+              padding:0 35px 0 10px;
+              border-top: 1px solid @ddGreyColor;
+              border-right:1px solid @ddGreyColor;
+              position: relative;
+              background: @whiteColor ;
+            }
+          }
+          & .box-container{
+            font-size: 12px;
+            margin: 5px 0px 0px 0px;
+            text-align: left;
+            .first-adeess{
+              color: @99GreyColor;
+              margin-right: 10px;
+            }
+            .second-addess{
+              display: inline-block;
+              line-height:25px;
+              padding:0 8px;
+              &:hover{
+                cursor: pointer;
+                background:  @themeColor;
+                color: @whiteColor;
+              }
+            }
+          }
+        }
+      }
+      & .text-position{
+        left:-41px;
+        top:11px;
+      }
+      & .chose-addess-box{
+        position: absolute;
+        top: 49px;
+        left: -1px;
+        text-align: left;
+        padding: 15px 0px;
+        background: white;
+        z-index: 10;
+        width: 358px;
+        border:1px solid @ddGreyColor;
+        & li{
+          padding:0 15px;
+          margin-top: 20px;
+          line-height:30px;
+          &:hover{
+            background: @f5GreyColor ;
+            cursor: pointer;
+          }
+        }
+        & li:nth-of-type(1){
+          margin-top: 0px;
+        }
+      }
+    }
+    & .chose-express-two{
+      margin-left:27px;
+    }
+  }
+  & .other-box{
+    & input[type=text] {
+      margin-left:27px;
+    }
+  }
+  & .chose-two-box{
+    & select{
+      margin-left: 27px;
+    }
+  }
+}
+.button-box{
+  & input[type=button] {
+    border: none;
+    width: 360px;
+    height: 50px;
+    background:  @themeColor;
+    color: @whiteColor;
+    margin-left: 27px;
+    &:hover{
+      background-color: @lightThemeColor;
+    }
+  }
+}
+.input-border{
+  border:1px solid @darkThemeColor !important;
+  -webkit-box-shadow: 0px 0px 6px  @darkThemeColor;
+  -moz-box-shadow: 0px 0px 6px  @darkThemeColor;
+  box-shadow: 0px 0px 6px  @darkThemeColor;
+}
+.icon-joinProcess {
+  display: block;
+  //background: url('../../images/company/company-default.png');
+  .common-product-company-default();
+  position: absolute;
+}
+.icon-down-arrow {
+  background-position: -22px -34px;
+  top:12px;
+  right:10px;
+  height:7px;
+  width:11px;
+}
+.icon-down-arrow-two {
+  top:23px;
+  right:15px;
+}
+.error-text-right{
+  position: absolute;
+  display: none;
+  top:13px;
+  right:200px;
+}
+.error-text-right-phone{
+  right:420px;
+}
+// 审核页面
+.joinProcessStep-box{
+  margin: 0 auto 50px;
+  width: 410px;
+  & .step-main-box{
+    margin-left: 50px;
+  }
+  & .step-main-box-two{
+    margin-left: 110px;
+  }
+  & .main-button-box{
+    margin-top: 160px;
+    & .button-one{
+      display: block;
+      margin:0 auto;
+      width:360px;
+      height:50px;
+      background: @themeColor;
+      color: @whiteColor;
+      line-height:50px;
+      text-align: center;
+      margin-bottom:20px;
+    }
+    & .button-two{
+      display: block;
+      margin:0 auto;
+      border:1px solid @ccGreyColor;
+      width:358px;
+      height:48px;
+      line-height:48px;
+      color: @fontColor;
+      text-align: center;
+    }
+  }
+  & .main-left{
+    vertical-align: middle;
+    margin-right: 20px;
+  }
+  & .left-icon{
+    display: inline-block;
+    vertical-align: middle;
+    height:53px;
+    width:50px;
+    //background: url('../../images/company/company-bitmap.png') no-repeat -632px -75px;
+    .common-product-company-bitmap(-632px,-75px);
+  }
+  & .none-left-icon{
+    display: inline-block;
+    vertical-align: middle;
+    height:53px;
+    width:50px;
+    //background: url('../../images/company/company-bitmap.png') no-repeat -564px -75px;
+    .common-product-company-bitmap(-564px,-75px);
+  }
+  & .main-right{
+    vertical-align: middle;
+    & .right-text-top{
+      display: block;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+    & .right-text-bottom{
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,66 @@
+<div class="receive-award clearfix" ng-init="address._getAllAddress();isEject">
+	<div class="modal" ng-show="showSuccess">
+		<div class="bigBox-disable">
+			<div class='follow-box' id="follow-box">
+				<dl class='follow-title clearfix'>
+					<dt>{{i18n('评价')}}</dt>
+				</dl>
+				<div class='take-follow clearfix'>
+					<div class='take-follow-left'>
+						<span class='follow-yes'></span>
+					</div>
+					<div class='take-follow-right'>
+						<span class='follow-success'>{{i18n('领取成功')}}</span>
+						<a href="/home.html#/award" class='chare-follow'>{{i18n('返回我的奖品')}}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="receive-title">
+		<span>{{i18n('领取奖品')}}</span>
+	</div>
+	<div class="good-mes">
+		<a class="img-box" href="">
+			<img width="80" height="80" ng-src="{{picUrl}}">
+		</a>
+		<a class="good-text" href="">{{awardsName}}</a>
+	</div>
+	<div class="user-box">
+		<div class="sb spad" ng-init="hideOtherAddress=true">
+			<div class="st">
+				<h4 ng-style="{float:allAddress.length>=1?'left':'none'}">{{i18n('收货人信息')}}</h4>
+				<ul class="linkr" ng-hide="allAddress != null && allAddress.length>20" ng-style="{float:allAddress.length>=1?'right':'none'}">
+					<li><a href="javascript:void(0)" ng-click="address._showAddNewAddress()" ng-hide="allAddress.length>=20">{{i18n('新增收货地址')}}</a></li>
+				</ul>
+			</div>
+			<div class="dialogForm" ng-include="'includes/_addressEdit.html'" ng-if="toAddNewAddress"></div>
+			<div class="sc">
+				<ul class="address">
+					<!--选中地址添加class bg-active-->
+					<li ng-repeat="addr in allAddress | limitTo:20" ng-show="$first&&!address.selectedId||!hideOtherAddress||addr.id==address.selectedId">
+						<div class="row">
+							<div class="cell a1">
+								<div ng-class="{'address-name':addr.id==address.selectedId}"
+									 class="address-name-no"
+									 name="address"
+									 ng-value="addr.id"
+									 ng-model="address.selectedId"
+									 ng-click="address._changeSaveAddress(addr.id)"
+								>{{addr.userName}}</div>
+							</div>
+							<div class="cell a2">{{addr.userName}}&nbsp;&nbsp;&nbsp;&nbsp;{{addr.provinceName}}{{addr.cityName}}{{addr.regionName}}/{{addr.detailAddress}}</div>
+							<div class="cell a3">{{addr.mobile| hidePhone}}</div>
+						</div>
+						<div class="dialogForm" ng-include="'includes/_addressEdit.html'" ng-show="showList[$index]"></div>
+					</li>
+				</ul>
+				<a href="javascript:void(0)" class="showmore" ng-click="hideOtherAddress=!hideOtherAddress" ng-show="allAddress.length>=2">{{hideOtherAddress?i18n('更多地址'):i18n('收起地址')}}</a>
+			</div>
+		</div>
+	</div>
+	<div class="receive-award-box">
+		<input type="button" value="{{i18n('领取')}}" ng-click="confirmReceive()">
+		<!-- <p>说明：实物奖品需要用户个人信息，填写后将无法修改，统一在活动结束后15个工作日内邮寄到对应收货人和地址（邮费由公司承担），需要在2016年8月8日前填写，过期视为自动弃奖，客服电话400-123-1234</p> -->
+	</div>
+</div>

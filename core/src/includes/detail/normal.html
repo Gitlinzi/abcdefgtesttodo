@@ -1,0 +1,27 @@
+<div ng-if="!itemlist.isPresell&&!itemlist.isSeckill" class='price'>
+    <!-- 商品价格开始  begin -->
+    @@include("detail/normalPrice.html")
+    @@include("detail/goodsCode.html")
+    <!-- @@include("detail/coupon.html") -->
+    <!-- 商品价格结束  begin -->
+    <!-- <dl class="second-dl" ng-if="promotionType_m.length>0&&itemlist.managementState&&itemlist.isAreaSale">
+        <dt>{{i18n('促销')}}</dt>
+        <dd>
+            <span ng-repeat="prom in promotionType_m | limitTo:promotionNum" class="block-box">
+                <span class="promotion-icon" ng-style="{background:'#'+ (prom.bgColor?prom.bgColor:'f23030'),color:'#'+ (prom.fontColor?prom.fontColor:'fff')}">{{prom.iconText}}</span>
+                <span class="promotion-text">
+                    {{prom.description}}
+                    <a ng-click="jumpUrl(prom)" class="more-see" ng-if="prom.frontPromotionType!=1 && prom.frontPromotionType!=7 && prom.frontPromotionType!=8 && prom.frontPromotionType!=1022 && prom.frontPromotionType!=2001 && prom.frontPromotionType!=2002 && prom.frontPromotionType!=3001 && prom.frontPromotionType!=1014 && prom.frontPromotionType!=1015 && prom.frontPromotionType!=1007 && prom.frontPromotionType!=2001&&prom.frontPromotionType!=2002&&prom.frontPromotionType!=3001&&prom.frontPromotionType!=1032&&prom.frontPromotionType!=1033&&prom.frontPromotionType!=1025&&prom.frontPromotionType!=1034">{{i18n('查看详情')}}</a>
+                </span>
+            </span>
+            <span ng-repeat="h in promotionType_gift"></span>
+        </dd>
+        <span ng-click="showMore()" class="total-promption">
+            {{i18n('共计')}}{{promotionType_m.length}}{{i18n('项促销')}}
+            <span class="arrow-img" ng-class="{'active':isClass&&promotionType_m.length>2}"></span>
+        </span>
+    </dl> -->
+    <!-- 商品销量统计开始  begin -->
+    <!-- @@include("detail/normalSaleNum.html") -->
+    <!-- 商品销量统计结束  begin -->
+</div>

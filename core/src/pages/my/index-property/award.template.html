@@ -1,0 +1,200 @@
+<div class="award-page">
+
+	<div class="modal" ng-show="showSuccess">
+		<div class="bigBox-disable">
+			<div class='follow-box' id="follow-box">
+				<dl class='follow-title clearfix'>
+					<dt></dt>
+					<dd ng-click="close()"></dd>
+				</dl>
+				<div class='take-follow clearfix'>
+					<div class='take-follow-left'>
+						<span class='follow-yes'></span>
+					</div>
+					<div class='take-follow-right'>
+						<span class='follow-success'>{{i18n('加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}{{i18n('成功')}}</span>
+						<a href="cart.html" class='chare-follow'>{{i18n('去结算')}}</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="home-allTitle pdL20">
+		<span>{{i18n('奖品')}}</span>
+	</div>
+	<div class="award-nav pdL20">
+		<span ng-click="activeNum=10" ng-class="{'goods-active':activeNum==10}" class="text hand">{{i18n('全部')}}</span>
+		<span class="line"></span>
+		<span class="text hand" ng-click="activeNum=0" ng-class="{'goods-active':activeNum==0}">{{i18n('可领取')}}</span>
+		<span class="line"></span>
+		<span class="text hand" ng-click="activeNum=1" ng-class="{'goods-active':activeNum==1}">{{i18n('已领取')}}</span>
+		<span class="line"></span>
+		<span class="text hand" ng-click="activeNum=2" ng-class="{'goods-active':activeNum==2}">{{i18n('已失效')}}</span>
+	</div>
+
+
+	<!-- 有奖品记录的时候 begin -->
+	<div class="item-good-box">
+		<div class="item-good-title">
+			<span class="width549">{{i18n('奖品信息')}}</span>
+			<span class="width234">{{i18n('领取信息')}}</span>
+			<span class="width103">{{i18n('状态')}}</span>
+			<span>{{i18n('操作')}}</span>
+		</div>
+		<div class="all-goods-box" ng-if="activeNum==10">
+			<dl class="clearfix" ng-repeat="award in awardList">
+				<dt>
+					<a class="img-box" href="item.html?itemId={{award.awardsId}}" ng-if="award.awardsCategory == 1">
+						<img height="80" width="80" ng-src="{{award.picUrl}}">
+					</a>
+					<a class="img-box" href="" ng-if="award.awardsCategory != 1">
+						<img height="80" width="80" ng-src="{{award.picUrl}}">
+					</a>
+				</dt>
+				<dd class="good-text">
+					<a href="item.html?itemId={{award.awardsId}}" ng-if="award.awardsCategory == 1">{{award.awardsName}}</a>
+					<a href="" ng-if="award.awardsCategory != 1">{{award.awardsName}}</a>
+				</dd>
+				<dd class="user-text">
+						<span ng-if = "award.status == 0 && (award.awardsCategory == 1 ||award.awardsCategory == 4)">
+							{{i18n('请在')}} {{nowTime+award.timeoutRemaining | date: 'yyyy-MM-dd HH:mm:ss'}} {{i18n('内领取')}}
+						</span>
+                        <span ng-if = "award.status == 1 && award.awardsCategory == 4">
+							<span>{{i18n('收货人')}}：{{award.receiverInfo.receiverName}} {{award.receiverInfo.receiverMobile}}</span>
+							<span>{{i18n('收货地址')}}：{{award.receiverInfo.provinceName}}{{award.receiverInfo.cityName}}{{award.receiverInfo.areaName}}
+										{{award.receiverInfo.detailAddress}}</span>
+						</span>
+
+				</dd>
+				<dd class="width122">
+					<span>{{awardStatus[award.status]}}</span>
+				</dd>
+				<dd>
+					<a ui-sref="index_receiveAward({picUrl:award.picUrl,awardsName:award.awardsName,recordId:award.recordId})" class="receive-text" ng-if="award.status == 0 && award.awardsCategory==4">{{i18n('领取')}}</a>
+					<a href="javascript:void(0)" class="receive-text" ng-click="addCart(award)" ng-if="award.status == 0 && award.awardsCategory==1">{{i18n('加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}</a>
+
+				</dd>
+			</dl>
+			<!-- 没有奖品记录的时候 begin -->
+			<div class="award-none" ng-if="isShowIcon">
+				<div class="award-left mgR15">
+					<span></span>
+				</div>
+				<div class="award-right">
+					<span>{{i18n('暂无奖品')}}~</span>
+				</div>
+			</div>
+			<!-- 没有奖品记录的时候 end -->
+		</div>
+
+		<!--可领取-->
+		<div class="allow-goods-box" ng-if="activeNum==0">
+			<dl class="clearfix" ng-repeat="award in awardList">
+				<dt>
+					<a class="img-box" href="item.html?itemId={{award.awardsId}}" ng-if="award.awardsCategory == 1">
+						<img height="80" width="80" ng-src="{{award.picUrl}}">
+					</a>
+					<a class="img-box" href="" ng-if="award.awardsCategory != 1">
+						<img height="80" width="80" ng-src="{{award.picUrl}}">
+					</a>
+				</dt>
+				<dd class="good-text">
+					<a href="item.html?itemId={{award.awardsId}}" ng-if="award.awardsCategory == 1">{{award.awardsName}}</a>
+					<a href="" ng-if="award.awardsCategory != 1">{{award.awardsName}}</a>
+				</dd>
+				<dd class="user-text">
+					<span ng-if = "award.awardsCategory == 1 ||award.awardsCategory == 4">
+						{{i18n('请在')}} {{nowTime+award.timeoutRemaining|date:'yyyy-MM-dd HH:mm:ss'}} {{i18n('内领取')}}</span>
+				</dd>
+				<dd class="width122">
+					<span>{{awardStatus[award.status]}}</span>
+				</dd>
+				<dd>
+					<a ui-sref="index_receiveAward({picUrl:award.picUrl,awardsName:award.awardsName,recordId:award.recordId})" class="receive-text" ng-if="award.status == 0 && award.awardsCategory==4">{{i18n('领取')}}</a>
+					<a href="javascript:void(0)" class="receive-text" ng-click="addCart(award)" ng-if="award.status == 0 && award.awardsCategory==1">{{i18n('加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}</a>
+				</dd>
+			</dl>
+			<div class="award-none" ng-if="isShowIcon">
+				<div class="award-left mgR15">
+					<span></span>
+				</div>
+				<div class="award-right">
+					<span>{{i18n('暂无奖品')}}~</span>
+				</div>
+			</div>
+		</div>
+		<!--已领取-->
+		<div class="ready-goods-box" ng-if="activeNum==1">
+			<dl class="clearfix" ng-repeat="award in awardList">
+				<dt>
+					<a class="img-box" href="item.html?itemId={{award.awardsId}}" ng-if="award.awardsCategory == 1">
+						<img height="80" width="80" ng-src="{{award.picUrl}}">
+					</a>
+					<a class="img-box" href="" ng-if="award.awardsCategory != 1">
+						<img height="80" width="80" ng-src="{{award.picUrl}}">
+					</a>
+				</dt>
+				<dd class="good-text">
+					<a href="item.html?itemId={{award.awardsId}}" ng-if="award.awardsCategory == 1">{{award.awardsName}}</a>
+					<a href="" ng-if="award.awardsCategory != 1">{{award.awardsName}}</a>
+				</dd>
+				<dd class="user-text">
+					<span ng-if = "award.status == 1 && award.awardsCategory == 4">
+							<span>{{i18n('收货人')}}：{{award.receiverInfo.receiverName}}&nbsp; {{award.receiverInfo.receiverMobile}}</span>
+							<span>{{i18n('收货地址')}}：{{award.receiverInfo.provinceName}}{{award.receiverInfo.cityName}}{{award.receiverInfo.areaName}}
+										{{award.receiverInfo.detailAddress}}</span>
+						</span>
+				</dd>
+				<dd class="width122">
+					<span>{{awardStatus[award.status]}}</span>
+				</dd>
+			</dl>
+			<div class="award-none" ng-if="isShowIcon">
+				<div class="award-left mgR15">
+					<span></span>
+				</div>
+				<div class="award-right">
+					<span>{{i18n('暂无奖品')}}~</span>
+				</div>
+			</div>
+		</div>
+		<!--已失效-->
+		<div class="invalid-goods-box" ng-if="activeNum==2">
+			<dl class="clearfix" ng-repeat="award in awardList">
+				<dt>
+					<a class="img-box" href="item.html?itemId={{award.awardsId}}" ng-if="award.awardsCategory == 1">
+						<img height="80" width="80" ng-src="{{award.picUrl}}">
+					</a>
+					<a class="img-box" href="" ng-if="award.awardsCategory != 1">
+						<img height="80" width="80" ng-src="{{award.picUrl}}">
+					</a>
+				</dt>
+				<dd class="good-text">
+					<a ng-if="award.awardsCategory == 1" ng-href="item.html?itemId={{award.awardsId}}">{{award.awardsName}}</a>
+					<a ng-if="award.awardsCategory != 1">{{award.awardsName}}</a>
+				</dd>
+				<dd class="user-text">
+					<span></span>
+					<span></span>
+				</dd>
+				<dd class="width122">
+					<span>{{awardStatus[award.status]}}</span>
+				</dd>
+			</dl>
+			<div class="award-none" ng-if="isShowIcon">
+				<div class="award-left mgR15">
+					<span></span>
+				</div>
+				<div class="award-right">
+					<span>{{i18n('暂无奖品')}}~</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+				total-page="totalPage" ng-if="isShowPage"></div>
+	<!-- 有奖品记录的时候 end -->
+</div>

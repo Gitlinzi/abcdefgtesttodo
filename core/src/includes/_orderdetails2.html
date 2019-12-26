@@ -1,0 +1,155 @@
+<div class="content">
+	<div class="module">
+        <div class="mt">
+            <div class="head"></div>
+            <h2>{{i18n('我的订单')}} > {{i18n('订单详情')}}</h2>
+        </div>
+        <div class="mc">
+            <div class="status mt10">
+                <h1>{{i18n('当前订单状态')}}：<span class="red">{{ details.orderStatusName }}</span></h1>
+            </div>
+        </div>
+    </div>
+    <div class="module">
+        <div class="mt">
+            <h2>{{i18n('发票信息')}}</h2>
+        </div>
+        <div class="mc">
+            {{i18n('未开发票')}}
+        </div>
+    </div>
+    <div class="module">
+        <div class="mt">
+            <h2>{{i18n('支付信息')}}</h2>
+        </div>
+        <div class="mc">
+            <div class="userinfo">
+                <div class="row">
+                    <div class="cell c1">{{i18n('付款方式')}}：</div>
+                    <div class="cell c2">{{i18n('货到付款')}}</div>
+                </div>
+                <div class="row">
+                    <div class="cell c1">{{i18n('商品总额')}}：</div>
+                    <div class="cell c2"><span class="red">￥9999.00</span></div>
+                </div>
+                <div class="row">
+                    <div class="cell c1">{{i18n('折扣金额')}}：</div>
+                    <div class="cell c2"><span class="red">-￥1000.00</span></div>
+                </div>
+                <div class="row">
+                    <div class="cell c1">{{i18n('运')}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{i18n('费')}}：</div>
+                    <div class="cell c2"><span class="red">-￥1000.00</span></div>
+                </div>
+                <div class="row">
+                    <div class="cell c1">{{i18n('应付金额')}}：</div>
+                    <div class="cell c2"><span class="red">-￥89000.00</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="module">
+		<div class="mt">
+			<h2>{{i18n('配送信息')}}</h2>
+		</div>
+		<div class="mc">
+			<div class="userinfo">
+				<div class="row">
+                    <div class="cell c1">{{i18n('收货人')}}：</div>
+                    <div class="cell c2">{{ details.receiver.receiverName }}</div>
+                </div>
+                <div class="row">
+                    <div class="cell c1">{{i18n('收货地址')}}：</div>
+                    <div class="cell c2">{{ details.receiver.provinceName + details.receiver.cityName + details.receiver.areaName + details.receiver.detailAddress }}</div>
+                </div>
+				<div class="row">
+                    <div class="cell c1">{{i18n('联系电话')}}：</div>
+                    <div class="cell c2">{{ details.receiver.receiverMobile }}</div>
+                </div>
+			</div>
+		</div>
+	</div>
+	<div class="module">
+		<div class="mt">
+			<h2>{{i18n('商品信息')}}</h2>
+		</div>
+		<div class="mc">
+            <table class="theme2 mt10">
+                <tr class="thead">
+                    <td width="218">{{i18n('商品图片')}}</td>
+                    <td width="162">{{i18n('商品名称')}}</td>
+                    <td width="240">{{i18n('商品单价')}}</td>
+                    <td width="175">{{i18n('商品数量')}}</td>
+                    <td>{{i18n('商家')}}</td>
+                </tr>
+                <tr>
+                    <td align="center" width="103" class="bl bb"><a href="item.html?itemId={{pro.mpId}}"><img width="80" height="80" ng-src="{{ pro.picUrl }}" alt="{{ pro.name }}"></a></td>
+                    <td class="bb">
+                        <a href="item.html?itemId={{pro.mpId}}">Cheuk’s 2{{i18n('吨')}}1.6{{i18n('米手动堆高车')}} {{i18n('液压升高车堆高机')}} {{i18n('堆高叉车')}}SYC2016E</a>
+                    </td>
+                    <td align="center" class="bb">3999.00</td>
+                    <td align="center" class="bb">1</td>
+                    <td align="center" class="bb br">{{i18n('卓仕')}}</td>
+                </tr>
+                <tr>
+                    <td align="center" width="103" class="bl bb"><img width="80" height="80" ng-src="{{ pro.picUrl }}" alt="{{ pro.name }}"></td>
+                    <td class="bb">
+                        Cheuk’s 2{{i18n('吨')}}1.6{{i18n('米手动堆高车')}} {{i18n('液压升高车堆高机')}} {{i18n('堆高叉车')}}SYC2016E
+                    </td>
+                    <td align="center" class="bb">3999.00</td>
+                    <td align="center" class="bb">1</td>
+                    <td align="center" class="bb br">{{i18n('卓仕')}}</td>
+                </tr>
+            </table>
+		</div>
+	</div>
+    <div class="module">
+        <div class="mt">
+            <h2>{{i18n('还款计划')}}</h2>
+        </div>
+        <div class="mc">
+            <table class="theme1 mt10">
+                <tr class="thead">
+                    <td>{{i18n('期数')}}</td>
+                    <td>{{i18n('支付金额')}}</td>
+                    <td>{{i18n('支付节点')}}</td>
+                    <td>{{i18n('备注')}}</td>
+                    <td>{{i18n('支付时间')}}</td>
+                    <td>{{i18n('支付状态')}}</td>
+                </tr>
+                <tr>
+                    <td>{{i18n('第一批')}}</td>
+                    <td>3000</td>
+                    <td>{{i18n('发货前')}}</td>
+                    <td>{{i18n('预付款')}}</td>
+                    <td>2016/01/01</td>
+                    <td>{{i18n('已支付')}}</td>
+                </tr>
+                <tr>
+                    <td>{{i18n('第一批')}}</td>
+                    <td>3000</td>
+                    <td>{{i18n('发货前')}}</td>
+                    <td>{{i18n('预付款')}}</td>
+                    <td>2016/01/01</td>
+                    <td><a href="#" class="btn border-btn">{{i18n('去支付')}}</a></td>
+                </tr>
+                <tr>
+                    <td>{{i18n('第一批')}}</td>
+                    <td>3000</td>
+                    <td>{{i18n('发货前')}}</td>
+                    <td>{{i18n('预付款')}}</td>
+                    <td>2016/01/01</td>
+                    <td><span class="red">{{i18n('未支付')}}</span></td>
+                </tr>
+                <tr>
+                    <td>{{i18n('第一批')}}</td>
+                    <td>3000</td>
+                    <td>{{i18n('发货前')}}</td>
+                    <td>{{i18n('预付款')}}</td>
+                    <td>2016/01/01</td>
+                    <td><span class="red">{{i18n('未支付')}}</span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>

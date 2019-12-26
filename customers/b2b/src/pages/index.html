@@ -1,0 +1,1929 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="heimdall" content="首页">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/index.css?v=${version}">
+    <meta name="heimdall" content="首页">
+</head>
+<base target="_blank"/>
+<body ng-app="appControllers" ng-controller="indexCtrl" ng-style="{'background-color':bgColor}">
+<!-- <div class="index-banner" ng-mouseenter="indexEnter()" ng-mouseleave="indexLeave()">
+    <a class="top-small-banner" href="{{topRecommendation[0].linkUrl}}">
+        <img ng-src="{{topRecommendation[0].imageUrl}}" alt="">
+        <i class="close-img"></i>
+    </a>
+    <a class="top-big-banner" href="{{topRecommendation[1].linkUrl}}">
+        <img ng-src="{{bottomRecommendation[1].imageUrl}}" alt="">
+        <i class="close-img"></i>
+    </a>
+</div> -->
+<div class="mini-index-modal" ng-show="isShowIndexImg">
+    <div class="img-box">
+        <a href="{{lightBox.linkUrl}}">
+            <img ng-src="{{lightBox.imageUrl}}" alt="" width="390" height="375">
+        </a>
+        <i class="index-img-position" ng-click="closeIndexImg()"></i>
+    </div>
+</div>
+<div class="mod_topbanner_wrap" ng-show="showTopRecommendation" style="background-color: #0076fa;">
+    <div class="wrap index-banner">
+        <a class="top-big-banner" href="{{topRecommendation[1].linkUrl}}" target="_blank" data-bgcolor="#0076fa">
+            <img ng-src="{{topRecommendation[1].imageUrl}}" height="200px">
+        </a>
+        <a class="top-small-banner" style="display: block;" href="{{topRecommendation[0].linkUrl}}" data-bgcolor="#0076fa">
+            <img ng-src="{{topRecommendation[0].imageUrl}}" height="80px">
+        </a>
+        <i class="close-img" ng-click="hideTopRecommendation()"></i>
+    </div>
+</div>
+@@include("header.html")
+@@include("global-nav.html")
+<!--<div class='fix-nav'>
+	<ul class='fix-box'>
+		<li class='fix-item'><a href="/cart.html"><span class='fix-icon car'></span></a></li>
+		<li class='fix-item'><span class='fix-icon ear'></span></li>
+		<li class='fix-item'><span class='fix-icon code'></span></li>
+		<li class='fix-item'><span class='fix-icon message'></span></li>
+		<li class='fix-item'><span class='fix-icon phone'></span></li>
+		<li class='fix-item'><a href="/home.html"><span class='fix-icon penson'></span></a></li>
+	</ul>
+</div>
+<div class='top-box'>
+	<span class='top-btn'></span>
+</div>-->
+<!--首页弹框地址-->
+<dl ng-include="'includes/_location.html'"></dl>
+<div class="container mB50">
+    <!-- 广告位1 begin -->
+    <div class="banner-one" ng-if="sceneTitle.imageUrl">
+        <a href="{{sceneTitle.linkUrl}}">
+            <img ng-src="{{sceneTitle.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- 广告位1 end -->
+    <!-- 10个魔方 begin -->
+    <div class="ten-cube f0" ng-if="sceneClassification[0].imageUrl && (sceneClassification || (sceneClassification && sceneClassification.length == 0))">
+        <div class="ten-cube-left dis">
+            <a href="{{sceneClassification[0].linkUrl}}">
+                <img ng-src="{{sceneClassification[0].imageUrl}}" alt="" height="210px" width="240px">
+            </a>
+        </div>
+        <div class="ten-cube-right dis">
+            <a class="right-img-box dis" ng-repeat="sc in sceneClassification" ng-class="{'marr0':$index == 4 || $index == 8,'marb0':$index>4}" ng-if="$index > 0" href="{{sc.linkUrl}}">
+                <img ng-src="{{sc.imageUrl}}" alt="" height="100px" width="230px">
+            </a>
+        </div>
+    </div>
+    <!-- 10个魔方 end -->
+    <!-- 限时秒杀 begin -->
+    <div class="limit-time" ng-if="purchaseBuyList.merchantProducts.length > 0">
+        <p class="time-top f0">
+            <span class="time-text dis">限时秒杀</span>
+            <span class="dis time-lost">本场剩余</span>
+            <!--<span class="time-style dis">06</span>
+            <span class="time-icon dis vertical">：</span>
+            <span class="time-style dis">08</span>
+            <span class="time-icon dis vertical">：</span>
+            <span class="time-style dis">59</span>-->
+            <span class="time-icon dis vertical time-style" ng-if="purchaseTimeList[0].sysTime>0" count-down show-count-down="true" end-time="purchaseTimeList[0].endTime"
+                  current-time="purchaseTimeList[0].sysTime" no-font="true"></span>
+        </p>
+        <div class="time-goods-box f0">
+            <div class="time-good dis" ng-repeat="pro in purchaseBuyList.merchantProducts | limitTo:6">
+                <a href="/panicbuying.html?mpId={{pro.mpId}}" class="time-good-a" ng-class="{'first-time-good-a':$first}">
+                    <img width="170px" height="150px" ng-src="{{pro.picUrl}}" alt="">
+                    <span class="good-name f12">{{pro.name}}</span>
+                </a>
+                <span class="money-text f14" ng-if="!$parent.hideProductPrice">{{pro.promotionPrice| currency:'￥'}}</span>
+                <span class="money-text f14" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+            </div>
+        </div>
+    </div>
+    <!-- 限时秒杀 end -->
+    <!-- 众筹 begin -->
+    <div class="limit-time" ng-if="crowdfundList[0] && crowdfundList[0].merchantProducts.length > 0">
+        <p class="time-top f0">
+            <span class="time-text dis">火爆众筹</span>
+        </p>
+        <div class="time-goods-box f0">
+            <div class="dis" ng-repeat="crowdfund in crowdfundList">
+                <div class="time-good dis" ng-repeat="pro in crowdfund.merchantProducts">
+                    <a href="/crowdFunding.html" ng-class="{'first-time-good-a':$first}" class="time-good-a">
+                        <img width="170px" height="150px" ng-src="{{pro.picUrl}}" alt="">
+                        <span class="good-name f12">{{pro.name}}</span>
+                    </a>
+                    <span class="money-text f14" ng-if="!$parent.hideProductPrice">{{pro.promotionPrice| currency:'￥'}}</span>
+                    <span class="money-text f14" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 楼层1 点击后样式 begin -->
+    <div class="one-floor" ng-if="firstFloor && firstFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{firstFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in firstFloorTab" ng-class="{'select-one':tab.select}" ng-click="getDataByAdCode(tab, textData1, floor1ShowLunbo, floor1callback,firstFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left dis f0">
+                    <a href="{{firstFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{firstFloorClassification[0].imageUrl}}" alt="" height="471px" width="210px">
+                    </a>
+                    <div class="dl-first-box">
+                        <div class="dl-two-box dis f14 dl-small-box">
+                            <a class="dl-two" href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in firstCategory | limitTo:3">{{cat.categoryName}}&nbsp;/&nbsp;</a>
+                        </div>
+                        <ul class="dl-three-box">
+                            <li class="dl-three-box1">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in firstCategory[0].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box2">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in firstCategory[1].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box3">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in firstCategory[2].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main-right dis f0">
+                    <div class="right-left dis">
+                        <!--第二个tab往后 不是轮播，一张大图-->
+                        <div class="lunboimg dis index-carousel-1" ody-carousel lunbo="textData1.num3" imgwidth="389" main-dom="index-carousel-1" lunbo-time="5000" imgheight="470"
+                             ng-if="textData1.num3 && floor1ShowLunbo"></div>
+                        <!-- 品牌 begin -->
+                        <div class="merchant-brand f0">
+                            <div class="merchant-img dis" ng-repeat="a in textData1.num2">
+                                <a href="{{a.linkUrl}}">
+                                    <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="115px">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 品牌 end -->
+                        <img ng-if="!floor1ShowLunbo" ng-src="{{f1sevenBlocks[0].refObject?f1sevenBlocks[0].refObject.picUrl:f1sevenBlocks[0].imageUrl}}" alt="" height="470px" width="389px">
+                    </div>
+                    <div class="right-right dis">
+                        <a href="" class="left-position-arrow" ng-if="!floor1ShowLunbo && f1upBtn" ng-click="firstTurnUpPage()"></a>
+                        <a href="" class="right-position-arrow" ng-if="!floor1ShowLunbo && f1nextBtn" ng-click="firstTurnNextPage()"></a>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData1.num1 | limitTo:6" ng-if="floor1ShowLunbo">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                                <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                                <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f1sevenBlocks | limitTo:7" ng-if="!floor1ShowLunbo && $index >0">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                                <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                                <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- banner 2 begin -->
+    <div class="banner-two" ng-if="f1Recommendation">
+        <a href="{{f1Recommendation.linkUrl}}">
+            <img ng-src="{{f1Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 2 end -->
+    <!--楼下二-->
+    <div class="one-floor" ng-if="secondFloor && secondFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{secondFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in secondFloorTab" ng-class="{'select-two':tab.select}" ng-click="getDataByAdCode(tab, textData2, floor2ShowLunbo, floor2callback,secondFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-left-two left-banner-two dis f0">
+                    <a href="{{secondFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{secondFloorClassification[0].imageUrl}}" alt="" height="471px" width="120px">
+                    </a>
+                    <div class="dl-box dl-box-second">
+                        <div class="dl-box-second-top">
+                            <a href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in secondCategory | limitTo:3">{{cat.categoryName}}</a>
+                        </div>
+                        <div class="dl-box-second-bottom">
+                            <!--<a href="##">刻刀22</a>
+                            <a href="##">订书机22</a>
+                            <a href="##">120px222</a>-->
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in secondCategory[0].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in secondCategory[1].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in secondCategory[2].children | limitTo:1">{{cc.categoryName}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-right left-right-two dis"></div>
+            </div>
+            <div class="main-right main-right-two dis f0">
+                <div class="right-left right-left-two dis">
+                    <div class="lunboimg dis index-carousel-2" ody-carousel lunbo="textData2.num3" imgwidth="479" main-dom="index-carousel-2" lunbo-time="5000" imgheight="470"
+                         ng-if="textData2.num3 && floor2ShowLunbo"></div>
+                    <img ng-if="!floor2ShowLunbo" ng-src="{{f2sevenBlocks[0].refObject?f2sevenBlocks[0].refObject.picUrl:f2sevenBlocks[0].imageUrl}}" alt="" height="470px" width="479px">
+                    <!-- 品牌 begin -->
+                    <div class="merchant-brand merchant-brand-two f0">
+                        <div class="merchant-img dis" ng-repeat="a in textData2.num2">
+                            <a href="{{a.linkUrl}}">
+                                <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="110px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 品牌 end -->
+                </div>
+                <div class="right-right dis">
+                    <a href="" class="left-position-arrow" ng-if="!floor2ShowLunbo && f2upBtn" ng-click="secondTurnUpPage()"></a>
+                    <a href="" class="right-position-arrow" ng-if="!floor2ShowLunbo && f2nextBtn" ng-click="secondTurnNextPage()"></a>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData2.num1 | limitTo:6" ng-if="floor2ShowLunbo">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                            <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                            <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f2sevenBlocks | limitTo:7" ng-if="!floor2ShowLunbo && $index >0">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                            <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                            <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- banner 2 begin -->
+    <div class="banner-two" ng-if="f2Recommendation">
+        <a href="{{f2Recommendation.linkUrl}}">
+            <img ng-src="{{f2Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 2 end -->
+    <!--楼层三-->
+    <div class="one-floor" ng-if="thirdFloor && thirdFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{thirdFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in thirdFloorTab" ng-class="{'select-three':tab.select}" ng-click="getDataByAdCode(tab, textData3, floor3ShowLunbo, floor3callback,thirdFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-banner-three dis f0">
+                    <a href="{{thirdFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{thirdFloorClassification[0].imageUrl}}" alt="" height="471px" width="210px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-first-box">
+                        <div class="dl-two-box dis f14 dl-small-box">
+                            <a class="dl-two" href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in thirdCategory | limitTo:3">{{cat.categoryName}}&nbsp;/&nbsp;</a>
+                        </div>
+                        <ul class="dl-three-box">
+                            <li class="dl-three-box1">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in thirdCategory[0].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box2">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in thirdCategory[1].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box3">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in thirdCategory[2].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main-right main-right-three dis f0">
+                    <div class="right-left dis">
+                        <!--第二个tab往后 不是轮播，一张大图-->
+                        <div class="lunboimg dis index-carousel-3" ody-carousel lunbo="textData3.num3" imgwidth="389" main-dom="index-carousel-3" lunbo-time="5000" imgheight="470"
+                             ng-if="textData3.num3 && floor3ShowLunbo"></div>
+                        <img ng-if="!floor3ShowLunbo" ng-src="{{f3sevenBlocks[0].refObject.picUrl || f3sevenBlocks[0].imageUrl}}" alt="" height="470px" width="389px">
+                        <!-- 品牌 begin -->
+                        <div class="merchant-brand f0">
+                            <div class="merchant-img dis" ng-repeat="a in textData3.num2">
+                                <a href="{{a.linkUrl}}">
+                                    <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="115px">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 品牌 end -->
+                    </div>
+                    <div class="right-right dis">
+                        <a href="" class="left-position-arrow" ng-if="!floor3ShowLunbo && f3upBtn" ng-click="thirdTurnUpPage()"></a>
+                        <a href="" class="right-position-arrow" ng-if="!floor3ShowLunbo && f3nextBtn" ng-click="thirdTurnNextPage()"></a>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData3.num1 | limitTo:6" ng-if="floor3ShowLunbo">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                                <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                                <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f3sevenBlocks | limitTo:7" ng-if="!floor3ShowLunbo && $index >0">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                                <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                                <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 3 begin -->
+    <div class="banner-two" ng-if="f3Recommendation">
+        <a href="{{f3Recommendation.linkUrl}}">
+            <img ng-src="{{f3Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 3 end -->
+
+    <!--楼层四-->
+    <div class="one-floor" ng-if="fourthFloor && fourthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{fourthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in fourthFloorTab" ng-class="{'select-fore':tab.select}" ng-click="getDataByAdCode(tab, textData4, floor4ShowLunbo, floor4callback,fourthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-left-two left-banner-fore dis f0">
+                    <a href="{{fourthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{fourthFloorClassification[0].imageUrl}}" alt="" height="471px" width="120px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-box dl-box-second">
+                        <div class="dl-box-second-top">
+                            <a href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in fourthCategory | limitTo:3">{{cat.categoryName}}</a>
+                        </div>
+                        <div class="dl-box-second-bottom">
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in fourthCategory[0].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in fourthCategory[1].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in fourthCategory[2].children | limitTo:1">{{cc.categoryName}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-right left-right-two dis"></div>
+            </div>
+            <div class="main-right main-right-fore dis f0">
+                <div class="right-left right-left-two dis">
+                    <div class="lunboimg dis index-carousel-4" ody-carousel lunbo="textData4.num3" imgwidth="479" main-dom="index-carousel-4" lunbo-time="5000" imgheight="470"
+                         ng-if="textData4.num3 && floor4ShowLunbo"></div>
+                    <!-- 品牌 begin -->
+                    <div class="merchant-brand merchant-brand-two f0">
+                        <div class="merchant-img dis" ng-repeat="a in textData4.num2">
+                            <a href="{{a.linkUrl}}">
+                                <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="110px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 品牌 end -->
+                    <img ng-if="!floor4ShowLunbo" ng-src="{{f4sevenBlocks[0].refObject?f4sevenBlocks[0].refObject.picUrl:f4sevenBlocks[0].imageUrl}}" alt="" height="470px" width="479px">
+                </div>
+                <div class="right-right dis">
+                    <a href="" class="left-position-arrow" ng-if="!floor4ShowLunbo && f4upBtn" ng-click="fourthTurnUpPage()"></a>
+                    <a href="" class="right-position-arrow" ng-if="!floor2ShowLunbo && f2nextBtn" ng-click="fourthTurnNextPage()"></a>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData4.num1 | limitTo:6" ng-if="floor4ShowLunbo">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                            <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                            <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f4sevenBlocks | limitTo:7" ng-if="!floor4ShowLunbo && $index >0">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                            <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                            <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 4 begin -->
+    <div class="banner-two" ng-if="f4Recommendation">
+        <a href="{{f4Recommendation.linkUrl}}">
+            <img ng-src="{{f4Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 4 end -->
+
+    <!--楼层五-->
+    <div class="one-floor" ng-if="fifthFloor && fifthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{fifthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in fifthFloorTab" ng-class="{'select-five':tab.select}" ng-click="getDataByAdCode(tab, textData5, floor5ShowLunbo, floor5callback,fifthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-banner-five dis f0">
+                    <a href="{{fifthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{fifthFloorClassification[0].imageUrl}}" alt="" height="471px" width="210px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-first-box">
+                        <div class="dl-two-box dis f14 dl-small-box">
+                            <a class="dl-two" href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in fifthCategory | limitTo:3">{{cat.categoryName}}&nbsp;/&nbsp;</a>
+                        </div>
+                        <ul class="dl-three-box">
+                            <li class="dl-three-box1">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in fifthCategory[0].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box2">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in fifthCategory[1].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box3">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in fifthCategory[2].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main-right main-right-five dis f0">
+                    <div class="right-left dis">
+                        <!--第二个tab往后 不是轮播，一张大图-->
+                        <div class="lunboimg dis index-carousel-5" ody-carousel lunbo="textData5.num3" imgwidth="389" main-dom="index-carousel-5" lunbo-time="5000" imgheight="470"
+                             ng-if="textData5.num3 && floor5ShowLunbo"></div>
+                        <img ng-if="!floor5ShowLunbo" ng-src="{{f5sevenBlocks[0].refObject?f5sevenBlocks[0].refObject:f5sevenBlocks[0].imageUrl}}" alt="" height="470px" width="389px">
+                        <!-- 品牌 begin -->
+                        <div class="merchant-brand f0">
+                            <div class="merchant-img dis" ng-repeat="a in textData5.num2">
+                                <a href="{{a.linkUrl}}">
+                                    <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="115px">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 品牌 end -->
+                    </div>
+                    <div class="right-right dis">
+                        <a href="" class="left-position-arrow" ng-if="!floor5ShowLunbo && f5upBtn" ng-click="fifthTurnUpPage()"></a>
+                        <a href="" class="right-position-arrow" ng-if="!floor5ShowLunbo && f5nextBtn" ng-click="fifthTurnNextPage()"></a>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData5.num1 | limitTo:6" ng-if="floor5ShowLunbo">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                                <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                                <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f5sevenBlocks | limitTo:7" ng-if="!floor5ShowLunbo && $index >0">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                                <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                                <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 5 begin -->
+    <div class="banner-two" ng-if="f5Recommendation">
+        <a href="{{f5Recommendation.linkUrl}}">
+            <img ng-src="{{f5Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 5 end -->
+
+    <!--楼层六-->
+    <div class="one-floor" ng-if="sixthFloor && sixthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{sixthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in sixthFloorTab" ng-class="{'select-six':tab.select}" ng-click="getDataByAdCode(tab, textData6, floor6ShowLunbo, floor6callback,sixthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-banner-six left-left-two dis f0">
+                    <a href="{{sixthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{sixthFloorClassification[0].imageUrl}}" alt="" height="471px" width="120px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-box dl-box-second">
+                        <div class="dl-box-second-top">
+                            <a href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in sixthCategory | limitTo:3">{{cat.categoryName}}</a>
+                        </div>
+                        <div class="dl-box-second-bottom">
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in sixthCategory[0].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in sixthCategory[1].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in sixthCategory[2].children | limitTo:1">{{cc.categoryName}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-right left-right-two dis"></div>
+            </div>
+            <div class="main-right main-right-six dis f0">
+                <div class="right-left right-left-two dis">
+                    <div class="lunboimg dis index-carousel-6" ody-carousel lunbo="textData6.num3" imgwidth="479" main-dom="index-carousel-6" lunbo-time="5000" imgheight="470"
+                         ng-if="textData6.num3 && floor6ShowLunbo"></div>
+                    <img ng-if="!floor6ShowLunbo" ng-src="{{f6sevenBlocks[0].refObject?f6sevenBlocks[0].refObject.picUrl:f6sevenBlocks[0].imageUrl}}" alt="" height="470px" width="479px">
+                    <!-- 品牌 begin -->
+                    <div class="merchant-brand merchant-brand-two f0">
+                        <div class="merchant-img dis" ng-repeat="a in textData6.num2">
+                            <a href="{{a.linkUrl}}">
+                                <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="110px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 品牌 end -->
+                </div>
+                <div class="right-right dis">
+                    <a href="" class="left-position-arrow" ng-if="!floor6ShowLunbo && f6upBtn" ng-click="sixthTurnUpPage()"></a>
+                    <a href="" class="right-position-arrow" ng-if="!floor6ShowLunbo && f6nextBtn" ng-click="sixthTurnNextPage()"></a>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData6.num1 | limitTo:6" ng-if="floor6ShowLunbo">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                            <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                            <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f6sevenBlocks | limitTo:7" ng-if="!floor6ShowLunbo && $index >0">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                            <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                            <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 6 begin -->
+    <div class="banner-two" ng-if="f6Recommendation">
+        <a href="{{f6Recommendation.linkUrl}}">
+            <img ng-src="{{f6Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 6 end -->
+
+    <!--楼层七-->
+    <div class="one-floor" ng-if="seventhFloor && seventhFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{seventhFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in seventhFloorTab" ng-class="{'select-seven':tab.select}" ng-click="getDataByAdCode(tab, textData7, floor7ShowLunbo, floor7callback,seventhFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-banner-seven dis f0">
+                    <a href="{{seventhFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{seventhFloorClassification[0].imageUrl}}" alt="" height="471px" width="210px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-first-box">
+                        <div class="dl-two-box dis f14 dl-small-box">
+                            <a class="dl-two" href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in seventhCategory | limitTo:3">{{cat.categoryName}}&nbsp;/&nbsp;</a>
+                        </div>
+                        <ul class="dl-three-box">
+                            <li class="dl-three-box1">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in seventhCategory[0].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box2">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in seventhCategory[1].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box3">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in seventhCategory[2].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main-right main-right-seven dis f0">
+                    <div class="right-left dis">
+                        <!--第二个tab往后 不是轮播，一张大图-->
+                        <div class="lunboimg dis index-carousel-7" ody-carousel lunbo="textData7.num3" imgwidth="389" main-dom="index-carousel-7" lunbo-time="5000" imgheight="470"
+                             ng-if="textData7.num3 && floor7ShowLunbo"></div>
+                        <img ng-if="!floor7ShowLunbo" ng-src="{{f7sevenBlocks[0].refObject.picUrl || f7sevenBlocks[0].imageUrl}}" alt="" height="470px" width="389px">
+                        <!-- 品牌 begin -->
+                        <div class="merchant-brand f0">
+                            <div class="merchant-img dis" ng-repeat="a in textData7.num2">
+                                <a href="{{a.linkUrl}}">
+                                    <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="115px">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 品牌 end -->
+                    </div>
+                    <div class="right-right dis">
+                        <a href="" class="left-position-arrow" ng-if="!floor7ShowLunbo && f7upBtn" ng-click="seventhTurnUpPage()"></a>
+                        <a href="" class="right-position-arrow" ng-if="!floor5ShowLunbo && f5nextBtn" ng-click="seventhTurnNextPage()"></a>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData7.num1 | limitTo:6" ng-if="floor7ShowLunbo">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                                <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                                <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f7sevenBlocks | limitTo:7" ng-if="!floor7ShowLunbo && $index >0">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                                <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                                <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 7 begin -->
+    <div class="banner-two" ng-if="f7Recommendation">
+        <a href="{{f7Recommendation.linkUrl}}">
+            <img ng-src="{{f7Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 7 end -->
+
+    <!--楼层八-->
+    <div class="one-floor" ng-if="eighthFloor && eighthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{eighthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in eighthFloorTab" ng-class="{'select-eight':tab.select}" ng-click="getDataByAdCode(tab, textData8, floor8ShowLunbo, floor8callback,eighthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left  dis f0">
+                <div class="left-left left-banner-eight left-left-two dis f0">
+                    <a href="{{eighthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{eighthFloorClassification[0].imageUrl}}" alt="" height="471px" width="120px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-box dl-box-second">
+                        <div class="dl-box-second-top">
+                            <a href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in eighthCategory | limitTo:3">{{cat.categoryName}}</a>
+                        </div>
+                        <div class="dl-box-second-bottom">
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in eighthCategory[0].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in eighthCategory[1].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in eighthCategory[2].children | limitTo:1">{{cc.categoryName}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-right left-right-two dis"></div>
+            </div>
+            <div class="main-right main-right-eight dis f0">
+                <div class="right-left right-left-two dis">
+                    <div class="lunboimg dis index-carousel-8" ody-carousel lunbo="textData8.num3" imgwidth="479" main-dom="index-carousel-8" lunbo-time="5000" imgheight="470"
+                         ng-if="textData8.num3 && floor8ShowLunbo"></div>
+                    <img ng-if="!floor8ShowLunbo" ng-src="{{f8sevenBlocks[0].refObject?f8sevenBlocks[0].refObject.picUrl:f8sevenBlocks[0].imageUrl}}" alt="" height="470px" width="479px">
+                    <!-- 品牌 begin -->
+                    <div class="merchant-brand merchant-brand-two f0">
+                        <div class="merchant-img dis" ng-repeat="a in textData8.num2">
+                            <a href="{{a.linkUrl}}">
+                                <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="110px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 品牌 end -->
+                </div>
+                <div class="right-right dis">
+                    <a href="" class="left-position-arrow" ng-if="!floor8ShowLunbo && f8upBtn" ng-click="eighthTurnUpPage()"></a>
+                    <a href="" class="right-position-arrow" ng-if="!floor6ShowLunbo && f6nextBtn" ng-click="eighthTurnNextPage()"></a>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData8.num1 | limitTo:6" ng-if="floor8ShowLunbo">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                            <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                            <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f8sevenBlocks | limitTo:7" ng-if="!floor8ShowLunbo && $index >0">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                            <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                            <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 8 begin -->
+    <div class="banner-two" ng-if="f8Recommendation">
+        <a href="{{f8Recommendation.linkUrl}}">
+            <img ng-src="{{f8Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 8 end -->
+
+    <!--楼层九-->
+    <div class="one-floor" ng-if="ninthFloor && ninthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{ninthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in ninthFloorTab" ng-class="{'select-night':tab.select}" ng-click="getDataByAdCode(tab, textData9, floor9ShowLunbo, floor9callback,ninthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-banner-night dis f0">
+                    <a href="{{ninthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{ninthFloorClassification[0].imageUrl}}" alt="" height="471px" width="210px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-first-box">
+                        <div class="dl-two-box dis f14 dl-small-box">
+                            <a class="dl-two" href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in ninthCategory | limitTo:3">{{cat.categoryName}}&nbsp;/&nbsp;</a>
+                        </div>
+                        <ul class="dl-three-box">
+                            <li class="dl-three-box1">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in ninthCategory[0].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box2">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in ninthCategory[1].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box3">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in ninthCategory[2].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main-right main-right-night dis f0">
+                    <div class="right-left dis">
+                        <!--第二个tab往后 不是轮播，一张大图-->
+                        <div class="lunboimg dis index-carousel-9" ody-carousel lunbo="textData9.num3" imgwidth="389" main-dom="index-carousel-9" lunbo-time="5000" imgheight="470"
+                             ng-if="textData9.num3 && floor9ShowLunbo"></div>
+                        <img ng-if="!floor9ShowLunbo" ng-src="{{f9sevenBlocks[0].refObject.picUrl || f9sevenBlocks[0].imageUrl}}" alt="" height="470px" width="389px">
+                        <!-- 品牌 begin -->
+                        <div class="merchant-brand f0">
+                            <div class="merchant-img dis" ng-repeat="a in textData9.num2">
+                                <a href="{{a.linkUrl}}">
+                                    <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="115px">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 品牌 end -->
+                    </div>
+                    <div class="right-right dis">
+                        <a href="" class="left-position-arrow" ng-if="!floor9ShowLunbo && f9upBtn" ng-click="ninthTurnUpPage()"></a>
+                        <a href="" class="right-position-arrow" ng-if="!floor9ShowLunbo && f9nextBtn" ng-click="ninthTurnNextPage()"></a>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData9.num1 | limitTo:6" ng-if="floor9ShowLunbo">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                                <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                                <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f9sevenBlocks | limitTo:7" ng-if="!floor9ShowLunbo && $index >0">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                                <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                                <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 9 begin -->
+    <div class="banner-two" ng-if="f9Recommendation">
+        <a href="{{f9Recommendation.linkUrl}}">
+            <img ng-src="{{f9Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 9 end -->
+
+    <!--楼层十-->
+    <div class="one-floor" ng-if="tenthFloor && tenthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{tenthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in tenthFloorTab" ng-class="{'select-ten':tab.select}" ng-click="getDataByAdCode(tab, textData10, floor10ShowLunbo, floor10callback,tenthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-banner-ten left-left-two dis f0">
+                    <a href="{{tenthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{tenthFloorClassification[0].imageUrl}}" alt="" height="471px" width="120px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-box dl-box-second">
+                        <div class="dl-box-second-top">
+                            <a href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in tenthCategory | limitTo:3">{{cat.categoryName}}</a>
+                        </div>
+                        <div class="dl-box-second-bottom">
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in tenthCategory[0].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in tenthCategory[1].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in tenthCategory[2].children | limitTo:1">{{cc.categoryName}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-right left-right-two dis"></div>
+            </div>
+            <div class="main-right main-right-ten dis f0">
+                <div class="right-left right-left-two dis">
+                    <div class="lunboimg dis index-carousel-10" ody-carousel lunbo="textData10.num3" imgwidth="479" main-dom="index-carousel-10" lunbo-time="5000" imgheight="470"
+                         ng-if="textData10.num3 && floor10ShowLunbo"></div>
+                    <img ng-if="!floor10ShowLunbo" ng-src="{{f10sevenBlocks[0].refObject?f10sevenBlocks[0].refObject.picUrl:f10sevenBlocks[0].imageUrl}}" alt="" height="470px" width="479px">
+                    <!-- 品牌 begin -->
+                    <div class="merchant-brand merchant-brand-two f0">
+                        <div class="merchant-img dis" ng-repeat="a in textData10.num2">
+                            <a href="{{a.linkUrl}}">
+                                <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="110px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 品牌 end -->
+                </div>
+                <div class="right-right dis">
+                    <a href="" class="left-position-arrow" ng-if="!floor10ShowLunbo && f10upBtn" ng-click="tenthTurnUpPage()"></a>
+                    <a href="" class="right-position-arrow" ng-if="!floor10ShowLunbo && f10nextBtn" ng-click="tenthTurnNextPage()"></a>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData10.num1 | limitTo:6" ng-if="floor10ShowLunbo">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                            <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                            <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f10sevenBlocks | limitTo:7" ng-if="!floor10ShowLunbo && $index >0">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                           <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                           <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 10 begin -->
+    <div class="banner-two" ng-if="f10Recommendation">
+        <a href="{{f10Recommendation.linkUrl}}">
+            <img ng-src="{{f10Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 10 end -->
+
+    <!--楼层十一-->
+    <div class="one-floor" ng-if="eleventhFloor && eleventhFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{eleventhFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in eleventhFloorTab" ng-class="{'select-one':tab.select}" ng-click="getDataByAdCode(tab, textData11, floor11ShowLunbo, floor11callback,eleventhFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left dis f0">
+                    <a href="{{eleventhFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{eleventhFloorClassification[0].imageUrl}}" alt="" height="471px" width="210px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-first-box">
+                        <div class="dl-two-box dis f14 dl-small-box">
+                            <a class="dl-two" href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in eleventhCategory | limitTo:3">{{cat.categoryName}}&nbsp;/&nbsp;</a>
+                        </div>
+                        <ul class="dl-three-box">
+                            <li class="dl-three-box1">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[0].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box2">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[1].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box3">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[2].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main-right dis f0">
+                    <div class="right-left dis">
+                        <!--第二个tab往后 不是轮播，一张大图-->
+                        <div class="lunboimg dis index-carousel-11" ody-carousel lunbo="textData11.num3" imgwidth="389" main-dom="index-carousel-11" lunbo-time="5000" imgheight="470"
+                             ng-if="textData11.num3 && floor11ShowLunbo"></div>
+                        <img ng-if="!floor11ShowLunbo" ng-src="{{f11sevenBlocks[0].refObject?f11sevenBlocks[0].refObject.picUrl:f11sevenBlocks[0].imageUrl}}" alt="" height="470px" width="389px">
+                        <!-- 品牌 begin -->
+                        <div class="merchant-brand f0">
+                            <div class="merchant-img dis" ng-repeat="a in textData11.num2">
+                                <a href="{{a.linkUrl}}">
+                                    <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="115px">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 品牌 end -->
+                    </div>
+                    <div class="right-right dis">
+                        <a href="" class="left-position-arrow" ng-if="!floor11ShowLunbo && f11upBtn" ng-click="eleventhTurnUpPage()"></a>
+                        <a href="" class="right-position-arrow" ng-if="!floor11ShowLunbo && f11nextBtn" ng-click="eleventhTurnNextPage()"></a>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData11.num1 | limitTo:6" ng-if="floor11ShowLunbo">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                               <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                                <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f11sevenBlocks | limitTo:7" ng-if="!floor11ShowLunbo && $index >0">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                               <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                               <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 11 begin -->
+    <div class="banner-two" ng-if="f11Recommendation">
+        <a href="{{f11Recommendation.linkUrl}}">
+            <img ng-src="{{f11Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 11 end -->
+
+    <!--楼层十二-->
+    <div class="one-floor" ng-if="twelfthFloor && twelfthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{twelfthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in twelfthFloorTab" ng-class="{'select-two':tab.select}" ng-click="getDataByAdCode(tab, textData12, floor12ShowLunbo, floor12callback,twelfthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-left-two dis f0">
+                    <a href="{{twelfthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{twelfthFloorClassification[0].imageUrl}}" alt="" height="471px" width="120px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-box dl-box-second">
+                        <div class="dl-box-second-top">
+                            <a href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in twelfthCategory | limitTo:3">{{cat.categoryName}}</a>
+                        </div>
+                        <div class="dl-box-second-bottom">
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in twelfthCategory[0].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in twelfthCategory[1].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in twelfthCategory[2].children | limitTo:1">{{cc.categoryName}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-right left-right-two dis"></div>
+            </div>
+            <div class="main-right main-right-two dis f0">
+                <div class="right-left right-left-two dis">
+                    <div class="lunboimg dis index-carousel-12" ody-carousel lunbo="textData12.num3" imgwidth="479" main-dom="index-carousel-12" lunbo-time="5000" imgheight="470"
+                         ng-if="textData12.num3 && floor12ShowLunbo"></div>
+                    <img ng-if="!floor12ShowLunbo" ng-src="{{f12sevenBlocks[0].refObject?f12sevenBlocks[0].refObject.picUrl:f12sevenBlocks[0].imageUrl}}" alt="" height="470px" width="479px">
+                    <!-- 品牌 begin -->
+                    <div class="merchant-brand merchant-brand-two f0">
+                        <div class="merchant-img dis" ng-repeat="a in textData12.num2">
+                            <a href="{{a.linkUrl}}">
+                                <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="110px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 品牌 end -->
+                </div>
+                <div class="right-right dis">
+                    <a href="" class="left-position-arrow" ng-if="!floor12ShowLunbo && f12upBtn" ng-click="twelfthTurnUpPage()"></a>
+                    <a href="" class="right-position-arrow" ng-if="!floor12ShowLunbo && f12nextBtn" ng-click="twelfthTurnNextPage()"></a>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData12.num1 | limitTo:6" ng-if="floor12ShowLunbo">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                           <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                           <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f12sevenBlocks | limitTo:7" ng-if="!floor12ShowLunbo && $index >0">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                           <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                           <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 12 begin -->
+    <div class="banner-two" ng-if="f12Recommendation">
+        <a href="{{f12Recommendation.linkUrl}}">
+            <img ng-src="{{f12Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 12 end -->
+
+    <!--楼层十三-->
+    <div class="one-floor" ng-if="thirteenthFloor && thirteenthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{thirteenthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in thirteenthFloorTab" ng-class="{'select-three':tab.select}" ng-click="getDataByAdCode(tab, textData13, floor13ShowLunbo, floor13callback,thirteenthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left dis f0">
+                    <a href="{{thirteenthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{thirteenthFloorClassification[0].imageUrl}}" alt="" height="471px" width="210px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-first-box">
+                        <div class="dl-two-box dis f14 dl-small-box">
+                            <a class="dl-two" href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in thirteenthCategory | limitTo:3">{{cat.categoryName}}&nbsp;/&nbsp;</a>
+                        </div>
+                        <ul class="dl-three-box">
+                            <li class="dl-three-box1">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[0].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box2">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[1].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box3">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[2].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main-right main-right-three dis f0">
+                    <div class="right-left dis">
+                        <!--第二个tab往后 不是轮播，一张大图-->
+                        <div class="lunboimg dis index-carousel-13" ody-carousel lunbo="textData13.num3" imgwidth="389" main-dom="index-carousel-13" lunbo-time="5000" imgheight="470"
+                             ng-if="textData13.num3 && floor13ShowLunbo"></div>
+                        <img ng-if="!floor13ShowLunbo" ng-src="{{f13sevenBlocks[0].refObject?f13sevenBlocks[0].refObject.picUrl:f13sevenBlocks[0].imageUrl}}" alt="" height="470px" width="389px">
+                        <!-- 品牌 begin -->
+                        <div class="merchant-brand f0">
+                            <div class="merchant-img dis" ng-repeat="a in textData13.num2">
+                                <a href="{{a.linkUrl}}">
+                                    <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="115px">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 品牌 end -->
+                    </div>
+                    <div class="right-right dis">
+                        <a href="" class="left-position-arrow" ng-if="!floor13ShowLunbo && f13upBtn" ng-click="thirteenthTurnUpPage()"></a>
+                        <a href="" class="right-position-arrow" ng-if="!floor13ShowLunbo && f13nextBtn" ng-click="thirteenthTurnNextPage()"></a>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData13.num1 | limitTo:6" ng-if="floor13ShowLunbo">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                               <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                               <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f13sevenBlocks | limitTo:7" ng-if="!floor13ShowLunbo && $index >0">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                               <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                               <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 13 begin -->
+    <div class="banner-two" ng-if="f13Recommendation">
+        <a href="{{f13Recommendation.linkUrl}}">
+            <img ng-src="{{f13Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 13 end -->
+
+    <!--楼层十四-->
+    <div class="one-floor" ng-if="fourteenthFloor && fourteenthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{fourteenthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in fourteenthFloorTab" ng-class="{'select-fore':tab.select}" ng-click="getDataByAdCode(tab, textData14, floor14ShowLunbo, floor14callback,fourteenthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-left-two dis f0">
+                    <a href="{{fourteenthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{fourteenthFloorClassification[0].imageUrl}}" alt="" height="471px" width="120px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-box dl-box-second">
+                        <div class="dl-box-second-top">
+                            <a href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in fourteenthCategory | limitTo:3">{{cat.categoryName}}</a>
+                        </div>
+                        <div class="dl-box-second-bottom">
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in fourteenthCategory[0].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in fourteenthCategory[1].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in fourteenthCategory[2].children | limitTo:1">{{cc.categoryName}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-right left-right-two dis"></div>
+            </div>
+            <div class="main-right main-right-fore dis f0">
+                <div class="right-left right-left-two dis">
+                    <div class="lunboimg dis index-carousel-14" ody-carousel lunbo="textData14.num3" imgwidth="479" main-dom="index-carousel-14" lunbo-time="5000" imgheight="470"
+                         ng-if="textData14.num3 && floor14ShowLunbo"></div>
+                    <img ng-if="!floor14ShowLunbo" ng-src="{{f14sevenBlocks[0].refObject?f14sevenBlocks[0].refObject.picUrl:f14sevenBlocks[0].imageUrl}}" alt="" height="470px" width="479px">
+                    <!-- 品牌 begin -->
+                    <div class="merchant-brand merchant-brand-two f0">
+                        <div class="merchant-img dis" ng-repeat="a in textData14.num2">
+                            <a href="{{a.linkUrl}}">
+                                <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="110px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 品牌 end -->
+                </div>
+                <div class="right-right dis">
+                    <a href="" class="left-position-arrow" ng-if="!floor14ShowLunbo && f14upBtn" ng-click="fourteenthTurnUpPage()"></a>
+                    <a href="" class="right-position-arrow" ng-if="!floor14ShowLunbo && f14nextBtn" ng-click="fourteenthTurnNextPage()"></a>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData14.num1 | limitTo:6" ng-if="floor14ShowLunbo">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                           <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                           <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f14sevenBlocks | limitTo:7" ng-if="!floor14ShowLunbo && $index >0">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                           <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                           <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 14 begin -->
+    <div class="banner-two" ng-if="f14Recommendation">
+        <a href="{{f14Recommendation.linkUrl}}">
+            <img ng-src="{{f14Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 14 end -->
+
+    <!--楼层十五-->
+    <div class="one-floor" ng-if="fifteenthFloor && fifteenthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{fifteenthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in fifteenthFloorTab" ng-class="{'select-five':tab.select}" ng-click="getDataByAdCode(tab, textData15, floor15ShowLunbo, floor15callback,fifteenthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left dis f0">
+                    <a href="{{fifteenthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{fifteenthFloorClassification[0].imageUrl}}" alt="" height="471px" width="210px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-first-box">
+                        <div class="dl-two-box dis f14 dl-small-box">
+                            <a class="dl-two" href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in fifteenthCategory | limitTo:3">{{cat.categoryName}}&nbsp;/&nbsp;</a>
+                        </div>
+                        <ul class="dl-three-box">
+                            <li class="dl-three-box1">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[0].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box2">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[1].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box3">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[2].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main-right main-right-five dis f0">
+                    <div class="right-left dis">
+                        <!--第二个tab往后 不是轮播，一张大图-->
+                        <div class="lunboimg dis index-carousel-15" ody-carousel lunbo="textData15.num3" imgwidth="389" main-dom="index-carousel-15" lunbo-time="5000" imgheight="470"
+                             ng-if="textData15.num3 && floor15ShowLunbo"></div>
+                        <img ng-if="!floor15ShowLunbo" ng-src="{{f15sevenBlocks[0].refObject?f15sevenBlocks[0].refObject.picUrl:f15sevenBlocks[0].imageUrl}}" alt="" height="470px" width="389px">
+                        <!-- 品牌 begin -->
+                        <div class="merchant-brand f0">
+                            <div class="merchant-img dis" ng-repeat="a in textData15.num2">
+                                <a href="{{a.linkUrl}}">
+                                    <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="115px">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 品牌 end -->
+                    </div>
+                    <div class="right-right dis">
+                        <a href="" class="left-position-arrow" ng-if="!floor15ShowLunbo && f15upBtn" ng-click="fifteenthTurnUpPage()"></a>
+                        <a href="" class="right-position-arrow" ng-if="!floor15ShowLunbo && f15nextBtn" ng-click="fifteenthTurnNextPage()"></a>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData15.num1 | limitTo:6" ng-if="floor15ShowLunbo">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                               <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                               <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f15sevenBlocks | limitTo:7" ng-if="!floor15ShowLunbo && $index >0">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                               <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                               <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 15 begin -->
+    <div class="banner-two" ng-if="f15Recommendation">
+        <a href="{{f15Recommendation.linkUrl}}">
+            <img ng-src="{{f15Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 15 end -->
+
+    <!--楼层十六-->
+    <div class="one-floor" ng-if="sixteenthFloor && sixteenthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{sixteenthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in sixteenthFloorTab" ng-class="{'select-six':tab.select}" ng-click="getDataByAdCode(tab, textData16, floor16ShowLunbo, floor16callback,sixteenthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-left-two dis f0">
+                    <a href="{{sixteenthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{sixteenthFloorClassification[0].imageUrl}}" alt="" height="471px" width="120px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-box dl-box-second">
+                        <div class="dl-box-second-top">
+                            <a href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in sixteenthCategory | limitTo:3">{{cat.categoryName}}</a>
+                        </div>
+                        <div class="dl-box-second-bottom">
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in sixteenthCategory[0].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in sixteenthCategory[1].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in sixteenthCategory[2].children | limitTo:1">{{cc.categoryName}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-right left-right-two dis"></div>
+            </div>
+            <div class="main-right main-right-six dis f0">
+                <div class="right-left right-left-two dis">
+                    <div class="lunboimg dis index-carousel-16" ody-carousel lunbo="textData16.num3" imgwidth="479" main-dom="index-carousel-16" lunbo-time="5000" imgheight="470"
+                         ng-if="textData16.num3 && floor16ShowLunbo"></div>
+                    <img ng-if="!floor16ShowLunbo" ng-src="{{f16sevenBlocks[0].refObject?f16sevenBlocks[0].refObject.picUrl:f16sevenBlocks[0].imageUrl}}" alt="" height="470px" width="479px">
+                    <!-- 品牌 begin -->
+                    <div class="merchant-brand merchant-brand-two f0">
+                        <div class="merchant-img dis" ng-repeat="a in textData16.num2">
+                            <a href="{{a.linkUrl}}">
+                                <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="110px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 品牌 end -->
+                </div>
+                <div class="right-right dis">
+                    <a href="" class="left-position-arrow" ng-if="!floor16ShowLunbo && f16upBtn" ng-click="sixteenthTurnUpPage()"></a>
+                    <a href="" class="right-position-arrow" ng-if="!floor16ShowLunbo && f16nextBtn" ng-click="sixteenthTurnNextPage()"></a>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData16.num1 | limitTo:6" ng-if="floor16ShowLunbo">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                           <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                           <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f16sevenBlocks | limitTo:7" ng-if="!floor16ShowLunbo && $index >0">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                           <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                           <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 16 begin -->
+    <div class="banner-two" ng-if="f16Recommendation">
+        <a href="{{f16Recommendation.linkUrl}}">
+            <img ng-src="{{f16Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 16 end -->
+
+    <!--楼层十七-->
+    <div class="one-floor" ng-if="seventeenthFloor && seventeenthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{seventeenthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in seventeenthFloorTab" ng-class="{'select-seven':tab.select}" ng-click="getDataByAdCode(tab, textData17, floor17ShowLunbo, floor17callback,seventeenthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left dis f0">
+                    <a {{seventeenthFloorClassification[0].linkUrl}}>
+                        <img ng-src="{{seventeenthFloorClassification[0].imageUrl}}" alt="" height="471px" width="210px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-first-box">
+                        <div class="dl-two-box dis f14 dl-small-box">
+                            <a class="dl-two" href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in seventeenthCategory | limitTo:3">{{cat.categoryName}}&nbsp;/&nbsp;</a>
+                        </div>
+                        <ul class="dl-three-box">
+                            <li class="dl-three-box1">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[0].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box2">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[1].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box3">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[2].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main-right main-right-seven dis f0">
+                    <div class="right-left dis">
+                        <!--第二个tab往后 不是轮播，一张大图-->
+                        <div class="lunboimg dis index-carousel-17" ody-carousel lunbo="textData17.num3" imgwidth="389" main-dom="index-carousel-17" lunbo-time="5000" imgheight="470"
+                             ng-if="textData17.num3 && floor17ShowLunbo"></div>
+                        <img ng-if="!floor17ShowLunbo" ng-src="{{f17sevenBlocks[0].refObject?f17sevenBlocks[0].refObject.picUrl:f17sevenBlocks[0].imageUrl}}" alt="" height="470px" width="389px">
+                        <!-- 品牌 begin -->
+                        <div class="merchant-brand f0">
+                            <div class="merchant-img dis" ng-repeat="a in textData17.num2">
+                                <a href="{{a.linkUrl}}">
+                                    <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="115px">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 品牌 end -->
+                    </div>
+                    <div class="right-right dis">
+                        <a href="" class="left-position-arrow" ng-if="!floor17ShowLunbo && f17upBtn" ng-click="seventeenthTurnUpPage()"></a>
+                        <a href="" class="right-position-arrow" ng-if="!floor17ShowLunbo && f17nextBtn" ng-click="seventeenthTurnNextPage()"></a>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData17.num1 | limitTo:6" ng-if="floor17ShowLunbo">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                               <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                               <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f17sevenBlocks | limitTo:7" ng-if="!floor17ShowLunbo && $index >0">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                               <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                               <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 17 begin -->
+    <div class="banner-two" ng-if="f17Recommendation">
+        <a href="{{f17Recommendation.linkUrl}}">
+            <img ng-src="{{f17Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 17 end -->
+
+    <!--楼层十八-->
+    <div class="one-floor" ng-if="eighteenthFloor && eighteenthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{eighteenthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in eighteenthFloorTab" ng-class="{'select-eight':tab.select}" ng-click="getDataByAdCode(tab, textData18, floor18ShowLunbo, floor18callback,eighteenthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-left-two dis f0">
+                    <a {{eighteenthFloorClassification[0].linkUrl}}>
+                        <img ng-src="{{eighteenthFloorClassification[0].imageUrl}}" alt="" height="471px" width="120px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-box dl-box-second">
+                        <div class="dl-box-second-top">
+                            <a href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in eighteenthCategory | limitTo:3">{{cat.categoryName}}</a>
+                        </div>
+                        <div class="dl-box-second-bottom">
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in eighteenthCategory[0].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in eighteenthCategory[1].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in eighteenthCategory[2].children | limitTo:1">{{cc.categoryName}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-right left-right-two dis"></div>
+            </div>
+            <div class="main-right main-right-eight dis f0">
+                <div class="right-left right-left-two dis">
+                    <div class="lunboimg dis index-carousel-18" ody-carousel lunbo="textData18.num3" imgwidth="479" main-dom="index-carousel-18" lunbo-time="5000" imgheight="470"
+                         ng-if="textData18.num3 && floor18ShowLunbo"></div>
+                    <img ng-if="!floor18ShowLunbo" ng-src="{{f18sevenBlocks[0].refObject?f18sevenBlocks[0].refObject.picUrl:f18sevenBlocks[0].imageUrl}}" alt="" height="470px" width="479px">
+                    <!-- 品牌 begin -->
+                    <div class="merchant-brand merchant-brand-two f0">
+                        <div class="merchant-img dis" ng-repeat="a in textData18.num2">
+                            <a href="{{a.linkUrl}}">
+                                <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="110px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 品牌 end -->
+                </div>
+                <div class="right-right dis">
+                    <a href="" class="left-position-arrow" ng-if="!floor18ShowLunbo && f18upBtn" ng-click="eighteenthTurnUpPage()"></a>
+                    <a href="" class="right-position-arrow" ng-if="!floor18ShowLunbo && f18nextBtn" ng-click="eighteenthTurnNextPage()"></a>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData18.num1 | limitTo:6" ng-if="floor18ShowLunbo">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                           <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                           <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f18sevenBlocks | limitTo:7" ng-if="!floor18ShowLunbo && $index >0">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                           <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                           <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 18 begin -->
+    <div class="banner-two" ng-if="f18Recommendation">
+        <a href="{{f18Recommendation.linkUrl}}">
+            <img ng-src="{{f18Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 18 end -->
+
+    <!--楼层十九-->
+    <div class="one-floor" ng-if="nineteenthFloor && nineteenthFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{nineteenthFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in nineteenthFloorTab" ng-class="{'select-night':tab.select}" ng-click="getDataByAdCode(tab, textData19, floor19ShowLunbo, floor19callback,nineteenthFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left dis f0">
+                    <a href="{{nineteenthFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{nineteenthFloorClassification[0].imageUrl}}" alt="" height="471px" width="210px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-first-box">
+                        <div class="dl-two-box dis f14 dl-small-box">
+                            <a class="dl-two" href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in nineteenthCategory | limitTo:3">{{cat.categoryName}}&nbsp;/&nbsp;</a>
+                        </div>
+                        <ul class="dl-three-box">
+                            <li class="dl-three-box1">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[0].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box2">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[1].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                            <li class="dl-three-box3">
+                                <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}"
+                                   ng-repeat="cc in ninthCategory[2].children | limitTo:5">{{cc.categoryName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main-right main-right-night dis f0">
+                    <div class="right-left dis">
+                        <!--第二个tab往后 不是轮播，一张大图-->
+                        <div class="lunboimg dis index-carousel-19" ody-carousel lunbo="textData19.num3" imgwidth="389" main-dom="index-carousel-19" lunbo-time="5000" imgheight="470"
+                             ng-if="textData19.num3 && floor19ShowLunbo"></div>
+                        <img ng-if="!floor19ShowLunbo" ng-src="{{f19sevenBlocks[0].refObject?f19sevenBlocks[0].refObject.picUrl:f19sevenBlocks[0].imageUrl}}" alt="" height="470px" width="389px">
+                        <!-- 品牌 begin -->
+                        <div class="merchant-brand f0">
+                            <div class="merchant-img dis" ng-repeat="a in textData19.num2">
+                                <a href="{{a.linkUrl}}">
+                                    <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="115px">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- 品牌 end -->
+                    </div>
+                    <div class="right-right dis">
+                        <a href="" class="left-position-arrow" ng-if="!floor19ShowLunbo && f19upBtn" ng-click="nineteenthTurnUpPage()"></a>
+                        <a href="" class="right-position-arrow" ng-if="!floor19ShowLunbo && f19nextBtn" ng-click="nineteenthTurnNextPage()"></a>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData19.num1 | limitTo:6" ng-if="floor19ShowLunbo">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                               <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                               <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                        <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f19sevenBlocks | limitTo:7" ng-if="!floor19ShowLunbo && $index >0">
+                            <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                                <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                            </a>
+                            <div ng-if="pro.refObject">
+                                <a href="{{pro.linkUrl}}" class="main-img-a">
+                                    <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                    <span class="goods-name">{{pro.refObject.productName}}</span>
+                                </a>
+                               <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                               <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- banner 19 begin -->
+    <div class="banner-two" ng-if="f19Recommendation">
+        <a href="{{f19Recommendation.linkUrl}}">
+            <img ng-src="{{f19Recommendation.imageUrl}}" alt="" height="80px" width="1200px">
+        </a>
+    </div>
+    <!-- banner 98 end -->
+
+    <!--楼层二十-->
+    <div class="one-floor" ng-if="twentiethFloor && twentiethFloor.name">
+        <div class="one-floor-top clearfix">
+            <div class="top-left">
+                <span class="left-text">{{twentiethFloor.content}}</span>
+            </div>
+            <div class="top-right f0">
+                <span class="right-text dis f14" ng-repeat="tab in twentiethFloorTab" ng-class="{'select-ten':tab.select}" ng-click="getDataByAdCode(tab, textData20, floor20ShowLunbo, floor20callback,twentiethFloorTab)">{{tab.name}}</span>
+            </div>
+        </div>
+        <div class="one-floor-main f0">
+            <div class="main-left dis f0">
+                <div class="left-left left-left-two dis f0">
+                    <a href="{{twentiethFloorClassification[0].linkUrl}}">
+                        <img ng-src="{{twentiethFloorClassification[0].imageUrl}}" alt="" height="471px" width="120px">
+                    </a>
+                    <div class="dl-bg"></div>
+                    <div class="dl-box dl-box-second">
+                        <div class="dl-box-second-top">
+                            <a href="/search.html?navCategoryIds={{cat.categoryId}}&categoryTreeNodeId={{cat.categoryTreeNodeId}}" ng-repeat="cat in twentiethCategory | limitTo:3">{{cat.categoryName}}</a>
+                        </div>
+                        <div class="dl-box-second-bottom">
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in twentiethCategory[0].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in twentiethCategory[1].children | limitTo:1">{{cc.categoryName}}</a>
+                            <a href="/search.html?navCategoryIds={{cc.categoryId}}&categoryTreeNodeId={{cc.categoryTreeNodeId}}" ng-repeat="cc in twentiethCategory[2].children | limitTo:1">{{cc.categoryName}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-right left-right-two dis"></div>
+            </div>
+            <div class="main-right main-right-ten dis f0">
+                <div class="right-left right-left-two dis">
+                    <div class="lunboimg dis index-carousel-20" ody-carousel lunbo="textData20.num3" imgwidth="479" main-dom="index-carousel-20" lunbo-time="5000" imgheight="470"
+                         ng-if="textData20.num3 && floor20ShowLunbo"></div>
+                    <img ng-if="!floor20ShowLunbo" ng-src="{{f20sevenBlocks[0].refObject?f20sevenBlocks[0].refObject.picUrl:f20sevenBlocks[0].imageUrl}}" alt="" height="470px" width="479px">
+                    <!-- 品牌 begin -->
+                    <div class="merchant-brand merchant-brand-two f0">
+                        <div class="merchant-img dis" ng-repeat="a in textData20.num2">
+                            <a href="{{a.linkUrl}}">
+                                <img ng-src="{{a.imageUrl}}" alt="" height="50px" width="110px">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 品牌 end -->
+                </div>
+                <div class="right-right dis">
+                    <a href="" class="left-position-arrow" ng-if="!floor20ShowLunbo && f20upBtn" ng-click="twentiethTurnUpPage()"></a>
+                    <a href="" class="right-position-arrow" ng-if="!floor20ShowLunbo && f20nextBtn" ng-click="twentiethTurnNextPage()"></a>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in textData20.num1 | limitTo:6" ng-if="floor20ShowLunbo">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                           <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                           <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                    <div class="main-img dis" ng-class="{'main-img-two':pro.refObject}" ng-repeat="pro in f20sevenBlocks | limitTo:7" ng-if="!floor20ShowLunbo && $index >0">
+                        <a href="{{pro.linkUrl}}" ng-if="!pro.refObject">
+                            <img ng-src="{{pro.imageUrl}}" width="199px" height="234px">
+                        </a>
+                        <div ng-if="pro.refObject">
+                            <a href="{{pro.linkUrl}}" class="main-img-a">
+                                <img ng-src="{{pro.refObject.picUrl}}" width="130px" height="130px">
+                                <span class="goods-name">{{pro.refObject.productName}}</span>
+                            </a>
+                           <span class="goods-money-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.realPrice | currency:'￥'}}</span>
+                           <span class="goods-money-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+@@include("footer.html")
+<div class="index-banner index-banner-bottom" ng-show="showBottomRecommendation">
+    <a class="top-small-banner-a" href="{{bottomRecommendation[0].linkUrl}}">
+        <img ng-src="{{bottomRecommendation[0].imageUrl}}" height="80px" alt="">
+        <i class="close-img" ng-click="hideBottomRecommendation()"></i>
+    </a>
+</div>
+@@include("script.html")
+<script type="text/javascript" src="/index.js?v=${version}"></script>
+</body>
+</html>

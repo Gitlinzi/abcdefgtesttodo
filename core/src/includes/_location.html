@@ -1,0 +1,73 @@
+<!-- 模态 -->
+<div class="modal"
+     ng-style="{display:localProvince.provinceFlag?'none':'block'}"
+     ng-if="!localProvince.provinceFlag && !errorMessageTip.config.display && localProvince.gotProvince">
+    <!-- 省份地址选择 -->
+    <div class="location">
+        <span class="dialog-closeOne"
+           ng-class="{'dialog-close-ie':isIE,'dialog-close-notie':!isIE}"
+           ng-click="localProvince.provinceFlag=true">&times;</span>
+        <div class="dialog-header">
+            {{i18n('请选择收货地址')}}，{{i18n('您的地址将会送货至')}}：
+        </div>
+        <div class="dialog-content">
+            <ul class="area bl">
+                <li ng-repeat="(letter,province) in localProvince.provinceList" ng-if="$index<8">
+                    <span>{{letter}}</span>
+                    <div>
+                        <span class="small-location" ng-repeat="prov in province | orderBy:'isHot' track by $index"
+                           ng-class="{hot:prov.isHot}"
+                           ng-click="localProvince._setProvince(prov.provinceId,prov.provinceName,prov.provinceCode,[getCartTotal,getMiniCart])">{{prov.provinceName}}</span>
+                    </div>
+                </li>
+            </ul>
+            <ul class="area">
+                <li ng-repeat="(letter,province) in localProvince.provinceList" ng-if="$index>=8">
+                    <span>{{letter}}</span>
+                    <div>
+                        <span class="small-location" ng-repeat="prov in province | orderBy:'isHot' track by $index"
+                           ng-class="{hot:prov.isHot}"
+                           ng-click="localProvince._setProvince(prov.provinceId,prov.provinceName,prov.provinceCode,[getCartTotal,getMiniCart])">{{prov.provinceName}}</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="deliverAddress">
+    <dt>{{i18n('送货至')}}：</dt>
+    <dd>
+        <span class="spaddress" href="javascript:void(0)" ng-click="localProvince.lvAreaObj.areaShow = true">{{localProvince.lvAreaObj.detail||localProvince.gotAreas.province.name}}<i class="icon-more-down"></i></span>
+        <div class="adschange" ng-if="localProvince.lvAreaObj.areaShow">
+            <span
+               class="dialog-close-location"
+               ng-click="localProvince.lvAreaObj.areaShow=false"
+               style="line-height: 25px">&times;</span>
+            <ul class="tab">
+                <li ng-class="{active:localProvince.lvAreaObj.areaTab == 1}"
+                    ng-click="localProvince.lvAreaObj.areaTab=1">{{localProvince.gotAreas.province.name||i18n('请选择省份')}}</li>
+                <li ng-class="{active:localProvince.lvAreaObj.areaTab == 2}"
+                    ng-if="localProvince.lvAreaObj.areaTab>1"
+                    ng-click="localProvince.lvAreaObj.areaTab=2">{{localProvince.gotAreas.city.name||i18n('请选择城市')}}</li>
+                <li ng-class="{active:localProvince.lvAreaObj.areaTab == 3}"
+                    ng-if="localProvince.lvAreaObj.areaTab>2">{{localProvince.gotAreas.area.name||i18n('请选择区域')}}</li>
+            </ul>
+            <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 1}">
+                <li ng-repeat="prov in localProvince.gotAreas.provinces|orderBy:'name.length'"
+                    ng-click="localProvince._changeAddr(prov,2)"
+                    ng-class="{active:prov.id==localProvince.gotAreas.province.id,col2:prov.name.length > 7}">{{prov.name}}</li>
+            </ul>
+            <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 2}">
+                <li ng-repeat="city in localProvince.gotAreas.cities|orderBy:'name.length'"
+                    ng-click="localProvince._changeAddr(city,3)"
+                    ng-class="{active:city.id==localProvince.gotAreas.city.id,col2:city.name.length > 7}">{{city.name}}</li>
+            </ul>
+            <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 3}">
+                <li  ng-repeat="area in localProvince.gotAreas.areas|orderBy:'name.length'"
+                    ng-click="localProvince._changeAddr(area,0)"
+                    ng-class="{col2:area.name.length > 7}">{{area.name}}</li>
+            </ul>
+        </div>
+    </dd>
+</script>

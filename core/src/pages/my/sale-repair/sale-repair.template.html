@@ -1,0 +1,70 @@
+<div class="always">
+    <div class="home-allTitle pdL20">{{i18n('维修服务')}}</div>
+    <div class="repair-box">
+        <div class="repair-nav">
+            <ul class="pdL20" ng-init="activeNum=1">
+                <!--<li ng-click="activeNum=1;" ng-class="{'active':activeNum==1}">申请售后</li>-->
+                <!--<li ng-click="activeNum=2;" ng-class="{'active':activeNum==2}">售后记录</li>-->
+                <li class="active">{{i18n('申请售后')}}</li>
+                <b></b>
+                <li ui-sref="index_saleRepairProgList">{{i18n('售后记录')}}</li>
+            </ul>
+            <p class="pdR20">
+                <a href="" ng-click="afterRepairList.init()" class="">{{i18n('搜索')}}</a>
+                <input type="text" name="" placeholder="{{i18n('商品名称')}}，{{i18n('商品编号')}}，{{i18n('订单编号')}}" class="" ng-model="afterRepairList.keyword">
+            </p>
+        </div>
+        <div class="repair-list">
+            <div class="repair-list-con">
+                <div class="repair-header">
+                    <span class="column1">{{i18n('订单详情')}}</span>
+                    <span class="column2">{{i18n('收货人')}}</span>
+                    <span class="column3">{{i18n('金额')}}</span>
+                    <span class="column4">{{i18n('订单状态')}}</span>
+                    <span class="column5">{{i18n('操作')}}</span>
+                </div>
+                <div class="repair-con" ng-repeat="suborder in afterRepairList.list">
+                    <div class="repair-con-list">
+                        <h4>
+                            <em class="c9">{{suborder.orderCreateTime | date: 'yyyy-MM-dd HH:mm:ss'}}</em>
+                            <em>{{i18n('订单号')}}：{{suborder.orderCode}}</em>
+                            <em>{{i18n('订单类型')}}：{{suborder.orderType|toOrderTypeContext}}</em>
+                        </h4>
+                        <div class="repair-span">
+                            <span class="column1">
+                                <dl ng-repeat="pro in suborder.orderItemListOutputVOList">
+                                    <dt><a target="_blank" class="img-block" href="#/orderDetail?code={{suborder.orderCode }}"><img ng-src="{{pro.productPicPath || '../../../images/defaultImg.png'}}" alt="{{pro.productCname}}"></a></dt>
+                                    <dd>
+                                        <h5>
+                                            <cite>{{pro.productCname}}</cite>
+                                            <em>x{{pro.productItemNum}}</em>
+                                        </h5>
+                                        <p ng-repeat="property in pro.productAttributeList track by $index">{{property.name}}:{{property.value}}</p>
+                                    </dd>
+                                </dl>
+                            </span>
+                                <span class="column2"><i></i>{{suborder.goodReceiverName}}</span>
+                            <span class="column3">
+                                <h6>
+                                    {{i18n('总额')}}: {{ suborder.totalAmount | currency:'￥' }}
+                                    <em>{{i18n('应付')}}: {{ suborder.paymentAmount | currency:'￥' }}</em>
+                                </h6>
+                                <cite>{{suborder.orderPaymentType|toOrderPaymentTypeContext}}</cite>
+                            </span>
+                            <span class="column4">
+                                {{suborder.orderWebStatus|toOrderStatusContext}}
+                                <a target="_blank" href="#/orderDetail?code={{suborder.orderCode }}" class="margint">{{i18n('订单详情')}}</a>
+                            </span>
+                            <span class="column5">
+                                <a target="_blank" ui-sref="index_applyRepair({code:suborder.orderCode})">{{i18n('申请维修')}}</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="not-prod" ng-if="afterRepairList.isShowIcon"><i class="mgR15"></i>{{i18n('没有售后的商品哦')}}~</div>
+        <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                    total-page="totalPage" ng-if="afterRepairList.isShowPage"></div>
+    </div>
+</div>

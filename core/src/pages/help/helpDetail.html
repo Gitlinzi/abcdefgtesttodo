@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <!-- <title>帮助中心</title> -->
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/cms/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/help#((skin)).css?v=${version}">
+</head>
+<base target="_self"/>
+<body ng-app="appControllers" ng-controller="helpDetailCtrl">
+<div class="notification with-nav"></div><!-- #3a3f51 -->
+<span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+    @@include("global-nav.html")
+</span>
+<div class="help-top">
+    <div class="help-title">
+        <h1>
+            <a target="_self" href="/index.html">
+                <img src="${staticPath}/images/stb_logo.png" ng-src="{{frontBasicSetting.personPageLogo}}" width="143" height="60">
+            </a>
+            <a class="help-center" ng-href="{{isShowHelpTitle? '/help.html' : ''}} ">{{isShowHelpTitle?i18n('帮助中心'):i18n('资讯')}}</a>
+        </h1>
+        <p ng-show="isShowHelpTitle">
+            <input name="keyword" ng-model="keyword" ng-enter="searchList()" placeholder="{{i18n('输入问题关键字')}}，{{i18n('找到答案')}}"/>
+            <span ng-click="searchList()">{{i18n('搜索')}}</span>
+        </p>
+    </div>
+</div>
+<div class="container">
+    <div class="help-nav" ng-show="isShowHelpTitle">
+        <a href="/help.html">{{i18n('首页')}}</a><i class="icon-arrow-right4 mgL10 mgR10" ></i>
+        <span ng-repeat="e in categoryList">
+            <a ng-href="/helpList.html?categoryId={{e.id}}">{{e.categoryName}}</a>
+            <i class="icon-arrow-right4 mgL10 mgR10"></i>
+        </span>
+        {{articleInfo.displayTitle}}
+    </div>
+    <div class="help-detail">
+        <h4>{{articleInfo.displayTitle}}</h4>
+        <h5>{{i18n('发表于')}}  {{articleInfo.createTime | date:'yyyy年MM月dd日 HH:mm:ss'}}</h5>
+        <div class="help-infor" id="article_content">
+        </div>
+        <!--<h6>0人觉得有帮助<span>有帮助</span></h6>-->
+    </div>
+</div>
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/helpDetail.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=helpDetail"></script>
+</body>
+</html>

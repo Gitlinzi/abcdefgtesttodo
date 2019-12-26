@@ -1,0 +1,93 @@
+{
+  "code": 0,
+  "data": {
+    "listObj": [
+      {
+        "orderCode": "170630831379307505",
+        "outOrderCode": "110206579565-28673934001",
+        "orderPaymentStatus": 0,
+        "deliveryStatus": 0,
+        "merchantName": "testuser_wanganqing",
+        "orderType": 0,
+        "manualType": 0,
+        "sysSource": "ebay",
+        "createUsername": "testuser_dingxl",
+        "goodReceiverName": null,
+        "goodReceiverAdress": null,
+        "warehouseId": null,
+        "warehouseVO": null,
+        "distributorName": "testuser_wanganqing",
+        "createTime": 1498810705000
+      },
+      {
+        "orderCode": "170630369021616505",
+        "outOrderCode": "110206579565-28673908001",
+        "orderPaymentStatus": 0,
+        "deliveryStatus": 0,
+        "merchantName": "testuser_wanganqing",
+        "orderType": 0,
+        "manualType": 0,
+        "sysSource": "ebay",
+        "createUsername": "testuser_dingxl",
+        "goodReceiverName": null,
+        "goodReceiverAdress": null,
+        "warehouseId": null,
+        "warehouseVO": null,
+        "distributorName": "testuser_wanganqing",
+        "createTime": 1498809895000
+      },
+      {
+        "orderCode": "170630117301578505",
+        "outOrderCode": "110206579565-28673791001",
+        "orderPaymentStatus": 0,
+        "deliveryStatus": 0,
+        "merchantName": "testuser_wanganqing",
+        "orderType": 0,
+        "manualType": 0,
+        "sysSource": "ebay",
+        "createUsername": "testuser_dingxl",
+        "goodReceiverName": null,
+        "goodReceiverAdress": null,
+        "warehouseId": null,
+        "warehouseVO": null,
+        "distributorName": "testuser_wanganqing",
+        "createTime": 1498802275000
+      },
+      {
+        "orderCode": "170630715366009370",
+        "outOrderCode": "channel_370",
+        "orderPaymentStatus": 0,
+        "deliveryStatus": 0,
+        "merchantName": "tester1",
+        "orderType": 0,
+        "manualType": 0,
+        "sysSource": "ebay",
+        "createUsername": "mem_acc",
+        "goodReceiverName": "rev_name",
+        "goodReceiverAdress": null,
+        "warehouseId": 1,
+        "warehouseVO": null,
+        "distributorName": "tester1",
+        "createTime": 1498800946000
+      },
+      {
+        "orderCode": "170630516296172505",
+        "outOrderCode": "110206579565-28673348001",
+        "orderPaymentStatus": 0,
+        "deliveryStatus": 0,
+        "merchantName": "testuser_wanganqing",
+        "orderType": 0,
+        "manualType": 0,
+        "sysSource": "ebay",
+        "createUsername": "testuser_dingxl",
+        "goodReceiverName": null,
+        "goodReceiverAdress": null,
+        "warehouseId": null,
+        "warehouseVO": null,
+        "distributorName": "testuser_wanganqing",
+        "createTime": 1498741300000
+      }
+    ],
+    "total": 132
+  }
+}

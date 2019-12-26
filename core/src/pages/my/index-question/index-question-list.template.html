@@ -1,0 +1,141 @@
+<div class="question">
+    <div class="home-allTitle pdL20">{{i18n('我的问答')}}</div>
+    <div class="question-content" ng-init="activeNum=0;">
+        <div class="question-left pdL20 clearfix">
+            <span class="quiz" ng-click="activeNum=0" ng-class="{'quiz-active':activeNum==0}">{{i18n('我的提问')}}</span>
+            <b></b>
+            <span class="answer" ng-click="activeNum=1" ng-class="{'quiz-active':activeNum==1}">{{i18n('我的回答')}}</span>
+            <b></b>
+            <span class="wait-quiz" ng-click="activeNum=2" ng-class="{'quiz-active':activeNum==2}">{{i18n('待回答')}}</span>
+        </div>
+        <!--我的回答-->
+        <div class="cont" ng-if="activeNum==1">
+            <div class="cont-box"  ng-class="{'border-cddd':!answer.length==0}">
+                <div class="problem-box"  ng-repeat="myQuestion in answer">
+                    <dl class="clearfix">
+                        <dt>
+                            <span class="one-text question-text">{{i18n('问')}}</span>
+                            <span class="problem-aa width685">{{myQuestion.content}}</span>
+                        </dt>
+                        <dd>
+                            <span class="user-name">{{myQuestion.userTelephone|phoneDate}}</span>
+                            <span class="color-9">{{myQuestion.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                        </dd>
+                    </dl>
+
+                    <dl class="clearfix second-dl " ng-class="{'line':myQuestion.listObj.length>1}" ng-repeat="answer in myQuestion.listObj" ng-if="$first">
+                        <span class="one-text answer" ng-show="myQuestion.listObj.length>0">{{i18n('答')}}</span>
+                        <dt>
+                            <span class="width685">{{answer.content}}</span>
+                        </dt>
+                        <dd>
+                            <span class="user-name">{{answer.userTelephone|phoneDate}}</span>
+                            <span class="color-9">{{answer.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                        </dd>
+                    </dl>
+                    <div class="go-QA" ng-if="myQuestion.listObj != null && myQuestion.listObj.length>1">
+                        <span><a target="_blank" ui-sref="index_questionAnswer({consultItemId:myQuestion.id})">{{i18n('查看更多回答')}}<span class="goArrow-two goArrow-left"></span></a></span>
+                    </div>
+                </div>
+                <!--没有咨询-->
+            </div>
+            <!-- isShowIcon -->
+            <div class="consult-no" ng-class="{'consultEnglish-no':locale == 'en_US'}" align='center' ng-if="isShowIcon">
+                <i></i>
+                <span>{{i18n('没有问答信息哦')}}~</span>
+            </div>
+
+        </div>
+        <!-- 我的提问 -->
+        <div class="cont" ng-if="activeNum==0">
+            <div class="cont-box"  ng-class="{'border-cddd':!qaText.length==0}">
+                <div class="problem-box"  ng-repeat="myQuestion in qaText">
+                    <dl class="clearfix">
+                        <dt>
+                            <span class="one-text question-text">{{i18n('问')}}</span>
+                            <span class="problem-aa width685">{{myQuestion.content}}</span>
+                        </dt>
+                        <dd>
+                            <span class="user-name">{{myQuestion.userTelephone|phoneDate}}</span>
+                            <span class="color-9">{{myQuestion.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                        </dd>
+                    </dl>
+
+                    <dl class="clearfix second-dl " ng-class="{'line':myQuestion.listObj.length>0}" ng-repeat="answer in myQuestion.listObj" ng-if="$first ||isHidden">
+                        <span class="one-text answer" ng-show="myQuestion.listObj.length>0 && $first">{{i18n('答')}}</span>
+                        <dt>
+                            <span class="width685">{{answer.content}}</span>
+                        </dt>
+                        <dd>
+                            <span class="user-name">{{answer.userTelephone|phoneDate}}</span>
+                            <span class="color-9">{{answer.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                        </dd>
+                    </dl>
+                    <div class="go-QA" ng-show="myQuestion.listObj.length>1">
+                        <span>
+                            <a href="" ng-click="isHidden = !isHidden">{{!isHidden?i18n('继续查看')+(myQuestion.listObj.length)+i18n('条回答'):i18n('收起回答')}}<span class="goArrow-one" ng-class="{'goArrow-up':isHidden,'goArrow-down':!isHidden}"></span></a>
+                        </span>
+                    </div>
+                </div>
+                <!--没有咨询-->
+            </div>
+            <!-- isShowIcon -->
+            <div class="consult-no" ng-class="{'consultEnglish-no':locale == 'en_US'}" align='center' ng-if="isShowIcon">
+                <i></i>
+                <span>{{i18n('没有问答信息哦')}}~</span>
+            </div>
+        </div>
+        <!-- 待回答 -->
+        <div class="cont" ng-if="activeNum==2">
+            <div class="cont-box"  ng-class="{'border-cddd':!answer.length==0}">
+                <div class="problem-box"  ng-repeat="myQuestion in answer">
+                    <dl class="clearfix">
+                        <dt>
+                            <span class="one-text question-text">{{i18n('问')}}</span>
+                            <span class="problem-aa width685">{{myQuestion.content}}</span>
+                        </dt>
+                        <dd>
+                            <span class="user-name">{{myQuestion.userTelephone|phoneDate}}</span>
+                            <span class="color-9">{{myQuestion.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                        </dd>
+                    </dl>
+                    <!--<span class="one-text answer" ng-show="myQuestion.listObj.length>0">答</span>-->
+                    <!--<dl class="clearfix second-dl " ng-class="{'line':myQuestion.listObj.length>1}" ng-repeat="answer in myQuestion.listObj">-->
+                        <!--<dt>-->
+                            <!--<span class="width685">{{answer.content}}{{myQuestion.listObj.length}}</span>-->
+                        <!--</dt>-->
+                        <!--<dd>-->
+                            <!--<span class="user-name">{{answer.userName||answer.userTelephone}}</span>-->
+                            <!--<span class="color-9">{{answer.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span>-->
+                        <!--</dd>-->
+                    <!--</dl>-->
+                    <div class="go-QA">
+                        <a target="_blank" ui-sref="index_questionAnswer({consultItemId:myQuestion.id,flag:true})">{{i18n('前往回答')}}</a>
+                    </div>
+                </div>
+
+            </div>
+            <!--没有咨询  isShowIcon-->
+            <div class="consult-no" ng-class="{'consultEnglish-no':locale == 'en_US'}" align='center' ng-if="isShowIcon">
+                <i></i>
+                <span>{{i18n('没有问答信息哦')}}~</span>
+            </div>
+                <!--<div class="go-QA">-->
+
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+        <!--<div class="cont">
+            <div class="tit clearfix">
+                <div class="def">
+                    <span class="time">2017-06-21 08:09</span>
+                </div>
+                <span class="icon_ask">{{i18n('问')}}</span>
+                <a target="_blank" href="#" class="tt">{{i18n('充电怎么充')}}</a>
+            </div>
+        </div>-->
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                total-page="totalPage" ng-if="isShowPage"></div>
+
+</div>

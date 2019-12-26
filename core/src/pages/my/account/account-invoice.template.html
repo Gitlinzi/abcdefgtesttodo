@@ -1,0 +1,120 @@
+<!-- 收货地址列表 -->
+<div class="content address-manage" id="invoice" ng-init="invoice.init()">
+        <div class="clearfix address-top pdL20 pdR20">
+            <div>
+                <p class='address-p'>{{i18n('发票信息')}}</p>
+            </div>
+        </div>
+        <!-- 新增收货地址 导购员不展示-->
+        <div class="add-sup" ng-if='isAdmin'>
+            <span ng-if="!invoice.id && !invoice.isEdit" class="add-sup-span pdL20">{{i18n('新增发票信息')}}</span>
+            <span  ng-if="invoice.id || invoice.isEdit" class="add-sup-span pdL20">{{i18n('编辑发票信息')}}</span>
+            <form class="add-sup-form">
+                <div class="pdL20">
+                    <dl class="pdb20">
+                        <dt><span><a href="javascript:void(0)" class="colorRed">*</a>{{i18n('结算单位')}}：</span></dt>
+                        <dd><select class="select"
+                                    name="nuits"
+                                    style="padding-left:5px;height: 33px;line-height: 33px;width: 272px"
+                                    id="nuits"
+                                    required
+                                    ng-model="invoice.nuits"
+                                    ng-change="invoice.getSelected($event.target.value)"
+                                    ng-options="pro.merchantId as pro.name for pro in Allnuits">
+                            <option value="">--{{i18n('请选择')}}--</option>
+                        </select></dd>
+                    </dl>
+                    <dl class="pdb20">
+                        <dt><span><a href="javascript:void(0)" class="colorRed">*</a>{{i18n('发票抬头')}}：</span></dt>
+                        <dd><input style="width: 272px" type="text" name="invoiceTitleContent" ng-model="invoice.invoiceTitleContent" placeholder="{{i18n('请输入')}}"></dd>
+                    </dl>
+                    <dl class="pdb20 setDefault">
+                        <dt><span>&nbsp;&nbsp;</span></dt>
+                        <dd><input type="checkbox" ng-model="defaultInvoice" ng-checked="invoice.defaultInvoice" ng-click="invoice.defaultInvoice=!invoice.defaultInvoice"/> 设置为默认发票信息</dd>
+                    </dl>
+                    <div class="pdb20">
+                        <button class="search mgR5 bao" ng-click="invoice.save()">{{i18n('保存')}}</button>
+                    </div>
+                 </div>      
+            </form>
+        </div>
+        <div class="module mode-rat">
+            <ul class="input pdL20" style="padding-right: 15px;display: inline-block;">
+                <li>
+                    <span>{{i18n('结算单位')}}：</span>
+                    <select class="select"
+                            name="searchnuits"
+                            style="padding-left:5px;height: 33px;line-height: 33px;width: 160px"
+                            id="searchnuits"
+                            required
+                            ng-model="searchList.nuits"
+                            ng-change="getSelected($event.target.value)"
+                            ng-options="pro.merchantId as pro.name for pro in Allnuits">
+                        <option value="">--{{i18n('请选择')}}--</option>
+                    </select>
+                </li>
+                <li style="margin-right: 310px;">
+                    <span>{{i18n('发票抬头')}}：</span>
+                    <input style="width: 160px" type="text" name="searchinvoiceTitle" ng-model="searchList.searchinvoiceTitle" placeholder="{{i18n('请输入')}}">
+                </li>
+                <li class="operation" style="padding: 0">
+                    <button class="search mgR5" ng-click="invoice.selectByCondition()">{{i18n('查询')}}</button>
+                    <button class="reset" ng-click="invoice.resetInfo()">{{i18n('重置')}}</button>
+                </li>
+            </ul>
+            <div class="evaluate-list mgT20">
+                <!-- <div class="list-title list-titleColor">
+                    <span class="w20" ng-if="isAdmin">{{i18n('操作')}}</span>
+                    <span class="w20">{{i18n('设为常用')}}</span>
+                    <span class="w20"><a href="javascript:void(0)" class="colorRed">*</a>{{i18n('结算单位')}}</span>
+                    <span class="w20">{{i18n('发票抬头')}}</span>
+                    <span class="w20">&nbsp;</span>
+                </div> -->
+                <div class="order-group" >
+                    <div ng-if="allInvoice.length>0">
+                        <table class="order-list all-table-color">
+                            <tr>
+                                <th class="w20" ng-if="isAdmin">{{i18n('操作')}}</th>
+                                <th class="w20">{{i18n('设为常用')}}</th>
+                                <th class="w20"><a href="javascript:void(0)" class="colorRed">*</a>{{i18n('结算单位')}}</th>
+                                <th class="w20">{{i18n('发票抬头')}}</th>
+                                <th class="w20">&nbsp;</th>
+                            </tr>
+                            <tr ng-repeat="addr in allInvoice">
+                                <!--订单操作-->
+                                <td valign="top" align="center" class="bb br w20" ng-if="isAdmin">
+                                    <a href="" class="c0066cc mgR10" ng-click="invoice._editAddress(addr);">{{i18n('编辑')}}</a>
+                                    <a href="" class="c0066cc theme" ng-click="invoice._deleteAddress(addr.id,true)">{{i18n('删除')}}</a>
+                                </td>
+                                <td valign="top"align="center" class="bb br w20">
+                                        <input type="checkbox" ng-value="{{addr.addressId}}" align="center"ng-model="addr.checked" ng-checked="addr.commonFlag"
+                                        ng-click="invoice.setCommonAddress(addr.id)" />
+                                </td>
+                                <td align="center" class="bb bl w20 br">
+                                    <a href="" >{{addr.merchantName}}</a>
+                                </td>
+                                <td align="center" class="bb bl w20 br">
+                                    <a href="">{{addr.invoiceTitleContent}}</a>
+                                </td>
+                                <td align="center" class="bb bl w20 br">
+                                    <a href class="theme" ng-if="addr.deft">默认发票</a>
+                                    <a href class="c0066cc" ng-click="invoice._setDefaultInvoice(addr.id);"ng-if="!addr.deft">设为默认</a>
+                                </td>
+                                
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="none-order" ng-if="allInvoice.length == 0 || allInvoice == null">
+                        <div class="none-right">
+                            <span>{{i18n('暂无数据')}}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 页码 -->
+                <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"total-page="totalPage" ></div>
+            </div>
+        </div>
+         <!-- 删除地址 --> 
+         <div bomb-box cart-data="deleteData"></div>
+    </div>
+    

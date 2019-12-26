@@ -1,0 +1,56 @@
+<div class="always">
+    <div class="home-allTitle pdL20">{{i18n('售后服务')}}</div>
+    <div class="evaluate-list mgB10">
+        <div class="list-title pdL20">
+            <span class="width617 align-center" align="center" >{{i18n('售后商品')}}</span>
+            <span class="width105" align="center">{{i18n('售后数量')}}</span>
+            <span class="width105" align="center">{{i18n('售后类型')}}</span>
+            <!--<span class="width100">金额</span>-->
+            <span class="width105" align="center">{{i18n('售后状态')}}</span>
+            <span class="width105" align="center">{{i18n('操作')}}</span>
+        </div>
+    </div>
+    <div class="order-group">
+        <div class="suborder" ng-class="{mgT10: $first}" ng-repeat="suborder in aftersaleList.list">
+            <div class="row order-title">
+                <div class="cell c1">{{suborder.applyTime|date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                <div class="cell c2">{{i18n('售后单号')}}：<span class="colorB">{{suborder.returnCode}}</span></div>
+                <div class="cell c3">
+                </div>
+            </div>
+            <table class="order-list">
+                <tr class='person-tr-color'>
+                    <td width="120" align="center" class="bl bb"><a class="img-block" ><img width="80" height="80" ng-src="{{suborder.productPicPath || '../../../images/defaultImg.png'}}" alt=""></a></td>
+                    <td width="598" class="bb">
+                        <a class="name" ><span class="colorB">{{suborder.productCname}}</span></a>
+                        <ul class="seriesAttr">
+                            <li ng-repeat="tag in suborder.attributes">{{tag.name}}：{{tag.value}}</li>
+                        </ul>
+                    </td>
+                    <td width="120" align="center" class="bb">
+                        <span align="center">x{{suborder.returnProductItemNum}}</span>
+                    </td>
+                    <td width="0" valign="top" align="center" class="bb br" rowspan="1">
+                    </td>
+                    <td width="126" valign="top" align="center" class="bb br people-icon" rowspan="1">
+                        <div>{{suborder.typeStr}}</div>
+                    </td>
+                    <td valign="top" width='120' align="center" class="bb br" rowspan="1">
+                        <div class="state-none">
+                            <div>
+                                <span ng-class="{'change-color': suborder.returnStatus == baseConfig.returnStatus.verify||suborder.returnStatus == baseConfig.returnStatus.inspect||suborder.returnStatus == baseConfig.returnStatus.notApproved||suborder.returnStatus == baseConfig.returnStatus.closed,'theme':suborder.returnStatus == baseConfig.returnStatus.noPassed,'c013ca6':}" ng-if="suborder.returnStatusStr">{{i18n(suborder.returnStatusStr)}}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td valign='top' width='120' align='center' class='bb br pay-money' rowspan="1">
+                        <a target="_blank" ui-sref="index_afterSaleDetail({afterSaleDetail:1,id:suborder.id})" class='soon-buy'>{{i18n('查看详情')}}</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="not-prod" ng-if="aftersaleList.isShowIcon"><i class="mgR15"></i>{{i18n('没有售后的商品哦')}}~</div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                total-page="totalPage" ng-if="aftersaleList.isShowPage"></div>
+</div>
+<!-- 写死的代码 end -->

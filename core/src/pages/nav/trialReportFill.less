@@ -1,0 +1,211 @@
+@import url('../../common/css/i-var_${skin}.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-directives.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-carousel.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-header-nav.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-substep.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-global-nav.less');
+@import url("../../common/css/i-directives.less");
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-feedback.less');
+@import url('../../common/css/reset.less');
+
+.navigation-nav{
+    height: 50px;
+    line-height: 50px;
+}
+.trial-report{
+    width: 980px;
+    margin: 10px auto 100px auto;
+    dl{
+        margin-bottom: 20px;
+        overflow: hidden;
+        background-color: @backgroundColor;
+        dt{
+            width: 130px;
+            height: 130px;
+            display: block;
+            float: left;
+            margin-right: 20px;
+            img{
+                width: 130px;
+                height: 130px;
+            }
+        }
+        dd{
+            width: 830px;
+            float: left;
+            h4{
+                overflow: hidden;
+                margin: 10px 0 10px 0;
+                color: @33GreyColor;
+                font-size: 16px;
+            }
+            h5{
+                font-size: 14px;
+                font-weight: normal;
+                margin: 20px 0 10px 0;
+                span{
+                    display: inline-block;
+                    font-size: 16px;
+                    color: @33GreyColor;
+                    font-weight: bold;
+                }
+                em{
+                    display: inline-block;
+                    width: 86px;
+                    height: 26px;
+                    line-height: 26px;
+                    text-align: center;
+                    border: 1px solid @f2RedColor;
+                    color: @f2RedColor;
+                    border-radius: 30px;
+                    font-style: normal;
+                    margin-left: 10px;
+                }
+            }
+            .trial-infor{
+                margin-top: 18px;
+                overflow: hidden;
+                ul{
+                    li{
+                        border-right: 1px solid @ddGreyColor;
+                        float: left;
+                        padding-right: 20px;
+                        margin: 0 20px 10px 0;
+                        &:nth-child(2n){
+                            border-right: none;
+                        }
+                        em{
+                            display: inline-block;
+                            font-style: normal;
+                        }
+                        span{
+                            display: inline-block;
+                            cite{
+                                display: inline-block;
+                                color:@themeTrialColor;
+                                font-style: normal;
+                                margin-right: 10px;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .trial-gained{
+        overflow: hidden;
+        h4{
+            margin: 0;
+        }
+        h5{
+            font-weight: normal;
+            position: relative;
+            margin: 5px 0 10px 0;
+            font-size: 14px;
+            color: @fontColor;
+            textarea{
+                padding: 10px;
+                background-color: @backgroundColor;
+                height: 120px;
+                border: 0;
+                width: 960px;
+            }
+            span{
+                width: 200px;
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                display: block;
+                text-align: right;
+            }
+        }
+        .trial-gained-img{
+            margin-bottom: 60px;
+            ul{
+                display: -webkit-box;
+            }
+        }
+        h6{
+            text-align: center;
+            button{
+                width: 200px;
+                height: 60px;
+                line-height: 60px;
+                font-size: 20px;
+                border: 1px solid @themeTrialColor;
+                background-color: @themeTrialColor;
+                color: @whiteColor;
+                font-weight: normal;
+                margin-right: 10px;
+            }
+            .keptBtn{
+                border: 1px solid @bodyBgColor;
+                color: @fontColor;
+                background-color: @whiteColor;
+            }
+        }
+    }
+}
+.trial-pop{
+    width: 282px;
+    overflow: hidden;
+    position: fixed;
+    left: 50%;
+    margin-left: -141px;
+    background-color: @whiteColor;
+    border: 5px solid rgba(148, 148, 148, 0.5);
+    background-clip: padding-box;
+    border-radius: 5px;
+    z-index: 9;
+    h4{
+        background-color: @backgroundColor;
+        height: 36px;
+        line-height: 36px;
+        padding: 0 10px;
+        margin: 0;
+        overflow: hidden;
+        font-weight: normal;
+        span{
+            display: block;
+            float: right;
+            color: @99GreyColor;
+            margin: 6px 0 0 0;
+            width: 24px;
+            height: 24px;
+            line-height: 21px;
+            font-size: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+    }
+    .trial-box{
+        padding: 10px;
+        width: 262px;
+        h5{
+            text-align: center;
+            color: @33GreyColor;
+            font-size: 20px;
+            overflow: hidden;
+            margin: 30px 0 35px 0;
+            i{
+                width: 52px;
+                height: 52px;
+                margin-right: 10px;
+                display: inline-block;
+                //background: url('../../images/company/company-icon.png') no-repeat -447px -126px;
+                .common-product-company-icon(-447px, -126px);
+            }
+        }
+    }
+}

@@ -1,0 +1,94 @@
+<div id="coupon" class="award-page">
+    <div class="home-allTitle pdL20">
+        <span>{{i18n('优惠券')}}</span>
+    </div>
+    <div class="award-nav pdL20">
+        <span ng-click="init(1)" ng-class="{'goods-active':activeNum==1}" class="text hand">{{i18n('可使用')}}</span>
+        <span class="line"></span>
+        <span class="text hand" ng-click="init(2)" ng-class="{'goods-active':activeNum==2}">{{i18n('已使用')}}</span>
+        <span class="line"></span>
+        <span class="text hand" ng-click="init(3)" ng-class="{'goods-active':activeNum==3}">{{i18n('已过期')}}</span>
+    </div>
+    <!--可使用-->
+    <div class="coupon-bigBox">
+
+        <div class="coupon-box" ng-repeat="num in numList" ng-style="{'margin-right':num==3?0: '12px'}">
+            <!-- 'single-discount-coupon-box': couponL.couponDiscountType==1&&activeNum==1, 折扣券颜色 -->
+            <div ng-repeat="couponL in couponList | breakListFormate : 4 : num" class="single-coupon-box" ng-class="{'single-gery-coupon-box':activeNum!=1}" ng-mouseleave="couponL.isShowDesc=false" >
+                <div class="first-top-img">
+                    <img src="../../../images/top-coupon-gray.png" alt="" ng-if="activeNum==2 || activeNum==3">
+                    <img src="../../../images/top-coupon-light.png" alt="" ng-if="activeNum==1">
+                </div>
+                <!-- 2: 已使用， 3： 已过期 -->
+                <div class="coupon-title" style="position: relative; padding-bottom: 30px">
+                    <div class="top-box-text">
+                        <span class="text-icon" ng-if="couponL.couponDiscountType!=1">￥</span>
+                        <span class="text" ng-if="couponL.couponDiscountType!=1">{{couponL.couponValue}}</span>
+                        <span class="text" ng-if="couponL.couponDiscountType==1">{{couponL.couponValue|discountFormat:1}}<span class="f14">{{i18n('折')}}</span></span>
+                        <!-- couponDeductionType==1: 运费券,couponDiscountType==1：折扣券;  折扣卷属于优惠券 -->
+                        <span class="text-type coupon-text-type" ng-if="couponL.couponDeductionType!=1" style="color:#fff">{{i18n('优惠券')}}</span>
+                        <span class="text-type coupon-text-type" ng-if="couponL.couponDeductionType==1" style="color:#fff">{{i18n('运费券')}}</span>
+                        <!-- <span class="text-type" ng-if="couponL.couponDiscountType==1">{{i18n('折扣券')}}</span> -->
+                    </div>
+                    <div class="money-rule">
+                        <span class="f14">{{couponL.moneyRule}}</span>
+                    </div>
+                    
+                </div>
+                <div class="second-bot-img">
+                    <img src="../../../images/bot-coupon-gray.png" alt="" ng-if="activeNum==2 || activeNum==3">
+                    <img src="../../../images/bot-coupon-light.png" alt="" ng-if="activeNum==1">
+                </div>
+                <div class="bottom-box">
+                    <div class="top-bottom pt10" style="padding-left: 20px">
+                        <span ng-if="activeNum!=2 && activeNum!=3 && couponL.isStarted===1">{{i18n('有效期')}} : {{couponL.endTime | date : 'yyyy-MM-dd HH:mm'}}</span>
+                        <span ng-if="activeNum!=2 && activeNum!=3 && couponL.isStarted===0">{{couponL.startTime | date: 'yyyy-MM-dd'}} {{i18n('至')}} {{couponL.endTime | date: 'yyyy-MM-dd'}}</span>
+                        <span ng-if="activeNum==2 || activeNum==3">{{couponL.startTime | date: 'yyyy-MM-dd'}} {{i18n('至')}} {{couponL.endTime | date: 'yyyy-MM-dd'}}</span>
+                        <span class="future-expired" ng-if="activeNum!=2 && activeNum!=3 && couponL.overDate == 1">{{i18n('即将过期')}}</span>
+                    </div>
+                    <div class="bottom-title">
+                        {{couponL.themeTitle}}
+                    </div>
+                    <div class="bottom-desc">
+                        <span>
+                            {{couponL.themeDesc | textLengthFormat: 222}}
+                            <!-- hover上去显示所有数据的功能先隐藏 -->
+                            <!-- <span class="cursorPointer" ng-mouseenter="couponL.isShowDesc=true" ng-class="{'text-up':couponL.isShowDesc,'text-img':!couponL.isShowDesc}"></span> -->
+                        </span>
+                    </div>
+                    <div class="share-text-box" ng-show="couponL.isShowDesc" ng-mouseleave="couponL.isShowDesc=false">
+                        <label class="themeDesc">{{couponL.themeDesc}}</label>
+                    </div>
+                    <!-- <div class="icon-box" ng-if="activeNum==2 || activeNum==3">
+                        <span class="img-icon" style="right: 80px">
+                            <span class="box-content" ng-if="activeNum==2">{{i18n('已使用')}}</span>
+                            <span class="box-content" ng-if="activeNum==3">{{i18n('已过期')}}</span>
+                        </span>
+                    </div> -->
+                    <div ng-if="activeNum==2 || activeNum==3" class="text-center">
+                        <img src="../../../images/has-used-coupon.png" alt="" ng-if="activeNum==2">
+                        <img src="../../../images/past-due-coupon.png" alt="" ng-if="activeNum==3">
+                    </div>
+                    <!-- <div class="button-box" ng-if="activeNum==1">
+                        <span class="give">{{i18n('赠送')}}</span>
+                        <span class="use">{{i18n('立即使用')}}</span>
+                    </div> -->
+                </div>
+                <div class="third-img"></div>
+            </div>
+        </div>
+        <div class="award-none" ng-if="isShowIcon">
+            <div class="award-left mgR15">
+                <span></span>
+            </div>
+            <div class="award-right">
+                <span>{{i18n('暂无优惠券')}}~</span>
+            </div>
+        </div>
+    </div>
+    <!-- 有优惠券的时候 end -->
+    <!-- 分页 begin -->
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                total-page="totalPage" ng-if="isShowPage"></div>
+    <!-- 分页 end -->
+</div>

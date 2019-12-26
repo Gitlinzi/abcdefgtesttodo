@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>产品化样式</title>
+</head>
+<style>
+    body,html{
+        font-size: 14px;
+    }
+    ul,li,ol,dl,dd,dt{
+        margin: 0px;
+        padding:0px;
+        list-style: none;
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="/commonStyle.css?v=${version}">
+<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+<body ng-app="appControllers">
+
+<!-- 使用下面的html时 需要把style删除 -->
+
+<!-- i-paging.less 文件为分页组件的css样式 -->
+
+<!-- i-shopProcess.less 为结算页头部进度条的css样式 -->
+
+<!-- i-orderProcess.less 为订单详情页进度条的css样式 订单详情页进度条的html已经封装好 名称为：orderProcess.html 需include引用使用-->
+
+<!-- i-lack-img.less 为缺省图的css样式 -->
+
+<!-- i-popbox.less 为所有弹框的css样式 -->
+
+<!--  分页组件 begin -->
+<div pagination page-size="10" page-no="1" total-count="100" total-page="10"></div>
+<!-- 分页组件 end -->
+<!-- 结算页头部进度第一种显示 begin  position:static 方便在页面显示 用时可删除 -->
+<div class="buyStepNumBox" style="position: static">
+    <ul>
+        <li class="current">
+            <span class="num">1</span>
+            <span class="line_bg lbg-l"></span>
+            <span class="line_bg lbg-r"></span>
+            <h4 class="lbg-txt">当前指示信息</h4>
+        </li>
+        <li class="active">
+            <span class="num">2</span>
+            <span class="line_bg lbg-l"></span>
+            <span class="line_bg lbg-r"></span>
+            <h4 class="lbg-txt">当前指示信息</h4>
+        </li>
+        <li>
+            <span class="num">3</span>
+            <span class="line_bg lbg-l"></span>
+            <span class="line_bg lbg-r"></span>
+            <h4 class="lbg-txt">当前指示信息</h4>
+        </li>
+    </ul>
+</div>
+<!-- 结算页头部进度第一种显示 end -->
+<!-- 结算页头部进度第二种显示 begin  position:static 方便在页面显示 用时可删除 -->
+<div class="buyStepNumBox" style="position: static">
+    <ul>
+        <li class="active">
+            <span class="num">1</span>
+            <span class="line_bg lbg-l"></span>
+            <span class="line_bg lbg-r"></span>
+            <h4 class="lbg-txt">当前指示信息</h4>
+        </li>
+        <li>
+            <span class="num">2</span>
+            <span class="line_bg lbg-l"></span>
+            <span class="line_bg lbg-r"></span>
+            <h4 class="lbg-txt">当前指示信息</h4>
+        </li>
+        <li>
+            <span class="num">3</span>
+            <span class="line_bg lbg-l"></span>
+            <span class="line_bg lbg-r"></span>
+            <h4 class="lbg-txt">当前指示信息</h4>
+        </li>
+    </ul>
+</div>
+<!-- 结算页头部进度第二种显示 end -->
+<!-- 结算页头部进度第三种显示 begin  position:static 方便在页面显示 用时可删除 -->
+<div class="buyStepNumBox" style="position: static">
+    <ul>
+        <li class="current">
+            <span class="num">1</span>
+            <span class="line_bg lbg-l"></span>
+            <span class="line_bg lbg-r"></span>
+            <h4 class="lbg-txt">当前指示信息</h4>
+        </li>
+        <li class="current">
+            <span class="num">2</span>
+            <span class="line_bg lbg-l"></span>
+            <span class="line_bg lbg-r"></span>
+            <h4 class="lbg-txt">当前指示信息</h4>
+        </li>
+        <li>
+            <span class="num">3</span>
+            <span class="line_bg lbg-l"></span>
+            <span class="line_bg lbg-r"></span>
+            <h4 class="lbg-txt">当前指示信息</h4>
+        </li>
+    </ul>
+</div>
+<!-- 结算页头部进度第三种显示 end -->
+
+<!-- 取消订单弹框 begin -->
+<!-- 弹出框最外层加 class  dialogForm -->
+<div class="">
+    <div class="cancel-bomb" style="position: static;transform: none;float:left;">
+        <div class="cancel-title clearfix">
+            <span class="title-text">提示</span>
+            <span class="close-img"></span>
+        </div>
+        <div class="cancel-main">
+            <div class="main-title">
+                <span class="icon-text">订单取消申请?</span>
+            </div>
+            <div class="main-select">
+                <span>取消原因</span>
+                <select type="text" class="aftersalse-input"></select>
+            </div>
+            <div class="main-botton">
+                <a class="button-sure" href="">确定</a>
+                <a class="button-cancel" href="">暂不取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 取消订单弹框 end -->
+<!-- 取消售后申请弹框 begin -->
+<!-- 弹出框最外层加 class  dialogForm -->
+<div class="">
+    <div class="cancel-bomb" style="position: static;transform: none;float:left;">
+        <div class="cancel-title clearfix">
+            <span class="title-text">提示</span>
+            <span class="close-img"></span>
+        </div>
+        <div class="cancel-main">
+            <div class="main-title">
+                <span class="icon-text">确定取消售后申请?</span>
+            </div>
+            <div class="main-botton">
+                <a class="button-sure" href="">确定</a>
+                <a class="button-cancel" href="">暂不取消</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 取消售后申请弹框 end -->
+<!-- 物流弹框中物流追踪 begin -->
+<!-- 弹出框最外层加 class  dialogForm -->
+<div class="">
+    <div class="logistics-bomb" style="position: static;transform: none;float:left;">
+        <div class="cancel-title clearfix">
+            <span class="title-text">物流跟踪</span>
+            <span class="close-img"></span>
+        </div>
+        <div class="logistics-title" >
+            <a class="a-active" href="">包裹1</a>
+        </div>
+        <div class="logistics-main">
+            <div class="logistics-state">
+                <p><span>配送商</span>配送商名称</p>
+                <p><span>运单编号：</span>214648299726</p>
+            </div>
+            <div class="logistics-detail" >
+                <ul >
+                    <li class="active">物流跟踪</li>
+                    <li class="line-li"></li>
+                    <li>包裹信息</li>
+                </ul>
+                <div  class="logistics-detail-box">
+                    <div class="mes-big-box">
+                        <div class="mes-one">
+                            <span class="first-span">已签收 签收人：画虎林</span>
+                            <span class="colorA">订单配送成功欢迎您的再次光临！</span>
+                            <span class="colorA">2015-09-06 12:10:10</span>
+                        </div>
+                        <div class="mes-one">
+                            <span class="two-span">已签收 签收人：画虎林</span>
+                            <span class="colorA">订单配送成功欢迎您的再次光临！</span>
+                            <span class="colorA">2015-09-06 12:10:10</span>
+                        </div>
+                        <div class="mes-one">
+                            <span class="two-span">已签收 签收人：画虎林</span>
+                            <span class="colorA">订单配送成功欢迎您的再次光临！</span>
+                            <span class="colorA">2015-09-06 12:10:10</span>
+                        </div>
+                        <div class="mes-one">
+                            <span class="two-span">已签收 签收人：画虎林</span>
+                            <span class="colorA">订单配送成功欢迎您的再次光临！</span>
+                            <span class="colorA">2015-09-06 12:10:10</span>
+                        </div>
+                        <div class="mes-one">
+                            <span class="two-span">已签收 签收人：画虎林</span>
+                            <span class="colorA">订单配送成功欢迎您的再次光临！</span>
+                            <span class="colorA">2015-09-06 12:10:10</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 物流弹框中包裹信息 end -->
+
+<!-- 物流弹框中物流追踪 begin -->
+<!-- 弹出框最外层加 class  dialogForm -->
+<div class="">
+    <div class="logistics-bomb" style="position: static;transform: none;float:left;">
+        <div class="cancel-title clearfix">
+            <span class="title-text">物流跟踪</span>
+            <span class="close-img"></span>
+        </div>
+        <div class="logistics-title" >
+            <a class="a-active" href="">包裹1</a>
+        </div>
+        <div class="logistics-main">
+            <div class="logistics-state">
+                <p><span>配送商</span>配送商名称</p>
+                <p><span>运单编号：</span>214648299726</p>
+            </div>
+            <div class="logistics-detail" >
+                <ul >
+                    <li>物流跟踪</li>
+                    <li class="line-li"></li>
+                    <li class="active">包裹信息</li>
+                </ul>
+                <div  class="logistics-detail-box">
+                    <div class="mes-big-box">
+                        <ol>
+                            <dl>
+                                <dt><img width="80" height="80" src="../images/temporary/after.png" alt=""></dt>
+                                <dd>
+                                    <h4>123123</h4>
+                                    <p>
+                                        <span>444:555</span>
+                                        <em>x100</em>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><img width="80" height="80" src="../images/temporary/after.png" alt=""></dt>
+                                <dd>
+                                    <h4>123123</h4>
+                                    <p>
+                                        <span>444:555</span>
+                                        <em>x100</em>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><img width="80" height="80" src="../images/temporary/after.png" alt=""></dt>
+                                <dd>
+                                    <h4>123123</h4>
+                                    <p>
+                                        <span>444:555</span>
+                                        <em>x100</em>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><img width="80" height="80" src="../images/temporary/after.png" alt=""></dt>
+                                <dd>
+                                    <h4>123123</h4>
+                                    <p>
+                                        <span>444:555</span>
+                                        <em>x100</em>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><img width="80" height="80" src="../images/temporary/after.png" alt=""></dt>
+                                <dd>
+                                    <h4>123123</h4>
+                                    <p>
+                                        <span>444:555</span>
+                                        <em>x100</em>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><img width="80" height="80" src="../images/temporary/after.png" alt=""></dt>
+                                <dd>
+                                    <h4>123123</h4>
+                                    <p>
+                                        <span>444:555</span>
+                                        <em>x100</em>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><img width="80" height="80" src="../images/temporary/after.png" alt=""></dt>
+                                <dd>
+                                    <h4>123123</h4>
+                                    <p>
+                                        <span>444:555</span>
+                                        <em>x100</em>
+                                    </p>
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><img width="80" height="80" src="../images/temporary/after.png" alt=""></dt>
+                                <dd>
+                                    <h4>123123</h4>
+                                    <p>
+                                        <span>444:555</span>
+                                        <em>x100</em>
+                                    </p>
+                                </dd>
+                            </dl>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 物流弹框中包裹信息 end -->
+
+<!-- 活动说明 begin -->
+<div class="bottom-text-position" style="position: static;float: left">
+    <i class="close-bottom-position"></i>
+    <span>说明：1232132132132131231232131555551312321</span>
+</div>
+<!-- 活动说明 end -->
+
+<!-- 预售活动说明 begin -->
+<div class="stepState-presell" style="position: static;float: left;margin: 0 60px">
+    <ul class="clearfix">
+        <li class="current">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>5.21&nbsp;12:23前</h4>
+            <p class="first-p">支付定金</p>
+            <p class="second-p">￥1.00抵扣￥10.00</p>
+        </li>
+        <li class="current">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>5.30&nbsp;12:23前</h4>
+            <p class="first-p">支付尾款</p>
+            <p class="second-p">￥90.00</p>
+        </li>
+        <li class="current">
+            <i></i>
+            <h4>6.10&nbsp;10:00</h4>
+            <p class="first-p">立即发货</p>
+        </li>
+    </ul>
+    <span class="presell-title">说明：按时打算打算打算大按时大大大啊实打实大声道啊实打实大啊实打实大啊实打实大啊实打实</span>
+</div>
+<!-- 预售活动说明 end -->
+
+<!-- 查看赠品 begin -->
+<!-- 弹出框最外层加 class  dialogForm -->
+<div class="">
+    <div class="see-gift" style="left: 0;margin-left: 0;top: 0">
+        <div class="bomBox-title gift-bomBox-title clearfix">
+            <div class="bomBox-left">
+                <span>查看赠品</span>
+            </div>
+            <div class="bomBox-right">
+                <span class="close-img"></span>
+            </div>
+        </div>
+        <div class="gift-bottom">
+            <span class="gift-arrow" ng-class="{'gift-arrow-left':noArrowLeft,giftArrowLeft:yesArrowLeft}"></span>
+            <span  class="gift-arrow" ng-class="{'gift-arrow-right':noArrowRight,giftArrowRight:yesArrowRight}"></span>
+            <div class="gift-top">
+                <span class="full-gift">满赠</span>
+                <span class="change-text">满100.00元即赠热销商品</span>
+            </div>
+            <div class="gift-good-box">
+                <ul class="clearfix gift-box">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span  class="gift-mask">已赠完</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" src="../images/temporary/after.png" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x2</span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 查看赠品 end -->
+
+<!-- 删除失败弹框 begin -->
+<!-- 弹出框最外层加 class  dialogForm -->
+<div class="">
+    <div class="logistics-bomb" style="position: static;transform: none;float:left;">
+        <div class="logistics-bomb-box">
+            <span class="icon-error"></span>
+            <span class="icon-error-text">删除失败</span>
+        </div>
+    </div>
+</div>
+<!-- 删除失败弹框 end -->
+
+<!-- 删除成功弹框 begin -->
+<!-- 弹出框最外层加 class  dialogForm -->
+<div class="">
+    <div class="logistics-bomb" style="position: static;transform: none;float:left;">
+        <div class="logistics-bomb-box">
+            <span class="icon-success"></span>
+            <span class="icon-error-text">删除成功</span>
+        </div>
+    </div>
+</div>
+<!-- 删除成功弹框 end -->
+
+<!-- 付款确认的弹框 begin -->
+<div class="order-sure" style="top: 200px;left: 80%;display: block">
+    <div class="title-box clearfix">
+        <span class="tittle-text">付款确认</span>
+        <span class="close-img"></span>
+    </div>
+    <div class="title-bottom">
+        <div class="bottom-left">
+            <a href="" class="text16 success-pay">已完成支付</a>
+            <a href="" class="text12">查看订单详情</a>
+        </div>
+        <div class="bottom-right">
+            <a href="" class="text16">支付遇到问题</a>
+            <a href="" class="text12 main-text">修改支付方式</a>
+            <a href="" class="text12">查看支付帮助</a>
+        </div>
+    </div>
+</div>
+<!-- 付款确认的弹框 end -->
+
+
+<!-- 项目的缺省图 信息正在核实中 begin -->
+<div  class="joinProcessStep-box" style="float: left">
+    <div class="step-main-box f0">
+        <div class="main-left dis">
+            <span class="left-icon none-icon"></span>
+        </div>
+        <div class="main-right dis">
+            <span class="right-text-top">信息正在核实中</span>
+            <span class="right-text-bottom">审核通过即可立即使用，请您耐心等待，感谢~</span>
+        </div>
+    </div>
+</div>
+<!-- 项目的缺省图 end -->
+
+<!-- 项目缺省图 信息审核不通过 begin -->
+<div  class="joinProcessStep-box" style="float: left">
+    <div class="step-main-box f0">
+        <div class="main-left dis">
+            <span class="none-left-icon none-icon"></span>
+        </div>
+        <div class="main-right dis">
+            <span class="right-text-top">信息审核不通过</span>
+            <span class="right-text-bottom">请修改后重新提交</span>
+        </div>
+    </div>
+</div>
+<!-- 项目缺省图 信息审核不通过 end -->
+
+<!-- 项目缺省图 您还没有优惠券 begin -->
+<div  class="joinProcessStep-box" style="float: left">
+    <div class="step-main-box f0">
+        <div class="main-left dis">
+            <span class="none-coupon none-icon"></span>
+        </div>
+        <div class="main-right dis">
+            <span class="right-text-top right-text-bottomNone">您还没有优惠券</span>
+        </div>
+    </div>
+</div>
+<!-- 项目缺省图 您还没有优惠券 end -->
+
+<!-- 项目缺省图 您还没有订单 begin -->
+<div  class="joinProcessStep-box" style="float: left">
+    <div class="step-main-box f0">
+        <div class="main-left dis">
+            <span class="none-coupon none-icon"></span>
+        </div>
+        <div class="main-right dis">
+            <span class="right-text-top">您还没有订单</span>
+            <span class="right-text-bottom">这里都空空的，快去挑选合适的商品吧！</span>
+        </div>
+    </div>
+</div>
+<!-- 项目缺省图 您还没有订单 end -->
+
+<!-- 项目缺省图 您还没有订单 begin -->
+<div  class="joinProcessStep-box" style="float: left">
+    <div class="step-main-box f0">
+        <div class="main-left dis">
+            <span class="none-service none-icon"></span>
+        </div>
+        <div class="main-right dis">
+            <span class="right-text-top right-text-bottomNone">您还没有售后订单</span>
+        </div>
+    </div>
+</div>
+<!-- 项目缺省图 您还没有订单 end -->
+
+<!-- 项目缺省图 空的购物车 begin -->
+<div  class="joinProcessStep-box" style="float: left">
+    <div class="step-main-box f0">
+        <div class="main-left dis">
+            <span class="none-404 none-icon"></span>
+        </div>
+        <div class="main-right dis">
+
+            <span class="right-text-top">您访问的页面正在检修！</span>
+            <span class="right-text-bottom">
+                <a href="" class="goBack-a">返回上一级</a>
+                <a href="">返回首页</a>
+            </span>
+        </div>
+    </div>
+</div>
+<!-- 项目缺省图 空的购物车 end -->
+
+<!-- 项目缺省图 404 begin -->
+<div  class="joinProcessStep-box" style="float: left">
+    <div class="step-main-box f0">
+        <div class="main-left dis">
+            <span class="none-cart none-icon"></span>
+        </div>
+        <div class="main-right dis">
+            <span class="right-text-top right-text-bottomNone">购物车还是空的呢，快去采购吧~</span>
+        </div>
+    </div>
+</div>
+<!-- 项目缺省图 404 end -->
+
+<!-- 项目缺省图 消息 begin -->
+<div  class="joinProcessStep-box" style="float: left">
+    <div class="step-main-box f0">
+        <div class="main-left dis">
+            <span class="none-message none-icon"></span>
+        </div>
+        <div class="main-right dis">
+            <span class="right-text-top right-text-bottomNone">暂无消息~</span>
+        </div>
+    </div>
+</div>
+<!-- 项目缺省图 消息 end -->
+
+<!-- 订单详情页 订单显示进度第一种 begin -->
+<div class="stepState" style="position: static;float: left">
+    <ul>
+        <li class="active-no-active-i">
+            <i></i>
+            <span>等待付款<label></label></span>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>提交订单</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+        <li>
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>付款成功</h4>
+        </li>
+        <li>
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>商品出库</h4>
+        </li>
+        <li>
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>等待收货</h4>
+        </li>
+        <li>
+            <i></i>
+            <h4>完成</h4>
+        </li>
+    </ul>
+</div>
+<!-- 订单详情页 订单显示进度第一种 end -->
+
+<!-- 订单详情页 订单显示进度第二种 begin -->
+<div class="stepState" style="position: static;float: left">
+    <ul>
+        <li class="current">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>提交订单</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+        <li class="active">
+            <i></i>
+            <span>等待发货<label></label></span>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>付款成功</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+        <li>
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>商品出库</h4>
+        </li>
+        <li>
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>等待收货</h4>
+        </li>
+        <li>
+            <i></i>
+            <h4>完成</h4>
+        </li>
+    </ul>
+</div>
+<!-- 订单详情页 订单显示进度第二种 end -->
+
+<!-- 订单详情页 订单显示进度第三种 begin -->
+<div class="stepState" style="position: static;float: left">
+    <ul>
+        <li class="current">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>提交订单</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+        <li class="current">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>付款成功</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+        <li class="current">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>商品出库</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+        <li class="active">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>等待收货</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+        <li>
+            <i></i>
+            <h4>完成</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+    </ul>
+</div>
+<!-- 订单详情页 订单显示进度第三种 end -->
+
+<!-- 订单详情页 订单显示进度第四种 begin -->
+<div class="stepState" style="position: static;float: left">
+    <ul>
+        <li class="current">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>提交订单</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+        <li class="current">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>付款成功</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+        <li class="current">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>商品出库</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+        <li class="current">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>等待收货</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+        <li class="active">
+            <i></i>
+            <h4>完成</h4>
+            <p>1994-12-21 07:35:00</p>
+        </li>
+    </ul>
+</div>
+<!-- 订单详情页 订单显示进度第四种 end -->
+
+@@include("script.html")
+</body>
+</html>

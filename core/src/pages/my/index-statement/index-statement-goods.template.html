@@ -1,0 +1,91 @@
+<div class="statement-goods pricentCard-page">
+    <div class="home-allTitle pdL20">{{i18n('根据商品统计')}}</div>
+    <div class="tips theme">*{{i18n('以下统计数据为已出库订单')}}</div>
+    <div class="condition clearfix">
+        <!-- <div class="time fl">
+            <span>{{i18n('创建时间：')}}</span>
+            <input type="date">
+            <span>{{i18n('至')}}</span>
+            <input type="date">
+        </div> -->
+        <div class="datetimepicker fl">
+            <span class="date-title f14">{{i18n('创建时间')}}：</span>
+            <div class="dis datetimepicker-content">
+                <div class="input-group">
+                    <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalFrom" options="options1" close="close(from)" max-date="statement.endTime"
+                            ng-model="statement.startTime" ng-click="chooseStartTime()">
+                    <span class="input-group-addon">至</span>
+                    <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalTo" options="options2" close="close(to)" min-date="statement.startTime"
+                            ng-model="statement.endTime" ng-click="chooseStartTime()">
+                </div>
+            </div>
+        </div>
+        <div class="category fl clearfix">
+            <span class="fl mgL5" style="margin-top: 2px">{{i18n('商品分类：')}}</span>
+            <!-- <select name="level1" id="">
+                <option value="1">1</option>
+            </select>
+            <select name="level2" id=""></select>
+            <select name="level3" id=""></select> -->
+            <div class="level1 level fl mgL5">
+                <input type="text" readonly placeholder="--请选择--" ng-click="showfirstCategory()" ng-model="firstCategoryVal" class="ui-nowrap" ng-blur="closeCategory()">
+                <i class="icon-more-down icon-person down-person"></i>
+                <ul ng-show="isShowfirstCategory && !firstCategory.length">
+                    <li ng-click="isShowfirstCategory = false">暂无分类~</li>
+                </ul>
+                <ul ng-show="isShowfirstCategory && firstCategory.length">
+                    <li ng-repeat="item in firstCategory track by $index" class="ui-nowrap" ng-click="getSecondCategory(item)">{{item.name}}</li>
+                </ul>
+            </div>
+            <div class="level2 level fl mgL5">
+                <input type="text" readonly placeholder="--请选择--" ng-click="showSecondCategory()" ng-model="secondCategoryVal" class="ui-nowrap" ng-blur="closeCategory()">
+                <i class="icon-more-down icon-person down-person"></i>
+                <!-- <ul>
+                    <li>一级分类</li>  
+                </ul>   -->
+                <ul ng-show="isShowsecondCategory && !secondCategory.length">
+                    <li ng-click="isShowsecondCategory = false">暂无分类~</li>
+                </ul>
+                <ul ng-show="isShowsecondCategory && secondCategory.length">
+                    <li ng-repeat="item in secondCategory track by $index" class="ui-nowrap" ng-click="getThidCategory(item)">{{item.name}}</li>
+                </ul>
+            </div>
+            <div class="level3 level fl mgL5">
+                <input type="text" readonly placeholder="--请选择--" class="ui-nowrap" ng-click="showThirdCategory()" ng-model="thirdCategoryVal" ng-blur="closeCategory()">
+                <i class="icon-more-down icon-person down-person"></i>
+                <ul ng-show="isShowthirdCategory && !thirdCategory.length">
+                    <li ng-click="isShowthirdCategory = false">暂无分类~</li>
+                </ul>
+                <ul ng-show="isShowthirdCategory && thirdCategory.length">
+                    <li ng-repeat="item in thirdCategory track by $index" class="ui-nowrap" ng-click="getfouthCategory(item)">{{item.name}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="contion-btn fr" ng-click="queryStatementGoods()">{{i18n('查询')}}</div>
+    </div>
+    <div class="contaion-result clearfix">
+        <div class="title clearfix">
+            <div class="pic fl">{{i18n('图片')}}</div>
+            <div class="code fl">{{i18n('商品编号')}}</div>
+            <div class="name fl">{{i18n('商品名称')}}</div>
+            <div class="danw fl">{{i18n('单位')}}</div>、
+            <div class="num fl">{{i18n('数量')}}</div>
+            <div class="rec-price fl">{{i18n('金额')}}</div>
+        </div>
+        <ul class="condition-content" ng-if="StatementGoodsList && StatementGoodsList.length">
+            <li ng-repeat="item in StatementGoodsList track by $index">
+                <div class="pic fl">
+                    <img ng-src="{{item.pictureUrl}}" alt="">
+                </div>
+                <div class="code fl">{{item.code}}</div>
+                <div class="name fl ui-nowrap">{{item.chineseName}}</div>
+                <div class="danw fl">{{item.measurementUnit}}</div>
+                <div class="num fl">{{item.num}}</div>
+                <div class="rec-price fl">{{item.productPrice}}</div>
+            </li>
+        </ul>
+        <div style="text-align: center;margin-top: 30px" ng-show="isNocategoryList">{{i18n('无相关搜索结果')}}</div>
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                total-page="totalPage" ng-if="isShowPage"></div>
+</div>

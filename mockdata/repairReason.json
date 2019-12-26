@@ -1,0 +1,27 @@
+{
+  "data": {
+    "returnReasonVOList": [
+      {
+        "returnReasonId": "1",
+        "returnReason": "质量问题"
+      },
+      {
+        "returnReasonId": "2",
+        "returnReason": "不喜欢"
+      },
+      {
+        "returnReasonId": "3",
+        "returnReason": "选错地址"
+      },
+      {
+        "returnReasonId": "4",
+        "returnReason": "同城交货"
+      },
+      {
+        "returnReasonId": "5",
+        "returnReason": "其他 "
+      }
+    ]
+  },
+  "code": "0"
+}

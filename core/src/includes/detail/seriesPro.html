@@ -1,0 +1,154 @@
+
+<dl class="willchoose" ng-class="{active:willchoose}" ng-repeat="attr in pcIteminfo.sp.attributes" ng-if="!$parent.switchConfig.common.showChoosePackingMethod">
+    <dt class="pat13px">{{attr.name}}</dt>
+    <dd class="width630">
+        <input type="button" class="sku sceneIpt" ng-repeat="v in attr.values" attr_id="{{v.id}}" ng-click="pcIteminfo.sp.selectSerialAttr(v,attr.values,attr,pcIteminfo.sp.attributes,$event)" value="{{v.value}}">
+    </dd>
+</dl>
+<div class="choose-packing-method" ng-class="{active:willchoose}" ng-if="$parent.switchConfig.common.showChoosePackingMethod">
+    <div class="component-table">
+          <!-- flip-scroll  table竖直-->
+        <div class="portlet-body table-responsive" ng-if="pcIteminfo.sp.serialProducts && pcIteminfo.sp.serialProducts.length > 0">
+            <table class="table-bordered table-striped table-condensed flip-content">
+                <thead>
+                    <tr>
+                        <th class="width85 text-left pdL10">
+                            <span class="table-title-word">{{i18n('货号')}}</span>
+                        </th>
+                        <th ng-repeat="attrName in pcIteminfo.sp.attributes">
+                            <span class="table-title-word">{{attrName.name}}</span>
+                        </th>
+                        <th>
+                            <span class="table-title-word">{{i18n('库存')}}</span>
+                        </th>
+                        <th class="width150">
+                            <span class="table-title-word">{{i18n('包装方式')}}</span>
+                        </th>
+                        <th class="width80">
+                            <span class="table-title-word">{{i18n('价格')}}({{i18n('元')}})</span>
+                        </th>
+                        <th class="width150">
+                            <span class="table-title-word">{{i18n('购买数量')}}</span>
+                        </th>
+                        <th>
+                            <span class="table-title-word">{{i18n('总量')}}</span>
+                        </th>
+                        <th class="width105">
+                            <span class="table-title-word">{{i18n('金额')}}({{i18n('元')}})</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="{'bottom-body': pcIteminfo.sp.serialProducts && pcIteminfo.sp.serialProducts.length >= 3}">
+                    <tr ng-repeat="attr in pcIteminfo.sp.serialProducts track by $index" ng-hide="packingMethodFun.hideMoreSerial && $index >= 3">
+                        <td class="width85">
+                            <span class="promotion-icon" ng-if="attr.product.packingPromotions || attr.product.packingPromotions.length > 0" ng-click="showSerialPromotion(attr.product)">{{i18n('促')}}</span>
+                            <span>{{attr.product.code}}</span>
+                        </td>
+                        <td ng-repeat="attrName in pcIteminfo.sp.attributes track by $index">
+                            <span>{{attr.attrNameList[$index]}}</span>
+                        </td>
+                        <td>
+                            <span>{{attr.product.stockText}}</span>
+                        </td>
+                        <td class="width150">
+                            <ul class="spec_text clearfix">
+                                <li ng-class="{'selected': attr.product.productPackageId == packingWay.id || !packingWay.id}" ng-repeat="packingWay in attr.product.packingWayList" id="{{packingWay.id}}" ng-click="choosePackingWay(packingWay.id, packingWay.orderMultiple,$parent.$index)"><a href="javascript:;">{{packingWay.orderMultiple}}</a></li>
+                            </ul>
+                        </td>
+                        <td class="width80">
+                            <span ng-if="!$parent.hideProductPrice">{{attr.product.availablePrice|currency:""}}</span>
+                            <span ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showMinTextWhenHidePrice}}</span>
+                        </td>
+                        <td class="width150">
+                            <div class="add-numbox">
+                                <button type="button" ng-class="{'disabled': attr.product.chooseNum<=0 || !attr.product.chooseNum}" ng-disabled="attr.product.chooseNum<=0 || !attr.product.chooseNum" ng-click="decrease($event, $index)"><i class="common-icons common-icons-reduceNum"></i></button>
+                                <input type="text" maxlength="5" ng-model="attr.product.chooseNum" ng-change="changeNum($event, $index, attr.product.chooseNum)">
+                                <button type="button" ng-click="increase($event, $index)" ng-class="{'disabled': attr.product.chooseNum>=packingMethodFun.maxAddCartNum}" ng-disabled="attr.product.chooseNum>=packingMethodFun.maxAddCartNum"><i class="common-icons common-icons-addNum"></i></button>
+                            </div>
+                        </td>
+                        <td>
+                            <span>{{attr.product.chooseNum * attr.product.choosePackingWayNum}}</span>
+                        </td>
+                        <td class="width105">
+                            <span class="" ng-if="!$parent.hideProductPrice">{{attr.product.chooseNum * attr.product.choosePackingWayNum * attr.product.availablePrice|currency:""}}</span>
+                            <span class="" ng-if="$parent.hideProductPrice">0</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="pcIteminfo.sp.serialProducts && pcIteminfo.sp.serialProducts.length >= 3" class="showmore">
+            <span class="box" ng-click="changeSerailProductShow()">
+                <i ng-class="{'icon-top-down': packingMethodFun.hideMoreSerial, 'icon-top-up': !packingMethodFun.hideMoreSerial}"></i>
+            </span>
+        </div>
+        <div class="portlet-body table-responsive" ng-if="!itemlist.typeOfProduct">
+            <table class="table-bordered table-striped table-condensed flip-content">
+                <thead>
+                    <tr>
+                        <th class="width85 text-left pdL10">
+                            <span class="table-title-word">{{i18n('货号')}}</span>
+                        </th>
+                        <th width="100">
+                            <span class="table-title-word">{{i18n('库存')}}</span>
+                        </th>
+                        <th class="width150">
+                            <span class="table-title-word">{{i18n('包装方式')}}</span>
+                        </th>
+                        <th class="width80">
+                            <span class="table-title-word">{{i18n('价格')}}({{i18n('元')}})</span>
+                        </th>
+                        <th class="width150">
+                            <span class="table-title-word">{{i18n('购买数量')}}</span>
+                        </th>
+                        <th width="110">
+                            <span class="table-title-word">{{i18n('总量')}}</span>
+                        </th>
+                        <th class="width105">
+                            <span class="table-title-word">{{i18n('金额')}}({{i18n('元')}})</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="width85">
+                            <span class="promotion-icon" ng-if="itemlist.packingPromotions || itemlist.packingPromotions.length > 0">{{i18n('促')}}</span>
+                            <span>{{itemlist.code}}</span>
+                        </td>
+                        <td width="100">
+                            <span>{{itemlist.stockText}}</span>
+                        </td>
+                        <td class="width150">
+                            <ul class="spec_text clearfix">
+                                <li ng-class="{'selected': itemlist.productPackageId == packingWay.id || !packingWay.id}" ng-repeat="packingWay in itemlist.packingWayList" id="{{packingWay.id}}" ng-click="choosePackingWayBasic(packingWay.id, packingWay.orderMultiple)"><a href="javascript:;">{{packingWay.orderMultiple}}</a></li>
+                            </ul>
+                        </td>
+                        <td class="width80">
+                            <span ng-if="!$parent.hideProductPrice">{{itemlist.availablePrice|currency:""}}</span>
+                            <span ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showMinTextWhenHidePrice}}</span>
+                        </td>
+                        <td class="width150">
+                            <div class="add-numbox">
+                                <button type="button" ng-class="{'disabled': itemlist.chooseNum<=1 || !itemlist.chooseNum}" ng-disabled="itemlist.chooseNum<=1 || !itemlist.chooseNum" ng-click="decreaseBasic($event)"><i class="common-icons common-icons-reduceNum"></i></button>
+                                <input type="text" maxlength="5" ng-model="itemlist.chooseNum" ng-change="changeNumBasic($event, itemlist.chooseNum)">
+                                <button type="button" ng-click="increaseBasic($event)" ng-class="{'disabled': itemlist.chooseNum>=packingMethodFun.maxAddCartNum}" ng-disabled="itemlist.chooseNum>=packingMethodFun.maxAddCartNum"><i class="common-icons common-icons-addNum"></i></button>
+                            </div>
+                        </td>
+                        <td width="110">
+                            <span>{{itemlist.chooseNum * itemlist.choosePackingWayNum}}</span>
+                        </td>
+                        <td class="width105">
+                            <span class="" ng-if="!$parent.hideProductPrice">{{itemlist.chooseNum * itemlist.choosePackingWayNum * itemlist.availablePrice|currency:""}}</span>
+                            <span class="" ng-if="$parent.hideProductPrice">0</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="portlet-bottom" ng-show="(pcIteminfo.sp.serialProducts && pcIteminfo.sp.serialProducts.length > 0) || !itemlist.typeOfProduct">
+            <label class="total-num">{{i18n('数量总计')}}:<span class="disIB f16">{{totalPackingNum}}</span></label>
+            <label class="total-amount" ng-if="!$parent.hideProductPrice">{{i18n('总金额')}}:<span class="disIB f16 red bold">{{totalPackingAmount|currency:"￥"}}</span></label>
+            <label class="total-amount" ng-if="$parent.hideProductPrice">{{i18n('总金额')}}:<span class="disIB f16 red bold">{{0|currency:"￥"}}</span></label>
+        </div>
+    </div>
+</div>

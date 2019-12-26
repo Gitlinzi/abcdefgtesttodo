@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/store#((skin)).css?v=${version}">
+</head>
+
+<body ng-app="appControllers" ng-controller="storeCtrl">
+
+@@include("header.html")
+<span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+    @@include("global-nav.html")
+</span>
+<div class="container">
+	<!-- 店招和导航 -->
+	<div ng-include="'includes/_signboard.html'"></div>
+	<!-- 店铺轮播图 -->
+	<div id="store-carousel" class="carousel" ng-if="!isSearch&&!isList">
+		<div class="carousel-inner">
+			<a target="_blank" ng-repeat="img in storeslide" ng-class="{active:$first}" href="{{ img.redirectUrl }}"><img width="1200" height="540" ng-src="{{ img.url }}" alt="{{ img.name }}"></a>
+		</div>
+		<ul class="carousel-paging">
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="carousel-btn prev"><i class="icon-prev-big"></i></div>
+		<div class="carousel-btn next"><i class="icon-next-big"></i></div>
+	</div>
+	<!-- 路径导航 -->
+	<div id="breadcrumb" ng-if="isList" style="float:none">
+		<a href="store.html?shopId={{shopId}}&merchantId={{merchantId}}">{{i18n('首页')}}</a><span>&nbsp;&gt;&nbsp;</span>
+		<a href="store.html?merchantCategoryIds={{crumb.categoryId}}&categoryTreeNodeId={{crumb.shopCategoryTreeNodeId}}&shopId={{shopId}}&merchantId={{merchantId}}&companyId={{companyId}}"
+		   ng-repeat-start="crumb in crumbList">{{crumb.categoryName}}</a>
+		<span ng-repeat-end ng-if="!$last">&nbsp;&gt;&nbsp;</span>
+	</div>
+
+	<!-- 店铺信息 -->
+	<div ng-include="'includes/_storeinfo.html'"></div>
+	<!-- 店铺右侧 -->
+	<!--<div id="store-right" ng-include="'includes/_storeSearchList.html'" ng-if="isSearch||isList"></div>-->
+	<div id="store-right" ng-include="'includes/_searchlist.html'" ng-if="isSearch||isList"></div>
+	<div id="store-right" ng-include="'includes/_storeIndex.html'" ng-if="!isSearch&&!isList"></div>
+	<div class="clear"></div>
+</div>
+
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/store.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=store"></script>
+</body>
+</html>

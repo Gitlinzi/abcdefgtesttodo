@@ -1,0 +1,209 @@
+<div>
+    <!--面包屑-->
+    <div class="module-title">
+        <a ui-sref="index_saleRepair" class="my-order">{{i18n('申请售后')}}</a>
+        <span class="center-crumb-arrowhead"></span>
+        <span>{{i18n('申请维修')}}</span>
+    </div>
+    <h4 class="apply-title">{{i18n('申请维修的商品')}}</h4>
+    <div class="repair-box">
+        <div class="repair-list">
+            <div class="repair-list-con">
+                <div class="repair-con">
+                    <div class="repair-con-list">
+                        <h4>
+                            <em class="c9">{{applyRepair.repairOrderInfo.createDate}}</em>
+                            <em>{{i18n('订单号')}}：{{applyRepair.repairOrderInfo.orderCode}}</em>
+                            <em>{{i18n('订单类型')}}：{{applyRepair.repairOrderInfo.orderType |toOrderTypeContext}}</em>
+                        </h4>
+                        <div class="apply-repair-span" ng-repeat="pro in applyRepair.repairProductInfo">
+                            <span class="column1">
+                                <p class="applyCheck">
+                                    <label class="radioStyle-big" ng-click="applyRepair.needRepairProduct(pro)">
+                                        <input id="applyCheckTip" type="radio" name="repairPro" value="{{pro.mpId}}"
+                                            ng-model="applyRepair.returnProductList[0].mpId"
+                                            ng-disabled="!pro.guaranteeDays || pro.guaranteeDays < 0 || pro.canReturnNumber < 1">
+                                        <span></span>
+                                    </label>
+                                </p>
+                                <dl>
+                                    <dt><img ng-src="{{pro.productPicPath || '../../../images/defaultImg.png'}}" alt=""></dt>
+                                    <dd>
+                                        <h5>
+                                            <cite>{{pro.productCname}}</cite>
+                                            <em>x{{pro.productItemNum}}</em>
+                                        </h5>
+                                        <p ng-repeat="tag in pro.extInfo2">{{tag.name}}:{{tag.value}}</p>
+                                    </dd>
+                                </dl>
+                            </span>
+                            <span class="column2" ng-if="pro.guaranteeDays && pro.guaranteeDays > 0">
+                                <div class="apply-num">
+                                    {{i18n('申请维修数量')}}
+                                    <div class="numbox">
+                                        <!--<button ng-click="pro.repairReturnNum>1 ? pro.repairReturnNum = pro.repairReturnNum-1:''"
+                                                ng-disabled="prod.repairReturnNum<=1">-</button>-->
+                                        <button ng-click="applyRepair.checkItem(pro,1)">-</button>
+
+                                        <input type="text" name="" ng-model="pro.repairReturnNum"
+                                               ng-change="pro.repairReturnNum=applyRepair.checkNum(pro.repairReturnNum,pro.canReturnNumber)">
+                                        <!--<button ng-click="pro.repairReturnNum < pro.canReturnNumber?pro.repairReturnNum=pro.repairReturnNum+1:''"
+                                                ng-disabled="pro.repairReturnNum>=pro.canReturnNumber">+</button>-->
+                                        <button ng-click="applyRepair.checkItem(pro,2)">+</button>
+                                    </div>
+                                </div>
+                            </span>
+                            <span class="column3" ng-if="pro.guaranteeDays && pro.guaranteeDays > 0">
+                                <em>{{i18n('保修期至')}}: {{(applyRepair.repairOrderInfo.orderLogisticsTime+24*60*60*1000*pro.guaranteeDays) | date:'yyyy-MM-dd HH:mm:ss'}}</em>
+                                <!--<em>（已超过售后保修期/保修期内）</em>-->
+                                <em id="column-site">{{(applyRepair.repairOrderInfo.orderLogisticsTime+24*60*60*1000*pro.guaranteeDays) | isOverdue}}</em>
+                                <em id="column-siteTwo">{{pro.guaranteeDays}}{{i18n('天')}}</em>
+                            </span>
+                            <span class="column4" ng-if="!pro.guaranteeDays || pro.guaranteeDays < 0">
+                                {{i18n('暂不支持此售后类型')}}
+                            </span>
+                        </div>
+                    </div>
+                    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                         total-page="totalPage" ng-if=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 class="apply-title">{{i18n('售后信息')}}</h4>
+    <div class='apply-mes'>
+        <table class="theme2 aftersales-border">
+            <tr class="c6">
+                <td width="83" align="center" class="pdT12">{{i18n('维修原因')}}</td>
+                <td class="c3 pdT12">
+                    <select type="text" class="aftersalse-input"
+                            ng-options="cause as cause.returnReason for cause in applyRepair.repairReasonList"
+                            ng-model="applyRepair.selectReason">
+                    </select>
+                    <!-- <select name="" id="">
+                     <option value="">{{i18n('不想要了')}}</option>
+                     <option value="">{{i18n('拍错了')}}</option>
+                     <option value="">{{i18n('七天无条件退货')}}</option>
+                     </select>-->
+                </td>
+            </tr>
+            <tr class="c6">
+                <td width="83" align="center">{{i18n('问题描述')}}</td>
+                <td class="c3 posR h120">
+                    <textarea placeholder="{{i18n('请在此描述详细问题')}}，{{i18n('最多不超过')}}200{{i18n('字')}}" resize="none" class="aftersales-textarea"
+                              maxlength="200" ng-model="applyRepair.remark"></textarea>
+                    <p class="textarea-prompt">{{i18n('还可输入')}}<b class="ce62128 change-color">{{200-applyRepair.remark.length}}</b>{{i18n('字')}}
+                    </p>
+                </td>
+            </tr>
+            <tr class="c6">
+                <td width="83" align="center" class="pdB12">{{i18n('上传凭证')}}</td>
+                <td class="c3 posR clearfix pdB12">
+                    <div class='last-left'>
+                        <div pc-upload-more-image image-width="100" image-height="100" max-size="{{$parent.switchConfig.common.uploadingPicSize}}"
+                             image-url-list="applyRepair.picUrl" image-pattern="{{$parent.switchConfig.common.uploadingPicFormat}}"
+                             is-show-delete="true" image-max-length="3"
+                             add-class="disIB text-center fl posR mgR20"></div>
+                    </div>
+                    <div class='last-right'>
+                        <ul>
+                            <li class="c6">{{i18n('为了帮助您更好的解决问题')}},{{i18n('请上传图片')}}</li>
+                            <li class="c9">{{i18n('最多可上传')}}3{{i18n('张图片')}},{{i18n('每张图片大小不超过')}}5M,{{i18n('支持')}}bmp,jpg,png,jpeg{{i18n('格式文件')}}</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!--<div class="apply-box">-->
+    <!--<div class="apply-list">-->
+    <!--<label>维修原因</label>-->
+    <!--<span ng-class="{'active':showtimes}" ng-mouseenter="showtimes = true" ng-mouseleave="showtimes = false">-->
+    <!--{{applyRepair.selectReason.returnReason ? applyRepair.selectReason.returnReason: '&#45;&#45; 请选择 &#45;&#45;'}}<i class="icon-top-down"></i>-->
+    <!--<div class="apply-detail" ng-show="showtimes">-->
+    <!--<ul>-->
+    <!--<li ng-click="applyRepair.chooseReason(reason)"-->
+    <!--ng-repeat="reason in applyRepair.repairReasonList">{{reason.returnReason}}</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</span>-->
+    <!--</div>-->
+    <!--<div class="apply-list positonRE">-->
+    <!--<label>问题描述</label>-->
+    <!--<textarea rows="3" maxlength="200" placeholder="您在此描述详细问题，最多不超过200字" ng-model="applyRepair.remark"></textarea>-->
+    <!--<cite>200字</cite>-->
+    <!--</div>-->
+    <!--<div class="apply-list mgB0">-->
+    <!--<label>上传凭证</label>-->
+    <!--<div class="c3 posR clearfix pdB12">-->
+    <!--<div class='last-left'>-->
+    <!---->
+    <!--</div>-->
+    <!--<div class='last-right' ng-if="picUrl.length < 3">-->
+    <!--<ul>-->
+    <!--<li class="c6">为了帮助您更好的解决问题,请上传图片</li>-->
+    <!--<li class="c9">最多可上传3张图片,每张图片大小不超过5M,支持bmp,gif,jpg,png,jpeg格式文件</li>-->
+    <!--</ul>-->
+    <!--</div>-->
+
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <h4 class="apply-title">
+        {{i18n('维修信息')}}<span>{{i18n('用于接收我们寄送的配件及上门安装')}}</span>
+    </h4>
+    <div class="apply-box">
+        <div class="sb spad">
+            <div class="st">
+                <h4>
+                    {{i18n('收货人信息')}}
+                    <span><a href="javascript:void(0)" ng-click="address._showAddNewAddress()"
+                             ng-hide="allAddress.length>=20">{{i18n('新增收货地址')}}</a></span>
+                </h4>
+            </div>
+            <div class="dialogForm" ng-include="'includes/_addressEdit.html'" ng-if="toAddNewAddress"></div>
+            <div class="sc" ng-init="hideOtherAddress=true">
+                <ul class="address">
+                    <!--选中地址添加class bg-active-->
+                    <li ng-repeat="addr in allAddress | limitTo:20"
+                        ng-show="$first&&!address.selectedAddr.id||!hideOtherAddress||addr.id==address.selectedAddr.id">
+                        <div class="row">
+                            <div class="cell a1">
+                                <div ng-class="{'address-name':addr.id==address.selectedAddr.id}"
+                                     class="address-name-no"
+                                     name="address"
+                                     ng-value="addr.id"
+                                     ng-model="address.selectedAddr"
+                                     ng-click="address._changeSaveAddress(addr)"
+                                >{{addr.userName}}
+                                </div>
+                            </div>
+                            <div class="cell a2">{{addr.userName}}&nbsp;&nbsp;&nbsp;&nbsp;{{addr.provinceName}}{{addr.cityName}}{{addr.regionName}}/{{addr.detailAddress}}</div>
+                            <div class="cell a3">{{addr.mobile| hidePhone}}</div>
+                            <div class="cell a5">
+                                <span class="mo" ng-if="addr.isDefault">{{i18n('默认地址')}}</span>
+                                <a href="javascript:void(0)" ng-if="!addr.isDefault"
+                                   ng-click="address._updateAddressMo(addr,false,addr.id);"
+                                   class="c025EA9">{{i18n('设为默认地址')}}
+                                </a>
+                            </div>
+                            <div class="cell a4"><a href="javascript:void(0)"
+                                                    ng-click="address._editAddress(addr,$index);" class="c025EA9">{{i18n('编辑')}}</a>
+                            </div>
+                            <div class="cell a4"><a href="javascript:void(0)"
+                                                    ng-click="address._deleteAddress(addr.id,addr.isDefault)"
+                                                    class="c025EA9">{{i18n('删除')}}</a></div>
+                        </div>
+                        <div class="dialogForm" ng-include="'includes/_addressEdit.html'"
+                             ng-show="showList[$index]"></div>
+                    </li>
+                </ul>
+                <a href="javascript:void(0)" class="showmore" ng-click="hideOtherAddress=!hideOtherAddress"
+                   ng-show="allAddress.length>=2">{{hideOtherAddress?i18n('更多地址'):i18n('收起地址')}}</a>
+            </div>
+        </div>
+    </div>
+    <p>
+        <input type="button" class="applyBtn" ng-click="applyRepair.repairApply()" ng-disabled="applyRepair.submitBtn || applyRepair.submitAgain" value="{{i18n('提交申请')}}">
+    </p>
+</div>

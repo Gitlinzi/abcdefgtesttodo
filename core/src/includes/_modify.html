@@ -1,0 +1,56 @@
+<div class="content">
+    <div class="module" ng-if="!modifysuccess">
+        <div class="mt">
+            <div class="head"></div>
+            <h2>{{i18n('修改密码')}}</h2>
+        </div>
+        <div class="mc inner">
+            <form class="form mt100" name="pwdForm">
+            	<div class="msg" ng-show="modifyPwdErrMsg || modifyPwdErrMsg != '' ">{{modifyPwdErrMsg}}</div>
+                <div class="form-group">
+                    <label>{{i18n('原密码')}}：</label>
+                    <input class="input" type="password" name="oldPwd" ng-model="modifys.oldPwd" required>
+					<span class="tip err" ng-show="pwdForm.oldPwd.$dirty && pwdForm.oldPwd.$invalid || modifyPwdSubmit && pwdForm.oldPwd.$invalid">
+						<span ng-show="pwdForm.oldPwd.$error.required">{{i18n('原密码不能为空')}}</span>
+					</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <label>{{i18n('新密码')}}：</label>
+                    <input class="input" type="password" name="newPwd" ng-model="modifys.newPwd" ng-pattern="/^[A-Za-z0-9\.\,\`\~\!\@\#\$\%\\\^\&\*\(\)\-\_\=\+\[\{\]\}\|\;\:\‘\’\“\”\<\>\/?]{6,18}$/" required>
+                    <span class="tip err" ng-show="pwdForm.newPwd.$dirty && pwdForm.newPwd.$invalid || modifyPwdSubmit && pwdForm.newPwd.$invalid">
+						<span ng-show="pwdForm.newPwd.$error.required">{{i18n('新密码不能为空')}}</span>
+						<span ng-show="pwdForm.newPwd.$invalid && !pwdForm.newPwd.$error.required">{{i18n('仅支持')}}6-18{{i18n('个字符的英文字母')}}、{{i18n('符号')}}、{{i18n('数字')}}</span>
+					</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <label>{{i18n('确认密码')}}：</label>
+                    <input class="input" type="password" name="newPwdConfirm" ng-model="modifys.newPwdConfirm" pw-check="newPwd" required>
+                    <span class="tip err" ng-show="pwdForm.newPwdConfirm.$dirty && pwdForm.newPwdConfirm.$invalid || modifyPwdSubmit && pwdForm.newPwdConfirm.$invalid">
+						<span ng-show="pwdForm.newPwdConfirm.$error.required">{{i18n('确认密码不能为空')}}</span>
+						<span ng-show="pwdForm.newPwdConfirm.$error.repeat">{{i18n('两次输入的密码不一致')}}</span>
+					</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <input type="button" class="btn" value="{{i18n('确定')}}" id="modifyPwdBtn" ng-click="modifyPwd(pwdForm.$valid)">
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="module" ng-if="modifysuccess">
+        <div class="mt">
+            <div class="head"></div>
+            <h2>{{i18n('修改密码')}}</h2>
+        </div>
+        <div class="mc inner">
+            <div class="success">
+                <div class="info"><img width="38" height="36" src="/images/ok.png?v=${version}"> {{i18n('密码修改成功')}}！</div>
+                <a href="login.html" class="btn">{{i18n('去登录')}}</a>
+            </div>
+        </div>
+    </div>
+</div>

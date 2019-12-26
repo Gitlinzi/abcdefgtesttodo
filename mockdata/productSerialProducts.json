@@ -1,0 +1,786 @@
+{
+  "code": 0,
+  "message": "操作成功",
+  "data": {
+    "serialProducts": [
+      {
+        "key": "_726_798_",
+        "product": {
+          "productId": 5334,
+          "mpId": 5212,
+          "mpsId": 5212,
+          "code": "AAD6920298300665",
+          "name": "玫瑰太太哺乳塑身两用吊带衫（蓝色条纹）LL",
+          "subTitle": null,
+          "type": 1,
+          "price": 218,
+          "tax": 0,
+          "stockNum": 100,
+          "lackOfStock": 0,
+          "brandId": 140,
+          "brandName": "Rosemadame玫瑰太太",
+          "categoryId": 2260,
+          "promotionType": 0,
+          "promotionPrice": null,
+          "preferentialPrice": null,
+          "promotionId": null,
+          "promotionIconUrl": null,
+          "categoryTreeNodeId": 2252,
+          "merchantSeriesId": 116,
+          "companyId": 6,
+          "merchantId": 147,
+          "merchantName": "广生行",
+          "merchantType": "10",
+          "freightAttribute": null,
+          "grossWeight": null,
+          "merchantProdVolume": null,
+          "shopId": null,
+          "shopName": null,
+          "shopType": null,
+          "freightTemplateId": null,
+          "warehouseNo": null,
+          "calculationUnit": null,
+          "standard": null,
+          "saleType": 1,
+          "saleIconUrl": null,
+          "mpSource": null,
+          "isBargain": null,
+          "isRent": null,
+          "status": 4,
+          "managementState": 1,
+          "h5DetailUrl": null,
+          "pcDetailUrl": null,
+          "pics": [
+            {
+              "name": "3.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_64.96288200381706_3.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_64.96288200381706_3.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_64.96288200381706_3.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_64.96288200381706_3.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_64.96288200381706_3.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_64.96288200381706_3.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_64.96288200381706_3.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_64.96288200381706_3.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "2.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_86.3237658987042_2.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_86.3237658987042_2.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_86.3237658987042_2.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_86.3237658987042_2.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_86.3237658987042_2.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_86.3237658987042_2.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_86.3237658987042_2.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433168224_86.3237658987042_2.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            }
+          ],
+          "attrs": [
+            {
+              "attrName": {
+                "id": null,
+                "name": "颜色",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 798,
+                "value": "蓝色条纹",
+                "sortValue": 4,
+                "checked": false
+              }
+            },
+            {
+              "attrName": {
+                "id": null,
+                "name": "尺码",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 726,
+                "value": "LL",
+                "sortValue": 4,
+                "checked": false
+              }
+            }
+          ],
+          "video": null,
+          "securityVOList": null,
+          "favoriteId": null,
+          "url100x100": null,
+          "url120x120": null,
+          "url60x60": null,
+          "url160x160": null,
+          "url220x220": null,
+          "url500x500": null,
+          "url800x800": null
+        },
+        "productSimpleVO": null
+      },
+      {
+        "key": "_728_797_",
+        "product": {
+          "productId": 5335,
+          "mpId": 5213,
+          "mpsId": 5213,
+          "code": "AAD6920298300672",
+          "name": "玫瑰太太哺乳塑身两用吊带衫（灰色条纹）M",
+          "subTitle": null,
+          "type": 1,
+          "price": 218,
+          "tax": 0,
+          "stockNum": 100,
+          "lackOfStock": 0,
+          "brandId": 140,
+          "brandName": "Rosemadame玫瑰太太",
+          "categoryId": 2260,
+          "promotionType": 0,
+          "promotionPrice": null,
+          "preferentialPrice": null,
+          "promotionId": null,
+          "promotionIconUrl": null,
+          "categoryTreeNodeId": 2252,
+          "merchantSeriesId": 116,
+          "companyId": 6,
+          "merchantId": 147,
+          "merchantName": "广生行",
+          "merchantType": "10",
+          "freightAttribute": null,
+          "grossWeight": null,
+          "merchantProdVolume": null,
+          "shopId": null,
+          "shopName": null,
+          "shopType": null,
+          "freightTemplateId": null,
+          "warehouseNo": null,
+          "calculationUnit": null,
+          "standard": null,
+          "saleType": 1,
+          "saleIconUrl": null,
+          "mpSource": null,
+          "isBargain": null,
+          "isRent": null,
+          "status": 4,
+          "managementState": 1,
+          "h5DetailUrl": null,
+          "pcDetailUrl": null,
+          "pics": [
+            {
+              "name": "0.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "5.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "1.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "4.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            }
+          ],
+          "attrs": [
+            {
+              "attrName": {
+                "id": null,
+                "name": "颜色",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 797,
+                "value": "灰色条纹",
+                "sortValue": 3,
+                "checked": false
+              }
+            },
+            {
+              "attrName": {
+                "id": null,
+                "name": "尺码",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 728,
+                "value": "M",
+                "sortValue": 6,
+                "checked": false
+              }
+            }
+          ],
+          "video": null,
+          "securityVOList": null,
+          "favoriteId": null,
+          "url100x100": null,
+          "url120x120": null,
+          "url60x60": null,
+          "url160x160": null,
+          "url220x220": null,
+          "url500x500": null,
+          "url800x800": null
+        },
+        "productSimpleVO": null
+      },
+      {
+        "key": "_727_797_",
+        "product": {
+          "productId": 5336,
+          "mpId": 5214,
+          "mpsId": 5214,
+          "code": "AAD6920298300689",
+          "name": "玫瑰太太哺乳塑身两用吊带衫（灰色条纹）L",
+          "subTitle": null,
+          "type": 1,
+          "price": 218,
+          "tax": 0,
+          "stockNum": 100,
+          "lackOfStock": 0,
+          "brandId": 140,
+          "brandName": "Rosemadame玫瑰太太",
+          "categoryId": 2260,
+          "promotionType": 0,
+          "promotionPrice": null,
+          "preferentialPrice": null,
+          "promotionId": null,
+          "promotionIconUrl": null,
+          "categoryTreeNodeId": 2252,
+          "merchantSeriesId": 116,
+          "companyId": 6,
+          "merchantId": 147,
+          "merchantName": "广生行",
+          "merchantType": "10",
+          "freightAttribute": null,
+          "grossWeight": null,
+          "merchantProdVolume": null,
+          "shopId": null,
+          "shopName": null,
+          "shopType": null,
+          "freightTemplateId": null,
+          "warehouseNo": null,
+          "calculationUnit": null,
+          "standard": null,
+          "saleType": 1,
+          "saleIconUrl": null,
+          "mpSource": null,
+          "isBargain": null,
+          "isRent": null,
+          "status": 4,
+          "managementState": 1,
+          "h5DetailUrl": null,
+          "pcDetailUrl": null,
+          "pics": [
+            {
+              "name": "0.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "5.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "1.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "4.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            }
+          ],
+          "attrs": [
+            {
+              "attrName": {
+                "id": null,
+                "name": "颜色",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 797,
+                "value": "灰色条纹",
+                "sortValue": 3,
+                "checked": false
+              }
+            },
+            {
+              "attrName": {
+                "id": null,
+                "name": "尺码",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 727,
+                "value": "L",
+                "sortValue": 5,
+                "checked": false
+              }
+            }
+          ],
+          "video": null,
+          "securityVOList": null,
+          "favoriteId": null,
+          "url100x100": null,
+          "url120x120": null,
+          "url60x60": null,
+          "url160x160": null,
+          "url220x220": null,
+          "url500x500": null,
+          "url800x800": null
+        },
+        "productSimpleVO": null
+      },
+      {
+        "key": "_726_797_",
+        "product": {
+          "productId": 5337,
+          "mpId": 5215,
+          "mpsId": 5215,
+          "code": "AAD6920298300696",
+          "name": "玫瑰太太哺乳塑身两用吊带衫（灰色条纹）LL",
+          "subTitle": null,
+          "type": 1,
+          "price": 218,
+          "tax": 0,
+          "stockNum": 100,
+          "lackOfStock": 0,
+          "brandId": 140,
+          "brandName": "Rosemadame玫瑰太太",
+          "categoryId": 2260,
+          "promotionType": 0,
+          "promotionPrice": null,
+          "preferentialPrice": null,
+          "promotionId": null,
+          "promotionIconUrl": null,
+          "categoryTreeNodeId": 2252,
+          "merchantSeriesId": 116,
+          "companyId": 6,
+          "merchantId": 147,
+          "merchantName": "广生行",
+          "merchantType": "10",
+          "freightAttribute": null,
+          "grossWeight": null,
+          "merchantProdVolume": null,
+          "shopId": null,
+          "shopName": null,
+          "shopType": null,
+          "freightTemplateId": null,
+          "warehouseNo": null,
+          "calculationUnit": null,
+          "standard": null,
+          "saleType": 1,
+          "saleIconUrl": null,
+          "mpSource": null,
+          "isBargain": null,
+          "isRent": null,
+          "status": 4,
+          "managementState": 1,
+          "h5DetailUrl": null,
+          "pcDetailUrl": null,
+          "pics": [
+            {
+              "name": "0.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000857_89.10261197461705_0.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "5.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000883_99.03468122886088_5.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "1.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000863_30.695335196784825_1.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "4.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453366000891_24.295456871051947_4.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            }
+          ],
+          "attrs": [
+            {
+              "attrName": {
+                "id": null,
+                "name": "颜色",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 797,
+                "value": "灰色条纹",
+                "sortValue": 3,
+                "checked": false
+              }
+            },
+            {
+              "attrName": {
+                "id": null,
+                "name": "尺码",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 726,
+                "value": "LL",
+                "sortValue": 4,
+                "checked": false
+              }
+            }
+          ],
+          "video": null,
+          "securityVOList": null,
+          "favoriteId": null,
+          "url100x100": null,
+          "url120x120": null,
+          "url60x60": null,
+          "url160x160": null,
+          "url220x220": null,
+          "url500x500": null,
+          "url800x800": null
+        },
+        "productSimpleVO": null
+      },
+      {
+        "key": "_728_798_",
+        "product": {
+          "productId": 5331,
+          "mpId": 5210,
+          "mpsId": 5210,
+          "code": "AAD6920298300641",
+          "name": "玫瑰太太哺乳塑身两用吊带衫（蓝色条纹）M",
+          "subTitle": null,
+          "type": 1,
+          "price": 218,
+          "tax": 0,
+          "stockNum": 100,
+          "lackOfStock": 0,
+          "brandId": 140,
+          "brandName": "Rosemadame玫瑰太太",
+          "categoryId": 2260,
+          "promotionType": 0,
+          "promotionPrice": null,
+          "preferentialPrice": null,
+          "promotionId": null,
+          "promotionIconUrl": null,
+          "categoryTreeNodeId": 2252,
+          "merchantSeriesId": 116,
+          "companyId": 6,
+          "merchantId": 147,
+          "merchantName": "广生行",
+          "merchantType": "10",
+          "freightAttribute": null,
+          "grossWeight": null,
+          "merchantProdVolume": null,
+          "shopId": null,
+          "shopName": null,
+          "shopType": null,
+          "freightTemplateId": null,
+          "warehouseNo": null,
+          "calculationUnit": null,
+          "standard": null,
+          "saleType": 1,
+          "saleIconUrl": null,
+          "mpSource": null,
+          "isBargain": null,
+          "isRent": null,
+          "status": 4,
+          "managementState": 1,
+          "h5DetailUrl": null,
+          "pcDetailUrl": null,
+          "pics": [
+            {
+              "name": "3.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105639_37.6437627740833_3.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105639_37.6437627740833_3.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105639_37.6437627740833_3.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105639_37.6437627740833_3.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105639_37.6437627740833_3.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105639_37.6437627740833_3.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105639_37.6437627740833_3.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105639_37.6437627740833_3.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "2.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105641_24.95413641330443_2.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105641_24.95413641330443_2.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105641_24.95413641330443_2.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105641_24.95413641330443_2.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105641_24.95413641330443_2.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105641_24.95413641330443_2.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105641_24.95413641330443_2.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433105641_24.95413641330443_2.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            }
+          ],
+          "attrs": [
+            {
+              "attrName": {
+                "id": null,
+                "name": "颜色",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 798,
+                "value": "蓝色条纹",
+                "sortValue": 4,
+                "checked": false
+              }
+            },
+            {
+              "attrName": {
+                "id": null,
+                "name": "尺码",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 728,
+                "value": "M",
+                "sortValue": 6,
+                "checked": false
+              }
+            }
+          ],
+          "video": null,
+          "securityVOList": null,
+          "favoriteId": null,
+          "url100x100": null,
+          "url120x120": null,
+          "url60x60": null,
+          "url160x160": null,
+          "url220x220": null,
+          "url500x500": null,
+          "url800x800": null
+        },
+        "productSimpleVO": null
+      },
+      {
+        "key": "_727_798_",
+        "product": {
+          "productId": 5333,
+          "mpId": 5211,
+          "mpsId": 5211,
+          "code": "AAD6920298300658",
+          "name": "玫瑰太太哺乳塑身两用吊带衫（蓝色条纹）L",
+          "subTitle": null,
+          "type": 1,
+          "price": 218,
+          "tax": 0,
+          "stockNum": 100,
+          "lackOfStock": 0,
+          "brandId": 140,
+          "brandName": "Rosemadame玫瑰太太",
+          "categoryId": 2260,
+          "promotionType": 0,
+          "promotionPrice": null,
+          "preferentialPrice": null,
+          "promotionId": null,
+          "promotionIconUrl": null,
+          "categoryTreeNodeId": 2252,
+          "merchantSeriesId": 116,
+          "companyId": 6,
+          "merchantId": 147,
+          "merchantName": "广生行",
+          "merchantType": "10",
+          "freightAttribute": null,
+          "grossWeight": null,
+          "merchantProdVolume": null,
+          "shopId": null,
+          "shopName": null,
+          "shopType": null,
+          "freightTemplateId": null,
+          "warehouseNo": null,
+          "calculationUnit": null,
+          "standard": null,
+          "saleType": 1,
+          "saleIconUrl": null,
+          "mpSource": null,
+          "isBargain": null,
+          "isRent": null,
+          "status": 4,
+          "managementState": 1,
+          "h5DetailUrl": null,
+          "pcDetailUrl": null,
+          "pics": [
+            {
+              "name": "3.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134913_70.06113131159476_3.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134913_70.06113131159476_3.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134913_70.06113131159476_3.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134913_70.06113131159476_3.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134913_70.06113131159476_3.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134913_70.06113131159476_3.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134913_70.06113131159476_3.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134913_70.06113131159476_3.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            },
+            {
+              "name": "2.jpg",
+              "url": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134910_45.965878187151944_2.jpg",
+              "url100x100": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134910_45.965878187151944_2.jpg@base@tag=imgScale&h=100&w=100&m=0",
+              "url120x120": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134910_45.965878187151944_2.jpg@base@tag=imgScale&h=120&w=120&m=0",
+              "url60x60": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134910_45.965878187151944_2.jpg@base@tag=imgScale&h=60&w=60&m=0",
+              "url160x160": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134910_45.965878187151944_2.jpg@base@tag=imgScale&h=160&w=160&m=0",
+              "url220x220": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134910_45.965878187151944_2.jpg@base@tag=imgScale&h=220&w=220&m=0",
+              "url500x500": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134910_45.965878187151944_2.jpg@base@tag=imgScale&h=500&w=500&m=0",
+              "url800x800": "http://guangshenhang.kssws.ks-cdn.com/back_product/1453433134910_45.965878187151944_2.jpg@base@tag=imgScale&h=800&w=800&m=0"
+            }
+          ],
+          "attrs": [
+            {
+              "attrName": {
+                "id": null,
+                "name": "颜色",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 798,
+                "value": "蓝色条纹",
+                "sortValue": 4,
+                "checked": false
+              }
+            },
+            {
+              "attrName": {
+                "id": null,
+                "name": "尺码",
+                "sortValue": null
+              },
+              "attrVal": {
+                "id": 727,
+                "value": "L",
+                "sortValue": 5,
+                "checked": false
+              }
+            }
+          ],
+          "video": null,
+          "securityVOList": null,
+          "favoriteId": null,
+          "url100x100": null,
+          "url120x120": null,
+          "url60x60": null,
+          "url160x160": null,
+          "url220x220": null,
+          "url500x500": null,
+          "url800x800": null
+        },
+        "productSimpleVO": null
+      }
+    ],
+    "attributes": [
+      {
+        "id": 220,
+        "name": "选择颜色",
+        "sortValue": null,
+        "values": [
+          {
+            "id": 726,
+            "value": "小客厅调光调色款37瓦50*50",
+            "sortValue": 1,
+            "checked": true
+          },
+          {
+            "id": 727,
+            "value": "小客厅调光调色款60瓦120*100",
+            "sortValue": 3,
+            "checked": false
+          },
+          {
+            "id": 728,
+            "value": "小客厅调光调色款120瓦300*200",
+            "sortValue": 5,
+            "checked": false
+          },
+          {
+            "id": 729,
+            "value": "小客厅调光调色款60瓦120*100",
+            "sortValue": 5,
+            "checked": true
+          },
+          {
+            "id": 730,
+            "value": "小客厅调光调色款60瓦120*100",
+            "sortValue": 5,
+            "checked": true
+          }
+        ]
+      }
+
+    ]
+  }
+}

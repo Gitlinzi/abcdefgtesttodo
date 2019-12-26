@@ -1,0 +1,168 @@
+<div class="collection" ng-init="init()">
+    <div class="collection-title clearfix">
+        <span class="title-font">{{i18n('我的收藏')}}</span>
+        <!--   当我的收藏没有数据的时候下面的代码需要注释 begin -->
+        <!--   当我的收藏没有数据的时候下面的代码需要注释 end -->
+    </div>
+    <div class="clearfix tabs">
+        <div style="cursor:pointer;" class="fl">
+            <span ng-click="changeTag('myTag')" ng-class="{'tab-active':activeTag == 'myTag'}">{{i18n('我的收藏标签')}}</span>
+            <span class="tab-icon"></span>
+            <span ng-click="changeTag('sharedTag')" ng-class="{'tab-active':activeTag == 'sharedTag'}">{{i18n('共有标签')}}</span>
+        </div>
+        <!-- <div class="fr tab-search">
+            <input type="text" class="search-input" placeholder="{{i18n('商品编码及关键字')}}">
+            <span class="search-button">{{i18n('搜索')}}</span>
+        </div> -->
+    </div>
+
+    <div class="taglist" ng-style="{'height': showMoreTags ? 'auto' : '90px'}">
+        <div class="tag-left" ng-style="{'width':activeTag=='myTag'||isSuperAdmin?'75%':'100%'}">
+            <div class="show-more" ng-if="taglist.length>7&&!showMoreTags" ng-click="clickShowMoreTags()">
+                更多
+            </div>
+            <ul>
+                <li class="tag">
+                    <div>
+                        <a ng-class="{'tab-active': currentTagId == -1}" ng-click="clickTag(-1)" href="javascript:void(0)">所有商品({{totalEntityCount}})</a>
+                    </div>
+                </li>
+                <li class="tag" ng-repeat="tag in taglist">
+                    <div ng-if="!tag.edit">
+                        <input type="checkbox" title="{{tag.isShare?'已分享':'选择分享'}}" ng-disabled="tag.isShare" ng-model="tag.isChecked" ng-if="isSuperAdmin&&activeTag=='myTag'"/>
+                        <input type="checkbox" title="选择取消分享" ng-model="tag.isChecked" ng-if="isSuperAdmin&&activeTag=='sharedTag'"/>
+                        <a ng-class="{'tab-active': currentTagId == tag.id}" class="tag-name" href="javascript:void(0)" ng-click="clickTag(tag.id)">{{tag.tagName}}({{tag.entityCount}})</a>
+                        <img src="../../../images/editbtn.png" ng-if="activeTag=='myTag'" ng-click="editTag(tag)" title="{{i18n('编辑标签名')}}"/>
+                        <img src="../../../images/cancelbtn.png" ng-if="activeTag=='myTag'" ng-click="deleteTag(tag)" title="{{i18n('删除标签')}}"/>
+                    </div>
+                    <div ng-if="tag.edit" style="position: absolute;">
+                        <input class="input-tag" ng-model="tag.editName" ng-if="activeTag=='myTag'"/>
+                        <a href="javascript:void(0)" ng-click="editTagConfirm(tag)">确定</a>
+                        <a href="javascript:void(0)" ng-click="tag.edit=false">取消</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="tag-right">
+            <span class="tag-btn"  ng-if="activeTag=='myTag'" ng-click="showCreateTagModal()">创建标签</span>
+            &nbsp;
+            <span class="tag-btn" ng-click="shareTags(0)" ng-if="isSuperAdmin&&activeTag=='myTag'">分享</span>
+            <span class="tag-btn" ng-click="shareTags(1)" ng-if="isSuperAdmin&&activeTag=='sharedTag'">取消分享</span>
+        </div>
+    </div>
+
+    <div ng-if="activeTag=='myTag'" style="height:50px"> 
+        <div class="title-right">
+            <span class="paddr22">
+                <input type="checkbox" ng-model="$parent.ckAll" ng-change="clickCheckAll()"/>
+                {{i18n('全选')}}
+            </span>
+            <!-- <span class="join cancel" ng-click="batchAddCart()">{{i18n('批量加入购物车')}}</span> -->
+            <span class="join cancel" ng-click="batchDeleteFavorite()">{{i18n('批量取消收藏')}}</span>
+        </div>
+
+    </div>
+
+    <!--  当我的收藏有数据的时候 begin  -->
+    <div class="goodItem-bigBox" style="margin-top: 20px">
+
+        <div ng-mouseover="boxIsShow=true" ng-mouseleave="boxIsShow=false" class="good-box"  ng-repeat="fg in favoriteGoods">
+            <a class="img-box" href="item.html?itemId={{fg.mpId}}">
+                <div class="good-img">
+                    <img width="220" height="220" ng-src="{{fg.picUrl}}" alt="">
+                    <div class="shop-abate" ng-if="fg.managementState == 0 || fg.realNum == 0">{{i18n('商品已失效')}}</div>
+                </div>
+
+                <p>{{fg.realPrice | currency:'￥'}}</p>
+            </a>
+
+            <p class='mp-id'>{{i18n('商品编码')}}:{{fg.mpId}}</p>
+
+            <div mini-add-cart prod='fg' cart-name="购物车"></div>
+
+            <div class="tag">
+                {{i18n('标签')}}: 
+
+                <span ng-if="!fg.editTag">
+                    <span ng-if="!fg.favoriteTagName">无标签</span>
+                    <span>{{fg.favoriteTagName}}</span>
+                    <img ng-if="activeTag=='myTag'" ng-click="editFavGoodTag(fg)" src="../../../images/editbtn.png"/>
+                </span>
+
+                <span ng-if="fg.editTag">
+                    <select ng-model="fg.editTagId">
+                        <option ng-repeat="tag in taglist" ng-selected="tag.id==fg.editTagId" value="{{tag.id}}">{{tag.tagName}}</option>
+                    </select>
+                    <a href="javascript:void(0);" ng-click="confirmEditFavGoodTag(fg)">确认</a>
+                    <a href="javascript:void(0);" ng-click="cancelEditFavGoodTag(fg)">取消</a>
+                </span>
+
+            </div>
+
+            <div ng-if="activeTag=='myTag'" class="cancel-collection" ng-click="deleteFavorite(fg.mpId)">
+                <span ng-show="boxIsShow" >{{i18n('取消收藏')}}</span>
+            </div>
+
+            <div ng-if="activeTag=='myTag'" ng-class="{'favorite-square-checked':fg.isChecked,
+            'favorite-square-unchecked':!fg.isChecked}">
+                <span ng-click="toggleCheck(fg)"></span>
+            </div>
+        </div>
+    </div>
+
+    <!--  当我的收藏有数据的时候 end
+      当我的收藏没有数据的时候 begin  -->
+    <div class="collection-none f0" ng-if="!favoriteGoods">
+        <div class="collection-left mgR15">
+            <span></span>
+        </div>
+        <div class="collection-right">
+            <span>{{i18n('暂无收藏商品')}}~</span>
+        </div>
+    </div>
+
+    <div class="modal" style="display:block" ng-if="createTagModal">
+        <div class="favgood-tag-dialog">
+            <span class="dialog-closeOne" ng-click="hideCreateTagModal()">&times;</span>
+            <div class="dialog-header">
+                {{i18n('创建标签')}}
+            </div>
+            <div class="dialog-content1">
+                <div class="dialog-input">
+                    <label>创建标签&nbsp;&nbsp;&nbsp;</label>
+                    <input placeholder="新标签名" ng-model="newTagName" maxlength="10" minlength="1"/>
+                </div>
+
+                <div class='btn-box'>
+                    <input type="button" class="btn" ng-click="createTag(newTagName)" value="{{i18n('确定')}}">
+                    <input type="button" class="btn" ng-click="hideCreateTagModal()" value="{{i18n('取消')}}">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal" style="display:block" ng-if="deleteTagModal">
+        <div class="favgood-tag-dialog">
+            <span class="dialog-closeOne" ng-click="hideDeleteTagModal()">&times;</span>
+            <div class="dialog-header">
+                {{i18n('删除标签')}}
+            </div>
+            <div class="dialog-content1">
+                <div class="dialog-input">
+                    <label>{{i18n('确认是否删除标签')}} {{deleteTagName}}？</label>
+                </div>
+
+                <div class='btn-box'>
+                    <input type="button" class="btn" ng-click="deleteTagConfirm()" value="{{i18n('确定')}}">
+                    <input type="button" class="btn" ng-click="hideDeleteTagModal()" value="{{i18n('取消')}}">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- 添加分页 -->
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                total-page="totalPage" ng-if="totalPage > 0"></div>
+</div>
+

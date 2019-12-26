@@ -1,0 +1,319 @@
+/* 右侧固定导航 */
+
+//.global-bg {
+//    width: 40px;
+//    background-color: rgb(51, 51, 51);    /*不支持rgba的浏览器*/
+//    background-color: rgba(51, 51, 51, 0.9);  /*支持rgba的浏览器*/
+//    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#e5515151,endColorstr=#e5515151);
+//    background: none\9;
+//    height: 100%;
+//    position: fixed;
+//    right: 0;
+//    top: 0px;
+//    z-index: 999;
+//}
+
+//.fix-nav {
+//    width: 40px; //height: 314px;
+//    position: fixed;
+//    right: 0;
+//    top: 35%;
+//    z-index: 999;
+//    & .left-er {
+//        position: relative;
+//        & .global-er {
+//            display: block;
+//            width: 140px;
+//            height: 175px;
+//            background-color: @themeColor;
+//            position: absolute;
+//            left: 40px;
+//            bottom: 0px;
+//            padding: 14px 10px 0 10px;
+//            box-sizing: border-box;
+//            & .er-name{
+//                text-align: center;
+//                font-size: 12px;
+//                color: @whiteColor;
+//                padding-top: 5px;
+//            }
+//        }
+//    }
+//    & .fix-item {
+//        width: 25px;
+//        height: 24px; // padding: 9px;
+//        padding: 20px 8px;
+//        cursor: pointer;
+//        background-color: rgb(51, 51, 51);    /*不支持rgba的浏览器*/
+//        background-color: rgba(51, 51, 51, 0.7);  /*支持rgba的浏览器*/
+//        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000,endColorstr=#b2000000);
+//        background: none\9;
+//        margin-bottom: 1px;
+//        position: relative;
+//        & .fix-icon {
+//            display: block; //width: 30px;
+//            height: 30px;
+//        }
+//        & .car {
+//            background: url('../../images/company/company-default.png') no-repeat -223px -61px;
+//        }
+//        & .ear {
+//            background: url('../../images/company/company-default.png') no-repeat -223px -150px;
+//        }
+//        & .code {
+//            background: url('../../images/company/company-default.png') no-repeat -223px -91px;
+//        }
+//        & .phone {
+//            background: url('../../images/company/company-default.png') no-repeat -223px -119px;
+//        }
+//        & .cart-count-right {
+//            position: absolute;
+//            right: 23px;
+//            top: 9px;
+//            background: @clearColor;
+//            color: @whiteColor;
+//            padding: 1px 4px;
+//            font-size: 12px;
+//            border-radius: 7px;
+//            line-height: 13px;
+//        }
+//        .tab-text {
+//            display: block;
+//            width: 55px;
+//            height: 64px;
+//            line-height: 64px;
+//            color: rgb(255, 255, 255);
+//            text-align: center;
+//            font-family: 微软雅黑;
+//            position: absolute;
+//            z-index: -1;
+//            left: 40px;
+//            top: 0px;
+//            background-color: @themeColor;
+//            font-style: normal; //border-radius: 3px 0px 0px 3px;
+//            font-size: 12px;
+//        }
+//    }
+//    & .fix-item:hover {
+//        background-color: @themeColor;
+//        & .tab-text {
+//            transition: left 0.3s ease-in-out 0.1s;
+//            left: -55px;
+//        }
+//        & .global-er {
+//            transition: left 0.3s ease-in-out 0.1s;
+//            left: -140px;
+//        }
+//    }
+//}
+
+
+/*置顶按钮*/
+
+.top-box {
+    position: fixed;
+    top:80%;
+    cursor: pointer;
+    width: 25px;
+    height: 24px;
+    padding: 20px 10px;
+    cursor: pointer;
+    margin-bottom: 1px;
+    & .top-btn {
+        display: block;
+        width: 25px;
+        height: 34px;
+        background: url('../../images/company/company-default.png') no-repeat -595px -33px;
+    }
+    .tab-text {
+        display: block;
+        width: 70px;
+        height: 64px;
+        line-height: 64px;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        font-family: 微软雅黑;
+        position: absolute;
+        z-index: -1;
+        left: 40px;
+        top: 0px;
+        background-color: @themeColor;
+        font-style: normal; //border-radius: 3px 0px 0px 3px;
+        font-size: 12px;
+    }
+}
+
+& .top-box:hover {
+    background-color: @themeColor;
+    & .tab-text {
+        transition: left 0.3s ease-in-out 0.1s;
+        left: -70px;
+    }
+}
+
+.global-bg {
+    width: 50px;
+    //height: 250px;
+    position: fixed;
+    top: 50%;
+    margin-top: -125px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: rgba(0,0,0,.3) 0 0 10px 0;
+    z-index:99999;
+    border-radius: 2px 0 0 2px;
+    //padding: 0 8px;
+    ul {
+        position: relative;
+    }
+    ul>li {
+        height: 50px;
+        line-height: 50px;
+        width: 50px;
+        border-bottom: 1px solid #f4f4f4;
+        position: relative;
+        &:last-child {
+            border-bottom: none;
+        }
+        &:hover {
+            .cart-count {
+                background-color: #fff !important;
+                color: @themeColor !important;
+            }
+            &>a .wrap{
+                left: -50px;
+            }
+        }
+        &>a {
+            position: relative;
+            //transition: all .3s;
+            display: block;
+            width: 50px;
+            height: 50px;
+            overflow: hidden;
+            //position: absolute;
+            //left: 0;
+            //top: 0;
+            .wrap {
+                position: absolute;
+                transition: all .3s;
+                width: 100px;
+                height: 50px;
+                left: 0;
+                top: 0;
+            }
+            .front {
+                i {
+                    display: inline-block;
+                    height: 20px;
+                    width: 20px;
+                }
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 50px;
+                width: 50px;
+                text-align: center;
+                line-height: 50px;
+            }
+            .back {
+                background-color: @themeColor;
+                color: #fff;
+                font-size: 12px;
+                position: absolute;
+                left: 50px;
+                top: 0;
+                height: 50px;
+                width: 50px;
+                text-align: center;
+                line-height: 50px;
+            }
+        }
+        &.cart {
+            .cart-count {
+                transition: all .3s;
+                left: 27px;
+                top: 4px;
+                position: absolute;
+                display: inline-block;
+                padding: 0px 6px;
+                height: 16px;
+                line-height: 16px;
+                font-size: 12px;
+                background: #c00;
+                color: #fff;
+                border-radius: 17px;
+            }
+            i {
+                background: url('../../images/adv_ico_new.png') no-repeat -235px -20px;
+                background-size: 750px 1000px;
+            }
+        }
+        &.kefu {
+            i {
+                background: url('../../images/adv_ico_new.png') no-repeat -235px -50px;
+                background-size: 750px 1000px;
+            }
+        }
+        &.wx {
+            &:hover {
+                .wx-img-wrap {
+                    display: block;
+                }
+            }
+            i {
+                background: url('../../images/adv_ico_new.png') no-repeat -235px -81px;
+                background-size: 750px 1000px;
+            }
+            .wx-img-wrap {
+                display: none;
+                background-color: @themeColor;
+                line-height: 1em;
+                position: absolute;
+                width: 108px;
+                text-align: center;
+                left: -116px;
+                bottom: 0;
+                img {
+                    width: 82px;
+                    margin-top: 12px;
+                }
+                p {
+                    font-size: 12px;
+                    height: 16px;
+                    line-height: 16px;
+                    margin-top: 7px;
+                    padding-bottom: 12px;
+                    color: #fff;
+                }
+            }
+        }
+        &.nav-message {
+            i {
+                background: url('../../images/adv_ico_new.png') no-repeat -236px -110px;
+                background-size: 750px 1000px;
+            }
+            .cart-count {
+                transition: all .3s;
+                left: 27px;
+                top: 4px;
+                position: absolute;
+                display: inline-block;
+                padding: 0px 6px;
+                height: 16px;
+                line-height: 16px;
+                font-size: 12px;
+                background: #c00;
+                color: #fff;
+                border-radius: 17px;
+            }
+        }
+        &.back-to-top {
+            animation: fadeInUp .3s;
+            i {
+                background: url('../../images/adv_ico_new.png') no-repeat -236px -140px;
+                background-size: 750px 1000px;
+            }
+        }
+    }
+}

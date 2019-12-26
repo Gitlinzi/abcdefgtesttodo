@@ -1,0 +1,41 @@
+<div class="statement-page">
+
+	<div class="home-allTitle pdL20">{{i18n('账号剩余额度表')}}</div>
+
+    <div class="query clearfix">
+        <ul class="clearfix">
+            <li>
+                <span style="margin-left:10px">{{i18n('账号名称')}}:&nbsp;</span>
+                <input style="width:160px" ng-model="accountName"/>
+            </li>
+            <li style="float:right">
+                <button ng-click="clickSearch()" class="search">{{i18n('查询')}}</button>
+                <button ng-click="clickReset()" class="reset">{{i18n('重置')}}</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="clearfix" style="margin-top: 20px">
+        <button ng-click="clickDownload()" style="float:right" class="search">{{i18n('下载')}}</button>
+    </div>
+
+	<div class="statement-table">
+        <ul>
+            <li class="row">
+                <div class="table-cell table-title">{{i18n('账号名称')}}</div>
+                <div class="table-cell table-title">{{i18n('本月剩余额度')}}</div>
+                <div class="table-cell table-title">{{i18n('本季度剩余额度')}}</div>
+                <div class="table-cell table-title">{{i18n('本年剩余额度')}}</div>
+            </li>
+            <li ng-repeat="info in accountInfoList" class="row">
+                <div class="table-cell">{{info.nickname}}</div>
+                <div class="table-cell">{{info.monthAmount | currencySymbol:'¥'}}</div>
+                <div class="table-cell">{{info.quarterAmount | currencySymbol:'¥'}}</div>
+                <div class="table-cell">{{info.yearAmount | currencySymbol:'¥'}}</div>
+            </li>
+        </ul>
+    </div>
+
+    <div ng-if="totalPage>1" pagination page-size="pageSize" page-no="currentPage" total-page="totalPage"></div>
+
+</div>

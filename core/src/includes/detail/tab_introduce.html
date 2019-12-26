@@ -1,0 +1,25 @@
+<div id="introduce" class="content active txtcenter" ng-if="$parent.switchConfig.guide.item.goodNavigation.goodIntroduce">
+    <div class="prd-tags clearfix" ng-if="itemAttrSpec">
+        <div class="container-box clearfix" ng-repeat="attrs in itemAttrSpec">
+            <!-- <div class="packing-title">
+                 &lt;!&ndash;<span>{{attrs.name}}</span>&ndash;&gt;
+             </div>-->
+            <div class="packing-main" style="border-bottom: 0;border-top: 1px solid #eee;">
+                <span class="disblock">品牌：</span>
+                <span class="part16">{{productInfoBrandName}}</span>
+            </div>
+            <!--            <div class="packing-main" style="border-bottom: 0;border-top: 1px solid #eee;">-->
+            <!--                <span class="disblock">商品编码：</span>-->
+            <!--                <span class="part16">{{itemlist.code}}</span>-->
+            <!--            </div>-->
+            <div class="packing-main" ng-repeat="attr in attrs.merchantProductAttNameOutDTOS|limitTo:4 track by $index" ng-class="{'botT':$index<=0}">
+                <span class="disblock" ng-if="attr.attName && attr.attValue">{{attr.attName}}：</span>
+                <span class="part16" ng-if="attr.attName && attr.attValue">{{attr.attValue}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="item-produce" ng-if="itemAttrlist" ng-bind-html="itemAttrlist | trustHtml"></div>
+    <div ng-if="!itemAttrlist" class="pull-left">
+        {{i18n('抱歉')}}，{{i18n('内容暂无')}}，{{i18n('商家还没有发布相关内容')}}
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="side-nav">
+    <div class="st"><i class="icon-user2"></i>{{i18n('个人中心')}}</div>
+    <a ng-class="{active:center}" href="?center=0">{{i18n('我的主页')}}<i class="icon-arrow-right4"></i></a>
+    <div class="group" ng-class="{hide: ziliaozhongxin}" ng-init="ziliaozhongxin=false">
+        <span ng-click="ziliaozhongxin=!ziliaozhongxin">{{i18n('资料中心')}}<i class="icon-circle"></i></span>
+        <a ng-class="{active:modify}" href="?addpwd=0" ng-if="checkPasswordEnd && !haspassword">{{i18n('新增密码')}}<i class="icon-arrow-right4"></i></a>
+        <a ng-class="{active:modify}" href="?modify=0" ng-if="checkPasswordEnd && haspassword">{{i18n('修改密码')}}<i class="icon-arrow-right4"></i></a>
+        <a ng-class="{active:bindAndUnbind}" href="?bindMobile=0">{{i18n('绑定手机')}}<i class="icon-arrow-right4"></i></a>
+        <a ng-class="{active:invoiceUrl}" href="?invoice=0">{{i18n('发票信息')}}<i class="icon-arrow-right4"></i></a>
+        <a ng-class="{active:editAds}" href="?editAds=0">{{i18n('收货地址')}}<i class="icon-arrow-right4"></i></a>
+    </div>
+    <div class="group" ng-class="{hide: dingdanzhongxin}" ng-init="dingdanzhongxin=false">
+        <span ng-click="dingdanzhongxin=!dingdanzhongxin"><i class="icon-order mgR10"></i>{{i18n('我的订单')}}<i class="icon-circle"></i></span>
+        <a ng-class="{active:orderActive == 0}" href="?orders=0">{{i18n('全部订单')}}<i class="icon-arrow-right4"></i></a>
+        <!--<a ng-class="{active:evaluateList}" href="?evaluateList">我的评论<i class="icon-arrow-right4"></i></a>-->
+        <!--<a ng-class="{active:orderActive == 2}" href="?orders=2">订单文件<i class="icon-arrow-right4"></i></a> -->
+        <a ng-class="{active:orderActive == 1}" href="?orders=1">{{i18n('待付款')}}<i class="icon-arrow-right4"></i></a>
+        <a ng-class="{active:orderActive == 2}" href="?orders=2">{{i18n('待发货')}}<i class="icon-arrow-right4"></i></a>
+        <a ng-class="{active:orderActive == 3}" href="?orders=3">{{i18n('待收货')}}<i class="icon-arrow-right4"></i></a>
+        <a ng-class="{active:orderActive == 4}" href="?orders=4">{{i18n('待评价')}}<i class="icon-arrow-right4"></i></a>
+        <a ng-class="{active:orderActive == 8}" href="?orders=8">{{i18n('已完成')}}<i class="icon-arrow-right4"></i></a>
+    </div>
+    <!--<div class="group" ng-class="{hide: showFocus}" ng-init="showFocus=false">-->
+        <!--<span ng-click="showFocus=!showFocus"><i class="icon-attention mgR10"></i>我的关注</span>-->
+        <!--<a href="">关注的商品</a>-->
+        <!--<a href="">关注的店铺</a>-->
+        <!--<a href="">我的足迹</a>-->
+    <!--</div>-->
+    <div class="group" ng-class="{hide: showProperty}" ng-init="showProperty=false">
+        <span ng-click="showProperty=!showProperty"><i class="icon-assets mgR10"></i>{{i18n('我的资产')}}</span>
+        <!--<a href="">余额</a>-->
+        <!--<a href="">礼金卡</a>-->
+        <a ng-class="{active:coupons}" href="?coupons=0">{{i18n('优惠券')}}</a>
+        <a ng-class="{active:integral}" href="?integral=0">{{i18n('我的积分')}}</a>
+    </div>
+    <div class="group" ng-class="{hide: shouhoufuwu}" ng-init="shouhoufuwu=false">
+        <span ng-click="shouhoufuwu=!shouhoufuwu"><i class="icon-kefu mgR10" ></i>{{i18n('客户服务')}}</span>
+        <a href="?afterSaleList=1" ng-class="{active:asApply}">{{i18n('退换货')}}</a>
+        </div>
+    <!--<div class="group" ng-class="{hide: showEvaluate}" ng-init="showEvaluate=false">-->
+        <!--<span ng-click="showEvaluate=!showEvaluate"><i class="icon-evaluate mgR10"></i>我的评价</span>-->
+        <!--<a href="">待评价</a>-->
+        <!--<a href="">已评价</a>-->
+    <!--</div>-->
+</div>

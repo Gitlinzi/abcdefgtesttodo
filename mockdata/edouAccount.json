@@ -1,0 +1,8 @@
+{
+  "code":"0",
+  "data":{
+    "distributorId":16888,
+    "availableAccountAmount":123456.08,
+    "frozenAmount":654321.98
+  }
+}

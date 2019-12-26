@@ -1,0 +1,47 @@
+<div class="statement-page">
+
+	<div class="home-allTitle pdL20">{{i18n('采购额月表')}}</div>
+
+    <div class="query clearfix">
+        <ul class="clearfix">
+            <li>
+                <span style="margin-left:10px">{{i18n('年份')}}:&nbsp;</span>
+                <input placeholder="20XX, 20XX 最多3个年份" ng-model="yearInput" style="width:160px;"/>
+            </li>
+            <li>
+                <span style="margin-left:10px;float:left;line-height: 30px">{{i18n('成本中心')}}:&nbsp;</span>
+                <div select-tree data="costCenterList" key-name="'costName'" style="float:left"></div>
+            </li>
+            <li style="float:right">
+                <button ng-click="clickSearch()" class="search">{{i18n('查询')}}</button>
+                <button ng-click="clickReset()" class="reset">{{i18n('重置')}}</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="graph">
+        <div class="chart" id="month-chart"></div>
+    </div>
+
+    <div class="clearfix" style="margin-top: 20px">
+        <button ng-click="clickDownload()" style="float:right" class="search">{{i18n('下载')}}</button>
+    </div>
+
+	<div class="statement-table">
+        <ul>
+            <li class="row">
+                <div class="table-cell table-title">{{i18n('年份')}}</div>
+                <div class="table-cell table-title">{{i18n('月份')}}</div>
+                <div class="table-cell table-title">{{i18n('采购金额')}}</div>
+            </li>
+            <li ng-repeat="info in purchaseInfoList" class="row">
+                <div class="table-cell">{{info.year}}</div>
+                <div class="table-cell">{{info.month}}</div>
+                <div class="table-cell">{{info.amount | currencySymbol:'¥'}}</div>
+            </li>
+        </ul>
+    </div>
+
+    <div ng-if="totalPage>1" pagination page-size="pageSize" page-no="currentPage" total-page="totalPage"></div>
+
+</div>

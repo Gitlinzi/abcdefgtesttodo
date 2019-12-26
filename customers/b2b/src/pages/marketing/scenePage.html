@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="heimdall" content="首页">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/scenePage.css?v=${version}">
+    <meta name="heimdall" content="首页" >
+</head>
+<base target="_blank"/>
+<body ng-app="appControllers" ng-controller="scenePageCtrl">
+
+@@include("header.html")
+@@include("global-nav.html")
+<!--<div class="scenePage-banner">-->
+    <!--<img ng-src="../../images/top-banner.png" alt="" width="100%" height="400">-->
+<!--</div>-->
+<div class="container-scenePage scenePage-main">
+    <!-- 左侧悬浮导航 begin -->
+    <div class="left-target-box">
+        <a href="javascript:void(0)" ng-if="firstScene && firstScene.name" ng-click="anchorJump('scene1')">{{firstScene.name}}</a>
+        <a href="javascript:void(0)" ng-if="secondScene && secondScene.name" ng-click="anchorJump('scene2')">{{secondScene.name}}</a>
+        <a href="javascript:void(0)" ng-if="thirdScene && thirdScene.name" ng-click="anchorJump('scene3')">{{thirdScene.name}}</a>
+        <a href="javascript:void(0)" ng-if="fourthScene && fourthScene.name" ng-click="anchorJump('scene4')">{{fourthScene.name}}</a>
+        <a href="javascript:void(0)" ng-if="fifthScene && fifthScene.name" ng-click="anchorJump('scene5')">{{fifthScene.name}}</a>
+        <a href="javascript:void(0)" ng-if="sixthScene && sixthScene.name" ng-click="anchorJump('scene6')">{{sixthScene.name}}</a>
+        <a href="javascript:void(0)" ng-if="seventhScene && seventhScene.name" ng-click="anchorJump('scene7')">{{seventhScene.name}}</a>
+        <a href="javascript:void(0)" ng-if="eighthScene && eighthScene.name" ng-click="anchorJump('scene8')">{{eighthScene.name}}</a>
+        <a href="javascript:void(0)" class="goTopImg-box" href=""><i class="goTopImg"></i></a>
+    </div>
+    <!-- 左侧悬浮导航 end -->
+    <!--分类导航-->
+    <div class="main-top f0">
+        <div class="main-top-left dis" ng-repeat="sc in spreadClassification">
+            <a href="{{sc.linkUrl}}">
+                <img ng-src="{{sc.imageUrl}}" width="390" height="200" alt="">
+            </a>
+        </div>
+    </div>
+
+
+    <!-- 场景一 -->
+    <div class="main-container" ng-if="firstScene && firstScene.name" id="scene1">
+        <a href="" class="left-position-arrow" ng-if="!scene1ShowLunbo && s1upBtn" ng-click="firstTurnUpPage()"></a>
+        <a href="" class="right-position-arrow" ng-if="!scene1ShowLunbo && s1nextBtn" ng-click="firstTurnNextPage()"></a>
+        <a class="right-position-box" href="" ng-click="isShowImgOne=true;">使用说明</a>
+        <div class="mini-index-modal" ng-show="isShowImgOne">
+            <div class="img-box">
+                <a href="">
+                    <img src="{{textData1.num1[0].imageUrl}}" alt="" width="390" height="375">
+                </a>
+                <i class="index-img-position" ng-click="isShowImgOne=false"></i>
+            </div>
+        </div>
+        <div class="container-top clearfix">
+            <span class="top-left">{{firstScene.content}}</span>
+            <ul class="clearfix top-right-box">
+                <li class="top-right-text" ng-repeat="tab in firstSceneTab"><a ng-class={'text-bg-color':tab.select} href="" class="text-color" ng-click="getDataByAdCode(tab.content, textData1, scene1ShowLunbo, scene1callback,tab,firstSceneTab,true)">{{tab.name}}</a></li>
+            </ul>
+        </div>
+        <div class="container-img f0">
+            <div class="lunboimg dis lunboimg1 scene-carousel-1" ody-carousel lunbo="textData1.num3" imgwidth="600" main-dom="scene-carousel-1" lunbo-time="5000" imgheight="381" ng-if="textData1.num3 && scene1ShowLunbo"></div>
+            <div class="lunboimg dis" ng-if="!scene1ShowLunbo">
+                <img ng-src="{{s1sevenBlocks[0].refObject?s1sevenBlocks[0].refObject.picUrl:s1sevenBlocks[0].imageUrl}}" width="600" height="381" alt="">
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in textData1.num2" ng-if="scene1ShowLunbo">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in s1sevenBlocks | limitTo:7" ng-if="!scene1ShowLunbo && $index >0">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 场景二 -->
+    <div class="main-container" ng-if="secondScene && secondScene.name" id="scene2">
+        <a href="" class="left-position-arrow" ng-if="!scene2ShowLunbo && s2upBtn" ng-click="secondTurnUpPage()"></a>
+        <a href="" class="right-position-arrow" ng-if="!scene2ShowLunbo && s2nextBtn" ng-click="secondTurnNextPage()"></a>
+        <a class="right-position-box" href="" ng-click="isShowImgTwo=true">使用说明</a>
+        <div class="mini-index-modal" ng-show="isShowImgTwo">
+            <div class="img-box">
+                <a href="">
+                    <img src="{{textData2.num1[0].imageUrl}}" alt="" width="390" height="375">
+                </a>
+                <i class="index-img-position" ng-click="isShowImgTwo=false"></i>
+            </div>
+        </div>
+        <div class="container-top clearfix">
+            <span class="top-left">{{secondScene.content}}</span>
+            <ul class="clearfix top-right-box">
+                <li class="top-right-text" ng-repeat="tab in secondSceneTab"><a href="" ng-class={'text-bg-color':tab.select} class="text-color" ng-click="getDataByAdCode(tab.content, textData2, scene2ShowLunbo, scene2callback,tab,secondSceneTab,true)">{{tab.name}}</a></li>
+            </ul>
+        </div>
+        <div class="container-img f0">
+            <div class="lunboimg dis lunboimg2 scene-carousel-2" ody-carousel lunbo="textData2.num3" imgwidth="600" main-dom="scene-carousel-2" lunbo-time="5000" imgheight="381" ng-if="textData2.num3 && scene2ShowLunbo"></div>
+            <div class="lunboimg dis" ng-if="!scene2ShowLunbo">
+                <img ng-src="{{s2sevenBlocks[0].refObject?s2sevenBlocks[0].refObject.picUrl:s2sevenBlocks[0].imageUrl}}" width="600" height="381" alt="">
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in textData2.num2" ng-if="scene2ShowLunbo">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in s2sevenBlocks | limitTo:7" ng-if="!scene2ShowLunbo && $index >0">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 场景三 -->
+    <div class="main-container" ng-if="thirdScene && thirdScene.name" id="scene3">
+        <a href="" class="left-position-arrow" ng-if="!scene3ShowLunbo && s3upBtn" ng-click="thirdTurnUpPage()"></a>
+        <a href="" class="right-position-arrow" ng-if="!scene3ShowLunbo && s3nextBtn" ng-click="thirdTurnNextPage()"></a>
+        <a class="right-position-box" href="" ng-click="isShowImgThree=true">使用说明</a>
+        <div class="mini-index-modal" ng-show="isShowImgThree">
+            <div class="img-box">
+                <a href="">
+                    <!--<img src="../images/index-img.png" alt="" width="390" height="375">-->
+                    <img ng-src="{{textData3.num1[0].imageUrl}}" alt="" width="390" height="375">
+                </a>
+                <i class="index-img-position" ng-click="isShowImgThree=false"></i>
+            </div>
+        </div>
+        <div class="container-top clearfix">
+            <span class="top-left">{{thirdScene.content}}</span>
+            <ul class="clearfix top-right-box">
+                <li class="top-right-text" ng-repeat="tab in thirdSceneTab"><a href="" ng-class={'text-bg-color':tab.select} class="text-color" ng-click="getDataByAdCode(tab.content, textData3, scene3ShowLunbo, scene3callback,tab,thirdSceneTab,true)">{{tab.name}}</a></li>
+            </ul>
+        </div>
+        <div class="container-img f0">
+            <div class="lunboimg dis lunboimg3 scene-carousel-3" ody-carousel lunbo="textData3.num3" imgwidth="600" main-dom="scene-carousel-3" lunbo-time="5000" imgheight="381" ng-if="textData3.num3 && scene3ShowLunbo"></div>
+            <div class="lunboimg dis" ng-if="!scene3ShowLunbo">
+                <img ng-src="{{s3sevenBlocks[0].refObject?s3sevenBlocks[0].refObject.picUrl:s3sevenBlocks[0].imageUrl}}" width="600" height="381" alt="">
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in textData3.num2" ng-if="scene3ShowLunbo">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in s3sevenBlocks | limitTo:7" ng-if="!scene3ShowLunbo && $index >0">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 场景四 -->
+    <div class="main-container" ng-if="fourthScene && fourthScene.name" id="scene4">
+        <a href="" class="left-position-arrow" ng-if="!scene4ShowLunbo && s4upBtn" ng-click="fourthTurnUpPage()"></a>
+        <a href="" class="right-position-arrow" ng-if="!scene4ShowLunbo && s4nextBtn" ng-click="fourthTurnNextPage()"></a>
+        <a class="right-position-box" href="" ng-click="isShowImgFore=true">使用说明</a>
+        <div class="mini-index-modal" ng-show="isShowImgFore">
+            <div class="img-box">
+                <a href="">
+                    <img src="{{textData4.num1[0].imageUrl}}" alt="" width="390" height="375">
+                </a>
+                <i class="index-img-position" ng-click="isShowImgFore=false"></i>
+            </div>
+        </div>
+        <div class="container-top clearfix">
+            <span class="top-left">{{fourthScene.content}}</span>
+            <ul class="clearfix top-right-box">
+                <li class="top-right-text" ng-repeat="tab in fourthSceneTab"><a href="" ng-class={'text-bg-color':tab.select} class="text-color" ng-click="getDataByAdCode(tab.content, textData4, scene4ShowLunbo, scene4callback,tab,fourthSceneTab,true)">{{tab.name}}</a></li>
+            </ul>
+        </div>
+        <div class="container-img f0">
+            <div class="lunboimg dis lunboimg4 scene-carousel-4" ody-carousel lunbo="textData4.num3" imgwidth="600" main-dom="scene-carousel-4" lunbo-time="5000" imgheight="381" ng-if="textData4.num3 && scene4ShowLunbo"></div>
+            <div class="lunboimg dis" ng-if="!scene4ShowLunbo">
+                <img ng-src="{{s4sevenBlocks[0].refObject?s4sevenBlocks[0].refObject.picUrl:s4sevenBlocks[0].imageUrl}}" width="600" height="381" alt="">
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in textData4.num2" ng-if="scene4ShowLunbo">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in s4sevenBlocks | limitTo:7" ng-if="!scene4ShowLunbo && $index >0">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 场景五 -->
+    <div class="main-container" ng-if="fifthScene && fifthScene.name" id="scene5">
+        <a href="" class="left-position-arrow" ng-if="!scene5ShowLunbo && s5upBtn" ng-click="fifthTurnUpPage()"></a>
+        <a href="" class="right-position-arrow" ng-if="!scene5ShowLunbo && s5nextBtn" ng-click="fifthTurnNextPage()"></a>
+        <a class="right-position-box" href="" ng-click="isShowImgFive=true">使用说明</a>
+        <div class="mini-index-modal" ng-show="isShowImgFive">
+            <div class="img-box">
+                <a href="">
+                    <img src="{{textData5.num1[0].imageUrl}}" alt="" width="390" height="375">
+                </a>
+                <i class="index-img-position" ng-click="isShowImgFive=false"></i>
+            </div>
+        </div>
+        <div class="container-top clearfix">
+            <span class="top-left">{{fifthScene.content}}</span>
+            <ul class="clearfix top-right-box">
+                <li class="top-right-text" ng-repeat="tab in fifthSceneTab"><a href="" ng-class={'text-bg-color':tab.select} class="text-color" ng-click="getDataByAdCode(tab.content, textData5, scene5ShowLunbo, scene5callback,tab,fifthSceneTab,true)">{{tab.name}}</a></li>
+            </ul>
+        </div>
+        <div class="container-img f0">
+            <div class="lunboimg dis lunboimg5 scene-carousel-5" ody-carousel lunbo="textData5.num3" imgwidth="600" main-dom="scene-carousel-5" lunbo-time="5000" imgheight="381" ng-if="textData5.num3 && scene5ShowLunbo"></div>
+            <div class="lunboimg dis" ng-if="!scene5ShowLunbo">
+                <img ng-src="{{s5sevenBlocks[0].refObject?s5sevenBlocks[0].refObject.picUrl:s5sevenBlocks[0].imageUrl}}" width="600" height="381" alt="">
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in textData5.num2" ng-if="scene5ShowLunbo">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in s5sevenBlocks | limitTo:7" ng-if="!scene5ShowLunbo && $index >0">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 场景六 -->
+    <div class="main-container" ng-if="sixthScene && sixthScene.name" id="scene6">
+        <a href="" class="left-position-arrow" ng-if="!scene6ShowLunbo && s6upBtn" ng-click="sixthTurnUpPage()"></a>
+        <a href="" class="right-position-arrow" ng-if="!scene6ShowLunbo && s6nextBtn" ng-click="sixthTurnNextPage()"></a>
+        <a class="right-position-box" href="" ng-click="isShowImgSix=true">使用说明</a>
+        <div class="mini-index-modal" ng-show="isShowImgSix">
+            <div class="img-box">
+                <a href="">
+                    <img src="{{textData6.num1[0].imageUrl}}" alt="" width="390" height="375">
+                </a>
+                <i class="index-img-position" ng-click="isShowImgSix=false"></i>
+            </div>
+        </div>
+        <div class="container-top clearfix">
+            <span class="top-left">{{sixthScene.content}}</span>
+            <ul class="clearfix top-right-box">
+                <li class="top-right-text" ng-repeat="tab in sixthSceneTab"><a href="" ng-class={'text-bg-color':tab.select} class="text-color" ng-click="getDataByAdCode(tab.content, textData6, scene6ShowLunbo, scene6callback,tab,sixthSceneTab,true)">{{tab.name}}</a></li>
+            </ul>
+        </div>
+        <div class="container-img f0">
+            <div class="lunboimg dis lunboimg6 scene-carousel-6" ody-carousel lunbo="textData6.num3" imgwidth="600" main-dom="scene-carousel-6" lunbo-time="5000" imgheight="381" ng-if="textData6.num3 && scene6ShowLunbo"></div>
+            <div class="lunboimg dis" ng-if="!scene6ShowLunbo">
+                <img ng-src="{{s6sevenBlocks[0].refObject?s6sevenBlocks[0].refObject.picUrl:s6sevenBlocks[0].imageUrl}}" width="600" height="381" alt="">
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in textData6.num2" ng-if="scene6ShowLunbo">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in s6sevenBlocks | limitTo:7" ng-if="!scene6ShowLunbo && $index >0">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 场景七 -->
+    <div class="main-container" ng-if="seventhScene && seventhScene.name" id="scene7">
+        <a href="" class="left-position-arrow" ng-if="!scene7ShowLunbo && s7upBtn" ng-click="seventhTurnUpPage()"></a>
+        <a href="" class="right-position-arrow" ng-if="!scene7ShowLunbo && s7nextBtn" ng-click="seventhTurnNextPage()"></a>
+        <a class="right-position-box" href="" ng-click="isShowImgSeven=true">使用说明</a>
+        <div class="mini-index-modal" ng-show="isShowImgSeven">
+            <div class="img-box">
+                <a href="">
+                    <img src="{{textData7.num1[0].imageUrl}}" alt="" width="390" height="375">
+                </a>
+                <i class="index-img-position" ng-click="isShowImgSeven=false"></i>
+            </div>
+        </div>
+        <div class="container-top clearfix">
+            <span class="top-left">{{seventhScene.content}}</span>
+            <ul class="clearfix top-right-box">
+                <li class="top-right-text" ng-repeat="tab in seventhSceneTab"><a href="" ng-class={'text-bg-color':tab.select} class="text-color" ng-click="getDataByAdCode(tab.content, textData7, scene7ShowLunbo, scene7callback,tab,seventhSceneTab,true)">{{tab.name}}</a></li>
+            </ul>
+        </div>
+        <div class="container-img f0">
+            <div class="lunboimg dis lunboimg7 scene-carousel-7" ody-carousel lunbo="textData7.num3" imgwidth="600" main-dom="scene-carousel-7" lunbo-time="5000" imgheight="381" ng-if="textData7.num3 && scene7ShowLunbo"></div>
+            <div class="lunboimg dis" ng-if="!scene7ShowLunbo">
+                <img ng-src="{{s7sevenBlocks[0].refObject?s7sevenBlocks[0].refObject.picUrl:s7sevenBlocks[0].imageUrl}}" width="600" height="381" alt="">
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in textData7.num2" ng-if="scene7ShowLunbo">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in s7sevenBlocks | limitTo:7" ng-if="!scene7ShowLunbo && $index >0">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 场景八 -->
+    <div class="main-container" ng-if="eighthScene && eighthScene.name" id="scene8">
+        <a href="" class="left-position-arrow" ng-if="!scene8ShowLunbo && s8upBtn" ng-click="eighthTurnUpPage()"></a>
+        <a href="" class="right-position-arrow" ng-if="!scene8ShowLunbo && s8nextBtn" ng-click="eighthTurnNextPage()"></a>
+        <a class="right-position-box" href="" ng-click="isShowImgEight=true">使用说明</a>
+        <div class="mini-index-modal" ng-show="isShowImgEight">
+            <div class="img-box">
+                <a href="">
+                    <img src="{{textData8.num1[0].imageUrl}}" alt="" width="390" height="375">
+                </a>
+                <i class="index-img-position" ng-click="isShowImgEight=false"></i>
+            </div>
+        </div>
+        <div class="container-top clearfix">
+            <span class="top-left">{{eighthScene.content}}</span>
+            <ul class="clearfix top-right-box">
+                <li class="top-right-text" ng-repeat="tab in eighthSceneTab"><a href="" ng-class={'text-bg-color':tab.select} class="text-color" ng-click="getDataByAdCode(tab.content, textData8, scene8ShowLunbo, scene8callback,tab,eighthSceneTab,true)">{{tab.name}}</a></li>
+            </ul>
+        </div>
+        <div class="container-img f0">
+            <div class="lunboimg dis lunboimg8 scene-carousel-8" ody-carousel lunbo="textData8.num3" imgwidth="600" main-dom="scene-carousel-8" lunbo-time="5000" imgheight="381" ng-if="textData8.num3 && scene8ShowLunbo"></div>
+            <div class="lunboimg dis" ng-if="!scene8ShowLunbo">
+                <img ng-src="{{s8sevenBlocks[0].refObject?s8sevenBlocks[0].refObject.picUrl:s8sevenBlocks[0].imageUrl}}" width="600" height="381" alt="">
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in textData8.num2" ng-if="scene8ShowLunbo">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="container-goods dis" ng-repeat="pro in s8sevenBlocks | limitTo:7" ng-if="!scene8ShowLunbo && $index >0">
+                <div ng-if="pro.refObject">
+                    <a href="{{pro.linkUrl}}" class="goods-box">
+                        <img ng-src="{{pro.refObject?(pro.refObject.picUrl?pro.refObject.picUrl:pro.imageUrl):pro.imageUrl}}" height="260" width="260" alt="">
+                        <span class="good-name">{{pro.refObject.productName}}</span>
+                    </a>
+                    <span class="moeny-text" ng-if="!$parent.hideProductPrice">{{pro.refObject.price| currency:'￥'}}</span>
+                    <span class="moeny-text" ng-if="$parent.hideProductPrice">{{$parent.switchConfig.common.showTextWhenHidePrice}}</span>
+                </div>
+                <div class="onlyBigImg" ng-if="!pro.refObject">
+                    <a href="{{pro.linkUrl}}">
+                        <img ng-src="{{pro.imageUrl}}" height="340" width="260" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/scenePage.js?v=${version}"></script>
+</body>
+</html>

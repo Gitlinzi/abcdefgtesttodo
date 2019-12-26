@@ -1,0 +1,98 @@
+<div bomb-box cart-data="favoriteSuccessData"></div>
+<div class="couponDetail" ng-if="((couponsListNow.availableCouponTheme && couponsListNow.availableCouponTheme.length>0) || (couponsListNow.availableCoupon && couponsListNow.availableCoupon.length>0))">
+    <span>{{i18n('优惠券')}}</span>
+    <ul ng-if="couponsListNow.availableCouponTheme && couponsListNow.availableCouponTheme.length>0">
+        <li ng-repeat="coupon in couponsListNow.availableCouponTheme | limitTo:3" style="float:left" track-by="$index">
+            <div class="couponImg">
+                <!-- <img src="../../images/company/cart-icon.png" alt=""> -->
+                <i class="coupon-icon iconCoupon"></i>
+                <span class="couponTitle">{{coupon.useRule}}</span>
+            </div>
+        </li>
+    </ul>
+    <ul ng-if="(!couponsListNow.availableCouponTheme || couponsListNow.availableCouponTheme.length==0) && (couponsListNow.availableCoupon && couponsListNow.availableCoupon.length>0)">
+            <li ng-repeat="coupon in couponsListNow.availableCoupon | limitTo:3" style="float:left" track-by="$index">
+                <div class="couponImg">
+                    <!-- <img src="../../images/company/cart-icon.png" alt=""> -->
+                    <i class="coupon-icon iconCoupon"></i>
+                    <span class="couponTitle">{{coupon.useRule}}</span>
+                </div>
+            </li>
+        </ul>
+    <span href="javascript:viod(0)" ng-click="$parent.couponShow = true;lockBg()" class="cur">{{i18n('更多')}}></span>
+    <i class=""></i>
+</div> 
+<div class="mengceng" ng-show="couponShow"></div>
+<div style="z-index: 999;" class="coupon-container" ng-show="couponShow">
+    <div class="coupon-title">
+        {{i18n('优惠券')}}
+        <span class="close cur" ng-click="couponShow = false;unlockBg()">x</span>
+    </div>
+    <div class="coupon-body">
+        <ul class="coupon-header clearfix">
+            <li ng-class="{'active':curruntTabCoupon==1}" ng-click="pcIteminfo._switchCouponTab(1)">{{i18n('可领取')}}{{'('+canGoCouponNum+')'}}</li>
+            <li><span class="line"></span></li>
+            <li ng-class="{'active':curruntTabCoupon==2}" ng-click="pcIteminfo._switchCouponTab(2)">  {{i18n('可使用')}}{{'('+canUseCouponNum+')'}}</li>
+        </ul>
+        <ul class="coupon-box clearfix">
+            <li ng-repeat="coupon in couponsList track by $index" ng-if="curruntTabCoupon==1&&couponsList.length>0" >
+                <div class="coupon-img">
+                    <div>
+                        <span ng-if="coupon.couponDiscountType == 0" class="couponMoney">¥</span>
+                        <span ng-if="coupon.couponDiscountType == 0" class="couponM">{{coupon.couponValue|couponMoney}}</span>
+                        <span ng-if="coupon.couponDiscountType == 1" class="couponM" style="margin-right:20px">{{coupon.couponValue |discountFormat:1 }}<strong class="f14">{{i18n('折')}}</strong></span>
+                        <span class="coupon-arch">{{i18n('优惠券')}}</span>
+                        <span class="fr couponBox cur"  ng-if="!(coupon.userDayOverFlg == 1||coupon.userOverFlg == 1||coupon.overFlg == 1)"  ng-click="pcIteminfo._baggageCoupon(coupon)">{{i18n('立即领取')}}</span>
+                        <!-- <span class="fr couponBox"  ng-if="coupon.userDayOverFlg == 1||coupon.userOverFlg == 1||coupon.overFlg == 1" >立即使用</span> -->
+                    </div>
+
+                    <p>{{coupon.useRule||coupon.moneyRule}}</p>
+                    <!--<p ng-if="coupon.effdateCalcMethod==1 && coupon.isStarted === 1" class="couponMoneyNumChinese">{{i18n('有效期至')}}:{{coupon.endTime | date : 'yyyy-MM-dd HH:mm'}}-->
+                        <!--<span class="fr couponEnd" ng-if="coupon.overDate == 1">{{i18n('即将到期')}}</span>-->
+                    <!--</p>           -->
+                    <p ng-if="coupon.effdateCalcMethod==2" class="couponMoneyNumChinese">
+                        <span>{{i18n('自领取后')}}{{coupon.effDays}}{{i18n('天内有效')}}</span>
+                    </p>
+                    <p ng-if="coupon.effdateCalcMethod==1" class="couponMoneyNumChinese">{{coupon.startTime | date : 'yyyy-MM-dd'}}{{i18n('至')}}{{coupon.endTime | date : 'yyyy-MM-dd'}}
+                    </p>
+                </div>
+            </li>
+            <li ng-repeat="coupon in couponsList" ng-if="curruntTabCoupon==2&&couponsList.length>0" >
+                <div class="coupon-img">
+                    <div>
+                        <span ng-if="coupon.couponDiscountType == 0" class="couponMoney">¥</span>
+                        <span ng-if="coupon.couponDiscountType == 0" class="couponM">{{(coupon.couponValue)|couponMoney}}</span>
+                        <span ng-if="coupon.couponDiscountType == 1" class="couponM" style="margin-right:20px">{{coupon.couponValue|discountFormat:1}}<strong class="f14">{{i18n('折')}}</strong></span>
+                        <span class="coupon-arch">{{i18n('优惠券')}}</span>
+                       <!-- <span class="fr couponBox">{{i18n('立即使用')}}</span>-->
+                    </div>
+
+                    <p>{{coupon.useRule||coupon.moneyRule}}</p>
+                    <p ng-if="coupon.isStarted === 1" class="couponMoneyNumChinese">{{i18n('有效期至')}}:{{coupon.endTime | date : 'yyyy-MM-dd HH:mm'}}</p><span class="fr couponEnd" ng-if="coupon.overDate == 1">{{i18n('即将到期')}}</span>
+                    <p ng-if="coupon.isStarted === 0" class="couponMoneyNumChinese" >{{coupon.startTime | date : 'yyyy-MM-dd'}}{{i18n('至')}}{{coupon.endTime | date : 'yyyy-MM-dd'}}</p>
+                    <!-- <p ng-if="coupon.effdateCalcMethod==2" class="couponMoneyNumChinese"><span>自领取后{{coupon.effDays}}天内有效</span><span class="fr couponEnd">即将到期</span> -->
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- <div class="coupon-one clearfix" ng-repeat="coupon in couponsList" ng-if="isCanUseCoupons == 2&&couponsList.length>0">
+        <div class="coupon-one-top">
+            <div class="couponMoney">
+                <span ng-if="coupon.couponDiscountType == 0" class="moneySymbol"> ￥ </span>
+                <span ng-if="coupon.couponDiscountType == 0" class="couponMoneyNumChinese">{{coupon.couponValue|couponMoney}}</span>
+                <span ng-if="coupon.couponDiscountType == 1" class="couponMoneyNumChinese" style="margin-right:20px">{{coupon.couponValue|couponDiscount}}<strong class="f14">{{i18n('折')}}</strong></span>
+                    <span class="couponBox">
+                        <span class="reducerPrice">
+                            {{i18n('优惠券')}}
+                        </span>
+                    </span>
+            </div>
+            <div class="ticketChinese">{{coupon.moneyRule}}</div>
+        </div>
+        <div class="coupon-one-footer">
+            <p><span>{{i18n('有效期至')}}:{{coupon.endTime | date : 'yyyy-MM-dd HH:mm'}}</span><span ng-if="coupon.overDate == 1" class="overdate">{{i18n('即将到期')}}</span></p>
+        </div>
+    </div> -->
+    <p class="coupon-tips" ng-if="couponsList.length==0">{{i18n('暂无可领取优惠券')}}</p>
+</div>
+

@@ -1,0 +1,62 @@
+<div id="order-us" class="delivery-content content" ng-init="deliveryOrder.init()">   
+        <!-- 删除订单弹框 end -->
+        <div class='home-allTitle pdL20 pdR20'>{{i18n('交货单')}}<span class="goToBack fr" ng-click="goToBack()"><i class="icon-back-left"></i><i class="icon-back-left"></i><span class="fr">{{i18n('返回')}}</span></span></div>
+        <div class="module">
+            <div class="mc">
+                <!-- <div class="clear"></div> -->
+                <div class="evaluate-list">
+                    <div class="list-title pdL20 mgB10 list-titleColor">
+                        <span class="width580">{{i18n('商品')}}</span>
+                        <span class="width140">{{i18n('单价')}}</span>
+                        <span class="width140">{{i18n('数量')}}</span>
+                        <span class="width140">{{i18n('小计')}}</span>
+                        <!-- <span class="width120">{{i18n('操作')}}</span> -->
+                    </div>
+                </div>
+                <div class="order-group">
+                    <div class="suborder" ng-repeat="item in deliveryOrderList">
+                        <!--订单信息-->
+                        <div class="row order-title all-title-color">
+                            <!--订单号-->
+                            <div class="cell c3-1">{{i18n('交货单')}}：<span>{{item.deliverOrderCode}}</span></div>
+                        </div>
+                        <table class="order-list all-table-color">
+                            <tr ng-repeat="items in item.skus">
+                                <!--商品图片-->
+                                <td width="120" align="center" class="bl bb all-img-box"><a target="_blank"><img
+                                        width="80" height="80"
+                                        ng-src="{{items.delProObj[0].pictureUrl}}"></a></td>
+                                <!--商品名称-->
+                                <td width="240" class="bb" style="padding-right: 30px;box-sizing:border-box">
+                                    <a target="_blank" class="name">
+                                        <span class="colorB ui-nowrap-multi">{{items.delProObj[0].chineseName}}</span>
+                                    </a>
+                                </td>
+                                <!--商品属性-->
+                                <td width="200" style="padding-right: 20px" align="left" class="bb text-lighter"></td>
+                                <!--金额-->
+                                <td width="160" valign="top" align="center" class="bb bold">
+                                    {{items.bizPrice | currency:'￥'}}
+                                </td>
+                                <td width="130" style="padding-right: 20px" align="center" class="bb bold">{{items.num}}</td>
+                                <td width="130" style="padding-right: 20px" align="center" class="bb theme bold">{{items.prodPrice | currency:'￥'}}</td>
+                            </tr>
+                        </table>
+                        <div class="all-statistics">
+                            共<span class="theme">{{item.numtotal}}</span>件商品，合计：&nbsp;&nbsp;&nbsp;&nbsp;<span class="theme">{{item.pricetotal | currency:'￥'}}</span>
+                        </div>
+                    </div>
+                    <!-- <div class="none-order" ng-if="orders.isShowIcon">
+                        <div class="none-left mgR15">
+                            <span class="none-left-img"></span>
+                        </div>
+                        <div class="none-right">
+                            <span>{{i18n('没有订单哦')}}~</span>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                    total-page="totalPage" ng-if="isShowPage"></div>
+    </div>

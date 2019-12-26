@@ -1,0 +1,74 @@
+{
+  "code": "0",
+  "message": "操作成功",
+  "errMsg": null,
+  "data": {
+    "data": [
+      {
+        "balance": 111,
+        "actionType": 2,
+        "actionTypeName": "签到",
+        "createTimeStr": "2016-08-17 15:40:31",
+        "createTime": 1471419631000,
+        "sourceDetail": "签到"
+      },
+      {
+        "balance": 222,
+        "actionType": 1,
+        "actionTypeName": "签到",
+        "createTimeStr": "2016-08-17 15:40:31",
+        "createTime": 1471419631000,
+        "sourceDetail": "签到"
+      },{
+        "balance": 333,
+        "actionType": 2,
+        "actionTypeName": "签到",
+        "createTimeStr": "2016-08-17 15:40:31",
+        "createTime": 1471419631000,
+        "sourceDetail": "签到"
+      },
+      {
+        "balance": 666,
+        "actionType": 1,
+        "actionTypeName": "签到",
+        "createTimeStr": "2016-08-17 15:40:31",
+        "createTime": 1471419631000,
+        "sourceDetail": "签到"
+      },{
+        "balance": 555,
+        "actionType": 1,
+        "actionTypeName": "签到",
+        "createTimeStr": "2016-08-17 15:40:31",
+        "createTime": 1471419631000,
+        "sourceDetail": "签到"
+      },
+      {
+        "balance": 777,
+        "actionType": 2,
+        "actionTypeName": "签到",
+        "createTimeStr": "2016-08-17 15:40:31",
+        "createTime": 1471419631000,
+        "sourceDetail": "签到"
+      },{
+        "balance": 999,
+        "actionType": 1,
+        "actionTypeName": "签到",
+        "createTimeStr": "2016-08-17 15:40:31",
+        "createTime": 1471419631000,
+        "sourceDetail": "签到"
+      },
+      {
+        "balance": 888,
+        "actionType": 2,
+        "actionTypeName": "签到",
+        "createTimeStr": "2016-08-17 15:40:31",
+        "createTime": 1471419631000,
+        "sourceDetail": "签到"
+      }
+    ],
+    "totalCount": 9,
+    "pageSize": 2,
+    "totalPage": 5
+  },
+  "trace": "46!$6#@16%&172!$,null,61722798231684883191294"
+}

@@ -1,0 +1,221 @@
+<div class="good-evaluate" ng-init="lookComment.init()">
+	    <!-- <div crumb crumb-list="crumbList" active-attr="activeAttr" keyword="noResultKeyword" is-list="isList">
+        </div> -->
+
+    <div class="search">
+        <a ui-sref="index_comment" class="my-evalutate">{{i18n('评价晒单')}}</a>
+        <span>{{i18n('订单评价')}}</span>
+    </div>
+    <div class="evaluate-title pdL20 home-allTitle">
+        <span class="item-good">{{i18n('订单评价')}}</span>
+    </div>
+    <!-- ng-repeat="comment in lookComment.comment" -->
+    <div class="evaluate-main change-height clearfix">
+        <!-- <div class="evaluate-left">
+            <a class="img-box" href="item.html?itemId={{comment.mpId}}">
+                <img width="160" height="160" ng-src="{{comment.mpPicUrl}}">
+            </a>
+            <a class="fontSize" href="item.html?itemId={{comment.mpId}}">{{comment.mpName}}</a>
+            <p>{{comment.realPrice | currency:'￥'}}</p>
+        </div> -->
+        <div class="evaluate-right">
+            <!--评价时间-->
+            <dl class="clearfix evaluate-time" ng-if="false">
+                <dt>{{i18n('评价时间')}}</dt>
+                <dd>{{comment.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</dd>
+            </dl>
+            <dl class="clearfix one-dl">
+                <dt>{{i18n('服务评分')}}</dt>
+                <!--  五角星添加 star-active class时为红色 只有star属性时为灰色  -->
+                <dd ng-if="lookComment.mporderDetail.serviceRate == 1">
+                    <span class="star star-active"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                </dd>
+                <!--二星-->
+                <dd ng-if="lookComment.mporderDetail.serviceRate == 2">
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                </dd>
+                <!--三星-->
+                <dd ng-if="lookComment.mporderDetail.serviceRate == 3">
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                </dd>
+                <!--四星-->
+                <dd ng-if="lookComment.mporderDetail.serviceRate == 4">
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star"></span>
+                </dd>
+                <!--五星-->
+                <dd ng-if="lookComment.mporderDetail.serviceRate == 5">
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                </dd>
+                <dd class="colorB">{{lookComment.mporderDetail.serviceRate}}{{i18n('分')}}</dd>
+                <!-- <dd class="notice">请为商品满意度打分</dd> -->
+            </dl>
+            <dl class="clearfix one-dl">
+                    <dt>{{i18n('销售评分')}}</dt>
+                    <!--  五角星添加 star-active class时为红色 只有star属性时为灰色  -->
+                    <dd ng-if="lookComment.mporderDetail.saleRate == 1">
+                        <span class="star star-active"></span>
+                        <span class="star"></span>
+                        <span class="star"></span>
+                        <span class="star"></span>
+                        <span class="star"></span>
+                    </dd>
+                    <!--二星-->
+                    <dd ng-if="lookComment.mporderDetail.saleRate == 2">
+                        <span class="star star-active"></span>
+                        <span class="star star-active"></span>
+                        <span class="star"></span>
+                        <span class="star"></span>
+                        <span class="star"></span>
+                    </dd>
+                    <!--三星-->
+                    <dd ng-if="lookComment.mporderDetail.saleRate == 3">
+                        <span class="star star-active"></span>
+                        <span class="star star-active"></span>
+                        <span class="star star-active"></span>
+                        <span class="star"></span>
+                        <span class="star"></span>
+                    </dd>
+                    <!--四星-->
+                    <dd ng-if="lookComment.mporderDetail.saleRate == 4">
+                        <span class="star star-active"></span>
+                        <span class="star star-active"></span>
+                        <span class="star star-active"></span>
+                        <span class="star star-active"></span>
+                        <span class="star"></span>
+                    </dd>
+                    <!--五星-->
+                    <dd ng-if="lookComment.mporderDetail.saleRate == 5">
+                        <span class="star star-active"></span>
+                        <span class="star star-active"></span>
+                        <span class="star star-active"></span>
+                        <span class="star star-active"></span>
+                        <span class="star star-active"></span>
+                    </dd>
+                    <dd class="colorB">{{lookComment.mporderDetail.saleRate}}{{i18n('分')}}</dd>
+                    <!-- <dd class="notice">请为商品满意度打分</dd> -->
+                </dl>
+                <dl class="clearfix one-dl">
+                        <dt>{{i18n('物流评分')}}</dt>
+                        <!--  五角星添加 star-active class时为红色 只有star属性时为灰色  -->
+                        <dd ng-if="lookComment.mporderDetail.logisticsRate == 1">
+                            <span class="star star-active"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                        </dd>
+                        <!--二星-->
+                        <dd ng-if="lookComment.mporderDetail.logisticsRate == 2">
+                            <span class="star star-active"></span>
+                            <span class="star star-active"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                        </dd>
+                        <!--三星-->
+                        <dd ng-if="lookComment.mporderDetail.logisticsRate == 3">
+                            <span class="star star-active"></span>
+                            <span class="star star-active"></span>
+                            <span class="star star-active"></span>
+                            <span class="star"></span>
+                            <span class="star"></span>
+                        </dd>
+                        <!--四星-->
+                        <dd ng-if="lookComment.mporderDetail.logisticsRate == 4">
+                            <span class="star star-active"></span>
+                            <span class="star star-active"></span>
+                            <span class="star star-active"></span>
+                            <span class="star star-active"></span>
+                            <span class="star"></span>
+                        </dd>
+                        <!--五星-->
+                        <dd ng-if="lookComment.mporderDetail.logisticsRate == 5">
+                            <span class="star star-active"></span>
+                            <span class="star star-active"></span>
+                            <span class="star star-active"></span>
+                            <span class="star star-active"></span>
+                            <span class="star star-active"></span>
+                        </dd>
+                        <dd class="colorB">{{lookComment.mporderDetail.logisticsRate}}{{i18n('分')}}</dd>
+                        <!-- <dd class="notice">请为商品满意度打分</dd> -->
+                    </dl>
+            <dl class="clearfix look-content">
+                <dt>{{i18n('评价内容')}}</dt>
+                <dd>
+                    <span class="look-first">{{lookComment.mporderDetail.content}}</span>
+                    <div class="mart10">
+                        <img width="60" height="60" ng-repeat="pic in comment.mpShinePicList" ng-src="{{pic}}">
+                    </div>
+
+                </dd>
+                <dt ng-if="comment.replyContent">{{i18n('回复')}}</dt>
+                <dd ng-if="comment.replyContent">
+                    <span class="look-first">{{comment.replyContent}}</span>
+                </dd>
+            </dl>
+            <dl class="clearfix look-content" ng-if="comment.addMPCommentVOList != null">
+                <!--<dt ng-if= "!parseInt((comment.addMPCommentVOList[0].addContentTime-coment.createTime)/86400000)">当天追加：</dt>
+                <dt ng-if= "parseInt((comment.addMPCommentVOList[0].addContentTime-coment.createTime)/86400000)">{{{{parseInt((comment.addMPCommentVOList[0].addContentTime-coment.createTime)/86400000)}} 天追加：</dt> -->
+                <dt> {{i18n('追评')}} </dt>
+                <dd>
+                    <span class="look-first">{{comment.addMPCommentVOList[0].addContent}}</span>
+                    <div class="mart10">
+                        <img width="60" height="60" ng-repeat="pic in lookComment.mporderDetail.mpShinePicList" ng-src="{{pic}}">
+                    </div>
+                </dd>
+                <dt ng-if="comment.addMPCommentVOList[0].replyAddContent">{{i18n('回复')}}</dt>
+                <dd ng-if="comment.addMPCommentVOList[0].replyAddContent">
+                    <span class="look-first">{{comment.addMPCommentVOList[0].replyAddContent}}</span>
+                </dd>
+            </dl>
+            <div style="height: 35px;line-height: 35px;background-color: #f8f8f8;padding-left: 20px"><span>订单时间：{{lookComment.mporderDetail.orderCreateTime | date : 'yyyy-MM-dd HH:mm:ss'}}</span><span style="margin-left: 10px">订单编号：{{lookComment.mporderDetail.orderCode}}</span></div>
+            <div class="mp-pro-list">
+                <div class='show-good' style="margin-top: 20px">
+                    <!-- 无收藏商品的时候 end -->
+                    <!-- 有收藏商品的时候 begin -->
+                    <div class='goods-box'>
+                        <ul class='clearfix'>
+                            <li class='food-item' ng-repeat="pro in lookComment.currentmpoList">
+                                <a class="pdT20">
+                                    <img width='210' height='210' ng-src="{{pro.picUrl}}" alt="{{pro.productName}}">
+                                    <p>{{pro.productName}}</p>
+                                    <h5>{{pro.price | currency:"￥"}}</h5>                    
+                                    <!-- <span>来伊份 坚果炒货 休按时打算打算打算</span> -->
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 有收藏商品的时候 end -->
+                </div>
+                <div class='arrow-box arrowLeft'>                            
+                    <span class="arrowLeft-icon" ng-class="{'arrowLeft-icon-disabled':lookComment.currentPageNo==1}" ng-click="lookComment.upPage('favorite')"></span>
+                </div>
+                <div class='arrow-box arrowRight'>    
+                    <span class="arrowRight-icon" ng-class="{'arrowRight-icon-disabled':lookComment.currentPageNo >= lookComment.totalPage}" ng-click="lookComment.nextPage('favorite')"></span>
+                </div>
+            </div>    
+        </div>
+    </div>
+    <div class="submit-box">
+    </div>
+</div>

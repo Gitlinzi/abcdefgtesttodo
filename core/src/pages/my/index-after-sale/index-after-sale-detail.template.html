@@ -1,0 +1,281 @@
+<div class="after-sale content">
+    <div class="module">
+        <div class="module clear">
+            <!--面包屑-->
+            <div class="module-title">
+                <a ui-sref="index_afterSaleStateList" class="my-order">{{i18n('售后记录')}}</a>
+                <span class="center-crumb-arrowhead"></span>
+                <span>{{i18n('售后详情')}}</span>
+            </div>
+            <!-- type: 1、仅退款未发货； 2. 仅退款已发货； 3、 退款退货 **、换货-->
+            <!--审核通过-->
+            <p class="back-good-title">{{i18n('售后进度')}}</p>
+            <div class="aftersales-details" ng-if="aftersaleDetail.detail.type >2&&(aftersaleDetail.detail.returnStatus != baseConfig.returnStatus.noPassed && aftersaleDetail.detail.returnStatus != baseConfig.returnStatus.notApproved&& aftersaleDetail.detail.returnStatus != baseConfig.returnStatus.closed)">
+                <div class='detail-box'>
+                    <div id="aftersaleBox">
+                        <ul class="inReview">
+                            <span class="audit" ng-if="aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verify">{{i18n('平台审核中')}}</span>
+                            <span class="salesReturn" ng-if="aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verified||aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.inspect">{{i18n('退货中')}}</span>
+                            <span class="terrace" ng-if="aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.passed">{{i18n('平台处理中')}}</span>
+                            <li ng-class="{active: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verify, current: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verified||aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.inspect||aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.passed||aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.completed}">
+                                <span class="num">1</span>
+                                <span class="line_bg lbg-l"></span>
+                                <span class="line_bg lbg-r"></span>
+                                <h4 class="lbg-txt">{{i18n('提交申请')}}</h4>
+                            </li>
+                            <li ng-class="{active: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verified||aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.inspect, current: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.passed||aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.completed}">
+                                <span class="num">2</span>
+                                <span class="line_bg lbg-l"></span>
+                                <span class="line_bg lbg-r"></span>
+                                <h4 class="lbg-txt">{{i18n('平台审核通过')}}</h4>
+                            </li>
+                            <li ng-class="{active: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.passed, current: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.completed}">
+                                <span class="num">3</span>
+                                <span class="line_bg lbg-l"></span>
+                                <span class="line_bg lbg-r"></span>
+                                <h4 class="lbg-txt">{{i18n('验货通过')}}</h4>
+                            </li>
+                            <li ng-class="{active: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.completed}">
+                                <span class="num">4</span>
+                                <span class="line_bg lbg-l"></span>
+                                <span class="line_bg lbg-r"></span>
+                                <h4 class="lbg-txt">{{i18n('完成')}}</h4>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class='btn-box' ng-if="aftersaleDetail.detail.canCancel">
+                         <span style="cursor:pointer;" ng-click="aftersaleDetail.cancelReturnProduct()">{{i18n('取消申请')}}</span>
+                    </div>
+                    <div class='btn-box' ng-if="aftersaleDetail.detail.canUpdate">
+                        <span style="cursor:pointer;" ng-click="aftersaleDetail.toEdite(aftersaleDetail.detail.orderCode,aftersaleDetail.detail.id)">{{i18n('修改')}}</span>
+                    </div>
+                </div>
+            </div>
+            <!--退款-->
+            <div class="aftersales-details" ng-if="aftersaleDetail.detail.type <=2&&(aftersaleDetail.detail.returnStatus != baseConfig.returnStatus.noPassed||aftersaleDetail.detail.returnStatus != baseConfig.returnStatus.notApproved||aftersaleDetail.detail.returnStatus != baseConfig.returnStatus.closed)">
+                <div class='detail-box' ng-if="aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verify||aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.passed||aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verified||aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.completed">
+                    <div id="aftersaleBox">
+                        <ul class="refundOf">
+                            <span class="inReviewSale" ng-if="aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verify">{{i18n('平台审核中')}}</span>
+                            <span class="reimburse" ng-if="aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.passed || aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verified">{{i18n('退款中')}}</span>
+                            <li ng-class="{active: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verify, current: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.passed|| aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verified||aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.completed}">
+                                <span class="num">1</span>
+                                <span class="line_bg lbg-l"></span>
+                                <span class="line_bg lbg-r"></span>
+                                <h4 class="lbg-txt">{{i18n('提交申请')}}</h4>
+                            </li>
+                            <li ng-class="{active: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.passed|| aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.verified, current: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.completed}">
+                                <span class="num">2</span>
+                                <span class="line_bg lbg-l"></span>
+                                <span class="line_bg lbg-r"></span>
+                                <h4 class="lbg-txt">{{i18n(' 平台审核通过')}}</h4>
+                            </li>
+                            <li ng-class="{active: aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.completed}">
+                                <span class="num">3</span>
+                                <span class="line_bg lbg-l"></span>
+                                <span class="line_bg lbg-r"></span>
+                                <h4 class="lbg-txt">{{i18n('完成')}}</h4>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class='btn-box' ng-if="aftersaleDetail.detail.canCancel">
+                         <span style="cursor:pointer;" ng-click="aftersaleDetail.cancelReturnProduct()">{{i18n('取消申请')}}</span>
+                    </div>
+                    <div class='btn-box' ng-if="aftersaleDetail.detail.canUpdate">
+                        <span style="cursor:pointer;" ng-click="aftersaleDetail.toEdite(aftersaleDetail.detail.orderCode,aftersaleDetail.detail.id)">{{i18n('修改')}}</span>
+                    </div>
+                </div>
+            </div>
+            <!--审核不通过-->
+            <div class="aftersales-details" ng-if="aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.noPassed">
+                <div class="aftersales-notpass">
+                    <span class='not-pass'></span>
+                    <div class="aftersales-right">
+                        <span class="c3 fb f18 disB pdb5">{{i18n('审核不通过')}}</span>
+                        <span class="f14 c6 aftersales-content">{{i18n('原因说明')}}：{{aftersaleDetail.detail.auditReason}}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 验货拒收 -->
+            <div class="aftersales-details" ng-if="aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.notApproved">
+                <div class="aftersales-notpass">
+                    <span class='not-pass'></span>
+                    <div class="aftersales-right">
+                        <span class="c3 fb f18 disB pdb5">{{i18n('验货拒绝')}}</span>
+                        <span class="f14 c6 aftersales-content">{{i18n('原因说明')}}：{{aftersaleDetail.detail.serviceDesc}}</span>
+                        <p class='mgb0'>
+                            <img src='{{pic}}' width="100px" height="100px" ng-repeat="pic in aftersaleDetail.detail.merchantPicUrlList"/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- 已取消 -->
+            <div class="aftersales-details" ng-if="aftersaleDetail.detail.returnStatus == baseConfig.returnStatus.closed">
+                <div class="aftersales-notpass mgB30">
+                    <span class='not-pass'></span>
+                    <div class="aftersales-right">
+                        <span class="c3 fb f18 disB pdb5" style="height: 50px;line-height: 50px;" ng-if="aftersaleDetail.detail.returnStatusStr">{{i18n(aftersaleDetail.detail.returnStatusStr)}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--售后信息-->
+        <div class='detail-mes'>
+            <div class="back-good-title">{{i18n('售后信息')}}</div>
+            <table class="theme2 aftersales-border f12">
+                <tr class="c6">
+                    <td class="pdT12" align="right" ng-class="{afterSaleWidth:locale=='en_US'}">{{i18n('售后类型')}}：</td>
+                    <td class="c3 pdT12" v-cloak>
+                        <span>{{aftersaleDetail.detail.typeStr}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="c6" align="right" ng-class="{afterSaleWidth:locale=='en_US'}">{{i18n('售后单号')}}：</td>
+                    <td class="c3"> {{aftersaleDetail.detail.returnCode}}</td>
+                </tr>
+                <tr class="c6">
+                    <td align="right" ng-class="{afterSaleWidth:locale=='en_US'}">{{i18n('申请时间')}}：</td>
+                    <!--<td class="c3 pdL12"></td>-->
+                    <td class="c3">{{ aftersaleDetail.detail.applyTime|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                </tr>
+                <tr class="c6" ng-if="aftersaleDetail.detail.actualReturnAmount">
+                    <td align="right" ng-class="{afterSaleWidth:locale=='en_US'}">{{i18n('退款金额')}}：</td>
+                    <td class="c3"> {{(aftersaleDetail.detail.actualReturnAmount + (aftersaleDetail.detail.freight || 0))|currency:'￥'}}</td>
+                </tr>
+                <tr class="c6">
+                    <td align="right" ng-class="{afterSaleWidth:locale=='en_US'}">{{i18n('售后原因')}}：</td>
+                    <td class="c3">{{aftersaleDetail.detail.returnReasonIdStr}}</td>
+                </tr>
+                <tr class="c6">
+                    <td align="right" ng-class="{afterSaleWidth:locale=='en_US'}">{{i18n('退货说明')}}：</td>
+                    <td class="c3"> {{aftersaleDetail.detail.returnRemark}}</td>
+                </tr>
+                <tr>
+                    <td width="70" align="right" class="pdB12"></td>
+                    <td class="c3 pdB12" >
+                        <img height="100" width="100" class="mgR10" ng-repeat="pic in aftersaleDetail.detail.picUrlList" src='{{pic}}' alt="" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- 只有type==3, verified 可填；  type==3，>=inspect 可看 -->
+        <div class='detail-mes' ng-if="aftersaleDetail.detail.type==3">
+            <div class="back-good-title">{{i18n('物流信息')}}</div>
+            <table class="theme2 aftersales-border f12">
+                <tr class="c6" ng-if="aftersaleDetail.detail.returnStatus==baseConfig.returnStatus.verified || aftersaleDetail.detail.returnStatus==baseConfig.returnStatus.inspect">
+                    <td width="70" align="right">{{i18n('物流公司')}}：</td>
+                    <td class="c3" >
+                        <select type="text"
+                                ng-options="logistics as logistics.name for logistics in aftersaleDetail.logisticsList"
+                                ng-model="aftersaleDetail.selectedLogistics">
+                        </select>
+                        <label class="checkboxStyle-small">
+                            <input id="applyProduct" type="checkbox" hidden="hidden"
+                                ng-checked="aftersaleDetail.showOther" type="checkbox" ng-model="aftersaleDetail.showOther" ng-change="aftersaleDetail.chaneOther">
+                            <span></span>{{i18n('其他')}}
+                        </label>
+                        <input maxlength="20" type="text" class="input input-num" ng-model="aftersaleDetail.logisticsCompany" ng-if="aftersaleDetail.showOther">
+                    </td>
+                </tr>
+                <tr class="c6" ng-if="aftersaleDetail.detail.returnStatus==baseConfig.returnStatus.verified || aftersaleDetail.detail.returnStatus==baseConfig.returnStatus.inspect">
+                    <td width="70" align="right">{{i18n('物流单号')}}：</td>
+                    <td class="c3">
+                        <input maxlength="20" type="text" class="input input-num" ng-model="aftersaleDetail.courierNumber" >
+                        <input class='refer refer-sub btn' style="line-height: 27px;height: 31px;width: 100px;" type="button" value="{{i18n('提交')}}" ng-click="aftersaleDetail.saveCourierNo()" >
+                    </td>
+                </tr>
+                <tr class="c6" ng-if="aftersaleDetail.detail.returnStatus==baseConfig.returnStatus.verified || aftersaleDetail.detail.returnStatus==baseConfig.returnStatus.inspect">
+                    <td width="70" align="right">{{i18n('退货地址')}}：</td>
+                    <td class="c3">{{aftersaleDetail.detail.consigneeName}}&nbsp;&nbsp{{aftersaleDetail.detail.consigneeMobile}} &nbsp;&nbsp{{aftersaleDetail.detail.consigneeAddress}}</td>
+                </tr>
+            </table>
+        </div>
+        <!--申请售后的商品-->
+        <div class='back-good-box'>
+            <p class="c6 f14 back-good-title">{{i18n('申请售后的商品')}}</p>
+            <div class="order-group">
+                <div class="suborder">
+                    <div class="row order-title">
+                        <div class="cell c1">{{aftersaleDetail.detail.createTime |date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                        <div class="cell c2"><a
+                                href="#/orderDetail?code={{aftersaleDetail.detail.orderCode }}">{{i18n('订单号')}}：<span
+                                class="colorB">{{aftersaleDetail.detail.orderCode}}</span></a></div>
+                        <div class="cell c3">
+                            <!--<span class="margin30">订单类型：普通订单</span>-->
+                        </div>
+                    </div>
+                    <table class="order-list" ng-repeat="pro in aftersaleDetail.detail.returnProduct">
+                        <tr class='person-tr-color bt'>
+                            <td width="113" align="center" class="bl bb">
+                                <a class="img-block" href="item.html?itemId={{pro.soItemId}}">
+                                    <img width="80" height="80" ng-src="{{pro.productPicPath || '../../../images/defaultImg.png'}}" alt="{{pro.productCname}}">
+                                </a>
+                            </td>
+                            <td width="842" class="bb">
+                                <a class="name h20" href="item.html?itemId={{pro.mpId}}"><span class="colorB">{{pro.productCname}}</span></a>
+                                <ul class="seriesAttr">
+                                    <li ng-repeat="property in pro.attributes">{{property.name}}:{{property.value}}
+                                    </li>
+                                    <li>{{(pro.applyReturnAmount/pro.returnProductItemNum)| currency:'￥'}}</li>
+                                </ul>
+                            </td>
+                            <td width="" align="center" class="bb br">
+                                <span class="good-num">x{{pro.returnProductItemNum}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--更换的商品-->
+        <div class='back-good-box' ng-if="aftersaleDetail.detail.type==4">
+            <p class="c6 f14 back-good-title">{{i18n('更换的商品')}}</p>
+            <div class="order-group">
+                <div class="suborder">
+                    <table class="order-list" ng-repeat="pro in aftersaleDetail.detail.returnProduct">
+                        <tr class='person-tr-color bt'>
+                            <td width="113" align="center" class="bl bb"><a class="img-block" href="item.html?itemId={{pro.soItemId}}"><img
+                                    width="80" height="80" ng-src="{{pro.productPicPath}}" alt="{{pro.productCname}}"></a>
+                            </td>
+                            <td width="842" class="bb">
+                                <a class="name h20" href="item.html?itemId={{pro.soItemId}}"><span class="colorB">{{pro.productCname}}</span></a>
+                                <ul class="seriesAttr">
+                                    <li ng-repeat="property in pro.attributes">{{property.name}}:{{property.value}}
+                                    </li>
+                                    <li>{{(pro.applyReturnAmoun/pro.returnProductItemNum )| currency:'￥'}}</li>
+                                </ul>
+                            </td>
+                            <td width="" align="center" class="bb br">
+                                <span class="good-num">x{{pro.returnProductItemNum}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--换货单信息-->
+        <div class='detail-mes' ng-if="aftersaleDetail.detail.type==4 && aftersaleDetail.detail.exchangeStatus">
+            <div class="back-good-title">{{i18n('换货单信息')}}：</div>
+            <table class="theme2 aftersales-border f12">
+                <tr class="c6">
+                    <td width="88" align="right" class="pdT12">{{i18n('换货单号')}}：</td>
+                    <td class="c3 pdT12"> {{aftersaleDetail.detail.exchangeCode}}</td>
+                </tr>
+                <tr class="c6">
+                    <td width="88" align="right">{{i18n('换货单状态')}}：</td>
+                    <td class="c3" ng-if="aftersaleDetail.detail.exchangeStatus == 1">{{i18n('待出库')}}</td>
+                    <td class="c3" ng-if="aftersaleDetail.detail.exchangeStatus == 2">{{i18n('已出库')}}</td>
+                    <td class="c3" ng-if="aftersaleDetail.detail.exchangeStatus == 3">{{i18n('已完成')}}</td>
+                </tr>
+                <tr class="c6" >
+                    <td width="88" align="right">{{i18n('快递公司')}}：</td>
+                    <td class="c3">{{aftersaleDetail.detail.exchangeLogisticsCompanyName}}</td>
+                </tr>
+                <tr class="c6" >
+                    <td width="88" align="right" class="pdB12">{{i18n('快递单号')}}：</td>
+                    <td class="c3 pdB12">{{aftersaleDetail.detail.returnCourierNumber}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

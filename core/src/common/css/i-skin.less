@@ -1,0 +1,158 @@
+.default-btn{
+    display: inline-block;
+    color: @whiteColor;
+    text-align: center;
+    line-height: 1.42857143;
+    border: 0 none;
+    padding: 6px 12px;
+    background-color: @themeColor;
+    cursor: pointer;
+    &:hover{
+        color: @whiteColor;
+        background-color: darken(@themeColor, 5%);
+    }
+    &:active{
+        background-color: darken(@themeColor, 13%);
+    }
+    &.big{
+        height: 40px;
+        line-height: 40px;
+    }
+    &.btn-sm{
+      height: 40px;
+      line-height: 40px;
+    }
+    &.inverse{
+        color: @66GreyColor;
+        background-color: @eeGreyColor;;
+    }
+    &.inverse:hover{
+        background-color:@ddGreyColor;
+    }
+      &.btn-default{
+
+    }
+    &.disabled{
+        color: @ccGreyColor;
+        background-color: @ddGreyColor;
+        cursor: default;
+    }
+}
+
+
+//新增的样式规范
+.btn-primary{
+  color: @whiteColor;
+  background-color: @themeColor;
+  border:1px solid @themeColor;
+  &:hover{
+    background-color: darken(@themeColor, 5%)!important;
+  }
+  &:active{
+    background-color: darken(@themeColor, 13%)!important;
+  }
+}
+.btn-cancel{
+  color: @fontColor;
+  background-color: @backgroundColor;
+  border:1px solid @ddGreyColor;
+  &:hover{
+    color: @fontColor;
+    background-color: darken(@backgroundColor, 5%)!important;
+  }
+  &:active{
+    background-color: darken(@backgroundColor, 13%)!important;
+  }
+}
+.btn-disabled{
+  color: @ccGreyColor;
+  background-color: @backgroundColor;
+  border:1px solid @borderColor;
+  &:hover{
+    color: @ccGreyColor;
+    background-color: darken(@backgroundColor, 0%)!important;
+  }
+  &:active{
+    background-color: darken(@backgroundColor, 13%)!important;
+  }
+}
+.btn-sm{
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.btn-md{
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+}
+.btn-lg{
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+}
+
+.border-radius4{
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+}
+.border-radiusTopLR4{
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  -ms-border-radius: 4px 4px 0 0;
+  -o-border-radius: 4px 4px 0 0;
+}
+.border-radiusBottomLR4{
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  -ms-border-radius: 0 0 4px 4px;
+  -o-border-radius: 0 0 4px 4px;
+}
+.border-radius8{
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+.border-radiusTopLR8{
+  -webkit-border-radius: 8px 8px 0 0;
+  -moz-border-radius: 8px 8px 0 0;
+  -ms-border-radius: 8px 8px 0 0;
+  -o-border-radius: 8px 8px 0 0;
+}
+.border-radiusBottomLR8{
+  -webkit-border-radius: 0 0 8px 8px;
+  -moz-border-radius: 0 0 8px 8px;
+  -ms-border-radius: 0 0 8px 8px;
+  -o-border-radius: 0 0 8px 8px;
+}
+.theme-border-color{
+  border: 1px solid @themeColor;
+}
+.default-border-color{
+  border: 1px solid @ddGreyColor;
+}
+.theme-color{
+  color: @themeColor
+}
+.white-color{
+  color: @whiteColor;
+}
+.grey-color3{
+  color: @33GreyColor;
+}
+.grey-color6{
+  color: @66GreyColor;
+}
+.grey-color9{
+  color: @99GreyColor;
+}
+.theme-bg-color {
+  background-color: @themeColor;
+}
+.grey-bg-colorf8{
+  background-color: @backgroundColor;
+}
+//新增的样式规范

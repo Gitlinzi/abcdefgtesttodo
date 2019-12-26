@@ -1,0 +1,65 @@
+<div class="always">
+    <div class="home-allTitle pdL20">{{i18n('维修服务')}}</div>
+    <div class="repair-box">
+        <div class="repair-nav pdL20">
+            <ul ng-init="activeNum=1">
+                <li ui-sref="index_saleRepair">{{i18n('申请售后')}}</li>
+                <b></b>
+                <li class="active">{{i18n('售后记录')}}</li>
+            </ul>
+            <!--<p>
+                <a href="#" class="">{{i18n('搜索')}}</a>
+                <input type="text" name="" placeholder="{{i18n('商品名称')}}，{{i18n('商品编号')}}，{{i18n('订单编号')}}" class="">
+            </p>-->
+        </div>
+        <div class="repair-list">
+
+
+            <div class="repair-list-con">
+                <div class="repair-header">
+                    <span class="column1">{{i18n('售后商品')}}<label>{{i18n('售后数量')}}</label></span>
+                    <span class="column6">{{i18n('售后类型')}}</span>
+                    <span class="column7">{{i18n('售后状态')}}</span>
+                    <span class="column8">{{i18n('操作')}}</span>
+                </div>
+                <div class="repair-con">
+                    <div class="repair-con-list" ng-repeat="suborder in afterRepairProgList.list">
+                        <h4>
+                            <!--<em class="c9">2017-01-10 18:45:10</em>-->
+                            <em>{{i18n('售后单号')}}：{{suborder.returnCode}}</em>
+                            <!--<em>订单类型：普通订单</em>-->
+                            <cite>{{i18n('申请时间')}}：{{suborder.applyTime|date:'yyyy-MM-dd HH:mm:ss'}}</cite>
+                        </h4>
+                        <div class="repair-span">
+                            <span class="column1">
+                                <dl ng-repeat="pro in suborder.afterSalesProductVOs">
+                                    <dt><a><img ng-src="{{pro.productPicPath || '../../../images/defaultImg.png'}}" alt="{{pro.chineseName}}"></a></dt>
+                                    <dd>
+                                        <h5>
+                                            <cite>{{pro.chineseName}}</cite>
+                                            <em style="text-align: center">x{{pro.returnProductItemNum}}</em>
+                                        </h5>
+                                        <p ng-repeat="tag in pro.propertyTags">{{tag.name}}:{{tag.value}}</p>
+                                    </dd>
+                                </dl>
+                            </span>
+                            <!--<span class="column2">{{pro.returnProductItemNum}}</span>-->
+                            <span class="column6">
+                                {{afterRepairProgList.type[suborder.type]}}
+                            </span>
+                            <span class="column7">
+                                {{afterRepairProgList.returnStatus[suborder.returnStatus]}}
+                            </span>
+                            <span class="column8">
+                                <a target="_blank" ui-sref="index_applyRepairDetail({returnId:suborder.id})">{{i18n('查看详情')}}</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="not-prod" ng-if="afterRepairProgList.isShowIcon"><i class="mgR15"></i>{{i18n('没有售后的商品哦')}}~</div>
+                    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                                total-page="totalPage" ng-if="afterRepairProgList.isShowPage"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

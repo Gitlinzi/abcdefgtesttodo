@@ -1,0 +1,3014 @@
+@import url("../../common/css/i-var_${skin}.less");
+@import url("../../common/css/i-grid.less");
+@import url("../../common/css/i-base.less");
+@import url("../../common/css/i-address.less");
+@import url("../../common/css/i-popbox.less");
+@import url("../../common/css/i-button.less");
+@import url("../../common/css/i-icon.less");
+@import url("../../common/css/i-dropdown.less");
+@import url("../../common/css/i-header.less");
+@import url("../../common/css/i-footer.less");
+@import url("../../common/css/i-form.less");
+@import url("../../common/css/i-tabs.less");
+@import url("../../common/css/i-location.less");
+@import url("../../common/css/i-miniCart.less");
+@import url("../../common/css/i-global-nav.less");
+@import url("../../common/css/i-feedback.less");
+@import url("../../common/css/reset.less");
+@import url("../../common/css/i-shotProcess");
+
+/* 结算页 */
+.errorText {
+  vertical-align: middle;
+  display: inline-block;
+  padding-left: 20px !important;
+  color: @starColor;
+}
+.widandmr {
+  margin-right: 24px;
+  width: 80%;
+}
+.tabwid {
+  width: 100%;
+  & td {
+    padding: 10px 0;
+  }
+  & div {
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+    color: #666;
+  }
+  & .input-td {
+    position: relative;
+    display: inline-block;
+    width: 90px;
+    height: 25px;
+    background-color: #cc0000;
+    border: 1px solid #cc0000;
+    border-radius: 13px;
+    padding: 4px 12px;
+    line-height: 25px;
+    margin-left: 100px;
+  }
+  & .input-td input {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    height: 34px;
+    width: 115px;
+  }
+  & .input-td:hover {
+    background-color: #cc0000;
+    border: 1px solid #cc0000;
+    color: #fff;
+  }
+  & .fileerrorTip1 {
+    color: #fff;
+    padding-left: 20px;
+  }
+  & .showFileName1 {
+    padding-left: 50px;
+    position: absolute;
+    width: 350px;
+  }
+}
+
+.colorRed {
+  color: #f23030;
+}
+.container {
+  width: 1000px;
+}
+h4,
+p {
+  margin: 0;
+}
+.colorE {
+  color: @99GreyColor;
+}
+.colorB {
+  color: @blackColor;
+}
+.colorRed {
+  color: @clearColor;
+}
+#stlt {
+  .bgColor() {
+    background-color: @lightBackgroundColor;
+  }
+  .border() {
+    border: 1px solid @borderColor;
+  }
+  .border2() {
+    border-bottom: 2px solid @bbGreyColor;
+  }
+  .btnColor() {
+    color: @themeColor;
+  }
+  &-title {
+    padding-bottom: 10px;
+    font-size: 18px;
+    .border2();
+  }
+  &-main {
+    margin-top: 12px;
+    padding: 20px 19px 40px 19px;
+    border: 1px solid @bodyBgColor;
+    font-size: 12px;
+    position: relative;
+    & .fontSize {
+      font-size: 14px;
+    }
+    & .sb {
+      & .st {
+        margin-bottom: 10px;
+        color: @blackColor;
+        overflow: hidden;
+        *zoom: 1;
+        & h4 {
+          font-size: 14px;
+          margin-right: 10px;
+        }
+        & .st-text {
+          display: inline-block;
+        }
+        & .st-error-text {
+          display: inline-block;
+        }
+        & .server-address {
+          margin-left: 24px;
+        }
+        & .server-same {
+          margin-left: 12px;
+          display: inline-block;
+          float: right;
+        }
+        & .goods-info {
+          margin-top: 10px;
+        }
+        & .linkr {
+          float: right;
+          font-size: 12px;
+        }
+        & h5 {
+          float: left;
+          margin: 0;
+          word-wrap: break-word;
+          word-break: break-all;
+          font-weight: normal;
+        }
+        & input[class*="checkBox"] + label {
+          margin: 5px 11px 0 24px;
+          background-color: @whiteColor;
+          border: 1px solid @ccGreyColor;
+          width: 10px;
+          height: 10px;
+          display: inline-block;
+          position: relative;
+        }
+        & input[class*="checkBox"]:checked + label:after {
+          content: "\2714";
+          position: absolute;
+          top: -3px;
+          left: 1px;
+          color: @paymentColor;
+          font-size: 12px;
+        }
+        .switch {
+          cursor: pointer;
+        }
+        & a {
+          color: @00BlueColor;
+        }
+      }
+    }
+    & .hhtabs {
+      margin-bottom: 10px;
+    }
+    & .hr {
+      margin: 18px 0 15px;
+    }
+    & .cell {
+      padding-left: 0;
+      word-wrap: break-word;
+      word-break: break-all;
+      a {
+        color: @00BlueColor;
+      }
+    }
+    & .spad {
+      padding-bottom: 14px;
+      border-bottom: 1px solid @bodyBgColor;
+      & .address {
+        & .row {
+          line-height: 30px;
+        }
+        & li {
+          margin-bottom: 10px;
+        }
+        & .a1 {
+          width: 106px;
+        }
+        & .a2 {
+          width: 373px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        & .a3 {
+          width: 175px;
+        }
+        & .a4 {
+          width: 40px;
+        }
+        & .a5 {
+          width: 206px;
+          text-align: right;
+          padding-right: 15px;
+        }
+        & .hide {
+          display: none;
+        }
+        .address-name {
+          width: 86px;
+          height: 26px;
+          line-height: 26px;
+          text-align: center;
+          border: 2px solid @paymentColor!important;
+          position: relative;
+          cursor: pointer;
+          &-no {
+            width: 86px;
+            height: 26px;
+            line-height: 26px;
+            text-align: center;
+            border: 1px solid @ddGreyColor;
+            cursor: pointer;
+          }
+        }
+        .address-name:after {
+          content: "";
+          width: 17px;
+          height: 16px;
+          .common-product-company-icon(-334px, -169px);
+          position: absolute;
+          bottom: 0px;
+          right: -1px;
+        }
+      }
+      & .address li:hover {
+        background-color: @fff2f2RedColor;
+      }
+      & .showmore {
+        display: inline-block;
+        margin-top: 9px;
+        padding-right: 20px;
+        position: relative;
+        &::after {
+          position: absolute;
+          content: "";
+          height: 6px;
+          width: 11px;
+          .common-product-company-default(-22px, -34px);
+          top: 5px;
+          right: 0;
+        }
+      }
+    }
+    & .invoice {
+      padding: 20px 0;
+      border-bottom: 1px solid @bodyBgColor;
+      & h4 {
+        float: left;
+      }
+      & .modify {
+        margin-left: 20px;
+        font-size: 14px;
+      }
+      & .a1 {
+        width: 160px;
+      }
+      & .a2 {
+        width: 350px;
+        overflow: hidden;
+      }
+      & .a3 {
+        width: 150px;
+      }
+      & .cell {
+        float: none;
+        line-height: 2;
+      }
+      .needless {
+        margin: 20px;
+        font-size: 14px;
+        color: @55GreyColor;
+      }
+      &-support {
+        background: @backgroundColor;
+        padding: 20px 0;
+        overflow: hidden;
+        margin-top: 19px;
+        height: 100px;
+        p {
+          margin-bottom: 15px;
+        }
+        img {
+          margin-right: 10px;
+        }
+        &-left {
+          float: left;
+          width: 46%;
+          padding-left: 20px;
+          & div {
+            overflow-x: auto;
+            white-space: nowrap;
+          }
+        }
+        &-right {
+          float: left;
+          padding-left: 20px;
+          width: 920px;
+          & div {
+            overflow-x: auto;
+            white-space: nowrap;
+          }
+        }
+        &-line {
+          float: left;
+          height: 100px;
+          border-left: 1px solid @whiteColor;
+          border-right: 1px solid @bodyBgColor;
+        }
+      }
+    }
+    & .pay {
+      padding: 20px 0;
+      border-bottom: 1px solid @bodyBgColor;
+      & .way {
+        display: inline-block;
+        vertical-align: middle;
+        & li {
+          padding: 3px 0;
+          height: 30px;
+          line-height: 30px;
+          float: left;
+        }
+        & .a2 {
+          color: @bbGreyColor;
+        }
+        .payway {
+          &-default {
+            padding: 3px 0;
+            width: 90px;
+            text-align: center;
+            border: 1px solid @bodyBgColor;
+            cursor: pointer;
+            line-height: 20px;
+            margin-right: 20px;
+          }
+          border: 2px solid @paymentColor!important;
+          position: relative;
+          &:after {
+            content: "";
+            width: 17px;
+            height: 16px;
+            .common-product-company-icon(-334px, -169px);
+            position: absolute;
+            bottom: 0px;
+            right: -1px;
+          }
+        }
+      }
+    }
+    & .td0 {
+      width: 60px;
+      margin-left: 20px;
+    }
+    & .td01 {
+      width: 105px;
+      height: 19px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      & a {
+        color: @33GreyColor;
+      }
+    }
+    & .td1 {
+      width: 380px;
+      margin-left: 19px;
+    }
+    & .td11 {
+      width: 146px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      & span {
+        margin: 0 3px;
+      }
+    }
+    & .td2 {
+      width: 80px;
+      text-align: center;
+      margin-left: 20px;
+    }
+    & .td3 {
+      width: 60px;
+      text-align: center;
+      margin-left: 20px;
+      font-size: 14px;
+      color: @33GreyColor;
+    }
+    & .td4 {
+      width: 80px;
+      text-align: right;
+      margin-left: 20px;
+      font-weight: 900;
+    }
+    & .none-fontW {
+      font-weight: normal;
+    }
+    & .colorRed {
+      color: @clearColor;
+    }
+    & .thead {
+      background-color: @backgroundColor;
+      padding: 10px 0;
+    }
+    & .peisong {
+      width: 155px;
+      float: left;
+      padding: 10px;
+      margin-left: 5px;
+      border-right: 1px solid @bodyBgColor;
+      padding-bottom: 2000px;
+      margin-bottom: -2000px;
+      & .delivery-money {
+        text-align: right;
+      }
+      & .delivery-type {
+        padding: 10px;
+        color: @fontColor;
+        border: 1px solid @bodyBgColor;
+        position: relative;
+        margin-top: 6px;
+        cursor: pointer;
+      }
+      .bg-box {
+        padding: 3px 15px;
+        border: 2px solid @paymentColor!important;
+        position: relative;
+        cursor: pointer;
+        &-no {
+          padding: 3px 15px;
+          text-align: center;
+          border: 1px solid @ddGreyColor;
+          cursor: pointer;
+        }
+      }
+      .bg-box:after {
+        content: "";
+        width: 17px;
+        height: 16px;
+        .common-product-company-icon(-334px, -169px);
+        position: absolute;
+        bottom: 0px;
+        right: -1px;
+      }
+    }
+    & .goods-box {
+      overflow: hidden;
+      border: 1px solid @bodyBgColor;
+      position: relative;
+      & .goods-total {
+        margin-top: 20px;
+      }
+      & .showmore {
+        display: inline-block;
+        margin-top: 9px;
+        padding-right: 20px;
+        position: relative;
+        &::after {
+          position: absolute;
+          content: "";
+          height: 6px;
+          width: 11px;
+          .common-product-company-default(-22px, -34px);
+          top: 5px;
+          right: 0px;
+        }
+      }
+    }
+    & .pei-h4 {
+      margin: 20px 0 10px 0;
+    }
+    & .goods {
+      margin-bottom: 20px;
+      padding-bottom: 19px;
+      padding-right: 11px;
+      font-size: 12px;
+      float: left;
+      & .row {
+        padding-top: 19px;
+        border-bottom: 2px solid @whiteColor;
+      }
+      & .good-dl {
+        padding-left: 15px;
+        margin-bottom: 18px;
+        & dt {
+          float: left;
+        }
+        & dd {
+          float: left;
+        }
+        & .text-dt {
+          width: 293px;
+        }
+        & .price-dd {
+          width: 100px;
+          text-align: center;
+          margin-left: 234px;
+        }
+        & .num-dd {
+          width: 100px;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 900;
+          margin-left: 39px;
+        }
+      }
+      & .pic {
+        float: left;
+        width: 80px;
+        height: 80px;
+        text-align: center;
+        margin-right: 12px;
+      }
+      & .pname {
+        float: left;
+        width: 202px;
+        height: 100px;
+        color: @33GreyColor;
+      }
+      & .attr {
+        float: left;
+        width: 100px;
+        margin-left: 40px;
+      }
+    }
+    .courier {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid @bodyBgColor;
+      &-title {
+        margin-bottom: 16px;
+        font-size: 14px;
+      }
+      .c428ad2 {
+        padding-left: 15px;
+        color: @lightThemeColor;
+      }
+    }
+    .remarks {
+      margin-top: 10px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid @bodyBgColor;
+      & h4 {
+        font-size: 14px;
+        font-weight: normal;
+        span {
+          display: inline-block;
+          font-weight: normal;
+          color: @99GreyColor;
+          margin-left: 5px;
+        }
+      }
+      dt {
+        font-size: 14px;
+        float: none;
+        margin-left: 8px;
+      }
+      dd {
+        position: relative;
+      }
+      dd input {
+        width: 900px;
+        font-size: 12px;
+        margin-top: 10px;
+        padding: 5px 40px 5px 20px;
+        height: 23px;
+        margin-right: 20px;
+      }
+      .f12 {
+        font-size: 12px;
+      }
+      & .padl24 {
+        padding-left: 24px;
+        position: relative;
+        &::after {
+          position: absolute;
+          content: "";
+          height: 16px;
+          width: 16px;
+          .common-product-company-default(-726px, -12px);
+          top: 0px;
+          left: 0px;
+        }
+      }
+      p {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+        color: @ccGreyColor;
+      }
+    }
+    & .submit {
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: right;
+      & .btn {
+        height: 42px;
+        padding: 0 40px;
+        line-height: 42px;
+      }
+      & .money {
+        margin-right: 20px;
+        color: @redColor;
+        font-size: 22px;
+      }
+      dl,
+      dt,
+      dd {
+        float: left;
+        font-size: 14px;
+      }
+    }
+    & .dialogForm {
+      & .input {
+        padding: 2px;
+        border: 1px solid @ccGreyColor;
+      }
+      & .select {
+        border: 1px solid @ccGreyColor;
+      }
+      & .btn {
+        height: 30px;
+        padding: 0 20px;
+        line-height: 30px;
+      }
+      & td {
+        padding: 5px 0;
+      }
+    }
+    & .delivery {
+      & .thead {
+        padding: 0;
+      }
+      & .cell {
+        padding: 10px 0 10px 12px;
+      }
+      & .td1 {
+        width: 346px;
+        text-align: center;
+        border-right: 1px solid @borderColor;
+      }
+      & .td2 {
+        width: 363px;
+        border-right: 1px solid @borderColor;
+      }
+      & .td3 {
+        display: none;
+        width: 392px;
+        margin-left: 0;
+        border-right: 1px solid @borderColor;
+      }
+      & .td4 {
+        width: 336px;
+        margin-left: 0;
+        text-align: center;
+      }
+      & .td21 {
+        width: 246px;
+        text-align: center;
+        border-right: 1px solid @borderColor;
+      }
+      & .td22 {
+        width: 263px;
+        text-align: center;
+        border-right: 1px solid @borderColor;
+      }
+      & .td23 {
+        width: 392px;
+        margin-left: 0;
+        text-align: center;
+        border-right: 1px solid @borderColor;
+      }
+      & .td24 {
+        width: 144px;
+        margin-left: 0;
+        text-align: center;
+      }
+      & .tbody {
+        border-right: 1px solid @borderColor;
+        border-bottom: 1px solid @borderColor;
+        border-left: 1px solid @borderColor;
+        & .cell {
+          height: 25px;
+        }
+        &:hover {
+          background-color: @backgroundColor;
+        }
+        & select {
+          border: 1px solid @ccGreyColor;
+        }
+      }
+      & .c1 {
+        width: 346px;
+        text-align: center;
+        border-right: 1px solid @borderColor;
+      }
+      & .c2 {
+        width: 363px;
+        text-align: center;
+        border-right: 1px solid @borderColor;
+      }
+      & .c3 {
+        display: none;
+        width: 392px;
+        text-align: center;
+        border-right: 1px solid @borderColor;
+      }
+      & .c4 {
+        width: 336px;
+        text-align: center;
+      }
+      & .c21 {
+        width: 246px;
+        text-align: center;
+        border-right: 1px solid @borderColor;
+      }
+      & .c22 {
+        width: 263px;
+        text-align: center;
+        border-right: 1px solid @borderColor;
+      }
+      & .c23 {
+        width: 392px;
+        text-align: center;
+        border-right: 1px solid @borderColor;
+      }
+      & .c24 {
+        width: 144px;
+        text-align: center;
+      }
+    }
+  }
+}
+.invoice-mes {
+  width: 580px;
+  border: 5px solid @ddGreyColor;
+  position: fixed;
+  z-index: 100;
+  background: white;
+  left: 50%;
+  margin-left: -263px;
+  top: 80px;
+  border-radius: 5px;
+  & .fontSize0 {
+    font-size: 0;
+  }
+  & .invoice-height {
+    height: 32px;
+  }
+  & span {
+    display: inline-block;
+    font-size: 12px;
+  }
+  & .invoice-title {
+    height: 23px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: @backgroundColor;
+    font-size: 14px;
+    padding-top: 12px;
+    & .title-left {
+      float: left;
+    }
+    & .title-right {
+      float: right;
+      display: block;
+      width: 12px;
+      height: 12px;
+      .common-product-company-default(-22px, -256px);
+      cursor: pointer;
+    }
+  }
+  & .need-invoice {
+    padding-top: 16px;
+    padding-left: 24px;
+    & .invoice-sure {
+      width: 16px;
+      height: 16px;
+      position: relative;
+      top: 3px;
+      cursor: pointer;
+      .common-product-company-default(-107px, -73px);
+    }
+    & .invoice-false {
+      position: relative;
+      top: 3px;
+      cursor: pointer;
+      .common-product-company-default(-107px, -33px);
+    }
+  }
+  & .invoice-color {
+    font-size: 0;
+  }
+  & .add-local {
+    margin-left: 85px;
+    position: relative;
+    & .one-input {
+      width: 381px;
+      position: relative;
+      & input {
+        width: 100%;
+        height: 28px;
+        padding: 0;
+        border: 2px solid @btnBgColor;
+        padding-left: 14px;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 17px;
+        height: 16px;
+        .common-product-company-icon(-334px, -169px);
+        top: 14px;
+        right: -17px;
+      }
+    }
+    & .company-tips {
+      position: relative;
+      color: @f2RedColor;
+      padding-left: 20px;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        .common-product-company-default(-703px, -101px);
+        left: 0;
+        top: 0;
+      }
+    }
+    & span {
+      display: block;
+      margin-top: 13px;
+      color: @00BlueColor;
+      cursor: pointer;
+    }
+  }
+  & .person-tips {
+    position: relative;
+    color: @f2RedColor;
+    padding-left: 20px;
+    margin: 13px 0 0 120px;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      .common-product-company-default(-703px, -101px);
+      left: 0;
+      top: 0;
+    }
+  }
+  & .red-icon {
+    position: relative;
+    border: 2px solid @btnBgColor !important;
+    &::after {
+      position: absolute;
+      content: "";
+      width: 17px;
+      height: 16px;
+      .common-product-company-icon(-334px, -169px);
+      bottom: 0px;
+      right: -1px;
+    }
+  }
+  & input[type="text"] {
+    font-size: 12px;
+  }
+  & .one-span {
+    width: 72px;
+    text-align: right;
+  }
+  & .marr178 {
+    margin-left: 84px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    & .first-input {
+      border-top-style: none;
+      border-bottom-style: none;
+      border-right-style: none;
+      border-left-style: none;
+      width: 90px;
+      height: 35px;
+      border-radius: @searchRadius;
+      background: @btnBgColor;
+      color: @whiteColor;
+      margin-right: 12px;
+    }
+    & .second-input {
+      border-top-style: none;
+      background: white;
+      border-bottom-style: none;
+      border-right-style: none;
+      border-left-style: none;
+      border: 1px solid @ccGreyColor;
+      color: @99GreyColor;
+      width: 88px;
+      height: 33px;
+      border-radius: @searchRadius;
+    }
+  }
+  & .fore-span {
+    width: 105px;
+    text-align: right;
+    margin-right: 15px;
+  }
+  & .invoice-content {
+    & .span-one {
+      width: 75px;
+      text-align: right;
+    }
+    & .spanCommen {
+      padding: 8px 16px;
+      cursor: pointer;
+      border: 1px solid @ddGreyColor;
+      margin-left: 8px;
+    }
+  }
+  & .two-input {
+    padding: 0;
+    width: 362px;
+    height: 28px;
+    border: 1px solid @ddGreyColor;
+    padding-left: 11px;
+  }
+  & .two-span {
+    width: 93px;
+    height: 28px;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 11px;
+    cursor: pointer;
+    border: 1px solid @ddGreyColor;
+  }
+  & .uncrease-invoice {
+    background-color: @ccGreyColor;
+    cursor: default;
+  }
+  & .two-clone {
+    width: 93px;
+    height: 28px;
+    border: 1px solid @ddGreyColor;
+    text-align: center;
+    line-height: 30px;
+    margin-left: 11px;
+    cursor: pointer;
+  }
+  & .three-clone {
+    width: 91px;
+    height: 26px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    border: 1px solid @ddGreyColor;
+  }
+  & .mart13 {
+    margin-top: 13px;
+  }
+  & .marb16 {
+    margin-bottom: 16px;
+  }
+  & .invoice-container {
+    padding: 23px;
+    // margin-bottom: 29px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  & .padda {
+    margin-top: 11px;
+    margin-bottom: 5px;
+    color: @clearColor;
+  }
+  & .mart11 {
+    margin-top: 11px;
+  }
+  & .container-invoice {
+    padding: 23px;
+    padding-bottom: 0;
+    & span {
+      display: block;
+      margin-bottom: 11px;
+    }
+    & .container-ul {
+      margin-bottom: 20px;
+      & li {
+        float: left;
+        margin-left: 30px;
+        text-align: center;
+      }
+      & span {
+        margin-bottom: 0px;
+      }
+      & .img-invoice {
+        width: 60px;
+        height: 60px;
+        display: inline-block;
+      }
+    }
+  }
+}
+.invoice-two {
+  display: none;
+  & .invoice-container {
+    padding-left: 23px;
+    margin-bottom: 29px;
+  }
+  & .padda {
+    margin-top: 11px;
+    margin-bottom: 5px;
+    color: @clearColor;
+  }
+  & .mart11 {
+    margin-top: 11px;
+  }
+}
+.invoice-three {
+  display: none;
+  & .container-invoice {
+    padding-left: 23px;
+    & span {
+      display: block;
+      margin-bottom: 11px;
+    }
+    & .container-ul {
+      margin-bottom: 20px;
+      & li {
+        float: left;
+        margin-left: 30px;
+        text-align: center;
+      }
+      & span {
+        margin-bottom: 0px;
+      }
+      & .img-invoice {
+        width: 60px;
+        height: 60px;
+        background: pink;
+        margin-left: 5px;
+        display: inline-block;
+      }
+    }
+  }
+}
+.sum {
+  padding: 10px 0;
+  border: 1px solid @ddGreyColor;
+  margin-bottom: 20px;
+  overflow: hidden;
+  *zoom: 1;
+  & dt {
+    float: left;
+  }
+  & dd {
+    float: right;
+  }
+  & dl {
+    line-height: 30px;
+    overflow: hidden;
+    *zoom: 1;
+  }
+  & .ps {
+    float: left;
+    width: 400px;
+    margin-left: 12px;
+    & dt {
+      width: 75px;
+    }
+    & dd {
+      width: 300px;
+    }
+  }
+  & .zj {
+    float: right;
+    width: 415px;
+    padding-right: 10px;
+    text-align: right;
+    .payEarnest {
+      position: relative;
+    }
+    & dt {
+      width: 300px;
+    }
+    & dd {
+      width: 115px;
+    }
+    & .reduce-width {
+      width: 260px;
+    }
+    & .reduce-w {
+      width: initial;
+      position: absolute;
+      right: 0px;
+    }
+    & .reduce {
+      height: 20px;
+      background: @99GreyColor;
+      color: @whiteColor;
+      text-align: center;
+      line-height: 20px;
+      width: initial;
+      padding: 0px 5px;
+      margin: 5px 0px 0px 5px;
+    }
+    & .reduce-w375 {
+      width: 375px;
+      color: @99GreyColor;
+    }
+  }
+}
+& .time-over {
+  height: 40px;
+  background-color: @cartCurrentProgressBarColor;
+  text-align: center;
+  line-height: 40px;
+  & .time-over-icon {
+    position: relative;
+    padding-left: 40px;
+    &::after {
+      content: "";
+      top: -3px;
+      left: 5px;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      .common-product-company-default(-686px, -13px);
+    }
+  }
+}
+/* 结算页发票 */
+
+.invoiceform {
+  margin: 25px 40px 40px;
+  font-size: 16px;
+  & label {
+    margin-right: 30px;
+  }
+  & .invoiceTypes {
+    margin-top: 20px;
+    padding: 30px;
+    border: 1px solid @borderColor;
+  }
+  & .invoiceType {
+    display: none;
+    & .tip {
+      display: inline-block;
+      padding: 1px 5px;
+      margin-left: 5px;
+      font-size: 12px;
+      border: 1px solid @eeGreyColor;
+      background-color: lighten(@fontColor, 60%);
+      &.upd {
+        right: -378px;
+      }
+      &.err {
+        color: @clearColor;
+        border: 1px solid lighten(@clearColor, 30%);
+        background-color: lighten(@clearColor, 45%);
+      }
+      &.succ {
+        color: green;
+        border: 1px solid @99ffGreenColor;
+        background-color: @e6GreenColor;
+      }
+    }
+  }
+  & .active {
+    display: block;
+  }
+  & td {
+    padding-bottom: 20px;
+  }
+  & .btn {
+    padding: 0 20px;
+  }
+  & .info {
+    color: @00BlueColor;
+  }
+}
+.c025EA9 {
+  color: @themeColor;
+}
+
+.bg-active {
+  background: @backgroundColor;
+  border: 1px solid @ddGreyColor;
+}
+
+.ce62128 {
+  color: @themeColor;
+}
+.mgL5 {
+  margin-left: 5px;
+}
+
+.mgL10 {
+  margin-left: 10px;
+}
+#related {
+  margin-top: 13px;
+  & .tab-titles {
+    height: 33px;
+    font-size: 0;
+    text-align: left;
+    border: 1px solid @bodyBgColor;
+    background-color: @backgroundColor;
+    & .red-one {
+      position: relative;
+      & .icon-red {
+        position: absolute;
+        top: 7px;
+        right: 22px;
+        height: 6px;
+        width: 6px;
+        background-color: @btnBgColor;
+        border-radius: 3px;
+      }
+    }
+    li {
+      display: inline-block;
+      padding: 0 30px;
+      height: 34px;
+      font-size: 14px;
+      line-height: 35px;
+      cursor: pointer;
+      border-right: 1px solid @bodyBgColor;
+    }
+    .active {
+      margin-top: -1px;
+      background-color: @whiteColor !important;
+    }
+  }
+  .tab-contents {
+    height: auto;
+    border-bottom: 1px solid @bodyBgColor;
+    border-right: 1px solid @bodyBgColor;
+    border-left: 1px solid @bodyBgColor;
+    width: 958px;
+    .content {
+      display: none;
+      p {
+        span {
+          color: @33GreyColor;
+          label {
+            color: @clearColor;
+            font-style: normal;
+            margin: 0 5px;
+          }
+        }
+      }
+      &.active {
+        display: block;
+      }
+      .coupon,
+      .coupon-code {
+        padding: 20px;
+        li {
+          float: left;
+          font-size: 14px;
+          padding-bottom: 3px;
+          margin-right: 40px;
+          cursor: pointer;
+        }
+        .liactive {
+          display: block;
+          border-bottom: 2px solid @themeColor;
+          color: @themeColor;
+        }
+      }
+      .coupon-content {
+        display: none;
+        margin: 0 20px;
+        height: auto;
+        float: left;
+        .coupon-null {
+          overflow: hidden;
+          margin: 10px;
+          p {
+            float: left;
+            height: 58px;
+            line-height: 58px;
+            margin-left: 15px;
+          }
+          & .use-count-icon {
+            float: left;
+            width: 87px;
+            height: 58px;
+            .common-product-company-bitmap(-661px, 0px);
+          }
+        }
+        .coupon-input {
+          margin-bottom: 20px;
+          .input {
+            border: 1px solid @ddGreyColor;
+            padding-left: 15px;
+            outline: none;
+            height: 35px;
+            line-height: 35px;
+            width: 345px;
+          }
+          .add-coupon {
+            background: @btnBgColor;
+            height: 38px;
+            width: 100px;
+            line-height: 38px;
+            display: inline-block;
+            color: @whiteColor;
+            text-align: center;
+            border: 0 none;
+            cursor: pointer;
+          }
+        }
+        .coupon-main {
+          margin-right: 20px;
+          width: 296px;
+          float: left;
+          height: 104px;
+          margin-top: 10px;
+          border: 2px solid transparent;
+          .coupon-main-left {
+            background: -webkit-linear-gradient(
+              top,
+              @redColor,
+              @themeOrangeColor
+            );
+            background: -o-linear-gradient(top, @redColor, @themeOrangeColor);
+            background: -ms-linear-gradient(top, @redColor, @themeOrangeColor);
+            background: linear-gradient(top, @redColor, @themeOrangeColor);
+            width: 40px;
+            color: @whiteColor;
+            height: 104px;
+            float: left;
+            span {
+              padding: 5px 7px;
+              text-align: center;
+              display: inline-block;
+              margin-top: 8px;
+            }
+          }
+          .cou-main-leftbg {
+            background-size: 100%;
+          }
+          /*失效*/
+          .cou-main-failurebg {
+            background-size: 100%;
+          }
+          .coupon-main-right-failure {
+            background: @backgroundColor!important;
+            color: @99GreyColor!important;
+            .coupon-title,
+            .coupon-dec,
+            .coupon-data {
+              color: @99GreyColor!important;
+            }
+          }
+          .coupon-main-right {
+            width: 250px;
+            float: left;
+            padding-left: 6px;
+            height: 104px;
+            .coupon-title {
+              margin-top: 10px;
+              color: @themeColor;
+              font-size: 18px;
+            }
+            .coupon-dec,
+            .coupon-data {
+              font-size: 12px;
+              color: @33GreyColor;
+              margin-top: 5px;
+            }
+          }
+          &.valid:hover {
+            cursor: pointer;
+            border: 2px solid @themeColor;
+          }
+        }
+        .coupon-main-active {
+          border: 2px solid @themeColor;
+          position: relative;
+          height: 100px !important;
+          overflow: hidden;
+          .mark {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+          }
+        }
+      }
+      .coupon-code-tips {
+        color: @themeOrangeColor;
+        margin-left: 15px;
+      }
+      .coupon-code-content {
+        padding: 15px;
+        overflow: hidden;
+        .coupon-code-null {
+          overflow: hidden;
+          margin: 10px;
+          p {
+            float: left;
+            height: 58px;
+            line-height: 58px;
+            margin-left: 15px;
+          }
+          & .use-count-icon {
+            float: left;
+            width: 60px;
+            height: 58px;
+            .common-product-company-bitmap(-337px, -72px);
+          }
+        }
+        .coupon-code-input {
+          margin-bottom: 20px;
+          .input {
+            border: 1px solid @ddGreyColor;
+            padding-left: 15px;
+            outline: none;
+            height: 35px;
+            line-height: 35px;
+            width: 345px;
+          }
+          .add-coupon {
+            background: @btnBgColor;
+            height: 36px;
+            width: 100px;
+            line-height: 36px;
+            display: inline-block;
+            color: @whiteColor;
+            text-align: center;
+            border: 0 none;
+            cursor: pointer;
+          }
+        }
+        .coupon-code-using {
+          border: 2px solid @paymentColor!important;
+          position: relative;
+          box-sizing: border-box;
+          & :after {
+            content: "";
+            width: 17px;
+            height: 16px;
+            .common-product-company-icon(-334px, -169px);
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+          }
+        }
+        .coupon-code-used {
+          color: @99GreyColor;
+        }
+        .coupon-code-use {
+          width: 297px;
+          border: 2px solid @bodyBgColor;
+          margin-right: 10px;
+          margin-bottom: 10px;
+          float: left;
+          cursor: pointer;
+          position: relative;
+          box-sizing: border-box;
+          .coupon-code-used-icon {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            .common-product-company-icon(-447px, -265px);
+            bottom: 43px;
+            right: 13px;
+          }
+          .font-bold {
+            font-weight: bold;
+          }
+          .c013ca6 {
+            color: @themeColor;
+          }
+          .pad15 {
+            padding: 15px;
+          }
+          .padB15 {
+            padding-bottom: 15px;
+          }
+          .marT15 {
+            margin-top: 15px;
+          }
+          .marB15 {
+            margin-bottom: 15px;
+          }
+          .marB10 {
+            margin-bottom: 10px;
+          }
+          .borB1 {
+            border-bottom: 1px solid @bodyBgColor;
+          }
+          .coupon-code-title {
+            height: 40px;
+            line-height: 40px;
+            padding-left: 15px;
+            background-color: @backgroundColor;
+          }
+        }
+      }
+    }
+  }
+}
+
+.pay-content {
+  float: left;
+  background: @backgroundColor;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  color: @99GreyColor;
+  & span {
+    margin: 0 3px;
+  }
+}
+.commonsision {
+  position: relative;
+  & input[type="text"] {
+    width: 76px;
+    height: 21px;
+    padding: 0;
+  }
+}
+.padd47 {
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+}
+.integral-rule {
+  color: @99GreyColor;
+  position: relative;
+  display: block;
+  margin: 10px 0 0 30px;
+  &::after {
+    position: absolute;
+    content: "";
+    width: 16px;
+    height: 16px;
+    .common-product-company-default(-69px, -54px);
+    top: 0;
+    left: -21px;
+  }
+}
+.coupon-code {
+  & input[type="text"] {
+    width: 451px;
+    height: 30px;
+    padding: 0;
+    padding-left: 15px;
+  }
+  & input[type="button"] {
+    width: 100px;
+    height: 35px;
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    background: @btnBgColor;
+    color: @blackColor;
+    margin-left: 10px;
+  }
+}
+.coupon-code-content {
+  display: none;
+}
+.integral-cos {
+  margin-bottom: 16px;
+  position: relative;
+  &::after {
+    position: absolute;
+    content: "";
+    width: 12px;
+    height: 12px;
+    .common-product-company-icon(-360px, -183px);
+    top: 2px;
+    left: -21px;
+  }
+}
+.con-active {
+  display: block;
+  clear: both;
+}
+
+.mgR5 {
+  margin-right: 5px;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.mgT5 {
+  margin-top: 5px;
+}
+
+.mgT30 {
+  margin-top: 30px;
+}
+
+.mgTB30 {
+  margin: 30px 0;
+}
+
+.ce62128 {
+  color: @themeColor;
+}
+
+.pdL10 {
+  padding-left: 10px;
+}
+
+.pdR10 {
+  padding-right: 10px;
+}
+.pdB10 {
+  padding-bottom: 10px;
+}
+.clear {
+  clear: both;
+}
+
+.sum-pay {
+  background: @backgroundColor;
+  float: left;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+.sum-pay-delivery {
+  word-break: break-all;
+  overflow: hidden;
+}
+.cf {
+  color: @blackColor;
+}
+
+.f24 {
+  font-size: 20px;
+}
+.fontWi {
+  font-weight: 900;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.bth-buy {
+  height: 50px;
+  padding: 0 32px;
+  line-height: 50px;
+  display: inline-block;
+  color: @whiteColor;
+  text-align: center;
+  border: 0 none;
+  cursor: pointer;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.mo {
+  background: @themeColor;
+  color: @whiteColor;
+  padding: 2px 5px;
+  font-size: 12px;
+  margin-left: 18px;
+}
+
+#shopTitle {
+  height: 50px;
+  width: 426px;
+  position: absolute;
+  left: 350px;
+  top: -75px;
+  font-size: 20px;
+}
+#none-border {
+  border: none;
+  font-size: 16px;
+}
+
+.posR {
+  position: relative;
+}
+
+.mgT20 {
+  margin-top: 20px;
+}
+
+.dialog-title {
+  margin-top: 7px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid @ddGreyColor;
+}
+
+/*弹框*/
+.control-label {
+  padding-top: 7px;
+  margin-bottom: 0;
+  text-align: right;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.form-control {
+  display: block;
+  width: 280px;
+  height: 25px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: @55GreyColor;
+  background-color: @whiteColor;
+  background-image: none;
+  border-color: #cfdadd;
+  border-radius: 2px;
+  margin-left: 10px;
+}
+
+.form-control2 {
+  width: 200px;
+  height: 22px;
+}
+
+.w80 {
+  width: 70%;
+}
+
+.w10 {
+  width: 12%;
+}
+
+.red {
+  color: @f2RedColor;
+}
+
+.has-error .form-control,
+.con-textarea {
+  border-color: @themeColor !important;
+}
+
+.con-textarea {
+  width: 280px;
+  height: 70px;
+  resize: none;
+  margin-left: 10px;
+}
+
+.from-btn {
+  width: 90px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 4px;
+  text-align: center;
+  display: inline-block;
+}
+
+.btn-red:hover {
+  color: @blackColor;
+}
+
+.btn-para:hover {
+  color: @fontColor;
+}
+
+.btn-red {
+  background: @themeColor;
+  color: @blackColor;
+}
+
+.btn-para {
+  color: @fontColor;
+  border: 1px solid @ddGreyColor;
+}
+
+.has-error .help-block {
+  color: @themeColor;
+  float: left;
+  width: 200px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.form-select {
+  height: 35px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 30px;
+  color: @55GreyColor;
+  background-color: @whiteColor;
+  background-image: none;
+  border-color: #cfdadd;
+  border-radius: 2px;
+  margin-left: 10px;
+  width: 100px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mgT10 {
+  margin-top: 10px;
+}
+
+.zengzhi {
+  margin-left: 30px;
+}
+
+.c3 {
+  color: @33GreyColor;
+}
+
+.c6 {
+  color: @fontColor;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.update-zengzhi {
+  dl {
+    float: left;
+    width: 50%;
+    dd {
+      margin-top: 5px;
+    }
+  }
+}
+
+.w40 {
+  width: 40% !important;
+}
+
+.mgL80 {
+  margin-left: 80px;
+}
+
+.c0172ca {
+  color: @00BlueColor;
+}
+
+//优惠券
+.coupon-content {
+  .coupon-box {
+    float: left;
+    width: 284px;
+    height: 110px;
+    font-size: 0;
+    margin-right: 21px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    .coupon-new-left {
+      &-mo {
+        padding: 5px 0px 0px 22px;
+        display: inline-block;
+        width: 228px;
+        height: 105px;
+        color: @paymentCouponColor;
+        vertical-align: top;
+        //background: url('../../images/company/company-icon.png') no-repeat -275px -520px;
+        .common-product-company-icon(-275px, -520px);
+        & .left-top {
+          font-size: 0;
+          & .money-text {
+            display: inline-block;
+            vertical-align: top;
+            margin-top: 3px;
+            & .money-icon {
+              font-size: 18px;
+              font-weight: 900;
+              display: inline-block;
+              vertical-align: top;
+              padding-top: 6px;
+            }
+            & .money-text {
+              font-size: 22px;
+              font-weight: 900;
+              display: inline-block;
+              vertical-align: top;
+            }
+          }
+          & .text-title {
+            display: inline-block;
+            vertical-align: top;
+            padding-top: 6px;
+            float: right;
+            margin-right: 5px;
+            & .font14 {
+              font-size: 14px;
+              font-weight: 900;
+              display: block;
+            }
+            & .font12 {
+              font-size: 12px;
+            }
+          }
+        }
+        & .left-bottom {
+          font-size: 12px;
+          & .all-good {
+            display: block;
+            margin-bottom: 9px;
+          }
+          & .company-name {
+            display: block;
+            margin-top: 7px;
+            max-width: 228px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+      .common-product-company-icon(0px, -520px);
+      & .left-top {
+        font-size: 0;
+        & .money-text {
+          display: inline-block;
+          vertical-align: top;
+          margin-top: 3px;
+          & .money-icon {
+            font-size: 18px;
+            font-weight: 900;
+            display: inline-block;
+            vertical-align: top;
+            padding-top: 6px;
+          }
+          & .money-text {
+            font-size: 22px;
+            font-weight: 900;
+            display: inline-block;
+            vertical-align: top;
+          }
+        }
+        & .text-title {
+          display: inline-block;
+          vertical-align: top;
+          padding-top: 6px;
+          float: right;
+          margin-right: 5px;
+          & .font14 {
+            font-size: 14px;
+            font-weight: 900;
+            display: block;
+          }
+          & .font12 {
+            font-size: 12px;
+          }
+        }
+      }
+      & .left-bottom {
+        font-size: 12px;
+        & .all-good {
+          display: block;
+          margin-bottom: 9px;
+        }
+      }
+    }
+    & .white-bgc {
+      .common-product-company-icon(-275px, -520px);
+      color: @themeOrangeColor;
+    }
+    .coupon-new-right {
+      &-mo {
+        display: inline-block;
+        width: 30px;
+        height: 110px;
+        font-size: 16px;
+        color: @paymentCouponColor;
+        font-weight: 900;
+        vertical-align: top;
+        position: relative;
+        border-top: 1px solid @paymentCouponColor;
+        border-right: 1px solid @paymentCouponColor;
+        border-bottom: 1px solid @paymentCouponColor;
+        box-sizing: border-box;
+        & .all-goods {
+          margin-top: 25px;
+          display: block;
+          margin-left: 8px;
+        }
+      }
+      & .bottom-icon {
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+        .common-product-company-icon(-334px, -169px);
+        height: 16px;
+        width: 17px;
+      }
+    }
+    & .color9 {
+      color: @99GreyColor;
+    }
+    & .coupon-no {
+      .common-product-company-icon(0px, -633px);
+    }
+    & .white-border {
+      display: inline-block;
+      border-top: 1px solid @themeOrangeColor;
+      border-right: 1px solid @themeOrangeColor;
+      border-bottom: 1px solid @themeOrangeColor;
+      width: 31px;
+      height: 108px;
+      position: relative;
+      & .none-img {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        .common-product-company-icon(-447px, -265px);
+        top: 10px;
+        left: -55px;
+      }
+      & .all-goods {
+        font-size: 16px;
+        margin-top: 25px;
+        display: block;
+        margin-left: 8px;
+      }
+    }
+    & .borderN {
+      border: none;
+      background: @ddGreyColor;
+      height: 110px;
+    }
+  }
+  .item-checkTo {
+  }
+
+  input[class*="checkBox"]:checked + label {
+    border: 1px solid @paymentColor;
+    background-color: @paymentColor;
+  }
+  input[class*="checkBox"]:checked + label:after {
+    content: "\2714"; //勾选符号
+    position: absolute;
+    top: 5px;
+    left: 1px;
+    color: @paymentColor;
+    font-size: 12px;
+  }
+
+  label[for="checkBoxFoot"] {
+    line-height: 0;
+    float: left;
+    margin: 22px 19px 0 0;
+  }
+}
+.coupon-content .coupon-box .coupon-new-left {
+  color: @whiteColor !important;
+  background: url(../../images/company/company-icon.png) no-repeat 0 -520px !important;
+}
+
+.modal {
+  background-color: rgb(0, 0, 0); /*不支持rgba的浏览器*/
+  background-color: rgba(0, 0, 0, 0.4); /*支持rgba的浏览器*/
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#66000000,endColorstr=#66000000);
+  background: none\9;
+}
+.bg-modal {
+  z-index: 1000;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgb(0, 0, 0); /*不支持rgba的浏览器*/
+  background: rgba(51, 51, 51, 0.3); /*支持rgba的浏览器*/
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000,endColorstr=#B2000000);
+  filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000, endColorstr=#B2000000)";
+  background: none\9;
+}
+//结算页弹框组件样式
+#settle {
+  width: 370px;
+  border: 5px solid @ddGreyColor;
+  background-color: @whiteColor;
+  position: fixed;
+  top: 200px;
+  left: 50%;
+  margin-left: -185px;
+  border-radius: 5px;
+}
+.settle-title {
+  background-color: @bodyBgColor;
+  padding: 12px 15px 12px 15px;
+  & .settle-close {
+    float: right;
+    width: 12px;
+    height: 12px;
+    .common-product-company-default(-22px, -256px);
+    cursor: pointer;
+  }
+}
+.settle-container {
+  & .settle-tips {
+    text-align: center;
+    padding: 15px;
+  }
+  & .settle-btn {
+    text-align: center;
+    margin-bottom: 20px;
+    & button {
+      width: 90px;
+      height: 35px;
+      border-radius: @searchRadius;
+      line-height: 35px;
+      background-color: @paymentColor;
+      color: @whiteColor;
+      text-align: center;
+      border: 0;
+      margin: 0 10px;
+    }
+    & button:nth-child(2) {
+      background-color: @whiteColor;
+      color: @fontColor;
+      border: 1px solid @ddGreyColor;
+    }
+  }
+  & .settle-goods {
+    padding: 15px;
+    & .settle-msg {
+      margin-bottom: 19px;
+    }
+    & ul li {
+      overflow: hidden;
+      padding: 13px 0;
+      border-bottom: 1px solid @ddGreyColor;
+      & img {
+        float: left;
+        margin-right: 15px;
+      }
+      & .goods-detail {
+        float: left;
+        & .goods-name {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
+.coupon-tip {
+  margin-right: 0;
+}
+.clearing-information {
+  padding: 20px 0px 20px 19px;
+  color: @greyColor;
+}
+//英文优惠券的样式
+#nulldiscountCouponBox {
+  overflow: hidden;
+  margin-top: -15px;
+  margin-bottom: 20px;
+}
+.discountCouponBox {
+  overflow: hidden;
+  margin-top: -15px;
+  margin-bottom: 20px;
+  font-family: "Microsoft YaHei", "微软雅黑";
+  .company-name {
+    display: inline-block;
+    color: @33GreyColor;
+    font-size: 14px;
+  }
+  & .couponListEnglish {
+    width: 266px;
+    height: 147px;
+    // border:1px solid @themeOrangeColor;
+    float: left;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    margin-right: 15px;
+    margin-top: 10px;
+    // border-radius: 5px;
+    background: url("../../images/prod-coupons.png") no-repeat -2px -2px;
+  }
+  & .nullcouponListEnglish {
+    width: 266px;
+    height: 176px;
+    // border:1px solid @ccGreyColor;
+    float: left;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    margin-right: 15px;
+    margin-top: 10px;
+    // border-radius: 5px;
+    background: url("../../images/prod-coupons.png") no-repeat -2px -177px;
+    .company-name {
+      color: @ccGreyColor;
+    }
+  }
+  & .couponListChinese {
+    width: 290px;
+    height: 138px;
+    // border:1px solid @themeOrangeColor;
+    float: left;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    margin-right: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    background: url("../../images/prod-coupons.png") no-repeat -2px -2px;
+  }
+  & .nullcouponListChinese {
+    width: 290px;
+    height: 170px;
+    // border:1px solid @ccGreyColor;
+    float: left;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    margin-right: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background: url("../../images/prod-coupons.png") no-repeat -2px -150px;
+    .company-name {
+      color: @ccGreyColor;
+    }
+  }
+  & .couponListChineseColor {
+    width: 290px;
+    height: 138px;
+    float: left;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    margin-right: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    background: url("../../images/prod-coupons.png") no-repeat -302px -2px;
+  }
+  & .couponListEnglishColor {
+    width: 290px;
+    height: 148px;
+    float: left;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    margin-right: 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background: url("../../images/prod-coupons.png") no-repeat -283px -2px;
+  }
+  & .couponList-topEnglish {
+    height: 40px;
+    line-height: 40px;
+  }
+  & .couponList-topChinese {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+  }
+  .allProductEnglish {
+    font-size: 16px;
+    color: @33GreyColor;
+    font-weight: bold;
+  }
+  .nullallProductEnglish {
+    font-size: 16px;
+    color: @ccGreyColor;
+    font-weight: bold;
+  }
+  .allProductChinese {
+    font-size: 12px;
+    color: @greyColor;
+    text-align: center;
+  }
+  & .nullcouponList-centerEnglish {
+    padding: 0px 5px;
+    height: 100px;
+    // border-top:1px dashed @ccGreyColor ;
+    // border-bottom:1px dashed @ccGreyColor;
+  }
+  & .nullcouponList-centerChinese {
+    padding: 0px 5px;
+    height: 93px;
+    // border-top:1px dashed @ccGreyColor ;
+    // border-bottom:1px dashed @ccGreyColor;
+  }
+  & .couponList-centerEnglish {
+    padding: 0 5px;
+    height: 100px;
+    // border-top:1px dashed @themeOrangeColor;
+    // border-bottom:1px dashed @themeOrangeColor;
+  }
+  & .couponList-centerChinese {
+    padding: 0 5px;
+    height: 95px;
+    //  border-top:1px dashed @themeOrangeColor;
+    //  border-bottom:1px dashed @themeOrangeColor;
+  }
+  .couponMoney {
+    color: @redColor;
+    padding-top: 24px;
+    //height: 60px;
+    .nullreducerPriceEng {
+      color: @99GreyColor;
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 15px;
+      margin-left: 10px;
+      position: absolute;
+    }
+    & .moneySymbol {
+      position: absolute;
+      font-size: 22px;
+      margin-top: 8px;
+    }
+    & .nullmoneySymbol {
+      position: absolute;
+      font-size: 22px;
+      margin-top: 8px;
+      color: @whiteColor;
+    }
+    & .couponMoneyNumEnglish {
+      font-size: 32px;
+      font-weight: bold;
+      margin-left: 20px;
+    }
+    & .nullcouponMoneyNumEnglish {
+      font-size: 32px;
+      font-weight: bold;
+      margin-left: 20px;
+      color: @whiteColor;
+    }
+    .couponBox {
+      position: absolute;
+      margin-left: 5px;
+      .reducerPrice {
+        display: block;
+        font-size: 14px;
+        color: @redColor;
+        margin-top: 15px;
+        margin-bottom: 5px;
+      }
+      .reducerPrice-unselected {
+        color: @adRedColor;
+      }
+      .nullreducerPrice {
+        display: block;
+        font-size: 14px;
+        color: @99GreyColor;
+        margin-top: 15px;
+        margin-bottom: 5px;
+      }
+    }
+    & .couponMoneyNumChinese {
+      font-size: 30px;
+      font-weight: bold;
+      margin-left: 20px;
+      & strong {
+        position: absolute;
+        margin-top: 15px;
+      }
+    }
+    &.couponMoneyNumChinese-unselected {
+      color: @whiteColor;
+    }
+    & .nullcouponMoneyNumChinese {
+      font-size: 30px;
+      font-weight: bold;
+      margin-left: 20px;
+      color: @whiteColor;
+      & strong {
+        position: absolute;
+        margin-top: 15px;
+      }
+    }
+    .ticketEnglish {
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 15px;
+      margin-left: 10px;
+      position: absolute;
+      color: @orderActiveProgressBarColor;
+    }
+    .ticketEnglish-unselected {
+      color: @adRedColor;
+    }
+  }
+  .couponMoney-unselected {
+    color: @whiteColor;
+  }
+  .nullticketChinese,
+  .nullticketEnglish {
+    color: @whiteColor;
+    padding: 2px 4px;
+  }
+  .ticketChinese {
+    font-size: 12px;
+    color: @redColor;
+    padding: 2px 4px;
+    display: inline-block;
+    max-width: 175px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .ticketChinese-unselected {
+    color: @whiteColor;
+  }
+  .couponToUse {
+    color: @themeOrangeColor;
+    height: 25px;
+    line-height: 25px;
+    padding-left: 10px;
+  }
+  .couponToUse-unselected {
+    color: @whiteColor;
+  }
+  .nullcouponToUse {
+    color: @whiteColor;
+    height: 25px;
+    line-height: 25px;
+    padding-left: 10px;
+  }
+  .couponToUse-bottom {
+    height: 40px;
+    line-height: 40px;
+    position: relative;
+    .allPro {
+      font-size: 12px;
+      font-weight: bold;
+      color: @33GreyColor;
+    }
+    .nullallPro {
+      font-size: 12px;
+      color: @ccGreyColor;
+    }
+    .couponFold {
+      position: absolute;
+      right: 0px;
+      top: 15px;
+      display: inline-block;
+      width: 16px;
+      height: 14px;
+      background: url(../../images/company/company-default.png) no-repeat -20px -30px;
+    }
+    .couponFoldDown {
+      position: absolute;
+      right: 0px;
+      top: 15px;
+      display: inline-block;
+      width: 16px;
+      height: 14px;
+      background: url(../../images/company/company-default.png) no-repeat -20px -43px;
+    }
+  }
+  .couponPromotionMsg {
+    position: absolute;
+    width: 270px;
+    background-color: @whiteColor;
+    border: 2px solid @99GreenColor;
+    z-index: 999;
+    padding-left: 10px;
+    margin-top: -2px;
+    min-height: 40px;
+    span {
+      float: left;
+    }
+    .couponToUse-message {
+      width: 250px;
+    }
+    .closeBtn {
+      position: absolute;
+      top: -3px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  }
+  .couponList-bottom {
+    height: 42px;
+    line-height: 42px;
+    position: relative;
+    span {
+      color: @66GreyColor;
+    }
+    .nullDate {
+      color: @ccGreyColor;
+    }
+    .overdate {
+      border: 1px solid @redColor;
+      padding: 2px 7px;
+      border-radius: 12px;
+      color: @redColor;
+      margin-left: 7px;
+    }
+  }
+  .coupon-unuse-reason {
+    color: @orangeColor;
+  }
+  .bottom-icon {
+    position: absolute;
+    bottom: -3px;
+    right: -7px;
+    //background: url('../../images/company/company-icon.png') no-repeat -334px -169px;
+    .common-product-company-icon(-334px, -169px);
+    height: 16px;
+    width: 17px;
+  }
+}
+
+div {
+  .invoice-false {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 3px;
+    cursor: pointer;
+    background: url(../../images/company/company-default-red.png) no-repeat -107px -33px;
+  }
+}
+.invoice-sure {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+  background: url(../../images/company/company-default-red.png) no-repeat -107px -73px;
+}
+.perosonInfo {
+  .title {
+    width: 92px;
+    text-align: right;
+    display: inline-block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  li {
+    margin-bottom: 5px;
+  }
+}
+.pop-row {
+  line-height: 30px;
+  .address-name-no {
+    margin-left: 24px;
+  }
+  // .a2 {
+  //     margin-left: 20px;
+  // }
+  .a1 {
+    // width: 80px;
+  }
+  .a2 {
+    margin-left: 10px;
+  }
+  .a3 {
+    margin-left: 20px;
+  }
+  .default-adress {
+    background-color: @themeColor;
+    height: 18px;
+    line-height: 18px;
+    padding: 0 3px;
+    color: #fff;
+  }
+}
+.showmore {
+  position: relative;
+  margin-left: 24px;
+  &::after {
+    position: absolute;
+    content: "";
+    height: 6px;
+    width: 11px;
+    background: url(../../images/company/company-default-red.png) no-repeat -22px -34px;
+    top: 6px;
+    right: -15px;
+  }
+}
+.address-name-no {
+  width: 86px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+.address-name {
+  width: 86px;
+  height: 26px;
+  line-height: 26px;
+  text-align: center;
+  border: 2px solid #f23030 !important;
+  position: relative;
+  cursor: pointer;
+}
+.address-name:after {
+  content: "";
+  width: 17px;
+  height: 16px;
+  background: url(../../images/company/company-icon-red.png) no-repeat -334px -169px;
+  position: absolute;
+  bottom: 0px;
+  right: -1px;
+}
+.invoive-info {
+  margin-top: 10px;
+  .title {
+    width: 72px;
+    display: inline-block;
+    text-align: right;
+    font-size: 12px;
+  }
+  .content {
+    width: 60px;
+    line-height: 26px;
+    text-align: center;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    display: inline-block;
+    margin-left: 10px;
+  }
+  .active {
+    position: relative;
+    &::after {
+      position: absolute;
+      content: "";
+      width: 17px;
+      height: 16px;
+      background: url(../../images/company/company-icon-red.png) no-repeat -334px -169px;
+      bottom: 0px;
+      right: -1px;
+    }
+  }
+}
+.invoice-container {
+  .invoiceShow {
+    .tip {
+      color: @themeColor;
+    }
+  }
+  .invoiceShow dd {
+    max-width: 400px;
+    height: 25px;
+    float: left;
+    overflow: hidden;
+    line-height: 25px;
+    padding: 0 10px;
+    font-size: 14px;
+    input {
+      width: 200px;
+      height: 20px;
+    }
+  }
+  .invoiceShow dt {
+    float: left;
+    width: 124px;
+    height: 24px;
+    padding-top: 7px;
+    font-size: 12px;
+    text-align: right;
+    margin-right: 10px;
+  }
+}
+//组合商品的弹框
+.add-dialog {
+  padding: 0 20px;
+  height: 338px;
+  overflow-y: auto;
+  li {
+    padding-top: 15px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  .img-box {
+    width: 80px;
+    height: 80px;
+    margin-right: 16px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .content {
+    width: 202px;
+    margin-right: 92px;
+  }
+  .descr {
+    width: 146px;
+    margin-right: 32px;
+  }
+}
+.combation {
+  width: 100px;
+  height: 25px;
+  border-radius: 13px;
+  display: block;
+  border: 1px solid #f23030;
+  text-align: center;
+  position: relative;
+  left: -20px;
+  line-height: 25px;
+  color: #f23030;
+  margin: 10px auto;
+  &:hover {
+    color: #f23030 !important;
+  }
+}
+
+/* Code By Joenix */
+.settlement {
+  &-section {
+    border: 1px solid #f8f8f8;
+    padding: 16px 0;
+    margin-bottom: 20px;
+
+    &-title,
+    &-container {
+      padding: 0 12px;
+    }
+
+    &-title {
+      color: #333;
+      border-left: 4px solid #c00;
+    }
+
+    &-container {
+      font-size: 12px;
+
+      [class^="grid-col"] {
+        margin: 10px 0;
+      }
+    }
+
+    .grid-col-6 {
+      display: flex;
+      flex-direction: row;
+
+      & > label,
+      & > div {
+        display: inline-block;
+        vertical-align: text-top;
+      }
+
+      & > label,
+      & > div > p {
+        line-height: 30px;
+      }
+
+      & > label {
+        width: 120px;
+        text-align: right;
+        white-space: nowrap;
+
+        &.must {
+          &:before {
+            content: "*";
+            color: #c00;
+            margin-right: 5px;
+          }
+        }
+      }
+
+      input,
+      select {
+        width: 240px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 8px;
+        border-radius: 2px;
+        border: solid 1px #ccc;
+
+        &[disabled] {
+          background-color: #f7f7f7;
+        }
+      }
+
+      bdo {
+        display: inline-block;
+        font-size: 12px;
+      }
+
+      label {
+        &:not(.no-colon):after {
+          content: "：";
+        }
+      }
+
+      .select-panel {
+        line-height: 30px;
+
+        input {
+          position: absolute;
+          right: 0;
+          top: 0;
+          opacity: 0;
+          height: 34px;
+          width: 115px;
+        }
+
+        &-error {
+          position: relative;
+          width: 90px;
+          height: 25px;
+          background-color: #cc0000;
+          border: 1px solid #cc0000;
+          border-radius: 13px;
+          padding: 4px 12px;
+          line-height: 25px;
+
+          a {
+            color: #fff;
+          }
+        }
+        &-name {
+          width: 350px;
+          margin-top: 8px;
+        }
+
+        &:hover {
+          background-color: #cc0000;
+          border: 1px solid #cc0000;
+          color: #fff;
+        }
+      }
+    }
+
+    .methods {
+      div {
+        margin-right: 20px;
+        display: inline-block;
+        span {
+          width: 90px;
+          padding: 3px;
+          text-align: center;
+          display: block;
+          border: 2px solid #eee;
+          cursor: pointer;
+
+          &.active {
+            border-color: #c00;
+            position: relative;
+
+            &:after {
+              content: "";
+              position: absolute;
+              right: -1px;
+              bottom: 0;
+              width: 17px;
+              height: 16px;
+              background: url(../../images/company/company-icon-red.png)
+                no-repeat -334px -169px;
+            }
+          }
+        }
+      }
+    }
+
+    .production-list {
+      &-title,
+      &-content {
+        .grid-col-4 {
+          word-wrap: break-word;
+        }
+        .grid-col-2 {
+          text-align: center;
+        }
+      }
+      &-content {
+        border-bottom: 1px dashed #f2f2f2;
+
+        img {
+          width: 80px;
+          height: 80px;
+        }
+
+        a {
+          &.picture {
+            float: left;
+          }
+          &.context {
+            margin-left: 100px;
+            display: block;
+          }
+        }
+      }
+    }
+
+    .input-editor {
+      margin: 10px -12px;
+      position: relative;
+
+      textarea {
+        width: 100%;
+        min-height: 6rem;
+        padding: 8px;
+      }
+
+      p {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+      }
+    }
+
+    .settlement-total {
+      text-align: right;
+      line-height: 2;
+      background-color: #fff;
+
+      .grid-col-8 {
+        text-align: left;
+      }
+      .grid-col-4 {
+        text-align: right;
+        background-color: #fafafa;
+      }
+      label {
+        width: 100px;
+        display: inline-block;
+      }
+      span {
+      }
+    }
+
+    .settlement-pay {
+      strong {
+        color: #c00;
+        font-size: 18px;
+      }
+    }
+
+    .settlement-publish {
+      margin-top: 10px;
+      & > a {
+        width: 100px;
+        height: 38px;
+        line-height: normal;
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    }
+
+    &.settlement-end {
+      padding: 0;
+
+      strong {
+        color: #333;
+      }
+
+      .settlement-section-container {
+        padding: 0;
+      }
+
+      .grid-col-4,
+      .grid-col-8 {
+        margin: 0;
+        padding: 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,408 @@
+@import url('../../common/css/i-var_${skin}.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-form.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-substep.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-global-nav.less');
+@import url('../../common/css/i-feedback.less');
+@import url('../../common/css/reset.less');
+@import url('../../common/css/common.less');
+@import url('../../common/css/i-shotProcess.less');
+
+/* 注册页面 */
+
+.forgot-box {
+    // background-color: @loginBgColor;
+    border-top: 1px solid @ddGreyColor;
+    #bregis-page {
+        background-color: @loginBgColor;
+    }
+    #cregis-page {
+        // background-color: @loginBgColor;
+        padding-top: 50px;
+        & .form {
+            padding-bottom: 42px;
+        }
+    }
+    .buyStepNumBox {
+        margin: 0 auto;
+        display: block;
+        height: 95px;
+        clear: both;
+        width: 360px;
+        position: static;
+        top: 0;
+        right: 0;
+        margin-bottom: 20px;
+        li {
+            width: 50%;
+            padding-top: 22px;
+        }
+    }
+}
+
+.form-group {
+    margin-bottom: 20px;
+    .input {
+        width: 318px;
+        padding: 7px 20px;
+        line-height: 33px;
+        height: 33px;
+    }
+    .tip {
+        padding: 16px 0;
+    }
+    .err_new {
+        top: -17px;
+    }
+    .tips {
+        position: absolute;
+        top: 0;
+        left: -60px;
+        width: 60px;
+        padding: 16px 0px;
+        margin-left: 5px;
+        font-size: 12px;
+    }
+    & .phone-code {
+        position: absolute;
+        top: 4px;
+        right: 8px;
+        height: 38px;
+        & span {
+            display: inline-block;
+            width: 40px;
+            height: 28px;
+            margin-top: 4px;
+            margin-left: 15px;
+            float: right;
+            font-size: 12px;
+            color: @bbGreyColor;
+        }
+    }
+}
+
+.cregis-left {
+    float: left;
+}
+
+.form {
+    // float: left;
+    margin: 0 auto;
+    .pwd-img {
+        padding-bottom: 70px;
+    }
+    & label {
+        width: 165px;
+        font-size: 14px;
+        padding-top: 12px;
+        &.checkbox-inline {
+            font-size: 12px;
+            width: 360px!important;
+            text-align: center!important;
+        }
+    }
+    .pwd {
+        margin-bottom: 20px;
+    }
+}
+
+.container {
+    position: relative;
+    .loginTitle {
+        position: absolute; //height: 50px;
+        width: 426px;
+        left: 156px;
+        top: -61px;
+        font-size: 20px;
+        // color: @bbGreyColor;
+        color: #747474;
+    }
+    & .loginTitle-two{
+        left:210px;
+        top:-58px;
+        // color: @33GreyColor;
+    }
+}
+
+#cregis-page,
+#bregis-page {
+    & .form {
+        width: 360px; //margin-left: 200px;
+        //padding-bottom: 43px;
+        padding-bottom: 82px; // overflow: hidden;
+    }
+    & .sms {
+        //width: 103px;
+        width: 178px;
+    }
+    & .file {
+        width: 143px;
+    }
+    & input[type="file"] {
+        position: absolute;
+        left: 249px;
+        top: 0px;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        z-index: 99;
+        font-family: "微软雅黑";
+    }
+    & .slt-pre {
+        width: 70px;
+    }
+    & .slt-sux {
+        width: 153px;
+        margin-left: 5px;
+    }
+    & .slt-area {
+        width: 80px;
+    }
+    & .ml5 {
+        margin-left: 5px;
+    }
+    & .btn {
+        //width: 250px;
+        height: 50px;
+        line-height: 50px;
+        width: 360px;
+    }
+    & .wd5 {
+        width: 122px;
+    }
+    & .smsBtn,
+    & .updBtn {
+        float: left; //width: 120px;
+        width: 125px; //margin-left: 5px;
+        margin-left: 15px; //color: @77GreyColor;
+        font-size: 12px; //background-color: @eeGreyColor;
+
+         background-color: @bodyBgColor!important;
+         color: @33GreyColor!important;
+        border-radius: 0;
+        &.del {
+            position: absolute;
+            right: -80px;
+        }
+    }
+     & .smsBtnreg{
+        background-color: @ccGreyColor!important;
+        color: @33GreyColor!important;
+    }
+     & .smsBtnHigh {
+        float: left!important; //width: 120px;
+        width: 125px!important; //margin-left: 5px;
+        margin-left: 15px!important; //color: @77GreyColor;
+        font-size: 12px!important; //background-color: @eeGreyColor;
+        background-color: @55GreyColor;
+        border-radius: 0!important;
+    }
+    input.btn.smsBtnHigh[disabled] {
+        color: @themeColor;
+    }
+    & .updBtn {
+        width: 80px;
+    }
+    & .has-suffix {
+        float: left;
+        width: 115px;
+        height: 36px;
+    }
+    & .date {
+        float: none;
+        width: 73px;
+    }
+    & .join {
+        float: left;
+        width: 14px;
+        padding-top: 6px;
+        margin: 0 2px;
+    }
+    & .icon-date {
+        position: absolute;
+        top: 9px;
+        right: 8px;
+    }
+    & .checkbox-inline a {
+        color: @themeColor;
+    }
+    & .regis-success {
+        padding: 60px 0 200px;
+        text-align: center;
+        & p {
+            margin: 0 0 40px;
+        }
+        & .info1 {
+            color: @redColor;
+            font-size: 20px;
+        }
+        & .info2 {
+            // color: @33GreyColor;
+            color: #ffa00a;
+            font-size: 25px;
+            font-weight: bold;
+        }
+        & img {
+            margin-right: 15px;
+            vertical-align: text-bottom;
+        }
+    }
+    & .msg {
+       padding-left: 0px;
+        // height: 20px;
+    }
+}
+
+#cregis-page {
+    //padding-top: 74px;
+    padding-top: 78px; //border-top: 2px solid @eeGreyColor;
+}
+
+#bregis-page {
+    padding-top: 35px;
+    & .form {
+        //margin-top: 30px;
+    }
+}
+
+
+/* 注册协议 */
+
+.agmt {
+    // position: absolute;
+    // bottom: 0;
+    // left: 0;
+    // width: 700px;
+    // height: 400px;
+    // padding: 20px;
+    // background-color: @whiteColor;
+    // border-right: 1px solid @ccGreyColor;
+    // border-bottom: 1px solid @ccGreyColor;
+    // border-left: 1px solid @ccGreyColor;
+    // box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    // z-index: 1000;
+    width: 900px;
+    position: fixed;
+    z-index: 10000;
+    display: block;
+    overflow: hidden;
+    top: 10%;
+    left: 50%;
+    margin-left: -450px;
+    background-color: @whiteColor;
+    border: 5px solid rgba(51, 51, 51, 0.3);
+    -webkit-border-radius: 5px;
+    box-shadow: 0 3px 10px @ccGreyColor;
+    & .header {
+        height: 40px;
+        overflow: hidden;
+        background-color: @bodyBgColor;
+        line-height: 40px;
+        padding: 0 18px;
+    }
+    .close {
+        float: right;
+        color: @ccGreyColor;
+        font-size: 26px;
+        line-height: 40px;
+        cursor: pointer;
+        &:hover {
+            color: @33GreyColor;
+        }
+    }
+    & h2 {
+        float: left;
+        margin: 0;
+        font-weight: normal;
+        font-size: 14px;
+        span {
+            border-right: 1px solid @ccGreyColor;
+        }
+    }
+    & .body {
+        height: 426px;
+        overflow: auto;
+        margin: 0 15px;
+        padding-bottom: 25px;
+        &::-webkit-scrollbar {
+            width: 9px;
+        }
+        &::-webkit-scrollbar-track {
+            background-color: @whiteColor;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color:@ddGreyColor;
+        }
+    }
+    & p {
+        margin: 10px 0;
+        font-size: 12px;
+    }
+    & h5 {
+        margin: 10px 0;
+    }
+    & .protocol-button{
+        margin: 20px 0;
+        button{
+            margin: 0 auto;
+            display: block;
+            width: 308px;
+            height: 40px;
+            color: @whiteColor;
+            background: @btnBgColor;
+            border: 0;
+            font-size: 16px;
+            font-family: '微软雅黑' !important;
+        }
+    }
+}
+
+.common-icons-cregis {
+    position: absolute;
+    top: -68px;
+    left: 380px;
+    z-index: 999;
+}
+
+.come {
+    width: 200px;
+    float: right;
+    font-size: 18px;
+    position: relative;
+    top: -80px;
+}
+
+.yiyou {
+    z-index: 999;
+    position: absolute;
+    right: 0px;
+    top: -50px;
+    font-size: 14px;
+    & a {
+        width: 82px;
+        // color: @themeColor;
+        color: @00BlueColor;
+        // padding-left: 30px;
+    }
+}
+.regis-index{
+    span{
+        padding: 10px 0;
+        box-sizing: border-box;
+        border-bottom: 1px solid @ddGreyColor;
+        float: left;
+        cursor: pointer;
+    }
+    .regis-active{
+        color: @themeColor;
+        border-bottom: 1px solid @themeColor;
+    }
+}

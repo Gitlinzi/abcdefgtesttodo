@@ -1,0 +1,163 @@
+{
+  "code": "0",
+  "message": "操作成功",
+  "errMsg": null,
+  "data": {
+    "mpId": 6819,
+    "productUrl": "http://p02.sfbest.com/2016/1400216519/original_1400216519_1_1.jpg",
+    "chineseName": "爱之湾 起泡酒缤纷礼盒三支装 750ml*3",
+    "mayExchangeProductNum": 1,
+    "productPriceFinal": 108,
+    "stockNum": 100,
+    "map": {
+      "serialProducts": [
+        {
+          "key": "_5_124_131_194_",
+          "product": {
+            "productId": 5733,
+            "mpId": 5733,
+            "code": "5733",
+            "name": "COOP 酷柏香浓咖啡粉 250g[海外直采]",
+            "subTitle": null,
+            "type": 1,
+            "price": 108,
+            "stockNum": 100,
+            "lackOfStock": null,
+            "brandId": 79,
+            "brandName": "酷欧培 COOP",
+            "promotionPrice": null,
+            "companyId": 10,
+            "merchantId": 101,
+            "standard": null,
+            "saleType": 1,
+            "saleIconUrl": null,
+            "volume4sale": null,
+            "isRecommend": null,
+            "picUrl": "http://p02.sfbest.com/2015/1500154051/original_1500154051_1_11.jpg",
+            "pics": null,
+            "attrs": null,
+            "url160x160": null,
+            "url220x220": null,
+            "url500x500": null,
+            "url800x800": null,
+            "url100x100": null,
+            "url120x120": null,
+            "url60x60": null
+          }
+        },
+        {
+          "key": "_27_129_139_",
+          "product": {
+            "productId": 6819,
+            "mpId": 6819,
+            "code": "6819",
+            "name": "爱之湾 起泡酒缤纷礼盒三支装 750ml*3",
+            "subTitle": null,
+            "type": 1,
+            "price": 108,
+            "stockNum": 97,
+            "lackOfStock": null,
+            "brandId": 212,
+            "brandName": "爱之湾",
+            "promotionPrice": null,
+            "companyId": 10,
+            "merchantId": 101,
+            "standard": "750ml*3",
+            "saleType": 1,
+            "saleIconUrl": null,
+            "volume4sale": null,
+            "isRecommend": null,
+            "picUrl": "http://p02.sfbest.com/2016/1400216519/original_1400216519_1_1.jpg",
+            "pics": null,
+            "attrs": null,
+            "url160x160": null,
+            "url220x220": null,
+            "url500x500": null,
+            "url800x800": null,
+            "url100x100": null,
+            "url120x120": null,
+            "url60x60": null
+          }
+        }
+      ],
+      "attributes": [
+        {
+          "id": 1,
+          "name": "保质期",
+          "sortValue": null,
+          "values": [
+            {
+              "id": 5,
+              "value": "540（天）",
+              "sortValue": 1,
+              "checked": false,
+              "mpId": [
+                5733
+              ]
+            },
+            {
+              "id": 27,
+              "value": "1800（天）",
+              "sortValue": 15,
+              "checked": true,
+              "mpId": [
+                6819
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "存储条件",
+          "sortValue": null,
+          "values": [
+            {
+              "id": 129,
+              "value": "冷藏15-18度红酒",
+              "sortValue": 25,
+              "checked": true,
+              "mpId": [
+                6819
+              ]
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "销售单位",
+          "sortValue": null,
+          "values": [
+            {
+              "id": 139,
+              "value": "套",
+              "sortValue": 24,
+              "checked": true,
+              "mpId": [
+                6819
+              ]
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "型号",
+          "sortValue": null,
+          "values": [
+            {
+              "id": 194,
+              "value": "250g",
+              "sortValue": 2,
+              "checked": false,
+              "mpId": [
+                5733
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "isSerial": 1,
+    "soItemId": 179
+  },
+  "trace": "124!$1#@168%&192!$,77215,61776907443115093501387"
+}

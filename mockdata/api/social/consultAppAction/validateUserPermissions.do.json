@@ -1,0 +1,35 @@
+{
+    "status": 0,
+    "code": "0",
+    "success": true,
+    "data": {
+        "answerTimes": null,
+        "operatorAnswer": null,
+        "scheduleTimeUserOfBuyMPNoReturn": null,
+        "scheduleTimeUserOfBuyMP": null,
+        "userOfBuyMP": null,
+        "highPraiseUsers": null,
+        "onlineUser": null,
+        "allUser": null,
+        "sensitiveWords": null,
+        "goodCommentUser": null,
+        "allToCheck": null,
+        "toCheck": null,
+        "toAnswer": null,
+        "consultConfigVO": {
+            "publish": true,
+            "view": true,
+            "publishMsg": "",
+            "viewMsg": ""
+        },
+        "qaConfigVO": {
+            "publish": true,
+            "view": true,
+            "publishMsg": "",
+            "viewMsg": ""
+        }
+    },
+    "message": null,
+    "desc": null,
+    "trace": "124!$121#@19%&172!$,87d8f30,e4b69ba87339a0f5"
+}

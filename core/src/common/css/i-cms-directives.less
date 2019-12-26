@@ -1,0 +1,306 @@
+// 商品大图
+.pc-goods-big {
+    .title {
+        line-height: 30px;
+        padding: 0 5px;
+    }
+    .left{
+        width: 400px;
+        height: 469px;
+        float: left;
+        img {
+            width: 400px;
+            height: 469px;
+        }
+    }
+    .right {
+        margin-left: 400px;
+        margin-top: 1px;
+    }
+    .goods-r1c4 {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin-top: -1px;
+        margin-left: -1px;
+        float: left;
+        width: 168px;
+        height: 204px;
+        .pic {
+            img {
+                width: 125px;
+                height: 125px;
+                display: block;
+                margin: 0 auto;
+            }
+        }
+        .name {
+            margin: 10px 0 !important;
+            font-weight: normal;
+            margin: 0px;
+            font-size: 14px;
+            color: #333333;
+            line-height: 18px;
+            display: -webkit-box;
+            word-wrap: break-word;
+            word-break: break-all;
+            /* autoprefixer: off */
+            -webkit-box-orient: vertical; // 参考 https://github.com/postcss/autoprefixer/issues/776
+            /* autoprefixer: on */
+            -webkit-line-clamp: 2;
+            height: 38px;
+            overflow: hidden;
+            //white-space: normal!important;
+            text-overflow: ellipsis;
+        }
+    }
+}
+// 商品模板
+.pc-goods {
+    .mc-goods {
+        width: 1200px;
+        position: relative;
+        overflow: visible;
+        .s-price{
+            margin-bottom: 5px;
+            height: 19px;
+            .pro-icon{
+                width: 40px;
+                height: 15px;
+                margin-left: 3px;
+            }
+            .pro-simulation-icon{
+                padding: 1px 4px;
+                font-size: 14px;
+                border-radius: 4px;
+                margin-right: 6px;
+            }
+        }
+        .h-border{
+            border-right: 1px solid @bodyBgColor;
+            border-bottom: 1px solid @bodyBgColor;
+        }
+        .hot {
+            background-color: @whiteColor;
+            padding: 20px;
+            box-sizing: border-box;
+            float: left;
+            .money {
+                margin-top: 15px;
+                margin-bottom: 4px;
+                font-size: 20px;
+                color: @clearColor;
+            }
+            .goods-name {
+                font-weight: normal;
+                margin: 0px;
+                font-size: 15px;
+                color: @33GreyColor;
+                line-height: 18px;
+                display: -webkit-box;
+                word-wrap: break-word;
+                word-break: break-all;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+                overflow: hidden;
+                width: 259px;
+                height: 18px;
+                overflow: hidden;
+            }
+        }
+        .hot:last-child {
+            border-right: none;
+        }
+
+        .hot-six {
+            background-color: @whiteColor;
+            padding: 20px;
+            box-sizing: border-box;
+            float: left;
+            .money {
+                margin-top: 15px;
+                margin-bottom: 4px;
+                font-size: 20px;
+                color: @clearColor;
+            }
+            .goods-name {
+                font-weight: normal;
+                margin: 0px;
+                font-size: 15px;
+                color: @33GreyColor;
+                line-height: 18px;
+                display: -webkit-box;
+                word-wrap: break-word;
+                word-break: break-all;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+                overflow: hidden;
+                width: 259px;
+                height: 18px;
+                overflow: hidden;
+            }
+        }
+        .hot:last-child {
+            border-right: none;
+        }
+
+        .hot-two {
+            position: relative;
+            width: 590px;
+            overflow: hidden;
+            &:nth-child(2n+1) {
+                margin-right: 10px;
+            }
+            &:nth-child(2n) {
+                margin-left: 10px;
+            }
+            .pic {
+                width: 260px;
+                height: 260px;
+                float: left;
+                img{
+                    width: 260px;
+                    height: 260px;
+                }
+            }
+            .con-two {
+                float: right;
+                width: 278px;
+                .name-two {
+                    font-weight: normal;
+                    height: 38px;
+                    margin: 12px 0 3px;
+                    padding-right: 20px;
+                    font-size: 14px;
+                    line-height: 19px;
+                    display: -webkit-box;
+                    word-wrap: break-word;
+                    word-break: break-all;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                    color: @33GreyColor;
+                    font-size: 16px;
+                    margin-bottom: 10px;
+                }
+                .s-price{
+                    margin-bottom: 5px;
+                    height: 19px;
+                    .pro-icon{
+                        width: 40px;
+                        height: 15px;
+                        margin-left: 3px;
+                    }
+                    .pro-simulation-icon{
+                        padding: 1px 4px;
+                        color: @whiteColor;
+                        font-size: 14px;
+                        border-radius: 4px;
+                        margin-right: 6px;
+                    }
+                }
+                .money{
+                    position: absolute;
+                    bottom:20px;
+                    width: 278px;
+                    height: 49px;
+                    border:1px solid @btnBgColor;
+                    .price{
+                        display: block;
+                        float: left;
+                        width: 60%;
+                        line-height: 49px;
+                        color:@clearColor;
+                        text-align: center;
+                        font-weight:bold;
+                    }
+                    .sn{
+                        display: block;
+                        float: right;
+                        width: 40%;
+                        line-height:49px;
+                        background-color: @btnBgColor;
+                        font-size: 16px;
+                        color: @whiteColor;
+                        text-align: center;
+                    }
+                }
+
+            }
+        }
+    }
+}
+.pc-cms{
+    .w1200{
+        width:1200px;
+        margin:0 auto 20px auto;
+        overflow:hidden;
+       }
+}
+// 标题模板
+.pc-title {
+    // padding: 40px 0 30px;
+    height: 35px;
+    line-height: 35px;
+    .titlte-head {
+        display: table;
+        float: left;
+        font-size: 20px;
+        margin: 0;
+        height: 35px;
+        line-height: 35px;
+        .pc-icon {
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        .head-con {
+            vertical-align: middle;
+        }
+    }
+    .hotterm {
+        float: right;
+        display: inline-block;
+        .op-icons-right {
+            margin-left: 5px;
+        }
+        a {
+            float: left;
+            padding: 0 3px;
+            margin: 0 5px;
+            font-size: 13px;
+            color: @blackColor;
+            &:hover{
+                // text-decoration: underline;
+                color:@themeColor;
+            }
+        }
+    }
+}
+
+//魔方
+.cube-wrapper {
+    overflow: hidden;
+    img {
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        display: block;
+        border: 0;
+    }
+}
+//多图片模板
+.module-full {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    img {
+        width: 100%;
+    }
+}
+
+.module-nofull {
+    width: 1200px;
+    margin: 0 auto 20px auto;
+    img {
+        width: 100%;
+    }
+}

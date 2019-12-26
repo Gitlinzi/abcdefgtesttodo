@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="heimdall" content="购物车" >
+    <link rel="stylesheet" type="text/css" href="/plugins/datetimepicker/jquery.datetimepicker.min#((skin)).css?v=${version}">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/cart#((skin)).css?v=${version}">
+</head>
+
+<body ng-app="appControllers" ng-controller="cartCtrl" ng-init="init()">
+    @@include("trade-header.html",{"isShowSearch":"true"})
+<span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+    @@include("global-nav.html")
+</span>
+@@include("_location.html")
+<div class="container pb36" ng-cloak>
+    <!--购物车 字-->
+    <div class="shopTitle shopTitle-two">
+        {{i18n('购物车')}}
+    </div>
+    <!--弹框组件调用-->
+    <div bomb-box cart-data="deleteData"></div>
+    <div bomb-box cart-data="favoriteData"></div>
+    <div bomb-box cart-data="favoriteSuccessData"></div>
+    <div bomb-box cart-data="multiFavoriteData"></div>
+    <div bomb-box cart-data="multiDeleteData"></div>
+    <div bomb-box cart-data="delServerData"></div>
+    <div bomb-box cart-data="deleteGroupData"></div>
+    <div ng-if="cartInfo!==null&&!cartInfoBool" id="cart-box">
+        <div id="cart-title">
+            <!--    !logonInfo.userInfo.mobile  -->
+            <div class="cart-unlogin" ng-if="!logonInfo.userInfo.userId">
+                <div class="cart-icon"></div>
+                <p>{{i18n('您还没有登录')}}！{{i18n('登录后')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}{{i18n('的商品将保存到您账号中')}}</p>
+                <div class="cart-login" ng-if="!logonInfo.userInfo.mobile" ng-click="toLoginModal()">{{i18n('立即登录')}}</div>
+            </div>
+            <!-- <h2>{{i18n('全部商品')}}</h2>
+            <!-- 地址选择并计算运费 -->
+            <!-- <div id="cart-address" ng-include="template['deliverAddress']"></div> -->
+            <div class="clear"></div>
+        </div>
+        <div id="cart-main">
+            <div class="tool-bar">
+                <div class="row" style="overflow: hidden!important;">
+                    <div class="cell c0" ng-if="!isIE8">
+                        <label for="checkBoxAll" class="checkboxStyle-big checkbox-all">
+                            <input hidden id="checkBoxAll" ng-checked="cartInfo.allCheckedFlg"
+                                   ng-model="cartInfo.allCheckedFlg"
+                                   ng-change="checkAll(cartInfo.allCheckedFlg,cartInfo)"
+                                   class="chk chk-all checkBoxAll"
+                                   type="checkbox">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="cell c0" ng-if="isIE8">
+                        <input ng-checked="cartInfo.allCheckedFlg"
+                               ng-model="cartInfo.allCheckedFlg"
+                               class="chk chk-all checkBoxAll"
+                               type="checkbox"
+                               ng-change="checkAll(cartInfo.allCheckedFlg,cartInfo)">
+                    </div>
+                    <div class="cell c1">{{i18n('全选')}}</div>
+                    <div class="cell c2">{{i18n('商品信息')}}</div>
+                    <div class="cell c22">{{i18n('规格')}}</div>
+                    <div class="cell c3">{{i18n('单价(元)')}}</div>
+                    <div class="cell c4">{{i18n('数量')}}</div>
+                    <div class="cell c5">{{i18n('小计(元)')}}</div>
+                    <div class="cell c6">{{i18n('操作')}}</div>
+                </div>
+            </div>
+            <!--撤销删除先不做-->
+            <!--<div id="cart-msg" ng-show="isDeleteSuccess">成功删除1件宝贝，如有误，可<a class="color0721" href="javascript:void(0)" ng-click="undoDelete()">撤销删除</a></div>-->
+            <!--商家列表-->
+            <!--商家全选-->
+            <div id="cart-load" ng-if="!cartInfo.merchantList&&!cartInfo">
+                <img width="155" height="40" src="/images/company/loading.gif?v=${version}" alt="{{i18n('等待')}}。。。" ng-src="{{frontBasicSetting.websiteLoading}}">
+            </div>
+            <!--遍历商家-->
+            <div ng-repeat="merchant in cartInfo.merchantList" ng-clock>
+                <div ng-if="$parent.switchConfig.common.multipleMerchants" name="mCheckAllDiv" class="caption">
+                    <div class="row clearfix" style="overflow: inherit!important;">
+                        <div class="cell c0 title-c0" >
+                            <label ng-if="!merchant.grpCheckedBool" class="checkboxStyle-big" for="checkBoxName{{_index}}{{merchant.merchantId}}">
+                                <input  id="checkBoxName{{_index}}{{merchant.merchantId}}" hidden class="chk chk-all-grp checkBox"
+                                        type="checkbox"
+                                        ng-model="merchant.grpChecked"
+                                        ng-checked="merchant.grpChecked"
+                                        ng-change="grpCheckAll(merchant.grpChecked,merchant)">
+                                <span></span>
+                            </label>
+                        </div>
+                        <div class="merchant-name"><a href="#">{{merchant.merchantName}}</a>
+                            <div class="pull-left positonRE">
+                                <div ng-if="merchant.couponObj.directReceiveFlag" href="#" class="coupon-icon" ng-click="getCoupons(true,merchant,$event)">
+                                    {{i18n('优惠券')}}
+                                </div>
+                                <div class="coupon-container" ng-show="merchant.couponShow">
+                                    <ul class="coupon-header clearfix">
+                                        <li ng-class="{'active':isCanUseCoupons == 1}" ng-click="switchCouponTab(1)"><a href="#">{{i18n('可领取')}}(<span>{{canGoCouponNum}}</span>)</a></li>
+                                        <li><span class="line"></span></li>
+                                        <li ng-class="{'active':isCanUseCoupons == 2}" ng-click="switchCouponTab(2)"><a href="#">{{i18n('可使用')}}(<span>{{canUseCouponNum}}</span>)</a></li>
+                                    </ul>
+                                    <div class="coupon-box clearfix">
+                                        <div class="coupon-one clearfix" ng-repeat="coupon in couponsList" ng-if="isCanUseCoupons == 1&&couponsList.length>0">
+                                            <div class="coupon-one-top">
+                                                <div class="couponMoney">
+                                                    <span ng-if="coupon.couponDiscountType == 0" class="moneySymbol"> ￥ </span>
+                                                    <span ng-if="coupon.couponDiscountType == 0" class="couponMoneyNumChinese">{{coupon.couponAmount|couponMoney}}</span>
+                                                    <span ng-if="coupon.couponDiscountType == 1" class="couponMoneyNumChinese" style="margin-right:20px">{{coupon.couponAmount}}<strong class="f14">{{i18n('折')}}</strong></span>
+                                                    <span class="couponBox">
+                                                        <span class="reducerPrice">
+                                                            {{i18n('优惠券')}}
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                                <span class="go-coupon" ng-if="!(coupon.userDayOverFlg == 1||coupon.userOverFlg == 1||coupon.overFlg == 1)" ng-click="huntCoupon(coupon)">{{i18n('点击领取')}}</span>
+                                            </div>
+                                            <div class="coupon-one-footer">
+                                                <p ng-if="coupon.effdateCalcMethod==1"><span>{{coupon.startTime | date : 'yyyy-MM-dd'}}{{i18n('至')}}{{coupon.endTime | date : 'yyyy-MM-dd'}}</span><span ng-if="coupon.overDate == 1" class="overdate">{{i18n('即将到期')}}</span></p>
+                                                <p ng-if="coupon.effdateCalcMethod==2"><span>{{i18n('自领取后')}}{{coupon.effDays}}{{i18n('天内有效')}}</span><span ng-if="coupon.overDate == 1" class="overdate">{{i18n('即将到期')}}</span></p>
+
+                                            </div>
+                                        </div>
+                                        <div class="coupon-one clearfix" ng-repeat="coupon in couponsList" ng-if="isCanUseCoupons == 2&&couponsList.length>0">
+                                            <div class="coupon-one-top">
+                                                <div class="couponMoney">
+                                                    <span ng-if="coupon.couponDiscountType == 0" class="moneySymbol"> ￥ </span>
+                                                    <span ng-if="coupon.couponDiscountType == 0" class="couponMoneyNumChinese">{{coupon.couponValue|couponMoney}}</span>
+                                                    <span ng-if="coupon.couponDiscountType == 1" class="couponMoneyNumChinese" style="margin-right:20px">{{coupon.couponValue|couponDiscount}}<strong class="f14">{{i18n('折')}}</strong></span>
+                                                        <span class="couponBox">
+                                                            <span class="reducerPrice">
+                                                                {{i18n('优惠券')}}
+                                                            </span>
+                                                        </span>
+                                                </div>
+                                                <div class="ticketChinese">{{coupon.moneyRule}}</div>
+                                            </div>
+                                            <div class="coupon-one-footer">
+                                                <p ng-if="coupon.isStarted == 1"><span>{{i18n('有效期至')}}:{{coupon.endTime | date : 'yyyy-MM-dd HH:mm'}}</span><span ng-if="coupon.overDate == 1" class="overdate">{{i18n('即将到期')}}</span></p>
+                                                <p ng-if="coupon.isStarted == 0"><span>{{coupon.startTime | date : 'yyyy-MM-dd'}}{{i18n('至')}}{{coupon.endTime | date : 'yyyy-MM-dd'}}</span><span ng-if="coupon.overDate == 1" class="overdate">{{i18n('即将到期')}}</span></p>
+                                            </div>
+                                        </div>
+                                        <p class="coupon-tips" ng-if="couponsList.length==0 && isCanUseCoupons==1">{{i18n('暂无可领取优惠券')}}</p>
+                                        <p class="coupon-tips" ng-if="couponsList.length==0 && isCanUseCoupons==2">{{i18n('暂无可使用优惠券')}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--购物车列表-->
+                <!--遍历活动组-->
+                <div class="goods" ng-style="{'padding-bottom':$last?0:'10px'}" ng-repeat="group in merchant.productGroups track by $index"  ng-init="_index=$index">
+                    <!--优惠-->
+                    <div class="mctcount clearfix" ng-if="group.promotion">
+                        <div class="group-check" ng-if="group.promotion.promotionType == 1025&&group.disabled!=1">
+                            <label for="checkBoxGroup{{_index}}{{$index}}" class="checkboxStyle-big">
+                                <input hidden id="checkBoxGroup{{_index}}{{$index}}" ng-checked="group.checked"
+                                       ng-model="group.checked"
+                                       class="chk chk-all checkBoxAll"
+                                       type="checkbox"
+                                       ng-change="checkCartItem(group.checked, group)"
+                                       ng-init="product.isChecked=product.checked==1">
+                                <span></span>
+                            </label>
+                        </div>
+                        <span class="privilegeName fl">{{group.promotion.promIconText}}</span>
+                        <div class="label-box fl">
+                            <span class="label">{{group.promotion.displayName}}</span>
+                        </div>
+                        <span class="fl label-tips" ng-if="group.promotion.promotionType == 1025">{{i18n('套餐商品')}}，{{i18n('请在对应商品详情页调整套餐搭配')}}</span>
+                        <div ng-if="group.promotion.promotionType == 1025" class="group-btn">
+                            <a ng-if="groupGood.mainItemId == 'isMain'" ng-repeat="groupGood in group.productList" ng-href="../../item.html?itemId={{groupGood.seriesParentId?groupGood.seriesParentId:groupGood.mpId}}&groupId={{group.groupId}}&mainItemId={{groupGood.itemId}}" class="short-btn">{{i18n('修改套餐')}}</a>
+                            <a href="javascript:void(0)" class="short-btn marL10" ng-click="removeCartItem($event,group)">{{i18n('删除套餐')}}</a>
+                        </div>
+
+                        <a href="javascript:;" class="short-btn"
+                           ng-click="giftHgUtil.getProducts(group)"
+                           ng-if="(group.promotion.promIconText=='组合')&&!group.promotion.flag"
+                        >{{i18n('查看组合商品')}}</a>
+                        <a href="javascript:;" class="short-btn"
+                           ng-click="giftHgUtil.getProducts(group)"
+                           ng-if="(group.promotion.promIconText=='满赠'||group.promotion.promIconText == '赠品')&&!group.promotion.flag&&group.giftProductList[0].canSelectedGiftsNum>0"
+                        >{{i18n('查看赠品')}}</a>
+                        <a href="javascript:void(0);" class="short-btn"
+                           ng-click="giftHgUtil.getProducts(group)"
+                           ng-if="(group.promotion.promIconText=='满赠'||group.promotion.promIconText == '赠品')&&group.promotion.flag&&group.giftProductList[0].canSelectedGiftsNum>0">{{i18n('选择赠品')}}</a>
+                        <a href="javascript:;" class="short-btn"
+                           ng-click="giftHgUtil.getProducts(group)"
+                           ng-if="group.promotion.promIconText=='换购'&&!group.promotion.flag&&group.giftProductList[0].canSelectedGiftsNum>0"
+                        >{{i18n('查看换购')}}</a>
+                        <a href="javascript:void(0);" class="short-btn"
+                           ng-click="giftHgUtil.getProducts(group)"
+                           ng-if="group.promotion.promIconText=='换购'&&group.promotion.flag&&group.giftProductList[0].canSelectedGiftsNum>0">{{i18n('选择换购')}}</a>
+                        <!--去凑单-->
+                        <a ng-if="!group.promotion.flag&&group.promotion.promotionType != 1025" href="javascript:void(0)" class="privilegeTarget color0721" ng-click="jumpUrl(group.promotion,merchant.merchantId)">{{i18n('去凑单')}}></a>
+                    </div>
+                    <!--遍历商品-->
+                    <div class="row myRow" ng-class="{even:$odd,jingYong:product.disabled==1,fff2f2:product.checked==1}" ng-repeat="product in group.productList track by $index">
+                        <div class="clearfix">
+                            <div ng-show="false" name="controlFlagDiv">
+                                <input ng-show="false" ng-model="isNoStockFlg" ng-init="isNoStockFlg=(product.stockNum<=0)"/>
+                                <input ng-show="false" ng-model="isLackOfStockFlg" ng-init="isLackOfStockFlg=(product.lackOfStock==1)"/>
+                            </div>
+                            <div ng-if="product.itemType==1025" class="cell c0">
+                                <span class="disable"></span>
+                            </div>
+                            <div class="cell c0" ng-if="product.itemType!=1025">
+                                <label ng-if="!isNoStockFlg" for="checkBox{{_index}}{{product.itemId}}" class="checkboxStyle-big">
+                                    <input id="checkBox{{_index}}{{product.itemId}}"  hidden="hidden" ng-if="product.disabled==0"               ng-disabled="isNoStockFlg || group.promotion.promotionType == 1025"
+                                        ng-checked="product.isChecked"
+                                        class="chk checkBox1" type="checkbox"
+                                        ng-model="product.isChecked"
+                                        ng-change="checkCartItem(product.isChecked, product)"
+                                        ng-init="product.isChecked=product.checked==1" ng-click="classToggle($event)">
+                                    <span ng-if="product.gift!=1"></span>
+                                    <input ng-show="false" ng-value="product.mpId"/>
+                                    <span class="disable" ng-if="product.gift==1">{{i18n('赠品')}}</span>
+                                </label>
+                            </div>
+                            <!--tag.countdown-->
+                            <div class="cell c1" ng-if="product.promotions.length == 0">
+                                <a href="../../item.html?itemId={{product.seriesParentId ? product.seriesParentId:product.mpId}}"><img width="80" height="80" ng-src="{{product.url100x100}}" src="http://cdn.oudianyun.com/lyf-local/branch/back-cms/1505980570453_2441_64.png@base@tag=imgScale&q=80"></a>
+                                <div class="server-name" ng-repeat="server in product.additionalProductList">
+                                    <span>【{{i18n('服务')}}】</span><span class="server-name-detail">{{server.name}}</span><span>{{server.price | currency:'￥'}}</span> <span>X{{server.num}}</span>
+                                    <span ng-if="group.promotion.promotionType != 1025" class="server-delete" ng-click="delServer(server)">{{i18n('删除')}}</span>
+                                </div>
+                            </div>
+                            <div class="cell c1" ng-class="{'marB35':tag.countdown}" ng-if="product.promotions.length>0" ng-repeat="tag in product.promotions">
+                                <a href="../../item.html?itemId={{product.seriesParentId? product.seriesParentId:product.mpId}}"><img width="80" height="80" ng-src="{{product.url100x100}}" src="http://cdn.oudianyun.com/lyf-local/branch/back-cms/1505980570453_2441_64.png@base@tag=imgScale&q=80"></a>
+                                <div class="server-name" ng-repeat="server in product.additionalProductList">
+                                    <span>【{{i18n('服务')}}】</span><span class="server-name-detail">{{server.name}}</span><span>{{server.price | currency:'￥'}}</span> <span>X{{server.num}}</span>
+                                    <span ng-if="group.promotion.promotionType != 1025" class="server-delete" ng-click="delServer(server)">{{i18n('删除')}}</span>
+                                </div>
+                                <div class="count-down" ng-if="tag.countdown">
+                                    {{i18n('秒杀商品')}}，{{i18n('请在')}}<span count-down no-font="true" show-count-down="true" end-time="tag.countdown*1000" current-time="0"></span>{{i18n('内提交订单并完成支付')}}
+                                </div>
+                            </div>
+                            <div class="cell c2">
+                                <div class="pname">
+                                    <a href="../../item.html?itemId={{product.seriesParentId ? product.seriesParentId:product.mpId}}">{{product.name}}</a>
+                                    <div ng-if="product.serverVal.length>0&&!product.additionalProductList&&group.promotion.promotionType != 1025&&product.itemType!=3" class="server">
+                                        <!--product.additionalProductList-->
+                                        <div class="select-server-top">
+                                            <span class="select-server"></span>{{i18n('选服务')}}<span class="arrow"></span>
+                                            <ul>
+                                                <li ng-repeat="serverOne in product.serverVal">
+                                                    <label ng-if="serverOne.serAddress" class="checkboxStyle-small" for="checkBox{{serverOne.id}}{{product.mpId}}">
+                                                        <input ng-if="serverOne.serAddress" id="checkBox{{serverOne.id}}{{product.mpId}}" hidden class="chk chk-all checkBoxAll" ng-model="serverOne.isChecked" type="checkbox" style="display: none;" ng-change="serverOne.serAddress && serverAdd(product.mpId,product.itemId,serverOne.id,product.num)" ng-init="serverOne.isChecked = false" ng-disabled="!serverOne.serAddress">
+                                                        <span></span>
+                                                    </label>
+                                                    <span>{{serverOne.chineseName}}</span>
+                                                    <span>X1</span>
+                                                    <span>{{serverOne.serPrice | currency : '￥'}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cell c22">
+                                <!--系列属性-->
+                                <div class="attr" ng-if="product.propertyTags.length>0"
+                                    ng-class="{'attr-hover':product.itemType==3||product.itemType==1025}"
+                                     ng-mouseenter="product.itemType!=3&&product.itemType!=1025&&sp.getSerialProducts(product)">
+                                    <span ng-if="product.itemType!=3&&product.itemType!=1025" class="attrChange">{{i18n('修改')}}</span>
+                                    <div class="attr-box" ng-repeat="attr in product.propertyTags">
+                                        <span class="attr-name">{{attr.name}}：</span><span class="attr-style">{{attr.value}}</span>
+                                    </div>
+                                    <!--系列属性修改框-->
+                                    <div class="willchoose" ng-show="product.edit">
+                                        <dl ng-repeat="attr in sp.attributes">
+                                            <dt>{{attr.name}}：</dt>
+                                            <dd class="seriesinner">
+                                                <div class="series sku" ng-repeat="v in attr.values"
+                                                     ng-click="sp.selectSerialAttr(v,attr.values,attr,pcIteminfo.sp.attributes,$event)" attr_id="{{v.id}}">
+                                                    {{v.value}}
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                        <dl >
+                                            <dt></dt>
+                                            <dd class="footBtn">
+                                                <div class="series1 series2" ng-class="" >
+                                                    <a href="javascript:void(0)" ng-click="sp.updateSerial()">{{i18n('确定')}}</a>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cell c3">{{product.price|number:2}}<br>
+                                <span class="event" ng-if="product.promotions.length>0" ng-repeat="tag in product.promotions">{{tag.iconTxt}}</span>
+                                <span class="event" ng-if="product.itemType==3">{{product.itemTxt}}</span>
+                                <!-- <span class="price-type">奖品</span> -->
+                            </div>
+                            <div class="cell c4">
+                                <div class="numbox">
+                                    <button type="button" ng-style="{color: product.num == 1 || product.num<=0 || product.itemType==3 || group.promotion.promotionType == 1025 ? '#ddd' : '#333',cursor: product.num == 1 || product.num<=0? 'default':'pointer'}" ng-disabled="isNoStockFlg||product.itemType==3||group.promotion.promotionType == 1025" ng-click="decrease($event, product,editNumCtrl)">-
+                                    </button>
+                                    <input type="text"
+                                           ng-init="isNoStockFlg && (product.num = 0)"
+                                           ng-disabled="isNoStockFlg||product.itemType==3 || group.promotion.promotionType == 1025"
+                                           ng-model="product.num"
+                                           ng-change="changeNum(this, product)">
+                                    <button type="button" ng-style="{color: product.num >= product.stockNum || product.itemType==3 || group.promotion.promotionType == 1025? '#ddd' : '#333',cursor: product.num >= product.stockNum ||group.promotion.promotionType == 1025? 'default':'pointer'}" ng-disabled="isNoStockFlg||product.itemType==3 || group.promotion.promotionType == 1025"
+                                            ng-click="increase($event, product,editNumCtrl)">+
+                                    </button>
+                                </div>
+                                <div class="stock">{{i18n('有货')}}</div>
+                                <div class="nomuch" ng-show="isNoStockFlg">{{i18n('暂无库存')}}</div>
+                                <!--库存紧张-->
+                                <div class="nomuch bgf23030" ng-show="!isNoStockFlg && isLackOfStockFlg">{{i18n('库存紧张')}}</div>
+                                <!--超过按原价-->
+                                <div class="limit bgf23030" ng-show="!isNoStockFlg && product.tipsMsg">{{product.tipsMsg}}</div>
+                            </div>
+                            <div class="cell c5"><strong class="">{{product.totalPrice||0 | currency:'￥'}}</strong></div>
+                            <div class="cell c6">
+                                    <a ng-if='product.type==88' href="javascript:void(0);" class='combation' ng-click='combation(product.mpId)'>{{i18n('查看组合商品')}}</a>
+                                <!-- <a href="javascript:void(0);" ng-click="addFavorite($event, product)">{{i18n('加入收藏')}}</a>-->
+                                <a ng-if="group.promotion.promotionType != 1025" href="javascript:void(0);" ng-click="myFavorite($event, product)">{{i18n('移入收藏')}}</a>
+                                <a ng-if="group.promotion.promotionType != 1025" href="javascript:void(0);" ng-click="removeCartItem($event, product)">{{i18n('删除')}}</a>
+                            </div>
+                        </div>
+                        <div class="product-gift">
+                            <div class="product-gift-one" ng-if="product.giftProductList&&product.giftProductList.length>0&&(product.promotions[0].frontPromotionType==1007 ||  product.promotions[0].frontPromotionType == 1032 || product.promotions[0].frontPromotionType == 1033 || product.promotions[0].frontPromotionType == 1034)" ng-repeat="productOne in product.giftProductList">
+                                <span class="event">{{i18n('赠品')}}</span>
+                                <span>
+                                    <a class="name" href="../../item.html?itemId={{product.seriesParentId ? product.seriesParentId:product.mpId}}">{{productOne.giftName}}</a>
+                                </span>
+                                <span>x{{productOne.checkNum}}</span>
+                            </div>
+                            <div class="product-gift-one" ng-if="product.promotions&&product.promotions.length>0&&(product.promotions[0].frontPromotionType==1007 ||  product.promotions[0].frontPromotionType == 1032 || product.promotions[0].frontPromotionType == 1033 || product.promotions[0].frontPromotionType == 1034)" ng-repeat="productPro in product.promotions">
+                                <span>{{productPro.iconTxt}}:</span>
+                                <span class="description name">{{productPro.description}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--遍历活动组的赠品-->
+                    <div class="row" ng-class="{even:$odd,jingYong:product.disabled==1,bgfffce7:product.checked==1}"
+                         ng-repeat="product in group.giftProductList[0].giftProducts|filter:{checked:'1'}  track by $index">
+                        <div class="cell c0">
+                            <span class="disable"></span>
+                        </div>
+                        <div class="cell c1">
+                            <a href="../../item.html?itemId={{product.mpId}}"><img width="80" height="80" ng-src="{{product.picUrl }}" alt="{{product.giftName}}"></a>
+                        </div>
+                        <div class="cell c2">
+                            <div class="pname">
+                                <a href="../../item.html?itemId={{product.mpId}}">{{product.giftName}}</a>
+                            </div>
+                        </div>
+                        <div class="cell c22">
+                            <!--系列属性-->
+                            <div class="attr attr-white" ng-if="product.propertyTags.length>0">
+                                <div class="mgR20" ng-repeat="attr in product.propertyTags">
+                                    <span>{{attr.name}}：</span><span>{{attr.value}}</span>
+                                </div>
+                                <!--系列属性修改框-->
+                                <div class="willchoose" ng-show="product.edit" ng-class="" ng-if="product.propertyTags.length>0">
+                                    <dl ng-repeat="attr in sp.attributes">
+                                        <dt>{{attr.name}}：</dt>
+                                        <dd class="seriesinner">
+                                            <div class="series" ng-repeat="v in attr.values"
+                                                 ng-class="{active:v.checked,bdDash:v.disabled}"
+                                                 ng-click="sp.selectSerialAttr(v,attr.values)">
+                                                <a href="javascript:void(0)">{{v.value}}</a>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl >
+                                        <dt></dt>
+                                        <dd class="footBtn">
+                                            <div class="series1 series2" ng-class="" >
+                                                <a href="javascript:void(0)" ng-click="sp.updateSerialProduct(product)">{{i18n('确定')}}</a>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cell c3">
+                            {{product.price|number:2}}<br>
+                            <span class="event">{{(group.promotion.promotionType==1005||group.promotion.promotionType==1006) ? '赠品':group.promotion.promIconText||group.itemTxt}}</span>
+                        </div>
+                        <div class="cell c4">
+                            <div class="numbox">
+                                <button type="button" ng-style="{color: '#ddd',cursor: 'default'}" ng-disabled="true">- </button>
+                                <input type="text"
+                                       ng-disabled="true"
+                                       ng-model="product.checkNum">
+                                <button type="button" ng-style="{color: '#ddd',cursor:'default'}" ng-disabled="true" >+ </button>
+                            </div>
+                        </div>
+                        <div class="cell c5"><span class="red">{{product.price*product.checkNum | currency:'￥'}}</span></div>
+                    </div>
+                </div>
+            </div>
+            <!--失效商品列表-->
+            <div ng-if="cartInfo.failureProducts.length>0">
+                <div class="goods">
+                    <!--遍历失效商品-->
+                    <div class="mctcount">
+                        <span class="marL10">{{i18n('失效商品')}}</span>
+                        <a href="javascript:void(0)" class="color0721 marL10" ng-click="removeDisabledItems()" ng-if="cartInfo.failureProducts.length>0">{{i18n('清除失效商品')}}</a>
+                    </div>
+                    <div class="row jingYong" ng-class="{even:$odd}" ng-repeat="product in cartInfo.failureProducts">
+                    <!--Flags-->
+                    <div ng-show="false" name="controlFlagDiv">
+                        <input ng-show="false" ng-model="isNoStockFlg" ng-init="isNoStockFlg=(product.stockNum==0)"/>
+                        <input ng-show="false" ng-model="isLackOfStockFlg"
+                               ng-init="isLackOfStockFlg=(product.lackOfStock==1)"/>
+                    </div>
+                    <div class="cell c0">
+                        <span class="disable">{{i18n('失效')}}</span>
+                    </div>
+                    <div class="cell c1">
+                        <a href="../../item.html?itemId={{product.mpId}}"><img width="80" height="80" ng-src="{{product.url100x100}}" src="http://cdn.oudianyun.com/lyf-local/branch/back-cms/1505980570453_2441_64.png@base@tag=imgScale&q=80"></a>
+                    </div>
+                    <div class="cell c2">
+                        <div class="pname">
+                            <a href="../../item.html?itemId={{product.mpId}}">{{product.name}}</a>
+                        </div>
+                    </div>
+                    <div class="cell c22">
+                        <div class="attr attr-gray" ng-if="product.propertyTags.length>0">
+                            <div ng-repeat="attr in product.propertyTags">
+                                <span>{{attr.name}}：</span><span>{{attr.value}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cell c3">{{product.price|number:2}}<br>
+                    </div>
+                    <div class="cell c4">
+                        <div class="numbox">
+                            <button type="button" ng-style="{color: product.num == 1 || product.num<=0 ? '#ddd' : '#333',cursor: product.num == 1 || product.num<=0? 'default':'pointer'}" ng-disabled="isNoStockFlg" ng-click="decrease($event, product)">-
+                            </button>
+                            <input type="text"
+                                   ng-init="isNoStockFlg"
+                                   ng-disabled="isNoStockFlg"
+                                   ng-model="product.num"
+                                   ng-change="changeNum(this, product)">
+                            <button type="button" ng-style="{color: product.num > product.stockNum ? '#ddd' : '#333',cursor: product.num > product.stockNum ? 'default':'pointer'}" ng-disabled="isNoStockFlg"
+                                    ng-click="increase($event, product)">+
+                            </button>
+                        </div>
+                    </div>
+                    <div class="cell c5"><span class="red">{{product.price*product.num | currency:'￥'}}</span></div>
+                    <div class="cell c6"><a href="javascript:void(0);" ng-click="removeCartItem($event, product)">{{i18n('删除')}}</a></div>
+                </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="cart-bar">
+            <ul class="tool">
+                <li>
+                    <label for="checkBoxFoot" class="checkboxStyle-big checkbox-all checkboxMT">
+                        <input hidden id="checkBoxFoot" ng-checked="cartInfo.allCheckedFlg"
+                               ng-model="cartInfo.allCheckedFlg"
+                               ng-change="checkAll(cartInfo.allCheckedFlg,cartInfo)"
+                               class="chk chk-all checkBoxFoot"
+                               type="checkbox">
+                        <span></span>
+                    </label>
+                    <span>{{i18n('全选')}}</span>
+                </li>
+                <li><a href="javascript:void(0)" ng-click="checkDeleteAll()">{{i18n('删除选中的商品')}}</a></li>
+                <li><a href="javascript:void(0)" ng-click="checkFavoriteAll()">{{i18n('移入收藏')}}</a></li>
+                <li><a href="javascript:void(0)" ng-click="downloadCartTemplate()">{{i18n('导入模板下载')}}</a></li>
+                <li><a href="javascript:void(0)" ngf-pattern="'.xlsx,.xls'" ng-model="obj.excelData" ngf-select="inportCartList()">{{i18n('导入购物车')}}</a></li>
+                <li><a href="javascript:void(0)" ng-click="exportCartList()">{{i18n('导出购物车')}}</a></li>
+                <li><a href="javascript:void(0)" ng-click="addAdvandeOrder()">{{i18n('添加预置订单')}}</a></li>
+                <li><a href="javascript:void(0)" class="color0721" ng-click="removeDisabledItems()" ng-if="cartInfo.failureProducts.length>0">{{i18n('清除失效商品')}}</a></li>
+            </ul>
+        </div>
+        <div id="cart-bar">
+            <ul class="goslmt">
+                <li>{{i18n('已选')}} <strong class="f23030">{{cartInfo.summary.totalNum}}</strong> {{i18n('件商品')}}</li>
+                <li class="cart-totle">
+                    {{i18n('总价')}}({{i18n('不含运费')}})：<strong class="price f23030">{{cartInfo.summary.amount | currency:'￥'}}</strong>
+                    <div>
+                        {{i18n('已节省')}}：<span>-{{cartInfo.summary.discount | currency:'￥'}}</span>
+                    </div>
+                </li>
+                <li><a href="javascript:void(0)" class="btn f15" ng-click="initOrder()">{{i18n('去结算')}}</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!--空购物车提示页面-->
+    <div id="cart-null" ng-if="cartInfo===null" >
+        <div class="cart-null-box">
+            <div class="cart-icon-null">
+
+            </div>
+            <div class="fl cart-null-right">
+                <p>{{i18n($parent.switchConfig.common.allCartBtnName)}}{{i18n('中还没有商品')}}，{{i18n('赶紧选购吧')}}！</p>
+                <p class="clearfix">
+                    <span ng-if="!(logonInfo.userInfo.mobile || logonInfo.userInfo.email || logonInfo.userInfo.nickname)" class="go-login" ng-click="toLoginModal()">{{i18n('立即登录')}}</span>
+                    <a class="theme go-shopping" href="../index.html">>{{i18n('去购物')}}</a>
+                </p>
+            </div>
+        </div>
+        <div id="cart-bar" style="border: 1px solid rgb(230, 230, 230);">
+                <ul class="tool">
+                    <li>
+                        <label for="checkBoxFoot" class="checkboxStyle-big checkboxMT">
+                            <input hidden id="checkBoxFoot" ng-checked="cartInfo.allCheckedFlg"
+                                   ng-model="cartInfo.allCheckedFlg"
+                                   ng-change="checkAll(cartInfo.allCheckedFlg,cartInfo)"
+                                   class="chk chk-all checkBoxFoot"
+                                   type="checkbox">
+                            <span></span>
+                        </label>
+                        <span>{{i18n('全选')}}</span>
+                    </li>
+                    <li><a href="javascript:void(0)" ng-click="checkDeleteAll()">{{i18n('删除选中的商品')}}</a></li>
+                    <!-- <li><a href="javascript:void(0)" ng-click="checkFavoriteAll()">{{i18n('移入我的收藏')}}</a></li> -->
+                    <li><a href="javascript:void(0)" ng-click="downloadCartTemplate()">{{i18n('导入模板下载')}}</a></li>
+                    <li><a href="javascript:void(0)" ngf-pattern="'.xlsx,.xls'" ng-model="obj.excelData" ngf-select="inportCartList()">{{i18n('导入购物车')}}</a></li>
+                    <li><a href="javascript:void(0)" ng-click="exportCartList()">{{i18n('导出购物车')}}</a></li>
+                    <li><a href="javascript:void(0)" ng-click="addAdvandeOrder()">{{i18n('添加预置订单')}}</a></li>
+                    <li><a href="javascript:void(0)" class="color0721" ng-click="removeDisabledItems()" ng-if="cartInfo.failureProducts.length>0">{{i18n('清除失效商品')}}</a></li>
+                </ul>
+                <ul class="goslmt">
+                    <li>{{i18n('已选')}} <span class="f23030">{{cartInfo.summary.totalNum}}</span>{{i18n('件商品')}}</li>
+                    <li class="cart-totle">
+                        {{i18n('总价')}}({{i18n('不含运费')}})：<span class="f23030">{{cartInfo.summary.amount | currency:'￥'}}</span>
+                        <div>
+                            {{i18n('已节省')}}：<span>-{{cartInfo.summary.discount | currency:'￥'}}</span>
+                        </div>
+                    </li>
+                    <li><a href="javascript:void(0)" class="btn f15" ng-click="initOrder()">{{i18n('去结算')}}</a></li>
+                </ul>
+            </div>
+    </div>
+
+
+    <!-- 弹窗模板 -->
+    <div class="modal ng-scope" style="display: block" ng-show="giftHgUtil.show">
+        <div class="dialog" style="display: block;width: 740px;left:50%;top:10%;bottom:auto;margin-left: -439px;">
+            <div class="dialog-content">
+                <!--header-->
+                <div class="dialog-header">
+                    <div class="header-title fontWeight">{{giftHgUtil.title}}</div>
+                    <div class="header-title iconClick">
+                        <span class="iconYuan">
+                            <a href="javascript:;" ng-click="giftHgUtil.show=false">x</a>
+                        </span>
+                    </div>
+                </div>
+                <!--body-->
+                <div class="dialog-body_">
+                    <div class="row" ng-repeat="product in giftHgUtil.products.giftProducts track by $index">
+                        <div class="cell c0" ng-class="{'disabled':giftHgUtil.readOnly}">
+                            <input type="checkbox" ng-model="product.checked" ng-if="!giftHgUtil.readOnly"
+                                   ng-disabled="!product.checked && giftHgUtil.selectedNum()>=giftHgUtil.canSelectNum()" value="1" ng-checked="product.checked == 1">
+                        </div>
+                        <div class="cell c1">
+                            <a href="../../item.html?itemId={{product.mpId}}"><img width="100" height="100" ng-src="{{product.picUrl}}" alt=""></a>
+                        </div>
+                        <div class="cell c2">
+                            <div class="pname">
+                                <a href="">{{product.giftName}}</a>
+                            </div>
+                            <!--系列属性-->
+                            <div class="attr" ng-class="{'seriseGiftAttr': popGift.choosedAttrId == product.mpId}" ng-if="product.propertyTags.length>0"
+                                 ng-mouseenter="sp.getSerialProducts(product,'gift',giftHgUtil.promotion.promotionRuleId)">
+                                <span class="attrChange">{{i18n('修改')}}</span>
+                                <div class="mgR20" ng-repeat="attr in product.propertyTags track by $index">
+                                    <span>{{attr.name}}：</span><span>{{attr.value}}</span>
+                                </div>
+                                <!--系列属性修改框-->
+                                <div class="willchoose" ng-show="product.edit" ng-if="product.propertyTags.length>0">
+                                    <dl ng-repeat="attr in sp.attributes">
+                                        <dt><span class="seriesinner-name">{{attr.name}}</span>：</dt>
+                                        <dd class="seriesinner">
+                                            <div class="series sku" ng-repeat="v in attr.values"
+                                                 ng-click="sp.selectSerialAttr(v,attr.values,attr,pcIteminfo.sp.attributes,$event)" attr_id="{{v.id}}">
+                                                {{v.value}}
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl >
+                                        <dt></dt>
+                                        <dd class="footBtn">
+                                            <div class="series1 series2" ng-class="" >
+                                                <a href="javascript:void(0)" ng-click="sp.updateSerial(product.propertyTags)">{{i18n('确定')}}</a>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <!--暂无不支持功能-->
+                            <div class="privilegeAlter" ng-if="">
+                                <span>{{i18n('请在')}}<span class="privilegeAlterTime">11:22</span>{{i18n('内提交订单并完成支付')}}，{{i18n('可享优惠价格')}}</span>
+                            </div>
+                            <div class="outPrivilegeAlter" ng-if="">
+                                <span>{{i18n('未在规定时间内提交订单')}}，{{i18n('商品已回复原价')}}</span>
+                            </div>
+                        </div>
+                        <div class="cell c3">{{product.price|number:2}}
+                        </div>
+                        <div class="cell c3">{{product.checkNum}}<br>
+                        </div>
+                    </div>
+                </div>
+                <!--footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn footBtn bgRed" ng-click="giftHgUtil.selectGift()">{{giftHgUtil.readOnly?i18n('关闭'):i18n('确定')}}</button>
+                    <button type="button" class="btn footBtn bgWhite" ng-click="giftHgUtil.show=false" ng-if="!giftHgUtil.readOnly">{{i18n('取消')}}</button>
+                </div>
+            </div>
+        </div>
+    <!--</div>-->
+    </div>
+    <!-- 我的收藏 -->
+    <div class='goods-show'>
+        <div class='guess-you pdLR20 clearfix'>
+            <span class="guess-like">{{i18n('收藏商品')}}</span>
+            <!-- <span class="take-all"><a ng-href="/home.html#/frequence">{{i18n('查看全部')}}</a></span> -->
+        </div>
+        <div class='show-good'>
+            <!-- 无收藏商品的时候 begin -->
+            <div class="none-goods-box f0" ng-if="favoriteGoods.length>0? false:true">
+                <div class="collection-left mgR15">
+                    <span></span>
+                </div>
+                <div class="collection-right">
+                    <span>{{i18n('暂未收藏商品，可在商品详情页将喜欢的商品加入收藏哦')}}~</span>
+                </div>
+            </div>
+            <!-- 无收藏商品的时候 end -->
+            <!-- 有收藏商品的时候 begin -->
+            <div class='goods-box'>
+                <ul class='clearfix'>
+                    <li class='food-item' ng-repeat="pro in favoriteGoods">
+                        <a class="pdT20" href="item.html?itemId={{pro.mpId}}">
+                            <img width='210' height='210' ng-src="{{pro.picUrl}}" alt="{{pro.name}}">
+                            <h5>{{pro.realPrice|currency:"￥"}}</h5>
+                            <p class="">商品编码：{{pro.mpCode}}</p>
+                            <div class="goods-content" style="height: auto">
+                                <div mini-add-cart prod="pro" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                            </div>
+                            <!-- <span>来伊份 坚果炒货 休按时打算打算打算</span> -->
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 有收藏商品的时候 end -->
+        </div>
+        <!-- <div ng-if="favoriteGoods.length>0? true:false" class='arrow-box arrowLeft'>
+            <span class="arrowLeft-icon" ng-class="{'arrowLeft-icon-disabled':FavoriteGoodPageNo==1}" ng-click="upPage('favorite')"></span>
+        </div>
+        <div ng-if="favoriteGoods.length>0? true:false" class='arrow-box arrowRight'>
+            <span class="arrowRight-icon" ng-class="{'arrowRight-icon-disabled':FavoriteGoodPageNo==favoriteGoodPageTotal}" ng-click="nextPage('favorite')"></span>
+        </div> -->
+    </div>
+</div>
+
+<!-- 组合商品模态 -->
+<div class="modal" ng-style="{display:showCombation?'block':'none'}">
+        <div class="location">
+            <span class="dialog-closeOne" ng-click='showCombation = false'>&times;</span>
+            <div class="dialog-header">
+                {{i18n('查看组合商品')}}
+            </div>
+            <div class="dialog-content">
+                <ul class='add-dialog'>
+                    <li class='clearfix' ng-repeat='m in combationList'>
+                        <div class="img-box fl">
+                            <img ng-src="{{m.picUrl}}" alt="">
+                        </div>
+                        <div class="content fl">
+                            <span>{{m.chineseName}}</span>
+                        </div>
+                        <!-- <div class="descr fl">
+                            <span>这是一段描述这是一段描述这是一段描述这是一段描述这是一段描述这是一段描述这是一段描述这是一段描述这是一段描述这是一段描述</span>
+                        </div> -->
+                        <div class="money fl">
+                            <span>{{m.pmcPrice}}</span>
+                        </div>
+                        <div class="num fr">
+                            <span>x{{m.pmcNum}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</div>
+<!-- 显示预置订单弹框 -->
+<div add-advance-order prod="cartItem" prod-list="cartItemList"></div>
+<div id="cart-foot">
+
+</div>
+@@include("cart-footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/plugins/datetimepicker/jquery.datetimepicker.full.js?v=${version}"></script>
+<script type="text/javascript" src="/cart.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=cart"></script>
+</body>
+</html>

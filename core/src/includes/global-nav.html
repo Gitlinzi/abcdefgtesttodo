@@ -1,0 +1,65 @@
+<div class="global-bg">
+	<ul>
+		<!--购物车-->
+		<li class="cart">
+			<a href="/cart.html">
+				<div class="wrap">
+					<div class="front">
+						<i></i>
+					</div>
+					<div class="back">购物车</div>
+				</div>
+			</a>
+			<span class="cart-count ng-binding" ng-if="cartTotal">{{cartTotal}}</span>
+		</li>
+		<!--		客服-->
+		<!-- <li class="kefu" ng-click="openXiaoNeng()">
+			<a href="javascript:;">
+				<div class="wrap">
+					<div class="front">
+						<i></i>
+					</div>
+					<div class="back">客服</div>
+				</div>
+
+			</a>
+		</li> -->
+		<!--		微信-->
+		<li class="wx">
+			<a href="javascript:;">
+				<div class="wrap">
+					<div class="front">
+						<i></i>
+					</div>
+					<div class="back">手机购</div>
+				</div>
+			</a>
+			<div class="wx-img-wrap">
+				<img ng-src="{{footerSetting.footerImageArray[0].footerImageURL}}" alt="">
+				<p>手机购物更优惠</p>
+			</div>
+		</li>
+		<!--		消息-->
+		<li class="nav-message">
+			<a href="/home.html#/message">
+				<div class="wrap">
+					<div class="front">
+						<i></i>
+					</div>
+					<div class="back">消息</div>
+				</div>
+			</a>
+			<span class="cart-count" ng-if="untreatedMesNum">{{untreatedMesNum}}</span>
+		</li>
+		<li class="back-to-top" ng-click="backToTop()" style="display: none">
+			<a href="javascript:;">
+				<div class="wrap">
+					<div class="front">
+						<i></i>
+					</div>
+					<div class="back">回顶部</div>
+				</div>
+			</a>
+		</li>
+	</ul>
+</div>

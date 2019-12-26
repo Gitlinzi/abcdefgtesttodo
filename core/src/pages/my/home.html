@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script type="text/javascript" src="cms/view/cms,frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/plugins/zTree_v3/css/zTreeStyle.css">
+	<link rel="stylesheet" type="text/css" href="/home#((skin)).css?v=${version}">
+	<!-- <link rel="stylesheet" type="text/css" href="/settlement#((skin)).css?v=${version}"> -->
+    <link rel="stylesheet" type="text/css" href="/plugins/datetimepicker/jquery.datetimepicker.min#((skin)).css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/plugins/jquery.calendar-1.4.1/css/jquery.cxcalendar#((skin)).css?v=${version}">
+</head>
+<body ng-app="my" ng-controller="myCtrl" class="home-bg">
+<!-- 头部 -->
+@@include("my-header.html")
+<div id="member" class="container home-container">
+	<!--左侧菜单栏-->
+	<!--@@include("member-side.html")-->
+	<!--<ng-include src="'index-side.template.html'"></ng-include>-->
+	<div ng-class="{isShow:isHide}" class="side-nav">
+		<div side-layout side-list="dataList" class="vertical-nav"></div>
+	</div>
+	<!-- 引入模块 -->
+	<div ui-view></div>
+</div>
+<!-- 右边导航 -->
+@@include("global-nav.html")
+<!-- 底部 -->
+@@include("footer.html")
+@@include("script.html")
+<script>
+    //optional need to be loaded before angular-file-upload-shim(.min).js
+    FileAPI = {
+        //only one of jsPath or jsUrl.
+        //jsPath: '/js/FileAPI.min.js/folder/',
+        jsUrl: '/plugins/FileAPI.min.js?v=${version}',
+
+        //only one of staticPath or flashUrl.
+        //staticPath: '/flash/FileAPI.flash.swf/folder/',
+        flashUrl: '/plugins/FileAPI.flash.swf',
+
+        //forceLoad: true, html5: false //to debug flash in HTML5 browsers
+    }
+</script>
+<script type="text/javascript" src="/plugins/angular-ui-router.min.js?v=${version}"></script>
+<script type="text/javascript" src="/plugins/datetimepicker/jquery.datetimepicker.full.js?v=${version}"></script>
+<script type="text/javascript" src="/plugins/jquery.calendar-1.4.1/js/jquery.cxcalendar.js?v=${version}"></script>
+<script type="text/javascript" src="/plugins/areaJson.js?v=${version}"></script>
+<script type="text/javascript" src="/plugins/zTree_v3/js/jquery.ztree.all.js?v=${version}"></script>
+<script type="text/javascript" src="/plugins/clipboard.min.js?v=${version}"></script>
+<script type="text/javascript" src="/home.js?v=${version}"></script>
+<script type="text/javascript" src="/plugins/lodash.min.js?v=${version}"></script>
+<script type="text/javascript" src="/plugins/jquery.media.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=home"></script>
+<script type="text/javascript" src="/plugins/echarts.min.js"></script>
+<script type="text/javascript" src="/plugins/wangEditor.js"></script>
+<script type="text/javascript" src="/plugins/wangEditor.min.js"></script>
+@@include("logistics-bomb.html")
+</body>
+</html>

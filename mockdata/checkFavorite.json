@@ -1,0 +1,9 @@
+{
+  "code": "0",
+  "message": "操作成功",
+  "errMsg": null,
+  "data": {
+    "favoriteId": 0,
+    "isFavorite": 0
+  }
+}

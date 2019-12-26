@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="heimdall" content="首页">
+	<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/search#((skin)).css?v=${version}">
+
+    <link rel="stylesheet" type="text/css" href="/costDetail#((skin)).css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/home#((skin)).css?v=${version}">
+    <!-- <link rel="stylesheet" type="text/css" href="/cart#((skin)).css?v=${version}"> -->
+    <link rel="stylesheet" type="text/css" href="/plugins/datetimepicker/jquery.datetimepicker.min#((skin)).css?v=${version}">
+
+</head>
+
+<!-- ng-style="{'background-color':bgColor}" -->
+<body ng-app="appControllers" ng-controller="indexCtrl">
+@@include("my-header.html")
+@@include("global-nav.html")
+    <div class="container" ng-cloak>
+        <div class='cost-nav'>{{i18n('首页')}} <i class="icon-top-down icon-person down-person cost-down"></i> {{i18n('个人中心')}} <i class="icon-top-down icon-person down-person cost-down"></i> {{i18n('审批')}} <i class="icon-top-down icon-person down-person cost-down"></i> {{i18n('审批详情')}}</div>
+        <div class='zation-status clearfix'>
+            <div class='fl status'>
+                <div>{{i18n('审批状态')}}</div>
+                <div ng-if='userdetail.approvalStatus==0'>{{i18n('待审批')}}</div>
+                <div ng-if='userdetail.approvalStatus==1'>{{i18n('审批中')}}</div>
+                <div ng-if='userdetail.approvalStatus==2'>{{i18n('审批通过')}}</div>
+                <div ng-if='userdetail.approvalStatus==3'>{{i18n('审批拒绝')}}</div>
+                <div ng-if='userdetail.approvalStatus==4'>{{i18n('审批退回')}}</div>
+            </div>
+            <div class='fr info clearfix'>
+                <div class="fl" style="width: 30%"><div>{{i18n('订单编号')}} : {{userdetail.orderCode}}</div><div>{{i18n('下单人')}} : {{userdetail.userName}}</div></div>
+                <div class="fl" style="width: 60%"><div class='specil'>{{i18n('提交时间')}} : {{userdetail.approvalDate}}</div><div>{{i18n('下单部门')}} : <span>{{allroad[0]}}</span><span ng-if='allroad[1]'>></span><span>{{allroad[1]}}</span><span ng-if='allroad[2]'>></span><span>{{allroad[2]}}</span><span ng-if='allroad[3]'>></span><span>{{allroad[3]}}</span><span ng-if='allroad[4]'>></span> </div></div>
+            </div>
+        </div>
+        <div class='zation-info'>
+            <div class='title'>{{i18n('审批信息')}}</div>
+            <div class='allinfo'>
+                <div class='top1 clearfix'>
+                    <div class='fl top1-l'>{{i18n('成本中心')}}</div>
+                    <div class='fl top1-r'><span class='wjx'>*</span>{{i18n('成本中心')}} :
+                    <select name="cost" id="cost" required ng-model='userdetail.costCenterId' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1">
+                        <option  ng-repeat='pro in costList' value='{{pro.id}}' ng-selected='pro.costName==userdetail.costName'>{{pro.costName}}</option>
+                        <!-- <option value="">--{{i18n('请选择')}}--</option> -->
+                    </select>
+                </div>
+                </div>
+                <div class="top2 clearfix">
+                    <div class='fl top2-l'>{{i18n('收货信息')}}</div>
+                    <ul class='fl top2-r'>
+                        <li class="clearfix"><div class="fl" style="margin-left: 7px"><span class='wjx'>*</span>{{i18n('收货人姓名')}} :
+                        <!-- <select name="person" id="person" required ng-model='userdetail.goodReceiverPersonId' ng-options='pro.id as pro.receiverName for pro in consignee' ng-change='selectlist(userdetail.goodReceiverPersonId)'> -->
+                            <select name="person" id="person" required ng-model='userdetail.goodReceiverPersonId' ng-change='selectlist(userdetail.goodReceiverPersonId)' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1">
+                                <option ng-repeat='pro in consignee' value="{{pro.id}}" ng-selected='userdetail.goodReceiverPersonId==pro.id'>{{pro.receiverName}}</option>
+                            <!-- <option value="">{{authorization.receiverName}}</option> -->
+                        </select>
+                        </div><div class="fr"><span class='wjx'>*</span>{{i18n('手机号')}} : <input type="text" disabled ng-model='userdetail.goodReceiverMobile'></div></li>
+                        <li class="clearfix"><div class="fl" style="margin-left: 13px"><span class='wjx'>*</span>{{i18n('固定电话1')}} : <input type="text" disabled ng-model='userdetail.goodReceiverTel'></div><div class="fr">{{i18n('代收人')}} : <input type="text" ng-model='userdetail.proxyReceiverName' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1"></div></li>
+                        <li class="clearfix"><div class="fl" style="margin-left: 13px"><span class='wjx'>*</span>{{i18n('固定电话2')}} : <input type="text" disabled ng-model='userdetail.goodReceiverTel2'></div><div class="fr">{{i18n('代收人手机号')}} : <input type="text" ng-model='userdetail.proxyReceiverMobile' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1"></div></li>
+                        <li class="clearfix"><span class='wjx' style="margin-left: 21px">*</span>{{i18n('收货地址')}} : 
+                            <select name="" id="" ng-model='userdetail.goodReceiverAddressId' ng-change='gettime(userdetail.goodReceiverAddressId)' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1">
+                                <option ng-repeat='pro in addressList' value='{{pro.addressId}}' ng-selected='userdetail.goodReceiverAddressId==pro.addressId'>{{pro.detailAddress}}</option>
+                            </select> 
+                        </li>
+                        <li>
+                            <div class="datetimepicker" style='width: 100%;'>
+                                <span class="date-title f14">{{i18n('预计发货日期')}}：</span>
+                                <div class="dis datetimepicker-content">
+                                    <div class="input-group">
+                                        <input style='width: 228px' type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalFrom" options="options1" close="close(from)" ng-model="userdetail.shipmentDate" ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="top2 clearfix">
+                    <div class='fl top2-l' style='width: 125px;'>{{i18n('发票信息')}}</div>
+                    <ul class='fl top2-r'>
+                        <li class="clearfix"><div class="fl" style="margin-left: 31px">{{i18n('发票类型')}} : <select name="" id="" ng-model='userdetail.invoiceType' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1"><!--<option value="1">{{i18n('普通发票')}}</option>--><option value="2">{{i18n('增值税发票')}}</option></select></div><div class="fr">{{i18n('发票抬头')}} : <select name="invoice" id="invoice" ng-model='userdetail.invoiceTitleContent' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1"><option value="{{pro.invoiceTitleContent}}" ng-repeat='pro in invoiceList' ng-selected='pro.invoiceTitleContent==userdetail.invoiceTitleContent'>{{pro.invoiceTitleContent}}</option></select></div></li>
+                        <li class="clearfix"><div class="fl" style="margin-left: 42px">{{i18n('PO编号')}} : <input type="text" ng-model='userdetail.poCode' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1"></div><div class="fr">{{i18n('PO金额含税')}} : <input type="text" ng-model='userdetail.poAmountFax' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1"></div></li>
+                        <li class="clearfix">{{i18n('PO金额不含税')}} : <input type="text" ng-model='userdetail.poAmount' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1"></li>
+                        <li style='margin-top: 30px;'><a href="javascript:;"><input type="file" name="certificate" ngf-select="upload()" ng-model="userdetail.fileUrl" ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1"/>{{i18n('选择文件')}}</a><span>{{i18n('审核文件上传')}}</span><img width="50px" style="margin-left: 30px" ng-src="{{userdetail.fileUrl}}" alt=""></li>
+                    </ul>
+                </div>
+                <div class='pay-way'>
+                    <div class='pay'>{{i18n('支付方式')}}</div>
+                    <label for="female" class="radioStyle-big" style='margin-right:40px;' ng-if="canOwe == 1">
+                        <input id="female" type="radio" ng-model='order.orderPaymentType' value='4' checked ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1">
+                        <span></span> {{i18n('赊账')}}
+                    </label>
+                    <label for="male" class="radioStyle-big">
+                        <input id="male" type="radio" ng-model='order.orderPaymentType' value='3' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1">
+                        <span></span> {{i18n('货到付款')}}
+                    </label>
+                </div>
+                <div class='product-info'>
+                    <div class='title'>{{i18n('商品信息')}}</div>
+                    <ul class='content-title clearfix'>
+                        <li style="text-align: left;text-indent: 84px;">{{i18n('商品')}}</li>
+                        <li>{{i18n('单价')}}</li>
+                        <li>{{i18n('数量')}}</li>
+                        <li>{{i18n('小计')}}</li>
+                    </ul>
+                    <div style="border: 1px solid #eee;">
+                        <ul class='content clearfix' ng-repeat='m in order.orders[0].items'>
+                            <li class='pic'><img ng-src="{{m.productPicPath}}" alt=""></li>
+                            <li class='pname'>{{m.productCname}}</li>
+                            <li class='desc'></li>
+                            <li>{{m.productPriceFinal}}</li>
+                            <li>
+                                <div class="numbox">
+                                    <button type="button" ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1" ng-style="{color: m.productItemNum == 1 ? '#ddd' : '#333',cursor: m.productItemNum == 1 ? 'default':'pointer'}" ng-click="decrease($event, m,editNumCtrl)">-
+                                    </button>
+                                    <input type="text"
+                                           ng-model="m.productItemNum"
+                                           ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1"
+                                           ng-change="changeNum()">
+                                    <button type="button" style="color: #333;cursor:pointer" ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1" ng-click="increase($event, m,editNumCtrl)">+
+                                    </button>
+                                </div>
+                            </li>
+                            <li style="color:#cc0000">{{m.productPriceFinal*m.productItemNum | currency:'￥'}}</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class='remark'>
+                    <div class='title'>{{i18n('订单备注')}}</div>
+                    <textarea name="" id="" placeholder="用户备注" ng-model='order.orders[0].RemarkUser' ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1"></textarea>
+                </div>
+                <div class='account clearfix'>
+                    <div class="fl info">{{i18n('结算信息')}}</div>
+                    <div class="fr content">
+                        <div class="clearfix"><div class="fl">{{i18n('共')}}<span style='color:#cc0000;display: inline-block; padding: 0 4px; width: 14px;'>{{allnum}}</span>{{i18n('件商品')}},{{i18n('合计')}} : </div><span class="fr">{{allprice | currency:'￥'}}</span></div>
+                        <div class="clearfix"><span class="fl" style="margin-left: 82px">{{i18n('运费')}} : </span><span class="fr">{{order.orderDeliveryFee | currency:'￥'}}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='flow clearfix'>
+            <div class="fl flowl">
+                <div class="title">{{i18n('审批流程')}}</div>
+                <ul class='flowl-info'>
+                    <li ng-repeat='k in flowList'>
+                        <div ng-class="{'themeColor':$first}"> <span ng-class="{'first-span':$first,'two-span':!$first}"></span> <span>{{k.approvalUsername}}</span><span style='margin-left: 20px'>{{k.approvalRemark}}</span></div>
+                        <span class='crtime'>{{k.approvalDate}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="fr flowr">
+                <div class='title'>{{i18n('审批意见')}}</div>
+                <div class="clearfix"><span class='fl'>{{i18n('备注')}} : </span><textarea class="fr" name="" id="" ng-disabled="order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1"></textarea></div>
+            </div>
+        </div>
+        <div class='last-btn' ng-if="!(order.currentUserAppr.approvalStatus != 0 && $scope.order.currentUserAppr.approvalStatus != 1)">
+            <a href="javascript:;" ng-click='operate(3)'>{{i18n('拒绝')}}</a>
+            <a href="javascript:;" ng-click='operate(2)'>{{i18n('同意')}}</a>
+            <a href="javascript:;" ng-click='operate(4)'>{{i18n('退回')}}</a>
+            <a href="javascript:;" ng-click='saveEdit()'>{{i18n('保存修改')}}</a>
+        </div>
+    </div>
+
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/plugins/datetimepicker/jquery.datetimepicker.full.js?v=${version}"></script>
+<script type="text/javascript" src="/costDetail.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=index"></script>
+</body>
+</html>

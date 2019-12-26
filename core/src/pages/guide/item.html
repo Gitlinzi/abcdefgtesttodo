@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="heimdall" content="商品详情页">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/plugins/jquery.calendar-1.4.1/css/jquery.cxcalendar#((skin)).css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/item#((skin)).css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/plugins/datetimepicker/jquery.datetimepicker.min#((skin)).css?v=${version}">
+</head>
+<script type="text/ng-template" id="deliverAddress">
+    <dt>{{i18n('送货至')}}：</dt>
+    <dd>
+        <a class="spaddress" href="javascript:void(0)" ng-click="localProvince.lvAreaObj.areaShow = true">{{localProvince.lvAreaObj.detail||localProvince.gotAreas.province.name}}<i class="icon-more-down"></i></a>
+        <div class="adschange" ng-if="localProvince.lvAreaObj.areaShow">
+            <a href="javascript:void(0)"
+               class="dialog-close-location lh25px"
+               ng-click="localProvince.lvAreaObj.areaShow=false">&times;</a>
+            <ul class="tab">
+                <li ng-class="{active:localProvince.lvAreaObj.areaTab == 1}"
+                    ng-click="localProvince.lvAreaObj.areaTab=1">{{localProvince.gotAreas.province.name||i18n('请选择省份')}}</li>
+                <li ng-class="{active:localProvince.lvAreaObj.areaTab == 2}"
+                    ng-if="localProvince.lvAreaObj.areaTab>1"
+                    ng-click="localProvince.lvAreaObj.areaTab=2">{{localProvince.gotAreas.city.name||i18n('请选择城市')}}</li>
+                <li ng-class="{active:localProvince.lvAreaObj.areaTab == 3}"
+                    ng-if="localProvince.lvAreaObj.areaTab>2">{{localProvince.gotAreas.area.name||i18n('请选择区域')}}</li>
+            </ul>
+            <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 1}">
+                <li ng-repeat="prov in localProvince.gotAreas.provinces|orderBy:'name.length'"
+                    ng-click="localProvince._changeAddr(prov,2)"
+                    ng-class="{active:prov.id==localProvince.gotAreas.province.id,col2:prov.name.length > 7}">{{prov.name}}</li>
+            </ul>
+            <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 2}">
+                <li ng-repeat="city in localProvince.gotAreas.cities|orderBy:'name.length'"
+                    ng-click="localProvince._changeAddr(city,3)"
+                    ng-class="{active:city.id==localProvince.gotAreas.city.id,col2:city.name.length > 7}">{{city.name}}</li>
+            </ul>
+            <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 3}">
+                <li ng-repeat="area in localProvince.gotAreas.areas|orderBy:'name.length'"
+                    ng-click="localProvince._changeAddr(area,0)"
+                    ng-class="{col2:area.name.length > 7}">{{area.name}}</li>
+            </ul>
+        </div>
+    </dd>
+</script>
+
+<body ng-app="appControllers" ng-controller="detailCtrl">
+    @@include("header.html")
+    @@include("global-nav.html")
+    <!-- 没有商品信息时 -->
+    <div id="noResulTitle" ng-if="isShowNoProduct">
+        <div class="noResulTitle">
+            <div class="info">
+                <span class="row">
+                    <span class="noProductSign"></span>
+                    <span class="keywords">{{noProduct}}</span>
+                    <a class="returnHomePage" href="/index.html">{{i18n('返回首页')}}</a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- 商品详情页弹框地址 -->
+    <dl ng-include="'includes/_location.html'"></dl>
+    <!-- 商品详情页弹框地址 -->
+
+    <div id="breadcrumb">
+        <div class='container'>
+            <div class='container-left' ng-show="crumbList.length>0">
+                <a href="../index.html">{{i18n('首页')}}</a>
+                <i class="icon-arrow-right4 magr12l8"></i>
+                <a ng-repeat-start="crumb in crumbList track by $index" ng-if="$index !== 0 && $index < 4" href="search.html?navCategoryIds={{crumb.categoryId}}&categoryTreeNodeId={{crumb.categoryTreeNodeId}}">{{crumb.categoryName}}</a>
+                <span ng-repeat-end ng-if="$index !== 0 && $index < 3">
+                    <i class="icon-arrow-right4 magr12l8"></i>
+                </span>
+                <!-- <span title="{{itemlist.chineseName}}" class="c3">{{itemlist.chineseName|textLengthFormat:30}}</span> -->
+            </div>
+        </div>
+    </div>
+    <div class="container" ng-cloak>
+        <div class="clear"></div>
+        <!-- 商品展示loading -->
+        <div ng-show="!itemlist && isProductLoading" class="searchLoading">
+            <img width="194" src="/images/company/loading.gif?v=1508121650379" alt="{{i18n('等待')}}。。。" ng-src="{{frontBasicSetting.websiteLoading}}"/>
+        </div>
+        <!-- 商品展示loading -->
+
+        <div id="gdshow" ng-if="itemlist" class="new-item">
+            <!-- 预置订单弹框 -->
+            <div class="arrival-main" ng-show="advanceShow">
+                <div class="arrival-bomb" style="width: 555px;">
+                    <div class="arrival-title clearfix">
+                        <div class="title-left">
+                            <span>{{i18n('加入预置订单')}}</span>
+                        </div>
+                        <div class="title-right">
+                            <span ng-click="advanceOrder.closeAdvance()" class="close-img"></span>
+                        </div>
+                    </div>
+                    <div class="arrival-main mgT20 mgL10 mgR20" id="advanceOrder">
+                        <div>
+                            <ul class="input datetimepicker" style="margin-right: 0;">
+                                <li>
+                                    <span>{{i18n('预置订单编号')}}</span>
+                                    <input type="text" name="" ng-model="advanceOrder.id">
+                                </li>
+                                <li>
+                                    <span>{{i18n('预置订单名称')}}</span>
+                                    <input type="text" name="" ng-model="advanceOrder.name">
+                                </li>
+                                <li class="mgT20">
+                                    <div class="datetimepicker">
+                                        <span class="date-title">{{i18n('创建时间')}}</span>
+                                        <div class="disIB datetimepicker-content" style="margin-left: 4px;">
+                                            <div class="input-group">
+                                                <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalFrom" options="options1" close="close(from)" max-date="advanceOrder.createTimeEnd"
+                                                        ng-model="advanceOrder.createTimeStart">
+                                                <span class="input-group-addon">至</span>
+                                                <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalTo" options="options2" close="close(to)" min-date="advanceOrder.createTimeStart"
+                                                        ng-model="advanceOrder.createTimeEnd">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <p class="operation mgT20 bb pdB20">
+                                <button class="search mgR5" ng-click="advanceOrder.getOrderList()">{{i18n('查询')}}</button>
+                            </p>
+                            <div class="evaluate-list mgT20">
+                                <a class="car-color mgB10 my-advance disIB" href="javascript:void(0)" ng-click="advanceOrder.goto()">+{{i18n('创建预置订单')}}</a>
+                                <div class="list-title list-titleColor">
+                                    <span class="w10"><input type="checkbox" ng-click="advanceOrder.allCheckbox()" ng-model="advanceOrder.allCheck"></span>
+                                    <span class="w30">{{i18n('预置订单编号')}}</span>
+                                    <span class="w30">{{i18n('预置订单名称')}}</span>
+                                    <span class="w30">{{i18n('创建日期')}}</span>
+                                </div>
+                                <div class="order-group">
+                                    <div ng-if="advanceOrder.advanceList.length>0">
+                                        <table class="order-list all-table-color w100">
+                                            <tr ng-repeat="item in advanceOrder.advanceList track by $index">
+                                                <td align="center" class="bb bl w10">
+                                                    <input type="checkbox" ng-model="item.checked" ng-change="advanceOrder.change(item)">
+                                                </td>
+                                                <td align="center" class="bb w30">
+                                                    <!-- #/advanceDetailOrder?id={{item.id}} -->
+                                                    <a href="javascript:void(0)" class="c0066c">{{item.id}}</a>
+                                                </td>
+                                                <td align="center" class="bb w30">
+                                                    {{item.name}}
+                                                </td>
+                                                <td valign="top" align="center" class="bb br w30">
+                                                    {{item.createTime.time | date : 'yyyy-MM-dd'}}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="none-order align-center" ng-if="advanceOrder.advanceList.length == 0">
+                                        <div class="none-right">
+                                            <span>{{i18n('暂无数据')}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 页码 -->
+                                <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                                    total-page="totalPage"></div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="button-sure">
+                                <a ng-click="advanceOrder.addAdvance()" href="">{{i18n('加入')}}</a>
+                                <a class="my-cancel mgL5" ng-click="advanceOrder.closeAdvance()" href="">{{i18n('取消')}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 预置订单弹窗end -->
+            <!-- 到货通知弹框 -->
+            <div class="arrivalShow" ng-show="arrivalShow">
+                <div class="arrival-bomb">
+                    <div class="arrival-title clearfix">
+                        <div class="title-left">
+                            <span>{{i18n('到货通知')}}</span>
+                        </div>
+                        <div class="title-right">
+                            <span ng-click="arrivalShowFuncOne()" class="close-img"></span>
+                        </div>
+                    </div>
+                    <div class="arrival-main">
+                        <p>{{i18n('商品到货后')}}，{{i18n('我们将会用以下方式通知您')}}</p>
+                        <div class="main-text">
+                            <span class="disB">{{i18n('商品名称')}}：{{itemlist.chineseName}}</span>
+                            <span>{{i18n('手机短信通知')}}：</span>
+                            <input ng-change="changePhoneText()" ng-model="$parent.newPhone" class="phoneText" type="text" placeholder="{{i18n('请输入手机号码')}}">
+                            <span ng-show="rightPhoneText" class="placeTextColor">{{i18n('请输入')}}11{{i18n('位有效手机号码')}}</span>
+                        </div>
+                        <div class="button-sure">
+                            <a ng-click="arrivalShowFuncTwo()" href="">{{i18n('确定')}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 到货通知弹框 -->
+
+            <div class="left">
+                <!-- 主图和小图点击的切换 -->
+                @@include("detail/left_pic.html")
+                <!-- 分享收藏的小功能 -->
+                @@include("detail/share_etc.html")
+            </div>
+            <div class="main" ng-style="{'max-width':$parent.switchConfig.guide.item.showRightRecommend?'580px':'780px'}">
+                @@include("detail/allPopBox.html")
+                <!-- 新添加代码 begin -->
+                <div class='title'>
+                    <div class='title-logo' ng-if="itemlist.merchantType == 11 && $parent.switchConfig.guide.search.showMerchantName">{{i18n('自营')}}</div>
+                    <div class='title-text'>
+                        <h1>{{itemlist.chineseName}}</h1>
+                    </div>
+                </div>
+                <!-- 新添加代码 end -->
+                <!-- 副标题 -->
+                <h5>{{itemlist.subtitle}}</h5>
+                <!--商品详情页秒杀页面  begin -->
+                <!-- @@include("detail/seckill.html") -->
+                <!-- 商品详情页秒杀页面  end -->
+
+                <!-- 商品预售页面 begin -->
+                <!-- @@include("detail/presell.html") -->
+                <!-- 商品预售页面 end -->
+
+                <!-- 商品正常页面  begin -->
+                @@include("detail/normal.html")
+                <!-- 商品正常页面  begin -->
+
+                <!-- 系列品开始 -->
+                @@include("detail/seriesPro.html")
+                <!-- 系列品结束 -->
+
+                <!-- 加车数量开始 -->
+                @@include("detail/updateNum.html")
+                <!-- 加车数量结束 -->
+
+                <!-- 服务商品开始 -->
+                <!-- @@include("detail/servicePro.html") -->
+                <!-- 服务商品结束 -->
+
+                <!-- 地址选择并计算运费 start-->
+                @@include("detail/chooseAddress.html")
+                <!-- 地址选择并计算运费 end -->
+                <!-- 积分商城开始 -->
+                <!-- @@include("detail/pointPro.html") -->
+                <!-- 积分商城结束 -->
+
+                <!-- 各种按钮判断 开始-->
+                <div class="buy buy-outer clearfix">
+                    @@include("detail/allButton.html")
+                </div>
+                <!-- 各种按钮判断 结束 -->
+
+                <!-- 服务承诺开始 -->
+                @@include("detail/serviceCommitment.html")
+                <!-- 服务承诺结束 -->
+            </div>
+            <!-- 看了又看 -->
+            <div recommend-goods crumb-list="crumbList" class="recommend-goods" side="right" title="i18n('精准化推荐')" on-init="true" scene-no="0" options="$parent.switchConfig.guide.item.recommendGoodRightOptions" ng-if="$parent.switchConfig.guide.item.showRightRecommend"></div>
+        </div>
+        <!-- 商品套餐 start -->
+        @@include("detail/packages.html")
+        <!-- 商品套餐 end -->
+        <!-- 商品相关(详细) -->
+        <div id="related" ng-show="itemlist">
+<!--             options="$parent.switchConfig.guide.item.recommendGoodCrumbOptions" -->
+<!--            <div recommend-goods crumb-list="crumbList" prod-item-id="itemId" class="recommend-goods" side="left" scene-no="1" options="itemConfig"></div>-->
+            <div class="left">
+                <div class="left-title clearfix">
+                    <div ng-click="leftBoxIndex=0" ng-class="{active:leftBoxIndex===0}">收藏商品</div>
+                    <div ng-click="leftBoxIndex=1" ng-class="{active:leftBoxIndex===1}">浏览历史</div>
+                    <span ng-style="{left:25.5+107*leftBoxIndex + 'px'}"></span>
+                </div>
+                <div class="left-content">
+                    <div class="swipe-box clearfix" ng-style="{left:-leftBoxIndex*214+'px'}">
+                        <ul>
+                            <li ng-repeat="fav in favoriteGoods |limitTo:4" ng-click="toDetail(fav.mpId)">
+                                <div class="img-wrap">
+                                    <img width="132" height="132" ng-src="{{fav.picUrl}}" alt="">
+                                </div>
+                                <div class="bottom">
+                                    <h4>{{fav.chineseName}}</h4>
+                                    <div class="price">
+                                        {{fav.price|currency:'￥'}}
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li ng-repeat="fav in historyGoods |limitTo:4" ng-click="toDetail(fav.mpId)">
+                                <div class="img-wrap">
+                                    <img width="132" height="132" ng-src="{{fav.picUrl}}" alt="">
+                                </div>
+                                <div class="bottom">
+                                    <h4>{{fav.name}}</h4>
+                                    <div class="price">
+                                        {{fav.price|currency:'￥'}}
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class='related-right'>
+              <div class="related-right-wrap">
+                <ul class="tab-titles">
+                    <li class="active" ng-click="changeItemDetail(1)" ng-if="$parent.switchConfig.guide.item.goodNavigation.goodIntroduce">{{i18n('商品介绍')}}</li>
+                    <!-- 这边加了判断对应下面的dom也要加 -->
+                    <li ng-click="changeItemDetail(2)" ng-if="$parent.switchConfig.guide.item.goodNavigation.goodParameter">{{i18n('商品参数')}}</li>
+                    <li ng-click="changeItemDetail(3)" ng-if="$parent.switchConfig.guide.item.goodNavigation.goodAfterSales">{{i18n('售后服务')}}</li>
+                    <!-- 史泰博ADV隐藏 -->
+                    <!-- <li ng-click="changeItemDetail(4)" ng-if="$parent.switchConfig.guide.item.goodNavigation.goodEvaluation">{{i18n('商品评价')}}</li> -->
+                    <!-- <li ng-click="changeItemDetail(5)" ng-if="$parent.switchConfig.guide.item.goodNavigation.goodConsulting">{{i18n('商品咨询')}}</li>
+                    <li ng-click="changeItemDetail(6)" ng-if="$parent.switchConfig.guide.item.goodNavigation.goodQuestionAnswer">{{i18n('问大家')}}</li> -->
+                </ul>
+                <div class="tab-contents">
+                    <!-- 商品介绍 begin -->
+                    @@include("detail/tab_introduce.html")
+                    <!-- 商品介绍 end -->
+                    <!-- 商品参数 begin -->
+                    @@include("detail/tab_attr.html")
+                    <!-- 商品参数 end -->
+                    <!-- 售后服务 begin -->
+                    @@include("detail/tab_aftersales.html")
+                    <!-- 售后服务 end -->
+                    <!-- 商品评价 begin -->
+                    @@include("detail/tab_comment.html")
+                    <!-- 商品评价 end -->
+                    <!-- 商品咨询 begin -->
+                    @@include("detail/tab_consultation.html")
+                    <!-- 商品咨询 end -->
+                    <!-- 问大家 begin -->
+                    @@include("detail/tab_problem.html")
+                    <!-- 问大家 end -->
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="xiaoneng"></div>
+    <!-- 收藏夹弹框 -->
+    <!-- 底部 -->
+    @@include("footer.html")
+    @@include("script.html")
+    <script type="text/javascript" src="/plugins/jquery.jqzoom-core.js?v=${version}"></script>
+    <script type="text/javascript" src="/plugins/datetimepicker/jquery.datetimepicker.full.js?v=${version}"></script>
+    <script type="text/javascript" src="/plugins/jquery.calendar-1.4.1/js/jquery.cxcalendar.js?v=${version}"></script>
+    <script type="text/javascript" src="/item.js?v=${version}"></script>
+    <script type="text/javascript" src="/plugins/jquery.qrcode.min.js?v=${version}"></script>
+    <script src="http://connect.qq.com/widget/loader/loader.js" widget="shareqq" charset="utf-8"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=item"></script>
+</body>
+</html>

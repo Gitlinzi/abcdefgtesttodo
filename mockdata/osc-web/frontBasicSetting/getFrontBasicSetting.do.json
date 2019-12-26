@@ -1,0 +1,23 @@
+{
+    "code": 0,
+    "message": "success",
+    "resultData": {
+        "websiteDomain": "fashion.oudianyun.com",
+        "websiteName": "史泰博合约客户网站",
+        "websiteTitle": "博之智选 - 史泰博合约客户网站",
+        "websiteLogo": "http://cdn.oudianyun.com/staples-adv/prod/osc/1567394941448_63.88974810903135.png",
+        "personPageLogo": "http://cdn.oudianyun.com/staples-adv/prod/osc/1567400713167_38.83154657230742.png",
+        "websiteFavicon": "http://cdn.oudianyun.com/staples-adv/prod/osc/1572256335712_80.0492508352153.png",
+        "websiteLoading": "http://ody.cdn.oudianyun.com/saas/1469093864005_87.64606384100269_loading.gif",
+        "websitePhone": null,
+        "websiteRight": null,
+        "registerProtocol": null,
+        "registerProtocolName": null,
+        "companyId": 259
+    },
+    "gitVersion": {
+        "trace": null,
+        "git.commit.id": "c5873010bca91782d229644c192d16e1e3596575",
+        "git.branch": "origin/master"
+    }
+}

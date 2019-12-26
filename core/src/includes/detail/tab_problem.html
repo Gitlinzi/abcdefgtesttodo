@@ -1,0 +1,46 @@
+<div id="problem" class="content" ng-if="$parent.switchConfig.guide.item.goodNavigation.goodQuestionAnswer">
+    <div ng-if="consultationText.length<0" class="problem-none">
+        {{i18n('还没有人发起过提问哦')}}~
+    </div>
+    <div good-detail-bomb question-data="allData"></div>
+    <div class="problem-all">
+        <span>{{i18n('问大家')}}</span>
+    </div>
+    <div class="me-problem">
+        <span class="me-one">{{i18n('有疑惑')}}，{{i18n('问问买过此商品的同学吧')}}~</span>
+        <input ng-click="allQuestion()" type="button" value="{{i18n('我要提问')}}" ng-if="askPermissions.publish">
+    </div>
+    <div ng-if="consultationText.length>0" class="problem-box" ng-repeat="o in consultationText">
+        <dl class="clearfix">
+            <dt>
+                <span class="one-text question-text">{{i18n('问')}}</span>
+                <span class="problem-aa width685">{{o.content}}</span>
+            </dt>
+            <dd>
+                <span class="user-name">{{o.userName || o.userTelephone | phoneDate}}</span>
+                <span class="color-9">{{o.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+            </dd>
+        </dl>
+        <dl ng-repeat="v in o.listObj" class="clearfix second-dl" ng-show="v.show">
+            <dt>
+                <span ng-show="$first" class="one-text answer">{{i18n('答')}}</span>
+                <span class="width685">{{v.content}}</span>
+            </dt>
+            <dd>
+                <span class="user-name">{{v.userName || v.userTelephone | phoneDate}}</span>
+                <span class="color-9">{{v.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+            </dd>
+        </dl>
+        <!-- o.listObj.length>1 -->
+        <div ng-show="o.listObj.length>1" class="user-answer">
+                <span ng-show="!o.checked"  ng-click="takeContinue(o.listObj,o,consultationText)" class="continer">{{i18n('继续查看')}}{{o.listObj.length-1}}{{i18n('条回答')}}
+                    <span class="arrow-top"></span>
+                </span>
+            <span ng-show="o.checked" ng-click="takeContinue(o.listObj,o,consultationText)" class="continer">{{i18n('收起回答')}}
+                    <span class="arrow-bottom"></span>
+                </span>
+        </div>
+    </div>
+    <div pagination ng-if="consultationText.length>0" page-size="takeQaItemsPerPage" page-no="takeQaCurrentPage" total-count="AqTotalCount" total-page="AqTotalNum"></div>
+    <div class="clear"></div>
+</div>

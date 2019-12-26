@@ -1,0 +1,177 @@
+.feedback-bomb {
+    .consultation-bigBomb{
+        position:fixed;
+        top: 0;
+        left: 0;
+        width:100%;
+        height: 100%;
+        overflow: auto;
+        background: rgb(51, 51, 51);    /*不支持rgba的浏览器*/
+        background: rgba(51, 51, 51, 0.3);  /*支持rgba的浏览器*/
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99515151,endColorstr=#99515151);
+        filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2515151, endColorstr=#B2515151)";
+        background: none\9;
+        z-index: 1000;
+        .consultation-Bomb{
+            position: absolute;
+            z-index: 100;
+            background-color: @whiteColor;
+            width: 400px;
+            border:5px solid @ddGreyColor;
+            border-radius: 8px;
+            left:50%;
+            top:30%;
+            -webkit-transform: translateX(-50%);
+            transform: translateX(-50%);
+            .bomb-title{
+                height:35px;
+                padding-top: 10px;
+                padding-left: 16px;
+                padding-right:14px;
+                font-size: 0;
+                background-color: @backgroundColor;
+                .title-text{
+                    float: left;
+                    font-size: 14px;
+                }
+                .close-img{
+                    display: block;
+                    float: right;
+                    width: 12px;
+                    height:12px;
+                    //background: url('../../images/company/company-default.png') no-repeat -22px -256px;
+                    .common-product-company-default(-22px,-256px);
+                    cursor: pointer;
+                }
+            }
+            .bomb-main{
+                font-size: 12px;
+                padding-left: 15px;
+                padding-top: 13px;
+                padding-bottom: 18px;
+                .main-title{
+                    margin-bottom: 17px;
+                    position: relative;
+
+                    //select::-ms-expand { display: none; }
+                    select{
+                        width: 110px;
+                        height: 30px;
+                        padding-left: 10px;
+                        border:1px solid @ddGreyColor;
+                        // appearance:none;
+                        // -moz-appearance:none;
+                        // -webkit-appearance:none;
+                        // -ms-appearance:none;
+                    }
+
+                    .main-text{
+                        color: @99GreyColor;
+                        margin-right: 13px;
+                    }
+                    .close-icon{
+                        display: block;
+                        width:10px;
+                        height:6px;
+                        //background: url('../../images/company/company-default.png') no-repeat -22px -34px;
+                        .common-product-company-default(-22px,-34px);
+                        position: absolute;
+                        top:13px;
+                        left:150px;
+                    }
+                }
+                .top-text{
+                    color: @themeColor;
+                    margin-bottom: 5px;
+                }
+                .error-num {
+                    display: block;
+                    color: @clearColor;
+                }
+                .textarea-box{
+                    position: relative;
+                    textarea{
+                        width: 344px;
+                        height: 78px;
+                        border: 1px solid @ddGreyColor;
+                        padding: 10px;
+                        padding-left:14px;
+                        resize: none;
+                        line-height: 1;
+                    }
+                    .title {
+                        font-size: 12px;
+                        font-weight: normal;
+                        display: inline-block;
+                        margin: 5px 0 5px 0;
+                    }
+                    .text-num{
+                        position: absolute;
+                        bottom: 10px;
+                        right: 20px;
+                        color: @aaGreyColor;
+                    }
+                    .enter-aptcha {
+                        padding: 7px 15px;
+                        line-height: 20px;
+                        height: 25px;
+                        border: 1px solid #ddd;
+                        -webkit-transition: border-color linear 0.5s;
+                        transition: border-color linear 0.5s;
+                        float: left;
+                        width: 138px;
+                        margin-right: 10px;
+                    }
+                    .phone-code {
+                        float: left;
+                    }
+                    .img-captcha {
+                        float: left;
+                        margin-right: 5px;
+                    }
+                    .change {
+                        float: left;
+                        height: 40px;
+                        display: inline-block;
+                        line-height: 40px;
+                    }
+                }
+                .main-bottom{
+                    font-size: 0;
+                    margin-top: 20px;
+                    a{
+                        display: inline-block;
+                        font-size: 12px;
+                        text-align: center;
+                        line-height: 35px;
+                        border-radius: @searchRadius;
+                    }
+                    .one-button{
+                        background-color: @btnBgColor;
+                        color: @whiteColor;
+                        width: 90px;
+                        margin-right: 15px;
+                    }
+                    .two-button{
+                        width: 88px;
+                        border:1px solid @ddGreyColor;
+                        color: @fontColor;
+                    }
+                    .chose-evaluate{
+                        font-size: 12px;
+                        display: inline-block;
+                        margin-left: 24px;
+                    }
+                    .chose-evaluate span{
+                        vertical-align: middle;
+                        margin-left: 5px;
+                        color: @fontColor;
+                    }
+                    .chose-evaluate input{
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+    }
+}

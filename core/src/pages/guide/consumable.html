@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="heimdall" content="搜索页">
+    <link rel="stylesheet" type="text/css" href="/plugins/jquery.calendar-1.4.1/css/jquery.cxcalendar#((skin)).css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/plugins/datetimepicker/jquery.datetimepicker.min#((skin)).css?v=${version}">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/consumable#((skin)).css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+</head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153866881-2"></script>
+
+<body ng-app="appControllers" ng-controller="searchCtrl" class="search-list-page">
+@@include("header.html")
+@@include("global-nav.html")
+<!--活动商品聚合页-->
+<!--@@include("_searchlistpromotion.html")-->
+<!--购物进度-->
+<div class="consumable-search container">
+
+</div>
+<!--活动商品聚合页-->
+@@include("_searchlistpromotion.html")
+@@include("detail/allPopBox.html")
+<div class="container" ng-cloak>
+    <!-- 新修改的代码 begin -->
+    <div consumable-crumb category-id="defaultCategory" crumb-list="crumbList" active-attr="activeAttr" keyword="noResultKeyword1" is-list="isList">
+        <!-- 结果个数 -->
+        <!-- <div id="resultcount">
+            {{i18n('共')}} <span>{{searchedObj.totalCount || 0}}</span> {{i18n('条')}}
+        </div> -->
+    </div>
+    <div class="cart-search-box">
+        <div class="search-wrap">
+            <input class="cart-input" type="text"
+                   ng-model="keyword"
+                   ng-keydown="consumableAutoSearch($event,keyword)"
+                   placeholder="{{i18n('按耗材类型或名称查找')}}">
+            <input class="cart-button fr" value="查找" type="button" ng-click="consumableSearch(keyword)">
+        </div>
+    </div>
+
+    <div ng-show="!searchedObj" class="searchLoading">
+        <img width="194" src="/images/company/loading.gif?v=${version}" alt="{{i18n('等待')}}。。。" ng-src="{{frontBasicSetting.websiteLoading}}">
+    </div>
+    <!-- 类目搜索 -->
+    <!-- ng-if="noResultFlag&&(searchedObj.maybeInterestedKeywords.length||isList)" -->
+    <div id="noResult" ng-if="noResultFlag">
+        <div class="noResult" ng-if="!isList">
+            <div class="info">
+                <span class="row">{{i18n('很抱歉')}}!{{i18n('没有找到与')}}"<span class="keywords" ng-repeat="item in noResultKeyword2">{{item}}&nbsp;&nbsp;</span>"{{i18n('相关的商品')}}<a href="/index.html" class="noIndex ng-binding">返回首页</a><span ng-if="searchedObj.maybeInterestedKeywords.length>0">，{{i18n('为您推荐以下相关搜索结果')}}</span></span>
+                <span class="row" ng-if="searchedObj.maybeInterestedKeywords.length>0"><span class="changeKey">{{i18n('换个关键字试试')}}</span><a href="?keyword={{key}}" class="key" ng-repeat="key in searchedObj.maybeInterestedKeywords">{{key}}</a></span>
+            </div>
+        </div>
+        <div ng-if="isList && noResultFlag" class="noResult">
+            <i class="icon-warning"></i>{{i18n('该类目下暂无商品')}}
+        </div>
+        <div guess-you-like class="guessyoulike-goods mgT20" title="{{i18n('猜你喜欢')}}" on-init="true" options="$parent.switchConfig.guide.search.guessYouLikeOptions" ng-if="$parent.switchConfig.guide.search.showGuessYouLike"></div>
+    </div>
+    <!--搜索结果为无结果-->
+    <!-- //zeroRecommendWord 搜索结果为空时，返回推荐词 -->
+    <!-- //zeroRecommendResult 搜索结果为空时，返回推荐商品  见product描述 -->
+    <!-- //maybeInterestedKeywords 搜索结果为空时，推荐可能是用户感兴趣的关键词 -->
+    <!-- 可能是用户感兴趣为空， 推荐为空并且推荐列表为空， 非类目搜索 -->
+    <div id="noResult" ng-if="!isList&&(!searchedObj.maybeInterestedKeywords.length)&&searchedObj.zeroRecommendResult.length==0&&!searchedObj.zeroRecommendWord&&searchedObj.productList.length==0" >
+        <div class="noResult" ng-class="{'zero': $parent.switchConfig.guide.search.hideBorderBox}">
+            <div class="info" ng-if="noResultKeyword2">
+                    <span class="row ">{{i18n('很抱歉')}}~{{i18n('没有找到')}}"<span class="keywords">{{noResultKeyword2}}</span>"{{i18n('相关的商品')}}<a href="/index.html" class="noIndex">{{i18n('返回首页')}}</a>
+            </div>
+            <div class="info" ng-if="!noResultKeyword2">
+                    <span class="row ">{{i18n('很抱歉')}}~{{i18n('暂无数据')}},{{i18n('请稍后再试')}}<a href="/index.html" class="noIndex">{{i18n('返回首页')}}</a>
+            </div>
+        </div>
+        <div guess-you-like class="guessyoulike-goods mgT20" title="{{i18n('猜你喜欢')}}" on-init="true" options="$parent.switchConfig.guide.search.guessYouLikeOptions" ng-if="$parent.switchConfig.guide.search.showGuessYouLike"></div>
+    </div>
+    <!--拼音纠错-->
+    <!-- 推荐有值， 有列表 -->
+    <div class="checkSpell" ng-if="searchedObj.zeroRecommendWord&&searchedObj.zeroRecommendResult.length>0" ng-class="{'zero': $parent.switchConfig.guide.search.hideBorderBox}">
+        <span>{{i18n('以下是')}} "</span><span class="keywords">{{searchedObj.zeroRecommendWord}}</span><span>" {{i18n('搜索结果')}}，{{i18n('仍然搜索')}}</span><a href="?keyword={{noResultKeyword1}}" class="key col0172">{{noResultKeyword1}}</a>
+    </div>
+    <!--同音词纠错-->
+    <!-- 推荐有值， 无列表 -->
+    <div class="checkSpell checkSpellNo" ng-if="searchedObj.zeroRecommendResult.length==0&&searchedObj.zeroRecommendWord" ng-class="{'zero': $parent.switchConfig.guide.search.hideBorderBox}" >
+        <span>{{i18n('您要找的是不是')}}  <a href="?keyword={{searchedObj.zeroRecommendWord}}" class="col0172">"{{searchedObj.zeroRecommendWord}}"</a></span>
+    </div>
+    <!-- 数量少 -->
+    <div id="lessNumber" ng-if="searchedObj.hotwordsRecommended.length>0">
+        <div class="noResult" ng-if="!isList">
+            <div class="info">
+                <span class="row">"<span class="keywords">{{noResultKeyword2}}</span>"{{i18n('搜索结果较少')}}</span>
+                <span class="row"><span class="changeKey">{{i18n('换个关键字试试')}}</span><a href="?keyword={{key}}" class="key" ng-repeat="key in searchedObj.hotwordsRecommended">{{key}}</a></span>
+            </div>
+        </div>
+        <div guess-you-like class="guessyoulike-goods mgT20" title="{{i18n('猜你喜欢')}}" on-init="true" options="$parent.switchConfig.guide.search.guessYouLikeOptions" ng-if="$parent.switchConfig.guide.search.showGuessYouLike"></div>
+    </div>
+    <!--导购属性/商品分类-->
+    <div id="classify" ng-if="searchedObj.totalCount>0" ng-init="ngMin=4">
+        <div consumable-property callback="getProduct()"  datas="searchedObj.brandResult" title="{{$parent.brandName}}"></div>
+<!--        <div search-property callback="getProduct()" datas="attrs.attributeValues" title="{{attrs.name}}" options="{dataType:'list'}" ng-repeat="attrs in searchedObj.attributeResult|limitTo:ngMin"></div>-->
+<!--        <div search-property callback="getProduct()" datas="cates.children" title="{{cates.name}}" options="{dataType:'search'}" ng-repeat="cates in searchedObj.navCategoryTreeResult[0].children|limitTo:ngMin" ng-if="!isList"></div>-->
+<!--        <div class="type" ng-show="searchedObj.attributeResult.length>4||searchedObj.navCategoryTreeResult[0].children.length>4">-->
+<!--            <a href="javascript:;" ng-click="ngMin=ngMin==4?1000:4" ng-bind="ngMin==4?i18n('展开更多选项'):i18n('收起')"></a><i ng-class="{'icon-top-up mgL10':ngMin>4,'icon-top-down mgL10':ngMin==4}"></i>-->
+<!--        </div>-->
+    </div>
+    <!--搜索结果大于0,显示结果-->
+    <div class="container search-list" ng-if="searchedObj.zeroRecommendResult.length>0||searchedObj.productList.length>0">
+        <!-- ng-if="switchConfig.guide.search.searchShowRecommendGood && crumbList && crumbList.length > 0" -->
+        <!-- options="$parent.switchConfig.guide.search.recommendGoodSearchOptions" -->
+        <!-- <div recommend-goods crumb-list="crumbList" class="recommend-goods" side="left" title="{{i18n('热销商品')}}" scene-no="1" options="searchConfig"></div> -->
+        <div class='container-right' ng-include="'includes/_consumable_search.html'" ng-if="searchedObj.productList" ng-class="{'search-list-right': $parent.switchConfig.guide.search.searchShowRecommendGood && crumbList && crumbList.length > 0}"></div>
+    </div>
+</div>
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/plugins/datetimepicker/jquery.datetimepicker.full.js?v=${version}"></script>
+<script type="text/javascript" src="/plugins/jquery.calendar-1.4.1/js/jquery.cxcalendar.js?v=${version}"></script>
+<script type="text/javascript" src="/consumable.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=search"></script>
+</body>
+
+</html>

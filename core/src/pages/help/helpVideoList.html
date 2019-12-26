@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/cms/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/help#((skin)).css?v=${version}">
+</head>
+<base target="_self"/>
+<body ng-app="appControllers" ng-controller="helpVideoListCtrl" class="help-page">
+@@include("trade-header.html")
+<div class="notification with-nav"></div><!-- #3a3f51 -->
+<span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+    @@include("global-nav.html")
+</span>
+<div class="help-top">
+    <div class="help-title">
+        <h1>
+            <a target="_self" href="/index.html">
+                <img class="headerImg" src="../images/company/loading.gif" width="180" alt="" id="g_logo" ng-src="{{frontBasicSetting.websiteLogo}}">
+            </a>
+            <a target="_self" href="/index.html">
+              <img
+                class="headerImg"
+                src="../images/stb_logo.png"
+                alt=""
+                width="142"
+                ng-src="{{ companyLogoUrl }}"
+              />
+            </a>
+            <span class="help-center">{{i18n('帮助中心')}}</span>
+        </h1>
+        <p ng-show="isShowHelpTitle">
+            <input name="keyword" ng-model="keyword" ng-enter="search()" placeholder="{{i18n('输入问题关键字')}}，{{i18n('找到答案')}}"/>
+            <span class="" ng-click="search()">{{i18n('搜索')}}</span>
+        </p>
+    </div>
+</div>
+<div class="container">
+    <div class="help-nav" ><a href="/help.html">{{i18n('首页')}}</a>
+        <i class="icon-arrow-right4 mgL10 mgR10"></i>
+        <span>
+            <a ng-href="/helpVideoList.html?objUser=1">{{i18n('帮助中心')}}</a>
+            <i class="icon-arrow-right4 mgL10 mgR10"></i>
+        </span>
+        <span>
+            <a ng-href="/helpVideoList.html?objUser=1">{{i18n('视频列表')}}</a>
+            <!-- <i class="icon-arrow-right4 mgL10 mgR10"></i> -->
+        </span>
+    </div>
+    <div class="help-video">
+        <!-- <div class="help-video-title">{{i18n('视频演示')}}</div> -->
+        <div class="help-video-item" ng-if="searchArticleList.length >0">
+            <label style="padding-left:30px;line-height: 40px;">{{i18n('普通用户')}}</label>
+            <div class="video-list">
+                <div class="video-list-vi" ng-repeat="video in searchArticleList" ng-click="play($event,video)">
+                    <video controls>
+                        <source ng-src="{{videoUrlFun(video.url)}}">
+                    </video>
+                    <div ng-show="video.show">
+                        <!-- <div class="video-img" style="background: url({{video.images}}) no-repeat;"></div> -->
+                        <image class="video-img" src="{{video.images || '../../images/company/helpVideo.png'}}" mode="widthFix" lazy-load="false"  />
+                        <div class="video-img-play"></div>
+                    </div>
+                    <div class="video-title">{{i18n(video.name)}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="help-video-item" ng-if="searchArticle.length >0">
+                <label style="padding-left:30px;line-height: 40px;">{{i18n('审批人')}}</label>
+                <div class="video-list">
+                    <div class="video-list-vi" ng-repeat="video in searchArticle" ng-click="play($event,video)">
+                        <video controls>
+                            <source ng-src="{{videoUrlFun(video.url)}}">
+                        </video>
+                        <div ng-show="video.show">
+                            <!-- <div class="video-img" style="background: url({{video.images}}) no-repeat;"></div> -->
+                            <image class="video-img" src="{{video.images || '../../images/company/helpVideo.png'}}" mode="widthFix" lazy-load="false"  />
+                            <div class="video-img-play"></div>
+                        </div>
+                        <div class="video-title">{{i18n(video.name)}}</div>
+                    </div>
+                </div>
+            </div>
+        <div class="help-video-item" ng-if="searchListData.length >0">
+            <label style="padding-left:30px;line-height: 40px;">{{i18n('管理员')}}</label>
+            <div class="video-list">
+                <div class="video-list-vi" ng-repeat="video in searchListData" ng-click="play($event,video)">
+                    <video controls>
+                        <source ng-src="{{videoUrlFun(video.url)}}">
+                    </video>
+                    <div ng-show="video.show">
+                        <!-- <div class="video-img" style="background: url({{video.images}}) no-repeat;"></div> -->
+                        <image class="video-img" src="{{video.images || '../../images/company/helpVideo.png'}}" mode="widthFix" lazy-load="false"  />
+                        <div class="video-img-play"></div>
+                    </div>
+                    <div class="video-title">{{i18n(video.name)}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount" total-page="totalPage"></div>
+
+</div>
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/helpVideoList.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=helpList"></script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>结算页</title>
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/confirmation.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+</head>
+
+<body ng-app="appControllers" ng-controller="confirmationCtrl">
+
+@@include("trade-header.html")
+@@include("global-nav.html")
+<div settle-tips settle-data="bombBox"></div>
+<div class="container title-bigBox">
+    <div class="top-title-box">
+        <span class="title-text">确认订单</span>
+    </div>
+    <div class="order-num-box clearfix">
+        <span class="num-left" ng-if="orderMesData.paymentType==1">订单号：{{orderMesData.orderCode}}，您已选择在线支付，请确认订单后尽快付款！有问题及时联系客服</span>
+        <span class="num-left" ng-if="orderMesData.paymentType==2">订单号：{{orderMesData.orderCode}}，您已选择线下支付，请确认订单后尽快付款！有问题及时联系客服</span>
+        <span class="num-left" ng-if="orderMesData.paymentType==8">订单号：{{orderMesData.orderCode}}，您已选择月结支付，请确认订单后尽快付款！有问题及时联系客服</span>
+        <span class="num-right">
+            <span ng-repeat="qqName in $parent.merchantInfo.merchantQQ track by $index">
+                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={{qqName}}&site=qq&menu=yess"><img src="http://pub.idqqimg.com/wpa/images/counseling_style_52.png" title="选择客服端打开奥" class="logo_img"></a>
+            </span>
+        </span>
+    </div>
+    <div class="odrerMes-box">
+        <div class="top-title f0">
+            <span class="title-one dis f12">收货地址</span>
+            <span class="title-two dis f12">商品</span>
+            <span class="title-three dis f12">规格</span>
+            <span class="title-fore dis f12">单价(元)</span>
+            <span class="title-five dis f12">数量</span>
+            <span class="title-six dis f12">小计(元)</span>
+        </div>
+        <div class="main-box f0">
+            <div class="main-left dis f12">
+                <span class="user-mes">{{orderMesData.name}}&nbsp;&nbsp;{{orderMesData.mobile|hidePhone}}</span>
+                <span class="user-addess">{{orderMesData.orderReceivedAddrass}}</span>
+            </div>
+            <div class="main-right dis">
+                <div class="main-right-box f0" ng-repeat="a in orderCodeData">
+                        <div class="dis right-one f0">
+                            <a href="">
+                                <div class="right-img dis">
+                                    <img src="{{a.productPicPath}}" alt="" height="80" width="80">
+                                </div>
+                                <div class="right-text-box dis f12">
+                                    <span class="right-text">{{a.name}}</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="dis right-two f12">
+                            <span>{{a.standard}}</span>
+                        </div>
+                        <div class="dis right-three f12">
+                            <span ng-if="a.productItemNum>a.stockNum" class="error-text">库存紧张</span>
+                        </div>
+                        <div class="dis right-fore f12">
+                            <span>{{a.productPriceFinal}}</span>
+                        </div>
+                        <div class="dis right-five f12">
+                            <span>{{a.productItemNum}}</span>
+                        </div>
+                        <div class="dis right-six f12">
+                            <span class="money-color">{{a.productItemAmount}}</span>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <p class="sureOrder-errror">确认订单前如已联系客服改单，请先刷新页面<a href="" class="refresh-icon" ng-click="reload()">刷新</a></p>
+        <div class="bottom-box clearfix">
+            <div class="bottom-left">
+                <span>收货人：{{orderMesData.name}}&nbsp;{{orderMesData.mobile|hidePhone}}</span>
+                <span class="left-bottom-left">送货至：{{orderMesData.orderReceivedAddrass}}</span>
+            </div>
+            <div class="bottom-right">
+                <input type="button" class="right-a-text" value="确认订单" ng-click="sureOrder()">
+            </div>
+        </div>
+    </div>
+</div>
+
+@@include("cart-footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/confirmation.js?v=${version}"></script>
+</body>
+
+</html>

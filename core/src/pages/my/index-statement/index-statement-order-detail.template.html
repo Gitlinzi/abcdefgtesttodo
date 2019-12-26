@@ -1,0 +1,134 @@
+<div class="statement-page">
+
+	<div class="home-allTitle pdL20">{{i18n('账号订单明细表')}}</div>
+
+    <div class="query clearfix">
+        <ul class="clearfix">
+            <li>
+                <div class="datetimepicker">
+                    <span class="date-title">{{i18n('时间范围')}}:&nbsp;&nbsp;</span>
+                    <div class="input-group">
+                        <input datetimepicker ng-change="currentDateTab=0" ng-model="createTimeStart" options="datetimepickerOptions1" max-date="createTimeEnd" type="text" class="timeiconbg date-time-picker-input"/>
+                        <span class="input-group-addon">{{i18n('至')}}</span>
+                        <input datetimepicker ng-change="currentDateTab=0" ng-model="createTimeEnd" options="datetimepickerOptions2" min-date="createTimeStart" type="text" class="timeiconbg date-time-picker-input"/>
+                    </div>
+                </div>
+            </li>
+            <li style="margin-left:10px"><button class="date-button" ng-class="{'active':currentDateTab==1}" ng-click="clickDateTab(1)">昨天</button></li>
+            <li><button class="date-button" ng-class="{'active':currentDateTab==7}" ng-click="clickDateTab(7)">近7天</button></li>
+            <li><button class="date-button" ng-class="{'active':currentDateTab==30}" ng-click="clickDateTab(30)">近30天</button></li>
+            <li>
+                <span style="margin-left:10px">{{i18n('订单状态')}}:&nbsp;</span>
+                <select ng-model="orderStatus" style="width:160px;">
+                    <option value="-1">{{i18n('全部')}}</option>
+                    <option value="1010">{{i18n('待支付')}}</option>
+                    <option value="1020">{{i18n('已支付')}}</option>
+                    <option value="1030">{{i18n('待确认')}}</option>
+                    <option value="1031">{{i18n('已确认')}}</option>
+                    <option value="1040">{{i18n('待审核')}}</option>
+                    <option value="1050">{{i18n('待发货')}}</option>
+                    <option value="1060">{{i18n('已发货，待收货')}}</option>
+                    <option value="1070">{{i18n('已签收，待评价')}}</option>
+                    <option value="1999">{{i18n('已完成')}}</option>
+                    <option value="9000">{{i18n('已关闭，已取消')}}</option>
+                </select>
+            </li>
+            <li style="float:right">
+                <button ng-click="clickSearch()" class="search">{{i18n('查询')}}</button>
+                <button ng-click="clickReset()" class="reset">{{i18n('重置')}}</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="clearfix" style="margin-top: 20px">
+        <!--<button ng-click="clickDownload()" style="float:right" class="search">{{i18n('下载')}}</button>-->
+        <button style="float:right" ng-click="clickDownload2()" class="search">{{i18n('导出')}}</button>
+    </div>
+
+
+	
+            <div class="evaluate-list mgT20">
+                <!-- <div class="list-title list-titleColor">
+                    <span class="w10">{{i18n('订单日期')}}</span>
+                    <span class="w15">{{i18n('账号')}}</span>
+                    <span class="w15">{{i18n('账号ID')}}</span>
+                    <span class="w15">{{i18n('订单号')}}</span>
+                    <span class="w10">{{i18n('订单状态')}}</span>
+                    <span class="w5">{{i18n('订单金额')}}</span>
+                    <span class="w15">{{i18n('审批人账号')}}</span>
+                    <span class="w15">{{i18n('当前审批人')}}</span>
+                </div>
+            </div> -->
+        <!-- <ul>
+            <li class="row">
+                <div class="table-cell table-title">{{i18n('订单日期')}}</div>
+                <div class="table-cell table-title">{{i18n('账号')}}</div>
+                <div class="table-cell table-title">{{i18n('账号ID')}}</div>
+                <div class="table-cell table-title">{{i18n('订单号')}}</div>
+                <div class="table-cell table-title">{{i18n('订单状态')}}</div>
+                <div class="table-cell table-title">{{i18n('订单金额')}}</div>
+                <div class="table-cell table-title">{{i18n('审批人账号')}}</div>
+                <div class="table-cell table-title">{{i18n('当前审批人')}}</div>
+            </li>
+            <li ng-repeat="order in orderDetailList" class="row">
+                <div title="{{order.purchaseDate}}" class="table-cell">{{order.purchaseDate}}</div>
+                <div title="{{order.userName}}" class="table-cell">{{order.userName}}</div>
+                <div title="{{order.userId}}" class="table-cell">{{order.userId}}</div>
+                <div title="{{order.orderCode}}" class="table-cell">{{order.orderCode}}</div>
+                <div title="{{order.orderStatusStr}}" class="table-cell">{{order.orderStatusStr}}</div>
+                <div title="{{order.orderAmount}}" class="table-cell">{{order.orderAmount | currencySymbol:'¥'}}</div>
+                <div title="{{order.apprUserNameListStr}}" class="table-cell">{{order.apprUserNameListStr}}</div>
+                <div title="{{order.nowApprUserNameListStr}}" class="table-cell">{{order.nowApprUserNameListStr}}</div>
+            </li>
+        </ul> -->
+
+        <!-- 改为table形式 -->
+        <div style="width:calc(100% - 5px); overflow-x:auto; white-space:nowrap;">
+            <table class="scroll-list">
+                <thead>
+                <tr>
+                    <th class="bb bl br">订单日期</th>
+                    <th class="bb bl br">账号</th>
+                    <th class="bb bl br">账号ID</th>
+                    <th class="bb bl br">订单号</th>
+                    <th class="bb bl br">订单状态</th>
+                    <th class="bb bl br">订单金额</th>
+                    <th class="bb bl br">审批人账号</th>
+                    <th class="bb bl br">当前审批人</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="order in orderDetailList">
+                    <td  class="bb bl br">
+                        {{order.purchaseDate}}
+                    </td>
+                    <td  class="bb bl br">
+                        {{order.userName}}
+                    </td>
+                    <td  class="bb bl br">
+                        {{order.userId}}
+                    </td>
+                    <td  class="bb bl br">
+                        {{order.orderCode}}
+                    </td>
+                    <td  class="bb bl br">
+                        {{order.orderStausStr}}
+                    </td>
+                    <td  class="bb bl br">
+                        {{order.orderAmount | currencySymbol:'¥'}}
+                    </td>
+                    <td class="bb bl br">
+                        {{order.apprUserNameListStr}}
+                    </td>
+                    <td  class="bb bl br">
+                        {{order.nowApprUserNameListStr}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    
+
+    <div ng-if="totalPage>1" pagination page-size="pageSize" page-no="currentPage" total-page="totalPage"></div>
+
+</div>

@@ -1,0 +1,74 @@
+<div class="content" id="quickOrder2" ng-init="">
+    <!-- <div class='home-allTitle pdL20 disIB w100 border-box'>
+        {{i18n('快速订单')}}
+
+    </div> -->
+    <div class="home-alltips pdB15 pdL15 mgT20 mgB20">{{i18n('注意：史泰博商品编码已更新，如果您输入得是旧版编码，系统将自动为您转换为相应得新编码。')}}</div>
+    <div class="module">
+        <div class="quick-list evaluate-list">
+            <ul class="list-title list-titleColor bl bb br bt mgB5">
+                <li class="flex1 align-center">{{i18n('商品编码')}}</li>
+                <li class="flex1 align-center">{{i18n('数量')}}</li>
+                <li class="flex1 align-center">{{i18n('商品编码')}}</li>
+                <li class="flex1 align-center">{{i18n('数量')}}</li>
+                <li class="flex1 align-center">{{i18n('商品编码')}}</li>
+                <li class="flex1 align-center">{{i18n('数量')}}</li>
+            </ul>
+
+            <div class="quick-list-item">
+              <ul class="lineH50" ng-repeat="index in line track by $index" >
+                  <li class="flex1 align-center"><input class="item-code" type="text" ng-model="index.itemId1"></li>
+                  <li class="flex1 align-center pdR30">
+                      <div class="numbox lineH0 v-alignM">
+                          <button type="button" ng-click="index.num1 = index.num1-1"
+                              ng-style="{color: index.num1 == 1 || index.num1 <= 0 ? '#ddd' : '#333',cursor: index.num1 == 1 || index.num1<=0? 'default':'pointer'}"
+                              ng-disabled="index.num1==0" >-
+                          </button>
+                          <input type="text" ng-model="index.num1">
+                          <button type="button" ng-click="index.num1 = index.num1+1">+
+                          </button>
+                      </div>
+                  </li>
+                  <li class="flex1 align-center"><input class="item-code" type="text" ng-model="index.itemId2"></li>
+                  <li class="flex1 align-center pdR30">
+                      <div class="numbox lineH0 v-alignM">
+                          <button type="button" ng-click="index.num2 = index.num2-1"
+                              ng-style="{color: index.num2 == 1 || index.num2 <= 0 ? '#ddd' : '#333',cursor: index.num2 == 1 || index.num2<=0? 'default':'pointer'}"
+                              ng-disabled="index.num2==0" >-
+                          </button>
+                          <input type="text" ng-model="index.num2">
+                          <button type="button" ng-click="index.num2 = index.num2+1">+
+                          </button>
+                      </div>
+                  </li>
+                  <li class="flex1 align-center"><input class="item-code" type="text" ng-model="index.itemId3"></li>
+                  <li class="flex1 align-center">
+                      <div class="numbox lineH0 v-alignM">
+                          <button type="button" ng-click="index.num3 = index.num3-1"
+                              ng-style="{color: index.num3== 1 || index.num3 <= 0 ? '#ddd' : '#333',cursor: index.um3 == 1 || index.num3<=0? 'default':'pointer'}" ng-disabled="index.num3==0" >-
+                          </button>
+                          <input type="text" ng-model="index.num3">
+                          <button type="button" ng-click="index.num3 = index.num3+1">+
+                          </button>
+                      </div>
+                  </li>
+              </ul>
+
+              <p class="add align-center mgT15">
+                  <span class="cancel" ng-click="addLine()"><bdo>+</bdo>{{i18n('添加更多')}}</span>
+              </p>
+
+            </div>
+
+            <!-- 按钮 -->
+            <div class="operation mgT20 align-center">
+                <button class="search mgR5 w100-h40 mgR10" ng-click="save()">{{i18n('确定')}}</button>
+                <!-- <button class="reset w100-h40" ng-click="reset()">{{i18n('取消')}}</button> -->
+                <a class="button cancel w100-h40" href="javascript:history.back()">
+                    <i class="icon-return"></i>
+                    {{i18n('取消')}}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

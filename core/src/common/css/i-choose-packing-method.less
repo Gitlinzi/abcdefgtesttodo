@@ -1,0 +1,245 @@
+.choose-packing-method {
+    /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+    ::-webkit-scrollbar
+    {
+        width: 8px;
+        height: 8px;
+        background-color: @99GreyColor;
+    }
+
+    /*定义滚动条轨道 内阴影+圆角*/
+    ::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: @99GreyColor;
+    }
+
+    /*定义滑块 内阴影+圆角*/
+    ::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: @themeColor;
+    }
+    .portlet-body {
+        width: 780px;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    .portlet-bottom {
+        background-color: @eeGreyColor;
+        height: 40px;
+        line-height: 40px;
+        text-align: right;
+        width: 100%;
+        font-size: 14px;
+        color: @33GreyColor;
+        .total-num {
+            margin-right: 30px;
+        }
+        .total-amount {
+            margin-right: 15px;
+        }
+    }
+    .component-table {
+        .showmore {
+            border-top: 1px solid @ccGreyColor;
+            height: 20px;
+            .box {
+                display: inline-block;
+                height: 18px;
+                width: 20px;
+                //margin-top: -1px;
+                border-left: 1px solid @ccGreyColor;
+                border-right: 1px solid @ccGreyColor;
+                border-bottom: 1px solid @ccGreyColor;
+                border-top: 1px solid @whiteColor;
+                position: absolute;
+                background: @whiteColor;
+                padding: 0px 5px 0px 14px;
+                left: 105px;
+            }
+        }
+        span {
+          display: inline-block;
+          /* margin-left: 15px; */
+        }
+        table {
+            table-layout: fixed;
+            background-color: @whiteColor;
+            width: 100%;
+            .table-striped > thead > tr> th:first-child,
+            .table-striped > tbody > tr > td:first-child {
+                text-align: left;
+            }
+            tbody {
+                tr {
+                    td {
+                        padding: 5px 0;
+                        border-top: 1px solid @99GreyColor;
+                        width: 70px;
+                        text-align: center;
+                        color: @33GreyColor;
+                        font-weight: normal;
+                        height: 40px;
+                    }
+                    .width80 {
+                        width: 80px;
+                    }
+                    .width85 {
+                        width: 85px;
+                        position: relative;
+                        text-align: left;
+                        padding-left: 10px;
+                        .promotion-icon {
+                            height: 15px;
+                            width: 15px;
+                            background-color: @clearColor;
+                            color: @whiteColor;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            font-size: 12px;
+                            font-style: normal;
+                            line-height: 15px;
+                            text-align: center;
+                            margin-left: 0;
+                        }
+                    }
+                    .width105 {
+                        width: 105px;
+                    }
+                    .width150 {
+                        width: 150px;
+                        text-align: center;
+                    }
+                }
+            }
+            thead {
+                tr {
+                    th {
+                        padding: 5px 0;
+                        width: 70px;
+                        text-align: center;
+                        color: @99GreyColor;
+                        font-weight: normal;
+                        height: 40px;
+                    }
+                    .width80 {
+                        width: 80px;
+                    }
+                    .width85 {
+                        width: 85px;
+                    }
+                    .width105 {
+                        width: 105px;
+                    }
+                    .width150 {
+                        width: 150px;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        .table-bordered {
+            border: 0;
+        }
+        .table-bordered > tbody > tr > td {
+            border-color: @ccGreyColor;
+            border-left: 0;
+            word-break: break-all;
+        }
+        .table-bordered > thead > tr > th {
+            border-color: @ccGreyColor;
+            border-left: 0;
+        }
+        .table-striped > thead > tr> th:last-child,
+        .table-striped > tbody > tr > td:last-child {
+            border-right: none;
+        }
+        .spec_text
+        {
+            width: 108px;
+            margin: auto;
+        }
+        .spec_text li
+        {
+            height: 30px;
+            width: 38px;
+            margin: 3px 7.5px 3px 7.5px;
+            display: inline-block;
+            float: left;
+        }
+        .spec_text li a
+        {
+            height: 26px;
+            width: 38px;
+            text-align: center;
+            border: 1px solid @ccGreyColor;
+            background: @whiteColor;
+            display: inline-block;
+            line-height: 24px;
+            color: @33GreyColor;
+        }
+        .spec_text li i
+        {
+            display: none;
+        }
+        .spec_text li a:hover
+        {
+            border: 2px solid @themeColor;
+            text-decoration: none;
+            margin-top: -1px;
+        }
+        .spec_text li.selected a
+        {
+            border: 2px solid @themeColor;
+            text-decoration: none;
+            margin-top: -1px;
+        }
+
+        .add-numbox{
+            height: 30px;
+            margin: 0 auto;
+            border: 1px solid @bbGreyColor;
+            position: relative;
+            display: inline-block;
+            & button{
+                float: left;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                padding: 0;
+                font-size: 14px;
+                border: 0 none;
+                background-color: @whiteColor;
+                cursor: pointer;
+                color: @33GreyColor;
+                /* background: url('../../images/company/company-default.png') no-repeat -13px -184px; */
+                &[type=button][disabled]{
+                    i{
+                        opacity: 0.3;
+                    }
+                }
+            }
+            &.disabled {
+                color: @ddGreyColor;
+                cursor: default;
+            }
+            & input{
+                float: left;
+                width: 60px;
+                height: 30px;
+                padding: 0;
+                text-align: center;
+                line-height: 28px;
+                border: 0 none;
+                border-right:1px solid @bbGreyColor;
+                border-left:1px solid @bbGreyColor;
+            }
+        }
+    }
+}

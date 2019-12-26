@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+<link rel="stylesheet" type="text/css" href="/404#((skin)).css?v=${version}">
+</head>
+
+<body ng-app="appControllers" ng-controller="helpCtrl">
+
+@@include("header.html")
+
+<div class="container" id="notfound">
+	<p style="font-size: 32px;text-align: center">{{i18n('网站正在维护中')}}。。。</p>
+	<p style="margin-top:50px;text-align: center"><a style="color: #005ea7;text-decoration: underline;" href="javascript:location.href='index.html'">{{i18n('返回首页')}}</a></p>
+</div>
+
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/help.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=maintenance"></script>
+</body>
+</html>

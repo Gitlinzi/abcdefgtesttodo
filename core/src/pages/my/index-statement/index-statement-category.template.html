@@ -1,0 +1,41 @@
+<div class="statement-category pricentCard-page">
+    <div class="home-allTitle pdL20">{{i18n('根据商品分类统计')}}</div>
+    <div class="tips theme">*{{i18n('以下统计数据为已出库订单')}}</div>
+    <div class="condition clearfix">
+        <div class="datetimepicker fl">
+            <span class="date-title f14">{{i18n('创建时间')}}：</span>
+            <div class="dis datetimepicker-content">
+                <div class="input-group">
+                    <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalFrom" options="options1" close="close(from)" max-date="endTime"
+                            ng-model="startTime" ng-click="chooseTime()">
+                    <span class="input-group-addon">至</span>
+                    <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalTo" options="options2" close="close(to)" min-date="startTime"
+                            ng-model="endTime" ng-click="chooseTime()">
+                </div>
+            </div>
+        </div>
+        <div class="category">
+        <div class="contion-btn fr" ng-click="querystatementCategory()">{{i18n('查询')}}</div>
+        </div>
+    </div>
+    <div class="middle">
+        <!-- <span class="my-price">{{i18n('分类采购额')}}</span> -->
+        <div class="download" ng-click="downloadFileByGet()">
+            <img src="../../../images/download.png" alt="" style="vertical-align: bottom;">
+            <span>{{i18n('下载')}}</span>
+        </div>
+        <div id="main-charts" style="width: 600px;height:500px;margin-left: 300px"></div>
+    </div>
+    <div class="categoryName">
+        <div class="title">
+            <div class="name">分类名字</div>
+            <div class="price">金额</div>
+        </div>       
+        <ul>
+            <li ng-repeat="item in staticsCategoryList track by $index">
+                <div class="name">{{item.name}}</div>
+                <div class="price">{{item.productPrice}}</div>
+            </li>
+        </ul>
+    </div>
+</div>

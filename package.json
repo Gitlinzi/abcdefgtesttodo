@@ -1,0 +1,66 @@
+{
+  "name": "saas-pc",
+  "description": "saas-pc",
+  "author": "lgh",
+  "private": true,
+  "scripts": {
+    "b2b": "http-dev-server -f ./customers/b2b/b2b-server-config.js",
+    "b2c": "http-dev-server -f ./customers/b2c/b2c-server-config.js",
+    "laiyifen": "http-dev-server -f ./customers/laiyifen/laiyifen-server-config.js",
+    "laiyifen-test": "http-dev-server -f ./customers/laiyifen/laiyifen-test-server-config.js",
+    "laiyifen-online": "http-dev-server -f ./customers/laiyifen/laiyifen-online-server-config.js",
+    "oupu": "http-dev-server -f ./customers/oupu/oupu-server-config.js",
+    "oupu-online": "http-dev-server -f ./customers/oupu/online-server-config.js",
+    "oupu-test": "http-dev-server -f ./customers/oupu/test-server-config.js",
+    "yh": "http-dev-server -f ./customers/yh/yh-server-config.js",
+    "chenguang": "http-dev-server -f ./customers/chenguang/chenguang-server-config.js",
+    "chenguang-test": "http-dev-server -f ./customers/chenguang/test-server-config.js",
+    "ody": "http-dev-server -f ./customers/ody/ody-server-config.js",
+    "qytb": "http-dev-server -f ./customers/qytb/qytb-server-config.js",
+    "prodb2c": "http-dev-server -f ./customers/prodb2c/prodb2c-server-config.js",
+    "nolan": "http-dev-server -f ./customers/b2c/nolan-server-config.js"
+  },
+  "dependencies": {
+    "express": "^4.13.4",
+    "express-http-proxy": "^0.6.0",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "@uirouter/angularjs": "^1.0.3",
+    "angular": "1.2.29",
+    "angular-translate": "^2.17.0",
+    "args": "^1.3.1",
+    "babel-core": "^6.21.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.3.0",
+    "browserify-hmr": "^0.3.1",
+    "del": "^1.2.1",
+    "globby": "^5.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean-css": "^2.4.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-file-include": "^1.2.0",
+    "gulp-filter-java-properties2": "^0.1.0",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-if": "^1.2.5",
+    "gulp-less": "^3.4.0",
+    "gulp-merge-json": "^1.2.1",
+    "gulp-replace": "^0.5.4",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^3.0.0",
+    "http-dev-server": "^0.2.1",
+    "md5": "^2.2.1",
+    "mkdirp": "^0.5.1",
+    "require-dir": "^0.3.2",
+    "tar-pack": "^3.4.0",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^1.1.2"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  }
+}

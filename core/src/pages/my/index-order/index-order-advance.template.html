@@ -1,0 +1,77 @@
+<div class="content" id="advanceOrder" ng-init="advanceOrder.init()">
+    <div class='home-allTitle disIB w100 border-box'>
+        <!-- {{i18n('预置订单')}} -->
+        <p class="disIB">
+            <a class="join cancel" href="javascript:void(0)" ng-click="advanceOrder.goto()">{{i18n('创建')}}</a>
+            <a class="join cancel" ng-click="advanceOrder.exportPreOrder()">{{i18n('导出')}}</a>
+        </p>
+    </div>
+    <div class="module">
+        <ul class="input">
+            <li>
+                <span>{{i18n('订单编号')}}</span>
+                <input type="text" name="" ng-model="advanceOrder.id">
+            </li>
+            <li>
+                <span>{{i18n('订单名称')}}</span>
+                <input type="text" name="" ng-model="advanceOrder.name">
+            </li>
+            <li>
+                <div class="datetimepicker">
+                    <span class="date-title f14">{{i18n('创建时间')}}</span>
+                    <div class="dis datetimepicker-content">
+                        <div class="input-group">
+                            <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalFrom" options="options1" close="close(from)" max-date="advanceOrder.createTimeEnd"
+                                    ng-model="advanceOrder.createTimeStart" placeholder="开始时间">
+                            <span class="input-group-addon">至</span>
+                            <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalTo" options="options2" close="close(to)" min-date="advanceOrder.createTimeStart"
+                                    ng-model="advanceOrder.createTimeEnd" placeholder="结束时间">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <div class="operation txtcenter">
+                <button class="search mgR5" ng-click="advanceOrder.getOrderList('search')">{{i18n('查询')}}</button>
+                <button class="reset" ng-click="advanceOrder.resetInfo()">{{i18n('重置')}}</button>
+            </div>
+        </ul>
+        <div class="evaluate-list mgT20">
+            <div class="list-title list-titleColor">
+                <span class="w25">{{i18n('预置订单编号')}}</span>
+                <span class="w25">{{i18n('预置订单名称')}}</span>
+                <span class="w25">{{i18n('创建日期')}}</span>
+                <span class="w25">{{i18n('操作')}}</span>
+            </div>
+            <div class="order-group">
+                <div ng-if="advanceOrder.advanceList.length>0">
+                    <table class="order-list all-table-color">
+                        <tr ng-repeat="item in advanceOrder.advanceList track by $index">
+                            <td width="300" align="center" class="bb bl text-decoration">
+                                <a href="#/advanceDetailOrder?id={{item.id}}" class="theme">{{item.id}}</a>
+                            </td>
+                            <td width="300" align="center" class="bb">
+                                {{item.name}}
+                            </td>
+                            <td width="300" valign="top" align="center" class="bb">
+                                {{item.createTime.time | date : 'yyyy-MM-dd'}}
+                            </td>
+                            <!--订单操作-->
+                            <td valign="top" width='300' align="center" class="bb br">
+                                <a href="" class="mgR10 theme3" ng-click="advanceOrder.getAdvanceDetail(item.id)">{{i18n('下单')}}</a>
+                                <a href="" class="theme3" ng-click="advanceOrder.delete(item.id)">{{i18n('删除')}}</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="none-order" ng-if="advanceOrder.advanceList.length == 0">
+                    <div class="none-right">
+                        <span>{{i18n('暂无数据')}}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 页码 -->
+            <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+            total-page="totalPage"></div>
+        </div>
+    </div>
+</div>

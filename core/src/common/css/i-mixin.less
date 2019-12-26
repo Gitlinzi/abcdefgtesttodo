@@ -1,0 +1,87 @@
+//border
+//使用方法: .mixin-border(1px, #eee);
+.mixin-border (@size: 1px, @color: #ff6900) {
+    border: @size solid @color;
+}
+.mixin-border-left (@size: 1px, @color: #ff6900) {
+    border-left: @size solid @color;
+}
+.mixin-border-right (@size: 1px, @color: #ff6900) {
+    border-right: @size solid @color;
+}
+.mixin-border-top (@size: 1px, @color: #ff6900) {
+    border-top: @size solid @color;
+}
+.mixin-border-bottom (@size: 1px, @color: #ff6900) {
+    border-bottom: @size solid @color;
+}
+//雪碧图
+.common-sprites-icon(@width: 16px, @height: 16px, @postionX: 0, @positionY: 0) {
+  width: @width;
+  height: @height;
+  cursor: pointer;
+  background: url('../../images/company/company-icon.png') no-repeat @postionX @positionY;
+}
+
+.special-sprites-icon(@width: 16px, @height: 16px, @postionX: 0, @positionY: 0, @image) {
+  width: @width;
+  height: @height;
+  cursor: pointer;
+  background: url(@image) no-repeat @postionX @positionY;
+}
+//radius
+.rounded-corners (@radius: 1px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  -ms-border-radius: @radius;
+}
+
+//wrap
+.text-wrap () {
+  text-wrap: wrap;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  word-wrap: break-word;
+}
+
+//shadow
+.box-shadow (@x: 0, @y: 0, @blur: 1px, @color: #000) {
+  box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
+  -ms-box-shadow: @arguments;
+  -o-box-shadow: @arguments;
+}
+
+//appearance
+.appearance (){
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    -ms-appearance:none;
+}
+
+.box-transform(@x: -50%, @y: -50%) {
+  transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);   /* IE 9 */
+  -moz-transform: translateX(-50%) translateY(-50%);  /* Firefox */
+  -webkit-transform: translateX(-50%) translateY(-50%); /* Safari 和 Chrome */
+  -o-transform: translateX(-50%) translateY(-50%);
+}
+
+.box-transformX(@x: -50%) {
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);   /* IE 9 */
+  -moz-transform: translateX(-50%);  /* Firefox */
+  -webkit-transform: translateX(-50%); /* Safari 和 Chrome */
+  -o-transform: translateX(-50%);
+}
+
+.box-transformY(@y: -50%) {
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);   /* IE 9 */
+  -moz-transform: translateY(-50%);  /* Firefox */
+  -webkit-transform: translateY(-50%); /* Safari 和 Chrome */
+  -o-transform: translateY(-50%);
+}

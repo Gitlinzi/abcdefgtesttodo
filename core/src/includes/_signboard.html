@@ -1,0 +1,23 @@
+<!-- 店铺招牌 -->
+<div class="signboard" ng-show="storelogo.signboardPic.length > 0" >
+    <a href="{{storelogo.signboardLink}}"><img width="1200" height="120" ng-src="{{storelogo.signboardPic}}"  alt="{{storelogo.shopDesc}}"></a>
+</div>
+<!-- 店铺类目 -->
+<div id="store-nav">
+    <div class="side-nav" ng-mouseover="act=true" ng-mouseleave="act=false">{{i18n('店铺全部分类')}}<i class="icon-arrow-bottom"></i>
+            <ul class="side-ul" ng-class="{fixed:isIndex,active:act}">
+                <li ng-repeat="s_levels in storecategory.childList" ng-mouseover="_getCategorynextlevel(s_levels.categoryId);">
+                    <a href="store.html?merchantCategoryIds={{s_levels.categoryId}}&categoryTreeNodeId={{s_levels.mCateTreeNodeId}}&shopId={{shopId}}&merchantId={{merchantId}}&companyId={{companyId}}">{{s_levels.categoryName}}</a><i class="icon-arrow-right"></i>
+                    <ul class="nav-items">
+                        <li class="nav-item " id="c{{s_levels.categoryId}}" ng-repeat="s_next in s_levels.childList track by $index ">
+                            <a href="store.html?merchantCategoryIds={{s_next.categoryId}}&categoryTreeNodeId={{s_next.mCateTreeNodeId}}&shopId={{shopId}}&merchantId={{merchantId}}&companyId={{companyId}}">{{s_next.categoryName}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+    </div>
+    <ul class="main-nav">
+        <li><a href="store.html?shopId={{shopId}}&merchantId={{merchantId}}">{{i18n('首页')}}</a></li>
+        <li ng-repeat="s_nav in storesnav"><a href="{{s_nav.linkAddr}}">{{s_nav.name}}</a></li>
+    </ul>
+    <div class="clear"></div>
+</div>

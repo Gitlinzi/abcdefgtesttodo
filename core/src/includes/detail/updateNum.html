@@ -1,0 +1,32 @@
+<dl ng-show="!$parent.switchConfig.common.showChoosePackingMethod">
+    <dt class="pdT10">{{i18n('数量')}}</dt>
+    <dd>
+        <div class="count clearfix">
+            <div class="count-btn count-btn-left">
+                <input type="button" class="sub" value="–" ng-class="{disable:pcIteminfo.itemAmount<=1}" ng-disabled="pcIteminfo.itemAmount<=1" ng-click="pcIteminfo._updatedProducts(-1)"/>
+            </div>
+            <input class="num" data-min="1" data-max="9999" ng-model="pcIteminfo.itemAmount" ng-change="pcIteminfo._updatedProducts(0)"/>
+            <div class="count-btn count-btn-right">
+                <input type="button" class="add colorW" value="+" ng-class="{disable:pcIteminfo.itemAmount>=itemlist.stockNum}" ng-disabled="pcIteminfo.itemAmount>=itemlist.stockNum" ng-click="pcIteminfo._updatedProducts(1)"/>
+            </div>
+            <!-- <div class="count-btn"> -->
+            <!--     <input type="button" class="add colorW" value="▲" ng-class="{disable:pcIteminfo.itemAmount>=itemlist.stockNum}" ng-disabled="pcIteminfo.itemAmount>=itemlist.stockNum" ng-click="pcIteminfo._updatedProducts(1)"/> -->
+            <!--     <input type="button" class="sub" value="▼" ng-class="{disable:pcIteminfo.itemAmount<=1}" ng-disabled="pcIteminfo.itemAmount<=1" ng-click="pcIteminfo._updatedProducts(-1)"/> -->
+            <!-- </div> -->
+            <!-- <span class="num-text">{{i18n('件')}}</span> -->
+        </div>
+    </dd>
+    <!-- <dd class="stock-text">
+        <span ng-if="!isPointPro">
+            <span ng-if="(itemlist.stockNum == itemlist.stockText) || (itemlist.stockNum != itemlist.stockText && !itemlist.stockText)">{{i18n('库存')}}{{itemlist.stockNum}}{{i18n('件')}}</span>
+            <span ng-if="itemlist.stockNum != itemlist.stockText && itemlist.stockText">{{i18n('库存')}}{{itemlist.stockText}}</span>
+        </span>
+        <span ng-if="isPointPro && itemlist.realTimeStock != -1">{{i18n('库存')}}{{itemlist.realTimeStock}}{{i18n('件')}}</span>
+    </dd> -->
+</dl>
+<dl>
+    <dt>{{i18n('库存')}}</dd>
+    <dd ng-if="!localProvince.wareHose">{{i18n('从上海仓发货')}}</dd>
+    <dd ng-if="localProvince.wareHose">从{{localProvince.wareHose}}{{localProvince.wareHose.indexOf('发货') !== -1 ? '' : '发货'}}</dd>
+</dl>
+<!-- <div class="separator" ng-show="!$parent.switchConfig.common.showChoosePackingMethod"></div> -->

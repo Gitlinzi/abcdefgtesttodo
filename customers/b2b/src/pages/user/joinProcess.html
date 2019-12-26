@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="heimdall" content="注册页">
+    <script type="text/javascript" src="/cms/view/frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/joinProcess.css?v=${version}">
+    <style>
+        .animation-left {
+            -webkit-animation: fadeInLeft 1s .2s ease both;
+            -moz-animation: fadeInLeft 1s .2s ease both;
+        }
+        @-webkit-keyframes fadeInLeft {
+            0% {
+                opacity: 1;
+                -webkit-transform: translateX(0px);
+                transform: translateX(0px)
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: translateX(-130px);
+                transform: translateX(-130px);
+            }
+        }
+
+        @-moz-keyframes fadeInLeft {
+            0% {
+                opacity: 1;
+                -moz-transform: translateX(0px)
+            }
+            100% {
+                opacity: 1;
+                -moz-transform: translateX(-110px)
+            }
+        }
+        .animation-right {
+            -webkit-animation: fadeInRight 1s .2s ease both;
+            -moz-animation: fadeInRight 1s .2s ease both;
+        }
+        @-webkit-keyframes fadeInRight {
+            0% {
+                opacity: 1;
+                -webkit-transform: translateX(0px);
+                transform: translateX(0px)
+            }
+            100% {
+                opacity: 1;
+                -webkit-transform: translateX(130px);
+                transform: translateX(130px);
+            }
+        }
+
+        @-moz-keyframes fadeInRight {
+            0% {
+                opacity: 1;
+                -moz-transform: translateX(0px)
+            }
+            100% {
+                opacity: 1;
+                -moz-transform: translateX(110px)
+            }
+        }
+    </style>
+</head>
+
+<body ng-app="appControllers" ng-controller="joinProcessCtrl">
+<!-- 头部 -->
+@@include("userheader.html")
+@@include("global-nav.html")
+<div class="forgot-box">
+    <div class="container text" id="bregis-page" ng-cloak>
+        <!-- 字-->
+        <div class="loginTitle">加盟流程</div>
+        <div  class="yiyou">{{userInfo.nickname||(userInfo.mobile|hidePhone)}}&nbsp;,&nbsp;<a href="javascript:void(0)" ng-click="userExit()">退出</a></div>
+        <div class="join-container">
+            <div class="name-box">
+                <span class="wujiaoxing marr15">*</span>
+                <span ng-class="{'animation-left':masterName}" class="name-text text-position">店主姓名</span>
+                <span ng-class="{'animation-right':masterNameBorder}" ng-style="{'display' : masterNameBorder?'block':'none'}" class="error-text-right">限输入20位字符，包括中文、数字、英文、特殊文字</span>
+                <input type="text" ng-class="{'input-border':masterNameBorder}" ng-blur="masterNameBorder=false" ng-focus="masterName=true;masterNameBorder=true;errorTipsName=false;" maxlength="20"  ng-model="merchantMes.masterName">
+                <span ng-if="errorTipsName" class="error-text"><i class="error-img"></i>请填写店主姓名</span>
+            </div>
+            <div class="merchant-box">
+                <span class="wujiaoxing marr15">*</span>
+                <span ng-class="{'animation-left':marentName}" class="merchat-name text-position">门店名称</span>
+                <span ng-class="{'animation-right':marentNameBorder}" ng-style="{'display' : marentNameBorder?'block':'none'}" class="error-text-right">限输入20位字符，包括中文、数字、英文、特殊文字</span>
+                <input type="text" ng-class="{'input-border':marentNameBorder}" ng-blur="marentNameBorder=false;merchantRepeat()" ng-focus="marentName=true;marentNameBorder=true;errorTipsTwo=false;" ng-model="merchantMes.storeName">
+                <span ng-if="errorTipsTwo" class="error-text"><i class="error-img"></i>请填写门店名称</span>
+                <span ng-if="merchantNameIsRepeat" class="error-text error-text-two"><i class="error-img"></i>门店名称不允许重复，请修改</span>
+            </div>
+            <div class="phone-box">
+                <span class="wujiaoxing marr15">*</span>
+                <span ng-class="{'animation-left':mobileName}" class="number-text text-position">手机号码</span>
+                <span ng-class="{'animation-right':mobileNameBorder}" ng-style="{'display' : mobileNameBorder?'block':'none'}" class="error-text-right error-text-right-phone">限输入11位数字</span>
+                <input type="text" ng-class="{'input-border':mobileNameBorder}" maxlength="11" ng-blur="mobileNameBorder=false;checkPhoneNum()" ng-focus="mobileName=true;mobileNameBorder=true;errorTipsThreeTwo=false;" ng-model="merchantMes.phone">
+                <span ng-if="errorTipsThreeTwo" class="error-text error-text-three"><i class="error-img"></i>请填写正确的手机号码</span>
+            </div>
+            <div class="other-box">
+                <span ng-class="{'animation-left':otherNumber}" class="text-position">其他联系方式</span>
+                <span ng-class="{'animation-right':otherNumberBorder}" ng-style="{'display' : otherNumberBorder?'block':'none'}" class="error-text-right">限输入20位字符，包括中文、数字、英文、特殊字符</span>
+                <input type="text" ng-class="{'input-border':otherNumberBorder}" maxlength="20" ng-blur="otherNumberBorder=false" ng-focus="otherNumber=true;otherNumberBorder=true" ng-model="merchantMes.otherContact">
+            </div>
+            <div class="email-box">
+                <span class="wujiaoxing marr15">*</span>
+                <span ng-class="{'animation-left':emilName}" class="email-text text-position">电子邮件</span>
+                <span ng-class="{'animation-right':emilNameBorder}" ng-style="{'display' : emilNameBorder?'block':'none'}" class="error-text-right">限输入30位字符，包括中文、数字、英文、特殊字符</span>
+                <input type="text" ng-class="{'input-border':emilNameBorder}" maxlength="30" ng-blur="emilNameBorder=false" ng-focus="emilName=true;emilNameBorder=true;errorTipsFore=false;" ng-model="merchantMes.email">
+                <span ng-if="errorTipsFore" class="error-text"><i class="error-img"></i>请填写电子邮件</span>
+            </div>
+            <div class="merchant-add">
+                <span class="wujiaoxing marr15">*</span>
+                <div class="add-text-box" ng-class="{'input-border':merchatAddessTwo}" ng-click="showAddress()">
+                    <i class="icon-joinProcess icon-down-arrow  icon-down-arrow-two"></i>
+                    <span class="add-text text-position" ng-class="{'animation-left':merchatAddess}">门店所在地区</span>
+                    <span class="lastChoseText"></span>
+                    <span ng-if="errorTipsFive" class="error-text error-text-six"><i class="error-img"></i>请选择门店所在地区</span>
+                    <div class="merchant-text" ng-show="adesssChoseBox">
+                        <p class="title-text">请选择<i class="title-icon-right" ng-click="hideAddress($event)"></i></p>
+                        <div class="box-top">
+                            <ul class="clearfix first-box">
+                                <li ng-click="" class="addess-li">{{provinceName||'请选择省份'}}<i class="icon-joinProcess icon-down-arrow"></i></li>
+                                <li ng-show="urbanName" ng-click="closeUrbanName()" class="addess-li">{{urbanName}}<i class="icon-joinProcess icon-down-arrow"></i></li>
+                            </ul>
+                            <div class="box-container">
+                                <span ng-repeat="a in allProvince" ng-click="getCity(a.provinceCode,a.code,a.provinceName,a.name,$event)" class="second-addess">{{a.provinceName||a.name}}</span>
+                            </div>
+                            <!--<div class="box-container">-->
+                                <!--<span class="second-addess">上海</span><span class="second-addess">江苏</span><span class="second-addess">浙江</span><span class="second-addess">安徽</span><span class="second-addess">福建</span><span class="second-addess">山东</span>-->
+                            <!--</div>-->
+                            <!--<div class="box-container">-->
+                                <!--<span class="second-addess">广东</span><span class="second-addess">广西</span><span class="second-addess">海南</span>-->
+                            <!--</div>-->
+                            <!--<div class="box-container">-->
+                                <!--<span class="second-addess">广东</span><span class="second-addess">广西</span><span class="second-addess">海南</span>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;<div class="box-container">&ndash;&gt;ss">江西</span><span class="second-addess">河南</span><span class="second-addess">湖北</span>-->
+                            <!--</div>-->
+                                <!--<span class="second-adde
+                            <!--<div class="box-container">-->
+                                <!--<span class="second-addess">重庆</span><span class="second-addess">四川</span><span class="second-addess">贵州</span>-->
+                            <!--</div>-->
+                            <!--<div class="box-container">-->
+                                <!--<span class="second-addess">陕西</span><span class="second-addess">甘肃</span><span class="second-addess">青海</span><span class="second-addess">宁夏</span><span class="second-addess">新疆</span>-->
+                            <!--</div>-->
+                            <!--<div class="box-container">-->
+                                <!--<span class="second-addess">辽宁</span><span class="second-addess">吉林</span><span class="second-addess">黑龙江</span>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="merchant-add-detil">
+                <span class="wujiaoxing marr15">*</span>
+                <span ng-class="{'animation-left':adessDetail}" class="detil-text text-position">详细地址</span>
+                <span ng-class="{'animation-right':adessDetailBorder}" ng-style="{'display' : adessDetailBorder?'block':'none'}" class="error-text-right">限输入50位字符，包括中文、数字、英文、特殊字符</span>
+                <input type="text" ng-class="{'input-border':adessDetailBorder}" maxlength="50" ng-blur="adessDetailBorder=false" ng-focus="adessDetail=true;adessDetailBorder=true;errorTipsSix=false;" ng-model="merchantMes.addessDetail">
+                <span ng-if="errorTipsSix" class="error-text"><i class="error-img"></i>请填写详细地址</span>
+            </div>
+            <div class="chose-box">
+                <span class="wujiaoxing marr15">*</span>
+                <span class="chose-text  text-position" ng-class="{'animation-left':adessDetailShow}">选择配送中心</span>
+                <div class="chose-express"  ng-class="{'input-border':adessDetailShowTwo}" ng-click="adesssChoseBoxTwo=true;adessDetailShow=true;adessDetailShowTwo=true;errorTipsSeven=false;">
+                    <i class="icon-joinProcess icon-down-arrow  icon-down-arrow-two"></i>
+                    <span class="lastChoseTextTwo"></span>
+                    <span ng-if="errorTipsSeven" class="error-text error-text-fore"><i class="error-img"></i>请选择加盟的配送中心</span>
+                    <div class="merchant-text" ng-show="adesssChoseBoxTwo">
+                        <p class="title-text">请选择<i class="title-icon-right" ng-click="$event.stopPropagation();adesssChoseBoxTwo=false;adessDetailShowTwo=false;"></i></p>
+                        <div class="box-top">
+                            <ul class="clearfix first-box">
+                                <li ng-click="" class="addess-li">{{provinceNameTwo||'请选择省份'}}<i class="icon-joinProcess icon-down-arrow"></i></li>
+                                <!--<li ng-show="cityNameTwo" class="addess-li">{{cityNameTwo}}<i class="icon-joinProcess icon-down-arrow"></i></li>-->
+                            </ul>
+                            <div class="box-container">
+                                <span ng-repeat="a in allProvinceTwo" ng-click="getCityTwo(a.provinceCode,a.provinceName,a.name,a.code)" class="second-addess">{{a.provinceName||a.name}}</span>
+                            </div>
+                            <!--<div class="box-container">-->
+                            <!--<span class="second-addess">上海</span><span class="second-addess">江苏</span><span class="second-addess">浙江</span><span class="second-addess">安徽</span><span class="second-addess">福建</span><span class="second-addess">山东</span>-->
+                            <!--</div>-->
+                            <!--<div class="box-container">-->
+                            <!--<span class="second-addess">广东</span><span class="second-addess">广西</span><span class="second-addess">海南</span>-->
+                            <!--</div>-->
+                            <!--<div class="box-container">-->
+                            <!--<span class="second-addess">广东</span><span class="second-addess">广西</span><span class="second-addess">海南</span>-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;<div class="box-container">&ndash;&gt;ss">江西</span><span class="second-addess">河南</span><span class="second-addess">湖北</span>-->
+                            <!--</div>-->
+                            <!--<span class="second-adde
+                        <!--<div class="box-container">-->
+                            <!--<span class="second-addess">重庆</span><span class="second-addess">四川</span><span class="second-addess">贵州</span>-->
+                            <!--</div>-->
+                            <!--<div class="box-container">-->
+                            <!--<span class="second-addess">陕西</span><span class="second-addess">甘肃</span><span class="second-addess">青海</span><span class="second-addess">宁夏</span><span class="second-addess">新疆</span>-->
+                            <!--</div>-->
+                            <!--<div class="box-container">-->
+                            <!--<span class="second-addess">辽宁</span><span class="second-addess">吉林</span><span class="second-addess">黑龙江</span>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="merchantNameData" class="chose-box">
+                <div class="chose-express chose-express-two" ng-class="{'input-border':adessDetailShowThree}" ng-click="choseAdessShowTwo=!choseAdessShowTwo;adessDetailShowThree=!adessDetailShowThree;errorTipsSeven=false;">
+                    <i class="icon-joinProcess icon-down-arrow  icon-down-arrow-two"></i>
+                    <span class="lastChoseTextThree"></span>
+                    <ul class="chose-addess-box" ng-show="choseAdessShowTwo">
+                        <li ng-repeat="a in merchantNameData" ng-click="choseAddess(a.name,a.id)">{{a.name}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="button-box">
+                <input ng-click="submitExamine()" type="button" value="提交审核" placeholder="提交审核" pc-placeholder="提交审核">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+@@include("footer.html") @@include("script.html")
+<script type="text/javascript" src="/joinProcess.js?v=${version}"></script>
+</body>
+
+</html>

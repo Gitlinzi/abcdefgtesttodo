@@ -1,0 +1,55 @@
+<div class="credit-box">
+    <div class="credit-top">
+        <span class="top-text">批发业务单</span>
+        <span class="top-text-right"><i class="right-arrow"></i>业务单详情</span>
+    </div>
+    <div class="businessDetail-box">
+        <div class="detail-top">
+            <p class="top-first">
+                <span class="first-time dis f14 w260">业务日期：{{detail.parentBill.rzDate | date:'yyyy/MM/dd'}}</span>
+                <span class="first-order dis f14 w260">单据号：{{detail.parentBill.pfBillNo}}</span>
+                <span class="first-of-order dis f14 w260">相关单据号：{{detail.parentBill.billNo}}</span>
+                <span class="first-order-orign dis f14">单据来源：{{detail.parentBill.billFrom}}</span>
+            </p>
+            <p class="top-second">
+                <span class="second-order-style dis f14 w260">单据类型：{{detail.billType[detail.parentBill.billType]}}</span>
+                <span class="second-discound-order dis f14 w260">整单折让金额：{{detail.parentBill.billZrTotal | currencySymbol:'￥'}}</span>
+                <span class="second-diiscound-num dis f14 w260">整单折扣比例：{{detail.parentBill.billZkRate | currencySymbol:'￥'}}</span>
+                <span class="second-income dis f14">整单应收金额：{{detail.parentBill.ysTotal | currencySymbol:'￥'}}</span>
+            </p>
+            <p class="top-three">
+                <span class="three-good-num f14">商品数量：{{detail.parentBillcounts}}</span>
+            </p>
+        </div>
+        <div class="businessDetail-main">
+            <div class="main-text">
+                <span>业务单明细</span>
+            </div>
+            <div class="main-top">
+                <span class="top-serial f12 dis">序号</span>
+                <span class="top-code f12 dis">商品编码</span>
+                <span class="top-wholesale f12 dis">批发价</span>
+                <span class="top-wholesale-num f12 dis">批发数量</span>
+                <span class="top-wholesale-money f12 dis">批发金额</span>
+                <span class="top-income-money f12 dis">应收金额</span>
+                <span class="top-gift-num f12 dis">赠品数量</span>
+            </div>
+            <div class="main-detail" ng-repeat="dl in detail.list">
+                <span class="detail-num dis f12">{{dl.serialNo}}</span>
+                <span class="detail-serial dis f12">{{dl.pluCode}}</span>
+                <span class="detail-wholesale dis f12">{{dl.pfPrice | currencySymbol:'￥'}}</span>
+                <span class="detail-wholesale-num dis f12">{{dl.counts}}</span>
+                <span class="detail-wholesale-money dis f12">{{dl.pfTotal | currencySymbol:'￥'}}</span>
+                <span class="detail-wholesale-income dis f12">{{dl.ysTotal | currencySymbol:'￥'}}</span>
+                <span class="detail-gift-num dis f12">{{dl.zpCount}}</span>
+            </div>
+        </div>
+    </div>
+    <!-- 缺省图 -->
+    <div class="history-time-none" ng-if="isShowIcon">
+        <span class="none-img"></span>
+        <span class="none-text">暂无收藏商品</span>
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+         total-page="totalPage" ng-if="isShowPage"></div>
+</div>

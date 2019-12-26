@@ -1,0 +1,111 @@
+{
+  "code": "0",
+  "message": "操作成功",
+  "errMsg": null,
+  "data": {
+    "attrs": [
+      {
+        "id": 1004019402000010,
+        "name": "口味",
+        "sortValue": 0,
+        "attrs": [
+          {
+            "attrName": {
+              "id": null,
+              "name": "口味",
+              "sortValue": null
+            },
+            "attrVal": {
+              "id": null,
+              "value": "原味",
+              "sortValue": null,
+              "checked": false
+            }
+          }
+        ]
+      },
+      {
+        "id": 1004016504000031,
+        "name": "保质期",
+        "sortValue": 0,
+        "attrs": [
+          {
+            "attrName": {
+              "id": null,
+              "name": "保质期",
+              "sortValue": null
+            },
+            "attrVal": {
+              "id": null,
+              "value": "6个月",
+              "sortValue": null,
+              "checked": false
+            }
+          }
+        ]
+      },
+      {
+        "id": 1004016500001442,
+        "name": "产地",
+        "sortValue": 0,
+        "attrs": [
+          {
+            "attrName": {
+              "id": null,
+              "name": "产地",
+              "sortValue": null
+            },
+            "attrVal": {
+              "id": null,
+              "value": "山东",
+              "sortValue": null,
+              "checked": false
+            }
+          }
+        ]
+      },
+      {
+        "id": 1004019402000005,
+        "name": "品牌",
+        "sortValue": 0,
+        "attrs": [
+          {
+            "attrName": {
+              "id": null,
+              "name": "品牌",
+              "sortValue": null
+            },
+            "attrVal": {
+             "id": null,
+             "value": "百草味",
+             "sortValue": null,
+             "checked": false
+            }
+          }
+        ]
+      },
+      {
+        "id": 1004016500000016,
+        "name": "伊点卡",
+        "sortValue": 0,
+        "attrs": [
+          {
+            "attrName": {
+              "id": null,
+              "name": "伊点卡",
+              "sortValue": null
+            },
+            "attrVal": {
+              "id": null,
+              "value": "5元",
+              "sortValue": null,
+              "checked": false
+            }
+          }
+        ]
+      }
+    ],
+    "afterService": "呵呵呵呵呵"
+  },
+  "trace": "34!$9#@2%&10!$,153537,63005026586677334701189"
+}

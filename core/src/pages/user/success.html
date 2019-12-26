@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+<link rel="stylesheet" type="text/css" href="/regis#((skin)).css?v=${version}">
+</head>
+
+<body ng-app="appControllers" ng-controller="successCtrl">
+<!-- 头部 -->
+@@include("userheader.html")
+<span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+    @@include("global-nav.html")
+</span>
+<div class="container" id="cregis-page">
+	<div class="regis-success">
+		<p class="info1"><img width="38" height="36" src="/images/ok.png?v=${version}"> {{i18n('恭喜您操作成功')}}！</p>
+		<!-- <p class="info2">验证邮件已发往您的邮箱，请查收并点击链接激活账号！</p> -->
+		<p class="info2">{{i18n('马上激活邮件，完成注册吧！')}}</p>
+		<!-- <p><a href="login.html" class="btn">{{i18n('去登录')}}</a></p> -->
+	</div>
+	<div class="clear"></div>
+
+</div>
+ @@include("footer.html")
+
+@@include("script.html")
+<script type="text/javascript" src="/success.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=success"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+/* 分页 */
+#paging{
+    float: right;
+    line-height: 30px;
+
+    & a{
+        display: inline-block;
+		vertical-align: top;
+		min-width: 8px;
+		padding: 0 10px;
+		height: 28px;
+        margin: 0px 2px;
+        border:1px solid @ddGreyColor;
+        background-color: @whiteColor;
+		border-radius: 4px;
+        color: @greyColor;
+		text-align: center;
+		overflow: hidden;
+
+        &:hover{
+            border-color: @themeColor;
+            color: @themeColor;
+        }
+
+        &.active{
+            color: @whiteColor;
+            background-color: @themeColor;
+            border: 1px solid @themeColor;
+        }
+
+        &.disable,
+		&.disable:hover {
+            border-color: @ddGreyColor;
+            color: @ddGreyColor;
+        }
+
+        &.active{
+            color: @whiteColor;
+            background-color: @themeColor;
+            border: 1px solid @themeColor;
+        }
+    }
+    & .total{
+        padding:0 5px;
+    }
+    & input{
+        display: inline-block;
+        height: 35px;
+        width: 38px;
+        border:1px solid @ddGreyColor;
+        margin:0px 5px 0px 5px;
+        text-align: center;
+    }
+    & .sure{
+        padding:2px 20px;
+    }
+    & .middle-symbol-begin{
+        padding: 0px 12px 0px 13px;
+    }
+    & .middle-symbol-end{
+        padding: 0px 15px 0px 10px;
+    }
+}
+.search-pag{
+    margin: 40px 0 50px 0;
+}
+
+.pageInfor{
+  display: inline-block;
+  font-style: normal;
+  margin: 0 8px 0 5px;
+}

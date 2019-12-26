@@ -1,0 +1,37 @@
+<div class="message">
+    <div class="home-allTitle pdL20">
+        <span>{{i18n('消息')}}</span>
+    </div>
+    <!-- 无消息记录的情况下 begin -->
+    <div ng-if="!messageArr" class="message-none">
+        <div class="message-left">
+            <span></span>
+        </div>
+        <div class="message-right">
+            <span>{{i18n('暂无消息哦')}}~</span>
+        </div>
+    </div>
+    <!-- 无消息记录的情况下 end -->
+    <!-- 有消息记录的情况下 begin -->
+    <div ng-if="messageArr.length>0" class="container-bigBox">
+        <div class="container-box" ng-repeat="x in messageArr">
+            <div class="container-left">
+                <span class="day">{{x.sendTime | date:'yyyy-MM-dd'}}</span>
+                <span class="time">{{x.sendTime | date:'HH:mm:ss'}}</span>
+            </div>
+            <div class="container-right">
+                <dl ng-click="changeMessage(messageArr,x,$index)">
+                    <dt>
+                        <span class="down-triangle"></span>
+                        <span class="title-icon">{{x.msgTitle}}</span>
+                        <span class="title-img" ng-class="{'title-img-color':x.isRead}"></span>
+                        <span ng-class="{'up-arrow':x.isShow}" class="down-arrow"></span>
+                    </dt>
+                    <dd ng-show="x.isShow" class="text-title" ng-bind-html="x.msgContent | toTrusted"></dd>
+                </dl>
+            </div>
+        </div>
+        <div pagination page-size="message.pageSize" page-no="message.pageNo" total-count="message.totalCount" total-page="message.totalPage"></div>
+    </div>
+    <!-- 有消息记录的情况下 end -->
+</div>

@@ -1,0 +1,7 @@
+<dl ng-if="serviceList.length>0 && !isPointPro && $parent.switchConfig.guide.item.showServiceGoods">
+    <dt class="pat13px">{{i18n('安装服务')}}</dt>
+    <dd ng-repeat="a in serviceList" class="door-service">
+        <span ng-click="oneKey.choseServiceGood(a.id,serviceList,a)" ng-class="{'disabled':!a.choseAdd || !a.stockNum,'disAbled':!a.choseAdd || !a.stockNum,'active-redLine':a.checked}" >{{a.availablePrice|currency:"￥"}}</span>
+        <span style="border: none" ng-show="!a.choseAdd">{{i18n('当前地区不支持安装服务')}}</span>
+    </dd>
+</dl>

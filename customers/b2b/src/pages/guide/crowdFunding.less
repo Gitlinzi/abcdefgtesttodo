@@ -1,0 +1,324 @@
+@import url('../../common/css/i-var.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-carousel.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-header-nav.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-substep.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-global-nav.less');
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-feedback.less');
+@import url('../../common/css/reset.less');
+body{
+    background: @eeGreyColor;
+}
+.crowdFunding-big{
+  .crowdFunding-title{
+      height: 160px;
+      width: 100%;
+      background: url("../../images/crowdFunding.png") no-repeat;
+  }
+  .crowdFunding-list-ul{
+      width: 1200px;
+      margin: auto;
+      margin-bottom: 50px;
+      li{
+        width: 1200px;
+        margin-top: 20px;
+        margin:20px auto 0px;
+        position: relative;
+        float: left;
+          .crowdFunding-left{
+              background: @whiteColor;
+              height: 435px;
+              float: left;
+              // border: 1px solid #000;
+              img{
+                  display: block;
+                  width: 400px;
+                  height: 400px;
+                  padding-top: 20px;
+                  padding-left: 20px
+              }
+          }
+          .crowdFunding-right{
+            width: 740px;
+            float: left;
+            background: @whiteColor;
+            padding: 30px 20px 20px 20px;
+            min-height: 385px;
+            .crowdFunding-rightTitle{
+               font-size: 20px ;
+               display: block;
+               color:@33GreyColor;
+               font-weight: bold;
+            }
+            .crowdFunding-themeTitle{
+                color:@themeColor;
+                font-size: 16px;
+                display: block;
+                margin-top: 10px;
+            }
+
+            .crowdFunding-time{
+                display: block;
+                margin-top: 10px;
+                height: 21px;
+                .crowdFunding-timeClock{
+                    width: 17px;
+                    height: 18px;
+                    //background: url(../../images/company/company-default.png) no-repeat -69px -114px;
+                  .common-product-company-default(-69px,-114px);
+                    display: inline-block;
+                    float: left;
+                }
+                .crowdFunding-surplusTime{
+                    width: 700px;
+                    float: left;
+                    margin-left: 10px;
+                    .sellNumber{
+                        float: right;
+                        color:@66GreyColor;
+                    }
+                }
+            }
+            .crowdFunding-number{
+                margin-top: 5px;
+                padding-left: 20px;
+                height: 70px;
+                width: 720px;
+                line-height: 70px;
+                background: @f5GreyColor;
+                position: relative;
+                .crowdFunding-price{
+                   color:@f2RedColor;
+                   font-size: 32px;
+                   margin-left: 10px;
+                }
+                .fastBuy{
+                    // margin-left: 500px;
+                    position: absolute;
+                    right: 0px;
+                    height: 70px;
+                    width: 200px;
+                    background: @themeColor;
+                    text-align: center;
+                    color:@whiteColor;
+                    font-size: 18px;
+                }
+            }
+            .morePrice{
+                .priceBox{
+                    display: inline-block;
+                    width: 140px;
+                    height: 30px;
+                    line-height: 30px;
+                    margin-right: 65px;
+                }
+                border-bottom:1px solid @ddGreyColor;
+                height: 87px;
+                width: 740px;
+                .priceNum{
+                    display: inline-block;
+                    float: left;
+                    margin-top: 20px;
+                    margin-left: 20px;
+                }
+                .allPrice{
+                    float: left;
+                    margin-top: 15px;
+                    margin-left: 50px;
+                    .newPrice{
+                       color:@blackColor;
+                        font-size: 20px;
+                        margin-left: -4px;
+                        .small {
+                          font-size: 14px;
+                        }
+                    }
+                    .oldPrice{
+                        font-size: 14px;
+                        text-decoration: line-through;
+                        .small {
+                          font-size: 14px;
+                        }
+                    }
+                }
+            }
+            .activityDes{
+                .activityDes-title{
+                    display: block;
+                    margin-top: 15px;
+                    margin-bottom: 10px;
+                    color:@99GreyColor;
+                    font-weight: bold;
+                    position: relative;
+                }
+                .activityDes-msg{
+                    color:@99GreyColor;
+                    display: block;
+                }
+            }
+            .watchMore{
+                position: relative;
+                height:20px;
+                .watchMore-msg{
+                  position: absolute;
+                  right:0px;
+                  font-size: 12px;
+                  color:@99GreyColor
+                }
+                .packUp-icon{
+                    width: 10px;
+                    height: 7px;
+                    //background: url(../../images/company/company-default.png) no-repeat -22px -47px;
+                  .common-product-company-default(-22px,-47px);
+                    display: inline-block;
+                }
+                .more-icon{
+                    width: 10px;
+                    height: 7px;
+                    //background: url(../../images/company/company-default.png) no-repeat -22px -34px;
+                  .common-product-company-default(-22px,-34px);
+                    display: inline-block;
+                }
+             }
+          }
+      }
+  }
+}
+.crowdFunding-box{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: @whiteColor;
+  width: 410px;
+  height: 467px;
+  border: 5px solid @aaGreyColor;
+  border-radius: 5px;
+  margin-left:-210px;
+  margin-top:-235px;
+  z-index:1000;
+  & .dis{
+    display: inline-block;
+  }
+  & .w65{
+    width:65px;
+    text-align: right;
+    color: @99GreyColor;
+  }
+  & .f12{
+    font-size: 12px;
+  }
+  & .f14{
+    font-size: 14px;
+  }
+  & .box-top{
+    height: 23px;
+    background: @f5GreyColor;
+    /* padding-top: 12px; */
+    padding: 12px 15px 0px 15px;
+    font-size: 12px;
+    & .close-box{
+      height:12px;
+      width:12px;
+      background-position: -22px  -256px;
+      float: right;
+      cursor: pointer;
+    }
+  }
+  & .box-main{
+    padding: 0px 15px;
+    margin-top: 9px;
+    & .main-bottom{
+      text-align: center;
+      margin-top: 20px;
+      & .sure-button{
+        width: 100px;
+        height: 35px;
+        background: @themeColor;
+        color: @whiteColor;
+        text-align: center;
+        line-height: 35px;
+        margin-right: 15px;
+        vertical-align: top;
+      }
+      & .cancel-button{
+        width: 98px;
+        height: 33px;
+        text-align: center;
+        line-height: 35px;
+        border: 1px solid @ccGreyColor;
+        color: @greyColor;
+      }
+    }
+    & .main-dev{
+      height: 40px;
+      border-bottom: 1px dashed @eeGreyColor;
+      line-height: 40px;
+      font-size: 0;
+      & .right-text-color{
+        color: @starColor;
+      }
+      & .right-text-fore{
+        text-align: center;
+        line-height: 30px;
+        border: 1px solid @ccGreyColor;
+        min-width: 48px;
+        height: 28px;
+        margin-right: 10px;
+      }
+      & .blue-border{
+        border:2px solid @themeColor;
+      }
+      & .right-div{
+        width: 116px;
+        height: 28px;
+        border: 1px solid @ccGreyColor;
+        & .lost-button{
+          font-size: 22px;
+          border: none;
+          height: 28px;
+          width: 28px;
+          background: @whiteColor;
+          vertical-align: top;
+          color: @eeGreyColor;
+        }
+        & .value-button{
+          font-size: 12px;
+          width: 57px;
+          height: 26px;
+          border: none;
+          border-left: 1px solid @ccGreyColor;
+          vertical-align: top;
+          text-align: center;
+        }
+        & .add-button{
+          font-size: 22px;
+          border: none;
+          height: 28px;
+          width: 28px;
+          background: @whiteColor;
+          vertical-align: top;
+          color: @99GreyColor;
+          border-left: 1px solid @ccGreyColor;
+        }
+      }
+    }
+  }
+}
+.bigBox-disable{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  z-index: 99999;
+}

@@ -1,0 +1,17 @@
+{
+    "code": "0",
+    "message": "操作成功",
+    "errMsg": null,
+    "data": {
+        "promotionInfo": [{
+            "mpId": null,
+            "iconText": null,
+            "iconUrl": null,
+            "bgColor": null,
+            "fontColor": null,
+            "promotions": null,
+            "preheadPromotions": null
+        }]
+    },
+    "stackTrace": null
+}

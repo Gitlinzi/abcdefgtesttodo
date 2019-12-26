@@ -1,0 +1,99 @@
+<div class="content" id="noticeBoard" ng-init="noticeBoard.init()">
+    <div class='home-allTitle pdL20 disIB w100 border-box'>{{i18n('公告栏')}}</div>
+    <div class="module">
+        <ul class="input datetimepicker">
+            <li>
+                <span style="width: 85px;">{{i18n('标题')}}：</span>
+                <input type="text" name="title" ng-model="noticeBoard.title">
+            </li>
+            <li>
+                <span style="width: 85px;">{{i18n('支持终端')}}：</span>
+                <select class="select"
+                        name="terminal"
+                        style="padding-left:5px;height: 33px;line-height: 33px;width: 160px"
+                        id="terminal"
+                        required
+                        ng-model="noticeBoard.terminal"
+                        ng-change="getTerminal($event.target.value)"
+                        ng-options="pro.code as pro.name for pro in notice.terminalList">
+                    <option value="">--{{i18n('请选择')}}--</option>
+                </select>
+          
+            </li>
+            <li>
+                <div class="datetimepicker">
+                    <span class="date-title f14" style="width: 85px;">{{i18n('创建时间')}}：</span>
+                    <div class="dis datetimepicker-content">
+                        <div class="input-group">
+                            <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalFrom" options="options1" close="close(from)" max-date="noticeBoard.createTimeEnd"
+                                    ng-model="noticeBoard.createTimeStart">
+                            <span class="input-group-addon">至</span>
+                            <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalTo" options="options2" close="close(to)" min-date="noticeBoard.createTimeStart"
+                                    ng-model="noticeBoard.createTimeEnd">
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="operation" style="margin-right:15px;">
+                <button class="search mgR5" ng-click="noticeBoard.selectByCondition()">{{i18n('查询')}}</button>
+                <button class="reset" ng-click="noticeBoard.resetInfo()">{{i18n('重置')}}</button>
+            </li>
+        </ul>
+        <div class="evaluate-list mgT20">
+            <div class="opration-title">
+                <a href="javascript:void(0)" class='opration-span' ng-click="notice._editAddNotice(addr,$index);">{{i18n('新增公告')}}</a>
+                <a href="javascript:void(0)" class='opration-span' ng-click="deleteMore();">{{i18n('批量删除')}}</a>
+            </div>
+            <div class="list-title list-titleColor">
+                <span class="w10"><input type="checkbox" ng-model="select_all" ng-change="selectAll()"/></span>
+                <span class="w20">{{i18n('操作')}}</span>
+                <span class="w20">{{i18n('文章ID')}}</span>
+                <span class="w20"><a href="javascript:void(0)" class="colorRed">*</a>{{i18n('标题')}}</span>
+                <span class="w10">{{i18n('支持终端')}}</span>
+                <span class="w20"><a href="javascript:void(0)" class="colorRed">*</a>{{i18n('创建日期')}}</span>
+            </div>
+            <div class="order-group">
+                <div ng-if="noticeBoard.advanceList.length>0">
+                    <table class="order-list all-table-color">
+                        <tr ng-repeat="item in noticeBoard.advanceList track by $index">
+                            <td valign="top"align="center" class="bb br w10">
+                                <input type="checkbox" ng-value="{{item.id}}" align="center" ng-model="item.checked" ng-change="selectOne()"/>
+                            </td>
+                            <!--订单操作-->
+                            <td valign="top"align="center" class="bb br w20">
+                                <a href="" class="c0066cc mgR10" ng-click="getAdvanceDetail(item.id)">{{i18n('编辑')}}</a>
+                                <a href="" class="c0066cc theme" ng-click="deleteMore(item.id);">{{i18n('删除')}}</a>
+                            </td>
+                            <td align="center" class="bb bl w20 br">
+                                <a ng-href="/helpDetail.html?id={{item.id}}&isHelp=0" class="c0066c">{{item.id}}</a>
+                            </td>
+                            <td  align="center" class="bb w20 br">
+                                {{item.displayTitle}}
+                            </td>
+                            <td  align="center" class="bb w10 br" >
+                                <span ng-repeat="plat in item.cmsPlatformList track by $index">
+                                    {{plat.platform == 1 ? 'PC': plat.platform == 2 ? 'H5' : '' }}
+                                </span>
+                            </td>
+                            <td valign="top" align="center" class="bb w20">
+                                {{item.createTime | date : 'yyyy-MM-dd'}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="none-order" ng-if="noticeBoard.advanceList.length == 0">
+                    <div class="none-right">
+                        <span>{{i18n('暂无数据')}}</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 页码 -->
+            <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+            total-page="totalPage"></div>
+        </div>
+    </div>
+    <div bomb-box cart-data="deleteData"></div>
+    <!-- 新增公告 -->
+    <div class="dialogForm" ng-include="'includes/_noticeAdd.html'" ng-show="notice.noticeShow"></div>
+</div>
+    

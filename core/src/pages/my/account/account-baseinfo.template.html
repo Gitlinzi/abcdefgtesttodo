@@ -1,0 +1,43 @@
+<div class='base-mes-box' ng-init="infos.init()">
+     <p class='home-allTitle pdL20'>{{i18n('个人信息')}}</p>
+    <div class='base-mes'>
+        <div class='base-mes-left'> 
+            <table id='use'>
+                <tbody> 
+                    <tr>
+                        <td align='right'>{{i18n('当前用户名')}} :</td>
+                        <td class='pl20'>{{infos.userEdit.nickname}}</td>
+                    </tr>
+                    <tr>
+                        <td align='right'><span class="require">*</span>{{i18n('修改用户名')}} :</td>
+                        <td class='pl20'>
+                            <input type="text" ng-model="infos.userEdit.nickname">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align='right'><span class="require">*</span>{{i18n('固定电话1')}} :</td>
+                        <td class='pl20'>
+                            <input type="text" ng-model="infos.userEdit.fixenPhone">&nbsp;分机&nbsp;<input type="text" ng-model="infos.userEdit.extension">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align='right'><span class="require">*</span>{{i18n('固定电话2')}} :</td>
+                        <td class='pl20'>
+                            <input type="text" ng-model="infos.userEdit.fixenPhone2">&nbsp;分机&nbsp;<input type="text" ng-model="infos.userEdit.extension2">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align='right'><span class="require">*</span>{{i18n('手机号')}} :</td>
+                        <td class='pl20'>
+                            <input type="text" ng-model="infos.userEdit.phoneNum">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="operation">
+                <button class="search mgR5" ng-click="infos.updateUser(infos.userEdit)">{{i18n('保存')}}</button>
+                <button class="reset" ng-click="infos.resetInfo()">{{i18n('重置')}}</button>
+            </div>
+        </div>
+    </div>
+</div>

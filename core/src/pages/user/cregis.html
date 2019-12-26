@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="heimdall" content="注册页">
+	<script type="text/javascript" src="/cms/view/frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/regis#((skin)).css?v=${version}">
+	<style>
+		#animation-right {
+			-webkit-animation: fadeInLeft 1s .2s ease both;
+			-moz-animation: fadeInLeft 1s .2s ease both;
+		}
+
+		@-webkit-keyframes fadeInLeft {
+			0% {
+				opacity: 0;
+				-webkit-transform: translateX(-20px);
+				transform: translateX(-20px)
+			}
+			100% {
+				opacity: 1;
+				-webkit-transform: translateX(0);
+				transform: translateX(0);
+			}
+		}
+
+		@-moz-keyframes fadeInLeft {
+			0% {
+				opacity: 0;
+				-moz-transform: translateX(-20px)
+			}
+			100% {
+				opacity: 1;
+				-moz-transform: translateX(0)
+			}
+		}
+
+
+		#animation-left {
+			-webkit-animation: fadeInRight 1s .2s ease both;
+			-moz-animation: fadeInRight 1s .2s ease both;
+		}
+
+		@-webkit-keyframes fadeInRight {
+			0% {
+				opacity: 0;
+				-webkit-transform: translateX(20px);
+				transform: translateX(20px)
+			}
+			100% {
+				opacity: 1;
+				-webkit-transform: translateX(0);
+				transform: translateX(0);
+			}
+		}
+
+		@-moz-keyframes fadeInRight {
+			0% {
+				opacity: 0;
+				-moz-transform: translateX(20px)
+			}
+			100% {
+				opacity: 1;
+				-moz-transform: translateX(0)
+			}
+		}
+	</style>
+</head>
+
+<body ng-app="appControllers" ng-controller="personalRegisterCtrl">
+	<!-- 头部 -->
+	@@include("userheader.html")
+	<span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+	    @@include("global-nav.html")
+	</span>
+	<div class="forgot-box">
+		<div class="container" id="cregis-page" ng-cloak>
+			<!-- 字-->
+			<div class="loginTitle loginTitle-two">{{i18n('欢迎注册')}}</div>
+
+			<div class="yiyou">{{i18n('已有账号')}}?<a href="/login.html">{{i18n('请登录')}}</a></div>
+			<!--左侧的广告图-->
+			<!--<div class="cregis-left">
+		<img src="../../images/cregis.png" width="650px" height="400px">
+	</div>-->
+			<div class="f24 align-center c3 mgB20">{{i18n('注册成为史泰博会员')}}</div>
+			<!-- 手机号注册 -->
+			<form class="form" name="regisForm" novalidate ng-show="step == 1">
+				<div class="regis-index mgB20">
+					<div class="clearfix regis-line f16">
+						<span class="w50 disIB align-center" ng-class="{'regis-active':step == 2}" ng-click="step = 2">{{i18n('邮箱注册')}}</span>
+						<span class="w50 disIB align-center" ng-class="{'regis-active':step == 1}" ng-click="step = 1">{{i18n('手机号注册')}}</span>
+					</div>
+				</div>
+				<div>
+					<div class="form-group">
+						<!--<label><span class="require">*</span>手机号：</label>-->
+						<h3 ng-if="shareCode8 && sharename">{{i18n('注册成为')}}{{sharename}}{{i18n('的亲友号')}}</h3>
+						<div class="tips" ng-style="{'display':mobile_tip?'block':'none'}" id="animation-left">{{i18n('手机号')}}</div>
+						<input class="input" name="mobile" ng-model="user.mobile" ng-blur="mobile_tip = false;checkPhone()" ng-change="mobile_tip = false;checkPhone()" ng-focus="mobile_tip = true;isRepeatPhone=false;"
+							ng-pattern="mobileRegExp" required placeholder="{{i18n('手机号')}}" autocomplete="off">
+						<div class="tip" id="animation-right" ng-style="{'display':mobile_tip?'block':'none'}">{{i18n('输入正确手机号码')}}，{{i18n('以便接受订单通知')}}、{{i18n('找回密码等')}}</div>
+						<div class="tip err" ng-style="{'display':!mobile_tip && regisForm.mobile.$dirty && regisForm.mobile.$invalid || !mobile_tip && registerSubmit && regisForm.mobile.$invalid || (!mobile_tip && isRepeatPhone) ?'block':'none'}">
+							<span ng-show="regisForm.mobile.$error.required">{{i18n('手机号码不能为空')}}</span>
+							<span ng-show="regisForm.mobile.$error.pattern">{{i18n('请输入')}}11{{i18n('位手机号')}}</span>
+							<span ng-show="!regisForm.mobile.$error.pattern && isRepeatPhone">{{i18n('账号已注册')}}</span>
+						</div>
+					</div>
+					<!--<div class="form-group" ng-if="needImgCaptcha">
+							<input class="input" placeholder={{i18n({{i18n('{{i18n('图片验证码')}}')}})}} type="text" ng-model="loginInfo.vicode" name="vicode">
+							<div class="phone-code">
+								<img width="100" height="40" class="vicode" id="vicode" ng-src="{{ checkImage }}" ng-click="cantSee()">
+								<span><a href="javascript:void(0)" ng-click="cantSee()">{{i18n('看不清换一张')}}</a></span>
+							</div>
+					</div>-->
+					<div class="form-group">
+						<!--<label><span class="require">*</span>验证码：</label>-->
+						<div class="tips" ng-style="{'display':captchas_tip?'block':'none'}" id="animation-left">{{i18n('验证码')}}</div>
+						<input class="input sms" name="captchas" ng-model="user.captchas" ng-blur="captchas_tip = false;" ng-focus="captchas_tip = true;"
+							required placeholder="{{i18n('短信验证码')}}" autocomplete="off">
+						<input type="button" class="btn" ng-class="{'smsBtn': isExistPhone, 'smsBtnHigh': !isExistPhone}"  value="{{i18n('获取短信验证码')}}" ng-model="captchaMsg" ng-click="smsSend($event)"  ng-disabled="isExistPhone || isCountDownTime">
+						<!--<div class="tip" ng-style="{'display':captchas_tip?'block':'none'}" id="animation-right">6位验证码</div>-->
+						<div class="tip err" ng-style="{'display':!captchas_tip && regisForm.captchas.$dirty && regisForm.captchas.$invalid || !captchas_tip && registerSubmit && regisForm.captchas.$invalid?'block':'none'}">
+							<span ng-show="regisForm.captchas.$error.required">{{i18n('验证码不能为空')}}</span>
+						</div>
+						<!-- <div class="tip err" ng-style="{'display':!captchas_tip && captchasErrMsg != ''?'block':'none'}">{{captchasErrMsg}}</div> -->
+					</div>
+					<div class="form-group">
+						<!--<label><span class="require">*</span>密码：</label>-->
+						<div class="tips" ng-style="{'display':password_tip?'block':'none'}" id="animation-left">{{i18n('设置密码')}}</div>
+						<input style="display:none">
+						<input type="password" class="input" name="password" ng-model="user.password" ng-blur="password_tip = false;" ng-focus="password_tip = true;"
+							ng-pattern="passwordRegExp" required placeholder="{{i18n('设置密码')}}" autocomplete="off">
+						<div class="tip" ng-style="{'display':password_tip?'block':'none'}" id="animation-right">{{i18n('建议使用字母')}}、{{i18n('数字和符号两种及以上的组合')}}，6-18{{i18n('个字符')}}</div>
+						<div class="tip err" ng-style="{'display':!password_tip && regisForm.password.$dirty && regisForm.password.$invalid || !password_tip && registerSubmit && regisForm.password.$invalid?'block':'none'}">
+							<span ng-show="regisForm.password.$error.required">{{i18n('密码不能为空')}}</span>
+							<span ng-show="regisForm.password.$error.pattern">{{i18n('长度只能在')}}6-18{{i18n('个字符之间')}}</span>
+						</div>
+					</div>
+					<div class="form-group pwd">
+						<!--<label><span class="require">*</span>确认密码：</label>-->
+						<div class="tips" ng-style="{'display':confirmPassword_tip?'block':'none'}" id="animation-left">{{i18n('确认密码')}}</div>
+						<input type="password" class="input" name="confirmPassword" ng-model="user.confirmPassword" pw-check="password" ng-blur="confirmPassword_tip = false;"
+							ng-focus="confirmPassword_tip = true;" required placeholder="{{i18n('确认密码')}}">
+						<div class="tip" ng-style="{'display':confirmPassword_tip?'block':'none'}" id="animation-right">{{i18n('请再次输入密码')}}</div>
+						<div class="tip err" ng-style="{'display':!confirmPassword_tip && regisForm.confirmPassword.$dirty && regisForm.confirmPassword.$invalid || !confirmPassword_tip && registerSubmit && regisForm.confirmPassword.$invalid?'block':'none'}">
+							<span ng-show="regisForm.confirmPassword.$error.required" >{{i18n('确认密码不能为空')}}</span>
+							<span ng-show="!regisForm.confirmPassword.$error.required && regisForm.confirmPassword.$error.repeat">{{i18n('两次输入密码不一致')}}</span>
+						</div>
+					</div>
+
+					<!--<div class="form-group">
+				<label>{{i18n('电子邮箱')}}：</label>
+				<input class="input" name="email" ng-model="user.email" ng-pattern="emailRegExp">
+				<div class="tip err" ng-style="{'display':regisForm.email.$dirty && regisForm.email.$invalid?'block':'none'}">
+					<span ng-show="regisForm.email.$error.pattern">{{i18n('电子邮箱格式不正确')}}</span>
+				</div>
+			</div>-->
+				</div>
+				<div class="form-group">
+					<!--<label></label>-->
+					<!--<label class="checkbox-inline">
+				<input type="checkbox" ng-model="protocol" ng-init="protocol = false;"> 阅读并同意-->
+					<!--<a href="javascript:void(0)" ng-click="showAgmt(true)">《{{protocolTitle}}》</a>-->
+					<!--<a href="javascript:void(0)" ng-click="showAgmt(true)">《商城会员协议》</a>
+			</label>
+			<div class="tip err" ng-style="{'display':registerSubmit && !protocol?'block':'none'}">请接受服务条款</div>-->
+					<!-- 注册协议 -->
+					<!--<div ng-include="'includes/_regisagmt.html'"></div>-->
+					<!-- <label class="checkbox-inline" style="text-align: left !important;width: 360px!important;font-size: 12px;"> -->
+
+					<label for="registerBtnCheck" class="checkboxStyle-small" style="text-align: left !important;width: 360px!important;font-size: 12px;">
+						<input id="registerBtnCheck" type="checkbox" ng-model="protocol" ng-init="protocol = true;"    ng-change="!protocol">
+						<span></span>
+						{{i18n('阅读并同意')}}，{{i18n($parent.switchConfig.user.regist.projectTitle)}}
+						<a href="javascript:void(0)" ng-click="showAgmt(true)"class="cregisColor">《{{protocolTitle}}》</a>
+					</label>
+
+					<div class="tip err err_new" ng-style="{'display':registerSubmit && !protocol?'block':'none'}">{{i18n('请接受服务条款')}}</div>
+					<!-- 注册协议 -->
+					<!--<div ng-include="'includes/_regisagmt.html'"></div>-->
+				</div>
+				<div class="form-group">
+					<!--<label></label>-->
+					<!--<button type="button" class="btn" id="registerBtn" ng-click="register();">立即注册</button>-->
+					<button type="button" class="btn" id="registerBtn" ng-click="register();" ng-class="{'smsBtnreg':!protocol}" ng-disabled="!protocol">{{i18n('立即注册')}}</button>
+				</div>
+				<div class="msg" ng-if="registerErrMsg != '' ">{{registerErrMsg}}</div>		
+			</form>
+			<!-- 邮箱注册 -->
+			<form class="form" name="regisForm2" ng-show="step == 2" novalidate>
+				<div class="regis-index mgB20">
+					<div class="clearfix regis-line f16">
+						<span class="w50 disIB align-center" ng-class="{'regis-active':step == 2}" ng-click="step = 2">{{i18n('邮箱注册')}}</span>
+						<span class="w50 disIB align-center" ng-class="{'regis-active':step == 1}" ng-click="step = 1">{{i18n('手机号注册')}}</span>
+					</div>
+				</div>
+				<!-- 邮箱注册 start-->
+				<div>
+					<div class="form-group">
+						<div class="tips" ng-style="{'display':email_tip?'block':'none'}" id="animation-left">{{i18n('邮箱')}}</div>
+						<input style="display:none">
+						<input class="input" name="email" ng-model="user2.email" ng-blur="email_tip = false;registerSubmitFunc2()" ng-change="email_tip = false;registerSubmitFunc2()" ng-focus="email_tip = true;isRepeatEmail=false;"
+							ng-pattern="emailRegExp" required placeholder="{{i18n('邮箱')}}" autocomplete="off">
+						<!-- <div class="tip" ng-style="{'display':email_tip?'block':'none'}" id="animation-right">{{i18n('建议使用字母')}}、{{i18n('数字和符号两种及以上的组合')}}，6-18{{i18n('个字符')}}</div> -->
+						<div class="tip err" ng-style="{'display':!email_tip && regisForm2.email.$dirty && regisForm2.email.$invalid || !email_tip && registerSubmit2 && regisForm2.email.$invalid || (!regisForm2.email.$error.pattern && isRepeatEmail)?'block':'none'}">
+							<span ng-show="regisForm2.email.$error.required">{{i18n('邮箱不能为空')}}</span>
+							<span ng-show="regisForm2.email.$error.pattern">{{i18n('邮箱格式不对')}}</span>
+							<span ng-show="!regisForm2.email.$error.pattern && isRepeatEmail">{{i18n('邮箱已注册')}}</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="tips" ng-style="{'display':vicode_tip?'block':'none'}" id="animation-left">{{i18n('验证码')}}</div>
+						<input class="input" placeholder="{{i18n('图片验证码')}}" type="text" ng-model="user2.checkImageCode" name="vicode" ng-blur="vicode_tip = false;" ng-focus="vicode_tip = true;">
+						<div class="phone-code">
+							<img width="100" height="40" class="vicode" id="vicode" ng-src="{{ checkImage }}" ng-click="cantSee()">
+							<!-- <span><a href="javascript:void(0)" ng-click="cantSee()">{{i18n('看不清换一张')}}</a></span> -->
+						</div>
+						<div class="tip err" ng-style="{'display':!vicode_tip && regisForm2.vicode.$dirty && regisForm2.vicode.$invalid || !vicode_tip && registerSubmit2 && regisForm2.vicode.$invalid?'block':'none'}">
+							<span ng-show="regisForm2.vicode.$error.required">{{i18n('验证码不能为空')}}</span>
+						</div>
+						<div class="tip err" ng-style="{'display':!vicode_tip && checkImageCodeErrMsg != ''?'block':'none'}">{{checkImageCodeErrMsg}}</div>
+					</div>
+					<div class="form-group">
+						<!--<label><span class="require">*</span>密码：</label>-->
+						<div class="tips" ng-style="{'display':password2_tip?'block':'none'}" id="animation-left">{{i18n('设置密码')}}</div>
+						<input style="display:none">
+						<input type="password" class="input" name="password2" ng-model="user2.password2" ng-blur="password2_tip = false;" ng-focus="password2_tip = true;"
+							ng-pattern="passwordRegExp" required placeholder="{{i18n('密码')}}" autocomplete="off">
+						<div class="tip" ng-style="{'display':password2_tip?'block':'none'}" id="animation-right">{{i18n('建议使用字母')}}、{{i18n('数字和符号两种及以上的组合')}}，6-18{{i18n('个字符')}}</div>
+						<div class="tip err" ng-style="{'display':!password2_tip && regisForm2.password2.$dirty && regisForm2.password2.$invalid || !password2_tip && registerSubmit2 && regisForm2.password2.$invalid?'block':'none'}">
+							<span ng-show="regisForm2.password2.$error.required">{{i18n('密码不能为空')}}</span>
+							<span ng-show="regisForm2.password2.$error.pattern">{{i18n('长度只能在')}}6-18{{i18n('个字符之间')}}</span>
+						</div>
+					</div>
+					<div class="form-group pwd">
+						<!--<label><span class="require">*</span>确认密码：</label>-->
+						<div class="tips" ng-style="{'display':confirmPassword2_tip?'block':'none'}" id="animation-left">{{i18n('确认密码')}}</div>
+						<input type="password" class="input" name="confirmPassword2" ng-model="user2.confirmPassword2" pw-check="password2" ng-blur="confirmPassword2_tip = false;"
+							ng-focus="confirmPassword2_tip = true;" required placeholder="{{i18n('确认密码')}}">
+						<div class="tip" ng-style="{'display':confirmPassword2_tip?'block':'none'}" id="animation-right">{{i18n('请再次输入密码')}}</div>
+						<div class="tip err" ng-style="{'display':!confirmPassword2_tip && regisForm2.confirmPassword2.$dirty && regisForm2.confirmPassword2.$invalid || !confirmPassword2_tip && registerSubmit2 && regisForm2.confirmPassword2.$invalid?'block':'none'}">
+							<span ng-show="regisForm2.confirmPassword2.$error.required" >{{i18n('确认密码不能为空')}}</span>
+							<span ng-show="!regisForm2.confirmPassword2.$error.required && regisForm2.confirmPassword2.$error.repeat">{{i18n('两次输入密码不一致')}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="registerBtnCheck2" class="checkboxStyle-small" style="text-align: left !important;width: 360px!important;font-size: 12px;">
+						<input id="registerBtnCheck2" type="checkbox" ng-model="protocol2" ng-init="protocol2 = true;"    ng-change="!protocol2">
+						<span></span>
+						{{i18n('阅读并同意')}}，{{i18n($parent.switchConfig.user.regist.projectTitle)}}
+						<a href="javascript:void(0)" ng-click="showAgmt(true)"class="cregisColor">《{{protocolTitle}}》</a>
+					</label>
+
+					<div class="tip err err_new" ng-style="{'display':registerSubmit2 && !protocol2?'block':'none'}">{{i18n('请接受服务条款')}}</div>
+					<!-- 注册协议 -->
+					<!--<div ng-include="'includes/_regisagmt.html'"></div>-->
+				</div>
+				<div class="form-group">
+					<!--<label></label>-->
+					<!--<button type="button" class="btn" id="registerBtn" ng-click="register();">立即注册</button>-->
+					<button type="button" class="btn" id="registerBtn2" ng-click="register2();" ng-class="{'smsBtnreg':!protocol2}" ng-disabled="!protocol2">{{i18n('立即注册')}}</button>
+				</div>
+				<div class="msg" ng-if="registerErrMsg != '' ">{{registerErrMsg}}</div>	
+			</form>
+		</div>
+	</div>
+	<!-- 底部 -->
+	@@include("footer.html") @@include("script.html")
+	<script type="text/javascript" src="/personalRegister.js?v=${version}"></script>
+
+	<script type="text/javascript">
+		/**
+						    $('.input').focus(function () {
+						    	$(this).siblings('.tip').show();
+						    }).blur(function () {
+						    	$(this).siblings('.tip').hide();
+						    });
+							**/
+
+	</script>
+	<div class="agmt" ng-style="{display: agmt?'block':'none'}">
+		<div class="header">
+			<h2>{{i18n('用户服务协议')}}</h2>
+			<div class="close" ng-click="showAgmt(false, $event)">&times;</div>
+		</div>
+		<div id="protocalCms" class="body">
+		</div>
+		<div class="protocol-button" ng-click="showAgmt(false, $event)">
+			<button class="btn">{{i18n('同意并继续')}}</button>
+		</div>
+	</div>
+	<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=cregis"></script>
+</body>
+
+</html>

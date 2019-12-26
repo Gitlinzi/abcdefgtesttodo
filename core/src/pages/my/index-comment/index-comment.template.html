@@ -1,0 +1,126 @@
+<div class="always" ng-init="canEvaluateOrder.init(1);">
+    <div class="home-allTitle pdL20">{{i18n('评价晒单')}}</div>
+    <div class="follow clearfix">
+        <div class="follow-left pdL20 left-follow">
+            <span class="goods" ng-click="canEvaluateOrder.init(1)" ng-class="{'goods-active':activeNum==1}">{{i18n('待评价')}}</span>
+            <b></b>
+            <span class="store" ng-click="canEvaluateOrder.init(2)" ng-class="{'goods-active':activeNum==2}">{{i18n('已评价')}}</span>
+        </div>
+        <div class="follow-right pdR20 clearfix" ng-if="activeNum==1">
+            <input type="text" name="" ng-model="canEvaluateOrder.keyword" placeholder="{{i18n('商品名称')}}，{{i18n('商品编号')}}，{{i18n('订单编号')}}">
+            <input type="button" ng-click="canEvaluateOrder.init(3)" value="{{i18n('搜索')}}">
+        </div>
+    </div>
+    <div class="order-group">
+        <div class="evaluate-list">
+            <div class="list-title pdL20 mgB10">
+                <span class="width625">{{i18n('订单')}}</span>
+                <span class="width116">{{i18n('收货人')}}</span>
+                <span class="width100">{{i18n('金额')}}</span>
+                <span class="width120">{{i18n('订单状态')}}</span>
+                <span>{{i18n('操作')}}</span>
+            </div>
+        </div>
+        <div class="suborder" ng-repeat="suborder in canEvaluateOrder.commonList">
+            <div class="row order-title">
+                <div class="cell c1">{{suborder.orderCreateTimeStr}}</div>
+                <div class="cell c2">{{i18n('订单号')}}：<span class="colorB">{{suborder.orderCode}}</span></div>
+                <!-- <div class="cell c3">
+                    <span class="margin30">{{i18n('订单类型')}}：{{suborder.orderType2|toOrderTypeContext}}</span>
+                </div> -->
+            </div>
+            <table class="order-list">
+                <tr class='person-tr-color' ng-repeat="item in suborder.merchantProducts">
+                    <td width="120" align="center" class="bl bb"><a class="img-block" target="_blank" href="#/orderDetail?code={{suborder.orderCode}}"><img width="80" height="80" ng-src="{{item.picUrl}}" alt=""></a></td>
+                    <td width="390" class="bb">
+                        <a class="name" target="_blank" href="#/orderDetail?code={{suborder.orderCode}}"><span class="colorB">{{item.productName}}</span></a>
+                        <ul class="seriesAttr">
+                            <li ng-repeat="property in item.attributes">{{property.name}}:{{property.value}}</li>
+                        </ul>
+                    </td>
+                    <td width="230" align="center" class="bb">
+                        <span class="good-num">{{item.num}}</span>
+                    </td>
+                    <td width="0" valign="top" align="center" class="bb br" rowspan="{{suborder.merchantProducts.length}}" ng-if="$first">
+                    </td>
+                     
+                    <td width="126" valign="top" align="center" class="bb br people-icon" rowspan="{{suborder.merchantProducts.length}}" ng-if="$first">
+                        <span>{{suborder.goodReceiverName}}</span>
+                    </td>
+                    <td width="120" valign="top" align="center" class="bb br" align="center" rowspan="{{suborder.merchantProducts.length}}" ng-if="$first">
+                        <div class="state" ng-class="{red: suborder.orderStatus == 1}">{{ suborder.orderAmount | currency:'￥'}}</div>
+                        <div class="change-color">{{suborder.orderPaymentTypeStr}}</div>
+                    </td>
+                    <td valign="top" width='120' align="center" class="bb br" rowspan="{{suborder.merchantProducts.length}}" ng-if="$first">
+                        <div class="state-none">
+                            <div>
+                                <span class="change-color">{{i18n('已完成')}}</span>
+                                <a target="_blank" href="#/orderDetail?code={{suborder.orderCode}}" class="margint">{{i18n('订单详情')}}</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td valign='top' width='120' align='center' class='bb br pay-money' rowspan="{{suborder.merchantProducts.length}}" ng-if="$first">
+                        <a ng-if="activeNum==1" target="_blank" ui-sref="index_go_comment({code:suborder.orderCode})" class='pay-money-sty'>{{i18n('评价')}}</a>
+                        <a ng-if="activeNum==2" target="_blank" ui-sref="index_look_comment({code:suborder.orderCode,mpId:suborder.mpId})" class='pay-money-sty border-order' style="color: #666;border: 1px solid #ddd;">{{i18n('查看评价')}}</a>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="evaluate-none" ng-if="canEvaluateOrder.isShowIcon">
+            <div class="none-left mgR15">
+                <span></span>
+            </div>
+            <div class="none-right">
+                <span>{{i18n('暂无待评价')}}~</span>
+            </div>
+        </div>
+    </div>
+    <!-- 当有待评价和代追求的时候 begin -->
+    <!-- 待追评 -->
+    <!-- <div  class="store-follow"  ng-if="activeNum==2">
+        <div class="evaluate-list">
+            <div class="list-title pdL20">
+                <span class="width735">{{i18n('商品详情')}}</span>
+                <span class="width205">{{i18n('状态')}}</span>
+                <span class="width120">{{i18n('操作')}}</span>
+            </div>
+        </div>
+        <div class="suborder">
+            <table class="order-list borderTop">
+                <tr class='person-tr-color' ng-repeat="pro in canEvaluateOrder.addAppraise">
+                    <td width="120" align="center" class="bl bb"><a class="img-block" target="_blank" href="#/orderDetail?code={{pro.orderCode }}"><img width="80" height="80" ng-src="{{pro.picUrl}}" alt=""></a></td>
+                    <td width="390" class="bb">
+                        <a class="name" target="_blank" href="#/orderDetail?code={{pro.orderCode }}"><span class="colorB">{{pro.name}}</span></a>
+                        <ul class="seriesAttr">
+                            <li ng-repeat="property in pro.propertyTags">{{property.name}}:{{property.value}}</li>
+                        </ul>
+                    </td>
+                    <td width="230" align="center" class="bb">
+                        <span class="good-num">{{pro.num}}</span>
+                    </td>
+                    <td width="0" valign="top" align="center" class="bb br" rowspan="{{suborder.productList.length}}" ng-if="$first">
+                    </td>
+
+                    <td valign="top" width='205' align="center" class="bb br"  rowspan="{{suborder.productList.length}}" ng-if="$first">
+                        <span class="time-text">{{pro.commentTimeStr}}&nbsp;{{i18n('初评')}}</span>
+                    </td>
+                    <td valign='top' width='120' align='center' class='bb br pay-money' rowspan="{{suborder.productList.length}}" ng-if="$first">
+                        <a target="_blank" ui-sref="index_look_comment({code:pro.orderCode,mpId:pro.mpId})" class='pay-money-sty border-order' style="color: #666;border: 1px solid #ddd;">{{i18n('查看评价')}}</a>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="evaluate-none-two evaluate-none" ng-if="canEvaluateOrder.isShowIcon">
+            <div class="none-left mgR15">
+                <span></span>
+            </div>
+            <div class="none-right">
+                <span>{{i18n('暂无已评价')}}~</span>
+            </div>
+        </div>
+    </div> -->
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                total-page="totalPage" ng-if="canEvaluateOrder.isShowPage"></div>
+</div>

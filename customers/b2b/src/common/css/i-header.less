@@ -1,0 +1,760 @@
+/* 顶部 */
+.f0{
+    font-size:0;
+}
+.f12{
+    font-size: 12px;
+}
+.index-banner{
+    position: relative;
+    & img{
+        display: block;
+        width:100%;
+    }
+    & .close-img{
+        height:20px;
+        width:20px;
+        position: absolute;
+        right:350px;
+        top:3px;
+        background-position: -18px -338px;
+        cursor: pointer;
+    }
+    & .top-big-banner{
+        display: none;
+    }
+}
+.notification {
+    min-width: 1000px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 9999;
+    text-align: center;
+
+    .message {
+        position: relative;
+        height: 50px;
+        min-height: 50px;
+        line-height: 50px;
+        margin: 0 auto;
+        font-size: 14px;
+        text-align: left;
+        display: inline-block;
+        min-width: 1000px;
+        float: none;
+
+        i,span {
+            overflow: hidden;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            top: 15px;
+            left: 30px;
+        }
+
+        .text {
+            line-height: 22px;
+            height: 22px;
+            max-height: 22px;
+            padding-left: 20px;
+            padding-right: 60px;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            font-size: 28px;
+            font-family: '微软雅黑' !important;
+            background: none;
+        }
+    }
+
+    .message.message-warning {
+        background-color: @lightOrangeThemeColor;
+        color: @themeBrownColor;
+    }
+}
+.notification.with-nav {
+    top: 0;
+}
+
+.projectLoading {
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    margin-top: -41px;
+    margin-left: -97px;
+}
+
+.icon-more-down {
+    margin-left: 5px;
+}
+
+.pdR20 {
+    padding-right: 20px!important;
+}
+
+#h-top {
+    position: relative;
+    height: 30px;
+    font-size: 12px;
+    background-color:@f5GreyColor ;
+    z-index: 200;
+    color: @fontColor;
+    & .container {
+        background-color: inherit;
+
+    }
+    & .ull {
+        float: left;
+        & .please-login{
+            color:  @themeColor;
+            padding-right: 17px;
+            border-right:1px solid @ddGreyColor;
+        }
+        & .loginAfterText{
+            color: @33GreyColor;
+        }
+        & .riges-text{
+            padding-left:18px;
+        }
+        & li {
+            line-height: 30px;
+        }
+    }
+    & .ulr {
+        float: right;
+        box-sizing: border-box;
+        & a {
+            border-right: 2px solid @ddGreyColor; //height: 30px;
+            padding: 0 20px;
+        }
+        & li:nth-last-of-type(1)  {
+            & a{
+                border:none;
+            }
+        }
+        .dt {
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            & .down-person {
+                right: 9px;
+            }
+            & .down-person-two{
+                right:4px;
+            }
+            & .down-person-my{
+                right:2px;
+            }
+            & .login-name {
+                padding: 0 20px;
+                color: none;
+                border-right: 1px solid @ddGreyColor;
+                & span {
+                    display: inline-block;
+                    line-height: 19px;
+                    padding: 0px 10px;
+                    background-color: @themeColor;
+                    color: @whiteColor;
+                    border-radius: 10px;
+                    margin: 0 10px;
+                }
+            }
+        }
+        & .userinfo {
+            width: 313px;
+            height: 128px;
+            & .imgTitle {
+                float: left;
+                margin: 15px 14px 0 14px;
+                & img {
+                    height: 100px;
+                    width: 100px;
+                    border: 1px solid @ddGreyColor;
+                    border-radius: 50px;
+                }
+            }
+            & .info {
+                width: 120px;
+                float: left;
+                margin-top: 26px;
+                & .level {
+                    display: inline-block;
+                    padding: 0 10px;
+                    line-height: 19px;
+                    border-radius: 10px;
+                    background-color: @themeColor;
+                    color: @whiteColor;
+                    position: relative;
+                    font-size: 11px;
+                    text-align: center;
+                    margin-right: 8px;
+                }
+                & .account-save {
+                    display: block;
+                }
+                & .experience {
+                    width: 160px;
+                    height: 12px;
+                    overflow: hidden;
+                    box-sizing: border-box;
+                    background-color: @ccGreyColor;
+                    border-radius: 10px;
+                    margin-top: 5px;
+                    position: relative;
+                    //& span {
+                    //    background: orange;
+                    //    height: 100%;
+                    //    display: block;
+                    //}
+                    & .experience-bgc{
+                        position: absolute;
+                        background-color: @themeOrangeColor;
+                        top:0px;
+                        height:100%;
+                        border-radius: 10px;
+                    }
+                    & .experience-text{
+                        color: @whiteColor;
+                        position: absolute;
+                        top:-10px;
+                        left:50%;
+                        margin-left: -16px;
+                        z-index: 100;
+                    }
+                }
+            }
+            & .close {
+                margin-top: 26px;
+                float: right;
+                padding-right: 10px;
+                box-sizing: border-box;
+                & a {
+                    color: @99GreyColor;
+                }
+            }
+        }
+        & .head-home {
+            width: 121px;
+            height: 100px;
+            padding-top: 10px;
+            & div {
+                line-height: 22px;
+                text-align: left;
+                margin-left: 20px;
+                & a{
+                    border:none;
+                    padding:0;
+                }
+                & span {
+                    margin-left: 5px;
+                }
+            }
+        }
+        & .header-er {
+            width: 135px;
+            height: 145px;
+            position: absolute;
+            right: -1px;
+            display: none;
+            position: absolute;
+            top: 30px;
+            border: 1px solid @ddGreyColor;
+            background-color: @whiteColor;
+            dl {
+                text-align: center;
+                display: block;
+            }
+        }
+        & li {
+            //position: relative; // border-right: 1px solid @ddGreyColor;
+            // margin-top: 8px;
+            & .icon-person {
+                position: absolute;
+                top: 14px;
+                right: 20px;
+            }
+        }
+        & li:hover {
+            & .userinfo {
+                display: block;
+            }
+            & .head-home {
+                display: block;
+                left:-28px;
+            }
+            & .header-er {
+                display: block;
+            }
+        }
+    }
+    & li {
+        float: left;
+        line-height: 30px;
+    }
+    & .dt {
+        padding-right: 0;
+    }
+    & .dd li {
+        float: none;
+        width: 100px; //border-right:1px solid @ddGreyColor;
+    }
+    & .spacer {
+        width: 1px;
+        height: 10px;
+        margin: 10px 1px 0;
+        background-color: @ddGreyColor;
+    } // & a {
+    //     border-right: 1px solid @ddGreyColor; //height: 30px;
+    //     padding: 0 20px;
+    // }
+    & .ads-lab {
+        margin-left: 10px;
+    }
+    & .address {
+        & li {
+            width: auto;
+            line-height: normal;
+            overflow: hidden;
+        }
+        & .dd {
+            width: 561px;
+            padding: 5px 0;
+        }
+        & .area {
+            float: left;
+            width: 250px;
+            padding: 0 10px;
+            font-size: 12px;
+            & span {
+                float: left;
+                width: 16px;
+                margin-top: 2px;
+            }
+            & div {
+                float: left;
+                width: 232px;
+            }
+            & a {
+                display: inline-block;
+                height: auto;
+                margin-right: 6px;
+                padding: 2px 3px;
+                &:hover {
+                    background-color: @ddGreyColor;
+                }
+                &.active {
+                    color: @whiteColor;
+                    background-color: @themeColor;
+                }
+                &.hot {
+                    color: @themeColor;
+                }
+            }
+            & li {
+                padding: 5px 0;
+            }
+        }
+        & .bl {
+            border-right: 1px dotted @ddGreyColor;
+        }
+    }
+}
+
+
+/* 头部banner */
+
+#h-banner,
+#bottomSearch {
+    position: relative; //height: 90px;
+    height: 110px;
+    z-index: 130;
+    background-color: inherit;
+    &.bottom-h {
+        height: auto;
+    }
+    & .logo {
+        float: left;
+        width: 300px;
+        height: 50px;
+        margin: 19px 0 0 0;
+    }
+    & .cart-logo {
+        float: left;
+        width: 260px!important;
+        height: 49px!important;
+        margin: 35px 0 0 0!important;
+    }
+    & h1 {
+        float: left;
+        font-size: 24px;
+        font-weight: normal;
+        margin: 36px 0 0 28px;
+    }
+    & .link-right {
+        float: right;
+        margin-top: 46px;
+        font-size: 16px;
+        & li {
+            display: inline;
+            margin-left: 20px;
+        }
+        & a {
+            color: @themeColor;
+        }
+    }
+    & .purchasing {
+        position: absolute; //top: -6px;
+        right: 0; //width: 123px;
+        //height: 54px;
+        //padding-left: 10px;
+        //border-radius: 0 0 2px 2px;
+        //background-color: darken(@themeColor, 4%);
+        //z-index: 10;
+        top: 19px;
+        right: 0;
+        width: 133px;
+        height: 36px;
+        padding-left: 46px;
+        border-radius: 0 0 2px 2px;
+        box-sizing: border-box;
+        z-index: 10;
+        border: 1px solid @eeGreyColor;
+        & .icon-arrow-bottom2 {
+            position: absolute;
+            top: 25px;
+            right: 10px;
+        }
+        & .tocart {
+            //color: @whiteColor;
+            line-height: 36px;
+        }
+    }
+    & .search {
+        height: 96px;
+        width: 590px;
+        float: left;
+        margin-top: 20px;
+        margin-left:50px;
+        .search-product-type{
+            display: block;
+            width: 200px;
+            height: 30px;
+            float: left;
+            .type{
+                width: 60px;
+                height: 32px;
+                line-height: 32px;
+                color: @themeColor;
+                float: left;
+                text-align: center;
+                cursor: pointer;
+                &.active{
+                    background-color: @themeColor;
+                    color: @whiteColor;
+                }
+            }
+        }
+        &-text {
+            position: relative;
+        }
+        &-ipt {
+            width: 457px;
+            height: 36px;
+            border-bottom-style: none;
+            border-top-style: none;
+            border-right-style: none;
+            border-left-style: none;
+            border: 2px solid @themeColor;
+            border-right: 0px;
+            padding: 0px 0px 0px 15px;
+            float: left;
+        }
+        &-btn {
+            width: 58px;
+            height: 38px;
+            background-color: @themeColor;
+            text-align: center;
+            line-height: 38px;
+            font-size: 16px;
+            float: left;
+            color: @whiteColor;
+            border-right-style: none;
+            border-left-style: none;
+            border-top-style: none;
+            border-bottom-style: none;
+        }
+        &-top-btn {
+            width: 86px;
+            height: 40px;
+            background:@themeColor;
+            color: white;
+            border: 0;
+            font-size: 16px;
+        }
+        &-top-text-btn {
+            width: 86px;
+            height: 40px;
+            background:@themeColor;
+            color: white;
+            border: 0;
+            font-size: 16px;
+        }
+        .mgT30 {
+            margin-top: 30px;
+        }
+        & .hotword {
+            margin: 5px 0px;
+            & a {
+                margin-left: 15px;
+                color: @aaGreyColor;
+                &:hover{
+                    color: @themeColor;
+                }
+            }
+        }
+        //历史搜索
+        & #shelper {
+            // display: none;
+            position: relative;
+              .top5{
+                  top:-7px;
+              }
+              .top29{
+                  top:-32px;
+              }
+            & .shelper {
+                border: 1px solid @eeGreyColor;
+                position: absolute;
+                // top: -7px;
+                left: 0px;
+                width: 472px;
+                background-color: @whiteColor;
+                overflow: hidden;
+                & li{
+                    height: 33px;
+                    line-height: 33px;
+                    padding: 0 20px;
+                    color: @blackColor;
+                }
+                & .shelper-first{
+                    height: 44px;
+                    line-height: 44px;
+                    color: @99GreyColor!important;
+                }
+                & li:hover{
+                    background-color: @backgroundColor;
+                    color: @themeColor;
+                    cursor: pointer;
+                }
+                 & .shelper-first:hover{
+                    background-color: @whiteColor!important;
+                    color: @99GreyColor!important;
+                }
+                & .search-item{
+                    float: left;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 190px;
+                    overflow: hidden;
+
+                }
+                & .search-count{
+                    float: right;
+                }
+                & .close{
+                    border-top: 1px solid @eeGreyColor;
+                    text-align: right;
+                    color: @99GreyColor;
+                }
+            }
+        }
+    }
+    & .top-right{
+        float: left;
+        width:260px;
+        height:40px;
+        font-size:0;
+        margin-top:20px;
+        & .right-button{
+            width: 82px;
+            height: 38px;
+            display: inline-block;
+            line-height: 40px;
+            position: relative;
+            padding-left:46px;
+            font-size: 14px;
+        }
+        & .right-icon{
+            display: block;
+            position: absolute;
+            width:24px;
+            height:22px;
+            top:9px;
+            left:12px;
+        }
+        & .right-one{
+            border:1px solid  @themeColor;
+            color:  @themeColor;
+            margin-right:10px;
+            vertical-align: top;
+        }
+        & .right-two{
+            background-color:  @themeColor;
+            color: @whiteColor;
+            height:40px;
+            width:74px;
+            .two-img {
+                //background: url('../../images/company/company-default.png') no-repeat -222px -322px;
+                .common-product-company-default(-222px,-322px);
+            }
+        }
+    }
+    .op-icons-searchBig {
+        position: absolute;
+        right: 18px;
+        top: 7px;
+    }
+    & .search.bottom {
+        margin: 30px auto;
+        float: none;
+    } //.hotWords{
+    //  position: relative;
+    //  top: 63px;
+    //  left: -491px;
+    //  a{
+    //      margin-right: 10px;
+    //      font-size: 12px;
+    //      color:@bbGreyColor;
+    //  }
+    //  a:hover{
+    //      color:@dfRedColor;
+    //  }
+    //}
+    .local-search-btn {
+        float: left;
+        width: 76px;
+        height: 31px;
+        margin: 28px 0 0 2px;
+        color: @whiteColor;
+        font-size: 16px;
+        border: 0 none;
+        background-color: @44GreyColor;
+    }
+    & .service-tel {
+        float: right;
+        width: 171px;
+        height: 32px;
+        margin-top: 43px;
+        text-align: right;
+    }
+}
+
+#bottomSearch {
+    z-index: 99;
+}
+
+.cart-icons {
+    position: relative;
+    top: -37px;
+    left: -31px;
+}
+.dis{
+    display: inline-block;
+    vertical-align: top;
+}
+// 登录注册头部
+.user-head {
+    height: 90px!important;
+    padding: 20px 0;
+    box-sizing: border-box;
+    & .user-logo {
+        margin: 0!important; //margin: 20px 0 0 5px!important;
+    }
+}
+.top-position-box{
+    height:160px;
+}
+.h-banner-box{
+    width:100%;
+    background-color: @whiteColor;
+}
+.container-index{
+    max-width: 1920px;
+    margin: 0 auto;
+    min-width: 1200px;
+    & .advantage-box{
+        position: relative;
+        & .advantage{
+            position: absolute;
+            background: @ddGreyColor;
+            top: 10px;
+            right: 0px;
+            z-index: 100;
+        }
+    }
+}
+#jumbotron{
+    position: relative;
+ }
+.text-position{
+    position: absolute;
+    top:40px;
+    left:320px;
+    font-size: 20px;
+}
+.pb36 .shopTitle-two{
+    left:210px;
+    top:-78px;
+}
+.login-top .loginTitle-two{
+    left:210px;
+    top:-58px;
+    color: @33GreyColor;
+}
+.border-b{
+    border-bottom: 1px solid @ddGreyColor;
+}
+.container {
+    .merchantSendCenter{
+        margin-left: 20px;
+        & .sendCenter-box{
+            width: 358px;
+            padding: 15px 15px;
+            & .first-text,& .second-text{
+                margin:0;
+            }
+            & .sendCenter-div-one{
+                padding-right: 15px;
+                border-right: 1px solid @ddGreyColor;
+            }
+            & .sendCenter-div-two{
+                padding-right: 15px;
+                border-right: 1px solid @ddGreyColor;
+                padding-left: 15px;
+            }
+            & .sendCenter-div-three{
+                padding-left: 15px;
+            }
+        }
+        &:hover{
+            & .sendCenter-box{
+                display: block;
+            }
+        }
+        & .dt{
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+        }
+    }
+}

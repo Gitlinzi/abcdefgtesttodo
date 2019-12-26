@@ -1,0 +1,110 @@
+/* 地址选择 */
+.location{
+	display: block;
+	width: 673px;
+	left:50%;
+	bottom:auto;
+	margin-left: -335px;
+	position: absolute;
+	left: 50%;
+	top: 18%;
+	background-color: @whiteColor;
+	border: 5px solid @ddGreyColor;
+	border-radius: 8px;
+	& .dialog-header{
+		padding-left: 20px;
+		color: @whiteColor;
+		font-size: 14px;
+		line-height: 35px;
+		background-color: @bodyBgColor;
+		color: @77GreyColor;
+	}
+	& .dialog-closeOne{
+		color: @99GreyColor;
+		margin: 8px 12px 0 0;
+		width: 25px;
+		height: 25px;
+		line-height: 21px;
+		position: absolute;
+		background: @bodyBgColor;
+		font-size: 20px;
+		text-align: center;
+		right: 0px;
+		top:-4px;
+		cursor: pointer;
+	  	&-notie{
+			top:-17px;
+		  	right: -21px;
+		}
+	  	&-ie{
+		  	top:-8px;
+			right: -12px;
+		}
+	}
+	& .area{
+		float: left;
+		width: 334px;
+		font-size: 12px;
+
+		& span{
+			float: left;
+			width: 10px;
+			margin-top: 3px;
+		}
+		& div{
+			float: left;
+			width: 295px;
+		}
+		& a{
+			display: inline-block;
+			height: auto;
+			padding: 2px 4px;
+
+			&:hover{
+				background-color: @themeColor;
+				color: @whiteColor;
+			}
+			&.active{
+				color: @whiteColor;
+				background-color:@themeColor;
+			}
+			&.hot{
+				&:hover{
+					color: @whiteColor;
+				}
+			}
+		}
+		& .small-location{
+			display: inline-block;
+		    height: auto;
+		    padding: 2px 4px;
+		    float: none;
+		    width: auto;
+		    margin-top: 0;
+		    cursor: pointer;
+
+			&:hover{
+				background-color: @themeColor;
+				color: @whiteColor;
+			}
+			&.active{
+				color: @whiteColor;
+				background-color:@themeColor;
+			}
+			&.hot{
+				&:hover{
+					color: @whiteColor;
+				}
+			}
+		}
+		& li{
+			padding: 12px 0 12px 20px;
+			border-bottom: 1px solid @bodyBgColor;
+			overflow: hidden;
+			line-height: normal;
+		}
+	}
+	& .bl{
+		border-right: 1px solid @bodyBgColor;
+	}
+}

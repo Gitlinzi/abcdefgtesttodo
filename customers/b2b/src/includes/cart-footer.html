@@ -1,0 +1,117 @@
+<div class="custom-footer">
+    <!--cms配置的自定义html内容-->
+    <!--<div id="customFooterHtml"></div>-->
+    <div id="footer">
+        <div class="footer-top">
+            <div class="footer-img">
+                <a href="{{serviceGuarantee.linkUrl}}">
+                    <div ng-style="{'background': 'url('+ serviceGuarantee.imageUrl +')  no-repeat center center'}" style="height: 110px; width: 100%"></div>
+                    <!-- <img width="100%" height="110" ng-src="{{serviceGuarantee.imageUrl}}" alt=""> -->
+                </a>
+            </div>
+            <div class="container">
+                <div class="clearfix visual">
+                    <visual-directive module-name="footerColumn"></visual-directive>
+                    <div class="footer-left" style="float:right">
+                        <div class="qrcode" ng-repeat=" footerImg in footerSetting.footerImageArray track by $index">
+                            <h5>{{ footerImg.footerImageName }}</h5>
+                            <i style="background:none;"><img width="100" height="100" ng-src="{{ footerImg.footerImageURL }}" src='../images/cg-qr.png'></i>
+                        </div>
+                    </div>
+                    <div class="footer-right" style="float:left;">
+                        <div class="bt-nav" ng-repeat="cate in category.childCategoryVOList|limitTo:5">
+                            <i class=''></i>
+                            <a style="padding-left: 70px" class="first-a" ng-href="/helpList.html?categoryId={{cate.id}}">{{cate.categoryName | textLengthFormat: '6' : '...'}}</a>
+                            <ul style="padding-left: 70px" class="trade-ul common-ul">
+                                <li ng-repeat="item in cate.pageArticleVOList.listObj">
+                                    <a ng-href="/helpDetail.html?id={{item.id}}">{{item.displayTitle | textLengthFormat: '6' : '...'}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+
+                    <!-- error tooltip -->
+                    <div cart-check-code-tip error-message-tip="errorMessageTip" error="error" is-ie="isIE" btn-class="btnf" error-info="errorInfo"></div>
+                    <!-- <div class="modal" ng-style="{display:errorMessageTip.config.display?'block':'none'}">
+                        <div id="cart-dialog" class="dialog" name="delConfirmDialog" ng-class="{'notie':!isIE}" ng-style="{display:errorMessageTip.config.display?'block':'none'}">
+                            <a href="javascript:void(0);" target="_self" class="dialog-close" ng-class="{'dialog-close-ie':isIE,'dialog-close-notie':!isIE}"
+                                ng-show="errorMessageTip.config.close&&!errorMessageTip.config.btnGoBack" ng-click="error.closeTip()">&times;</a>
+                            <div class="dialog-content">
+                                <div class="dialog-header" ng-class="{'dialog-header-notie':!isIE}">
+                                    <h5 class="dialog-title">{{errorMessageTip.config.title}}</h5>
+                                </div>
+                                <div class="dialog-body" ng-if="!errorMessageTip.config.htmlMsg">
+                                    {{errorMessageTip.config.message}}
+                                </div>
+                                <div class="dialog-body" ng-bind-html="errorMessageTip.config.message" ng-if="errorMessageTip.config.htmlMsg"></div>
+                                <div class="dialog-footer">
+                                    <button type="button" class="btnf cancel" ng-show="errorMessageTip.config.btnCancel" ng-click="errorMessageTip.config.cancel()">
+                                    {{errorMessageTip.config.btnCancelText}}
+                                </button>
+                                    <button type="button" class="btnf ok" ng-show="errorMessageTip.config.btnOK" ng-click="errorMessageTip.config.ok()">{{errorMessageTip.config.btnOKText}}
+                                </button>
+                                    <button type="button" class="btnf ok" ng-show="errorMessageTip.config.btnGoBack" ng-click="errorMessageTip.config.goBack(errorMessageTip.config.btnGoBackUrl)">
+                                    {{errorMessageTip.config.btnGoBackText}}
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <!--<div align="center" class="mgT20">
+                <a href="#"><img src="../images/wl110.jpg" alt=""></a>
+                <a href="#"><img src="../images/shgs.jpg" alt=""></a>
+                <a href="#"><img src="../images/lyd.jpg" alt=""></a>
+                <a href="#"><img src="../images/zxzf.jpg" alt=""></a>
+                <a href="#"><img src="../images/baxx.jpg" alt=""></a>
+                <a href="#"><img src="../images/shen_03.png" alt=""></a>
+            </div>-->
+            <div class="footer-bottom-box">
+                <p class="footerNav clearfix visual mart20">
+                    <visual-directive module-name="footerNav"></visual-directive>
+                    <a target="_blank" ng-repeat="a in websiteRecommendation" class="a-text" href="{{a.linkUrl}}">{{a.content}}</a>
+                    <!--<li ng-repeat="nav in navList | filter:{navType:3}| orderBy:item.sortValue"><a target="_blank" ng-href="{{nav.navLink}}">{{nav.navTitle}}</a><span ng-show="!$last"> - </span></li>-->
+                </p>
+                <div class="clearfix">
+                    <div style="margin:10px auto 0" ng-bind-html="copyRight.websiteRight | trustHtml"></div>
+                </div>
+            </div>
+            <div align="center" class="mgT20 marR10">
+                <a class="mart15" href="#" style="display: inline-block" ng-repeat="a in recordInformation"><img src="{{a.imageUrl}}" width="100px" height="30px" alt=""></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  error tooltip  -->
+<div check-code-tip error-message-tip="errorMessageTip" error="error" is-ie="isIE" btn-class="btn" error-info="errorInfo"></div>
+<!-- <div class="modal" ng-style="{display:errorMessageTip.config.display?'block':'none','z-index':9999}">
+    <div class="dialog {{errorMessageTip.config.size||'sm'}}" name="delConfirmDialog" ng-class="{'notie':!isIE}" ng-style="{display:errorMessageTip.config.display?'block':'none'}">
+        <a href="javascript:void(0);" target="_self" class="dialog-close" ng-class="{'dialog-close-ie':isIE,'dialog-close-notie':!isIE}"
+            ng-show="errorMessageTip.config.close&&!errorMessageTip.config.btnGoBack" ng-click="error.closeTip()">&times;</a>
+        <div class="dialog-content">
+            <div class="dialog-header" ng-class="{'dialog-header-notie':!isIE}">
+                <h5 class="dialog-title">{{errorMessageTip.config.title}}</h5>
+            </div>
+            <div class="dialog-body" ng-show="!errorMessageTip.config.isHtml">
+                {{errorMessageTip.config.message}}
+            </div>
+            <div class="dialog-body" ng-include="errorMessageTip.config.message" ng-if="errorMessageTip.config.isHtml"></div>
+            <div class="dialog-footer">
+                <button type="button" class="btn cancel" ng-show="errorMessageTip.config.btnCancel" ng-click="errorMessageTip.config.cancel()">{{errorMessageTip.config.btnCancelText}}
+                </button>
+                <button type="button" class="btn ok" ng-show="errorMessageTip.config.btnOK" ng-click="errorMessageTip.config.ok()">{{errorMessageTip.config.btnOKText}}
+                </button>
+                <button type="button" class="btn ok" ng-show="errorMessageTip.config.btnGoBack" ng-click="errorMessageTip.config.goBack(errorMessageTip.config.btnGoBackUrl)">
+                    {{errorMessageTip.config.btnGoBackText}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div> -->

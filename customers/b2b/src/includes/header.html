@@ -1,0 +1,157 @@
+<!--cms配置的自定义html内容-->
+<div login-bomb show-login-box="$parent.showLoginBox"></div>
+<!-- 显示loading -->
+<div ng-show="$parent.isShowProjectLoading" class="projectLoading">
+    <img width="194" height="82" src="/images/company/loading.gif?v=${version}" alt="等待。。。">
+</div>
+<div class="notification with-nav"></div><!-- #3a3f51 -->
+<div class="custom-header white">
+    <!--<style id="customHeaderCss"></style>-->
+    <!--<div id="customHeaderHtml"></div>-->
+    <div class="wait" ng-hide="true"></div>
+    <!-- 头部 -->
+    <div class="clearfix visual top-position-box">
+        <visual-directive module-name="header"></visual-directive>
+         <div id="h-top">
+            <div class="container">
+                <ul class="ull" ng-init="logined=util.loggedIn()">
+                    <li ng-if="!logined">
+                        <a class="please-login" href="/login.html">您好，请登录</a>
+                    </li>
+                    <li ng-if="!logined">
+                        <a class="riges-text" href="/cregis.html">注册</a>
+                    </li>
+                    <li ng-if="logined">
+                        <span class="loginAfterText">您好，{{userInfo.nickname||userInfo.mobile}}，</span>
+                        <a href="javascript:void(0)" ng-click="userExit()">退出</a>
+                    </li>
+                    <li class="dropdown merchantSendCenter">
+                        <div class="dt">
+                            <!--<i class="icon-more-down icon-person"></i>-->
+                            <a target="_self" href="javascript:void(0)" style="padding-right:20px;padding-left: 15px">{{$parent.merchantInfo.merchantName}}</a>
+                            <i class="icon-top-down icon-person down-person"></i>
+                            <div class="mask"></div>
+                            <div class="dd sendCenter-box f0">
+                                <div class="dis sendCenter-div-one f12">
+                                    <p class="first-text">联系电话</p>
+                                    <p class="second-text" ng-repeat="telName in $parent.merchantInfo.merchantTel track by $index">{{telName}}</p>
+                                </div>
+                                <div class="dis sendCenter-div sendCenter-div-two f12">
+                                    <p class="first-text">QQ</p>
+                                    <p class="second-text" ng-repeat="qqName in $parent.merchantInfo.merchantQQ track by $index">{{qqName}}</p>
+                                </div>
+                                <div class="dis sendCenter-div sendCenter-div-three f12">
+                                    <p class="first-text">工作时间</p>
+                                    <p class="second-text">{{$parent.merchantInfo.merchantServiceWorkTime}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="ulr">
+                    <li><a target="_self" title="选择客服端打开奥" href="http://wpa.qq.com/msgrd?v=3&uin={{$parent.merchantInfo.merchantQQ[0]}}&site=qq&menu=yes">我的客服</a></li>
+                    <!--<li ng-if="logined"><a target="_self" href="javascript:void(0)"
+                                                   ng-click="userExit()">退出登录</a></li>-->
+                    <li><a target="_self" href="javascript:void(0)" ng-click="myMessage()">我的消息<span ng-if="untreatedMesNum">({{untreatedMesNum}})</span></a></li>
+                    <!-- /home.html#/message -->
+                    <!--<li class="spacer"></li>-->
+                    <li><a target="_self" href="javascript:void(0)" ng-click="myOrder()">我的订单</a></li>
+                    <!-- /home.html#/orderList -->
+                    <!--<li class="spacer"></li>-->
+                    <li class="dropdown">
+                        <div class="dt">
+                            <!--<i class="icon-more-down icon-person"></i>-->
+                            <a target="_self" href="javascript:void(0)" style="padding-right:26px;" ng-click="PersonalCenter()">个人中心 </a>
+                            <i class="icon-top-down icon-person down-person"></i>
+                            <div class="mask"></div>
+                            <div class="dd head-home">
+                                <!--<div>-->
+                                    <!--<a target="_self" href="/home.html#/orderList">待处理订单</a>-->
+                                    <!--<span class="red">{{pendingOrderTotal}}</span>-->
+                                <!--</div>-->
+                                <!--<div>-->
+                                    <!--<a target="_self" href="/home.html#/message">消息</a>-->
+                                    <!--<span class="red">{{untreatedMesNum}}</span>-->
+                                <!--</div>-->
+                                <div>
+                                    <a target="_self" href="javascript:void(0)" ng-click="myCouponPage()">我的优惠券</a>
+                                    <span class="theme">{{validCouponNum}}</span>
+                                </div>
+                                <div>
+                                    <a target="_self" href="javascript:void(0)" ng-click="myFrequence()">我的收藏</a>
+                                    <span class="theme">{{myCollectionNum}}</span>
+                                </div>
+                                <div>
+                                    <a target="_self" href="javascript:void(0)" ng-click="myDetails()">个人信息</a>
+                                    <span class="theme"></span>
+                                </div>
+                                <div>
+                                    <a target="_self" href="javascript:void(0)" ng-click="myIndexCredit()">信用额度</a>
+                                    <span class="theme">{{cgCommentMyHeadData.creditLinesAmount}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--<li class="spacer"></li>-->
+                    <!--<li><a href="#">企业采购</a></li>-->
+                    <!--<li class="spacer"></li>-->
+                   <!-- <li><a href="#">积分商城</a></li>-->
+                    <!--<li><a href="#">客户服务</a></li>-->
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="h-banner-box">
+            <div id="h-banner" class="container">
+                <div class="logo">
+                    <a target="_self" href="/index.html">
+                        <img src="../images/company/logo.png" alt="" id="g_logo" >
+                    </a>
+                </div>
+                <!--<div class="search" search-bar shelper="searchHistory" keyword="noResultKeyword" ><i></i></div>-->
+                <div class="search" search-bar shelper="searchHistory" keyword="noResultKeyword"><i></i></div>
+                <!--购物车图片-->
+                <!--<div class="shopCar" mini-cart ng-style="{top: switchConfig.common.showSearchCommodityTypes ? 49: 20}"></div>-->
+                <div class="top-right">
+                    <div class="shopCar self-shopCar right-button right-one" mini-cart></div>
+                    <!-- <a href="" class="right-button right-one">
+                        <i class="one-img right-icon"></i>
+                        <span>我的进货单</span>
+                    </a> -->
+                    <a href="javascript:void(0)" ng-click="quickOrder()" class="right-button right-two">
+                        <i class="two-img right-icon"></i>
+                        <span>快速下单</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--</div>-->
+    </div>
+    <div id="h-nav">
+        <div class="container">
+            <div class="side-nav" ng-mouseleave="act=false" ng-mousemove="act=true">
+                商品分类
+                <!--<i class="icon-arrow-bottom"></i>-->
+                <ul class="side-ul" ng-class="{fixed:isIndex,active:act}">
+                    <li ng-repeat="levels in categorylist" ng-mousemove="_getCategorynextlevel(levels.categoryId,$index);">
+                        <!-- 原来下面a标签上的ng-class   ng-class="{'highlight': levels.isHighlight}" -->
+                        <a target="_self" href="/{{integralFlag?'integralSearch':'search'}}.html?navCategoryIds={{levels.categoryId}}&categoryTreeNodeId={{levels.categoryTreeNodeId}}">{{levels.categoryName}}
+                            <!--<i class="icon-arrow-right"></i>-->
+                        </a>
+                        <div class="nav-items" >
+                            <div class="nav-item" id="c{{levels.categoryId}}"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <ul class="main-nav clearfix visual">
+                <visual-directive module-name="headerNav"></visual-directive>
+                <span head-menu module-name="index_entrance" page-code="PC_HOME_PAGE"></span>
+            </ul>
+
+        </div>
+    </div>
+    <div class="container-index">
+        @@include("_jumbotron.html")
+    </div>
+</div>

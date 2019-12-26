@@ -1,0 +1,249 @@
+.stepState{
+    left: 76px;
+    display:block;
+    position:relative;
+    height: 100px;
+    width: 920px;
+    top: 44px;
+    li{
+        position:relative;
+        text-align:center;
+        width: 20%;
+        padding-top: 22px;
+        float: left;
+        i{
+            width: 66px;
+            height: 40px;
+            z-index: 99;
+            position: absolute;
+            left: 0;
+            background: @whiteColor url('../../../images/company/company-step.png') no-repeat;
+        }
+        &.current{
+            h4{
+                color: @orderCurrentProgressBarColor!important;
+            }
+            h5{
+                address{
+                    background-color: @orderCurrentProgressBarColor;
+                }
+                cite{
+                    border-color: transparent transparent transparent @orderActiveProgressBarColor!important;
+                }
+            }
+        }
+        &.active{
+            h5{
+                address{
+                    background-color: @orderCurrentProgressBarColor!important;
+                }
+                cite{
+                    border-color: transparent transparent transparent @orderActiveProgressBarColor!important;
+                }
+            }
+        }
+        &.active-no-active-i {
+            h5{
+                address{
+                    background-color: @ccGreyColor!important;
+                }
+                cite{
+                    border-color: transparent transparent transparent @ccGreyColor!important;
+                }
+            }
+        }
+        &:nth-child(1){
+            i{
+                background-position: 0 0;
+            }
+            &.current{
+                i{
+                    background-position: -66px 0!important;
+                }
+            }
+            &.active{
+                i{
+                    background-position: -132px 0!important;
+                }
+            }
+            &.active-no-active-i {
+                i{
+                    background-position: -132px 0!important;
+                }
+            }
+        }
+        &:nth-child(2){
+            i{
+                background-position: 0 -40px;
+            }
+            &.current{
+                i{
+                    background-position: -66px -40px!important;
+                }
+            }
+            &.active{
+                i{
+                    background-position: -132px -40px!important;
+                }
+            }
+        }
+        &:nth-child(3){
+            i{
+                background-position: 0 -80px;
+            }
+            &.current{
+                i{
+                    background-position: -66px -80px!important;
+                }
+            }
+            &.active{
+                i{
+                    background-position: -132px -80px!important;
+                }
+            }
+        }
+        &:nth-child(4){
+            i{
+                background-position: 0 -120px;
+            }
+            &.current{
+                i{
+                    background-position: -66px -120px!important;
+                }
+            }
+            &.active{
+                i{
+                    background-position: -132px -120px!important;
+                }
+            }
+        }
+        &:nth-child(5){
+            i{
+                background-position: 0 -160px;
+            }
+            &.current{
+                i{
+                    background-position: -66px -160px!important;
+                }
+            }
+            &.active{
+                i{
+                    background-position: -132px -160px!important;
+                }
+            }
+        }
+        span{
+            position: absolute;
+            left: 97px;
+            top: 14px;
+            z-index: 99;
+            font-size: 12px;
+            color: @33GreyColor;
+            label{
+                width: 10px;
+                height: 10px;
+                background-color: @orderActiveProgressBarColor;
+                border-radius: 50%;
+                display: block;
+                position: absolute;
+                left: 50%;
+                margin-left: -5px;
+                top: 27px;
+            }
+        }
+        h4{
+            position: absolute!important;
+            width: 100%;
+            text-align: center;
+            left: -57px;
+            bottom: -88px;
+            font-weight: normal;
+            color: @33GreyColor;
+        }
+        p{
+            position: absolute!important;
+            width: 100%;
+            text-align: center;
+            left: -57px;
+            bottom: -102px;
+            color: @99GreyColor;
+        }
+        h5{
+            width: 100%;
+            height: 1px;
+            position: absolute;
+            top: 26px;
+            left: 0;
+            address{
+                width: 80%;
+                background-color: @ccGreyColor;
+                height: 1px;
+                display: block;
+                z-index: 9;
+                position: absolute;
+                margin: 0px 19%;
+            }
+            cite{
+                position:absolute;
+                top:-4px;
+                *top:-6px;
+                right: -5px;
+                display:block;
+                height:0;
+                width:0;
+                font-size: 0;
+                line-height: 0;
+                border-color: transparent transparent transparent @99GreyColor;
+                border-style: dashed dashed dashed solid;
+                border-width:5px;
+                em{
+                    position:absolute;
+                    top:-10px;
+                    *top:-9px;
+                    left:-11px;
+                    display:block;
+                    height:0;
+                    width:0;
+                    font-size: 0;
+                    line-height: 0;
+                    border-color: transparent transparent transparent @whiteColor;
+                    border-style: dashed dashed dashed solid;
+                    border-width:10px;
+                }
+            }
+        }
+    }
+}
+.finish {
+    position: relative;
+    top: 50px;
+    left: 50px;
+    & .color-change{
+        color: @99GreyColor;
+    }
+    .c {
+        padding-right: 100px;
+        span {
+            display: block;
+        }
+    }
+    .c1 {
+        width: 90px;
+    }
+    .c2 {
+        width: 94px;
+    }
+    .c3 {
+        width: 96px;
+    }
+    .c4 {
+        width: 90px;
+        padding-right: 0;
+    }
+    .cancel {
+        font-size: 17px;
+        .ccc {
+            color: @ccGreyColor;
+        }
+    }
+}

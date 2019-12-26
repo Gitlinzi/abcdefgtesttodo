@@ -1,0 +1,321 @@
+<div class="always" style="position:relative">
+    <div class="home-allTitle pdL20">{{i18n('我的发票')}}</div>
+    <div class="switch-title-tab">
+        <span class="tab" ng-click="switchTab(1)" ng-class="{active:currentIndex==1}">{{i18n('已开发票')}}</span>
+        <span class="line"></span>
+        <span class="tab" ng-click="switchTab(3)" ng-class="{active:currentIndex==3}">{{i18n('申请中发票')}}</span>
+        <span class="line"></span> 
+        <span class="tab" ng-click="switchTab(2)" ng-class="{active:currentIndex==2}">{{i18n('未申请发票')}}</span>
+    </div>
+    <div class="follow clearfix queryOrderFloat" style="position: absolute;right:0;top: 82px">
+        <div class="follow-right pdL10 clearfix">
+            <input type="text" name="" ng-model="keywords" placeholder="{{i18n('商品名称')}}，{{i18n('商品编号')}}，交货单编号" style="width: 210px">
+            <input type="button" value="{{i18n('搜索')}}" ng-click="gotoSearch()">
+        </div>
+    </div>
+    <!-- <div class="evaluate-list">
+        <div class="list-title pdL20">
+            <span class="width817" align="left" >{{i18n('订单')}}</span>
+            <span class="width114" align="center">{{i18n('发票类型')}}</span>
+            <span class="width114" align="center">{{i18n('操作')}}</span>
+        </div>
+    </div> -->
+    <div class="order-group mgT10" ng-repeat="suborder in ownInvoice.list">
+        <div class="suborder">
+            <div class="row order-title">
+                <div class="cell c1">{{suborder.createTime | date : 'yyyy-MM-dd HH:mm:ss'}}</div>
+                <!-- #/orderDetail?code={{suborder.orderCode}} -->
+                <div class="cell c2"><a href="">{{i18n('交货单号')}}：<span class="colorB">{{suborder.deliverOrderCode}}</span></a></div>
+                <!-- <div class="cell c3">
+                    <span class="margin30">{{i18n('订单类型')}}：{{suborder.orderType}}</span>
+                </div> -->
+            </div>
+            <table class="order-list">
+                <tr class='person-tr-color' ng-repeat="pro in suborder.skus">
+                        <!-- #/orderDetail?code={{suborder.orderCode}} -->
+                    <td width="120" align="center" class="bl bb"><a target="_blank" class="img-block" href=""><img width="80" height="80" ng-src="{{pro.delProObj[0].pictureUrl}}" alt="{{pro.productCname}}"></a></td>
+                    <td width="598" class="bb">
+                            <!-- #/orderDetail?code={{suborder.orderCode}} -->
+                        <a target="_blank" class="name ui-nowrap" href=""><span class="colorB">{{pro.delProObj[0].chineseName}}</span></a>
+                        <ul class="seriesAttr">
+                            <!-- <li class="c9" ng-repeat="property in pro.attributes">{{property.name}}:{{property.value}}</li> -->
+                        </ul>
+                    </td>
+                    <td width="120" align="center" class="bb">
+                        <span  align="center">x{{pro.num}}</span>
+                    </td>
+                    <td width="0" valign="top" align="center" class="bb br" ng-if="$first" rowspan="{{suborder.skus.length}}">
+                    </td>
+                    <td valign="top" width='120' ng-if="$first && (currentIndex == 1 || currentIndex ==3)" align="center" class="bb br" rowspan="{{suborder.skus.length}}">
+                        <div class="state-none">
+                            <div>
+                                <span class="change-color">{{ownInvoice.invoiceType[suborder.invoiceType||0]}}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td valign='top' width='120' align='center' class='bb br pay-money' ng-if="$first && (currentIndex == 1 || currentIndex ==3)" rowspan="{{suborder.skus.length}}">
+                       <a target="_blank" ui-sref="index_billList({orderCode:suborder.deliverOrderCode})" style="cursor: pointer">{{i18n('发票详情')}}</a>
+                    </td>
+                    <td valign='top' style="position: relative" width='240' align='center' class='bb br pay-money' ng-if="$first && currentIndex == 2" rowspan="{{suborder.skus.length}}">
+                       <a target="_blank" ng-click="ownInvoice.applyMakeInvoice(suborder)" style="cursor: pointer">{{i18n('申请开票')}}</a>
+                       <div style="position: absolute;bottom: 5px;text-align: left;padding: 0 5px;">90天内支持在线申请开发票，90天后联系客服</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <div class="not-invoice" ng-if="ownInvoice.isShowIcon"><i class="mgR15"></i>{{i18n('暂无发票哦')}}~</div>
+    <!-- 发票信息弹框 begin -->
+    
+    <div class="bg-modal" ng-style="{display:invoice.invoiceShow?'block':'none'}">
+        <div class="invoice-mes">
+            <div class="invoice-title clearfix">
+                <span class="title-left">{{i18n('发票信息')}}</span>
+                <span class="title-right" ng-click="invoice.changeInvoiceShow(false)"></span>
+            </div>
+            <!-- <div class="need-invoice">
+                <span class="invoice-sure"
+                        ng-class="{'invoice-false':!invoice.invoiceSure}"
+                        ng-click="invoice.invoiceNeed(1)"
+                ></span>
+                <span>{{i18n('需要发票')}}</span>
+            </div> -->
+            <div class="invoice-color mart13 marb16 fontSize0 invoice-type-box invoice-height">
+                <span class="one-span">{{i18n('发票类型')}}</span>
+                <span class="two-span invoice-type"
+                        ng-disabled="invoice.invoiceRadio.commonDisabled"
+                        ng-model="invoice.toSaveInvoiceObj.invoiceType"
+                        ng-class="{'red-icon':invoice.toSaveInvoiceObj.invoiceType == 1}"
+                        ng-click="(invoice.invoiceSure)&&(invoice.toSaveInvoiceObj.invoiceType=1)"
+                >{{i18n('普通发票')}}</span>
+                <!--ng-class="{'red-icon':invoice.invoiceSure}"-->
+                <!-- ng-if="merchantProductList.orderInvoice.merchantSupportInvoiceType==2||merchantProductList.orderInvoice.merchantSupportInvoiceType==3"  -->
+                <span class="two-span invoice-type"
+                        ng-model="invoice.toSaveInvoiceObj.invoiceType"
+                        ng-class="{'red-icon':invoice.toSaveInvoiceObj.invoiceType == 2,'uncrease-invoice':merchantProductList.orderInvoice.merchantSupportInvoiceType==1}"
+                        ng-click="invoice.changezzsInvoice()"
+                        ng-disabled="merchantProductList.orderInvoice.merchantSupportInvoiceType==1"
+                >{{i18n('增值税发票')}}</span>
+            </div>
+            <div class="fontSize0 invoice-style-box invoice-height">
+                <span class="one-span">{{i18n('开票方式')}}</span>
+                <span class="two-span invoice-type" ng-class="{'red-icon': invoice.invoiceModeNum ==1 && invoice.invoiceSure}" ng-click="invoice.paperOrderInvioce()">纸质发票</span>
+                <span class="two-span invoice-type" ng-class="{'red-icon': invoice.invoiceModeNum ==2 && invoice.invoiceSure}" ng-click="invoice.electrocOrderInvioce()" ng-if="invoice.toSaveInvoiceObj.invoiceType!=2">电子发票</span>
+            </div>
+            <div class="fontSize0 mart13 marb16 invoice-head-type invoice-height" ng-if="invoice.toSaveInvoiceObj.invoiceType !=2 ">
+                <span class="one-span">{{i18n('发票抬头')}}</span>
+                <span class="two-clone invoice-type"
+                        ng-model="invoice.toSaveInvoiceObj.invoiceTitleType"
+                        ng-class="{'red-icon':invoice.toSaveInvoiceObj.invoiceTitleType == 1}"
+                        ng-click="(invoice.invoiceSure)&&(invoice.toSaveInvoiceObj.invoiceTitleType=1)"
+                >{{i18n('个人')}}</span>
+                <span class="two-clone invoice-type"
+                        ng-model="invoice.toSaveInvoiceObj.invoiceTitleType"
+                        ng-class="{'red-icon':invoice.toSaveInvoiceObj.invoiceTitleType == 2}"
+                        ng-click="(invoice.invoiceSure)&&(invoice.toSaveInvoiceObj.invoiceTitleType=2)"
+                >{{i18n('单位')}}</span>
+            </div>
+            <div class="add-local fontSize0">
+
+                <div class="one-input" ng-if="invoice.toSaveInvoiceObj.invoiceType==1&&invoice.toSaveInvoiceObj.invoiceTitleType==2">
+                    <input type="text" placeholder="{{i18n('请填写单位名称')}}"
+                            ng-hide="invoice.toSaveInvoiceObj.invoiceTitleType==1"
+                            ng-model="invoice.toSaveInvoiceObj.invoiceTitleContent"
+                            >
+                    <span class="company-tips" ng-if="invoice.companyTips">{{i18n('请填写单位名称')}}</span>
+                </div>
+            </div>
+            <div class="fontSize0 mart13 marb16" ng-if="invoice.toSaveInvoiceObj.invoiceType==1&&invoice.toSaveInvoiceObj.invoiceTitleType==2">
+                <span class="fore-span"><span class="colorRed">*</span>{{i18n('纳税人识别码')}}</span>
+                <input class="two-input" type="text" name="" placeholder="{{i18n('请输入识别码')}}"
+                        ng-hide="invoice.toSaveInvoiceObj.invoiceTitleType==1"
+                        ng-model="invoice.toSaveInvoiceObj.taxpayerIdentificationCode"
+                >
+                <span class="person-tips" ng-if="invoice.personTips">{{i18n('请填写纳税人识别码')}}</span>
+            </div>
+            <!-- 收货人信息 -->
+            <div class="perosonInfo" ng-if="invoice.invoiceModeNum ==1 && invoice.toSaveInvoiceObj.invoiceType!=2">
+                <div class="title">收货人信息</div>	
+                <ul>
+                    <li ng-repeat="addr in invoiceAllAdress track by $index" ng-show="invoice.invoiceAdressCurrentIndex == $index ||invoiceHideOtherAddress">
+                        <div class="pop-row row">
+                            <div class="cell a1">
+                                <div ng-class="{'address-name':invoice.invoiceAdressCurrentIndex == $index && invoice.invoiceSure}"
+                                        class="address-name-no"
+                                        name="address"
+                                        ng-click="invoice.changeinvoiceAddress($index)"
+                                >{{addr.userName}}</div>
+                            </div>
+                            <div class="cell a2">{{addr.userName}}&nbsp;{{addr.provinceName}}&nbsp;{{addr.cityName}}&nbsp;{{addr.regionName}}&nbsp;{{addr.detailAddress}}</div>
+                            <div class="cell a3">{{addr.mobile| hidePhone}}</div>
+                            <div class="cell a5">
+                                <span class="default-adress" ng-if="addr.isDefault">{{i18n('默认地址')}}</span>
+                            </div>
+                        </div>
+                        <div class="dialogForm" ng-include="'includes/_addressEdit.html'" ng-show="showList[$index]"></div>
+                    </li>
+                </ul>
+                <a href="javascript:void(0)" class="showmore" ng-click="invoiceHideOtherAddress=!invoiceHideOtherAddress" ng-show="allAddress.length>=2">{{!invoiceHideOtherAddress?i18n('更多地址'):i18n('收起地址')}}</a>
+            </div>
+            <!-- 发票内容 -->
+            <div class="invoive-info">
+                <div class="title">发票内容</div>
+                <div class="my-content" ng-class="{active: invoice.invoiceSure}">明细</div>	
+            </div>
+            <!--没有增票资质的提示-->
+            <div class="invoice-container" ng-if="invoice.toSaveInvoiceObj.invoiceType==2 && !personVat.auditStatus">
+                <div class="invoiceInfo">
+                    <p class='pd20'>{{i18n('增票资质信息')}}</p>
+    
+                    <div class="invoiceShow" >
+                        <form name="myForm">
+                            <!-- <input type="hidden" ng-model="invoice.id"/> -->
+                            <dl class="clearfix">
+                                <dt><span class="require">*</span>{{i18n('收票人')}} :</dt>
+                                <dd>
+                                    <input type="text" class="ticket-people" name="goodReceiverName"
+                                            ng-model="settmentinvoice.goodReceiverName" required>
+                                    <span class="tip err" ng-show="myForm.goodReceiverName.$dirty && myForm.goodReceiverName.$invalid || settmentinvoice.invoiceSubmit && myForm.goodReceiverName.$invalid">
+                                        <span ng-show="myForm.goodReceiverName.$error.required">{{i18n('收票人不能为空')}}</span>
+                                    </span>
+                                    <div class="clear"></div>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt><span class="require">*</span>{{i18n('收票地址')}} :</dt>
+                                <dd>
+                                    <select class="cursorPointer" name="provice" ng-model="invoice.selectedDistrict" ng-change="areaSelect(areaJson,invoice.selectedDistrict.key,1)" ng-options="district.name for district in areaJson">
+                                        <option value="">{{i18n('请选择')}}</option>
+                                    </select>
+                                    <select name="city" ng-model="invoice.selectedUnit" ng-change="areaSelect(invoice.selectedDistrict.child,invoice.selectedUnit.key,2)" ng-options="unit.name for unit in selectedDis.child">
+                                        <option value="">{{i18n('请选择')}}</option>
+                                    </select>
+                                    <select name="town" ng-model="invoice.selectedPosition" ng-options="position.name for position in selectedUn.child">
+                                        <option value="">{{i18n('请选择')}}</option>
+                                    </select>
+                                        <span class="tip err" ng-show="myForm.town.$invalid && !selectedPosition || settmentinvoice.invoiceSubmit && !selectedPosition"><span>{{i18n('请选择收票地址')}}</span></span>
+                                    <div class="clear"></div>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt><span class="require">*</span>{{i18n('详细地址')}} :</dt>
+                                <dd>
+                                    <input type="text" class='detail-local' name="goodReceiverAddress" ng-model="settmentinvoice.goodReceiverAddress" required>
+                                    <span class="tip err" ng-show="myForm.goodReceiverAddress.$dirty && myForm.goodReceiverAddress.$invalid || settmentinvoice.invoiceSubmit && myForm.goodReceiverAddress.$invalid">
+                                        <span ng-show="myForm.goodReceiverAddress.$error.required">{{i18n('请输入详细地址')}}</span>
+                                    </span>
+                                    <div class="clear"></div>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt><span class="require">*</span>{{i18n('收票人手机')}} :</dt>
+                                <dd>
+                                    <input type="text" class='ticket-phone' name="goodReceiverMobile" ng-model="settmentinvoice.goodReceiverMobile" ng-pattern="mobileRegExp" ng-maxlength=11 max-length=11 required>
+                                        
+                                    <div class="tip" ng-show="mobile_tip">{{i18n('仅支持')}}11{{i18n('位数字')}}</div>
+                                    <span class="tip err" ng-show="myForm.goodReceiverMobile.$dirty && myForm.goodReceiverMobile.$invalid || settmentinvoice.invoiceSubmit && myForm.goodReceiverMobile.$invalid">
+                                        <span ng-show="myForm.goodReceiverMobile.$error.required">{{i18n('手机号码不能为空')}}</span>
+                                        <span ng-show="myForm.goodReceiverMobile.$error.pattern">{{i18n('手机号码格式不正确')}}</span>
+                                    </span>
+                                    <div class="clear"></div>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt><span class="require">*</span>{{i18n('公司名称')}} :</dt>
+                                <dd>
+                                    <input type="text" class='detail-local' name="unitName" ng-model="settmentinvoice.unitName" ng-maxlength=20 required>
+                                    <div class="tip" ng-show="companyName_tip">{{i18n('限')}}20{{i18n('个字符')}}</div>
+                                    <span class="tip err" ng-show="myForm.unitName.$dirty && myForm.unitName.$invalid || settmentinvoice.invoiceSubmit && myForm.unitName.$invalid">
+                                        <span ng-show="myForm.unitName.$error.required">{{i18n('公司名称不能为空')}}</span>
+                                        <span ng-show="myForm.unitName.$error.maxlength">{{i18n('限')}}20{{i18n('个字符')}}</span>
+                                    </span>
+                                    <div class="clear"></div>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt><span class="require">*</span>{{i18n('纳税人识别码')}} :</dt>
+                                <dd>
+                                    <!--纳税人识别码的正则需要确认-->
+                                    <input type="text" class='detail-local' name="taxpayerIdentificationCode" ng-model="settmentinvoice.taxpayerIdentificationCode"  ng-pattern="/^[A-Z0-9]+$/" ng-minlength=15 ng-maxlength=18 required>
+                                    <span class="tip err" ng-show="myForm.taxpayerIdentificationCode.$dirty && myForm.taxpayerIdentificationCode.$invalid || settmentinvoice.invoiceSubmit && myForm.taxpayerIdentificationCode.$invalid">
+                                        <span>{{i18n('请输入有效的纳税人识别码')}}</span>
+                                    </span>
+                                    <div class="clear"></div>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt><span class="require">*</span>{{i18n('注册地址')}} :</dt>
+                                <dd>
+                                    <input type="text" class='detail-local' name="registerAddress" ng-model="settmentinvoice.registerAddress" required>
+                                    <span class="tip err" ng-show="myForm.registerAddress.$dirty && myForm.registerAddress.$invalid || settmentinvoice.invoiceSubmit && myForm.registerAddress.$invalid">
+                                        <span>{{i18n('请输入注册地址')}}</span>
+                                    </span>
+                                    <div class="clear"></div>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt><span class="require">*</span>{{i18n('注册电话')}} :</dt>
+                                <dd>
+                                    <input type="text" class='detail-local' name="registerPhone" ng-model="settmentinvoice.registerPhone" ng-pattern="/^[0-9]+[-]?[0-9]+$/" required>
+                                    <span class="tip err" ng-show="myForm.registerPhone.$dirty && myForm.registerPhone.$invalid || settmentinvoice.invoiceSubmit && myForm.registerPhone.$invalid">
+                                        <span ng-show="myForm.registerPhone.$error.required">{{i18n('请输入注册电话')}}</span>
+                                        <span ng-show="myForm.registerPhone.$error.pattern || myForm.registerPhone.$error.maxlength">{{i18n('电话格式不正确')}}</span>
+                                    </span>
+                                    <div class="clear"></div>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt><span class="require">*</span>{{i18n('开户银行')}} :</dt>
+                                <dd>
+                                    <input type="text" class='detail-local' name="bankDeposit" ng-model="settmentinvoice.bankDeposit" required>
+                                    <span class="tip err"ng-show="myForm.bankDeposit.$dirty && myForm.bankDeposit.$invalid || settmentinvoice.invoiceSubmit && myForm.bankDeposit.$invalid">
+                                        <span>{{i18n('请输入开户银行')}}</span>
+                                    </span>
+                                    <div class="clear"></div>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix">
+                                <dt><span class="require">*</span>{{i18n('银行账户')}} :</dt>
+                                <dd>
+                                    <!--/^[0-9]+$/-->
+                                        
+                                    <input type="text" class='detail-local' name="bankAccount" ng-model="settmentinvoice.bankAccount" ng-pattern="bankAcountRegExp" ng-minlength=15 ng-maxlength=25 required>
+                                    <span class="tip err" ng-show="myForm.bankAccount.$dirty && myForm.bankAccount.$invalid || settmentinvoice.invoiceSubmit && myForm.bankAccount.$invalid">
+                                        <span ng-show="myForm.bankAccount.$error.required">{{i18n('请输入银行账户')}}</span>
+                                        <span ng-show="myForm.bankAccount.$error.pattern">{{i18n('请输入银行账户')}}15-25{{i18n('位数字')}}</span>
+                                    </span>
+                                    <div class="clear"></div>
+                                </dd>
+                            </dl>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--有增票资质的发票-->
+            <div class="container-invoice" ng-if="invoice.toSaveInvoiceObj.invoiceType==2&&personVat.auditStatus!=null">
+                <span>{{i18n('公司名称')}}：{{personVat.unitName}}</span>
+                <span>{{i18n('纳税人识别码')}}：{{personVat.taxpayerIdentificationCode}}</span>
+                <span>{{i18n('注册地址')}}：{{personVat.registerAddress}}</span>
+                <span>{{i18n('注册电话')}}：{{personVat.registerPhone}}</span>
+                <span>{{i18n('开户银行')}}：{{personVat.bankDeposit}}</span>
+                <span>{{i18n('银行账户')}}：{{personVat.bankAccount}}</span>
+                <span>{{i18n('收票人')}}：{{personVat.goodReceiverName}}</span>
+                <span>{{i18n('联系方式')}}：{{personVat.goodReceiverMobile}}</span>
+                <span>{{i18n('所在地区')}}：{{personVat.goodReceiverProvince}}{{personVat.goodReceiverCity}}{{personVat.goodReceiverArea}}</span>
+                <span>{{i18n('详细地址')}}：{{personVat.goodReceiverAddress}}</span>
+            </div>
+            <div class="marr178">
+                    <!-- ng-disabled="invoice.toSaveInvoiceObj.invoiceType==2"  -->
+                <input class="first-input" type="button" name="" value="{{i18n('确定')}}" ng-if="!(invoice.toSaveInvoiceObj.invoiceType==2 && !personVat.unitName)" ng-click="invoice.invoiceSave(invoice.toSaveInvoiceObj.invoiceType)">
+                <input class="first-input" type="button" name="" value="{{i18n('确定')}}"
+                ng-disabled="!settmentinvoice.goodReceiverName || !invoice.selectedDistrict || !invoice.selectedUnit || !invoice.selectedPosition || !settmentinvoice.goodReceiverAddress || !settmentinvoice.goodReceiverMobile || !settmentinvoice.unitName || !settmentinvoice.taxpayerIdentificationCode || !settmentinvoice.registerAddress || !settmentinvoice.registerPhone || !settmentinvoice.bankDeposit || !settmentinvoice.bankAccount"
+                ng-if="invoice.toSaveInvoiceObj.invoiceType==2 && !personVat.unitName" 
+                ng-click="invoice.invoiceSave(invoice.toSaveInvoiceObj.invoiceType)">
+                <input class="second-input" type="button" name="" value="{{i18n('取消')}}" ng-click="invoice.changeInvoiceShow(false)">
+            </div>
+        </div>
+    </div>
+    <!-- 发票信息弹框 end -->
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                total-page="totalPage" ng-if="ownInvoice.isShowPage"></div>

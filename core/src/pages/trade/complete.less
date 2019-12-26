@@ -1,0 +1,177 @@
+@import url("../../common/css/i-var_${skin}.less");
+@import url("../../common/css/i-base.less");
+@import url("../../common/css/i-address.less");
+@import url("../../common/css/i-popbox.less");
+@import url("../../common/css/i-button.less");
+@import url("../../common/css/i-icon.less");
+@import url("../../common/css/i-dropdown.less");
+@import url("../../common/css/i-header.less");
+@import url("../../common/css/i-footer.less");
+@import url("../../common/css/i-location.less");
+@import url("../../common/css/i-miniCart.less");
+@import url("../../common/css/i-global-nav.less");
+@import url("../../common/css/i-feedback.less");
+@import url("../../common/css/reset.less");
+
+.flexible (@direction: column) {
+  display: flex;
+  flex-direction: @direction;
+  align-items: center;
+}
+
+.container {
+  position: relative;
+  width: 1000px;
+  .shopTitle {
+    height: 50px;
+    width: 426px;
+    position: absolute;
+    left: 380px;
+    top: -78px;
+    font-size: 20px;
+  }
+  .pay-complete {
+    width: 100%;
+    padding: 30px 0;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    .flexible(row);
+    justify-content: space-between;
+
+    &-tip {
+      .flexible;
+
+      span {
+        width: 200px;
+        border-right: 1px dashed #999;
+        .flexible;
+        justify-content: center;
+      }
+      i {
+        font-size: 28px;
+        color: #1cb77b;
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: 400;
+      }
+    }
+
+    &-order {
+      width: calc(~"100% - 200px - 320px");
+      padding: 0 60px;
+      justify-content: flex-start;
+      font-weight: bold;
+
+      .money {
+        font-size: 18px;
+        color: #c00;
+      }
+
+      h4 {
+        font-size: 14px;
+        color: #333;
+      }
+    }
+
+    &-control {
+      width: 320px;
+      .flexible(row);
+      justify-content: center;
+
+      a {
+        margin: 0 16px;
+        padding: 0 16px;
+
+        &.btn-sign {
+          color: #c00;
+          border: 1px solid #c00;
+          background-color: #fff6f6;
+        }
+      }
+    }
+  }
+
+  .pay-information {
+    margin-top: 24px;
+    .flexible(row);
+
+    &-box {
+      flex: 1;
+      min-height: 260px;
+      padding: 30px 20px;
+      border: 1px solid #f2f2f2;
+
+      h2 {
+        margin: 0 0 12px;
+        font-size: 16px;
+        color: #333;
+      }
+      strong {
+        color: #333;
+      }
+      em {
+        font-style: normal;
+      }
+    }
+  }
+
+  .pay-complete-left {
+    width: 300px;
+    float: left;
+    background-color: @completeActiveProgressBarColor;
+    h1 {
+      text-align: center;
+      font-size: 40px;
+      color: @whiteColor;
+      font-weight: normal;
+      margin-top: 33px;
+      margin-bottom: 12px;
+    }
+    .money {
+      text-align: center;
+      color: @whiteColor;
+      font-weight: bold;
+    }
+    .look {
+      text-align: center;
+    }
+    .btn-com {
+      background-color: @completeCurrentProgressBarColor;
+      min-width: 100px;
+      height: 35px;
+      border-radius: @searchRadius;
+      margin: 40px 10px;
+    }
+  }
+  .pay-complete-right {
+    width: 700px;
+    float: left;
+    height: 231px;
+    overflow-y: auto;
+    padding: 5px 20px;
+    box-sizing: border-box;
+    background-color: @backgroundColor;
+    .xinxi {
+      .name {
+        margin-right: 20px;
+      }
+    }
+    .jieshao {
+      span {
+        margin-right: 5px;
+      }
+    }
+    h4 {
+      margin: 12px 0;
+    }
+  }
+
+  .footer-img {
+    margin-top: 80px;
+    margin-bottom: 30px;
+  }
+}
+.complete-marginB {
+  margin-bottom: 100px;
+}

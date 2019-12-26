@@ -1,0 +1,22 @@
+{
+    "code": "0",
+    "message": "请求成功3",
+    "errMsg": null,
+    "data": {
+        "merchantId": "-99",
+        "pageCode": "1",
+        "domain": null,
+        "appKey": null,
+        "appId": null,
+        "code": null,
+        "link": null,
+        "scriptUrl": null,
+        "userKey": null,
+        "siteId": "st_1000",
+        "settingId": "st_1000_template_36",
+        "uId": "",
+        "uName": "",
+        "userLevel": "0"
+    },
+    "stackTrace": null
+}

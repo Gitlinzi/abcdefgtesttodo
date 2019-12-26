@@ -1,0 +1,39 @@
+{
+  "code": "0",
+  "message": "操作成功",
+  "errMsg": null,
+  "data": {
+    "id": 77,
+    "orderCode": "160903962413373333",
+    "createTime": 1472892348000,
+    "afterSalesProductVOs": [
+      {
+        "id": 197,
+        "mpId": 1229,
+        "productPicPath": "http://cdn.oudianyun.com/lyf-local/trunk/back-cms/1501816286450_461_53.jpg@base@tag=imgScale&q=80",
+        "productItemNum": 1,
+        "chineseName": "【万科85平户型】灯具套餐 多风格选择",
+        "returnProductItemNum": 0,
+        "mayReturnProductItemNum": 1,
+        "productPayPrice": null,
+        "productPriceFinal": 398,
+        "returnId": null,
+        "productItemAmount": 408
+      },
+      {
+        "id": 198,
+        "mpId": 212,
+        "productPicPath": "http://cdn.oudianyun.com/lyf-local/trunk/back-cms/1501816360135_2322_66.jpg@base@tag=imgScale&q=80",
+        "productItemNum": 3,
+        "chineseName": "欧普 led吸顶灯具长方形 客厅卧室灯简约现代大气",
+        "returnProductItemNum": 0,
+        "mayReturnProductItemNum": 3,
+        "productPayPrice": null,
+        "productPriceFinal": 42.8,
+        "returnId": null,
+        "productItemAmount": 128.4
+      }
+    ]
+  },
+  "trace": "124!$1#@168%&192!$,77380,61777623239122380230594"
+}

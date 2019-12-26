@@ -1,0 +1,34 @@
+<div class="message">
+    <div class="message-title">
+        <span>
+            {{i18n('活动消息')}}
+            <span ng-if="unReadSysteamMessage||unReadActiveMessage" class="unReadNum">{{unReadSysteamMessage + unReadActiveMessage}}</span>
+            <span ng-if="unReadSysteamMessage" class="systeamUnReadNum">{{unReadSysteamMessage}}</span>
+            <span ng-if="unReadActiveMessage" class="activeUnReadNum">{{unReadActiveMessage}}</span>
+        </span>
+    </div>
+    <!-- 无消息记录的情况下 begin -->
+    <div ng-if="!activeMessageArr" class="message-none">
+        <div class="message-left">
+            <span></span>
+        </div>
+    </div>
+    <!-- 无消息记录的情况下 end -->
+    <!-- 有消息记录的情况下 begin -->
+    <div ng-if="activeMessageArr.length>0" ng-repeat="x in activeMessageArr" class="container-box">
+        <div ng-click="changeMessage(activeMessageArr,x,$index,$event)" class="container-text clearfix">
+            <span class="text-left">
+                <span  ng-class="{'circular':!x.isRead}"></span>
+                <span ng-if="!x.isRead" class="text-two">【{{i18n('新增')}}】</span>
+                <span class="text-one">{{x.msgTitle}}</span>
+            </span>
+            <span class="text-right">{{x.sendTime | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+        </div>
+        <div ng-show="x.isShow" class="text-title" class="messageDetail">
+            <p ng-bind-html="x.msgContent | toTrusted"></p>
+            <a href="">{{i18n('查看详情')}}</a>
+        </div>
+    </div>
+    <div ng-if="activeMessageArr.length>0" pagination page-size="activeMessage.pageSize" page-no="activeMessage.pageNo" total-count="activeMessage.totalCount" total-page="activeMessage.totalPage"></div>
+    <!-- 有消息记录的情况下 end -->
+</div>

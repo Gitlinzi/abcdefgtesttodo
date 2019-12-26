@@ -1,0 +1,8 @@
+<div class='total' ng-if="!isPointPro">
+    <div class='sales'>
+        累计销量 <span>{{item.volume4sale | numMultipleFormat : 10000 : '+'}}</span>
+    </div>
+    <div class='assess'>
+        累计评价 <span>{{comment.ratingUserCount||comment.defaultRating}}</span>
+    </div>
+</div>

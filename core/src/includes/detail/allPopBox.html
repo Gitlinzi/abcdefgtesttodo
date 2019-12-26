@@ -1,0 +1,193 @@
+<!-- 查看赠品弹出框 Begin -->
+<div ng-show="giftIsShow" class="see-gift-box">
+    <div class="see-gift">
+        <div class="bomBox-title gift-bomBox-title clearfix">
+            <div class="bomBox-left">
+                <span>{{i18n('查看赠品')}}</span>
+            </div>
+            <div class="bomBox-right">
+                <span ng-click="$parent.giftIsShow=false" class="close-img"></span>
+            </div>
+        </div>
+        <div class="gift-bottom">
+            <span ng-click="giftArrowRight()" class="gift-arrow" ng-class="{'gift-arrow-left':noArrowLeft,giftArrowLeft:yesArrowLeft}"></span>
+            <span ng-click="giftArrowLeft()" class="gift-arrow" ng-class="{'gift-arrow-right':noArrowRight,giftArrowRight:yesArrowRight}"></span>
+            <div class="gift-top">
+                <span class="full-gift" ng-style="{background:'#'+ (promotionType_gift[0].bgColor?promotionType_gift[0].bgColor:'f23030')}">{{promotionType_gift[0].iconText}}</span>
+                <span class="change-text">{{promotionType_gift[0].promotionGiftDetailList[0].specificDescription}}</span>
+            </div>
+            <div class="gift-good-box">
+                <ul class="clearfix gift-box">
+                    <li ng-repeat="v in giftDetail">
+                        <a href="javascript:void(0)">
+                            <img width="80" height="80" ng-src="{{v.picUrl}}" alt="image"/>
+                        </a>
+                        <span class="gift-mask">x{{v.giftNum}}</span>
+                        <span ng-show="v.soldOut" class="gift-mask">{{i18n('已赠完')}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="packingMethodFun.allPromotionIsShow" class="see-gift-box">
+    <div class="see-gift see-more-gift">
+        <div class="bomBox-title gift-bomBox-title clearfix">
+            <div class="bomBox-left">
+                <span>{{i18n('促销信息')}}</span>
+            </div>
+            <div class="bomBox-right">
+                <span ng-click="hideSerialPromotion()" class="close-img"></span>
+            </div>
+        </div>
+        <div class="gift-bottom gift-bottom-limit-height">
+            <span ng-repeat="prom in packingMethodFun.currentProduct.packingPromotions" class="block-box">
+                <div class="gift-top" ng-if="prom.frontPromotionType!=1005">
+                    <span class="full-gift" ng-style="{background:'#'+ (prom.bgColor?prom.bgColor:'f23030'),color:'#'+ (prom.fontColor?prom.fontColor:'fff')}">{{prom.iconText}}</span>
+                    <span class="change-text">
+                        {{prom.description}}
+                        <a ng-click="jumpUrl(prom)" class="more-see" ng-if="prom.frontPromotionType!=1007 && prom.frontPromotionType!=1 && prom.frontPromotionType!=7 && prom.frontPromotionType!=8">{{i18n('查看详情')}}</a>
+                    </span>
+                </div>
+                <div class="gift-top" ng-if="prom.frontPromotionType==1005">
+                    <span class="full-gift" ng-style="{background:'#'+ (prom.bgColor?prom.bgColor:'f23030'),color:'#'+ (prom.fontColor?prom.fontColor:'fff')}">{{prom.iconText}}</span>
+                    <span class="change-text">{{prom.promotionGiftDetailList[0].specificDescription}}</span>
+                </div>
+                <div class="gift-more-good-box" ng-if="prom.frontPromotionType==1005 && prom.promotionGiftDetailList[0].singleGiftInfoList && prom.promotionGiftDetailList[0].singleGiftInfoList.length > 0">
+                    <ul class="clearfix gift-box">
+                        <li ng-repeat="v in prom.promotionGiftDetailList[0].singleGiftInfoList">
+                            <a href="javascript:void(0)">
+                                <img width="80" height="80" ng-src="{{v.picUrl}}" alt="image"/>
+                            </a>
+                            <span class="gift-mask">x{{v.giftNum}}</span>
+                            <span ng-show="v.soldOut" class="gift-mask">{{i18n('已赠完')}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>
+<!-- 查看赠品弹出框 End -->
+<!-- 关注弹出框 -->
+<!-- 收藏成功弹框 begin -->
+<div ng-show="obj.isCheckFavorite" class="bigBox-disable">
+    <div class='follow-box' id="follow-box" style="width: 440px">
+        <dl class='follow-title clearfix'>
+            <dt>{{i18n('收藏')}}</dt>
+            <dd ng-click="obj.isCheckFavorite=false"></dd>
+            <dt style="width: 80px; float: right; color: #cc0000;cursor: pointer;" ng-click="goToCollect()">{{i18n('查看收藏夹')}}</dt>
+        </dl>
+        <div class='clearfix' style="padding: 20px 20px 20px 40px">
+            <div class='take-follow-left clearfix'>
+                <span class='follow-yes' style="margin-right: 28px;float: left">加入到：</span>
+                <div style="float: left">
+                    <label for="female" class="radioStyle-big">
+                        <input id="female" type="radio" ng-model="obj.hasFavorite" value="1">
+                        <span></span> {{i18n('已有标签')}}
+                    </label>
+                    <label for="male" class="radioStyle-big">
+                        <input id="male" type="radio" ng-model="obj.hasFavorite" value="0">
+                        <span></span> {{i18n('创建新标签')}}
+                    </label>
+                </div>               
+            </div>
+            <div class='take-follow-right clearfix'>
+                <div style="width: 300px;height:140px;background-color: #f5f5f5;float: right;margin-top: 8px;padding: 12px" ng-if="obj.hasFavorite==1">
+                    <a href="" class="my-checkbox" ng-repeat="item in obj.labelList" style="width: 33%;display: inline-block;overflow: auto" ng-class="{'active':item.checked ==true}"  ng-click="chooseLabel(item)">
+                        <i class="icon-checkbox"></i>
+                        <span>{{item.tagName}}</span>
+                    </a>
+                    <a ng-if="!obj.labelList || !obj.labelList.length">暂无已收藏标签~</a>
+                </div>
+                <div style="width: 300px;height:75px;background-color: #f5f5f5;float: right;margin-top: 8px;padding: 12px 0 0 12px;box-sizing: border-box" ng-if="obj.hasFavorite==0">
+                    <input type="text" style="width: 270px; height: 30px;border: 1px solid #ddd;padding-left: 5px;box-sizing: border-box" ng-model="obj.labelText">
+                </div>
+            </div>
+            <div class="all-btn" style="padding: 15px 0 0 80px">
+                <button style="border: none;background-color: #cc0000;width: 90px;height:36px;color:#fff;border-radius: 18px;" 
+                        ng-click="confirmSetLabel(1)"
+                        ng-if="obj.hasFavorite==1 && obj.labelList.length && obj.hasChooseLabel">确定</button>  
+                <button style="border: 1px solid #ddd;width: 90px;height:36px;border-radius: 18px;margin-left: 5px;" 
+                        ng-click="obj.isCheckFavorite=false"
+                        ng-if="obj.hasFavorite==1 && (!obj.labelList.length || !obj.hasChooseLabel)">确定</button>  
+                <button style="border: none;background-color: #cc0000;width: 90px;height:36px;color:#fff;border-radius: 18px;" 
+                        ng-click="confirmSetLabel(2)"
+                        ng-if="obj.hasFavorite==0 && obj.labelText">确定</button>  
+                <button style="border: 1px solid #ddd;width: 90px;height:36px;border-radius: 18px;margin-left: 5px;" 
+                        ng-if="obj.hasFavorite==0 && !obj.labelText">取消</button>  
+                <button style="border: 1px solid #ddd;width: 90px;height:36px;border-radius: 18px;margin-left: 5px;" ng-click="obj.isCheckFavorite=false">取消</button>  
+            </div> 
+        </div>
+    </div>
+</div>
+<!-- 收藏成功弹框  end -->
+<!-- 收藏失败弹框 begin -->
+<div ng-show="sureCheckFavorite" class="bigBox-disable">
+    <div class='follow-box' id="follow-box">
+        <dl class='follow-title clearfix'>
+            <dt>{{i18n('收藏')}}</dt>
+            <dd ng-click="closeCheckFavorite()"></dd>
+        </dl>
+        <div class='take-follow clearfix'>
+            <div class='take-follow-left'>
+                <span class='follow-no'></span>
+            </div>
+            <div class='take-follow-right'>
+                <span class='follow-fair'>{{i18n('您已经收藏该商品')}}</span>
+                <a href="/home.html#/frequence" class='chare-follow'>{{i18n('查看我的收藏')}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-show="favoriteSoldOut" class="bigBox-disable">
+    <div class='follow-box' id="follow-box">
+        <dl class='follow-title clearfix'>
+            <dt>{{i18n('收藏')}}</dt>
+            <dd ng-click="closeFavoriteSoldOut()"></dd>
+        </dl>
+        <div class='take-follow clearfix'>
+            <div class='take-follow-left'>
+                <span class='follow-no'></span>
+            </div>
+            <div class='take-follow-right'>
+                <span class='follow-fair'>{{i18n('该商品已下架')}}</span>
+                <a href="/home.html#/frequence" class='chare-follow'>{{i18n('查看我的收藏')}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 收藏失败弹框 end -->
+<!-- 分享弹出框 -->
+<div ng-show='shareBox' class="share-mes-bigBox">
+    <div class='share-mes'>
+        <dl class='mes-title clearfix'>
+            <dt>{{i18n('提示')}}</dt>
+            <dd ng-click="closeButton()"></dd>
+        </dl>
+        <div class='mes-box'>
+            <ul class='share-box clearfix'>
+                <li class='share-icon-one'></li>
+                <li class='share-icon share-icon-two'></li>
+            </ul>
+            <textarea class="textarea-one" maxlength=100 ng-change="changeText()" ng-model="$parent.messageLength"></textarea>
+            <p class='text-p'>{{i18n('还可以输入')}}{{100-$parent.messageLength.length}}{{i18n('字')}}</p>
+            <ul class='share-img-box clearfix'>
+                <li ng-repeat="v in itemInfoImage">
+                    <img ng-click="choseShareImg(v,itemInfoImage)" ng-mouseover="isImgBorder=true" ng-mouseleave="isImgBorder=false" ng-class='{imgBorder:isImgBorder,setImgBorder:v.isChecked}' witth="60" height="60" ng-src="{{v.pictureUrl}}" alt="image"/>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="default-pop-box" ng-if="addCartSuccess">
+   <div id="collectDialogPack" class="dialogItem collectDialogPack">
+       <a href="javascript:void(0)" class="tooltipClose dialog-close dialog-close-notie" ng-click="hideCartSuccessPop()">&times;</a>
+       <div class="dialog-content">
+           <div class="dialog-header">
+               <h5 class="dialog-title">{{i18n('友情提示')}}</h5>
+           </div>
+           <div class="dialog-body">{{i18n('添加成功')}}！<a class="red" href="cart.html">{{i18n('去结算')}}</a>&nbsp;<a href="javascript:;" class="tooltipClose">{{i18n('继续购物')}}</a></div>
+       </div>
+   </div>
+</div>

@@ -1,0 +1,53 @@
+/* 路径导航 (面包屑) */
+
+#breadcrumb,
+#searchBreadcrumb{
+	float: left;
+	padding: 20px 0 0;
+	color: @ccGreyColor;
+	overflow: hidden;
+	*zoom: 1;
+
+	& input{
+		width: 144px;
+		height: 22px;
+		border-radius: 10px;
+		outline:medium;
+		//padding-left: 12px;
+		padding:0px 20px 0px 12px;
+	}
+	& .search-box{
+		display: inline-block;
+		position: relative;
+	}
+	& .right-icon{
+		display: inline-block;
+		width: 33px;
+		position: relative;
+		&::after{
+			content: '';
+			position: absolute;
+			height: 10px;
+			width: 7px;
+			top:-10px;
+			left:10px;
+		  	background: url('../../images/company/company-default.png') no-repeat -25px -126px;
+		}
+	}
+	& .result{//路径导航里的结果个数
+		float: right;
+		color: @66GreyColor;
+	}
+}
+/* 搜索结果个数 */
+#resultcount{
+	float: right;
+	padding: 20px 0 0;
+	color: @99GreyColor;
+	text-align: right;
+}
+.next{
+	float: left;
+	padding: 20px 0 0;
+	color: @ccGreyColor;
+}

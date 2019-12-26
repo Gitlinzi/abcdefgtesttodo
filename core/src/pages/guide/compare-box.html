@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="heimdall" content="比较盒">
+	<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/plugins/jquery.calendar-1.4.1/css/jquery.cxcalendar#((skin)).css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/item#((skin)).css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/compareBox#((skin)).css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/plugins/datetimepicker/jquery.datetimepicker.min#((skin)).css?v=${version}">
+
+</head>
+
+<body ng-app="appControllers" ng-controller="compareBoxCtrl" ng-style="{'background-color':bgColor}">
+@@include("header.html")
+@@include("global-nav.html")
+
+<div class="container width1000">
+    <div class="container-nav">
+				<a href="/index.html">{{i18n('首页')}}</a>
+				<span>></span>
+				<a ng-click="goSearch()">{{i18n('搜索')}}</a>
+				<span>></span>
+				<a href="#">{{i18n('商品比较盒')}}</a>
+	</div>
+    <div class="order-groups clearfix">
+        <ul class="w90 order-groups-ul" style="background-color: #f6f6f6;">
+            
+            <li class="bl bb h222">{{i18n('商品图片')}}</li>
+            <li class="bl bb h67">{{i18n('商品名称')}}</li>
+            <li class="bl bb h40">{{i18n('商品编码')}}</li>
+            <li class="bl bb h50">{{i18n('单价')}}</li>
+            <li class="bl bb h40">{{i18n('数量')}}</li>
+            <li class="bl bb h30">{{i18n('操作')}}</li>
+            <li class="bl bb h40" ng-repeat="item in proProptyList track by $index">{{item}}</li>
+        </ul>
+        <ul class="w222 order-groups-ul" ng-repeat="item in compareBoxList">
+            
+            <li class="bl bb h222">
+				<img  ng-src="{{item.mainPictureUrl || '/images/bijiaohe.png?v=${version}'}}" alt="">
+			</li>
+            <li class="bl bb h67 ">
+							<a href="/item.html?itemId={{item.mpId}}">
+								<span>{{item.chineseName || '--'}}</span>
+							</a>
+						</li>
+            <li class="bl bb h40 ">{{item.code || '--'}}</li>
+            <li class="bl bb h40 ">{{(item.salePriceWithTax | currency:'￥') || '--'}}</li>
+            <li class="bl bb h40 ">
+								<div mini-add-cart-two prod="item" cart-name="{{switchConfig.common.allCartBtnName}}" ng-if="item.mpId"></div>
+            </li>
+            <li class="bl bb h30" ng-if="item.mpId">
+							<span class="spanTop del themeColor" ng-click="delCompareBox(item.mpId)">{{i18n('删除')}}</span>
+							<span class="spanTop collect" ng-click="addFavorite($event,item)">{{i18n('收藏')}}</span>
+							<span class="spanTop tianjia" ng-click="addAdvance(item,compareBoxList)">{{i18n('添加到预置订单')}}</span>
+						</li>
+            <li class="bl bb h30" ng-if="!item.mpId"></li>
+            <li class="bl bb h40" ng-repeat="proty in spesList track by $index">{{item[proty] || '--'}}</li>
+			<div add-advance-order prod="item"></div>
+		</ul>
+		<div class="none-order align-center" ng-if="compareBoxList.length == 0">
+			<div class="none-right">
+				<span>{{i18n('暂无数据')}}</span>
+			</div>
+        </div>
+        @@include("detail/allPopBox.html")
+	</div>
+
+	<div bomb-box cart-data="favoriteSuccessData"></div>
+
+</div>
+
+
+
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/plugins/datetimepicker/jquery.datetimepicker.full.js?v=${version}"></script>
+<script type="text/javascript" src="/plugins/jquery.calendar-1.4.1/js/jquery.cxcalendar.js?v=${version}"></script>
+<script type="text/javascript" src="/compare-box.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=index"></script>
+</body>
+</html>

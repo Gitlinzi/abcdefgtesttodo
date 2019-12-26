@@ -1,0 +1,43 @@
+<div class="credit-box" ng-init="init()">
+     <div class="credit-top">
+         <span class="top-text">浏览历史</span>
+         <div class="right-top">
+            <label for="coupon" class="checkboxStyle-big mgR10">
+                <input id="coupon" type="checkbox" ng-model="ck" ng-change="checkAll()">
+                <span></span>
+            </label>
+            <span class="all-chose">全选</span>
+            <span class="all-delete" ng-click="batchDeleteFootList()">批量删除</span>
+         </div>
+     </div>
+    <div class="history-time" ng-show="!isShowIcon" ng-repeat="foot in footList track by $index" when-scrolled="getFootList()">
+        <p class="text-box">
+            <span class="square-icon"></span>
+            <span class="time-text">{{foot.name |formatTime:true }}</span>
+            <span class="number-text">{{foot.name | formatTime:false}}</span>
+            <span class="square-line"></span>
+        </p>
+        <div class="goods-list-bigBox">
+            <div class="goods-list-box" ng-mouseover="boxIsShow=true" ng-mouseleave="boxIsShow=false" ng-repeat="g in foot.values track by $index">
+                <a href="item.html?itemId={{g.seriesParentId||g.mpId}}">
+                    <img src="{{g.picUrl}}" alt="" width="196" height="196">
+                    <p class="goods-text">{{g.name| textLengthFormat: 18: '...'}}</p>
+                </a>
+                <span class="goods-num-text">{{g.realPrice | currency:'￥'}}</span>
+                <div ng-show="g.isChecked">
+                    <span class="goods-list-box-cover goods-list-box-cover-height"></span>
+                    <span class="goods-list-box-cover-right" ng-click="cancelFav(g)"></span>
+                </div>
+                <span class="cancer-follow" ng-show="boxIsShow && !g.isChecked" ng-click="deleteFootList(g.mpId)">删除</span>
+            </div>
+        </div>
+    </div>
+    <div class="history-none" ng-if="isShowIcon">
+        <div class="history-left">
+            <span></span>
+        </div>
+        <div class="history-right">
+            <span>{{i18n('暂无浏览历史')}}~</span>
+        </div>
+    </div>
+</div>

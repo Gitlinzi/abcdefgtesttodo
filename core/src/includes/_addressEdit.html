@@ -1,0 +1,167 @@
+<form class="form add-user" id="addressEdit" name="addressEdit" novalidate style="display: block">
+    <div class="add-title clearfix">
+        <span ng-if="!addr.id && !address.isEdit" class="title-text">{{i18n('新增收货人信息')}}</span>
+        <span ng-if="addr.id || address.isEdit" class="title-text">{{i18n('编辑收货人信息')}}</span>
+        <span class="close-img" ng-click="address._cleanStatus()"></span>
+    </div>
+    <div ng-init="hasError={color:'#ff0000'}">
+        <dl class="clearfix">
+            <dt>
+                <span class="colorRed">*</span>
+                <span>{{i18n('收货人')}}</span>
+            </dt>
+            <dd>
+                <input type="text"
+                         class="input seem-height"
+                         placeholder="{{i18n('姓名')}}"
+                         id="userName"
+                         style="padding-left:10px;"
+                         name="userName"
+                         ng-model="newAddress.userName"
+                         ng-blur="validateStatus.nameTipShow=false"
+                         ng-focus="validateStatus.nameTipShow=true"
+                         ng-pattern="/^[\u4E00-\u9FA5\w\d-]{1,20}$/"
+                         required>
+                <div class="tip addr err pddleft"
+                     ng-style="{display:validateStatus.nameTipShow?'block':'none'}">{{i18n('仅支持')}}20{{i18n('个字符以内的中文')}}、{{i18n('英文或数字')}}</div>
+                <div class="tip addr err pddleft"
+                     ng-style="{display:!validateStatus.nameTipShow && (addressEdit.userName.$dirty||address.invalidSubmit) && addressEdit.userName.$invalid?'block':'none'}">
+                    <span ng-show="addressEdit.userName.$error.required">{{i18n('收货人不能为空')}}</span>
+                    <span ng-show="addressEdit.userName.$error.pattern">{{i18n('仅支持')}}20{{i18n('个字符以内的中文')}}、{{i18n('英文或数字')}}</span>
+                </div>
+                <div class="clear"></div>
+            </dd>
+        </dl>
+        <dl class="clearfix">
+            <dt class="fl">
+                <span class="colorRed">*</span>
+                <span>{{i18n('所在地区')}}</span>
+            </dt>
+            <dd>
+                <select class="select"
+                        name="province"
+                        style="padding-left:5px;"
+                        id="province"
+                        required
+                        ng-blur="validateStatus.provinceTipShow=false"
+                        ng-focus="validateStatus.provinceTipShow=true"
+                        ng-model="newAddress.provinceCode"
+                        ng-change="_getLayerAddress(newAddress.provinceCode,2);validate('province',newAddress.provinceCode)"
+                        ng-options="pro.code+'_'+pro.code as pro.name for pro in multiAddress.provinces">
+                    <option value="">--{{i18n('省份')}}--</option>
+                </select>
+
+                <select class="select"
+                        name="city"
+                        id="city"
+                        required
+                        ng-blur="validateStatus.cityTipShow=false"
+                        ng-focus="validateStatus.cityTipShow=true"
+                        ng-model="newAddress.cityCode"
+                        ng-change="_getLayerAddress(newAddress.cityCode,3);validate('city',newAddress.cityCode)"
+                        ng-options="city.code+'_'+city.code as city.name for city in multiAddress.cities">
+                    <option value="">--{{i18n('城市')}}--</option>
+                </select>
+                <select class="select"
+                        name="region"
+                        id="region"
+                        required
+                        ng-blur="validateStatus.regionTipShow=false"
+                        ng-focus="validateStatus.regionTipShow=true"
+                        ng-model="newAddress.regionCode"
+                        ng-change="validate('region',newAddress.regionCode)"
+                        ng-options="region.code+'_'+region.code as region.name for region in multiAddress.regions">
+                    <option value="">--{{i18n('区县')}}--</option>
+                </select>
+                <div class="tip addr err pddleft"
+                     ng-style="{display:validateStatus.provinceTipShow?'block':'none'}">{{i18n('请选择省份')}}</div>
+                <div class="tip addr err pddleft"
+                     ng-style="{display:validateStatus.cityTipShow?'block':'none'}">{{i18n('请选择城市')}}</div>
+                <div class="tip addr pddleft"
+                     ng-style="{display:validateStatus.regionTipShow?'block':'none'}">{{i18n('请选择区县')}}</div>
+                <div class="tip addr err pddleft"
+                     ng-style="{display:!validateStatus.provinceTipShow&&!validateStatus.cityTipShow&&!validateStatus.regionTipShow
+                     &&(addressEdit.province.$dirty||addressEdit.city.$dirty||addressEdit.region.$dirty||address.invalidSubmit)
+                     && (addressEdit.province.$invalid||addressEdit.city.$invalid||addressEdit.region.$invalid)?'block':'none'}">
+                    <span ng-show="addressEdit.province.$error.required">{{i18n('省份')}}</span
+                        ><span ng-show="addressEdit.city.$error.required">{{i18n('城市')}}</span
+                        ><span ng-show="addressEdit.region.$error.required">{{i18n('区县')}}</span
+                        ><span ng-show="addressEdit.province.$error.required||addressEdit.city.$error.required||addressEdit.region.$error.required">{{i18n('不能为空')}}</span>
+                </div>
+                <div class="clear"></div>
+                <!--<span ng-style="hasError"-->
+                      <!--ng-show="validateStatus.v_province||validateStatus.v_city||validateStatus.v_region">*&nbsp;{{validateMessage.v_address}}</span>-->
+            </dd>
+        </dl>
+        <dl class="clearfix">
+            <dt>
+                <span class="colorRed">*</span>
+                <span>{{i18n('详细地址')}}</span>
+            </dt>
+            <dd><input type="text"
+                       class="input no-height"
+                       style="padding-left:5px;"
+                       id="detailAddress"
+                       name="detailAddress"
+                       ng-model="newAddress.detailAddress"
+                       ng-model-options="{updateOn:'blur'}"
+                       placeholder="{{i18n('街道名称编号')}} {{i18n('楼宇名称')}} {{i18n('单位')}} {{i18n('房间')}}"
+                       ng-pattern=/.{2,100}/ required
+                       maxlength="100"
+                       ng-blur="validateStatus.detailAddressTipShow=false"
+                       ng-focus="validateStatus.detailAddressTipShow=true"/>
+                <div class="tip addr err pddleft"
+                     ng-style="{display:validateStatus.detailAddressTipShow?'block':'none'}">{{i18n('仅支持')}}100{{i18n('个字符以内的中文')}}、{{i18n('英文或数字')}}</div>
+                <div class="tip addr err pddleft"
+                     ng-style="{display:!validateStatus.detailAddressTipShow && (addressEdit.detailAddress.$dirty||address.invalidSubmit) && addressEdit.detailAddress.$invalid?'block':'none'}">
+                    <span ng-show="addressEdit.detailAddress.$error.required">{{i18n('详细地址不能为空')}}</span>
+                    <span ng-show="addressEdit.detailAddress.$error.pattern">{{i18n('详细地址不合法')}}</span>
+                </div>
+                <div class="clear"></div>
+            </dd>
+        </dl>
+        <dl class="clearfix">
+            <dt>
+                <span class="colorRed">*</span>
+                <span>{{i18n('邮编')}}</span>
+            </dt>
+            <dd><input type="text" class="input seem-height"
+                       id="mobile"
+                       style="padding-left:5px;"
+                       name="mobile"
+                       ng-model="newAddress.mobile"
+                       ng-model-options="{updateOn:'blur'}"
+                       placeholder="{{i18n('请输入')}}"
+                       ng-pattern=/^[0-9]{11}$/ required
+                       ng-blur="validateStatus.mobileTipShow=false"
+                       ng-focus="validateStatus.mobileTipShow=true"/>
+                <span ng-if="false">{{i18n('或固定电话')}} <input type="text" class="input" ng-disabled="true"
+                             ng-model-options="{updateOn:'blur'}"
+                             ng-model="newAddress.zip" placeholder="{{i18n('区号')}}"/> -
+                <input type="text" class="input" ng-disabled="true"
+                       ng-model-options="{updateOn:'blur'}"
+                       ng-model="newAddress.phone" placeholder="{{i18n('电话号码')}}"/> -
+                <input type="text" class="input" ng-disabled="true"
+                       ng-model-options="{updateOn:'blur'}"
+                       ng-model="newAddress.ext" placeholder="{{i18n('分机号')}}"/></span>
+                <span ng-style="hasError" ng-show="validateStatus.v_mobile">*&nbsp;{{validateMessage.v_mobile}}</span>
+                <div class="addr pddleft"
+                     ng-style="{display:validateStatus.mobileTipShow?'block':'none'}">{{i18n('请输入')}}11{{i18n('位的手机号码')}}</div>
+                <div class="addr err pddleft"
+                     ng-style="{display:!validateStatus.mobileTipShow && (addressEdit.mobile.$dirty||address.invalidSubmit) && addressEdit.mobile.$invalid?'block':'none'}">
+                    <span ng-show="addressEdit.mobile.$error.required">{{i18n('手机不能为空')}}</span>
+                    <span ng-show="addressEdit.mobile.$error.pattern">{{i18n('手机号码不合法')}}</span>
+                </div>
+                <div class="clear"></div>
+            </dd>
+        </dl>
+        <div class="add-bottom">
+            <input type="button" class="btn"
+                    ng-click="address._addNewAddress(addressEdit.$invalid)"
+                    ng-if="!addr.id && !address.isEdit" value="{{i18n('保存收货人信息')}}"/>
+            <input type="button" class="btn"
+                    ng-click="address._updateAddress(addressEdit.$invalid,addr.id)"
+                    ng-if="addr.id || address.isEdit" value="{{i18n('保存收货人信息')}}"/>
+        </div>
+    </div>
+</form>

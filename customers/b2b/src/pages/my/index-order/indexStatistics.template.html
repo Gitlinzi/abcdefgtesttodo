@@ -1,0 +1,48 @@
+<div class="credit-box">
+    <div class="credit-top">
+        <span class="top-text">欠量统计</span>
+
+    </div>
+    <div class="businessList-top datetimepicker">
+        <span class="date-title f14">下单时间：</span>
+        <div class="dis datetimepicker-content">
+            <div class="input-group">
+                <input type="text"  value="" class="timeiconbg date-time-picker-input"  datetimepicker for-id="logListModalFrom" options="options1" close="close(from)" max-date="endDateStr" ng-model="obj.startTime">
+                <span class="input-group-addon">至</span>
+                <input type="text"  value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalTo" options="options2" close="close(to)" min-date="startDateStr" ng-model="obj.endTime">
+            </div>
+        </div>
+        <div class="receivable-right">
+            <span class="bill-text f14 dis">商品名称：</span>
+            <input type="text" class="num-bill f14" ng-model="obj.mpName">
+            <span class="bill-text f14 dis">货号：</span>
+            <input type="text" class="num-bill f14" ng-model="obj.number">
+            <span class="search-text f14 dis" ng-click="init()">搜索</span>
+        </div>
+    </div>
+    <div class="businessList-container">
+        <div class="businessList-container-top">
+            <span class="statistic-title f12 dis">商品名称</span>
+            <span class="statistic-num-title f12 dis">货号</span>
+            <span class="statistic-of-title  f12 dis">购买数量</span>
+            <span class="statistic-orign-title f12 dis">欠量</span>
+        </div>
+        <div class="businessList-main" ng-repeat="sl in statistic.list">
+            <span class="statistic-order-time f12 dis">{{sl.productName}}</span>
+            <span class="statistic-order-num  f12 dis">{{sl.code}}</span>
+            <span class="statistic-order-of-num  f12 dis">{{sl.buyNum}}</span>
+            <span class="statistic-order-oring  f12 dis">{{sl.owedNum}}</span>
+        </div>
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+         total-page="totalPage" ng-if="isShowPage"></div>
+    <!-- 缺省图 -->
+    <div class="none-order" ng-if="isShowIcon">
+        <div class="none-left">
+            <span class="none-left-img"></span>
+        </div>
+        <div class="none-right">
+            <span>{{i18n('暂无数据')}}~</span>
+        </div>
+    </div>
+</div>

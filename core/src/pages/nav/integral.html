@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>积分商城</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/integral#((skin)).css?v=${version}">
+
+</head>
+<base target="_blank"/>
+<body ng-app="appControllers" ng-controller="integralCtrl" ng-init="init()">
+
+    @@include("header.html")
+    @@include("global-nav.html")
+    <dl ng-include="'includes/_location.html'"></dl>
+    <div id="jumbotron">
+        <div class="advantage">
+            <div class="integralStore">
+                <span>{{i18n('积分商城')}}</span>
+            </div>
+            <div class="ScoreInfor" ng-if="data.ut">
+                <span class="myScore">{{i18n('我的积分')}}: {{userPointInfo.balanceAccount + userPointInfo.freezedAccount}}</span>
+                <span>{{i18n('冻结积分')}}: {{userPointInfo.freezedAccount}}</span>
+            </div>
+            <div class="ScoreInfor" ng-if="!data.ut">
+                <span class="myScore">{{i18n('我的积分')}}:- -</span>
+                <span>{{i18n('冻结积分')}}:- -</span>
+            </div>
+            <!-- <p><a href="">如何赚钱积分&nbsp;<i class="icon-arrow-right"></i></a></p> -->
+            <!-- <em class="signBtn">签到</em> -->
+        </div>
+    </div>
+
+    <div class="integral-title">
+        <div class="container">
+            <div class="tab-left">
+                <ul >
+                    <li ng-repeat="item in data.pointPriceRange">
+                        <a href="/integralSearch.html?isPointPro=1&pointPriceRange={{item.value}}">{{item.text}}</a>
+                    </li>
+                </ul>
+                <!--<div class="tabBox">
+                    <div class="tabInfor">
+                        <h4>{{i18n('积分换购')}}<span>{{i18n('更多')}}<i class="icon-arrow-right"></i></span></h4>
+                    </div>
+                </div>-->
+            </div>
+            <div class="search-right">
+                <div class="search-text">
+                    <input class="search-ipt" type="text" ng-model="data.searchWord" placeholder="{{data.placehold.title}}"/>
+                    <span ng-click="searchPointPro()" class="search-btn">{{i18n('搜索积分商品')}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bgf8f8f8">
+        <div class="container bgf8f8f8">
+            <!--积分换购-->
+            <div class="buy">
+                <div class="buy-title">
+                    <div class="buy-name">{{i18n('积分换购')}}</div>
+                    <div class="buy-more"><a href="/integralList.html?redemptionType=1">{{i18n('更多')}}&nbsp;<i class="icon-arrow-right"></i></a></div>
+                </div>
+                <div class="buy-nav">
+                    <ul>
+                        <li ng-class="{active:data.redemptionType == ''}" ng-click="data.redemptionType='';getRedemptionList()">{{i18n('全部')}}</li>
+                        <li ng-class="{active:data.redemptionType == '0'}" ng-click="data.redemptionType='0';getRedemptionList()">{{i18n('实物')}}</li>
+                        <li ng-class="{active:data.redemptionType == '1'}" ng-click="data.redemptionType='1';getRedemptionList()">{{i18n('优惠券')}}</li>
+                    </ul>
+                </div>
+                <div class="buy-content">
+                    <ul>
+                        <li ng-repeat="(index,item) in data.redemptionList">
+                            <a href="item.html?isPointPro=1&itemId={{item.mpId}}">
+                                <dl>
+                                    <dt><img ng-src="{{item.url160x160}}" alt="{{item.name}}"></dt>
+                                    <dd>
+                                        <h4>{{item.name}}</h4>
+                                        <h5><span>{{i18n('积分')}}</span><em>{{item.pointPrice || 0}}</em>+ <span>￥</span><em>{{item.price}}</em></h5>
+                                        <p>{{i18n('已购买人数')}}：{{item.volume4sale}}</p>
+                                        <cite ng-if="item.realTimeStock != -1">{{i18n('库存')}}：{{item.realTimeStock}}</cite>
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--积分兑换-->
+            <div class="buy">
+                <div class="buy-title exchangeBg">
+                    <div class="buy-name">{{i18n('积分兑换')}}</div>
+                    <div class="buy-more"><a href="/integralList.html?redemptionType=2">{{i18n('更多')}}&nbsp;<i class="icon-arrow-right"></i></a></div>
+                </div>
+                <div class="buy-nav">
+                    <ul>
+                        <li ng-class="{active:data.exchangeType == ''}" ng-click="data.exchangeType='';getExchangeList()">{{i18n('全部')}}</li>
+                        <li ng-class="{active:data.exchangeType == '0'}" ng-click="data.exchangeType='0';getExchangeList()">{{i18n('实物')}}</li>
+                        <li ng-class="{active:data.exchangeType == '1'}" ng-click="data.exchangeType='1';getExchangeList()">{{i18n('优惠券')}}</li>
+                    </ul>
+                </div>
+                <div class="buy-content">
+                    <ul>
+                        <li ng-repeat="(index,item) in data.exchangeList">
+                            <a href="item.html?isPointPro=1&itemId={{item.mpId}}">
+                                <dl>
+                                    <dt><img ng-src="{{item.url160x160}}" alt="{{item.name}}"></dt>
+                                    <dd>
+                                        <h4>{{item.name}}</h4>
+                                        <h5><span>{{i18n('积分')}}</span><em>{{item.pointPrice || 0}}</em></h5>
+                                        <p>{{i18n('已购买人数')}}：{{item.volume4sale}}</p>
+                                        <cite ng-if="item.realTimeStock != -1">{{i18n('库存')}}：{{item.realTimeStock}}</cite>
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--<div class="convert">
+                <div class="convert-title"></div>
+                <div class="convert-nav"></div>
+                <div class="convert-content"></div>
+            </div>-->
+        </div>
+    </div>
+    @@include("footer.html")
+    @@include("script.html")
+    <script type="text/javascript" src="/integral.js?v=${version}"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=integral"></script>
+</body>
+</html>

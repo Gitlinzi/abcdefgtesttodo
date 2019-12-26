@@ -1,0 +1,37 @@
+<i class="icon-script" ng-class="{'icon-bargain':itemlist.isBargain==2 || itemlist.isBargain==3,'icon-presale':itemlist.saleType==3}" ng-if="itemlist.isBargain==2 || itemlist.isBargain==3 || itemlist.saleType==3"></i>
+<div class="original">
+<!--    <div ng-show="itemlist.scripts.displayType==0" class="displayType  displayTypeOne">-->
+<!--        <img width="50" height="50" ng-src="{{itemlist.scripts.iconUrl}}" alt="">-->
+<!--    </div>-->
+<!--    <div ng-show="itemlist.scripts.displayType==1" class="displayType displayTypeTwo">-->
+<!--        <img width="50" height="50" ng-src="{{itemlist.scripts.iconUrl}}" alt="">-->
+<!--    </div>-->
+<!--    <div ng-show="itemlist.scripts.displayType==3" class="displayType displayTypeThree">-->
+<!--        <img width="50" height="50" ng-src="{{itemlist.scripts.iconUrl}}" alt="">-->
+<!--    </div>-->
+<!--    <div ng-show="itemlist.scripts.displayType==2" class="displayType displayTypeFore">-->
+<!--        <img width="50" height="50" ng-src="{{itemlist.scripts.iconUrl}}" alt="">-->
+<!--    </div>-->
+    <a target="_blank" style="width:398px;height:398px;display: block" ng-href="{{ itemlist.pictureUrlList[0].pictureUrl }}" rel="gal1" class="jqzoom">
+        <img class="item-img jqzoom-item-img" width="398" height="398" ng-src="{{itemlist.pictureUrlList[0].pictureUrl }}">
+    </a>
+</div>
+<div class="picbox" id="sliderImgs">
+    <span ng-click="arrowLeftImg()" ng-class="{'img-arrow-left':noImgArrowLeft,imgArrowLeft:yesImgArrowLeft}"></span>
+    <span ng-click="arrowRightImg()" ng-class="{'img-arrow-right':noImgArrowRight,imgArrowRight:yesImgArrowRight}"></span>
+    <a class=""></a>
+    <div class="thumbnail newCss">
+        <ul class="clearfix" id="thumblist" ng-if="itemlist.pictureUrlList.length >0">
+            <!--<li ng-class="{active:jqimg.index == $index}"
+                   ng-repeat="pic in itemlist.pics | limitTo:5"
+                   ng-mouseover="pcIteminfo._imgSwitching(pic, $index)">
+                   <img width="60" height="60" ng-src="{{ pic.url60x60 }}" alt="{{ pic.name }}">
+           </li> -->
+            <li class="imgLi"  ng-repeat="pic in itemlist.pictureUrlList track by $index">
+                <a ng-class="{zoomThumbActive:$first}" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '{{pic.pictureUrl}}',largeimage: '{{pic.pictureUrl}}'}">
+                    <img width="60" height="60" ng-src='{{ pic.pictureUrl }}'>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

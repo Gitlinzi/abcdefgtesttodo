@@ -1,0 +1,90 @@
+<div class="always" ng-init="getOrderList()" ng-cloak>
+        <div class="home-allTitle pdL20">{{i18n('兑换的商品')}}</div>
+        <!-- <div class="follow" ng-init="activeNum=0;">
+            <div class="follow-left">
+                <span class="goods" ng-click="switchTab(0)" ng-class="{'goods-active':data.orderType==0}">{{i18n('实物')}}</span>
+                <b></b>
+                <span class="store" ng-click="switchTab(3)" ng-class="{'goods-active':data.orderType==3}">{{i18n('虚拟')}}</span>
+            </div>
+        </div> -->
+
+        <div ng-if="data.orderType==0">
+            <!-- 有兑换记录的情况 begin -->
+            <div class="goods-bigBox" ng-repeat="item in data.orderList">
+                <div class="goods-box">
+                    <dl class="clearfix goods-box-dl goods-title">
+                        <span>{{i18n('兑换编号')}}：{{item.orderCode}}</span>
+                        <dd>
+                            <a target="_blank" ui-sref="index_orderDetail({code:item.orderCode})">{{i18n('查看详情')}}</a>
+                        </dd>
+                    </dl>
+                    <div class="good-item">
+                        <a href="" ng-repeat="v in item.productList | limitTo : 1">
+                            <div class="item-img" >
+                                <img width="150" height="150" ng-src="{{v.picUrl}}" alt="">
+                            </div>
+                            <div class="item-mes">
+                                <span class="item-title">{{v.name}}</span>
+                                <div class="item-second">
+                                    <span ng-if="v.pointPrice">
+                                        <span class="text-one width34">{{i18n('积分')}}</span>
+                                        <span class="text-two width40">{{v.pointPrice}}</span>
+                                    </span>
+                                    <span ng-if="v.pointPrice&&v.price">+</span>
+                                    <span ng-if="v.price">
+                                        <span class="text-one width15">￥</span>
+                                        <span class="text-two width60">{{v.price}}</span>
+                                    </span>
+                                </div>
+                                <span class="text-num color#666">{{i18n('数量')}}:{{v.num}}</span>
+                                <span class="text-num color#666">{{i18n('兑换时间')}}:{{item.orderCreateTimeStr}}</span>
+                                <span class="color#666">{{i18n('兑换状态')}}:{{item.orderStatusName}}</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- 有兑换记录的情况 end -->
+        </div>
+
+        <div class="store-follow" ng-if="data.orderType==1">
+            <div class="goods-bigBox" ng-repeat="item in data.orderList">
+                <div class="goods-box">
+                    <dl class="clearfix goods-box-dl goods-title">
+                            <dt>{{i18n('兑换编号')}}：{{item.orderCode}}</dt>
+                        <dd>
+                            <a target="_blank" class="marginr20" ui-sref="index_orderDetail({code:item.orderCode})">{{i18n('查看详情')}}</a>
+                            <a ui-sref="index_coupons()">{{i18n('查看优惠券')}}</a>
+                        </dd>
+                    </dl>
+                    <div class="good-item">
+                        <a href="" ng-repeat="v in item.productList | limitTo : 1">
+                            <div class="item-img">
+                                    <img width="150" height="150" ng-src="{{v.picUrl}}" alt="">
+                            </div>
+                            <div class="item-mes">
+                                <span class="item-title">{{v.name}}</span>
+                                <div class="item-second">
+                                    <span class="text-one width34">{{i18n('积分')}}</span>
+                                    <span class="text-two width40">399</span> +
+                                    <span class="text-one width15">￥</span>
+                                    <span class="text-two width60">{{v.price}}</span>
+                                </div>
+                                <span class="text-num color#666">{{i18n('数量')}}:{{v.num}}</span>
+                                <span class="color#666">{{i18n('兑换时间')}}:{{item.orderCreateTimeStr}}</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="exchange-none" ng-if="data.orderList.length == 0 && !data.loading">
+            <div class="exchange-left">
+                <span></span>
+            </div>
+            <div class="exchange-right">
+                <span>{{i18n('没有兑换记录哦')}}~</span>
+            </div>
+        </div>
+        <div ng-if="data.orderList.length > 0" pagination page-size="data.searchObj.pageSize" page-no="data.searchObj.pageNo" total-count="data.searchObj.totalCount" total-page="data.searchObj.totalPage"></div>
+    </div>

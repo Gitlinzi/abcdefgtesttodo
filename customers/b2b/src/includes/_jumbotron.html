@@ -1,0 +1,40 @@
+<div id="jumbotron" style="margin-bottom: 0px">
+    <div class="container advantage-box">
+        <!-- ng-if="noticeIsShow||noticeData.length>0" -->
+        <div ng-if="isIndex" class="advantage">
+            <div class='advantage-top'>
+                <div class='weclome'>
+                    <div class='weclome-img'>
+                        <a href="">
+                            <img height='46' width='46' src="{{userInfo.headPicUrl||'/images/company/cg-head.png'}}" alt="">
+                        </a>
+                    </div>
+                    <!-- <div class='weclome-text'>HI,欢迎来到{{$parent.switchConfig.common.companyName}}商城</div> -->
+                    <div class='weclome-text'>HI,欢迎来到shitaibo</div>
+                </div>
+                <div class='login'>
+                    <a ng-if="!logined" class="link" href="login.html">登 录</a>
+                    <a ng-if="!logined" class="link regis" href="cregis.html">注册</a>
+                    <div ng-if="logined" class="login-name-text-box">
+                        <span class="login-name-text">{{userInfo.nickname||userInfo.mobile}}</span>
+                        <a  ng-click="userExit()" class="userExit">退出</a>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <ul ng-init="activeTab=1" class="notice clearfix">
+                    <li class="active" ng-click="activeTab=1">{{$parent.switchConfig.common.companyName}}头条</li>
+                    <li class='more'><a ng-href="/helpList.html?categoryCode=headlines&isHelp=0">更多</a></li>
+                </ul>
+                <div ng-if="activeTab==1" class="inner active">
+                    <a ng-repeat="newitem in noticeData | limitTo : 5"  ng-href="/helpDetail.html?id={{newitem.id}}&isHelp=0" class="li">{{newitem.displayTitle}}</a>
+                </div>
+            </div>
+            <div class='logo-img'>
+                <!--<img id="fwbzimg" width="210" height="118" ng-src="/images/{{ fwbzimg }}" alt="服务保障">-->
+                <a ng-repeat="a in reconmendService" href="{{a.linkUrl}}" class='small-logo small-logo-one'>{{a.name}}<img class="my-icon" ng-src="{{a.imageUrl}}" alt=""></a>
+            </div>
+        </div>
+    </div>
+    <div ody-carousel lunbo="lunbo" imgheight="400" main-dom="index-main-carousel" class="index-main-carousel scenePage-carousel" lunbo-time="5000"></div>
+</div>

@@ -1,0 +1,324 @@
+@import url('../../common/css/i-var_${skin}.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-carousel.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-header-nav.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-buy-group.less');
+@import url('../../common/css/i-paging.less');
+@import url('../../common/css/i-sctoolbar.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-feedback.less');
+@import url('../../common/css/reset.less');
+
+/* 店铺 */
+.signboard{
+	font-size: 0;
+}
+#store{
+	&-carousel{
+		width: 1200px;
+		height: 540px;
+		margin-top: 18px;
+		margin-bottom: 24px;
+
+		& .carousel-paging{
+			right: 540px;
+
+			& li{
+				width: 16px;
+				height: 16px;
+				margin-left: 14px;
+				background-color: @whiteColor;
+				border-radius: 10px;
+			}
+			& .active{
+				background-color: @redColor;
+			}
+		}
+		& .carousel-btn{
+			top: 200px;
+			width: 78px;
+			height: 143px;
+			line-height: 140px;
+			font-size: 30px;
+			font-weight: bold;
+		}
+	}
+	&-nav{
+		position: relative;
+		background-color: @f2RedColor;
+		z-index: 110;
+
+		& .icon-arrow-bottom{
+			position: absolute;
+			top: 20px;
+			right: 8px;
+		}
+		& .side-nav{
+			position: relative;
+			float: left;
+			width: 163px;
+			height: 40px;
+			padding-left:15px;
+			color: @eeGreyColor;
+			font-size: 16px;
+			line-height: 40px;
+			//z-index: 1;
+		}
+		& .side-ul{
+			display: none;
+			position: absolute;
+			top: 40px;
+			left: 0;
+			width: 178px;
+			font-size: 0;
+			line-height: 30px;
+			background-color: @44GreyColor;
+
+			& .icon-arrow-right{
+				position: absolute;
+				top: 12px;
+				right: 10px;
+			}
+			& li{
+				position: relative;
+				border-bottom: 1px solid @88GreyColor;
+
+				& ul{
+					display: none;
+					position: absolute;
+					top: 0;
+					left: 178px;
+					width: 178px;
+					font-size: 12px;
+				}
+				& li{
+					border-bottom: none;
+
+					& a{
+					  padding:0 15px;
+					  line-height: 30px;
+					}
+
+					&:hover a{
+						color: @themeColor;
+					}
+				}
+				&.active a{
+					color: @whiteColor;
+					background-color: @backgroundColor;
+				}
+				&.active ul{
+					display: block;
+				}
+			}
+			& a{
+				display: block;
+				padding:8px 15px;
+				color: @whiteColor;
+				font-size: 14px;
+			  	line-height: 20px;
+			}
+			&.active{
+				display: block;
+			}
+			&.fixed{
+				display: block;
+			}
+		}
+		& .main-nav{
+			font-size: 16px;
+
+			& li{
+				position: relative;
+				float: left;
+
+				& i{
+					position: absolute;
+					top: -4px;
+					right: 0;
+					width: 27px;
+					height: 14px;
+
+					&.icon-hot{
+						.icon-posi(-21px, 0);
+					}
+				}
+			}
+			& a{
+				display: inline-block;
+				padding: 0 15px;
+				color: @whiteColor;
+				line-height: 40px;
+
+				&:hover{
+					color: @whiteColor;
+				}
+			}
+			& .active a{
+				background-color: @adRedColor;
+			}
+		}
+	}
+	&-left{
+		float: left;
+		width: 200px;
+		margin-top: 16px;
+
+		& .module{
+			margin: 0 0 30px 0;
+		}
+		& .mt{
+			height: 40px;
+			color: @whiteColor;
+			font-size: 20px;
+			line-height: 40px;
+			text-align: center;
+			border-bottom: 0;
+			background-color: @themeColor;
+		}
+		& .mc{
+			border-left: 1px solid @eeGreyColor;
+			border-right: 1px solid @eeGreyColor;
+			border-bottom: 1px solid @eeGreyColor;
+		}
+		& .cmp{
+			padding: 10px 10px 0 10px;
+
+			& dt{
+				font-weight: bold;
+				margin-bottom: 5px;
+			}
+			& dd{
+				margin-bottom: 10px;
+			}
+			& .separator{
+				border-top: 1px dotted @ccGreyColor;
+			}
+		}
+		& .side-nav{
+			font-size: 0;
+
+			& li{
+				position: relative;
+				border-top: 1px dotted @ccGreyColor;
+				background-color: @backgroundColor;
+			}
+			& a{
+				display: block;
+				height: 44px;
+				padding: 0 12px;
+				font-size: 16px;
+				line-height: 44px;
+			}
+			& .noborder{
+				border: 0;
+			}
+			& .active{
+				background-color: @whiteColor;
+
+				& a{
+					color: @themeColor;
+				}
+			}
+			& .icon-arrow-right2{
+				position: absolute;
+				top: 16px;
+				right: 13px;
+			}
+		}
+	}
+	&-right{
+		float: right;
+		width: 980px;
+		margin-top: 16px;
+
+		& #sctoolbar{
+			margin-top: 0;
+		}
+		& .mc{
+			padding-top: 15px;
+		}
+		& #store-pro{
+			margin-left: -20px;
+			//margin-top: -20px;
+			overflow: hidden;
+			*zoom: 1;
+		}
+		& .pro{
+			float: left;
+			width: 228px;
+			height: 300px;
+			padding: 4px 0 10px;
+		  	margin: 0 0 20px 20px;
+			border: 1px solid @ddGreyColor;
+			overflow: hidden;
+			i{
+				position: absolute;
+				margin-top: -4px;
+				margin-left: 168px;
+			}
+			& img{
+				margin-left: 4px;
+			}
+			& .price{
+				height: 26px;
+				padding: 0 8px;
+				margin: 5px 0 0 0;
+				color: @ff000;
+				font-size: 20px;
+				& .event{
+					padding: 0px 5px;
+					margin-left: 3px;
+					color: @whiteColor;
+					font-size: 14px;
+					background-color: @ff86RedColor;
+					border-radius: 5px;
+				}
+			}
+			& h5{
+				height: 38px;
+				margin: 5px 0 0 0;
+				padding: 0 10px;
+				line-height: 19px;
+				font-size: 14px;
+				line-height: 19px;
+				word-wrap: break-word;
+				word-break:break-all;
+				font-weight: normal;
+				overflow: hidden;
+			}
+			& .addCart{
+				width: 92px;
+				text-align: center;
+			}
+		}
+		& #paging{
+			margin-top: 30px;
+		}
+	}
+}
+
+/* 搜索面添加购物车弹框 */
+#collectDialog1{
+	position: absolute;
+	width: 250px;
+	margin-top: -122px;
+	margin-left: 122px;
+	text-align: center;
+	background-color: @whiteColor;
+	box-shadow: 2px 2px 10px -4px rgba(200,200,200,0.5);
+	*border:3px solid @ccGreyColor;
+	z-index: 1;
+
+	& h5{
+		color: @whiteColor;
+	}
+}

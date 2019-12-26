@@ -1,0 +1,13 @@
+{
+    "code": "0",
+    "message": "操作成功",
+    "errMsg": null,
+    "data": {
+        "canUserCount": 0,
+        "inactiveCount": 0,
+        "expiredCount": 0,
+        "usedCount": 0,
+        "count": 0
+    },
+    "stackTrace": null
+}

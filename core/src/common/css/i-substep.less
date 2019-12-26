@@ -1,0 +1,67 @@
+/* 轴 */
+.shaft{
+	height: 43px;
+	font-size: 0;
+	text-align: center;
+	border-bottom: 2px solid @borderColor;
+	*overflow: hidden;
+
+	& li{
+		display: inline-block;
+		*display:inline;
+		*zoom:1;
+		height: 43px;
+		color: @99GreyColor;
+		padding: 0 30px;
+		font-size: 19px;
+		text-align: left;
+		line-height: 25px;
+	}
+	& a{
+		color: @99GreyColor;
+
+		&:hover{
+			color: @themeColor;
+		}
+	}
+	& .active{
+		position: relative;
+		color: @44GreyColor;
+		border-bottom: 2px solid @themeColor;
+
+		& a{
+			color: @44GreyColor;
+		}
+	}
+}
+
+/* 分步骤 需继承 轴 */
+.listeps{
+	& li span{
+		display: inline-block;
+		width: 26px;
+		height: 26px;
+		margin-right: 8px;
+		color: @whiteColor;
+		text-align: center;
+		background-color: @99GreyColor;
+		border-radius: @searchRadius;
+	}
+	& .active span{
+		background-color: @themeColor;
+	}
+	&.wider li{
+		padding: 0 80px;
+	}
+	&.bregis{
+		text-align: left;
+		padding-left: 235px;
+
+		& li{
+			border-bottom: 2px solid @99GreyColor;
+		}
+		& .active{
+			border-color: @themeColor;
+		}
+	}
+}

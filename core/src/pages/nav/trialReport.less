@@ -1,0 +1,213 @@
+@import url('../../common/css/i-var_${skin}.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-carousel.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-header-nav.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-substep.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-global-nav.less');
+@import url("../../common/css/i-directives.less");
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-feedback.less');
+@import url('../../common/css/reset.less');
+
+.navigation-nav{
+    height: 50px;
+    line-height: 50px;
+}
+.trial-report{
+    width: 980px;
+    margin: 10px auto 100px auto;
+    dl{
+        margin-bottom: 20px;
+        overflow: hidden;
+        background-color: @backgroundColor;
+        dt{
+            width: 130px;
+            height: 130px;
+            display: block;
+            float: left;
+            margin-right: 20px;
+            img{
+                width: 130px;
+                height: 130px;
+            }
+        }
+        dd{
+            width: 830px;
+            float: left;
+            h4{
+                overflow: hidden;
+                margin: 10px 0 10px 0;
+                color: @33GreyColor;
+                font-size: 16px;
+            }
+            h5{
+                font-size: 14px;
+                font-weight: normal;
+                margin: 20px 0 10px 0;
+                span{
+                    display: inline-block;
+                    font-size: 16px;
+                    color: @33GreyColor;
+                    font-weight: bold;
+                }
+                em{
+                    display: inline-block;
+                    width: 86px;
+                    height: 26px;
+                    line-height: 26px;
+                    text-align: center;
+                    border: 1px solid @f2RedColor;
+                    color: @f2RedColor;
+                    border-radius: 30px;
+                    font-style: normal;
+                    margin-left: 10px;
+                }
+            }
+            .trial-infor{
+                margin-top: 18px;
+                overflow: hidden;
+                ul{
+                    li{
+                        border-right: 1px solid @ddGreyColor;
+                        float: left;
+                        padding-right: 20px;
+                        margin: 0 20px 10px 0;
+                        &:nth-child(2n){
+                            border-right: none;
+                        }
+                        em{
+                            display: inline-block;
+                            font-style: normal;
+                        }
+                        span{
+                            display: inline-block;
+                            cite{
+                                display: inline-block;
+                                color: @themeTrialColor;
+                                font-style: normal;
+                                margin-right: 10px;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .trial-report-detail{
+        overflow: hidden;
+        .trial-report-infor{
+            float: left;
+            width: 770px;
+            margin-right: 20px;
+            h4{
+                height: 40px;
+                line-height: 40px;
+                background-color: @backgroundColor;
+                padding-left: 20px;
+                margin: 0 0 20px 0;
+            }
+            dl{
+                overflow: hidden;
+                background-color: @whiteColor;
+                dt{
+                    width: 150px;
+                    float: left;
+                    margin-right: 0;
+                    span{
+                        display: block;
+                        margin-bottom: 5px;
+                        img{
+                            display: inline-block;
+                            width: 30px;
+                            height: 30px;
+                            border-radius: 50%;
+                            margin-right: 10px;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+                dd{
+                    width: 620px;
+                    float: left;
+                    color: @33GreyColor;
+                    span{
+                        display: block;
+                        font-weight: bold;
+                        margin-bottom: 10px;
+                    }
+                    p{
+                        img{
+                            width: 620px;
+                            margin-top: 10px;
+                            margin-bottom: 10px;
+                        }
+                    }
+                    h6{
+                        font-weight: normal;
+                        color: @99GreyColor;
+                        font-size: 14px;
+                        margin: 0;
+                    }
+                }
+            }
+        }
+        .trial-report-evaluate{
+            width: 190px;
+            float: left;
+            h4{
+                height: 40px;
+                line-height: 40px;
+                background-color: @backgroundColor;
+                text-align: center;
+                margin: 0;
+            }
+            ul{
+                border: 1px solid @bodyBgColor;
+                overflow: hidden;
+                padding-top: 20px;
+                li{
+                    padding-left: 20px;
+                    margin-bottom: 20px;
+                    font-size: 12px;
+                    img{
+                        display: inline-block;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        margin-right: 12px;
+                        vertical-align: middle;
+                    }
+                }
+                p{
+                    text-align: center;
+                    i{
+                        display: inline-block;
+                        width: 24px;
+                        height: 20px;
+                        margin: 0 10px;
+                        //background: url('../../images/company/company-default.png') no-repeat;
+                        .common-product-company-default();
+                        &.icon-arrow-up{
+                            background-position: -319px -138px;
+                        }
+                        &.icon-arrow-down{
+                            background-position: -319px -31px;
+                        }
+                        &.not-clickable{
+                            opacity:0.5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

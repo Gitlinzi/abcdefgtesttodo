@@ -1,0 +1,14 @@
+{
+    "code": "0",
+    "message": "操作成功",
+    "errMsg": null,
+    "data": {
+        "companyId": 259,
+        "dataList": [{
+            "mpId": 1247101609000192,
+            "canSale": 1
+        }],
+        "totalCount": 1
+    },
+    "stackTrace": null
+}

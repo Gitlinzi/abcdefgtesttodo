@@ -1,0 +1,23 @@
+<div id="packing" class="content" ng-if="$parent.switchConfig.guide.item.goodNavigation.goodParameter">
+    <!-- <div class="packing-title" ng-if="itemAttrSpec.length>0">
+        <span>{{i18n('特性参数')}}</span>
+    </div> -->
+    <div class="container-box" style="margin-bottom: 0">
+        <div class="packing-main" style="border-bottom: 0; border-top: 1px solid #eee;">
+            <span class="disblock">品牌</span>
+            <span class="part16">{{productInfoBrandName}}</span>
+        </div>
+    </div>
+    <div class="container-box" ng-repeat="attrs in itemAttrSpec">
+       <!-- <div class="packing-title">
+            &lt;!&ndash;<span>{{attrs.name}}</span>&ndash;&gt;
+        </div>-->
+        <div class="packing-main" ng-repeat="attr in attrs.merchantProductAttNameOutDTOS track by $index" ng-class="{'botT':$index<=0}">
+            <span class="disblock">{{attr.attName}}</span>
+            <span class="part16">{{attr.attValue}}</span>
+        </div>
+    </div>
+    <div ng-if="itemAttrSpec.length<=0" class="packing-none">
+        {{i18n('抱歉')}}，{{i18n('内容暂无')}}，{{i18n('商家还没有发布相关内容')}}
+    </div>
+</div>

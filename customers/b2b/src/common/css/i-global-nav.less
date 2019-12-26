@@ -1,0 +1,182 @@
+/* 右侧固定导航 */
+
+.global-bg {
+    width: 40px;
+    background-color: rgb(51, 51, 51);    /*不支持rgba的浏览器*/
+    background-color: rgba(51, 51, 51, 0.9);  /*支持rgba的浏览器*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#e5515151,endColorstr=#e5515151);
+    background: none\9;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    top: 0px;
+    z-index: 999;
+}
+
+.fix-nav {
+    width: 40px; //height: 314px;
+    position: fixed;
+    right: 0;
+    top: 25%;
+    z-index: 999;
+    & .left-er {
+        position: relative;
+        & .global-er {
+            display: block;
+            width: 140px;
+            height: 165px;
+            background-color: @themeColor;
+            position: absolute;
+            left: 40px;
+            bottom: 0px;
+            padding: 14px 10px 0 10px;
+            box-sizing: border-box;
+            & .er-name{
+                text-align: center;
+                font-size: 12px;
+                color: @whiteColor;
+                padding-top: 5px;
+            }
+        }
+    }
+    & .fix-item {
+        width: 25px;
+        height: 24px; // padding: 9px;
+        padding: 20px 8px;
+        cursor: pointer;
+        background-color: rgb(51, 51, 51);    /*不支持rgba的浏览器*/
+        background-color: rgba(51, 51, 51, 0.7);  /*支持rgba的浏览器*/
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#b2000000,endColorstr=#b2000000);
+        background: none\9;
+        margin-bottom: 1px;
+        position: relative;
+        & .fix-icon {
+            display: block; //width: 30px;
+            height: 30px;
+        }
+        & .car {
+            //background: url('../../images/company/company-default.png') no-repeat -223px -61px;
+            .common-product-company-default(-223px,-61px);
+        }
+        & .ear {
+            //background: url('../../images/company/company-default.png') no-repeat -224px -266px;
+            .common-product-company-default(-224px,-266px);
+            height:28px;
+        }
+        & .code {
+            //background: url('../../images/company/company-default.png') no-repeat -223px -91px;
+            .common-product-company-default(-223px,-91px);
+        }
+        & .phone {
+            //background: url('../../images/company/company-default.png') no-repeat -223px -119px;
+            .common-product-company-default(-223px,-119px);
+        }
+        & .frequence{
+            //background: url('../../images/company/company-default.png') no-repeat -224px -241px;
+            .common-product-company-default(-224px,-241px);
+            height:25px;
+        }
+        & .person-icon{
+            //background: url('../../images/company/company-default.png') no-repeat -224px -212px;
+            .common-product-company-default(-224px,-212px);
+            height:28px;
+        }
+        & .opinion{
+            //background: url('../../images/company/company-default.png') no-repeat -225px -293px;
+            .common-product-company-default(-225px,-293px);
+            height:28px;
+        }
+        & .cart-count-right {
+            position: absolute;
+            right: 23px;
+            top: 9px;
+            background: @clearColor;
+            color: @whiteColor;
+            padding: 1px 4px;
+            font-size: 12px;
+            border-radius: 7px;
+            line-height: 13px;
+        }
+        .tab-text {
+            display: block;
+            width: 100px;
+            height: 64px;
+            line-height: 64px;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            font-family: 微软雅黑;
+            position: absolute;
+            z-index: -1;
+            left: 40px;
+            top: 0px;
+            background-color: @themeColor;
+            font-style: normal; //border-radius: 3px 0px 0px 3px;
+            font-size: 12px;
+        }
+    }
+    & .fix-item-two{
+        width:25px;
+        height:auto;
+        text-align: center;
+        font-size: 15px;
+    }
+    & .car-text{
+        color: @whiteColor;
+    }
+    & .fix-item:hover {
+        background-color: @themeColor;
+        & .tab-text {
+            transition: left 0.3s ease-in-out 0.1s;
+            left: -100px;
+        }
+        & .global-er {
+            transition: left 0.3s ease-in-out 0.1s;
+            left: -140px;
+        }
+    }
+}
+
+
+/*置顶按钮*/
+
+.top-box {
+    position: fixed;
+    top: 75%;
+    cursor: pointer;
+    width: 25px;
+    height: 24px;
+    padding: 20px 10px;
+    cursor: pointer;
+    margin-bottom: 1px;
+    & .top-btn {
+        display: block;
+        width: 25px;
+        height: 34px;
+        //background: url('../../images/company/company-default.png') no-repeat -595px -33px;
+        .common-product-company-default(-595px,-33px);
+    }
+    .tab-text {
+        display: block;
+        width: 70px;
+        height: 64px;
+        line-height: 64px;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        font-family: 微软雅黑;
+        position: absolute;
+        z-index: -1;
+        left: 40px;
+        top: 0px;
+        background-color: @themeColor;
+        font-style: normal; //border-radius: 3px 0px 0px 3px;
+        font-size: 12px;
+    }
+}
+
+& .top-box:hover {
+    background-color: @themeColor;
+    & .tab-text {
+        transition: left 0.3s ease-in-out 0.1s;
+        left: -70px;
+    }
+}

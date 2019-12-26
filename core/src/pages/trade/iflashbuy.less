@@ -1,0 +1,458 @@
+@import url('../../common/css/i-var_${skin}.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-header-nav.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-buy-group.less');
+@import url('../../common/css/i-sctoolbar.less');
+@import url('../../common/css/i-paging.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-directives.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-global-nav.less');
+@import url('../../common/css/i-form.less');
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-feedback.less');
+@import url('../../common/css/reset.less');
+
+// // 面包屑的下拉
+.crumb-down {
+    display: none;
+    border: 1px solid @ddGreyColor;
+    width: 278px;
+    position: absolute;
+    top: 60px; // left:0px;
+    z-index: 1;
+    background-color: @whiteColor;
+    padding: 8px 0;
+    li {
+        float: left;
+        padding: 7px 16px;
+        a {
+            font-size: 14px;
+        }
+    }
+}
+
+#search-address {
+    position: relative;
+    & dl {
+        float: left;
+        overflow: hidden;
+        *zoom: 1;
+        & dt,
+        & dd {
+            display: inline-block;
+        }
+        & dt {
+            color: @99GreyColor;
+            padding-left: 10px;
+        }
+        & dd {
+            color: @66GreyColor;
+            .mask{
+                display: block;
+                position: absolute;
+                top: 31px;
+                left: 60px;
+                width: 106px;
+                height: 1px;
+                font-size: 0;
+                background-color: @whiteColor;
+                z-index: 999;
+            }
+            & a {
+                margin-left: 10px!important;
+            }
+        }
+    }
+    & .spaddress {
+        display: inline-block;
+        padding: 0 5px; // margin-right: 28px;
+        line-height: 22px;
+        border: 1px solid @ddGreyColor;
+        & i {
+            margin-left: 5px;
+            -webkit-transition: transform 0.5s;
+        }
+        &:hover i {
+            transform: rotate(180deg);
+            -webkit-transition: transform 0.5s;
+        }
+    }
+    & .adschange {
+        line-height: normal;
+        position: absolute;
+        top: 31px;
+        left: 59px;
+        width: 450px;
+        padding: 5px 5px 30px 5px;
+        border: 1px solid @ddGreyColor;
+        background-color: @whiteColor;
+        z-index: 2;
+        & li {
+            display: inline-block;
+            cursor: pointer;
+            font-size: 12px; // background-color: @backgroundColor;
+        }
+        & .tab {
+            height: 30px;
+            font-size: 0;
+            border-bottom: 1px solid @eeGreyColor;
+            border-left: 1px solid @eeGreyColor;
+            & li {
+                padding: 0 10px;
+                line-height: 29px;
+                border-top: 1px solid @eeGreyColor;
+                border-right: 1px solid @eeGreyColor;
+                background-color: @backgroundColor;
+            }
+            & .active {
+                border-bottom: 1px solid @whiteColor;
+                background-color: @whiteColor;
+            }
+        }
+        & .content {
+            display: none;
+            margin-top: 5px;
+            & li {
+                width: 90px;
+                padding: 0 8px;
+                margin: 5px 0;
+                &:hover {
+                    color: @themeColor;
+                }
+                //  &:hover{color: @whiteColor;
+                // 	background-color: @themeColor;
+                // }
+                &.col2 {
+                    width: 196px;
+                }
+            }
+            &.active {
+                display: block;
+            }
+        }
+    }
+}
+.serve-big {
+    background-color: @backgroundColor;
+    padding-top: 18px;
+}
+
+.container {
+    & .serve-type {
+        height: 100px;
+        background-color: @a5BrownColor;
+        & div{
+            margin-left: 100px;
+            float: left;
+            height: 100px;
+            line-height: 100px;
+            & a{
+                font-size: 22px;
+                color: @whiteColor;
+                & img{
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-right: 15px;
+                }
+                & i{
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+    & .module {
+        margin-bottom: 0;
+        background-color: @backgroundColor!important;
+        & .time-img {
+            padding: 36px 0 30px 0;
+            text-align: center;
+        }
+        & .mc{
+            & .pat-left{
+                float: left;
+            }
+            & .pat-right{
+                float: right;
+            }
+        }
+    }
+    & .call-serve{
+        height: 284px;
+        & div{
+            float: left;
+            margin-right: 20px;
+        }
+
+    }
+}
+#footer{
+    .footer-top{
+        background-color: @whiteColor!important;
+        .container{
+            background-color: @whiteColor!important;
+        }
+    }
+}
+.pdB70{
+    padding-bottom: 70px;
+}
+.mgR0{
+    margin-right: 0px!important;
+}
+.mgL90{
+    margin-left: 90px;
+}
+.pdT60{
+    padding-top: 60px!important;
+}
+.channel-banner{
+    position:relative;
+    overflow:hidden;
+    height:300px;
+    .channel-con{
+        width:1920px; /*图片宽度*/
+        position:absolute;
+        left:50%;
+        margin-left:-960px; /*图片宽度的一半*/
+    }
+
+}
+
+
+.flashSales-box{
+    width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    .flashSales-nav{
+        margin: 40px 0;
+        ul{
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            li{
+                width: 360px;
+                height: 60px;
+                line-height: 60px;
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
+                color: @greyColor;
+                display: inline-block;
+                border: 1px solid @ddGreyColor;
+                background-color: @whiteColor;
+                cursor: pointer;
+                &.active,&:hover{
+                    color: @whiteColor;
+                    background-color: @themeColor;
+                    border-color: @themeColor;
+                }
+            }
+            &::before,&::after{
+                content: '';
+                width: 100px;
+                height: 1px;
+                display: block;
+                position: absolute;
+                background-color: @ddGreyColor;
+                top: 30px;
+                left: 122px;
+            }
+            &::after{
+                top: 30px;
+                left: 976px;
+            }
+        }
+    }
+    .flashSales-list-box{
+        overflow: hidden;
+        .flashSales-list{
+            overflow: hidden;
+            .flashSales-list-ul{
+                li{
+                    width: 568px;
+                    padding: 10px;
+                    margin-right: 20px;
+                    float: left;
+                    border: 1px solid @ddGreyColor;
+                    margin-bottom: 20px;
+                    position: relative;
+                    &:nth-child(2n){
+                        margin-right: 0;
+                    }
+                    .flashSales-time{
+                        position: absolute;
+                        width: 108px;
+                        height: 40px;
+                        top: 30px;
+                        right: 0;
+                        text-align: center;
+                        line-height: 40px;
+                        background-color: @blackColor;
+                        border-top-left-radius: 30px;
+                        border-bottom-left-radius: 30px;
+                        color: @whiteColor;
+                        font-weight: bold;
+                        i{
+                            display: inline-block;
+                            width: 16px;
+                            height: 20px;
+                            margin-right: 5px;
+                            //background: url('../../images/company/company-default.png') no-repeat -70px -97px;
+                            .common-product-company-default(-70px,-97px);
+                        }
+                    }
+                    dl{
+                        overflow: hidden;
+                        dt{
+                            width: 570px;
+                            height: 250px;
+                            img{
+                                width: 570px;
+                                height: 250px;
+                            }
+                        }
+                        dd{
+                            position: relative;
+                            .now-Buy,
+                            .promit-Buy{
+                                position: absolute;
+                                bottom: 0;
+                                right: 0;
+                                width: 92px;
+                                font-size: 16px;
+                                height: 38px;
+                                text-align: center;
+                                line-height: 1px;
+                                background-color: @themeColor;
+                                color: @whiteColor;
+                                border: 1px solid @themeColor;
+                            }
+                            .buyNothing{
+                                position: absolute;
+                                bottom: 4px;
+                                right: 11px;
+                                width: 92px;
+                                font-size: 16px;
+                                height: 38px;
+                                text-align: center;
+                                line-height: 36px;
+                                background: @borderColor;
+                                border: none;
+                            }
+                            .promit-Buy{
+                                background-color: @fef9f5rangeColor;
+                                border-color: @ffd9c0rangeColor;
+                                color: @themeColor;
+                            }
+                            h5{
+                                font-size: 16px;
+                                font-weight: normal;
+                                line-height: 22px;
+                                height: 22px;
+                                margin: 15px 0;
+                                word-wrap: break-word;
+                                word-break: break-all;
+                                color: @blackColor;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 1;
+                                overflow: hidden;
+                                span{
+                                    display: inline-block;
+                                    border: 1px solid @themeOrangeColor;
+                                    color: @themeOrangeColor;
+                                    padding: 0px 3px;
+                                    height: 17px;
+                                    line-height: 16px;
+                                    font-size: 12px;
+                                    margin-right: 5px;
+                                    border-radius: 3px;
+                                }
+                            }
+                            .flashSales-con{
+                                overflow: hidden;
+                                .flashSales-con-price{
+                                    width: 170px;
+                                    float: left;
+                                    overflow: hidden;
+                                    margin-right: 20px;
+                                    border-right: 1px solid @ddGreyColor;
+                                    span{
+                                        font-size: 30px;
+                                        display: inline-block;
+                                        margin-right: 10px;
+                                        color: @themeColor;
+                                        font-weight: bold;
+                                        label{
+                                            font-style: normal;
+                                            font-size: 12px;
+                                        }
+                                        em{
+                                            display: inline-block;
+                                            font-style: normal;
+                                            font-size: 12px;
+                                            color: @99GreyColor;
+                                            font-weight: normal;
+                                            text-decoration: line-through;
+                                        }
+                                    }
+                                }
+                                .flashSales-con-num{
+                                    float: left;
+                                    width: 256px;
+                                    // overflow: hidden;
+                                    // .whiteArea{
+                                    //     height: 20px;
+                                    // }
+                                    .attentionCount{
+                                        color: @themeColor;
+                                    }
+                                    .flashSales-con-infor{
+                                        display: block;
+                                        // margin-top: 8px;
+                                        text-align: center;
+                                        em{
+                                            display: inline-block;
+                                            margin-left: 20px;
+                                            color: @themeColor;
+                                            font-style: normal;
+                                        }
+                                    }
+                                    .flashSales-con-limited{
+                                        display: block;
+                                        // margin-bottom: 5px;
+                                        // margin-top: 0px;
+                                        label{
+                                            display: block;
+                                            float: right;
+                                            font-style: normal;
+                                        }
+                                    }
+                                    .flashSales-con-pro{
+                                        display: block;
+                                        width: 254px;
+                                        height: 8px;
+                                        border: 1px solid @orangeColor;
+                                        background-color: @fef9f5rangeColor;
+                                        label{
+                                            display: block;
+                                            height: 8px;
+                                            background-color: @themeColor;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

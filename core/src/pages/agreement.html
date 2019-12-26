@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="heimdall" content="搜索页">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/plugins/jquery.calendar-1.4.1/css/jquery.cxcalendar#((skin)).css?v=${version}">
+
+    <link rel="stylesheet" type="text/css" href="/agreement-hot#((skin)).css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<!-- <link rel="stylesheet" type="text/css" href="/index#((skin)).css?v=${version}"> -->
+    <link rel="stylesheet" type="text/css" href="/plugins/datetimepicker/jquery.datetimepicker.min#((skin)).css?v=${version}">
+
+</head>
+
+<body ng-app="appControllers" ng-controller="agreementCtrl" class="search-list-page">
+    @@include("header.html")
+    @@include("global-nav.html")
+    <!--活动商品聚合页-->
+    <!-- @@include("_searchlistpromotion.html") -->
+    <div class="container" ng-cloak>
+        <!--搜索结果大于0,显示结果-->
+        <div class="container search-list">
+                <div class="my-agreement">
+                    <div class="agr-info">
+                        <!-- 协议 -->
+                        <ul class="clearfix" ng-if="type == 1">
+                            <li class="pro-list goods-item" ng-repeat="item in productList" ng-click="goToDetail(item.mpId)">
+                                <div class="img">
+                                    <img ng-src="{{item.picUrl}}" alt="">
+                                </div>
+                                <div class="price bold theme">
+                                    <span>{{item.realPrice | currency:'¥'}}</span>
+                                    <span ng-if="item.adv_delivery_type == 1" class=self-sell>自</span>
+                                    <span ng-if="item.adv_delivery_type == 2" class="immediate-sell">直</span>
+                                </div>
+                                <div class="name ui-nowrap-multi">{{item.name}}</div>
+                                <div class="code">商品编码：{{item.code}}</div>
+                                <div class="goods-content" style="height: auto">
+                                    <div adv-mini-add-cart prod="item" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                                </div> 
+                            </li>
+                        </ul>
+                        <!-- 热销 -->
+                        <ul class="clearfix" ng-if="type == 2">
+                            <li class="pro-list goods-item" ng-repeat="item in productList" ng-click="goToDetail(item.mpId)">
+                                <div class="img">
+                                    <img ng-src="{{item.mainPictureUrl}}" alt="">
+                                </div>
+                                <div class="price bold theme">
+                                    <span>{{item.realPrice | currency:'¥'}}</span>
+                                    <span ng-if="item.deliveryType == 1" class=self-sell>自</span>
+                                    <span ng-if="item.deliveryType == 2" class="immediate-sell">直</span>
+                                </div>
+                                <div class="name ui-nowrap-multi">{{item.chineseName}}</div>
+                                <div class="code">商品编码：{{item.code}}</div>
+                                <div class="goods-content" style="height: auto">
+                                    <div adv-mini-add-cart prod="item" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                                </div> 
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            <!--分页-->
+            <div pagination page-size="searchObj.pageSize" page-no="searchObj.pageNo" total-count="searchObj.totalCount" total-page="totalPage"></div>   
+        </div>
+    </div>
+    @@include("footer.html")
+    @@include("script.html")
+    <script type="text/javascript" src="/plugins/datetimepicker/jquery.datetimepicker.full.js?v=${version}"></script>
+    <script type="text/javascript" src="/plugins/jquery.calendar-1.4.1/js/jquery.cxcalendar.js?v=${version}"></script>
+    <script type="text/javascript" src="/agreement.js?v=${version}"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=search"></script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="heimdall" content="注册页">
+    <script type="text/javascript" src="/cms/view/frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/joinProcess.css?v=${version}">
+</head>
+
+<body ng-app="appControllers" ng-controller="joinProcessStepCtrl">
+<!-- 头部 -->
+@@include("userheader.html")
+@@include("global-nav.html")
+<div class="forgot-box">
+    <div class="container" id="bregis-page" ng-cloak>
+        <!-- 字-->
+        <div class="loginTitle">加盟流程</div>
+        <div  class="yiyou">{{userInfo.nickname||(userInfo.mobile|hidePhone)}}&nbsp;,&nbsp;<a href="javascript:void(0)" ng-click="userExit()">退出</a></div>
+        <div ng-if="merchantInfo.auditStatus==0" class="joinProcessStep-box">
+            <div class="step-main-box f0">
+                <div class="main-left dis">
+                    <span class="left-icon"></span>
+                </div>
+                <div class="main-right dis">
+                    <span class="right-text-top">信息正在核实中</span>
+                    <span class="right-text-bottom">审核通过即可立即使用，请您耐心等待，感谢~</span>
+                </div>
+            </div>
+            <div class="main-button-box">
+                <a href="javascript:void(0)" class="button-one"  ng-click="userExit()">退出登录</a>
+                <a href="javascript:void(0)" class="button-two" ng-click="reload()">刷新一下</a>
+            </div>
+        </div>
+        <div ng-if="merchantInfo.auditStatus==2" class="joinProcessStep-box">
+            <div class="step-main-box-two f0">
+                <div class="main-left dis">
+                    <span class="none-left-icon"></span>
+                </div>
+                <div class="main-right dis">
+                    <span class="right-text-top">信息审核不通过</span>
+                    <span class="right-text-bottom">请修改后重新提交</span>
+                </div>
+            </div>
+            <div class="main-button-box">
+                <a href="javascript:void(0)" class="button-one" ng-click="backUrl()">重新修改</a>
+                <a href="javascript:void(0)" class="button-two" ng-click="userExit()">退出登录</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 底部 -->
+@@include("footer.html") @@include("script.html")
+<script type="text/javascript" src="/joinProcessStep.js?v=${version}"></script>
+</body>
+
+</html>

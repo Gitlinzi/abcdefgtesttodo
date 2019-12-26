@@ -1,0 +1,10 @@
+{
+  "code": "0",
+  "message": "操作成功",
+  "data": [
+    {
+      "paymentId": 1,
+      "name": "在线支付"
+    }
+  ]
+}

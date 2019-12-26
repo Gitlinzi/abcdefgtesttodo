@@ -1,0 +1,353 @@
+@import url('../../common/css/i-var_${skin}.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-carousel.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-header-nav.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-substep.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-global-nav.less');
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-feedback.less');
+@import url('../../common/css/reset.less');
+
+.serve-big {
+    background-color: @backgroundColor;
+    padding-top: 18px;
+}
+
+.container {
+    & .serve-type {
+        height: 100px;
+        background-color: @a5BrownColor;
+        & div{
+            margin-left: 100px;
+            float: left;
+            height: 100px;
+            line-height: 100px;
+            & a{
+                font-size: 22px;
+                color: @whiteColor;
+                & img{
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin-right: 15px;
+                }
+                & i{
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+    & .module {
+        margin-bottom: 0;
+        background-color: @backgroundColor!important;
+        & .time-img {
+            padding: 36px 0 30px 0;
+            text-align: center;
+        }
+        & .mc{
+            & .pat-left{
+                float: left;
+            }
+            & .pat-right{
+                float: right;
+            }
+        }
+    }
+    & .call-serve{
+        height: 284px;
+        & div{
+            float: left;
+            margin-right: 20px;
+        }
+
+    }
+}
+#footer{
+    .footer-top{
+        background-color: @whiteColor!important;
+        .container{
+            background-color: @whiteColor!important;
+        }
+    }
+}
+.pdB70{
+    padding-bottom: 70px;
+}
+.mgR0{
+    margin-right: 0px!important;
+}
+.mgL90{
+    margin-left: 90px;
+}
+.pdT60{
+    padding-top: 60px!important;
+}
+.channel-banner{
+    position:relative;
+    overflow:hidden;
+    height:300px;
+    .channel-con{
+        width:1920px; /*图片宽度*/
+        position:absolute;
+        left:50%;
+        margin-left:-960px; /*图片宽度的一半*/
+    }
+
+}
+.channel-box{
+    width: 100%;
+    overflow: hidden;
+    .channel-title{
+        background-color: @backgroundColor;
+        height: 60px;
+        -moz-box-shadow:2px 2px 10px @ccGreyColor;
+        -webkit-box-shadow:2px 2px 10px @ccGreyColor;
+        box-shadow:2px 2px 10px @ccGreyColor;
+        position: relative;
+        .stateMsg{
+            font-size: 20px;
+        }
+        .stateHeight{
+            height: 60px;
+            line-height: 60px;
+        }
+        .stateFont{
+            width:60px;
+            line-height: 60px;
+            color: @themeColor
+        }
+        .seckillSty{
+            font-size: 10px;
+        }
+        #thumblist{
+            transition: all 0.5s;
+        }
+        & .leftGuide{
+            position: absolute;
+            width: 51px;
+            height: 52px;
+            //background: url('../../images/company/company-default.png') no-repeat -489px -11px;
+            .common-product-company-default(-489px,-11px);
+            top: 5px;
+            left: 292px;
+            cursor: pointer
+        }
+        & .rightGuide{
+            position: absolute;
+            width: 51px;
+            height: 52px;
+            //background: url('../../images/company/company-default.png') no-repeat -540px -11px;
+            .common-product-company-default(-540px,-11px);
+            top: 5px;
+            right: 292px;
+            cursor: pointer
+        }
+        .channel-nav{
+            overflow: hidden;
+            ul{
+                height: 60px;
+                overflow: hidden;
+                width: 10000%;
+                li{
+                    float: left;
+                    display: inline-block;
+                    width: 239px;
+                    text-align: center;
+                    font-size: 16px;
+                    height: 60px;
+                    cursor: pointer;
+                    color: @greyColor;
+                    // border-right: 1px solid @lightBackgroundColor;
+
+                    display: -webkit-box;
+                    -webkit-box-orient: horizontal;
+                    -webkit-box-pack: center;
+                    -webkit-box-align: center;
+
+                    display: -moz-box;
+                    -moz-box-orient: horizontal;
+                    -moz-box-pack: center;
+                    -moz-box-align: center;
+
+                    display: -o-box;
+                    -o-box-orient: horizontal;
+                    -o-box-pack: center;
+                    -o-box-align: center;
+
+                    display: -ms-box;
+                    -ms-box-orient: horizontal;
+                    -ms-box-pack: center;
+                    -ms-box-align: center;
+
+                    display: box;
+                    box-orient: horizontal;
+                    box-pack: center;
+                    box-align: center;
+                    &.have-hand{
+                        background-color: @themeColor;
+                        color: @whiteColor;
+                        border-right: none;
+                    }
+                    &.has-ended{
+                        background-color: @greyColor;
+                        color: @whiteColor;
+                        border-right: none;
+                    }
+                }
+            }
+        }
+    }
+    .channel-list-box{
+        width: 100%;
+        overflow: hidden;
+        .channel-list{
+            // overflow: hidden;
+            margin: 60px auto;
+            width: 1200px;
+            .channel-list-ul{
+                li{
+                    width: 283px;
+                    margin-right: 20px;
+                    border: 1px solid @ddGreyColor;
+                    float: left;
+                    background-color: @whiteColor;
+                    margin-bottom: 20px;
+                    position: relative;
+                    cursor: pointer;
+                    &:hover{
+                        border-color: @themeColor;
+                        -moz-box-shadow:0 0 6px @orangeColor;
+                        -webkit-box-shadow:0 0 6px @orangeColor;
+                        box-shadow:0 0 6px @orangeColor;
+                    }
+                    &:nth-child(4n){
+                        margin-right: 0;
+                    }
+                    dl{
+                        width: 250px;
+                        padding: 16px;
+                        dt{
+                            margin-bottom: 10px;
+                            img{
+                                width: 250px;
+                                height: 250px;
+                            }
+                        }
+                        dd{
+                            h4{
+                                line-height: 20px;
+                                height: 40px;
+                                min-height: 33px;
+                                margin-top: 0;
+                                font-size: 14px;
+                                word-wrap: break-word;
+                                word-break: break-all;
+                                font-weight: normal;
+                                color: @blackColor;
+                                display: -webkit-box;
+                                -webkit-box-orient: vertical;
+                                -webkit-line-clamp: 2;
+                                overflow: hidden;
+                                margin-bottom: 5px;
+                                label{
+                                    display: inline-block;
+                                    border: 1px solid @themeOrangeColor;
+                                    color: @themeOrangeColor;
+                                    padding: 0px 3px;
+                                    height: 17px;
+                                    line-height: 16px;
+                                    font-size: 12px;
+                                    margin-right: 5px;
+                                    border-radius: 3px;
+                                }
+                            }
+                            .channel-list-infor{
+                                overflow: hidden;
+                                h5{
+                                    margin: 0 0 5px 0;
+                                    font-weight: normal;
+                                    span{
+                                        display: inline-block;
+                                        color: @themeColor;
+                                        font-size: 26px;
+                                        font-weight: bold;
+                                        vertical-align: top;
+                                        label{
+                                            font-size: 14px;
+                                            font-weight: normal;
+                                        }
+                                    }
+                                    cite{
+                                        font-style: normal;
+                                        display: inline-block;
+                                        em{
+                                            text-decoration: line-through;
+                                            font-style: normal;
+                                            display: block;
+                                            color: @99GreyColor;
+                                        }
+                                    }
+                                }
+                                p{
+                                    margin: 0;
+                                    font-size: 12px;
+                                    span{
+                                        display: inline-block;
+                                        width: 86px;
+                                        height: 8px;
+                                        border: 1px solid @orangeColor;
+                                        background-color: @fef9f5rangeColor;
+                                        label{
+                                            display: block;
+                                            height: 8px;
+                                            background-color: @themeColor;
+                                        }
+                                    }
+                                }
+                            }
+                            .panicBuyBtn{
+                                position: absolute;
+                                bottom: 20px;
+                                right: 16px;
+                                width: 92px;
+                                font-size: 16px;
+                                height: 38px;
+                                text-align: center;
+                                line-height: 38px;
+                                background-color: @themeColor;
+                                color: @whiteColor;
+                                border: 1px solid @themeColor;
+                            }
+                            .futureBuyBtn{
+                                position: absolute;
+                                bottom: 20px;
+                                right: 16px;
+                                width: 92px;
+                                font-size: 16px;
+                                height: 38px;
+                                text-align: center;
+                                line-height: 38px;
+                                border: 1px solid @blackColor;
+                                background: @navColor;
+                            }
+                        }
+                    }
+                    &.begin-minute{
+                        dl dd .panicBuyBtn{
+                            background-color: @whiteColor;
+                            border: 1px solid @greyColor;
+                            color: @greyColor;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

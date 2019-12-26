@@ -1,0 +1,102 @@
+<div id="jumbotron">
+    <div class="container advantage-box">
+        <div ng-if="noticeIsShow||noticeData.length>0" class="advantage" style="border: 1px solid #dddddd;border-top: none">
+            <div class="advantage-title"><i></i>合约客户专享福利</div>
+            <div class='advantage-top'>
+                <!-- <div class='weclome'>
+                    <div class='weclome-img'>
+                        <a href="">
+                            <img height='60' width='60' ng-src="{{userInfo.headPicUrl||'/images/header.png'}}" alt="">
+                        </a>
+                    </div>
+                    <div ng-if="logined" class='weclome-text'>HI,{{userInfo.nickname||userInfo.mobile}}</div>
+                    <div ng-if="!logined" class='weclome-text'>HI,{{i18n('欢迎来到')}} {{i18n($parent.switchConfig.common.companyName)}}</div>
+                </div>
+                <div class='login'>
+                    <a ng-if="!logined" class="link" href="login.html">{{i18n('登录')}}</a>
+                    <a ng-if="!logined" class="link regis" href="cregis.html">{{i18n('注册')}}</a>
+                    <a ng-if="logined" ng-click="userExit()" class="link goOut">{{i18n('退出')}}</a>
+                </div> -->
+                <div class="img fl">
+                    <img ng-src="{{userInfo.headPicUrl||'/images/header.png'}}" alt="">
+                </div>
+                <div class="info fl">
+<!--                    <div ng-if="logined" class='weclome-text'>HI,欢迎来到shitaibo</div>-->
+                    <div ng-if="logined" class='weclome-text ui-nowrap' ng-title="{{userInfo.nickname || userInfo.mobile}}">{{userInfo.nickname||userInfo.mobile}}</div>
+                    <div ng-if="logined &&  $root.currentBalance == 1" class='weclome-text'>月余额 <span style="color: #cc0000">￥{{monthBalance || 0}}</span></div>
+                    <div class="info-logout" ng-click="userExit()"><i></i>退出登录</div>
+                </div>
+            </div>
+            <div class="examine">
+                <div class="exa-title">审批信息</div>
+                <div class="exa-info">您有<a class="theme no-examine" href="/home.html#/authorization">未审批</a>订单<span class="fr theme order-num">{{unreviewedNum || 0}}</span></div>
+            </div>
+            <div class="client">
+                <div class="cli-title">客户代表</div>
+                <ul>
+                    <li class="member ui-nowrap clearfix" ng-if="regionList[0]">
+                        <span class="member1">区域销售</span>
+                        <span class="member2">{{regionList[0].delegateName}}</span>    
+                        <span class="member3">{{regionList[0].delegatePhone}}</span>
+                    </li>
+                    <li class="member clearfix" ng-if="reconciliationList[0]">
+                        <span class="member1">对账人员</span>
+                        <span class="member2">{{reconciliationList[0].delegateName}}</span>    
+                        <span class="member3">{{reconciliationList[0].delegatePhone}}</span>
+                    </li>
+                    <li class="member clearfix" ng-if="saleafterList[0]">
+                        <span class="member1">售后人员</span>
+                        <span class="member2">{{saleafterList[0].delegateName}}</span>    
+                        <span class="member3">{{saleafterList[0].delegatePhone}}</span>
+                    </li>
+                </ul>    
+            </div>
+            <div class="content">
+
+                <ul ng-init="activeTab=1" class="notice clearfix">
+                    <li class="active" ng-class="{'isActive': activeTab==1}" ng-click="activeTab=1">{{i18n('公告信息')}}</li>
+                    <!-- <li>公告</li>
+                    <li>公告</li> -->
+                    <li class='active' ng-class="{'isActive': activeTab==2}" ng-click="activeTab=2">企业信息</li>
+
+<!--                    <li class='more'><a ng-href="/helpList.html?categoryCode=headlines&isHelp=0&type=0" ng-if="activeTab==1 && noticeData.length>3">{{i18n('更多')}}>></a></li>-->
+<!--                    <li class='more'><a ng-href="/helpList.html?categoryCode=headlines&isHelp=0&type=1" ng-if="activeTab==2 && companyNotice.length>3">{{i18n('更多')}}>></a></li>-->
+                </ul>
+                <div ng-if="activeTab==1" class="inner active">
+                    <a ng-if="!noticeData || !noticeData.length">暂无数据~</a>
+                    <div ng-repeat="newitem in noticeData | limitTo : 4">
+                        <a ng-if="articleType == 1" ng-href="/helpDetail.html?id={{newitem.id}}&isHelp=0" class="li" style="margin-top: 0">
+                            <span ng-if="$index==0" class="new-tag">NEW</span>
+                            {{newitem.displayTitle}}
+                        </a>
+                        <a ng-if="articleType == 2" ng-href="/helpVideoList.html?objUser=1" class="li" style="margin-top: 0">
+                            <span ng-if="$index==0" class="new-tag">NEW</span>
+                            {{newitem.displayTitle}}
+                        </a>
+                    </div>
+                    <!--<a ng-repeat="newitem in companyNotice"  href="{{newitem.linkUrl}}" class="li">{{newitem.title}}</a>-->
+                </div>
+                <div ng-if="activeTab==2" class="inner active">
+                    <a ng-if="!companyNotice || !companyNotice.length">暂无数据~</a>
+                    <a ng-repeat="newitem in companyNotice | limitTo : 5" ng-href="/helpDetail.html?id={{newitem.id}}&isHelp=0" class="li" style="margin-top: 0">
+                        <span ng-if="$index==0" class="new-tag">NEW</span>
+                        {{newitem.displayTitle}}
+                    </a>
+                </div>
+                <!--<div class="inner"></div>-->
+                <!--<div class="inner"></div>-->
+            </div>
+            <!-- <div class='logo-img'> -->
+                <!--<img id="fwbzimg" width="210" height="118" ng-src="/images/{{ fwbzimg }}" alt="服务保障">-->
+               <!-- <a href="/home.html#/ECart" class='small-logo small-logo-one'>伊点卡</a>
+                <a href="/home.html#/UCart" class='small-logo small-logo-two'>悠点卡</a>-->
+                <!-- <a href="{{proclamationItem.linkUrl}}" class='small-logo-three' ng-repeat="proclamationItem in proclamationList" ng-style="{width: '230'/ proclamationList.length}">
+                    <img ng-src="{{proclamationItem.imageUrl}}" alt="" class="small-logo-threeImg"> {{proclamationItem.name}}
+                </a> -->
+            <!-- </div> -->
+        </div>
+        
+    </div>
+
+    <div ody-carousel lunbo="lunbo" imgheight="518" lunbo-time="5000"></div>
+</div>

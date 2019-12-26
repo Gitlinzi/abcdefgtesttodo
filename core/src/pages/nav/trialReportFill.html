@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>填写试用报告</title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/trialReportFill#((skin)).css?v=${version}">
+
+</head>
+<base target="_blank"/>
+<body ng-app="appControllers" ng-controller="trialReportFillCtrl">
+
+@@include("header.html")
+@@include("global-nav.html")
+<dl ng-include="'includes/_location.html'"></dl>
+<!--<div class="trial-pop" ng-if="reportFill.saveDraftFlag">-->
+    <!--<h4>-->
+        <!--提示<span ng-click="reportFill.saveDraftFlag = false">×</span>-->
+    <!--</h4>-->
+    <!--<div class="trial-box">-->
+        <!--<h5>-->
+            <!--<i></i>-->
+            <!--草稿保存成功！-->
+        <!--</h5>-->
+    <!--</div>-->
+<!--</div>-->
+<!--<div class="trial-pop" ng-if="reportFill.submitFlag">
+    <h4>
+        {{i18n('提示')}}<span ng-click="reportFill.closeBox()">×</span>
+    </h4>
+    <div class="trial-box">
+        <h5>
+            <i></i>
+            {{i18n('报告提交成功')}}！
+        </h5>
+    </div>
+</div>-->
+<div bomb-box cart-data="saveDraftSuccessData"></div>
+<div bomb-box cart-data="submitSuccessData"></div>
+<div class="container">
+    <div class="navigation-nav"><a href="../index.html">{{i18n('首页')}}</a><i class="icon-arrow-right4 mgL10 mgR10"></i><a
+            ng-repeat-start="crumb in reportFill.crumbList"
+            href="search.html?navCategoryIds={{crumb.categoryId}}">{{crumb.categoryName}}</a><i
+            class="icon-arrow-right4 mgL10 mgR10" ng-repeat-end></i>{{reportFill.activityInfo.mpName|textLengthFormat:30}}
+    </div>
+    <div class="trial-report">
+        <dl>
+            <dt>
+                <img ng-src="{{reportFill.reportDetial.pic}}" alt="">
+            </dt>
+            <dd>
+                <h4>{{reportFill.reportDetial.mpName}}</h4>
+                <h5>{{i18n('价格')}}: <span>{{reportFill.reportDetial.price|currency:'￥'}}</span><em style="cursor: pointer;" ng-click="reportFill.toItemPage(reportFill.reportDetial.mpId,reportFill.reportDetial.seriesParentId)">{{i18n('我要购买')}}</em>
+                </h5>
+                <div class="trial-infor">
+                    <!--<ul>
+                        <li>
+                            <em>{{i18n('免费提供')}}：</em>
+                            <span class="f16"><cite>{{reportFill.activityInfo.trialLimit-reportFill.activityInfo.hasApplicedCount}}</cite>{{i18n('份')}}</span>
+                        </li>
+                        <li>
+                            <em>{{i18n('已申请人数')}}：</em>
+                            <span class="f16"><cite>{{reportFill.activityInfo.hasApplicedCount}}</cite>{{i18n('人')}}</span>
+                        </li>
+                    </ul>-->
+                </div>
+            </dd>
+        </dl>
+        <div class="trial-gained">
+            <!--<h4>*试用心得</h4>-->
+            <!--<h5>-->
+                <!--<textarea name="" rows="3" maxlength="500" ng-model="reportFill.trialExperience"-->
+                          <!--placeholder="请输入500字以内试用心得.."></textarea>-->
+                <!--<span>还可以输入{{500-reportFill.trialExperience.length}}个字</span>-->
+            <!--</h5>-->
+            <!--<h4>*试用过程与体验</h4>-->
+            <!--<h5>-->
+                <!--<textarea name="" rows="3" maxlength="500" ng-model="reportFill.trialProcess"-->
+                          <!--placeholder="请输入500字以内试用过程.."></textarea>-->
+                <!--<span>还可以输入{{500-reportFill.trialProcess.length}}个字</span>-->
+            <!--</h5>-->
+            <!--<div class="trial-gained-img">-->
+                <!--<ul>-->
+                    <!--<div pc-upload-more-image image-width="100" image-height="100" max-size="5MB"-->
+                         <!--image-url-list="reportFill.picUrl" image-pattern=".jpg,.bmp,.png,.jpeg,.gif"-->
+                         <!--is-show-delete="true" image-max-length="5"-->
+                         <!--add-class="disIB text-center fl posR mgR20" is-show-tip="true"></div>-->
+                <!--</ul>-->
+
+            <!--</div>-->
+            <div ng-repeat="item in reportFill.reportDetial.decodeVariables">
+                <h4 ng-if="item.type != 'image'">*{{item.label}}</h4>
+                <h5 ng-if="item.type == 'input'">
+                    <textarea name="" rows="3" maxlength="{{item.dataLength}}" ng-model="item.value"
+                          placeholder="30-500 {{i18n('个字')}}，{{i18n('请描述宝贝相关内容')}}.."></textarea>
+                    <span>{{i18n('还可以输入个字')}}{{item.dataLength-item.value.length}}</span>
+                </h5>
+                <div ng-if="item.type == 'image'" class="trial-gained-img">
+                    <ul>
+                        <div pc-upload-more-image image-width="100" image-height="100" max-size="{{$parent.switchConfig.common.uploadingPicSize}}"
+                             image-url-list="item.value" image-pattern="{{$parent.switchConfig.common.uploadingPicFormat}}"
+                             is-show-delete="true" image-max-length="item.dataLength"
+                             add-class="disIB text-center fl posR mgR20" is-show-tip="true"></div>
+                    </ul>
+                    {{i18n('每张图不超过')}}5M,{{i18n('仅支持')}}JPG,BMP,PNG,JPEG{{i18n('图片')}}
+                </div>
+            </div>
+            <h6>
+                <button type="button" name="" ng-click="reportFill.submitTrialReport(reportFill.reportDetial.id)" ng-disabled="reportFill.reportDetial.status == 3 || reportFill.reportDetial.status == 4">{{i18n('立即提交')}}</button>
+                <button class="keptBtn" type="button" name="" ng-click="reportFill.saveDraftTrialReport(reportFill.reportDetial.id)" ng-disabled="!(reportFill.reportDetial.status == 0||reportFill.reportDetial.status == 1||reportFill.reportDetial.status == 2)">{{i18n('保存草稿')}}</button>
+            </h6>
+        </div>
+    </div>
+</div>
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/trialReportFill.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=trialReportFill"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<div class="bt-nav">
+    <i class="icon-gwzn"></i>
+    <ul>
+        <li><a href="help2203.html">{{i18n('购物指南')}}</a></li>
+        <li><a href="help2203.html">{{i18n('会员介绍')}}</a></li>
+        <li><a href="help2202.html">{{i18n('购物流程')}}</a></li>
+        <li><a href="help2218.html">{{i18n('订单状态')}}</a></li>
+        <li><a href="help2201.html">{{i18n('发票说明')}}</a></li>
+    </ul>
+</div>
+<div class="bt-nav">
+    <i class="icon-psfs"></i>
+    <ul>
+        <li><a href="help2205.html">{{i18n('配送方式')}}</a></li>
+        <li><a href="help2205.html">{{i18n('配送方式')}}</a></li>
+        <li><a href="help2217.html">{{i18n('配送范围')}}</a></li>
+    </ul>
+</div>
+<div class="bt-nav">
+    <i class="icon-zffs"></i>
+    <ul>
+        <li><a href="help2204.html">{{i18n('支付方式')}}</a></li>
+        <li><a href="help2204.html">{{i18n('货到付款')}}</a></li>
+        <li><a href="help2215.html">{{i18n('在线支付')}}</a></li>
+        <li><a href="help2214.html">{{i18n('银行转账')}}</a></li>
+    </ul>
+</div>
+<div class="bt-nav">
+    <i class="icon-shfw"></i>
+    <ul>
+        <li><a href="help2212.html">{{i18n('售后服务')}}</a></li>
+        <li><a href="help2212.html">{{i18n('退换货政策')}}</a></li>
+        <li><a href="help2213.html">{{i18n('退货流程')}}</a></li>
+        <li><a href="help2208.html">{{i18n('换货流程')}}</a></li>
+        <li><a href="help2210.html">{{i18n('联系客服')}}</a></li>
+    </ul>
+</div>
+<div class="bt-nav">
+    <i class="icon-hyzx"></i>
+    <ul>
+        <li><a href="help2206.html">{{i18n('会员中心')}}</a></li>
+        <li><a href="help2206.html">{{i18n('注册流程')}}</a></li>
+        <li><a href="help2209.html">{{i18n('积分政策')}}</a></li>
+    </ul>
+</div>
+<div class="qrcode">
+    <h5>{{i18n('微信二维码')}}</h5>
+    <i class="icon-qrcode"></i>
+    <p>{{i18n('关注有惊喜')}},{{i18n('好礼马上到')}}!</p>
+</div>
+
+<!--  error tooltip  -->
+<div class="modal" ng-style="{display:errorMessageTip.config.display?'block':'none'}">
+    <div id="cart-dialog"
+         class="dialog" name="delConfirmDialog"
+         ng-class="{'notie':!isIE}"
+         ng-style="{display:errorMessageTip.config.display?'block':'none'}">
+        <a href="javascript:void(0);" target="_self"
+            class="dialog-close"
+            ng-class="{'dialog-close-ie':isIE,'dialog-close-notie':!isIE}"
+            ng-show="errorMessageTip.config.close&&!errorMessageTip.config.btnGoBack"
+            ng-click="error.closeTip()">&times;</a>
+        <div class="dialog-content">
+            <div class="dialog-header"
+                 ng-class="{'dialog-header-notie':!isIE}">
+                <h5 class="dialog-title">{{errorMessageTip.config.title}}</h5>
+            </div>
+            <div class="dialog-body" ng-if="!errorMessageTip.config.htmlMsg">
+                {{errorMessageTip.config.message}}
+            </div>
+            <div class="dialog-body" ng-bind-html="errorMessageTip.config.message" ng-if="errorMessageTip.config.htmlMsg"></div>
+            <div class="dialog-footer">
+                <button type="button" class="btn cancel"
+                        ng-show="errorMessageTip.config.btnCancel"
+                        ng-click="errorMessageTip.config.cancel()">{{errorMessageTip.config.btnCancelText}}</button>
+                <button type="button" class="btn ok"
+                        ng-show="errorMessageTip.config.btnOK"
+                        ng-click="errorMessageTip.config.ok()">{{errorMessageTip.config.btnOKText}}</button>
+                <button type="button" class="btn ok"
+                        ng-show="errorMessageTip.config.btnGoBack"
+                        ng-click="errorMessageTip.config.goBack(errorMessageTip.config.btnGoBackUrl)">{{errorMessageTip.config.btnGoBackText}}</button>
+            </div>
+        </div>
+    </div>
+</div>

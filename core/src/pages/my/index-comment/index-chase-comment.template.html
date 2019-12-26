@@ -1,0 +1,96 @@
+<div class="good-evaluate" ng-init="additional.init();">
+	    <!-- <div crumb crumb-list="crumbList" active-attr="activeAttr" keyword="noResultKeyword" is-list="isList">
+        </div> -->
+
+    <div class="search">
+        <a ui-sref="index_saleRepairProgList" class="my-order">{{i18n('我的订单')}}</a>
+        <span class="center-crumb-arrowhead"></span>
+        <span>{{i18n('商品评价')}}</span>
+    </div>
+    <div class="evaluate-title">
+        <span class="item-good">{{i18n('商品评价')}}</span>
+    </div>
+    <div class="evaluate-main clearfix" ng-repeat="good in additional.goods">
+        <div class="evaluate-left change-padding">
+            <a class="img-box" href="item.html?itemId={{good.mpId}}">
+                <img width="160" height="160" ng-src="{{good.mpPicPath}}">
+            </a>
+            <a class="fontSize" href="item.html?itemId={{good.mpId}}">{{good.mpName}}</a>
+            <p>{{good.productPriceFinal | currency:'￥'}}</p>
+        </div>
+        <div class="evaluate-right">
+            <dl class="clearfix evaluate-time mgB15">
+                <dt>{{i18n('评价时间')}}</dt>
+                <dd>{{good.createTime | date:'yyyy-MM-dd HH:mm:ss'}}</dd>
+            </dl>
+            <dl class="clearfix one-dl">
+                <dt>{{i18n('商品满意度')}}</dt>
+                <!--  五角星添加 star-active class时为红色 只有star属性时为灰色  -->
+                <dd ng-if="good.rate == 1">
+                    <span class="star star-active"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                </dd>
+                <!--二星-->
+                <dd ng-if="good.rate == 2">
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                </dd>
+                <!--三星-->
+                <dd ng-if="good.rate == 3">
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star"></span>
+                    <span class="star"></span>
+                </dd>
+                <!--四星-->
+                <dd ng-if="good.rate == 4">
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star" ng-click="good.rate=5"></span>
+                </dd>
+                <!--五星-->
+                <dd ng-if="good.rate == 5">
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                    <span class="star star-active"></span>
+                </dd>
+                <dd class="colorB">{{good.rate}}{{i18n('分')}}</dd>
+                <!-- <dd class="notice">请为商品满意度打分</dd> -->
+            </dl>
+            <dl class="clearfix marb15">
+                <dt>{{i18n('评价内容')}}</dt>
+                <dd>
+                    <span>{{good.content}}</span>
+                    <div class="mart10">
+                        <img width="60" height="60" ng-repeat="pic in good.mpShinePicList" ng-src="{{pic}}">
+                    </div>
+
+                </dd>
+            </dl>
+            <dl class="clearfix marginb">
+                <dt class="mart14px">{{i18n('追评内容')}}</dt>
+                <dd class="textarea-box">
+                    <textarea  maxlength="500"  class="textarea" placeholder="{{i18n('商品是否给力')}}？{{i18n('快分享您的购买心得吧')}}" ng-model="good.evaluate.addContent"></textarea>
+                    <span>{{i18n('还可以输入')}}{{500-good.evaluate.addContent.length}}{{i18n('字')}}</span>
+                </dd>
+            </dl>
+            <dl class="dl-three clearfix mgB10">
+                <div pc-upload-more-image image-width="60" image-height="60" max-size="{{$parent.switchConfig.common.uploadingPicSize}}" image-url-list="good.evaluate.addShinePicList" image-pattern="{{$parent.switchConfig.common.uploadingPicFormat}}" is-show-delete="true" image-max-length="10" is-show-tip="true"></div>
+            </dl>
+        </div>
+    </div>
+    <div class="submit-box">
+        <input type="button" value="{{i18n('提交')}}" ng-click="additional.save()">
+    </div>
+</div>

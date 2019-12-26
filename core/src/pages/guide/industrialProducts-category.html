@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="heimdall" content="">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/search#((skin)).css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/index#((skin)).css?v=${version}">
+</head>
+<!-- style="background-color:rgb(248, 248, 248)" -->
+<body ng-app="appControllers" ng-controller="industrialProductsCtrl" class="search-list-page">
+    @@include("header.html")
+    @@include("global-nav.html")
+    <!-- @@include("_jumbotron.html") -->
+    <div class="industrialProduct-hot-goods container">
+        <!-- <div class="head-title">热卖商品</div> -->
+    </div>
+    <div class="container pro-top" style="margin-bottom: 10px;margin-top: 10px">共有<span class="theme">{{totalNum || 0}}</span>件商品，<span class="theme">{{totalCategory || 0}}</span>个品类</div>
+    <div class="container industrialProduct-category"  ng-if="endLoading" ng-cloak id="hhh">
+        <div class="pro-category goToJump" ng-repeat="item in listChildrenCategory track by $index" id="{{$index}}">
+                
+            <div class="first"><span ng-click="chooseCategory(item,$index)">{{item.name}}&nbsp;<span ng-if="item.firstCategoryNum">({{item.firstCategoryNum}})</span></div>
+            <div class="two-content clearfix">
+                <div class="two clearfix" ng-repeat="items in item.secondCategory track by $index">  
+                    <div class="three twos" ng-click="chooseCategory(items,$index)">{{items.name}} </div>   
+                    <div class="three-in" style="width: 75%">
+                        <div class="three" ng-repeat="itemss in items.thirdCategory track by $index" ng-if="$index<=3" ng-click="chooseCategory(itemss,$index)">{{itemss.name}}</div>
+                    </div>            
+               </div>
+            </div>      
+        </div>
+    </div>
+    @@include("footer.html")
+    @@include("script.html")
+    <script type="text/javascript" src="/industrialProducts-category.js?v=${version}"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=search"></script>
+</body>
+
+</html>

@@ -1,0 +1,190 @@
+{
+  "code": 0,
+  "message": "操作成功",
+  "data": {
+    "promotionInfo": [
+      {
+        "mpId": 1182036600000040,
+        "iconText": "满赠",
+        "iconUrl": "http://ody-open.kssws.ks-cdn.com/yh/%E5%B0%8F%E5%9B%BE/manjian_icon.png",
+        "promotions": [
+          {
+            "id": null,
+            "description": "满99元减20,满79元减20",
+            "promotionId": 1,
+            "promotionType": 2,
+            "contentType": 3,
+            "url": null,
+            "iconText": "满减",
+            "iconUrl": "http://ody-open.kssws.ks-cdn.com/yh/%E5%B0%8F%E5%9B%BE/manjian_icon.png",
+            "startTime": 1471956548000,
+            "endTime": 1471956548000,
+            "promotionRuleList": [
+              {
+                "promotionId": 1,
+                "conditionType": 1,
+                "conditionValue": 9900,
+                "contentType": 3,
+                "contentValue": 2000,
+                "description": "满99元减20",
+                "merchantId": 1,
+                "merchantName": "1",
+                "level": 2,
+                "iconUrl": "http://ody-open.kssws.ks-cdn.com/yh/%E5%B0%8F%E5%9B%BE/manjian_icon.png"
+              },
+              {
+                "promotionId": 1,
+                "conditionType": 1,
+                "conditionValue": 7900,
+                "contentType": 3,
+                "contentValue": 2000,
+                "description": "满79元减20",
+                "merchantId": 1,
+                "merchantName": "1",
+                "level": 2,
+                "iconUrl": "http://ody-open.kssws.ks-cdn.com/yh/%E5%B0%8F%E5%9B%BE/manjian_icon.png"
+              }
+            ],
+            "promotionGiftDetailList": [
+              {
+
+              }
+            ]
+          },
+          {
+            "id": null,
+            "description": "满2件9折,满3件8折",
+            "promotionId": 555,
+            "promotionType": 3,
+            "contentType": 2,
+            "url": null,
+            "iconText": "满折",
+            "iconUrl": "http://ody-open.kssws.ks-cdn.com/yh/%E5%B0%8F%E5%9B%BE/manjian_icon.png",
+            "startTime": 1471956548000,
+            "endTime": 1471956548000,
+            "promotionRuleList": [
+              {
+                "promotionId": 555,
+                "conditionType": 2,
+                "conditionValue": 2,
+                "contentType": 2,
+                "contentValue": 90,
+                "description": "满2件9折",
+                "merchantId": 1,
+                "merchantName": "1",
+                "level": 2,
+                "iconUrl": "http://ody-open.kssws.ks-cdn.com/yh/%E5%B0%8F%E5%9B%BE/manjian_icon.png"
+              },
+              {
+                "promotionId": 555,
+                "conditionType": 2,
+                "conditionValue": 3,
+                "contentType": 2,
+                "contentValue": 80,
+                "description": "满3件8折",
+                "merchantId": 1,
+                "merchantName": "1",
+                "level": 2,
+                "iconUrl": "http://ody-open.kssws.ks-cdn.com/yh/%E5%B0%8F%E5%9B%BE/manjian_icon.png"
+              }
+            ],
+            "promotionGiftDetailList": [
+              {
+
+              }
+            ]
+          },
+          {
+            "id": null,
+            "description": "满99赠热销商品",
+            "promotionId": 1,
+            "promotionType": 4,
+            "contentType": 4,
+            "url": null,
+            "iconText": "满赠",
+            "iconUrl": "http://ody-open.kssws.ks-cdn.com/yh/%E5%B0%8F%E5%9B%BE/manjian_icon.png",
+            "startTime": 1471956548000,
+            "endTime": 1471956548000,
+            "promotionRuleList": [
+              {
+
+              }
+            ],
+            "promotionGiftDetailList": [
+              {
+                "promotionId": 1,
+                "level": 1,
+                "description": "满99赠热销商品",
+                "specificDescription": "满99元，送以下任意1件商品，请在购物车领取",
+                "giftType": 1,
+                "promotionRuleId": 1,
+                "conditionType": 1,
+                "conditionValue": 9900,
+                "contentValue": "1",
+                "singleGiftInfoVOList": [
+                  {
+                    "promotionId": 1,
+                    "promotionRuleId": 1,
+                    "merchantId": 1,
+                    "mpId": 1,
+                    "giftName": "1",
+                    "giftNum": 1,
+                    "price": 1,
+                    "picUrl": "http://ody-open.kssws.ks-cdn.com/yh/%E5%B0%8F%E5%9B%BE/manjian_icon.png",
+                    "explain": "满赠"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": null,
+            "description": "满99赠优惠券",
+            "promotionId": 1,
+            "promotionType": 4,
+            "contentType": 4,
+            "url": null,
+            "iconText": "满赠",
+            "iconUrl": "http://ody-open.kssws.ks-cdn.com/yh/%E5%B0%8F%E5%9B%BE/manjian_icon.png",
+            "startTime": 1471956548000,
+            "endTime": 1471956548000,
+            "promotionRuleList": [
+              {
+
+              }
+            ],
+            "promotionGiftDetailList": [
+              {
+                "promotionId": 1,
+                "level": 1,
+                "description": "满99赠优惠券",
+                "specificDescription": "满99元，送以下优惠券",
+                "giftType": 1,
+                "promotionRuleId": 1,
+                "conditionType": 1,
+                "conditionValue": 9900,
+                "contentValue": "1",
+                "singleGiftInfoVOList": [
+                  {
+
+                  }
+                ],
+                "singleCouponInfoList": [
+                  {
+                    "id": 1,
+                    "themeTitle": "",
+                    "useLimit": 1,
+                    "couponDiscountType": 1,
+                    "couponDiscount": "1",
+                    "amountRule": 1,
+                    "couponAmount": 1
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

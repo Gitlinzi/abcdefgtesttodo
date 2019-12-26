@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="heimdall" content="搜索页">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/search#((skin)).css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/index#((skin)).css?v=${version}">
+</head>
+
+<body ng-app="appControllers" ng-controller="majorGuideCtrl" class="search-list-page">
+    @@include("header.html")
+    @@include("global-nav.html")
+    <!--活动商品聚合页-->
+    <!-- @@include("_searchlistpromotion.html") -->
+    <div class="container major-guide1" ng-cloak>
+        <div class="top-title" style="height: 40px;line-height: 40px">首页<span class="right-icon"></span>促销活动页</div>
+        <div>
+            <div class="left" ng-if="f1_classification.imageUrl">
+                <a ng-href="{{f1_classification.linkUrl}}">
+                    <img ng-src="{{f1_classification.imageUrl}}" alt="">
+                </a>
+            </div>
+            <div class="right">
+                <!-- floor1 -->
+                <div class="img-top" ng-if="f1_pic.imageUrl">
+                    <a ng-href="{{f1_pic.linkUrl}}">
+                        <img ng-src="{{f1_pic.imageUrl}}" alt="">
+                    </a>                   
+                </div>
+                <div class="f1-title" ng-if="f1_title"><a ng-href="{{f1_title.linkUrl}}">{{f1_title.name}}</a></div>
+                <div class="f1_content clearfix" ng-if="f1_goods&&f1_goods.length">
+                    <div class="goods goods-item" ng-repeat="item in f1_goods track by $index" ng-show="$index<=3">
+                        <div class="goods-content">
+                            <img ng-src="{{item.refObject.picUrl}}" alt="" ng-click="goToDetail(item)"> 
+                            <div class="price theme">{{item.refObject.price | currency:'￥'}}</div>
+                            <div class="name">{{item.refObject.productName}}</div>
+                            <!-- <div class="third">
+                                <div class="salevome">商品销量 <span style="color:#4262b3">11</span></div>
+                                <div class="comment">评价 <span style="color:#4262b3">11</span></div>
+                            </div> -->
+                            <div class="goods-num">商品编码：{{item.refObject.code}}</div>
+                            <div>
+                                <div stb-mini-add-cart prod="item.refObject" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                            </div> 
+                        </div>                                              
+                    </div>
+                </div>
+                <!-- floor2 -->
+                <div class="f2_img_pic" ng-if="f2_pic.imageUrl">
+                    <a ng-href="{{f2_pic.linkUrl}}">
+                        <img ng-src="{{f2_pic.imageUrl}}" alt="">
+                    </a>                   
+                </div>
+                <div class="f2-title" ng-if="f2_title">
+                    <a ng-href="{{f2_title.linkUrl}}">{{f2_title.name}}</a>                   
+                </div>
+                <div class="f1_content" ng-if="f2_goods&&f2_goods.length">
+                    <div class="goods goods-item" ng-repeat="item in f2_goods track by $index" ng-show="$index<=3">
+                        <div class="goods-content">
+                            <img ng-src="{{item.refObject.picUrl}}" alt="" ng-click="goToDetail(item)"> 
+                            <div class="price theme">{{item.refObject.price | currency:'￥'}}</div>
+                            <div class="name">{{item.refObject.productName}}</div>
+                            <!-- <div class="third">
+                                <div class="salevome">商品销量 <span style="color:#4262b3">11</span></div>
+                                <div class="comment">评价 <span style="color:#4262b3">11</span></div>
+                            </div> -->
+                            <div class="goods-num">商品编码：{{item.refObject.code}}</div>
+                            <div>
+                                <div stb-mini-add-cart prod="item.refObject" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                            </div> 
+                        </div>                                              
+                    </div>
+                </div>
+                <!-- floor3 -->
+                <div class="f3_img_pic" ng-if="f3_pic.imageUrl">
+                    <a ng-href="{{f3_pic.linkUrl}}">
+                        <img ng-src="{{f3_pic.imageUrl}}" alt="">
+                    </a>                    
+                </div>
+                <div class="f3-title" ng-if="f3_title">
+                    <a ng-href="{{f3_title.linkUrl}}">{{f3_title.name}}</a>                    
+                </div>
+                <div class="f1_content" ng-if="f3_goods&&f3_goods.length">
+                    <div class="goods goods-item" ng-repeat="item in f3_goods track by $index" ng-show="$index<=3">
+                        <div class="goods-content">
+                            <img ng-src="{{item.refObject.picUrl}}" alt="" ng-click="goToDetail(item)"> 
+                            <div class="price theme">{{item.refObject.price | currency:'￥'}}</div>
+                            <div class="name">{{item.refObject.productName}}</div>
+                            <!-- <div class="third">
+                                <div class="salevome">商品销量 <span style="color:#4262b3">11</span></div>
+                                <div class="comment">评价 <span style="color:#4262b3">11</span></div>
+                            </div> -->
+                            <div class="goods-num">商品编码：{{item.refObject.code}}</div>
+                            <div>
+                                <div stb-mini-add-cart prod="item.refObject" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                            </div> 
+                        </div>                                              
+                    </div>
+                </div>
+                <!-- floor4 -->
+                <div class="f3_img_pic" ng-if="f4_pic.imageUrl">
+                    <a ng-href="{{f4_pic.linkUrl}}">
+                        <img ng-src="{{f4_pic.imageUrl}}" alt="">
+                    </a>                    
+                </div>
+                <div class="f3-title" ng-if="f4_title">
+                    <a ng-href="{{f4_title.linkUrl}}">{{f4_title.name}}</a>  
+                </div>
+                <div class="f1_content" ng-if="f4_goods&&f4_goods.length">
+                    <div class="goods goods-item" ng-repeat="item in f4_goods track by $index" ng-show="$index<=3">
+                        <div class="goods-content">
+                            <img ng-src="{{item.refObject.picUrl}}" alt="" ng-click="goToDetail(item)"> 
+                            <div class="price theme">{{item.refObject.price | currency:'￥'}}</div>
+                            <div class="name">{{item.refObject.productName}}</div>
+                            <!-- <div class="third">
+                                <div class="salevome">商品销量 <span style="color:#4262b3">11</span></div>
+                                <div class="comment">评价 <span style="color:#4262b3">11</span></div>
+                            </div> -->
+                            <div class="goods-num">商品编码：{{item.refObject.code}}</div>
+                            <div>
+                                <div stb-mini-add-cart prod="item.refObject" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                            </div> 
+                        </div>                                              
+                    </div>
+                </div>
+                 <!-- floor5 -->
+                <div class="img-top" ng-if="f5_pic.imageUrl">
+                    <a ng-href="{{f5_pic.linkUrl}}">
+                        <img ng-src="{{f5_pic.imageUrl}}" alt="">
+                    </a>
+                </div>
+                <div class="f1-title" ng-if="f5_title"><a ng-href="{{f5_title.linkUrl}}">{{f5_title.name}}</a></div>
+                <div class="f1_content clearfix" ng-if="f5_goods&&f5_goods.length">
+                    <div class="goods goods-item" ng-repeat="item in f5_goods track by $index" ng-show="$index<=3">
+                        <div class="goods-content">
+                            <img ng-src="{{item.refObject.picUrl}}" alt="" ng-click="goToDetail(item)"> 
+                            <div class="price theme">{{item.refObject.price | currency:'￥'}}</div>
+                            <div class="name">{{item.refObject.productName}}</div>
+                            <!-- <div class="third">
+                                <div class="salevome">商品销量 <span style="color:#4262b3">11</span></div>
+                                <div class="comment">评价 <span style="color:#4262b3">11</span></div>
+                            </div> -->
+                            <div class="goods-num">商品编码：{{item.refObject.code}}</div>
+                            <div>
+                                <div stb-mini-add-cart prod="item.refObject" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                            </div> 
+                        </div>                                              
+                    </div>
+                </div>
+                  <!-- floor6 -->
+                <div class="img-top" ng-if="f6_pic.imageUrl">
+                    <a ng-href="{{f6_pic.linkUrl}}">
+                        <img ng-src="{{f6_pic.imageUrl}}" alt="">
+                    </a>
+                </div>
+                <div class="f1-title" ng-if="f6_title"><a ng-href="{{f6_title.linkUrl}}">{{f6_title.name}}</a></div>
+                <div class="f1_content clearfix" ng-if="f6_goods&&f6_goods.length">
+                    <div class="goods goods-item" ng-repeat="item in f6_goods track by $index" ng-show="$index<=3">
+                        <div class="goods-content">
+                            <img ng-src="{{item.refObject.picUrl}}" alt="" ng-click="goToDetail(item)"> 
+                            <div class="price theme">{{item.refObject.price | currency:'￥'}}</div>
+                            <div class="name">{{item.refObject.productName}}</div>
+                            <!-- <div class="third">
+                                <div class="salevome">商品销量 <span style="color:#4262b3">11</span></div>
+                                <div class="comment">评价 <span style="color:#4262b3">11</span></div>
+                            </div> -->
+                            <div class="goods-num">商品编码：{{item.refObject.code}}</div>
+                            <div>
+                                <div stb-mini-add-cart prod="item.refObject" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                            </div> 
+                        </div>                                              
+                    </div>
+                </div>
+                 <!-- floor7 -->
+                <div class="img-top" ng-if="f7_pic.imageUrl">
+                    <a ng-href="{{f7_pic.linkUrl}}">
+                        <img ng-src="{{f7_pic.imageUrl}}" alt="">
+                    </a>
+                </div>
+                <div class="f1-title" ng-if="f7_title"><a ng-href="{{f7_title.linkUrl}}">{{f7_title.name}}</a></div>
+                <div class="f1_content clearfix" ng-if="f7_goods&&f7_goods.length">
+                    <div class="goods goods-item" ng-repeat="item in f7_goods track by $index" ng-show="$index<=3">
+                        <div class="goods-content">
+                            <img ng-src="{{item.refObject.picUrl}}" alt="" ng-click="goToDetail(item)"> 
+                            <div class="price theme">{{item.refObject.price | currency:'￥'}}</div>
+                            <div class="name">{{item.refObject.productName}}</div>
+                            <!-- <div class="third">
+                                <div class="salevome">商品销量 <span style="color:#4262b3">11</span></div>
+                                <div class="comment">评价 <span style="color:#4262b3">11</span></div>
+                            </div> -->
+                            <div class="goods-num">商品编码：{{item.refObject.code}}</div>
+                            <div>
+                                <div stb-mini-add-cart prod="item.refObject" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                            </div> 
+                        </div>                                              
+                    </div>
+                </div>
+                 <!-- floor8 -->
+                <div class="img-top" ng-if="f8_pic.imageUrl">
+                    <a ng-href="{{f8_pic.linkUrl}}">
+                        <img ng-src="{{f8_pic.imageUrl}}" alt="">
+                    </a>
+                </div>
+                <div class="f1-title" ng-if="f8_title"><a ng-href="{{f8_title.linkUrl}}">{{f8_title.name}}</a></div>
+                <div class="f1_content clearfix" ng-if="f8_goods&&f8_goods.length">
+                    <div class="goods goods-item" ng-repeat="item in f8_goods track by $index" ng-show="$index<=3">
+                        <div class="goods-content">
+                            <img ng-src="{{item.refObject.picUrl}}" alt="" ng-click="goToDetail(item)"> 
+                            <div class="price theme">{{item.refObject.price | currency:'￥'}}</div>
+                            <div class="name">{{item.refObject.productName}}</div>
+                            <!-- <div class="third">
+                                <div class="salevome">商品销量 <span style="color:#4262b3">11</span></div>
+                                <div class="comment">评价 <span style="color:#4262b3">11</span></div>
+                            </div> -->
+                            <div class="goods-num">商品编码：{{item.refObject.code}}</div>
+                            <div>
+                                <div stb-mini-add-cart prod="item.refObject" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                            </div> 
+                        </div>                                              
+                    </div>
+                </div>
+                <!-- floor9 -->
+                <div class="img-top" ng-if="f9_pic.imageUrl">
+                    <a ng-href="{{f9_pic.linkUrl}}">
+                        <img ng-src="{{f9_pic.imageUrl}}" alt="">
+                    </a>
+                </div>
+                <div class="f1-title" ng-if="f9_title"><a ng-href="{{f9_title.linkUrl}}">{{f9_title.name}}</a></div>
+                <div class="f1_content clearfix" ng-if="f9_goods&&f9_goods.length">
+                    <div class="goods goods-item" ng-repeat="item in f9_goods track by $index" ng-show="$index<=3">
+                        <div class="goods-content">
+                            <img ng-src="{{item.refObject.picUrl}}" alt="" ng-click="goToDetail(item)"> 
+                            <div class="price theme">{{item.refObject.price | currency:'￥'}}</div>
+                            <div class="name">{{item.refObject.productName}}</div>
+                            <!-- <div class="third">
+                                <div class="salevome">商品销量 <span style="color:#4262b3">11</span></div>
+                                <div class="comment">评价 <span style="color:#4262b3">11</span></div>
+                            </div> -->
+                            <div class="goods-num">商品编码：{{item.refObject.code}}</div>
+                            <div>
+                                <div stb-mini-add-cart prod="item.refObject" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                            </div> 
+                        </div>                                              
+                    </div>
+                </div>
+                <!-- floor10 -->
+                <div class="img-top" ng-if="f10_pic.imageUrl">
+                    <a ng-href="{{f10_pic.linkUrl}}">
+                        <img ng-src="{{f10_pic.imageUrl}}" alt="">
+                    </a>
+                </div>
+                <div class="f1-title" ng-if="f10_title"><a ng-href="{{f10_title.linkUrl}}">{{f10_title.name}}</a></div>
+                <div class="f1_content clearfix" ng-if="f10_goods&&f10_goods.length">
+                    <div class="goods goods-item" ng-repeat="item in f10_goods track by $index" ng-show="$index<=3">
+                        <div class="goods-content">
+                            <img ng-src="{{item.refObject.picUrl}}" alt="" ng-click="goToDetail(item)"> 
+                            <div class="price theme">{{item.refObject.price | currency:'￥'}}</div>
+                            <div class="name">{{item.refObject.productName}}</div>
+                            <!-- <div class="third">
+                                <div class="salevome">商品销量 <span style="color:#4262b3">11</span></div>
+                                <div class="comment">评价 <span style="color:#4262b3">11</span></div>
+                            </div> -->
+                            <div class="goods-num">商品编码：{{item.refObject.code}}</div>
+                            <div>
+                                <div stb-mini-add-cart prod="item.refObject" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+                            </div> 
+                        </div>                                              
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include("footer.html")
+    @@include("script.html")
+    <script type="text/javascript" src="/major-guide.js?v=${version}"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=search"></script>
+</body>
+
+</html>

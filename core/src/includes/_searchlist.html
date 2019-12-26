@@ -1,0 +1,160 @@
+<!-- 筛选工具条 -->
+<div id="sctoolbar" ng-style="{'margin-bottom': (!$parent.switchConfig.common.showUpdateDistributionAddress && !$parent.switchConfig.common.productRestrictedStock && !$parent.switchConfig.guide.search.showSelfSupport)? '16px': '16px'}">
+    <div class="sorting">
+        <a href="javascript:void(0);" class="order" ng-class="{active:!searchObj.sortType||searchObj.sortType==10}" ng-click="selectOptions.sort(10)">{{i18n('综合')}}</a>
+        <a href="javascript:void(0);" class="order" ng-class="{active:searchObj.sortType==15}" ng-click="selectOptions.sort(15)">{{searchObj.sortType==15?i18n('销量'):i18n('销量')}}<i></i></a>
+        <a href="javascript:void(0);" class="order" ng-class="{active:searchObj.sortType==12}" ng-click="selectOptions.sort(12)">{{searchObj.sortType==12?i18n('新品'):i18n('新品')}}<i></i></a>
+        <a ng-if="$parent.switchConfig.guide.search.showCommodityScore" href="javascript:void(0);" class="order" ng-class="{active:searchObj.sortType==16}" ng-click="selectOptions.sort(16)">{{searchObj.sortType==16?i18n('评分'):i18n('评分')}}<i></i></a>
+        <a ng-if="$parent.switchConfig.guide.search.showCommodityComment" href="javascript:void(0);" class="order" ng-class="{active:searchObj.sortType==17}" ng-click="selectOptions.sort(17)">{{searchObj.sortType==17?i18n('评论'):i18n('评论')}}<i></i></a>
+        <a href="javascript:void(0);" class="order " ng-show="!$parent.hideProductPrice" ng-class="{'active down-icon-two':searchObj.sortType==13||searchObj.sortType==14,'down-icon-two':searchObj.sortType!=13&&searchObj.sortType!=14}"
+            ng-click="selectOptions.sort(searchObj.sortType==13?14:13)">
+           {{searchObj.sortType==13?i18n('价格'):searchObj.sortType==14?i18n('价格'):i18n('价格')}}<i ng-class="{'asc':searchObj.sortType==13,'desc':searchObj.sortType==14}"></i>
+
+        </a>
+        <div class="price-range fl" ng-show="!$parent.hideProductPrice" ng-mouseleave="displayCheck=false" ng-mouseover="displayCheck=true">
+            <input class="from from-price" type="text" placeholder="￥" ng-blur="priceRange.from = formatDecimals(priceRange.from)" ng-model="priceRange.from" maxlength="6" placeholder="￥"/><span>&minus;</span>
+           <input class="to" type="text" placeholder="￥" ng-blur="priceRange.to = formatDecimals(priceRange.to)"
+                ng-model="priceRange.to" maxlength="6" placeholder="￥"/>
+            <div class="check" ng-if="displayCheck">
+                <a href="javascript:void(0)" ng-click="priceRange.to=(priceRange.from=null);">{{i18n('清除')}}</a>
+                <button class="btn" ng-click="selectOptions.price(priceRange.from,priceRange.to)">{{i18n('确定')}}</button>
+            </div>
+        </div>
+        <a href="javascript:void(0);" ng-click="selectOptions.filter('CATEGORY_DISCOUNT')" class="condition" ng-class="{active:searchObj.filterType.indexOf('CATEGORY_DISCOUNT')>=0}">
+            <i class="icon-checkbox"></i> {{i18n('大类折扣')}}
+        </a>
+        <a href="javascript:void(0);" ng-click="selectOptions.filter('FIXED_DISCOUNT')" class="condition" ng-class="{active:searchObj.filterType.indexOf('FIXED_DISCOUNT')>=0}">
+            <i class="icon-checkbox"></i> {{i18n('固定折扣')}}
+        </a>
+        <a href="javascript:void(0);" ng-click="selectOptions.filter('AGREEMENT_PRODUCT')" class="condition" ng-class="{active:searchObj.filterType.indexOf('AGREEMENT_PRODUCT')>=0}">
+            <i class="icon-checkbox"></i> {{i18n('协议商品')}}
+        </a>
+        <!-- <span>
+            <label class="checkboxStyle-small checkCollection">
+                <input id="checkAllProduct" type="checkbox" name="checkAll" ng-model="searchObj.checkAll" ng-change="checkAllBtn();">
+                <span></span>
+                {{i18n('全选')}}
+            </label>
+        </span>
+        <span>{{i18n('批量加入购物车')}}</span>
+        <a ng-href="/compare-box.html" class="toCompareBox fl">{{i18n('查看比较盒')}}</a> -->
+    </div>
+    <!-- <div class="segmenting-line"></div>
+    <div class="filter" ng-if="$parent.switchConfig.common.showUpdateDistributionAddress || $parent.switchConfig.common.productRestrictedStock || $parent.switchConfig.guide.search.showSelfSupport">
+        <!-- 过滤 --
+        <div id="search-address" ng-if="$parent.switchConfig.common.showUpdateDistributionAddress">
+            <dl >
+                <dt>{{i18n('配送至')}}</dt>
+                <dd>
+                    <span class="spaddress" ng-click="localProvince.lvAreaObj.areaShow = true">{{localProvince.lvAreaObj.detail||localProvince.gotAreas.province.name}}</span>
+                    <!--<i class="icon-more-down"></i>--
+                    <div class="mask" ng-if="localProvince.lvAreaObj.areaShow"></div>
+                    <div class="adschange" ng-if="localProvince.lvAreaObj.areaShow">
+                        <span class="dialog-close-location h25px" ng-click="localProvince.lvAreaObj.areaShow=false" >&times;</span>
+                        <ul class="tab">
+                            <li ng-class="{active:localProvince.lvAreaObj.areaTab == 1}" ng-click="localProvince.lvAreaObj.areaTab=1">{{localProvince.gotAreas.province.name||i18n('请选择省份')}}</li>
+                            <li ng-class="{active:localProvince.lvAreaObj.areaTab == 2}" ng-if="localProvince.lvAreaObj.areaTab>1" ng-click="localProvince.lvAreaObj.areaTab=2">{{localProvince.gotAreas.city.name||i18n('请选择城市')}}</li>
+                            <li ng-class="{active:localProvince.lvAreaObj.areaTab == 3}" ng-if="localProvince.lvAreaObj.areaTab>2">{{localProvince.gotAreas.area.name||i18n('请选择区域')}}</li>
+                        </ul>
+                        <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 1}">
+                            <li ng-repeat="prov in localProvince.gotAreas.provinces|orderBy:'name.length'" ng-click="localProvince._changeAddr(prov,2, 'search')"
+                                ng-class="{active:prov.id==localProvince.gotAreas.province.id,col2:prov.name.length > 7}">{{prov.name}}</li>
+                        </ul>
+                        <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 2}">
+                            <li ng-repeat="city in localProvince.gotAreas.cities|orderBy:'name.length'" ng-click="localProvince._changeAddr(city,3, 'search')"
+                                ng-class="{active:city.id==localProvince.gotAreas.city.id,col2:city.name.length > 7}">{{city.name}}</li>
+                        </ul>
+                        <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 3}">
+                            <li ng-repeat="area in localProvince.gotAreas.areas|orderBy:'name.length'" ng-click="localProvince._changeAddr(area,0, 'search')" ng-class="{col2:area.name.length > 7}">{{area.name}}</li>
+                        </ul>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+       <!-- <label for="filterProduct" class="checkboxStyle-small ProductML" ng-click="selectOptions.filter('HAS_STOCK')" class="condition" ng-class="{active:searchObj.filterType.indexOf('HAS_STOCK')>=0}" ng-if="$parent.switchConfig.common.productRestrictedStock">
+            <input id="filterProduct" type="checkbox">
+            <span></span> {{i18n('仅显示有货')}}
+        </label>--
+        <a href="javascript:void(0);" ng-click="selectOptions.filter('HAS_STOCK')" class="condition" ng-class="{active:searchObj.filterType.indexOf('HAS_STOCK')>=0}">
+            <i class="icon-checkbox"></i> {{i18n('仅显示有货')}}
+        </a>
+        <!-- <a href="javascript:void(0);" ng-click="selectOptions.filter('SELF_SUPPORT')" class="condition" ng-class="{active:searchObj.filterType.indexOf('SELF_SUPPORT')>=0}" ng-if="$parent.switchConfig.guide.search.showSelfSupport">
+            <i class="icon-checkbox"></i> {{i18n('自营')}}
+        </a> --
+        <a href="javascript:void(0);" ng-click="selectOptions.filter('AREA_SELL')" class="condition" ng-class="{active:searchObj.filterType.indexOf('AREA_SELL')>=0}">
+            <i class="icon-checkbox"></i> {{i18n('仅显示区域可售')}}
+        </a>
+        <a href="javascript:void(0);" ng-click="selectOptions.filter('AGREEMENT_PRODUCT')" class="condition" ng-class="{active:searchObj.filterType.indexOf('AGREEMENT_PRODUCT')>=0}">
+            <i class="icon-checkbox"></i> {{i18n('仅显示协议商品')}}
+        </a>
+        <a href="javascript:void(0);" ng-click="selectOptions.filter('FIXED_DISCOUNT')" class="condition" ng-class="{active:searchObj.filterType.indexOf('FIXED_DISCOUNT')>=0}">
+            <i class="icon-checkbox"></i> {{i18n('仅显示固定折扣')}}
+        </a>
+        <a href="javascript:void(0);" ng-click="selectOptions.filter('CATEGORY_DISCOUNT')" class="condition" ng-class="{active:searchObj.filterType.indexOf('CATEGORY_DISCOUNT')>=0}">
+            <i class="icon-checkbox"></i> {{i18n('仅显示大类折扣')}}
+        </a>
+    </div>
+    <dl ng-include="'includes/_location.html'"></dl> -->
+    <div class="flip">
+        <span class="mgR15">{{i18n('共')}}<b class="highlight">{{searchedObj.totalCount || 0}}</b>{{i18n('件商品')}}</span>
+        <span class="pag pag-one" ng-class="{'disable':searchObj.pageNo<=1}" ng-click="prev()"><i></i></span>
+        <span class=""><b class="highlight">{{searchObj.pageNo || 0}}</b>/{{pageTotal || searchObj.pageNo || 0}}</span>
+        <span class="pag pag-two" ng-class="{'disable':searchObj.pageNo>=pageTotal}" ng-click="next()"><i></i></span>
+    </div>
+</div>
+
+<!-- 搜索结果 类目列表 -->
+<div id="{{shopFlag?'store-pro':'pro-list'}}">
+    <div class="pro" ng-style="" ng-repeat="prod in searchedObj.productList" ng-init="prod.amount=1;prod.showTip=false">
+        <div search-item class="goods-item" prod="prod" options="{showComment:true}" prod-list="searchedObj.productList" >
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+<!--分页-->
+<div pagination page-size="searchObj.pageSize" page-no="searchObj.pageNo" total-count="searchObj.totalCount" total-page="totalPage"></div>
+
+
+
+<!-- 项目对比 -->
+<div id="pro-compare" ng-class="{active:showCompare}">
+    <div>
+        <div class="list">
+            <a class="pro" ng-class="{empty:!item.chineseName && !item.salePriceWithTax}" ng-href="{{item.mpId?'/item.html?itemId='+item.mpId:''}}" target="_blank" ng-repeat="item in compareBoxList | limitTo:4">
+                <div ng-if="item.chineseName || item.salePriceWithTax">
+                    <img ng-src="{{item.mainPictureUrl}}" alt="">
+                    <b>{{(item.salePriceWithTax | currency:'￥') || '--'}}</b>
+                    <strong>{{item.chineseName}}</strong>
+                </div>
+                <div ng-if="!item.chineseName&&!item.salePriceWithTax">
+                    <span>{{$index+1}}</span>
+                </div>
+            </a>
+        </div>
+        <div class="control">
+            <a class="hide" href="javascript:;" ng-click="updateCompareBox(false)" >隐藏</a>
+            <a class="do" href="/compare-box.html">对比</a>
+            <a class="clear" ng-click="clearAllCompare()">清空对比盒</a>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/ng-template" id="baseItem">
+    <div class="content">
+        <a href="item.html?itemId={{prod.mpId}}">
+            <i ng-class="{'icon-bargain':prod.isBargain==2 || prod.isBargain==3,'icon-presale':prod.saleType==3}" ng-if="prod.isBargain==2 || prod.isBargain==3 || prod.saleType==3"></i>
+            <img width="220" height="220" ng-src="{{prod.picUrl}}" alt="">
+            <p class="price" ng-if="prod.isBargain != 3">{{prod.promotionPrice||prod.price | currency:'￥'}}
+                <span class="event" ng-repeat="text in formatPromotionText(prod)">{{text}}</span>
+            </p>
+            <h5>{{prod.name}}</h5>
+        </a>
+        <div class="merchant" ng-if="!shopFlag">
+            <img src="../images/shop_03.png" alt="">
+            <!--<a href="store.html?shopId={{prod.shopId}}&merchantId={{prod.merchantId}}" ng-if="prod.merchantType==11">{{prod.shopName}}</a>-->
+            <span ng-if="prod.merchantType==11">{{prod.shopName}}</span>
+            <span ng-if="prod.merchantType==12">{{prod.shopName}}</span>
+        </div>
+    </div>
+</script>

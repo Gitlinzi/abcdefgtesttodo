@@ -1,0 +1,9 @@
+{
+    "gitVersion": {
+        "trace": null,
+        "git.commit.id": "4c9c29b6a783455a4d3b5cafd5c7cf77ac2bb4c7",
+        "git.branch": "origin/master"
+    },
+    "code": "-1",
+    "message": "收藏商品查询异常：json call error"
+}

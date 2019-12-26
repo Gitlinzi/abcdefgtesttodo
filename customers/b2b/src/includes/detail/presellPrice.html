@@ -1,0 +1,51 @@
+<dl class='first-dl'>
+    <dt>{{i18n('定金')}}</dt>
+    <dd ng-if="!item.isSeries">
+        <div class='money'>
+            <span ng-show="item.managementState">
+                <span class="num" ng-show="!$parent.hideProductPrice">
+                    <span class='money-img'>￥</span>
+                    {{item.presellDownPrice}}
+                </span>
+                <span class="num" ng-show="$parent.hideProductPrice">
+                    <span class='money-img'></span>
+                    {{$parent.switchConfig.common.showTextWhenHidePrice}}
+                </span>
+                &nbsp;&nbsp;
+            </span>
+            <span class="fontSize12" ng-show="!$parent.hideProductPrice">
+                <span class="color-text">{{i18n('预售价')}}：</span>
+                <span class="num">
+                    <span class="money-img">￥</span>
+                        {{item.availablePrice}}
+                   </span>
+                </span>
+            <span style="color: #000;" ng-show="!item.managementState">{{i18n('暂无价格')}}</span>
+            <span class="fontSize12 color-text fontL14" ng-if="item.originalPrice">{{i18n('原价')}}：</span>
+            <span class="fontSize12 color-black" ng-if="item.originalPrice && !$parent.hideProductPrice">{{item.originalPrice | currency : "￥" }}</span>
+        </div>
+    </dd>
+    <dd ng-if="item.isSeries">
+        <div class='money'>
+            <span ng-show="item.managementState">
+                <span class="num" ng-show="!$parent.hideProductPrice">
+                    <span class='money-img'>￥</span>{{item.presellDownPrice}}
+                    <span ng-if="item.highestPrice">&nbsp;-&nbsp;<span class='money-img'>￥</span>{{item.highestPrice}}</span>
+                </span>
+                <span class="num" ng-show="$parent.hideProductPrice">
+                    <span class='money-img'></span>
+                    {{$parent.switchConfig.common.showTextWhenHidePrice}}
+                </span>
+                &nbsp;&nbsp;
+            </span>
+            <span class="fontSize12" ng-show="!$parent.hideProductPrice">
+                <span class="color-text">{{i18n('预售价')}}：</span>
+                <span class="num">
+                    <span class="money-img">￥</span>
+                        {{item.availablePrice}}
+                   </span>
+                </span>
+            <span style="color: #000;" ng-show="!item.managementState">{{i18n('暂无价格')}}</span>
+        </div>
+    </dd>
+</dl>

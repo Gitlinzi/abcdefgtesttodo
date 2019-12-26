@@ -1,0 +1,53 @@
+<!--全局导航-->
+<div class="feedback-bomb" feedback-bomb feedback-data="$parent.commonFeedbackData"></div>
+<div class="global-bg">
+	<div class='fix-nav'>
+		<ul class='fix-box'>
+			<li class='fix-item'>
+				<a href="javascript:void(0)" ng-click="PersonalCenter()">
+					<span class='fix-icon person-icon'></span>
+					<em class="tab-text">个人中心</em>
+				</a>
+			</li>
+			<li class='fix-item fix-item-two'>
+				<a href="/cart.html">
+					<span class='fix-icon car'></span>
+					<a href="/cart.html" class="car-text">进货单</a>
+					<span class="cart-count-right ng-binding" ng-if="cartTotal">{{cartTotal}}</span>
+				</a>
+			</li>
+			<li class='fix-item'>
+				<a href="javascript:void(0)" ng-click="myFrequence()">
+					<span class='fix-icon frequence'></span>
+					<em class="tab-text">我的收藏</em>
+				</a>
+			</li>
+			<li class='fix-item'>
+				<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin={{$parent.merchantInfo.merchantQQ[0]}}&site=qq&menu=yes" title="选择客服端打开奥">
+	                <span class='fix-icon ear'></span>
+	                <em class="tab-text">客服</em>
+	            </a>
+			</li>
+			<li class='fix-item'>
+				<a href="javascript:void(0)" ng-click="commonFeedbackDataFun()">
+					<span class='fix-icon opinion'></span>
+					<em class="tab-text">意见反馈</em>
+				</a>
+			</li>
+			<li class='fix-item left-er'>
+				<span class='fix-icon code'></span>
+				<!--<i class='global-er'></i></a></li>-->
+				<div class="global-er">
+					<a href="#"><img src="../../images/cg-qr.png" alt="" width="120px" height="120px"/></a>
+					<div class="er-name">{{$parent.switchConfig.common.companyName}}办公</div>
+				</div>
+			<!--<li class='fix-item'><a href="/home.html#/message"><span class='fix-icon message'></span></a></li>-->
+			<!--<li class='fix-item'><a href="/home.html"><span class='fix-icon penson'></span></a></li>-->
+		</ul>
+	</div>
+	<div class='top-box'>
+		<em class="tab-text">返回顶部</em>
+		<span class='top-btn'>
+		</span>
+	</div>
+</div>

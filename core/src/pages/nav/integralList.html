@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>积分商城</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/integralList#((skin)).css?v=${version}">
+
+</head>
+<base target="_blank"/>
+<body ng-app="appControllers" ng-controller="integralListCtrl">
+
+    @@include("header.html")
+    @@include("global-nav.html")
+    <dl ng-include="'includes/_location.html'"></dl>
+    <div class="container" ng-init="getSearchList()">
+        <div class="navigation-nav">{{i18n('首页')}}<i class="icon-arrow-right4 mgL10 mgR10"></i>{{i18n('积分商城')}}<i class="icon-arrow-right4 mgL10 mgR10"></i>{{data.redemptionType == 1? i18n('积分换购'):i18n('积分兑换')}}
+            <a href="javascript:void(0);" ng-click="filterPointPro()" class="condition mgL10" ng-class="{active:data.filterSwitch}">
+                <i class="icon-checkbox"></i> {{i18n('仅查看可兑换商品')}}</a>
+        </div>
+        <div class="buy-content">
+            <ul>
+                <li ng-repeat="item in data.searchList">
+                    <a href="item.html?isPointPro=1&itemId={{item.mpId}}">
+                        <dl>
+                            <dt><img ng-src="{{item.url160x160}}" alt="">
+                                <span ng-if="item.scripts">
+                                    <img ng-src="{{item.scripts[0]}}" alt="">
+                                </span>
+                            </dt>
+                            <dd>
+                                <h4>{{item.name}}</h4>
+                                <h5><span class="span">{{i18n('积分')}}</span><em>{{item.pointPrice || 0}}</em> <span ng-if="data.redemptionType==1">+ <span class="span">￥</span><em>{{item.price}}</em></span></h5>
+                                <p>{{i18n('已购买人数')}}：{{item.volume4sale}}</p>
+                                <cite ng-if="item.realTimeStock != -1">{{i18n('库存')}}：{{item.realTimeStock}}</cite>
+                            </dd>
+                        </dl>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div ng-if="data.searchList.length > 0" pagination page-size="data.searchObj.pageSize" page-no="data.searchObj.pageNo" total-count="data.searchObj.totalCount" total-page="data.searchObj.totalPage"></div>
+    </div>
+    @@include("footer.html")
+    @@include("script.html")
+    <script type="text/javascript" src="/integralList.js?v=${version}"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=intergralList"></script>
+</body>
+</html>

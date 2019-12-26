@@ -1,0 +1,85 @@
+<div class="custom-footer">
+    <!--cms配置的自定义html内容-->
+    <!--<div id="customFooterHtml"></div>-->
+    <div id="footer" ng-class="{'footer-box-two':isLogion}">
+        <div class="footer-img" ng-if="showCgUserHtml">
+            <a href="{{serviceGuarantee.linkUrl}}">
+                <div ng-style="{'background': 'url('+ serviceGuarantee.imageUrl +')  no-repeat center center'}" style="height: 110px; width: 100%"></div>
+                <!-- <img width="100%" height="110" ng-src="{{serviceGuarantee.imageUrl}}" alt=""> -->
+            </a>
+        </div>
+        <div ng-if="!isLogion" class="footer-top">
+            <div class="container width1000">
+                <div class="clearfix visual">
+                    <visual-directive module-name="footerColumn"></visual-directive>
+                    <div class="footer-right" style="float:left;">
+                        <div class="bt-nav" ng-repeat="cate in category.childCategoryVOList|limitTo:5">
+                            <i class=''></i>
+                            <a class="first-a" ng-href="/helpList.html?categoryId={{cate.id}}">{{cate.categoryName | textLengthFormat: '6' : '...'}}</a>
+                            <ul class="trade-ul common-ul">
+                                <li ng-repeat="item in cate.pageArticleVOList.listObj">
+                                    <a ng-href="/helpDetail.html?id={{item.id}}">{{item.displayTitle | textLengthFormat: '6' : '...'}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="footer-left" style="float:right;margin-right: 20px">
+                        <div class="qrcode" ng-repeat=" footerImg in footerSetting.footerImageArray track by $index">
+                            <h5>{{ footerImg.footerImageName }}</h5>
+                            <i style="background:none;"><img width="100" height="100" ng-src="{{ footerImg.footerImageURL }}" src='../images/cg-qr.png'></i>
+                        </div>
+                    </div>
+                    <!-- error tooltip -->
+                    <div cart-check-code-tip error-message-tip="errorMessageTip" error="error" btn-class="btnf" is-ie="isIE"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container width1000 footer-top-border">
+            <div>
+                <p class="footerNav clearfix visual">
+                    <!--<visual-directive module-name="footerNav"></visual-directive>-->
+                    <a target="_blank" ng-repeat="a in websiteRecommendation" class="a-text" href="{{a.linkUrl}}">{{a.content}}</a>
+                    <!--<li ng-repeat="nav in navList | filter:{navType:3}| orderBy:item.sortValue"><a target="_blank" ng-href="{{nav.navLink}}">{{nav.navTitle}}</a><span ng-show="!$last"> - </span></li>-->
+                </p>
+                <div class="clearfix">
+                    <div style="margin:10px auto 0" ng-bind-html="copyRight.websiteRight | trustHtml"></div>
+                </div>
+            </div>
+            <div align="center" class="mgT20 marR10">
+                <a class="mart15" href="#" style="display: inline-block" ng-repeat="a in recordInformation"><img src="{{a.imageUrl}}" width="100px" height="30px" alt=""></a>
+            </div>
+            <div class="last-bottom" ng-if="blogroll.length>0">
+                <span>友情链接：</span><a ng-repeat="a in blogroll" href="{{a.linkUrl}}" target="_blank" class="target-name">{{a.content}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  error tooltip  -->
+<div check-code-tip error-message-tip="errorMessageTip" error="error" btn-class="btn" is-ie="isIE"></div>
+<!-- <div class="modal" ng-style="{display:errorMessageTip.config.display?'block':'none','z-index':9999}">
+    <div class="dialog {{errorMessageTip.config.size||'sm'}}" name="delConfirmDialog" ng-class="{'notie':!isIE}" ng-style="{display:errorMessageTip.config.display?'block':'none'}">
+        <a href="javascript:void(0);" target="_self" class="dialog-close" ng-class="{'dialog-close-ie':isIE,'dialog-close-notie':!isIE}"
+            ng-show="errorMessageTip.config.close&&!errorMessageTip.config.btnGoBack" ng-click="error.closeTip()">&times;</a>
+        <div class="dialog-content">
+            <div class="dialog-header" ng-class="{'dialog-header-notie':!isIE}">
+                <h5 class="dialog-title">{{errorMessageTip.config.title}}</h5>
+            </div>
+            <div class="dialog-body" ng-show="!errorMessageTip.config.isHtml">
+                {{errorMessageTip.config.message}}
+            </div>
+            <div class="dialog-body" ng-include="errorMessageTip.config.message" ng-if="errorMessageTip.config.isHtml"></div>
+            <div class="dialog-footer">
+                <button type="button" class="btn ok" ng-show="errorMessageTip.config.btnOK" ng-click="errorMessageTip.config.ok()">{{errorMessageTip.config.btnOKText}}
+                </button>
+                <button type="button" class="btn cancel" ng-show="errorMessageTip.config.btnCancel" ng-click="errorMessageTip.config.cancel()">{{errorMessageTip.config.btnCancelText}}
+                </button>
+                <button type="button" class="btn ok" ng-show="errorMessageTip.config.btnGoBack" ng-click="errorMessageTip.config.goBack(errorMessageTip.config.btnGoBackUrl)">
+                    {{errorMessageTip.config.btnGoBackText}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div> -->

@@ -1,0 +1,56 @@
+<div class="credit-box">
+    <div class="credit-top">
+        <span class="top-text">批发收款单</span>
+
+    </div>
+    <div class="businessList-top ">
+        <div class="datetimepicker">
+            <span class="date-title f14">业务日期：</span>
+            <div class="dis datetimepicker-content">
+                <div class="input-group">
+                    <input type="text"  value="" class="timeiconbg date-time-picker-input"  datetimepicker for-id="logListModalFrom" options="options1" close="close(from)" max-date="endDateStr" ng-model="obj.startTime">
+                    <span class="input-group-addon">至</span>
+                    <input type="text"  value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalTo" options="options2" close="close(to)" min-date="startDateStr" ng-model="obj.endTime">
+                </div>
+            </div>
+        </div>
+        <div class="receivable-right">
+            <span class="bill-text f14 dis">单据号：</span>
+            <input type="text" class="num-bill f14" ng-model="obj.pfBillNo">
+            <span class="search-text f14 dis" ng-click="receivables.getReceivablesList()">搜索</span>
+        </div>
+    </div>
+    <div class="businessList-container">
+        <div class="businessList-container-top">
+            <span class="top-title f12 dis">业务日期</span>
+            <span class="bill-num-title recelivable-bill-num-title f12 dis">收款单单据号</span>
+            <span class="of-bill-title recelivable-of-bill-title f12 dis">本次应收金额</span>
+            <span class="bill-orign-title recelivable-bill-orign-title f12 dis">预付款金额</span>
+            <span class="bill-style-title recelivable-bill-style-title f12 dis">折让金额</span>
+            <span class="discount-title recelivable-discount-title f12 dis">本次实收金额</span>
+            <span class="discount-num-title recelivable-discount-num-title f12 dis">备注</span>
+            <span class="operation-title f12 dis">操作</span>
+        </div>
+        <div class="businessList-main" ng-repeat="rl in receivables.list">
+            <span class="order-time f12 dis">{{rl.rzDate}}</span>
+            <span class="order-num recelivable-order-num f12 dis">{{rl.pfBillNo}}</span>
+            <span class="order-of-num recelivable-order-of-num f12 dis">{{rl.ysTotal | currencySymbol:'￥'}}</span>
+            <span class="order-oring recelivable-order-oring f12 dis">{{rl.prePay | currencySymbol:'￥'}}</span>
+            <span class="order-style recelivable-order-style f12 dis">{{rl.zrTotal | currencySymbol:'￥'}}</span>
+            <span class="order-discount-num recelivable-order-discount-num f12 dis">{{rl.ssTotal | currencySymbol:'￥'}}</span>
+            <span class="discount-order recelivable-discount-order f12 dis">{{rl.remark}}</span>
+            <a ui-sref="index_receivablesDetail({pfBillNo:rl.pfBillNo})" class="take-text recelivable-take-text f12 dis">查看</a>
+        </div>
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+         total-page="totalPage" ng-if="isShowPage"></div>
+    <!-- 缺省图 -->
+    <div class="none-order" ng-if="isShowIcon">
+        <div class="none-left">
+            <span class="none-left-img"></span>
+        </div>
+        <div class="none-right">
+            <span>{{i18n('暂无数据')}}~</span>
+        </div>
+    </div>
+</div>

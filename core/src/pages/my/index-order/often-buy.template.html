@@ -1,0 +1,55 @@
+<div class="always">
+    <div class="order-box mgT20">
+        <h4>{{i18n('常购清单')}}</h4>
+        <div class="often-buy-box">
+            <div class="often-buy-nav">
+                <ul ng-init="activeNum=1">
+                    <li ng-click="activeNum=1" ng-class="{'active':activeNum==1}">{{i18n('全部商品')}}</li>
+                    <!-- <li ng-click="activeNum=2" ng-class="{'active':activeNum==2}">坚果炒货(7)</li>
+                    <li ng-click="activeNum=3" ng-class="{'active':activeNum==3}">{{i18n('肉类即时')}}(7)</li>
+                    <li ng-click="activeNum=4" ng-class="{'active':activeNum==4}">{{i18n('果脯蜜饯')}}(5)</li>
+                    <li ng-click="activeNum=5" ng-class="{'active':activeNum==5}">{{i18n('豆菌笋类')}}(3)</li>
+                    <li ng-click="activeNum=6" ng-class="{'active':activeNum==6}">糕点饼干(1)</li> -->
+                </ul>
+                <h5>
+                    <!-- <span>更多<i></i></span> -->
+                    <p ng-if="oftenBuyList!=0">
+                        <label class="checkboxStyle">
+                            <input type="checkbox" ng-click="allChooseBtn()">
+                            <span></span>
+                        </label>
+                        {{i18n('全选')}}
+                        <button type="button" ng-click="moreAddCart()">{{i18n('批量加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}</button>
+                    </p>
+                </h5>
+            </div>
+            <div class="often-buy-list">
+                <div class="often-buy-infor" ng-show="activeNum==1">
+                    <dl ng-class="{active:g.isChecked}" ng-repeat="g in oftenBuyList"> <!-- 对号的显示与隐藏 -->
+                        <dt>
+                            <img :src="g.url120x120" alt="">
+                            <span>{{i18n('已下架')}}</span>
+                        </dt>
+                        <dd>
+                            <h5>{{g.name}}</h5>
+                            <h6>
+                                <span>{{g.price}}</span>{{g.num}}
+                            </h6>
+                            <div class="detailsBox">
+                                <span class="addCart" ng-click="onlyAddCart(g.mpId)">{{i18n('加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}</span>
+                                <span class="lookDetails" ng-click="addShoppingCart(fg.mpId)">{{i18n('查看详情')}}</span>
+                            </div>
+                        </dd>
+                        <cite ng-click="cancelFav(g)"></cite>
+                        <div class="pitchUpBor" ng-click="pitchUp(fg)"></div>
+                        <!-- 根据放回的数据来显示与隐藏按钮 -->
+                        <!-- <span class="add-cart"><button type="button" name="" ng-click="addShoppingCart(g.mpId)"><i></i>加入购物车</button></span> -->
+                    </dl>
+
+                </div>
+                <div class="concernNoPro" ng-if="oftenBuyList.length==0"><span></span>{{i18n('暂无商品')}}</div>
+                <div pagination page-size="searchObj.pageSize" ng-if="oftenBuyList.length!=0" page-no="searchObj.pageNo" total-count="searchObj.totalCount" total-page="totalPage" ></div>
+            </div>
+        </div>
+    </div>
+</div>

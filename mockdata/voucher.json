@@ -1,0 +1,61 @@
+{
+  "code": "0",
+  "message": "操作成功",
+  "errMsg": null,
+  "data": {
+    "total": 100,
+    "listObj": [{
+      "themeId": 1284037502000015,
+      "themeName": "欧普推荐码活动1",
+      "startTime": "2017-08-08 10:10:10",
+      "endTime": "2018-08-08 10:10:10",
+      "startTimeStr": "2017-08-08 10:10:10",
+      "endTimeStr": "2017-08-08 10:10:10",
+      "isAvailable": 1,
+      "referralCode": "17YHEprs",
+      "referralCodeId": null,
+      "type": 1,
+      "favourableContent": "满100元打9.8折",
+      "rebateContent": "返还支付金额10%的佣金",
+      "referralCodeRuleVO": null,
+      "useRuleInfo": "满100元打9.8折",
+      "status": 2
+    },
+      {
+        "themeId": 1284037502000015,
+        "themeName": "欧普推荐码活动2",
+        "startTime": "2017-08-08 10:10:10",
+        "endTime": "2018-08-08 10:10:10",
+        "startTimeStr": "2017-08-08 10:10:10",
+        "endTimeStr": "2017-08-08 10:10:10",
+        "isAvailable": 1,
+        "referralCode": "17YHEprs",
+        "referralCodeId": null,
+        "type": 1,
+        "favourableContent": "满100元打9.8折",
+        "rebateContent": "返还支付金额10%的佣金",
+        "referralCodeRuleVO": null,
+        "useRuleInfo": "满100元打9.8折",
+        "status": 3
+      },
+      {
+        "themeId": 1284037502000015,
+        "themeName": "欧普推荐码活动3",
+        "startTime": "2017-08-08 10:10:10",
+        "endTime": "2018-08-08 10:10:10",
+        "startTimeStr": "2017-08-08 10:10:10",
+        "endTimeStr": "2017-08-08 10:10:10",
+        "isAvailable": 1,
+        "referralCode": "17YHEprs",
+        "referralCodeId": null,
+        "type": 1,
+        "favourableContent": "满100元打9.8折",
+        "rebateContent": "返还支付金额10%的佣金",
+        "referralCodeRuleVO": null,
+        "useRuleInfo": "满100元打9.8折",
+        "status": 1
+      }
+    ]
+  },
+  "trace": "32!$3#@16%&172!$,0,63010699512548434932715"
+}

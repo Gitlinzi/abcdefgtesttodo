@@ -1,0 +1,13 @@
+{
+    "code": "0",
+    "message": "操作成功",
+    "errMsg": null,
+    "data": [{
+        "userId": 2427101801000018,
+        "mobile": null,
+        "userName": "user_8805",
+        "nickname": "测试",
+        "isCurrent": "1"
+    }],
+    "stackTrace": null
+}

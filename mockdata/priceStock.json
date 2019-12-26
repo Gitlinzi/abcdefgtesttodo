@@ -1,0 +1,33 @@
+{
+  "code": "0",
+  "errMsg": null,
+  "data": {
+    "plist": [
+      {
+        "mpId": 1182034703000003,
+        "price": 100,
+        "marketPrice": 1354,
+        "tax": 0,
+        "stockNum": 130,
+        "lackOfStock": 0,
+        "promotionType": 1,
+        "promotionPrice": 0.7,
+        "preferentialPrice": 99.3,
+        "promotionId": 244030000067506,
+        "promotionIconUrls": [
+          "http://odianyun.kssws.ks-cdn.com/saas/ic_special.png@base@tag=imgScale"
+        ],
+        "promotionIconTexts": [
+          "特价"
+        ],
+        "promotionStartTime": 1477965060000,
+        "promotionEndTime": 1478310660000,
+        "isSeckill": 1,
+        "availablePrice": 0.7,
+        "individualLimitNum": 1,
+        "totalLimitNum": -1
+      }
+    ],
+    "timestamp": 1478058452742
+  }
+}

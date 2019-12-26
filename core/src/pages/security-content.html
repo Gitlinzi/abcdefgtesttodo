@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-cn" ng-controller="supportCtrl">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/index#((skin)).css?v=${version}">
+</head>
+<body>
+@@include("header.html")
+
+<div class="container" ng-bind-html="trustHtml"></div>
+
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/support.js?v=${version}"></script>
+</body>
+</html>

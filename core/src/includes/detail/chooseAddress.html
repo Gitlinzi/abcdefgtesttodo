@@ -1,0 +1,35 @@
+<dl ng-if="$parent.switchConfig.common.showUpdateDistributionAddress">
+    <dt class="pdT10">{{i18n('配送至')}}</dt>
+    <dd>
+        <a class="spaddress" href="javascript:void(0)" ng-click="localProvince.lvAreaObj.areaShow = true">
+            {{localProvince.lvAreaObj.detail||localProvince.gotAreas.province.name}}<i class="icon-more-down"></i>
+        </a>
+        <div class="adschange" ng-if="localProvince.lvAreaObj.areaShow">
+            <a href="javascript:void(0)" class="dialog-close-location" ng-click="localProvince.lvAreaObj.areaShow=false" style="line-height: 25px">×</a>
+            <ul class="tab">
+                <li ng-class="{active:localProvince.lvAreaObj.areaTab == 1}"
+                    ng-click="localProvince.lvAreaObj.areaTab=1">{{localProvince.gotAreas.province.name||i18n('请选择省份')}}</li>
+                <li ng-class="{active:localProvince.lvAreaObj.areaTab == 2}"
+                    ng-if="localProvince.lvAreaObj.areaTab>1"
+                    ng-click="localProvince.lvAreaObj.areaTab=2">{{localProvince.gotAreas.city.name||i18n('请选择城市')}}</li>
+                <li ng-class="{active:localProvince.lvAreaObj.areaTab == 3}"
+                    ng-if="localProvince.lvAreaObj.areaTab>2">{{localProvince.gotAreas.area.name||i18n('请选择区域')}}</li>
+            </ul>
+            <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 1}">
+                <li ng-repeat="prov in localProvince.gotAreas.provinces|orderBy:'name.length'"
+                    ng-click="localProvince._changeAddr(prov,2)"
+                    ng-class="{active:prov.id==localProvince.gotAreas.province.id,col2:prov.name.length > 7}">{{prov.name}}</li>
+            </ul>
+            <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 2}">
+                <li ng-repeat="city in localProvince.gotAreas.cities|orderBy:'name.length'"
+                    ng-click="localProvince._changeAddr(city,3)"
+                    ng-class="{active:city.id==localProvince.gotAreas.city.id,col2:city.name.length > 7}">{{city.name}}</li>
+            </ul>
+            <ul class="content" ng-class="{active:localProvince.lvAreaObj.areaTab == 3}">
+                <li ng-repeat="area in localProvince.gotAreas.areas|orderBy:'name.length'"
+                    ng-click="localProvince._changeAddr(area,0)"
+                    ng-class="{col2:area.name.length > 7}">{{area.name}}</li>
+            </ul>
+        </div>
+    </dd>
+</dl>

@@ -1,0 +1,206 @@
+<div>
+    <!--面包屑-->
+    <div class="module-title">
+        <a ui-sref="index_saleRepairProgList" class="my-order">{{i18n('售后记录')}}</a>
+        <span class="center-crumb-arrowhead"></span>
+        <span>{{i18n('售后详情')}}</span>
+    </div>
+    <h4 class="apply-title">{{i18n('售后进度')}}</h4>
+    <div class="apply-box positonRE" id="positonREBox" style="padding-top: 30px;height: 80px;">
+        <!-- <span class="repair-process pro1" ng-if="repairDetail.detail.returnStatus ==1"></span> -->
+        <!-- <span class="repair-process pro2" ng-if="repairDetail.detail.returnStatus ==2 ||repairDetail.detail.returnStatus ==5"></span> -->
+        <!-- <span class="repair-process pro3" ng-if="repairDetail.detail.returnStatus ==8"></span> -->
+        <ul class="unInReview" ng-if="repairDetail.detail.returnStatus ==1">
+            <span class="repairTerrace">{{i18n('平台审核中')}}</span>
+            <li class="active">
+                <span class="num">1</span>
+                <span class="line_bg lbg-l"></span>
+                <span class="line_bg lbg-r"></span>
+                <h4 class="lbg-txt">{{i18n('提交申请')}}</h4>
+            </li>
+            <li>
+                <span class="num">2</span>
+                <span class="line_bg lbg-l"></span>
+                <span class="line_bg lbg-r"></span>
+                <h4 class="lbg-txt">{{i18n(' 平台审核通过')}}</h4>
+            </li>
+            <li>
+                <span class="num">3</span>
+                <span class="line_bg lbg-l"></span>
+                <span class="line_bg lbg-r"></span>
+                <h4 class="lbg-txt">{{i18n('完成')}}</h4>
+            </li>
+        </ul>
+        <ul class="unInReview" ng-if="repairDetail.detail.returnStatus ==2 ||repairDetail.detail.returnStatus ==5">
+            <span class="returnOfProduct">{{i18n('退货中')}}</span>
+            <li class="current">
+                <span class="num">1</span>
+                <span class="line_bg lbg-l"></span>
+                <span class="line_bg lbg-r"></span>
+                <h4 class="lbg-txt">{{i18n('提交申请')}}</h4>
+            </li>
+            <li class="active">
+                <span class="num">2</span>
+                <span class="line_bg lbg-l"></span>
+                <span class="line_bg lbg-r"></span>
+                <h4 class="lbg-txt">{{i18n(' 平台审核通过')}}</h4>
+            </li>
+            <li>
+                <span class="num">3</span>
+                <span class="line_bg lbg-l"></span>
+                <span class="line_bg lbg-r"></span>
+                <h4 class="lbg-txt">{{i18n('完成')}}</h4>
+            </li>
+        </ul>
+        <ul class="unInReview mgB10" ng-if="repairDetail.detail.returnStatus ==8">
+            <li class="current">
+                <span class="num">1</span>
+                <span class="line_bg lbg-l"></span>
+                <span class="line_bg lbg-r"></span>
+                <h4 class="lbg-txt">{{i18n('提交申请')}}</h4>
+            </li>
+            <li class="current">
+                <span class="num">2</span>
+                <span class="line_bg lbg-l"></span>
+                <span class="line_bg lbg-r"></span>
+                <h4 class="lbg-txt">{{i18n(' 平台审核通过')}}</h4>
+            </li>
+            <li class="active">
+                <span class="num">3</span>
+                <span class="line_bg lbg-l"></span>
+                <span class="line_bg lbg-r"></span>
+                <h4 class="lbg-txt">{{i18n('完成')}}</h4>
+            </li>
+        </ul>
+        <!--<span class="repair-process pro3"></span>-->
+        <div class="no-pass" ng-if="repairDetail.detail.returnStatus == 3">
+            <dl>
+                <dt></dt>
+                <dd>
+                    <h5>{{i18n('审核不通过')}}</h5>
+                    <span class="no-passDes">{{i18n('原因说明')}}：{{repairDetail.detail.auditReason}}</span>
+                    <!--<p>
+                        <span><img src="../images/temporary/integral/pro-img.png" alt=""></span>
+                        <span><img src="../images/temporary/integral/pro-img.png" alt=""></span>
+                    </p>-->
+                </dd>
+                <!--<cite><a>重新申请</a></cite>-->
+            </dl>
+        </div>
+        <div class="no-pass" ng-if="false">
+            <dl>
+                <dt></dt>
+                <dd>
+                    <h5>{{i18n('验货拒绝')}}</h5>
+                    <h6>{{i18n('验货拒绝')}}</h6>
+                    <p>
+                        <span><img src="../images/temporary/integral/pro-img.png" alt=""></span>
+                        <span><img src="../images/temporary/integral/pro-img.png" alt=""></span>
+                    </p>
+                </dd>
+                <cite><a>{{i18n('重新申请')}}</a></cite>
+            </dl>
+        </div>
+        <div class="no-pass" ng-if="repairDetail.detail.returnStatus ==9">
+            <dl>
+                <dt></dt>
+                <dd>
+                    <h5 class="mt10">{{i18n('已取消')}}</h5>
+                </dd>
+            </dl>
+        </div>
+        <label class="repair-proBtn">
+            <a class="applycancelBTN" ng-if="repairDetail.detail.modifyReturnFlag == 0" ui-sref="index_applyRepairUpdate({returnId:repairDetail.detail.id})">{{i18n('修改')}}</a>
+            <a class="applycancelBTN" ng-if="repairDetail.detail.cancelApplyFlag == 0" ng-click="repairDetail.cancelRepair(repairDetail.detail.returnCode)">{{i18n('取消申请')}}</a>
+        </label>
+    </div>
+    <h4 class="apply-title">{{i18n('售后信息')}}</h4>
+    <div class="apply-box">
+        <div class="clearfix apply-list positonRE">
+            <label>{{i18n('故障类型')}}:</label>
+            <address>{{repairDetail.detail.returnReason}}</address>
+        </div>
+        <div class="clearfix apply-list positonRE">
+            <label>{{i18n('问题描述')}}:</label>
+            <address>{{repairDetail.detail.returnRemark}}</address>
+        </div>
+        <div class="apply-list mgB0">
+            <div class="apply-img-list" style="margin-left: 60px;">
+                <ul>
+                    <li ng-repeat="pic in repairDetail.detail.returnPics"><img ng-src="{{pic.picUrl}}" alt=""></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <h4 class="apply-title">{{i18n('申请维修的商品')}}</h4>
+    <div class="repair-box">
+        <div class="repair-list">
+            <div class="repair-list-con">
+                <div class="repair-con">
+                    <div class="repair-con-list">
+                        <h4>
+                            <em class="c9">{{repairDetail.detail.createTime |date:'yyyy-MM-dd HH:mm:ss'}}</em>
+                            <em>{{i18n('订单号')}}：{{repairDetail.detail.orderCode}}</em>
+                            <!--<em>订单类型：普通订单</em>-->
+                        </h4>
+                        <div class="apply-repair-span" ng-repeat="pro in repairDetail.detail.returnItems">
+                            <span class="column1"><!--
+                                <p class="applyCheck">
+                                    <label class="checkboxStyle">
+                                        <input type="checkbox">
+                                        <span></span>
+                                    </label>
+                                </p>-->
+                                <dl style="padding-left: 20px">
+                                    <dt><img ng-src="{{pro.productPicPath || '../../../images/defaultImg.png'}}" alt=""></dt>
+                                    <dd style="width: 450px">
+                                        <h5>
+                                            <cite style="width: 350px">{{pro.productCname}}</cite>
+                                            <em>x{{pro.productItemNum}}</em>
+                                        </h5>
+                                        <p ng-repeat="tag in pro.extInfo2">{{tag.name}}:{{tag.value}}</p>
+                                    </dd>
+                                </dl>
+                            </span>
+                            <span class="column2">
+                                <div class="apply-num">
+                                    {{i18n('申请维修数量')}}：{{pro.returnProductItemNum}}
+                                    <!--<div class="numbox">
+                                        <button>-</button>
+                                        <input type="text" name="" value="1">
+                                        <button>+</button>
+                                    </div>-->
+                                </div>
+                            </span>
+                            <span class="column3">
+                                <em>{{pro.guaranteeDays}}{{i18n('天')}}</em>
+                                <em>{{i18n('保修期至')}}: {{(repairDetail.detail.orderLogisticsTime+24*60*60*1000*pro.guaranteeDays) | date:'yyyy-MM-dd HH:mm:ss'}}</em>
+                                <em>{{(repairDetail.detail.orderLogisticsTime+24*60*60*1000*pro.guaranteeDays) | isOverdue}}</em>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 class="apply-title">{{i18n('维修信息')}}</h4>
+    <div class="apply-box" style="padding-top: 0;padding-bottom: 0">
+        <!--<p class="person-infor">收货人：欧先生 上海 上海浦东 19987789 <span>默认地址</span></p>-->
+        <p class="person-infor">{{i18n('收货人')}}：{{repairDetail.detail.userGoodReceiverName}}    {{repairDetail.detail.userGoodReceiverProvince}}
+            {{repairDetail.detail.userGoodReceiverCity}} {{repairDetail.detail.userGoodReceiverAddress}} {{repairDetail.detail.userGoodReceiverMobile}}</p>
+    </div>
+
+    <h4 ng-if="repairDetail.relationOrders">{{i18n('相关订单')}}</h4>
+    <div class="repair-con" ng-if="repairDetail.relationOrders">
+        <div class="repair-con-list relation-order" ng-repeat="suborder in repairDetail.relationOrders">
+            <h4>
+                <em class="c9">{{suborder.createTime |date:'yyyy-MM-dd HH:mm:ss'}}</em>
+                <em>{{i18n('订单号')}}：{{suborder.orderCode}}</em>
+                <em>{{i18n('订单类型')}}：{{suborder.orderType|toOrderTypeContext}}</em>
+                <em>{{i18n('订单来源')}}：{{suborder.sysSourceName}}</em>
+                <em style="float: right;color:blue;cursor: pointer" ui-sref="index_orderDetail({code:suborder.orderCode})">{{i18n('查看订单详情')}}</em>
+            </h4>
+
+        </div>
+    </div>
+</div>

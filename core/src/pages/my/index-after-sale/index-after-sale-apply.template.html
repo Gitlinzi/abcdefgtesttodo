@@ -1,0 +1,339 @@
+<!-- 新添加代码 begin -->
+<div class="after-sale">
+    <!-- 批量售后进来先弹框 -->
+    <div class="modal" ng-if="applyAftersale.popIsShow" style="display: block">
+        <div class="aftersale-pop-box">
+            <div class="aftersale-pop-title f0">
+                <div class="pop-title-left">
+                    <span class="f14">编辑</span>
+                </div>
+                <div class="pop-title-right">
+                    <span class="close-right-icon" ng-click="applyAftersale.popIsShow=false">×</span>
+                </div>
+            </div>
+            <div class="aftersale-pop-main f0">
+                <div class="pop-main-title">
+                    <a href="javascript:void(0)" target=_self class="f14 pop-main-title-text disM" ng-class="{'active' : applyAftersale.activeTab==1}" ng-click="applyAftersale.switchTab(1)">已发货</a>
+                    <span class="line-main-title disM"></span>
+                    <a href="javascipt:void(0)" target=_self class="f14 pop-main-title-text disM" ng-class="{'active' : applyAftersale.activeTab==0}" ng-click="applyAftersale.switchTab(0)">未发货</a>
+                </div>
+                <div class="pop-main-mes-box">
+                    <div class="pop-main-mes disT" ng-repeat="item in applyAftersale.aftersaleGoods">
+                        <div class="label-box">
+                            <label class="checkboxStyle-small">
+                                <input id="applyProduct"  type="checkbox" hidden="hidden" ng-checked="item.checked" ng-model="item.checked" ng-change="applyAftersale.chooseCheck(item)">
+                                <span></span>
+                            </label>
+                        </div>
+                        <div class="main-mes-text">
+                            <div class="disT mes-imagebox">
+                                <img ng-src="{{item.productPicPath}}" height="80px" width="80px" alt="">
+                            </div>
+                            <div class="mes-goods-text disT">
+                                <div class="goods-text-box">
+                                    <span class="goods-text-box-span f12">{{item.productCname}}</span>
+                                </div>
+                                <p class="aftersale-text-mes f14">{{item.itemStatusStr}}</p>
+                                <div class="goods-price-text">
+                                    <div class="disM goods-price-text-box">
+                                        <span class="f12 c9">{{item.productItemAmount/item.productItemNum|currency:"￥"}}</span>
+                                    </div>
+                                    <div class="disM goods-price-text-box text-right">
+                                        <span class="f12 c9">x{{item.productItemNum}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="aftersale-pop-footer f0">
+                <div class="all-choose-box disM">
+                    <div class="all-choose-icon disM">
+                        <label class="checkboxStyle-small">
+                            <input type="checkbox" hidden="hidden" ng-checked="applyAftersale.allSelectButton" ng-model="applyAftersale.allSelectButton" ng-change="applyAftersale.changeAllSelect(item)">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="all-choose-text disM">
+                        <span class="f12">全选</span>
+                    </div>
+                </div>
+                <div class="all-choose-buttom disM">
+                    <a href="javascript:void(0)" target=_self class="sure-button-style f12" ng-click="applyAftersale.submitSelected()">确认提交</a>
+                    <a href="javascript:void(0)" target=_self class="cancer-button-style f12" ng-click="applyAftersale.popIsShow=false">取消</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="module back-apply">
+        <!--面包屑-->
+        <div class="module-title">
+            <a ui-sref="index_afterSaleStateList" class="my-order">{{i18n('售后服务')}}</a>
+            <span class="center-crumb-arrowhead"></span>
+            <span>{{i18n('售后申请')}}</span>
+        </div>
+        <div class='back-type-box'>
+            <span class="mgR18">{{i18n('售后类型')}}</span>
+            <!--<span class="c3 aftersales-button mgR5 apply-type-one apply-type" ng-class="{'aftersales-active':type.operateType==applyAftersale.type,'aftersales-border':type.operateType!=type}"-->
+            <!--ng-click="applyAftersale.type=0">退货退款-->
+            <!--<img src="../../../images/jiaobiao.png" class="jiaobiao"/>-->
+            <!--</span>-->
+            <!--<span class="c3 f14 aftersales-button mgR5 apply-type" ng-class="{'aftersales-active':type.operateType==applyAftersale.type,'aftersales-border':type.operateType!=type}"-->
+            <!--ng-click="applyAftersale.type=1">仅退款-->
+            <!--</span>-->
+            <!--<span class="c3 f14 aftersales-button mgR5 apply-type" ng-class="{'aftersales-active':type.operateType==applyAftersale.type,'aftersales-border':type.operateType!=type}"-->
+            <!--ng-click="applyAftersale.type=2">换货-->
+            <!--</span>-->
+            <span class="c3 f14 aftersales-button mgR5"
+                  ng-class="{'aftersales-active':type.type==applyAftersale.type,'aftersales-border':type.type!=type}"
+                  ng-repeat="type in applyAftersale.types|filter:{'type':applyAftersale.isModify?applyAftersale.type:''}"
+                  ng-click="applyAftersale.type=type.type">{{type.name}}
+                <img src="../images/jiaobiao.png" class="jiaobiao" ng-show="type.type==applyAftersale.type"/>
+            </span>
+        </div>
+        <div class='back-good-box' >
+            <!--<p class="c6 f14 back-good-title" ng-if="applyAftersale.type==4">{{i18n('申请换货的商品')}}</p>-->
+            <p class="c6 f14 back-good-title">{{i18n('申请退货的商品')}}</p>
+            <div class="order-group">
+                <div class="suborder">
+                    <div class="row order-title">
+                        <div class="cell c1">{{applyAftersale.afterOrder.createTime	|date:'yyyy-MM-dd HH:mm:ss'}}</div>
+                        <div class="cell c2"><a href="?orderdetails={{ applyAftersale.afterOrder.orderCode }}">{{i18n('订单号')}}：<span class="colorB">{{applyAftersale.afterOrder.orderCode}}</span></a></div>
+                        <div class="cell c3">
+                            <!--<span class="margin30">订单类型：普通订单</span>-->
+                        </div>
+                    </div>
+                    <div class="secound-goods-box" ng-if="applyAftersale.aftersaleTypeShow&&applyAftersale.selectedGoods.length>1">
+                        <div class="goods-box-transition f0">
+                            <div class="goods-smallbox disT" ng-repeat="prod in applyAftersale.selectedGoods">
+                                <div class="images-box">
+                                    <img height="100px" width="100px" ng-src="{{prod.productPicPath}}" alt="">
+                                    <span class="images-price-box"></span>
+                                    <span class="images-price text-center f14">{{prod.productItemAmount/prod.productItemNum|currency:"￥"}}</span>
+                                </div>
+                                <p class="f14 text-center goods-number">x{{prod.productItemNum}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="order-list" ng-repeat="prod in applyAftersale.selectedGoods" ng-if="applyAftersale.aftersaleTypeShow&&applyAftersale.selectedGoods.length==1">
+                        <tr class='person-tr-color' >
+                            <td width="106" align="center" class="bb bl">
+                                <a class="img-block" href="item.html?itemId={{prod.mpId}}">
+                                    <img width="80" height="80" ng-src="{{prod.productPicPath == null? '../../../images/company/logo.png':prod.productPicPath}}" alt="">
+                                </a>
+                            </td>
+                            <td width="390" class="bb">
+                                <a class="name" href="item.html?itemId={{prod.mpId}}"><span class="colorB">{{prod.productCname}}</span></a>
+                                <ul class="seriesAttr">
+                                    <li ng-repeat="tag in prod.propertyTags" >{{tag.name}}：{{tag.value}}</li>
+                                </ul>
+                            </td>
+                            <td width="230" align="center" class="bb">
+                                <span class="good-num">x{{prod.productItemNum}}</span>
+                            </td>
+                            <td width="0" valign="top" align="center" class="bb br" rowspan="{{suborder.productList.length}}">
+                            </td>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="order-list" ng-repeat="prod in applyAftersale.selectedGoods" ng-if="!applyAftersale.aftersaleTypeShow">
+                        <tr class='person-tr-color' >
+                            <td width="106" align="center" class="bb bl">
+                                <a class="img-block" href="item.html?itemId={{prod.mpId}}">
+                                <img width="80" height="80" ng-src="{{prod.productPicPath == null? '../../../images/company/logo.png':prod.productPicPath}}" alt="">
+                            </a>
+                            </td>
+                            <td width="390" class="bb">
+                                <a class="name" href="item.html?itemId={{prod.mpId}}"><span class="colorB">{{prod.productCname}}</span></a>
+                                <ul class="seriesAttr">
+                                    <li ng-repeat="tag in prod.propertyTags" >{{tag.name}}：{{tag.value}}</li>
+                                </ul>
+                            </td>
+                            <td width="230" align="center" class="bb">
+                                <span class="good-num">x{{prod.productItemNum}}</span>
+                            </td>
+                            <td width="0" valign="top" align="center" class="bb br" rowspan="{{suborder.productList.length}}">
+                            </td>
+                            <td align="center" class="bb br" width="344" valign="top" style="vertical-align: middle">
+                                <div>{{i18n('申请售后数量')}}</div>
+                                <!--  ng-if="prod.canAfterSale == 1 && !applyAftersale.isModify" -->
+                                <div class="aftersalse-num" ng-if="!applyAftersale.isModify">
+                                    <!--不能再减状态-->
+                                    <button class="button button-left" type="button" ng-click="prod.productItemNum>1?prod.productItemNum=prod.productItemNum-1:'';"
+                                            ng-disabled="prod.productItemNum<=1">-</button>
+                                    <!-- 换货的东西 applyAftersale.updateChange(prod) -->
+                                    <input type="text" class="aftersales-input" ng-model="prod.productItemNum" ng-change="prod.productItemNum=applyAftersale.checkNum(prod.productItemNum,prod.maxProductItemNum);">
+                                    <!-- 换货的东西 applyAftersale.updateChange(prod) -->
+                                    <button class="button button-right" type="button" ng-click="prod.productItemNum<prod.maxProductItemNum?prod.productItemNum=prod.productItemNum+1:'';"
+                                            ng-disabled="prod.productItemNum>=prod.maxProductItemNum">+</button>
+                                    <!-- 换货的东西 applyAftersale.updateChange(prod) -->
+                                </div>
+                                <!--<div class="aftersalse-dec">-->
+                                <!--最多选择100个-->
+                                <!--</div>-->
+                                <div class="aftersalse-dec w150" ng-if="prod.canAfterSale == 2&& !applyAftersale.isModify">
+                                    {{i18n('暂不支持此售后类型')}}
+                                </div>
+                                <div class="aftersalse-num" ng-if="applyAftersale.isModify">
+                                    <button class="button button-left" type="button" ng-click="prod.returnProductItemNum>1?prod.returnProductItemNum=prod.returnProductItemNum-1:''"
+                                            ng-disabled="prod.returnProductItemNum<=1">-</button>
+                                    <input type="text" class="aftersales-input" ng-model="prod.returnProductItemNum" ng-change="prod.returnProductItemNum=applyAftersale.checkNum(prod.returnProductItemNum,prod.canModifyReturnProductItemNum);">
+                                    <button class="button button-right" type="button" ng-click="prod.returnProductItemNum<prod.totalreturnProductItemNum?prod.returnProductItemNum=prod.returnProductItemNum+1:'';"
+                                            ng-disabled="prod.returnProductItemNum>=prod.canModifyReturnProductItemNum">+</button>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class='back-good-box' ng-if="applyAftersale.type==4">
+            <p class="c6 f14 back-good-title">{{i18n('更换的商品')}}</p>
+            <div class="order-group">
+                <div class="suborder">
+                    <table class="order-list">
+                        <tr class='person-tr-color bt' ng-repeat="prod in applyAftersale.changeProduct">
+                            <td width="113" align="center" class="bl bb"><a class="img-block" href="item.html?itemId={{prod.mpId}}"><img width="80" height="80" ng-src="{{prod.productUrl||prod.productPicPath}}" alt=""></a></td>
+                            <td width="842" class="bb">
+                                <a class="name h20" href="item.html?itemId={{prod.mpId}}"><span class="colorB">{{prod.chineseName}}</span></a>
+                                <ul class="seriesAttr">
+                                    <li ng-repeat="attr in applyAftersale.getSelectedItemInfo(prod.map.attributes)">{{attr}}</li>
+                                    <li class="afterSaleColor">{{prod.productPriceFinal | currency:'￥' }}</li>
+                                </ul>
+                            </td>
+                            <td width="" align="center" class="bb br">
+                                <span class="good-num">x{{prod.num||prod.returnProductItemNum}}</span>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!--<p class="c3 f16 mgt30">换货商品</p>-->
+        <!--<table class="theme2 mgt20">-->
+        <!--<tr>-->
+        <!--<td align="center" width="50" class="bl bb bt">-->
+        <!--</td>-->
+        <!--<td align="center" width="90" class="bb bt"><a href="item.html?itemId={{prod.mpId}}">-->
+        <!--<img width="80" height="80" src='../../../images/testHeader.png' alt="{{ prod.chineseName }}"></a>-->
+        <!--</td>-->
+        <!--<td class="bb bt" width="280">-->
+        <!--<a href="item.html?itemId={{prod.mpId}}" class="disIB mgt20">去玩儿</a>-->
+        <!--</td>-->
+        <!--<td align="left" class="bb bt" width="130">-->
+        <!--<p> 去玩儿：去玩儿&nbsp;&nbsp;</p>-->
+        <!--</td>-->
+        <!--<td align="center" class="bb bt" ng-class="{posR:'prod.edit'}" width="130">-->
+        <!--<div class="size text-left">-->
+        <!--<p>去玩儿</p>-->
+        <!--<span class="modify-size" ng-click="applyAftersale.sp.getSerialProducts(prod.map);prod.edit=true;">修改</span>-->
+        <!--</div>-->
+        <!--<div class="size-content">-->
+        <!--<table>-->
+        <!--<tr>-->
+        <!--<td width="40" class="lineH30">去玩儿: </td>-->
+        <!--<td>-->
+        <!--<span ng-class="{active:v.checked,disabled:v.disabled}"-->
+        <!--ng-click="applyAftersale.sp.selectSerialAttr(v,attr.values)">去玩儿</span>-->
+        <!--</tr>-->
+        <!--<tr>-->
+        <!--<td></td>-->
+        <!--<td><span ng-class="{'aftersales-submit':applyAftersale.sp.canSubmit,'aftersales-cancle':!applyAftersale.sp.canSubmit}"-->
+        <!--ng-click="applyAftersale.sp.updateSerialProduct(prod)">确定</span>-->
+        <!--<span class="aftersales-cancle" ng-click="applyAftersale.sp.rollback(prod)">取消</span></td>-->
+        <!--</tr>-->
+        <!--</table>-->
+        <!--</div>-->
+        <!--</td>-->
+        <!--<td align="center" class="bb bt" width="200">￥100</td>-->
+        <!--<td align="center"  class="bb bt br">去玩儿</td>-->
+        <!--</tr>-->
+        <!--</table>-->
+
+
+        <div class='apply-mes' >
+            <p class="back-good-title c6 f14">{{i18n('售后信息')}}</p>
+            <table class="theme2 aftersales-border" >
+                <tr class="c6">
+                    <td width="83" align="center" class="pdT12">{{i18n('退货原因')}}</td>
+                    <td class="c3 pdT12">
+                        <select type="text" class="aftersalse-input"
+                                ng-options="cause as cause.name for cause in applyAftersale.causes"
+                                ng-model="applyAftersale.selectedCauses">
+                        </select>
+                       <!-- <select name="" id="">
+                        <option value="">{{i18n('不想要了')}}</option>
+                        <option value="">{{i18n('拍错了')}}</option>
+                        <option value="">{{i18n('七天无条件退货')}}</option>
+                        </select>-->
+                    </td>
+                </tr>
+                <tr class="c6">
+                    <td width="83" align="center">{{i18n('退货说明')}}</td>
+                    <td class="c3 posR h120">
+                        <textarea placeholder="{{i18n('请在此描述详细问题')}}，{{i18n('最多不超过')}}200{{i18n('字')}}" resize="none" class="aftersales-textarea" maxlength="200" ng-model="applyAftersale.remark"></textarea>
+                        <p class="textarea-prompt">{{i18n('还可输入')}}<b class="ce62128 change-color">{{200-applyAftersale.remark.length}}</b>{{i18n('字')}}</p>
+                    </td>
+                </tr>
+                <tr class="c6">
+                    <td width="83" align="center" class="pdB12">{{i18n('上传凭证')}}</td>
+                    <td class="c3 posR clearfix pdB12">
+                        <div class='last-left'>
+                            <div pc-upload-more-image image-width="100" image-height="100" max-size="{{$parent.switchConfig.common.uploadingPicSize}}" image-url-list="applyAftersale.picUrl" image-pattern="{{$parent.switchConfig.common.uploadingPicFormat}}" is-show-delete="true" image-max-length="3" add-class="disIB text-center fl posR mgR20"></div>
+                        </div>
+                        <div class='last-right' ng-if="applyAftersale.picUrl.length < 3">
+                            <ul>
+                                <li class="c6">{{i18n('为了帮助您更好的解决问题')}},{{i18n('请上传图片')}}</li>
+                                <li class="c9">{{i18n('最多可上传')}}3{{i18n('张图片')}},{{i18n('每张图片大小不超过')}}5M,{{i18n('支持')}}bmp,jpg,png,jpeg{{i18n('格式文件')}}</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--<div class='apply-mes' ng-if="applyAftersale.type==2 || applyAftersale.type==4">-->
+            <!--<p class="back-good-title c6 f14">确认信息</p>-->
+            <!--<table class="theme2 aftersales-border" >-->
+                <!--<tr class="c6">-->
+                    <!--<td width="83" align="center" class="pdT12">申请凭据</td>-->
+                    <!--<td class="c3 pdT12">-->
+                        <!--<div class="noInvoice">{{applyAftersale.afterOrder.hasInvoice==1?'有发票':'无发票'}}</div>-->
+
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</table>-->
+        <!--</div>-->
+        <div class="mgt20">
+            <button class="btn aftersales-submit aftersales-submit-op" ng-click="applyAftersale.applyReturnProduct()"
+                    ng-if="!applyAftersale.isModify">{{i18n('提交申请')}}</button>
+            <button class="btn aftersales-submit aftersales-submit-op" ng-click="applyAftersale.updateReturnProduct()" ng-if="applyAftersale.isModify">{{i18n('提交申请')}}</button>
+        </div>
+        <div class="repair-text">
+            <p class="repair-color">{{i18n('维修说明')}}</p>
+            <span>1、{{i18n('如果您收到的商品有瑕疵')}}，{{i18n('建议与商家沟通后提交申请')}};</span>
+            <span>2、{{i18n('申请通过后')}}，{{i18n('将原商品寄还给商家')}}；</span>
+            <span>3、{{i18n('商家收到原商品后')}}，{{i18n('将选择同款商品寄给您')}}。</span>
+        </div>
+    </div>
+</div>
+<!-- 查看凭证 -->
+<div class="modal" style="display: none">
+    <div class="dialog" style="display: block;width: 878px;left:50%;top:50px;bottom:auto;margin-left: -439px;">
+        <a href="javascript:void(0)" class="dialog-close dialog-close-notie">×</a>
+        <div class="dialog-header line-height40 h40 pdL17">{{i18n('交易凭证样本')}}</div>
+        <div class="dialog-content">
+            <div class="dialog-body">
+                <div class="banktransfer text-center">
+                    <img src="../images/sample.png" max-with="640px" max-height="355px" />
+                </div>
+            </div>
+            <p class="text-center"><button class="cf ikonw radius4 text-center" type="button">{{i18n('知道了')}}</button></p>
+        </div>
+    </div>
+</div>
+
+<!-- 新添加代码 end -->

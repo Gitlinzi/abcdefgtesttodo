@@ -1,0 +1,138 @@
+<div class="content" id="advanceDetailOrder" ng-init="advanceDetailOrder.init()">
+    <div class='home-allTitle pdL20 disIB w100 border-box'>
+        {{i18n('预置订单详情')}}
+        <p class="disIB c9 mgL30 f14 normal-font-weight">{{i18n('预置订单编号')}}:
+            <span class="c3">{{getAdvanceDetailInfo.id}}</span>
+        </p>
+        <p class="disIB fr mgR20">
+            <a class="cancel c3 f12" href="javascript:history.back()">
+                <i class="icon-return"></i>
+                {{i18n('返回')}}
+            </a>
+        </p>
+    </div>
+   <div class="module">
+        <!-- 预置订单信息 -->
+        <div class="bb pdL20 pdB10 mgB10">{{i18n('预置订单信息')}}</div>
+        <div class="pdL20 pdT10 mgB20">
+            <div>
+                <p class="disIB w120 text-right">
+                    <span class="require">*</span>
+                    <span >{{i18n('预置订单名称')}}：</span>
+                </p>
+                <input type="text" ng-model="createInfo.name" style="width: 218px;">
+            </div>
+            <div class="mgT10 mgB10">
+                <span class="disIB w120 text-right vertical-top">{{i18n('描述')}}：</span>
+                <textarea cols="30" rows="3" ng-model="createInfo.describe"></textarea>
+            </div>
+        </div>
+        <!-- 商品信息 -->
+        <div class="bb pdL20 pdB10 mgB10">{{i18n('商品信息')}}</div>
+        <div class="quick-list evaluate-list">
+            <ul class="list-title list-titleColor">
+                <li class="flex3 text-left pdL30 border-box">{{i18n('商品名称')}}</li>
+                <li class="flex1 align-center">{{i18n('单价')}}</li>
+                <li class="flex1 align-center">{{i18n('库存类型')}}</li>
+                <li class="flex1 align-center">{{i18n('数量')}}</li>
+                <li class="flex1 align-center">{{i18n('合计')}}</li>
+                <li class="flex1 align-center">{{i18n('操作')}}</li>
+            </ul>
+            <div class="bb br bt bl pdT10 pdB10 pdL30 mgT10">
+                <div ng-if="getAdvanceDetailInfo.items.length>0">
+                    <ul class="bb pdT20 pdB20" ng-repeat="item in getAdvanceDetailInfo.items track by $index">
+                        <li class="flex3 text-left border-box" style="display: flex;">
+                            <div>
+                                <img ng-src="{{item.picUrl || '../../../images/moren.png'}}" alt="" width="80" height="80">
+                            </div>
+                            <div class="pdL20 f12">
+                                <p class="c3">{{item.mpName}}</p>
+                                <p class="c9 mgT10">
+                                    {{i18n('商品编码')}}：{{item.mpCode}}
+                                </p>
+                            </div>
+                        </li>
+                        <li class="flex1 align-center">{{ item.price | currency:'￥' }}</li>
+                        <!-- mpType int 商品类型 （0:普通商品;1:系列主品;2:系列子品;3:系列虚品;:组合商品） -->
+                        <li class="flex1 align-center">{{item.mpType==0?'普通商品':item.mpType==1?'系列主品':item.mpType==2?'系列子品':item.mpType==3?'系列虚品':'组合商品'}}</li>
+                        <li class="flex1 align-center">
+                            <div class="numbox lineH0 v-alignM">
+                                <button type="button" ng-click="advanceDetailOrder.addOrSub('sub',$index)"
+                                    ng-style="{color: item.num == 1 || item.num <= 0 ? '#ddd' : '#333',cursor: item.num == 1 || item.num<=0? 'default':'pointer'}" ng-disabled="item.num==1" >-
+                                </button>
+                                <input type="text" ng-model="item.num">
+                                <button type="button" ng-click="advanceDetailOrder.addOrSub('add',$index)">+
+                                </button>
+                            </div>
+                        </li>
+                        <li class="flex1 align-center"><span class="theme">{{ item.price*item.num| currency:'￥' }}</span></li>
+                        <li class="flex1 align-center" ng-click="advanceDetailOrder.delete(item.mpCode)"><a>{{i18n('删除')}}</a></li>
+                    </ul>
+                    <div class="lineH50 text-right pdR30 mgR20">
+                        {{i18n('总金额')}}：<span class="theme f16">{{ advanceDetailOrder.totalMoney| currency:'￥' }}</span>
+                    </div>
+                </div>
+                <div ng-if="getAdvanceDetailInfo.items.length<=0">
+                    <div class="lineH50 align-center pdR30 mgR20">
+                        {{i18n('暂无数据')}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 添加商品 -->
+        <div class="bb pdL20 pdB10 mgB20 mgT20 pdT10">{{i18n('添加商品')}}</div>
+        <div class="quick-list evaluate-list">
+            <ul class="list-title list-titleColor bl bb br bt">
+                <li class="flex1 align-center">{{i18n('商品编码')}}</li>
+                <li class="br flex1 align-center">{{i18n('数量')}}</li>
+                <li class="flex1 align-center">{{i18n('商品编码')}}</li>
+                <li class="br flex1 align-center">{{i18n('数量')}}</li>
+                <li class="flex1 align-center">{{i18n('商品编码')}}</li>
+                <li class="flex1 align-center">{{i18n('数量')}}</li>
+            </ul>
+            <ul class="bl bb br lineH50" ng-repeat="index in line track by $index">
+                <li class="flex1 align-center"><input type="text" ng-model="index.itemId1"></li>
+                <li class="br flex1 align-center">
+                    <div class="numbox lineH0 v-alignM">
+                        <button type="button" ng-click="index.num1 = index.num1-1"
+                            ng-style="{color: index.num1 == 1 || index.num1 <= 0 ? '#ddd' : '#333',cursor: index.num1 == 1 || index.num1<=0? 'default':'pointer'}" ng-disabled="index.num1==0" >-
+                        </button>
+                        <input type="text" ng-model="index.num1">
+                        <button type="button" ng-click="index.num1 = index.num1+1">+
+                        </button>
+                    </div>
+                </li>
+                <li class="flex1 align-center"><input type="text" ng-model="index.itemId2"></li>
+                <li class="br flex1 align-center">
+                    <div class="numbox lineH0 v-alignM">
+                        <button type="button"  ng-click="index.num2 = index.num2-1"
+                            ng-style="{color: index.num2 == 1 || index.num2 <= 0 ? '#ddd' : '#333',cursor: index.num2 == 1 || index.num2<=0? 'default':'pointer'}" ng-disabled="index.num2==0" >-
+                        </button>
+                        <input type="text" ng-model="index.num2">
+                        <button type="button" ng-click="index.num2 = index.num2+1">+
+                        </button>
+                    </div>
+                </li>
+                <li class="flex1 align-center"><input type="text" ng-model="index.itemId3"></li>
+                <li class="flex1 align-center">
+                    <div class="numbox lineH0 v-alignM">
+                        <button type="button"  ng-click="index.num3 = index.num3-1"
+                            ng-style="{color: index.num3== 1 || index.num3 <= 0 ? '#ddd' : '#333',cursor: index.um3 == 1 || index.num3<=0? 'default':'pointer'}" ng-disabled="index.num3==0" >-
+                        </button>
+                        <input type="text" ng-model="index.num3">
+                        <button type="button" ng-click="index.num3 = index.num3+1">+
+                        </button>
+                    </div>
+                </li>
+            </ul>
+            <div class="bl bb br lineH50 align-center">
+                <a href="javascript:void(0)" class="theme f14" ng-click="addLine()">+{{i18n('添加更多')}}</a>
+            </div>
+            <!-- 按钮 -->
+            <div class="operation mgT20">
+                <button class="search mgR5 pd10 w100-h40 mgR10" ng-click="advanceDetailOrder.save()">{{i18n('保存修改')}}</button>
+            </div>
+        </div>
+    </div>
+</div>
+    

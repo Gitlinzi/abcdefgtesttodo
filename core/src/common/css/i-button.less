@@ -1,0 +1,193 @@
+//input输入框
+input::-webkit-input-placeholder{
+  color: @99GreyColor;
+}
+input:-moz-placeholder{
+color: @99GreyColor;
+}
+input::-moz-placeholder{
+color: @99GreyColor;
+}
+input:-ms-input-placeholder{
+color: @99GreyColor;
+}
+input{
+  outline: none;
+}
+
+.input[type=password] {
+  letter-spacing: 2px;
+}
+
+
+
+//a的样式
+a{
+  color: @fontColor;
+  text-decoration: none;
+  outline: none;
+}
+a:hover{
+  color: darken(@themeColor, 5%);
+}
+
+//radio
+input[type=radio] {
+  position: relative;
+  top: -1px;
+  vertical-align: middle;
+}
+/*复选框换成图片*/
+.checkboxStyle-small {
+  display: inline-block;
+  cursor: pointer;
+}
+.checkboxStyle-small input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  display: none;
+}
+.checkboxStyle-small input[type="checkbox"]:disabled + span{
+  opacity:.4;
+}
+.checkboxStyle-small input[type="checkbox"]:disabled + span{
+  opacity:.4;
+}
+.checkboxStyle-small input[type="checkbox"] + span {
+  width: 13px;
+  height: 13px;
+  display: inline-block;
+  background: url('../../images/company/company-default.png') no-repeat -725px -10px;
+  vertical-align: text-bottom;
+}
+.checkboxStyle-small input[type="checkbox"]:checked + span {
+  background-position: -725px -24px;
+}
+
+
+.checkboxStyle-normal {
+  display: inline-block;
+  cursor: pointer;
+}
+.checkboxStyle-normal input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  display: none;
+}
+.checkboxStyle-normal input[type="checkbox"]:disabled + span{
+  opacity:.4;
+}
+.checkboxStyle-normal input[type="checkbox"] + span {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  background: url('../../images/company/company-default.png') no-repeat -107px -53px;
+  vertical-align: middle;
+}
+.checkboxStyle-normal input[type="checkbox"]:checked + span {
+  background-position: -107px -73px;
+}
+
+.checkboxStyle-big {
+  display: inline-block;
+  cursor: pointer;
+}
+.checkboxStyle-big input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  display: none;
+}
+.checkboxStyle-big input[type="checkbox"]:disabled + span {
+  opacity:.4;
+}
+.checkboxStyle-big input[type="checkbox"] + span {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background: url('../../images/company/company-default.png') no-repeat -107px -33px;
+  vertical-align: middle;
+}
+.checkboxStyle-big input[type="checkbox"]:checked + span {
+  background-position: -107px -73px;
+}
+
+
+//radio/*复选框换成图片*/
+.radioStyle-small {
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.radioStyle-small input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  display: none;
+}
+.radioStyle-small input[type="radio"]:disabled + span {
+  opacity:.4;
+}
+.radioStyle-small input[type="radio"] + span {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  background: url('../../images/company/company-default.png') no-repeat -107px -95px;
+  vertical-align: middle;
+}
+.radioStyle-small input[type="radio"]:checked + span {
+  background-position: -107px -135px;
+}
+
+.radioStyle-normal {
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.radioStyle-normal input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  display: none;
+}
+.radioStyle-normal input[type="radio"]:disabled + span{
+  opacity:.4;
+}
+.radioStyle-normal input[type="radio"] + span {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  background: url('../../images/company/company-default.png') no-repeat -107px -95px;
+  vertical-align: middle;
+}
+.radioStyle-normal input[type="radio"]:checked + span {
+  background-position: -107px -135px;
+}
+
+.radioStyle-big {
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 10px;
+}
+.radioStyle-big input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  display: none;
+}
+.radioStyle-big input[type="radio"]:disabled + span{
+  opacity:.4;
+}
+.radioStyle-big input[type="radio"] + span {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background: url('../../images/company/company-default.png') no-repeat -107px -95px;
+  vertical-align: middle;
+}
+.radioStyle-big input[type="radio"]:checked + span {
+  background-position: -107px -135px;
+}
+

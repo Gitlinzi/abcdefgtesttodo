@@ -1,0 +1,62 @@
+<!--未取消订单-->
+<div class="stepState">
+    <ul>
+        <li ng-class="{'active':detail.info.orderStatus === 1 || detail.info.orderStatus === 5,'active-no-active-i':detail.info.orderStatus === 10,'current':detail.info.orderStatus === 2 || detail.info.orderStatus === 3||detail.info.orderStatus === 8}">
+            <i></i>
+            <span ng-if="detail.info.orderStatus === 1">{{i18n('等待付款')}}<label></label></span>
+            <span ng-if="detail.info.orderStatus === 5">{{i18n('客户确认')}}<label></label></span>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>{{i18n('提交订单')}}</h4>
+            <p>{{detail.info.orderCreateTime|date:'yyyy-MM-dd HH:mm:ss'}}</p>
+        </li>
+        <li ng-class="{'active':detail.info.orderStatus === 2,'current':detail.info.orderStatus === 3||detail.info.orderStatus === 8}">
+            <i></i>
+            <span ng-if="detail.info.orderStatus === 2">{{i18n('等待发货')}}<label></label></span>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>{{i18n('下单成功')}}</h4>
+            <p>{{detail.info.paymentTimeStr}}</p>
+        </li>
+        <li ng-class="{'current':detail.info.orderStatus === 3||detail.info.orderStatus === 8}">
+            <i></i>
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>{{i18n('商品出库')}}</h4>
+            <p>{{detail.info.shipTimeStr}}</p>
+        </li>
+        <li ng-class="{'active':detail.info.orderStatus === 3,'current':detail.info.orderStatus === 8}">
+            <i></i>
+            <!-- <span ng-if="detail.info.orderStatus === 3">{{i18n('正在安装')}}<label></label></span> -->
+            <h5>
+                <address></address>
+                <cite>
+                    <em></em>
+                </cite>
+            </h5>
+            <h4>{{i18n('等待收货')}}</h4>
+            <p>{{detail.info.deliveryTimeStr}}</p>
+        </li>
+        <li ng-class="{'active':detail.info.orderStatus === 8}">
+            <i></i>
+            <h4>{{i18n('完成')}}</h4>
+            <p>{{detail.info.receiveTimeStr}}</p>
+        </li>
+    </ul>
+</div>
+<!--已取消-->
+<!--<div class="finish" >-->
+<!--<p class="cancel"><span class="ccc">取消原因：</span><span>超时未支付，订单取消</span></p>-->
+<!--</div>-->

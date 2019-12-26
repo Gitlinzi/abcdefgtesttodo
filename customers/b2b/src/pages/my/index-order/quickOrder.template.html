@@ -1,0 +1,234 @@
+<div class="quick-order" ng-click="searchTableCtrl =false;">
+    <div class="quick-order-top">
+        <span class="top-text">快速下单</span>
+    </div>
+    <div class="quick-order-tab">
+        <ul>
+            <li ng-class="{'active':quickTab == 1}" ng-click="quickTab = 1"><a href="./home.html#/quickOrder?quickTabUrl=1">快速下单</a></li>
+            <li class="line"></li>
+            <li ng-class="{'active':quickTab == 2}" ng-click="quickTab = 2"><a href="./home.html#/quickOrder?quickTabUrl=2">快速导入</a></li>
+            <li class="line"></li>
+            <li ng-class="{'active':quickTab == 3}" ng-click="quickTab = 3"><a href="./home.html#/quickOrder?quickTabUrl=3">历史进货</a></li>
+        </ul>
+    </div>
+    <div class="quick-order-container">
+        <div class="quick-order-first" ng-init="imgCtrl = true;" ng-show="quickTab == 1">
+            <div class="quick-order-first-top">
+                <label for="first" class="checkboxStyle-big">
+                    <input id="first" type="checkbox" ng-model="imgCtrl">
+                    <span></span>
+                </label>
+                <span class="fl">显示图片</span>
+                <span class="fl surplus-money">剩余信用额度：<b>{{myCreditAccount.availableCreditAmount | currency:'￥'}}</b></span>
+                <ul>
+                    <li>商品总数：<span>{{totleNum||0}}</span></li>
+                    <li class="marL30">商品金额总计：<span>{{(totlePrice||0) | currency:'￥'}}</span></li>
+                </ul>
+            </div>
+            <div class="quick-order-first-table">
+                <div class="quick-order-first-title">
+                    <div class="cell t2">商品货号</div>
+                    <div class="cell t3">包装方式</div>
+                    <div class="cell t4">购买数量</div>
+                    <div class="cell t5">总量</div>
+                    <div class="cell t6">商品名称</div>
+                    <div class="cell t7">单价(元)</div>
+                    <div class="cell t8">小计(元)</div>
+                    <div class="cell t9">操作</div>
+                </div>
+                <div class="quick-order-first-search quick-order-same-list">
+                    <div class="cell t2" ng-class="{'marT8':imgCtrl}">
+                        <input type="text" ng-model="searchValue" ng-change="searchGoods(searchValue)" ng-keydown="searchDirect($event)" placeholder="请输入商品货号">
+                    </div>
+                    <ul class="search-list" ng-style="{top:imgCtrl?'49px':'41px'}" ng-if="searchList&&searchList.merchantProductResult.length>0&&searchTableCtrl">
+                        <li ng-repeat="searchOne in searchList.merchantProductResult" ng-class="{'direct-active':$index == now}" ng-click="getPackageList(searchOne.id)"><span ng-if="searchOne.code">{{searchOne.code}}-</span>{{searchOne.productName}}</li>
+                    </ul>
+                    <ul class="search-list" ng-if="searchList.merchantProductResult&&searchList.merchantProductResult.length<=0&&searchTableCtrl">
+                        <li>暂无数据~</li>
+                    </ul>
+                    <div class="cell t3" ng-class="{'marT8':imgCtrl}">
+                        <select type="text"
+                                ng-options="package as package.orderMultiple for package in packageWayOne"
+                                ng-model="package">
+                        </select>
+                        <i class="select-arr"></i>
+                    </div>
+                    <div class="cell t4" ng-class="{'marT8':imgCtrl}">
+                        <button type="button" ng-class="{'disabled': quickNum<=1}" ng-disabled="quickNum<=1" ng-click="quickDecrease($event)"><i class="common-icons common-icons-reduceNum"></i></button>
+                        <input type="text" ng-model="quickNum" ng-blur="quickChange($event,quickNum)">
+                        <button type="button" ng-click="quickIncrease($event)" ng-class="{'disabled': quickNum >= maxAddCartNum}" ng-disabled="quickNum>=maxAddCartNum"><i class="common-icons common-icons-addNum"></i></button>
+                    </div>
+                    <div class="cell t5" ng-class="{'marT8':imgCtrl}">{{package.orderMultiple*quickNum||0}}</div>
+                    <div class="cell t6">
+                        <img ng-show="imgCtrl&&searchListOne.productName" width="45" height="45" ng-src="{{searchListOne.picUrl}}" src="http://cdn.oudianyun.com/prod1.0/dev/osc/1516175248717_79.11912182603086.png@base@tag=imgScale&q=80&m=0&h=100&w=100" alt="">
+                        <p ng-class="{'marT8':imgCtrl,'width240':!imgCtrl}">{{searchListOne.productName}}</p>
+                    </div>
+                    <div class="cell t7" ng-class="{'marT8':imgCtrl}">{{(searchListOne.availablePrice || searchListOne.promotionPrice||searchListOne.price) | currency:''}}</div>
+                    <div class="cell t8" ng-class="{'marT8':imgCtrl}">{{((searchListOne.availablePrice || searchListOne.promotionPrice||searchListOne.price)*package.orderMultiple*quickNum||0) | currency:''}}</div>
+                    <div class="cell t9" ng-class="{'marT8':imgCtrl}">
+                        <input type="button" value="添加" ng-click="quickAdd(searchListOne.id,package.orderMultiple*quickNum,package.id)">
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="quick-order-first-list quick-order-same-list"
+                ng-repeat="good in quickList">
+                    <div class="cell t2" ng-class="{'marT8':imgCtrl}">{{good.mpCode}} {{packageTab}}</div>
+                    <div class="cell t3" ng-class="{'marT8':imgCtrl}">
+                        <select type="text"
+                                ng-options="packageTab as packageTab.orderMultiple for packageTab in good.packageList"
+                                ng-model="good.packageTab"
+                                ng-change="goodChange($event,good,good.infactNum*good.packageTab.orderMultiple)">
+                        </select>
+                        <i class="select-arr"></i>
+                    </div>
+                    <div class="cell t4" ng-class="{'marT8':imgCtrl}">
+                        <button type="button" ng-class="{'disabled': good.infactNum<=1}" ng-disabled="good.infactNum<=1" ng-click="goodDecrease($event,good)"><i class="common-icons common-icons-reduceNum"></i></button>
+                        <input type="text" ng-model="good.infactNum" ng-blur="goodChange($event,good,good.infactNum*(good.orderMultiple?good.orderMultiple:1))">
+                        <button type="button" ng-click="goodIncrease($event,good)" ng-class="{'disabled': good.infactNum >= maxAddCartNum}" ng-disabled="good.infactNum>=maxAddCartNum"><i class="common-icons common-icons-addNum"></i></button>
+                    </div>
+                    <div class="cell t5" ng-class="{'marT8':imgCtrl}">{{good.num}}</div>
+                    <div class="cell t6">
+                        <img ng-show="imgCtrl" width="45" height="45" ng-src="{{good.picUrl}}" src="http://cdn.oudianyun.com/prod1.0/dev/osc/1516175248717_79.11912182603086.png@base@tag=imgScale&q=80&m=0&h=100&w=100" alt="">
+                        <p ng-class="{'marT8':imgCtrl,'width240':!imgCtrl}">{{good.name}}</p>
+                    </div>
+                    <div class="cell t7" ng-class="{'marT8':imgCtrl}">{{good.price | currency:''}}</div>
+                    <div class="cell t8" ng-class="{'marT8':imgCtrl}">{{good.price*good.num | currency:''}}</div>
+                    <div class="cell t9" ng-class="{'marT8':imgCtrl}"><a href="javascript:void(0)" ng-click="quickDelete(good.mpId,false)">删除</a></div>
+                </div>
+                <div class="quick-order-first-foot">
+                    <div class="quick-order-first-foot-left" ng-click="quickDelete(null,true)">清空所有商品</div>
+                    <div class="quick-order-first-foot-right">
+                        <ul>
+                            <li>商品总数：<span>{{totleNum||0}}</span></li>
+                            <li class="marL30">商品金额总计：<span>{{(totlePrice||0) | currency:'￥'}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="quick-order-first-btn">
+                    <div class="btn-group">
+                        <input type="button" value="立即购买" ng-click="quickAddCart(1,1)">
+                        <input class="add-cart" type="button" value="加入进货单" ng-click="quickAddCart(0,1)">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="quick-order-two" ng-show="quickTab == 2">
+            <div class="line"></div>
+            <div class="search-container"></div>
+            <div class="search">
+                <label class="search-file-cover search-file-cover-width"><a class="search-download" href="http://cdn.oudianyun.com/cg/cart/example.xlsx">下载excel模板</a></label>
+                <!--<input id="fileUp" uploader="uploaderCreat" type="file" class="search-file" hidden>-->
+                <label class="search-file-cover" ngf-pattern="'.xlsx,.xls'" ng-model="excelData" ngf-select="goodsUpload()">上传文件</label>
+                <div class="file-rule">
+                    <p class="rule-rule-top">上传文件支持excel快速导入符合格式的商品</p>
+                    <p>批量导入下单流程：1.下载excel模板。2.按照模板选择商品货号、商品包装方式、购买数量。3.上传文件。</p>
+                </div>
+            </div>
+        </div>
+        <div class="quick-order-three" ng-show="quickTab == 3">
+            <div class="quick-order-three-search">
+                <div class="businessList-top datetimepicker">
+                    <span class="date-title f14">下单时间：</span>
+                    <div class="dis datetimepicker-content">
+                        <div class="input-group">
+                            <input type="text"  value="" class="timeiconbg date-time-picker-input"  datetimepicker for-id="logListModalFrom" options="options1" close="close(from)" max-date="endDateStr" ng-model="startTime">
+                            <span class="input-group-addon">至</span>
+                            <input type="text"  value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalTo" options="options2" close="close(to)" min-date="startDateStr" ng-model="endTime">
+                        </div>
+                    </div>
+                    <div class="receivable-right f14">
+                        <select type="text" ng-model="historyType" ng-init="historyType = 0">
+                            <option value="0">货号</option>
+                            <option value="1">商品名称</option>
+                        </select>
+                        <i class="select-arr"></i>
+                        <input type="text" class="num-bill f14" ng-model="historyKeyword">
+                        <span class="search-text f14 dis" ng-click="history.historySearch(historyType,historyKeyword)">查询</span>
+                    </div>
+                </div>
+            </div>
+            <div class="quick-order-three-table" ng-show="history.srarchList&&history.srarchList.length>0">
+                <div class="quick-order-three-table-title">
+                    <div class="cell t1">
+                        <label for="checkBoxAll" class="checkboxStyle-big">
+                            <input hidden id="checkBoxAll" ng-checked="checkedAllCtrl"
+                                   ng-model="checkedAllCtrl"
+                                   class="chk chk-all checkBoxAll"
+                                   type="checkbox"
+                                   ng-change="checkAllRow()">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="cell t2">商品名称</div>
+                    <div class="cell t3">商品货号</div>
+                    <div class="cell t4" ng-click="sortNum()">
+                        <span>进货数量</span>
+                        <span ng-class="{'icon-rise':!historyNum&&historyNumCtrl,'icon-drop':historyNum&&historyNumCtrl}" class="icon-default"></span>
+                    </div>
+                    <div class="cell t5" ng-click="sortMoney()">
+                        <span>进货金额(元)</span>
+                        <span ng-class="{'icon-rise':!historyMoney&&historyMoneyCtrl,'icon-drop':historyMoney&&historyMoneyCtrl}" class="icon-default"></span>
+                    </div>
+                </div>
+                <div class="quick-order-three-table-row" ng-class="{'row-disabled':!row.canBuy}" ng-repeat="row in history.srarchList">
+                    <div class="cell t1">
+                        <label for="checkBox{{row.mpId}}" class="checkboxStyle-big">
+                            <input hidden id="checkBox{{row.mpId}}" ng-checked="row.checked"
+                                   ng-disabled="!row.canBuy"
+                                   ng-model="row.checked"
+                                   class="chk chk-all checkBoxAll"
+                                   type="checkbox"
+                                   ng-change="checkSingleRow(row)">
+                            <span></span>
+                        </label>
+                    </div>
+                    <div class="cell t2">{{row.productName}}<span ng-if="!row.canBuy">已失效</span></div>
+                    <div class="cell t3">{{row.artNo}}</div>
+                    <div class="cell t4">
+                        <span>{{row.buyNum}}</span>
+                    </div>
+                    <div class="cell t5">
+                        <span>{{row.buyAmount}}</span>
+                    </div>
+                </div>
+                <div class="quick-page" pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                     total-page="totalPage" ng-if="isShowPage"></div>
+                <div class="quick-order-three-table-btn">
+                    <div class="btn-group">
+                        <input type="button" value="批量加入订货单" ng-click="quickAddCart(0,3)">
+                        <input class="add-cart" type="button" value="去结算" ng-click="quickAddCart(1,3)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 缺省图 -->
+    <div class="none-order" ng-if="isShowIcon&&quickTab == 3">
+        <div class="none-left">
+            <span class="none-left-img"></span>
+        </div>
+        <div class="none-right">
+            <span>{{i18n('暂无数据')}}~</span>
+        </div>
+    </div>
+
+    <!--失效商品的集合弹框-->
+    <div class="bg-modal quick-error-modal" ng-show="quickModalCtrl">
+        <div class="bomb-Box"><div class="bomb-title clearfix">
+            <span class="title-text">提示</span><span class="close-img" ng-click="quickModalCtrl = false;"></span>
+        </div>
+            <div class="bomb-main">
+                <div class="main-right">
+                    <span ng-if="errorType == 0" class="right-text error-text">部分商品已经失效无法加车下单，你要继续提交吗？</span>
+                    <span ng-if="errorType == 1" class="right-text error-text">部分商品已经失效无法立即购买，你要继续提交吗？</span>
+                    <p class="f12">失效商品货号有：{{historyArtNo}}</p>
+                    <div class="right-botton">
+                        <a ng-if="errorType == 0" href="javascript:void(0)" class="one-button" ng-click="quickAddCart(0,quickTab,2)">确定</a>
+                        <a ng-if="errorType == 1" href="javascript:void(0)" class="one-button" ng-click="quickAddCart(1,quickTab,2)">确定</a>
+                        <a href="javascript:void(0)" class="two-button" ng-click="quickModalCtrl = false;">取消</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

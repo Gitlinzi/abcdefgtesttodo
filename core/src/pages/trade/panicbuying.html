@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+    <title>抢购</title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" href="/panicbuying#((skin)).css?v=${version}">
+</head>
+<base target="_blank" />
+
+<body class="bgf8" ng-app="appControllers" ng-controller="panicbuyingCtrl">
+
+    @@include("header.html") @@include("global-nav.html")
+
+    <div class="serve-big">
+        <div class="channel-box">
+            <div class="channel-title">
+                <div class="container channel-nav">
+                    <ul ng-init="panicBuyNav=1" id="thumblist">
+                        <li class="imgLi" ng-style="{width: purchaseTimeList.length >= 5 ? '240px' : 1200/ purchaseTimeList.length}" ng-repeat="time in purchaseTimeList" ng-click="purchaseBuy(time.promotionId)" ng-class="{'have-hand':time.promotionId==promotionIdNum}">
+                            <span>
+                            {{time.timeStr}}{{time.statusStr}}</span>
+                            <br>
+                            <span ng-if="time.statusStr==i18n('秒杀中')" class="seckillSty">
+                            - {{i18n('距离结束')}}
+                            <span count-down show-count-down="true" end-time="time.endTime" current-time="time.sysTime" no-font="true"></span> -
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="leftGuide" ng-click="arrowLeftImg()" ng-show="isShowLeft"></div>
+                <div class="rightGuide" ng-click="arrowRightImg()" ng-show="isShowRight"></div>
+            </div>
+            <div class="channel-list-box">
+                <div class="channel-list" ng-show="panicBuyNav==1">
+                    <ul class="channel-list-ul">
+                        <li ng-repeat="proBuy in purchaseBuyList">
+                            <dl>
+                                <dt ng-click="rushTopurchase(proBuy.mpId)">
+                                <img alt="" ng-src="{{proBuy.picUrl}}">
+                            </dt>
+                                <dd>
+                                    <h4>
+                                        <label>{{i18n('自营')}}</label>{{proBuy.name}}</h4>
+                                    <div class="channel-list-infor">
+                                        <h5>
+                                            <span>
+                                            <label>￥</label>{{proBuy.promotionPrice}}</span>
+                                            <cite>{{i18n('限量')}}：{{proBuy.allStock}}
+                                            <em>{{proBuy.originalPrice | currency : "￥"}}</em>
+                                        </cite>
+                                        </h5>
+                                        <p>
+                                            {{i18n('已售')}}{{((proBuy.saleStock)/proBuy.allStock)*100}}%
+                                            <span>
+                                            <label ng-style="{width:'{{((proBuy.allStock-proBuy.saleStock)/proBuy.allStock)*88}}'}"></label>
+                                        </span>
+                                        </p>
+                                    </div>
+                                    <button ng-class="{panicBuyBtn:proBuy.status==2,futureBuyBtn:proBuy.status==1}" ng-click="addToCart(proBuy)" ng-disabled="proBuy.status==1">{{proBuy.statusStr}}</button>
+                                </dd>
+                            </dl>
+                        </li>
+                </div>
+            </div>
+        </div>
+    </div>
+    @@include("footer.html")
+    @@include("script.html")
+    <script type="text/javascript" src="/panicbuying.js?v=${version}"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=panicbuying"></script>
+</body>
+
+</html>

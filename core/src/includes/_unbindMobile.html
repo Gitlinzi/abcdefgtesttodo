@@ -1,0 +1,42 @@
+<div class="content">
+    <div class="module" ng-if="!unBindMobile">
+        <div class="mt">
+            <div class="head"></div>
+            <h2>{{i18n('解除绑定手机')}}</h2>
+        </div>
+        <div class="mc inner">
+            <form class="form mt100" name="userForm" novalidate>
+                <div class="msg">{{ sms.msg }}</div>
+                <div class="form-group">
+                    <label>{{i18n('手机号')}}：</label>
+                    <input type="text" class="input" name="mobile" ng-model="sms.mobile" readonly="readonly" required>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <label>{{i18n('验证码')}}：</label>
+                    <input type="text" class="input sms" name="captchas" ng-pattern="/^[0-9]{6}$/" ng-model="sms.captchas" required>
+                    <input id="smsBtn" type="button" class="btn smsBtn" value="{{i18n('获取短信验证码')}}" ng-disabled="userForm.username.$invalid || userForm.mobile.$invalid" ng-click="smsCode(true)">
+                    <div ng-show="sms.sendErr" class="tip err">{{sms.sendErr}}</div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-group">
+                    <label></label>
+                    <input type="button" class="btn" value="{{i18n('解除绑定')}}" ng-disabled="userForm.$invalid || !sms.mobile" ng-click="unBindMobileForm()">
+                    <div class="clear"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="module" ng-if="unBindMobile">
+        <div class="mt">
+            <div class="head"></div>
+            <h2>{{i18n('解除绑定手机')}}</h2>
+        </div>
+        <div class="mc inner">
+            <div class="success">
+                <div class="info">{{i18n('您已成功解除绑定手机')}}！</div>
+                <a href="?bindMobile" class="btn">{{i18n('重新绑定')}}</a>
+            </div>
+        </div>
+    </div>
+</div>

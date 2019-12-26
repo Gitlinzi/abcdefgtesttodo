@@ -1,0 +1,472 @@
+@import url('../../common/css/i-var_${skin}.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-global-nav.less');
+@import url('../../common/css/i-feedback.less');
+@import url('../../common/css/reset.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-shotProcess.less');
+
+/* 支付 */
+// 新添加的 CSS代码 begin
+.container {
+	width: 1000px;
+	position: relative;
+}
+.colorRed{
+	color: @clearColor;
+}
+#payBox{
+	margin-bottom: 240px;
+}
+.order-success{
+	padding: 10px 20px;
+    background-color: @f5GreyColor;
+	& .order-left{
+		float: left;
+		& .success-text{
+			font-size: 16px;
+			display: block;
+			margin-bottom: 6px;
+			color: @blackColor;
+		}
+		& .place-text{
+			font-size: 12px;
+			color: @99GreyColor;
+		}
+	}
+	& .order-right{
+		float: right;
+		text-align: right;
+		& .order-detetil{
+			font-size: 12px;
+			margin-top: 14px;
+			padding-right: 22px;
+			position: relative;
+			& .detetil-text{
+				cursor: pointer;
+			}
+			& .arrow-top{
+				position: absolute;
+				top: 6px;
+				right: 2px;
+			  	background: url('../../images/company/company-default.png') no-repeat -22px -34px;
+				height: 6px;
+				width: 11px;
+			}
+			& .arrow-bottom{
+				position: absolute;
+				top: 6px;
+				right: 2px;
+			  background: url('../../images/company/company-default.png') no-repeat -22px -47px;
+				height: 6px;
+				width: 11px;
+			}
+		}
+		& .should-pay{
+			font-size: 14px;
+			& b{
+				font-size: 18px;
+				color: @clearColor;
+			}
+		}
+	}
+}
+.order-detail-see{
+	padding:18px 37px;
+	background-color: @whiteColor;
+	margin: 20px 0  240px 25px;
+	float: left;
+	text-align: center;
+	border:1px solid @ddGreyColor;
+	font-size:12px;
+	cursor: pointer;
+}
+.order-mes{
+	padding: 10px 20px 10px 20px;
+	margin-bottom: 10px;
+	border:1px solid @bodyBgColor;
+	h4{
+		margin: 0 0 10px 0;
+		font-size: 16px;
+	}
+	p.addressInfo{
+		margin: 0 0 15px 0;
+	    font-size: 12px;
+	    color: @33GreyColor;
+	    border-bottom: 1px solid @ddGreyColor;
+	    padding-bottom: 15px;
+	}
+	& li{
+		line-height:25px;
+		overflow: hidden;
+		& span{
+		    display: block;
+		    font-size: 16px;
+		}
+		& .order-mes-goods{
+			max-height: 250px;
+			overflow-y: auto;
+			width: 100%;
+		}
+		& .order-mes-goods::-webkit-scrollbar{
+			width: 4px;
+		}
+		& .order-mes-goods::-webkit-scrollbar-thumb{
+			background-color: @ccGreyColor;
+			-webkit-border-radius: 2em;
+			-moz-border-radius: 2em;
+			border-radius: 2em;
+		}
+		& .order-mes-goods::-webkit-scrollbar-track{
+			background-color: @navColor;
+			-webkit-border-radius: 2em;
+			-moz-border-radius: 2em;
+			border-radius: 2em;
+		}
+		& div{
+			font-size: 12px;
+			color: @33GreyColor;
+			p{
+				margin:0;
+				line-height:25px;
+			}
+			float: left;
+		}
+	}
+}
+.big-remind{
+	border: 1px solid @lightOrangeThemeColor;
+	background: @fffdeeOrangeColor;
+	padding: 5px 10px 5px 17px;
+	font-size: 12px;
+	margin-bottom: 14px;
+	& .remind-text{
+		float: left;
+	}
+	& .close-img{
+		float: right;
+		display: block;
+		width: 12px;
+		height: 12px;
+	  background: url('../../images/company/company-default.png') no-repeat -22px -256px;
+		cursor: pointer;
+	  	margin-top: 2px;
+	}
+}
+.main-box{
+	width: 960px;
+	border: 1px solid @bodyBgColor;
+	padding: 19px;
+	margin-bottom: 44px;
+	& .main-box-two{
+		width: 958px;
+		border:1px solid @bodyBgColor;
+		& .main-box-three{
+			width: 900px;
+			border: 6px solid @backgroundColor;
+			padding: 21px 22px 25px 24px;
+			& .three-top{
+				height: 32px;
+				border-bottom: 1px solid @bodyBgColor;
+				& .three-text{
+					font-weight: 900;
+					margin-right: 12px;
+				  	color: @33GreyColor;
+				}
+				& .three-right{
+					font-size: 12px;
+					padding: 6px 28px 6px 11px;
+					border: 1px solid @lightOrangeThemeColor;
+					position: relative;
+					& .close-img{
+						position: absolute;
+						top: 7px;
+						right: 5px;
+						display: block;
+						width: 12px;
+						height: 12px;
+					  background: url('../../images/company/company-default.png') no-repeat -22px -256px;
+						cursor: pointer;
+					}
+				}
+			}
+			& .pay-mode{
+				padding-top: 15px;
+				& span{
+					display: inline-block;
+				}
+				& .icon-box{
+					width: 137px;
+					border: 1px solid @ccGreyColor;
+					text-align: center;
+					padding: 3px 0;
+					display: inline-block;
+					vertical-align: top;
+					margin-right: 20px;
+					cursor:pointer;
+					position: relative;
+					& img{
+						width:100%;
+						height:100%;
+					}
+					& p{
+						text-align: center;
+					}
+				}
+				& .icon-box-text{
+					width: 137px;
+					position: absolute;
+					top:32px;
+					color:@themeColor;
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+				}
+				& .red-border{
+					border: 2px solid @btnBgColor;
+					position: relative;
+					&::after{
+						position: absolute;
+						content: '';
+						width: 17px;
+						height: 16px;
+						.common-product-company-icon(-334px, -169px);
+						bottom: 0px;
+						right: -1px;
+					}
+				}
+				& .wechat-icon{
+					width: 106px;
+					height: 32px;
+					.common-product-company-icon(-630px, -182px);
+				}
+				& .alipay-icon{
+					width: 88px;
+					height: 32px;
+					.common-product-company-icon(-630px, -225px);
+				}
+				& .card-icon{
+					width: 120px;
+					height: 31px;
+					.common-product-company-icon(-630px, -264px);
+				}
+			}
+		}
+	}
+	& .main-img{
+		width: 858px;
+		border: 1px solid @bodyBgColor;
+		margin-top: 10px;
+		font-size: 0;
+		padding-left: 100px;
+		padding-top: 20px;
+		padding-bottom: 10px;
+		& div{
+			display: inline-block;
+			vertical-align: top;
+		}
+		& .img-left{
+			margin-right: 100px;
+			& p{
+				font-size: 20px;
+				font-weight: 900;
+				text-align: center;
+				color: @clearColor;
+			}
+		}
+	}
+}
+.marginR14{
+	margin-left: 14px;
+}
+// 新添加的 CSS代码 end
+.container{
+	position: relative;
+}
+.width1000{
+	width: 1000px;
+}
+.pay-complete{
+	padding: 40px 0 40px 380px;
+	border-top: 2px solid @bbGreyColor;
+	background-color: @backgroundColor;
+	overflow: hidden;
+	*zoom: 1;
+
+	& .ok{
+		float: left;
+		margin-top: 7px;
+	}
+	& .title{
+		float: left;
+		margin-left: 24px;
+		//margin-bottom: 15px;
+	}
+	& h1{
+		margin: 0;
+		color:@redColor;
+		font-weight: normal;
+	}
+	& p{
+		margin: 6px 0 0 0;
+		font-size: 20px;
+	}
+	& a{
+		color: @00BlueColor;
+	}
+	& .jump{
+		display: block;
+		margin: 30px 0 0 0;
+	}
+	& h4{
+		font-weight: normal;
+	}
+}
+.confirm-payment{
+	margin:30px;
+
+	& h2{
+		margin: 0;
+		font-size: 22px;
+		font-weight: normal;
+	}
+	& .btn{
+		padding: 0 20px;
+	}
+}
+.shopTitle{
+	height: 50px;
+    width: 426px;
+    position: absolute;
+    left: 189px;
+    top: -78px;
+    font-size: 20px;
+}
+.wxPay{
+	border: 1px solid @ccGreyColor;
+}
+.wxPay:after{
+	visibility:hidden;
+	display:block;
+	font-size:0;
+	content:" ";
+	clear:both;
+	height:0;
+}
+.ft20{
+	font-size:20px;
+}
+.mgL20{
+	margin-left: 20px;
+}
+.mgL10{
+	margin-left: 10px;
+}
+.col0172{
+	color: @00BlueColor;
+}
+.pd0{
+	padding: 0;
+}
+.none{
+	display: none;
+}
+.trans180{
+	transform:rotate(180deg);
+}
+.wd50{
+	width: 50%;
+	float: left;
+}
+.text-center{
+	text-align: center;
+}
+.mgL145{
+	margin-left: 145px;
+}
+.mgL90{
+	margin-left: 90px;
+}
+// 弹框 提示组件
+.tips-popup{
+	border:5px solid @ddGreyColor;
+	background-color: @whiteColor;
+	width: 370px;
+	border-radius: 8px;
+	& .tips-title{
+		height:23px;
+		background-color: @bodyBgColor;
+		padding-left: 15px;
+		padding-top:12px;
+		padding-right:15px;
+		font-size: 14px;
+		& .tips-text{
+			float: left;
+		}
+		& .close-img{
+			float: right;
+			width: 12px;
+			height:12px;
+		  	background: url('../../images/company/company-default.png') no-repeat -22px -256px;
+			cursor: pointer;
+		}
+	}
+	& .tips-main{
+		padding-top:25px;
+		padding-bottom: 20px;
+		& .tips-top{
+			font-size: 16px;
+			text-align: center;
+			margin-bottom: 25px;
+		}
+	}
+	& .tips-button{
+		text-align: center;
+		& a{
+			font-size: 12px;
+			text-align: center;
+			line-height: 35px;
+			display: inline-block;
+			border-radius: @searchRadius;
+		}
+		& .button-one{
+			background-color: @btnBgColor;
+			color: @whiteColor;
+			margin-right: 15px;
+			min-width: 90px;
+			height:35px;
+		}
+		& .button-two{
+			min-width: 88px;
+			height:33px;
+			border:1px solid @ddGreyColor;
+			color: @fontColor;
+		}
+	}
+}
+
+.bg-modal{
+	z-index: 1000;
+	overflow: auto;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background: rgb(0, 0, 0);    /*不支持rgba的浏览器*/
+	background: rgba(51, 51, 51, 0.3);  /*支持rgba的浏览器*/
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000,endColorstr=#B2000000);
+	filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000, endColorstr=#B2000000)";
+	background: none\9;
+}
+

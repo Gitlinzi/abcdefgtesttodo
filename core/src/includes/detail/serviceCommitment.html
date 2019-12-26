@@ -1,0 +1,21 @@
+<dl ng-if="securityVOList.length>0" class='promise-icon'>
+    <dt>{{i18n('服务承诺')}}</dt>
+    <dt style="width: 670px">
+        <span ng-repeat="h in securityVOList" href="#" class="securityVOList">
+            {{h.title}}
+            <label class="share-text-box">{{h.contentPlain}}<s><em></em></s></label>
+        </span>
+        <span href="#">{{i18n('七天无理由退换')}}</span>
+    </dt>
+    <dt ng-show="refundBox">
+        <!--<span class="promise-bgc">
+            {{i18n('极速退款是为诚信会员提供的退款退回流程的专享特权')}}，{{i18n('额度是根据每个用户当前的信誉评级情况而定')}}。
+        </span>-->
+        <div class="share-text-box">
+            <label>{{i18n('极速退款是为诚信会员提供的退款退回流程的专享特权')}}，{{i18n('额度是根据每个用户当前的信誉评级情况而定')}}。</label>
+            <s>
+                <em></em>
+            </s>
+        </div>
+    </dt>
+</dl>

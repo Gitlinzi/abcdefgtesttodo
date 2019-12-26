@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+<link rel="stylesheet" type="text/css" href="/404#((skin)).css?v=${version}">
+</head>
+
+<body ng-app="appControllers" ng-controller="helpCtrl">
+
+@@include("header.html")
+<span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+    @@include("global-nav.html")
+</span>
+
+<div class="container" id="notfound">
+	<div class="png"><img width="47" height="47" src="/images/404.png?v=${version}" alt="404"></div>
+	<div class="tip">
+		<p>{{i18n('您访问的页面正在检修')}}</p>
+		<p>
+            <a href="javascript:history.back()" class="mgR15">{{i18n('返回上一级')}}</a>
+            <a href="../index.html">{{i18n('返回首页')}}</a>
+        </p>
+	</div>
+</div>
+
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/help.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=404"></script>
+
+</body>
+</html>

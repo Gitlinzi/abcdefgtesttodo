@@ -1,0 +1,88 @@
+{
+  "code": 0,
+  "successMsg": "处理成功!",
+  "data": {
+    "total": 5,
+    "listObj": [
+      {
+        "id": 111,
+        "activityId": 11111,
+        "activityTitle": "很好的一次活动",
+        "mpId": 111,
+        "mpName": "led吸顶灯具长方形 客厅卧室灯简约现代大气",
+        "mpCode": "123",
+        "price": 424.44,
+        "status": 0,
+        "trialReportStatus": 0,
+        "userId": 123456,
+        "picUrl": "http://cdn.oudianyun.com/lyf-local/trunk/back-cms/1501816286450_461_53.jpg@base@tag=imgScale&q=80",
+        "userName": "欧电云",
+        "createDate": 1458112654000
+      },
+      {
+        "id": 222,
+        "activityId": 222222,
+        "activityTitle": "很好的一次活动",
+        "mpId": 222,
+        "mpName": "led吸顶灯具长方形 客厅卧室灯简约现代大气",
+        "mpCode": "123",
+        "price": 454.44,
+        "status": 1,
+        "trialReportStatus": 0,
+        "userId": 123456,
+        "picUrl": "http://cdn.oudianyun.com/lyf-local/trunk/back-cms/1501816286450_461_53.jpg@base@tag=imgScale&q=80",
+        "userName": "欧电云",
+        "createDate": 1458112654000
+      },
+      {
+        "id": 333,
+        "activityId": 333333333,
+        "activityTitle": "很好的一次活动",
+        "mpId": 333,
+        "mpName": "led吸顶灯具长方形 客厅卧室灯简约现代大气",
+        "mpCode": "123",
+        "price": 464.44,
+        "status": 1,
+        "trialReportStatus": 1,
+        "userId": 123456,
+        "picUrl": "http://cdn.oudianyun.com/lyf-local/trunk/back-cms/1501816286450_461_53.jpg@base@tag=imgScale&q=80",
+        "userName": "欧电云",
+        "variables": "个人感觉就是5瓦的灯光对大客厅来说还是偏小点，个人感觉就是5瓦的灯光对大客厅来说还是偏小点个人感觉就是5瓦的灯光对大客厅来说还是偏小点。",
+        "hasApplicedCount": 33,
+        "createDate": 1458112654000
+      },
+      {
+        "id": 333,
+        "activityId": 333333333,
+        "activityTitle": "很好的一次活动",
+        "mpId": 333,
+        "mpName": "led吸顶灯具长方形 客厅卧室灯简约现代大气",
+        "mpCode": "123",
+        "price": 474.44,
+        "status": 1,
+        "trialReportStatus": 2,
+        "userId": 123456,
+        "picUrl": "http://cdn.oudianyun.com/lyf-local/trunk/back-cms/1501816286450_461_53.jpg@base@tag=imgScale&q=80",
+        "userName": "欧电云",
+        "variables": "个人感觉就是5瓦的灯光对大客厅来说还是偏小点，个人感觉就是5瓦的灯光对大客厅来说还是偏小点个人感觉就是5瓦的灯光对大客厅来说还是偏小点。",
+        "hasApplicedCount": 33,
+        "createDate": 1458112654000
+      },
+      {
+        "id": 444,
+        "mpId": 444,
+        "activityId": 4444444,
+        "activityTitle": "很好的一次活动",
+        "mpName": "led吸顶灯具长方形 客厅卧室灯简约现代大气",
+        "mpCode": "123",
+        "price": 44.44,
+        "status": 2,
+        "trialReportStatus": 0,
+        "userId": 123456,
+        "picUrl": "http://cdn.oudianyun.com/lyf-local/trunk/back-cms/1501816286450_461_53.jpg@base@tag=imgScale&q=80",
+        "userName": "欧电云",
+        "createDate": 1458112654000
+      }
+    ]
+  }
+}

@@ -1,0 +1,132 @@
+<div class="content" id="advanceCreateOrder" ng-init="">
+    <!-- <div class='home-allTitle pdL20 disIB w100 border-box'>
+        {{i18n('创建预置订单')}}
+        <p class="disIB fr mgR20">
+            <a class="cancel c3 f12" href="javascript:history.back()">
+                <i class="icon-return"></i>
+                {{i18n('返回')}}
+            </a>
+        </p>
+    </div> -->
+
+    <div class="crumb-nav" >
+      <a ng-href="/home.html#/advanceOrder">{{i18n('预制订单')}}</a>
+      <a class="active" ng-href="/home.html#/advanceCreateOrder">{{i18n('创建预制订单')}}</a>
+    </div>
+
+   <div class="module setup">
+        <!-- 预置订单信息 -->
+        <!-- <div class="bb pdL20 pdB10 mgB10">{{i18n('预置订单信息')}}</div> -->
+        <div class="mgB15">
+            <div class="setup-item">
+                <p class="disIB text-right">
+                    <span class="require">*</span>
+                    <span >{{i18n('预置订单名称')}}</span>
+                </p>
+                <div class="item-content item-content-input">
+                  <input type="text" ng-model="createInfo.name">
+                </div>
+            </div>
+            <div class="setup-item mgT10">
+                <p class="disIB text-right vertical-top">{{i18n('描述')}}</p>
+                <div class="item-content item-content-input">
+                  <textarea cols="30" rows="3" ng-model="createInfo.describe"></textarea>
+                </div>
+
+            </div>
+        </div>
+        <!-- 添加商品 -->
+        <!-- <div class="bb pdL20 pdB10 mgB10">{{i18n('添加商品')}}</div> -->
+        <div class="quick-list evaluate-list setup-item">
+            <!-- <ul class="list-title list-titleColor bl bb br bt">
+                <li class="flex1 align-center">{{i18n('商品编码')}}</li>
+                <li class="br flex1 align-center">{{i18n('数量')}}</li>
+                <li class="flex1 align-center">{{i18n('商品编码')}}</li>
+                <li class="br flex1 align-center">{{i18n('数量')}}</li>
+                <li class="flex1 align-center">{{i18n('商品编码')}}</li>
+                <li class="flex1 align-center">{{i18n('数量')}}</li>
+            </ul> -->
+
+            <p class="disIB text-right">添加商品</p>
+            <div class="item-content">
+              <ul class="lineH50 add-product mgB10" ng-repeat="index in line track by $index">
+                  <li class="flex1 align-center">
+                      <input type="text" ng-model="index.itemId1" placeholder="请输入商品编码">
+                      <div class="numbox lineH0 v-alignM">
+                          <input type="text" ng-model="index.num1">
+                          <div class="numbox-button">
+                            <button type="button" ng-click="index.num1 = index.num1-1"
+                                ng-style="{color: index.num1 == 1 || index.num1 <= 0 ? '#ddd' : '#333',cursor: index.num1 == 1 || index.num1<=0? 'default':'pointer'}" ng-disabled="index.num1==0" >-
+                            </button>
+                            <button type="button" ng-click="index.num1 = index.num1+1">+
+                            </button>
+                          </div>
+
+                      </div>
+                  </li>
+                  <li class="flex1 align-center">
+                    <input type="text" ng-model="index.itemId2" placeholder="请输入商品编码">
+                      <div class="numbox lineH0 v-alignM">
+
+                          <input type="text" ng-model="index.num2">
+                          <div class="numbox-button">
+                            <button type="button"  ng-click="index.num2 = index.num2-1"
+                                ng-style="{color: index.num2 == 1 || index.num2 <= 0 ? '#ddd' : '#333',cursor: index.num2 == 1 || index.num2<=0? 'default':'pointer'}" ng-disabled="index.num2==0" >-
+                            </button>
+                            <button type="button" ng-click="index.num2 = index.num2+1">+
+                            </button>
+                          </div>
+
+                      </div>
+                  </li>
+                  <li class="flex1 align-center">
+                    <input type="text" ng-model="index.itemId3" placeholder="请输入商品编码">
+                      <div class="numbox lineH0 v-alignM">
+
+                          <input type="text" ng-model="index.num3">
+                          <div class="numbox-button">
+                            <button type="button"  ng-click="index.num3 = index.num3-1"
+                                ng-style="{color: index.num3== 1 || index.num3 <= 0 ? '#ddd' : '#333',cursor: index.um3 == 1 || index.num3<=0? 'default':'pointer'}" ng-disabled="index.num3==0" >-
+                            </button>
+                            <button type="button" ng-click="index.num3 = index.num3+1">+
+                            </button>
+                          </div>
+
+                      </div>
+                  </li>
+
+                  <li class="flex1 align-center">
+                    <input type="text" ng-model="index.itemId4" placeholder="请输入商品编码">
+                      <div class="numbox lineH0 v-alignM">
+
+                          <input type="text" ng-model="index.num4">
+                          <div class="numbox-button">
+                            <button type="button"  ng-click="index.num4 = index.num4-1"
+                                ng-style="{color: index.num4== 1 || index.num4 <= 0 ? '#ddd' : '#333',cursor: index.um4 == 1 || index.num4<=0? 'default':'pointer'}" ng-disabled="index.num4==0" >-
+                            </button>
+                            <button type="button" ng-click="index.num4 = index.num4+1">+
+                            </button>
+                          </div>
+
+                      </div>
+                  </li>
+              </ul>
+
+            </div>
+            <div class="add lineH50 align-center">
+                <span class="theme f14" ng-click="addLine()"><bdo>+</bdo>{{i18n('添加更多')}}</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- 按钮 -->
+    <div class="operation mgT20">
+        <button class="search mgR5 w100-h40 mgR10" ng-click="save()">{{i18n('确定')}}</button>
+        <!-- <button class="reset w100-h40" ng-click="reset()">{{i18n('重置')}}</button> -->
+        <a class="button cancel w100-h40" href="javascript:history.back()">
+            {{i18n('返回')}}
+        </a>
+    </div>
+</div>

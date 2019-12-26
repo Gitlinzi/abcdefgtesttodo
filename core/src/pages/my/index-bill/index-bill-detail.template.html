@@ -1,0 +1,50 @@
+<div class="name-prove">
+    <!--面包屑-->
+    <!-- <div class="module-title">
+        <a ui-sref="index_bill" class="my-order">{{i18n('我的发票')}}</a>
+        <span class="center-crumb-arrowhead"></span>
+        <span>{{i18n('发票详情')}}</span>
+    </div> -->
+    <div class="evaluate-list" style="margin-top: 20px">
+        <div class="mgT0 home-allTitle pdL20">
+            <span>{{i18n('发票详情')}}</span>
+        </div>
+    </div>
+    <div class="bill-detail-title" style="height: 40px;line-height: 40px;padding-left: 20px;background: #f8f8f8">发票信息</div>
+    <div class="detail-mes aftersales-border">
+        <table class="theme2 f12 mgB10">
+            <tr class="c6">
+                <td width="88" align="right" class="pdT12">{{i18n('交货单号')}}：</td>
+                <td class="c6 pdT12"> {{invoiceDetail.orderDetail.deliverOrderCode}}</td>
+            </tr>
+            <tr class="c6">
+                <td width="88" align="right">{{i18n('发票类型')}}：</td>
+                <td class="c6">{{invoiceDetail.invoiceType[invoiceDetail.orderDetail.invoiceType]}}</td>
+            </tr>
+            <tr class="c6">
+                <td width="88" align="right">{{i18n('开票方式')}}：</td>
+                <td class="c6">{{invoiceDetail.invoiceMode[invoiceDetail.orderDetail.invoiceMode]}}</td>
+            </tr>
+            <tr class="c6" ng-if="invoiceDetail.orderDetail.invoiceTitleContent">
+                <td width="88" align="right" class="pdB12">{{i18n('发票抬头')}}：</td>
+                <td class="c6 pdB12">{{invoiceDetail.orderDetail.invoiceTitleContent}}</td>
+            </tr>
+            <tr class="c6" ng-if="invoiceDetail.orderDetail.taxpayerIdentificationCode">
+                <td width="88" align="right" class="pdB12">{{i18n('税号')}}：</td>
+                <td class="c6 pdB12">{{invoiceDetail.orderDetail.taxpayerIdentificationCode}}</td>
+            </tr>
+            <tr class="c6" ng-if="invoiceDetail.orderDetail.invoiceContent">
+                <td width="88" align="right" class="pdB12">{{i18n('发票内容')}}：</td>
+                <td class="c6 pdB12">{{invoiceDetail.orderDetail.invoiceContent}}</td>
+            </tr>
+        </table>
+        <!-- <div class="show-pdf-{{$index}} mgB10 mgL10 mgR10" ng-show="showInvoiceImage && item.invoicePdfUrl"> -->
+            
+        </div>
+        <div class="downed-pdf" style="margin-top: 10px;cursor: pointer;" ng-click="downloadFileByGet()" ng-if="invoiceDetail.orderDetail.url ">
+            <img src="../../../images/download.png" alt="" style="vertical-align: bottom;">
+            <span>下载电子发票</span>             
+        </div>
+    </div>
+
+</div>

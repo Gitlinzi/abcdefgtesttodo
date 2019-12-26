@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="heimdall" content="进货单" >
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/cart.css?v=${version}">
+</head>
+
+<body ng-app="appControllers" ng-controller="cartCtrl" ng-init="init()">
+@@include("trade-header.html")
+@@include("global-nav.html")
+@@include("_location.html")
+<div class="container pb36" ng-cloak>
+    <!--购物进度-->
+    <div class="cart-search">
+        <div class="cart-search-box">
+            <input class="cart-input" type="text"
+                   ng-model="keyword"
+                   ng-enter="autoSearch($event,keyword)"
+                   placeholder="输入关键词">
+            <input class="cart-button" type="button" value="搜索" ng-click="search(keyword)">
+        </div>
+    </div>
+    <!--购物车 字-->
+    <div class="shopTitle shopTitle-two">
+        {{$parent.switchConfig.common.allCartBtnName}}
+    </div>
+    <!--弹框组件调用-->
+    <div bomb-box cart-data="deleteData"></div>
+    <div bomb-box cart-data="favoriteData"></div>
+    <div bomb-box cart-data="favoriteSuccessData"></div>
+    <div bomb-box cart-data="multiFavoriteData"></div>
+    <div bomb-box cart-data="multiDeleteData"></div>
+    <div bomb-box cart-data="delServerData"></div>
+    <div bomb-box cart-data="deleteGroupData"></div>
+    <div class="quick" ng-init="quickTab = 1;searchCtrl = false;" ng-show="cartType == 'quickOrder'">
+        <ul class="quick-title">
+            <li ng-class="{active:quickTab == 1}" ng-click="quickTab = 1">快速下单</li>
+            <li ng-class="{active:quickTab == 2}" ng-click="quickTab = 2">快速导入</li>
+        </ul>
+        <div class="line"></div>
+        <div class="search-container"></div>
+        <div class="search" ng-show="quickTab == 1">
+            <span class="search-icon" ng-click="searchGoods(quickVal)"></span><input class="search-input" ng-model="quickVal" type="text" ng-keydown="quickSearch($event,quickVal)" placeholder="商品搜索快速下单">
+        </div>
+        <div class="search" ng-show="quickTab == 2">
+            <label class="search-file-cover search-file-cover-width"><a class="search-download" href="http://cdn.oudianyun.com/cg/cart/example.xlsx">下载excel模板</a></label>
+            <!--<input id="fileUp" uploader="uploaderCreat" type="file" class="search-file" hidden>-->
+            <label class="search-file-cover" ngf-pattern="'.xlsx,.xls'" ng-model="excelData" ngf-select="goodsUpload()">上传文件</label>
+            <div class="file-rule">
+                <p class="rule-rule-top">上传文件支持excel快速导入符合格式的商品</p>
+                <p>批量导入下单流程：1.下载excel模板。2.按照模板选择商品货号、商品包装方式、购买数量。3.上传文件。</p>
+            </div>
+        </div>
+        <div class="search-list" ng-show="quickTab == 1&&searchList.merchantProductIds.length>0&&searchCtrl">
+            <ul>
+                <li ng-repeat="searchOne in searchList.merchantProductResult">
+                    <img width="80" height="80" ng-src="{{searchOne.picUrl}}" src="http://cdn.oudianyun.com/lyf-local/branch/back-cms/1505980570453_2441_64.png@base@tag=imgScale&q=80">
+                    <div class="search-goods">
+                        <p class="name">{{searchOne.productName}}</p>
+                        <!--{{prod.availablePrice||prod.promotionPrice||prod.price | currency:\'￥\'}}-->
+                        <p><span class="size">货号：{{searchOne.thirdCode}}</span><span>单价：{{searchOne.availablePrice||searchOne.promotionPrice||searchOne.price|currency:'￥'}}</span></p>
+                        <p class="package" ng-if="searchOne.packageWay.length>0"><i class="package-name">包装方式</i><span ng-repeat="packageWayOne in searchOne.packageWay" ng-class="{'choose':packageWayOne.checked}" ng-model="packageWayOne.checked" ng-click="packageWayChoose(packageWayOne,searchOne.id)">{{packageWayOne.orderMultiple}}</span></p>
+                    </div>
+                </li>
+            </ul>
+            <div class="search-btns">
+                <span class="close" ng-click="searchCtrl = false;">关闭</span>
+                <span class="add-cart" ng-click="quickAddCart()">加入进货单</span>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="cartInfo!==null&&!cartInfoBool&&isLogin" id="cart-box">
+        <div id="cart-main">
+            <div class="tool-bar">
+                <div class="row" style="overflow: hidden!important;">
+                    <div class="cell c0">
+                        <label for="checkBoxAll" class="checkboxStyle">
+                            <input ng-if="!cartInfo.allCheckedFlgBool" hidden id="checkBoxAll" ng-checked="cartInfo.allCheckedFlg"
+                                   ng-model="cartInfo.allCheckedFlg"
+                                   class="chk chk-all checkBoxAll"
+                                   type="checkbox"
+                                   ng-change="(!cartInfo.allCheckedFlgBool)&&checkAll(cartInfo.allCheckedFlg,cartInfo)">
+                            <span ng-if="!cartInfo.allCheckedFlgBool"></span>
+                            <span ng-if="cartInfo.allCheckedFlgBool" class="checkbox-allCtrl"></span>
+                        </label>
+                    </div>
+                    <div class="cell c1">全选</div>
+                    <div class="cell c2">商品</div>
+                    <div class="cell c22">规格</div>
+                    <div class="cell c23">包装方式</div>
+                    <div class="cell c3">单价(元)</div>
+                    <div class="cell c4">数量</div>
+                    <div class="cell c5">合计</div>
+                    <div class="cell c55">总额(元)</div>
+                    <div class="cell c6">操作</div>
+                </div>
+            </div>
+            <!--撤销删除先不做-->
+            <!--<div id="cart-msg" ng-show="isDeleteSuccess">成功删除1件宝贝，如有误，可<a class="color0721" href="javascript:void(0)" ng-click="undoDelete()">撤销删除</a></div>-->
+            <!--商家列表-->
+            <!--商家全选-->
+            <div id="cart-load" ng-if="!cartInfo.merchantList&&!cartInfo">
+                <img width="155" height="40" src="/images/company/loading.gif?v=${version}" alt="等待。。。" ng-src="{{frontBasicSetting.websiteLoading}}">
+            </div>
+            <!--遍历商家-->
+            <div class="mgT10" ng-repeat="merchant in cartInfo.merchantList">
+                <!--<div name="mCheckAllDiv" class="caption">-->
+                    <!--<div class="row" style="overflow: hidden !important;">-->
+                        <!--<div class="cell c0 title-c0">-->
+                            <!--<input id="checkBoxName" hidden class="chk chk-all-grp checkBox"-->
+                                   <!--type="checkbox"-->
+                                   <!--ng-model="merchant.grpChecked"-->
+                                   <!--ng-checked="merchant.grpChecked"-->
+                                   <!--ng-change="grpCheckAll(merchant.grpChecked,merchant)">-->
+                            <!--<label class="title-label" for="checkBoxName">-->
+
+                            <!--</label>-->
+                        <!--</div>-->
+                        <!--<div class="cell"><a href="#">{{merchant.merchantName}}</a></div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;<div class="caption-name">来伊份自营店</div>&ndash;&gt;-->
+                <!--</div>-->
+
+                <!--购物车列表-->
+                <!--遍历活动组-->
+                <div class="goods" ng-repeat="group in merchant.productGroups track by $index"  ng-init="_index=$index">
+                    <!--优惠-->
+                    <div class="mctcount clearfix" ng-if="group.promotion">
+                        <div class="group-check" ng-if="group.promotion.promotionType == 1025&&group.disabled!=1">
+                            <label for="checkBoxGroup{{_index}}{{$index}}" class="checkboxStyle">
+                                <input hidden id="checkBoxGroup{{_index}}{{$index}}" ng-checked="group.checked"
+                                   ng-model="group.checked"
+                                   class="chk chk-all checkBoxAll"
+                                   type="checkbox"
+                                   ng-change="checkCartItem(group.checked, group)"
+                                   ng-init="product.isChecked=product.checked==1">
+                                <span></span>
+                            </label>
+                        </div>
+                        <span class="privilegeName fl">{{group.promotion.promIconText}}</span>
+                        <div class="label-box fl">
+                            <span class="label">{{group.promotion.displayName}}</span>
+                        </div>
+                        <span class="fl label-tips" ng-if="group.promotion.promotionType == 1025">套餐商品，请在对应商品详情页调整套餐搭配</span>
+                        <div ng-if="group.promotion.promotionType == 1025" class="group-btn">
+                            <a ng-if="groupGood.mainItemId == 'isMain'" ng-repeat="groupGood in group.productList" ng-href="../../item.html?itemId={{groupGood.seriesParentId?groupGood.seriesParentId:groupGood.mpId}}&groupId={{group.groupId}}&mainItemId={{groupGood.itemId}}" class="short-btn">修改套餐</a>
+                            <a href="javascript:void(0)" class="short-btn marL10" ng-click="removeCartItem($event,group)">删除套餐</a>
+                        </div>
+
+                        <a href="javascript:;" class="short-btn"
+                           ng-click="giftHgUtil.getProducts(group)"
+                           ng-if="group.promotion.promIconText=='满赠'&&!group.promotion.flag&&group.giftProductList[0].canSelectedGiftsNum>0"
+                        >查看赠品</a>
+                        <a href="javascript:void(0);" class="short-btn"
+                           ng-click="giftHgUtil.getProducts(group)"
+                           ng-if="group.promotion.promIconText=='满赠'&&group.promotion.flag&&group.giftProductList[0].canSelectedGiftsNum>0">选择赠品</a>
+                        <a href="javascript:;" class="short-btn"
+                           ng-click="giftHgUtil.getProducts(group)"
+                           ng-if="group.promotion.promIconText=='换购'&&!group.promotion.flag&&group.giftProductList[0].canSelectedGiftsNum>0"
+                        >查看换购</a>
+                        <a href="javascript:void(0);" class="short-btn"
+                           ng-click="giftHgUtil.getProducts(group)"
+                           ng-if="group.promotion.promIconText=='换购'&&group.promotion.flag&&group.giftProductList[0].canSelectedGiftsNum>0">选择换购</a>
+                        <!--去凑单-->
+                        <a ng-if="!group.promotion.flag&&group.promotion.promotionType != 1025" href="javascript:void(0)" class="privilegeTarget color0721" ng-click="jumpUrl(group.promotion)">去凑单></a>
+                    </div>
+                    <!--遍历商品-->
+                    <div class="row myRow" ng-class="{even:$odd,jingYong:product.disabled==1,fff2f2:product.checked==1}" ng-repeat="product in group.productList track by $index">
+                        <!--Flags-->
+                        <!--<div ng-class="{'group-style-checked':product.checked,'group-style-unchecked':!product.checked}" ng-if="!$first"></div>-->
+                        <div ng-show="false" name="controlFlagDiv">
+                            <input ng-show="false" ng-model="isNoStockFlg" ng-init="isNoStockFlg=(product.stockNum<=0)"/>
+                            <input ng-show="false" ng-model="isLackOfStockFlg" ng-init="isLackOfStockFlg=(product.lackOfStock==1)"/>
+                        </div>
+                        <div ng-if="product.itemType==1025" class="cell c0">
+                            <span class="disable"></span>
+                        </div>
+                        <div class="cell c0" ng-if="product.itemType!=1025">
+                            <label ng-if="!isNoStockFlg" for="checkBox{{_index}}{{$index}}{{product.itemId}}" class="checkboxStyle">
+                                <input id="checkBox{{_index}}{{$index}}{{product.itemId}}"  hidden="hidden" ng-if="product.disabled==0" ng-disabled="isNoStockFlg || group.promotion.promotionType == 1025"
+                                   ng-checked="product.isChecked"
+                                   class="chk checkBox1" type="checkbox"
+                                   ng-model="product.isChecked"
+                                   ng-change="checkCartItem(product.isChecked, product)"
+                                   ng-init="product.isChecked=product.checked==1" ng-click="classToggle($event)"/>
+                                <span ng-if="product.gift!=1"></span>
+                                <span class="disable" ng-if="product.gift==1">赠品</span>
+                                <input ng-show="false" ng-value="product.mpId"/>
+                            </label>
+
+                        </div>
+                        <!--tag.countdown-->
+                        <div class="cell c1" ng-if="product.promotions.length == 0">
+                            <a href="../../item.html?itemId={{product.seriesParentId ? product.seriesParentId:product.mpId}}"><img width="80" height="80" ng-src="{{product.url100x100}}" src="http://cdn.oudianyun.com/lyf-local/branch/back-cms/1505980570453_2441_64.png@base@tag=imgScale&q=80"></a>
+                            <div class="server-name" ng-repeat="server in product.additionalProductList">
+                                <span>【服务】</span><span class="server-name-detail">{{server.name}}</span><span>{{server.price | currency:'￥'}}</span> <span>X{{server.num}}</span>
+                                <span ng-if="group.promotion.promotionType != 1025" class="server-delete" ng-click="delServer(server)">删除</span>
+                            </div>
+                        </div>
+                        <div class="cell c1" ng-class="{'marB15':tag.countdown}" ng-if="product.promotions.length>0" ng-repeat="tag in product.promotions">
+                            <a href="../../item.html?itemId={{product.seriesParentId ? product.seriesParentId:product.mpId}}"><img width="80" height="80" ng-src="{{product.url100x100}}" src="http://cdn.oudianyun.com/lyf-local/branch/back-cms/1505980570453_2441_64.png@base@tag=imgScale&q=80"></a>
+                            <div class="server-name" ng-repeat="server in product.additionalProductList">
+                                【服务】<span>{{server.name}}</span><span>{{server.price | currency:'￥'}}</span> <span>X{{server.num}}</span>
+                                <span ng-if="group.promotion.promotionType != 1025" class="server-delete" ng-click="delServer(server)">删除</span>
+                            </div>
+                            <div class="count-down" ng-if="tag.countdown">
+                                秒杀商品，请在<span count-down no-font="true" show-count-down="true" end-time="tag.countdown*1000" current-time="0"></span>内提交订单并完成支付
+                            </div>
+                        </div>
+                        <div class="cell c2">
+                            <div class="pname">
+                                <a href="../../item.html?itemId={{product.seriesParentId ? product.seriesParentId:product.mpId}}">{{product.name}}</a>
+                                <div ng-if="product.serverVal.length>0&&!product.additionalProductList&&group.promotion.promotionType != 1025&&product.itemType!=3" class="server">
+                                    <!--product.additionalProductList-->
+                                    <div class="select-server-top">
+                                        <span class="select-server"></span>选服务<span class="arrow"></span>
+                                        <ul>
+                                            <li ng-repeat="serverOne in product.serverVal">
+                                                <!-- 兼容ie8 -->
+                                                <input ng-if="serverOne.serAddress && !isIE8" id="checkBox{{serverOne.id}}{{product.mpId}}" hidden class="chk chk-all checkBoxAll" ng-model="serverOne.isChecked" type="checkbox" style="display: none;" ng-change="serverOne.serAddress && serverAdd(product.mpId,product.itemId,serverOne.id,product.num)" ng-init="serverOne.isChecked = false">
+                                                <label ng-if="serverOne.serAddress && !isIE8" for="checkBox{{serverOne.id}}{{product.mpId}}"></label>
+
+                                                <input ng-if="serverOne.serAddress && isIE8" id="checkBox{{serverOne.id}}{{product.mpId}}" class="chk chk-all checkBoxAll" ng-model="serverOne.isChecked" type="checkbox" ng-change="serverOne.serAddress && serverAdd(product.mpId,product.itemId,serverOne.id,product.num)" ng-init="serverOne.isChecked = false">
+                                                <span ng-if="!serverOne.serAddress" class="no-select-icon"></span>
+                                                <span>{{serverOne.chineseName}}</span>
+                                                <span>X1</span>
+                                                <span>{{serverOne.serPrice | currency : '￥'}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--暂不支持-->
+                            <!--<div class="privilegeAlter" ng-if="">-->
+                                <!--<span>请在<span class="privilegeAlterTime">11:22</span>内提交订单并完成支付，可享优惠价格</span>-->
+                            <!--</div>-->
+                            <!--<div class="outPrivilegeAlter" ng-if="">-->
+                                <!--<span>未在规定时间内提交订单，商品已回复原价</span>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="cell c22">
+                            <!--系列属性-->
+                            <div class="attr" ng-if="product.propertyTags.length>0"
+                                ng-class="{'attr-hover':product.itemType==3||product.itemType==1025}"
+                                 ng-mouseenter="product.itemType!=3&&product.itemType!=1025&&sp.getSerialProducts(product)">
+                                <span ng-if="product.itemType!=3&&product.itemType!=1025" class="attrChange">修改</span>
+                                <div ng-repeat="attr in product.propertyTags">
+                                    <span class="attr-name">{{attr.name}}：</span><span class="attr-style">{{attr.value}}</span>
+                                </div>
+                                <!--系列属性修改框-->
+                                <div class="willchoose" ng-show="product.edit" ng-class="" ng-if="product.propertyTags.length>0">
+                                    <dl ng-repeat="attr in sp.attributes">
+                                        <dt>{{attr.name}}：</dt>
+                                        <dd class="seriesinner">
+                                            <div class="series" ng-repeat="v in attr.values"
+                                                 ng-click="sp.selectSerialAttr(v,attr.values,attr,pcIteminfo.sp.attributes,$event)" attr_id="{{v.id}}">
+                                                {{v.value}}
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl >
+                                        <dt></dt>
+                                        <dd class="footBtn">
+                                            <div class="series1 series2" ng-class="" >
+                                                <a href="javascript:void(0)" ng-click="sp.updateSerial()">确定</a>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cell c23"><span class="package" ng-style="{cursor: product.itemType==1025 ? 'default':'pointer'}" ng-class="{'choose':packOne.checked}" ng-click="(product.itemType!=1025)&&(packChange($event,packOne.orderMultiple,product,packOne.id))" ng-repeat="packOne in product.packageList">{{packOne.orderMultiple}}</span></div>
+                        <div class="cell c3">{{product.price|number:2}}<br>
+                            <span class="event" ng-if="product.promotions.length>0" ng-repeat="tag in product.promotions">{{tag.iconTxt}}</span>
+                            <span class="event" ng-if="product.itemType==3">{{product.itemTxt}}</span>
+                            <!--<span class="event">奖品</span>-->
+                        </div>
+                        <div class="cell c4">
+                            <div class="numbox" ng-cloak>
+                                <button type="button" ng-style="{color: product.productNum == 1 || product.productNum<=0 || product.itemType==3 || group.promotion.promotionType == 1025 ? '#ddd' : '#333',cursor: product.productNum == 1 || product.productNum<=0? 'default':'pointer'}" ng-disabled="isNoStockFlg||product.itemType==3||group.promotion.promotionType == 1025" ng-click="decrease($event, product)">-
+                                </button>
+                                <input type="text"
+                                       ng-init="isNoStockFlg && (product.productNum = 0)"
+                                       ng-disabled="isNoStockFlg||product.itemType==3 || group.promotion.promotionType == 1025"
+                                       ng-model="product.productNum"
+                                       ng-change="changeNum(this, product,product.orderMultiple?product.productNum*product.orderMultiple:1)">
+                                <button type="button" ng-style="{color: product.productNum >= product.stockNum || product.itemType==3 || group.promotion.promotionType == 1025? '#ddd' : '#333',cursor: product.productNum >= product.stockNum ||group.promotion.promotionType == 1025? 'default':'pointer'}" ng-disabled="isNoStockFlg||product.itemType==3 || group.promotion.promotionType == 1025"
+                                        ng-click="increase($event, product)">+
+                                </button>
+                            </div>
+
+                            <div class="nomuch" ng-show="isNoStockFlg">暂无库存</div>
+                            <!--库存紧张-->
+                            <div class="nomuch bgf23030" ng-show="!isNoStockFlg && isLackOfStockFlg">库存紧张</div>
+                            <!--超过按原价-->
+                            <div class="limit bgf23030" ng-show="!isNoStockFlg && product.tipsMsg">{{product.tipsMsg}}</div>
+                            <!--<div class="nomuch" ng-show="product.stockNum != 0 && product.num > product.stockNum">超过库存数量</div>-->
+                        </div>
+                        <div class="cell c5"><span>{{product.num||0}}</span></div>
+                        <div class="cell c55"><span class="f23030">{{product.totalPrice||0}}</span></div>
+                        <div class="cell c6">
+                            <a href="javascript:void(0);" ng-click="addFavorite($event, product)">加入收藏</a>
+                            <a ng-if="group.promotion.promotionType != 1025" href="javascript:void(0);" ng-click="myFavorite($event, product)">移入收藏</a>
+                            <a ng-if="group.promotion.promotionType != 1025" href="javascript:void(0);" ng-click="removeCartItem($event, product)">删除</a>
+                        </div>
+                    </div>
+                    <!--遍历活动组的赠品-->
+                    <div class="row" ng-class="{even:$odd,jingYong:product.disabled==1,bgfffce7:product.checked==1}"
+                         ng-repeat="product in group.giftProductList[0].giftProducts|filter:{checked:'1'}  track by $index">
+                        <div class="cell c0">
+                            <span class="disable"></span>
+                        </div>
+                        <div class="cell c1">
+                            <a href="../../item.html?itemId={{product.mpId}}"><img width="80" height="80" ng-src="{{product.picUrl }}" alt="{{product.giftName}}"></a>
+                        </div>
+                        <div class="cell c2">
+                            <div class="pname">
+                                <a href="../../item.html?itemId={{product.mpId}}">{{product.giftName}}</a>
+                            </div>
+                            <!--<div class="privilegeAlter">-->
+                                <!--<span>请在<span class="privilegeAlterTime">11:22</span>内提交订单并完成支付，可享优惠价格</span>-->
+                            <!--</div>-->
+                            <!--<div class="outPrivilegeAlter">-->
+                                <!--<span>未在规定时间内提交订单，商品已回复原价</span>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="cell c22">
+                            <!--<div class="specification">-->
+                                <!--<div class="specification-title">-->
+                                    <!--<div class="attr" ng-if="product.propertyTags.length>0">-->
+                                        <!--<span class="attrChange">修改</span>-->
+                                        <!--<div ng-repeat="attr in product.propertyTags">-->
+                                            <!--<span>{{attr.name}}：</span><span>{{attr.value}}</span>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+
+                            <!--系列属性-->
+                            <!--<div class="attr" ng-if="product.propertyTags.length>0" ng-mouseenter="sp.getSerialProducts(product,'gift')">-->
+                            <div class="attr attr-white" ng-if="product.propertyTags.length>0">
+                                <!--<span class="attrChange">修改</span>-->
+                                <div class="mgR20" ng-repeat="attr in product.propertyTags">
+                                    <span>{{attr.name}}：</span><span>{{attr.value}}</span>
+                                </div>
+                                <!--系列属性修改框-->
+                                <div class="willchoose" ng-show="product.edit" ng-class="" ng-if="product.propertyTags.length>0">
+                                    <dl ng-repeat="attr in sp.attributes">
+                                        <dt>{{attr.name}}：</dt>
+                                        <dd class="seriesinner">
+                                            <div class="series" ng-repeat="v in attr.values"
+                                                 ng-class="{active:v.checked,bdDash:v.disabled}"
+                                                 ng-click="sp.selectSerialAttr(v,attr.values)">
+                                                <a href="javascript:void(0)">{{v.value}}</a>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl >
+                                        <dt></dt>
+                                        <dd class="footBtn">
+                                            <div class="series1 series2" ng-class="" >
+                                                <a href="javascript:void(0)" ng-click="sp.updateSerialProduct(product)">确定</a>
+                                            </div>
+                                            <!--<div class="series1 series3" ng-class="" >-->
+                                            <!--<a href="javascript:void(0)" ng-click="sp.rollback(product)">取消</a>-->
+                                            <!--</div>-->
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cell c23"></div>
+                        <div class="cell c3">
+                            {{product.price|number:2}}<br>
+                            <span class="event">{{group.promotion.promIconText=='满赠' ? group.promotion.promIconText='赠品':group.promotion.promIconText||group.itemTxt}}</span>
+                        </div>
+                        <div class="cell c4">
+                            <div class="numbox" ng-cloak>
+                                <button type="button" ng-style="{color: '#ddd',cursor:'default'}" ng-disabled="true">-
+                                </button>
+                                <input type="text"
+                                       ng-init="isNoStockFlg "
+                                       ng-disabled="true"
+                                       ng-model="product.productNum">
+                                <button type="button" ng-style="{color: '#ddd',cursor:'default'}" ng-disabled="true">+
+                                </button>
+                            </div>
+                        </div>
+                        <div class="cell c5"><span>{{product.checkNum}}</span></div>
+                        <div class="cell c55"><span class="red">{{product.price*product.checkNum}}</span></div>
+                        <!--oupu选择的赠品不能删除-->
+                        <!--<div class="cell c6"><a href="javascript:void(0);" ng-click="removeCartItem($event, product)">删除</a></div>-->
+                    </div>
+                </div>
+            </div>
+            <!--失效商品列表-->
+            <div ng-if="cartInfo.failureProducts.length>0">
+                <div class="goods">
+                    <!--遍历失效商品-->
+                    <div class="mctcount">
+                        <span class="marL10">失效商品</span>
+                        <a href="javascript:void(0)" class="marL10" ng-click="removeDisabledItems()" ng-if="cartInfo.failureProducts.length>0">清除全部</a>
+                    </div>
+                    <div class="row jingYong" ng-class="{even:$odd}" ng-repeat="product in cartInfo.failureProducts">
+                    <!--Flags-->
+                    <div ng-show="false" name="controlFlagDiv">
+                        <input ng-show="false" ng-model="isNoStockFlg" ng-init="isNoStockFlg=(product.stockNum==0)"/>
+                        <input ng-show="false" ng-model="isLackOfStockFlg"
+                               ng-init="isLackOfStockFlg=(product.lackOfStock==1)"/>
+                    </div>
+                    <div class="cell c0">
+                        <span class="disable"></span>
+                    </div>
+                    <div class="cell c1">
+                        <a href="../../item.html?itemId={{product.mpId}}"><img width="80" height="80" ng-src="{{product.url100x100}}" src="http://cdn.oudianyun.com/lyf-local/branch/back-cms/1505980570453_2441_64.png@base@tag=imgScale&q=80"></a>
+                    </div>
+                    <div class="cell c2">
+                        <div class="pname">
+                            <a href="../../item.html?itemId={{product.mpId}}">{{product.name}}</a>
+                        </div>
+                        <!--<div class="attr" ng-if="product.propertyTags.length>0">-->
+                            <!--<span class="attrChange">修改</span>-->
+                            <!--<div ng-repeat="attr in product.propertyTags">-->
+                                <!--<span>{{attr.name}}：</span><span>{{attr.value}}</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+                    <div class="cell c22">
+                        <!--系列属性-->
+                        <!--<div class="attr attr-hover" ng-if="product.propertyTags.length>0"
+                             ng-mouseenter="sp.getSerialProducts(product)">-->
+                        <div class="attr attr-gray" ng-if="product.propertyTags.length>0">
+                            <!--<span class="attrChange">修改</span>-->
+                            <div ng-repeat="attr in product.propertyTags">
+                                <span>{{attr.name}}：</span><span>{{attr.value}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cell c23"><span class="package" ng-style="{cursor: 'default'}" ng-repeat="packOne in product.packageList">{{packOne.orderMultiple}}</span></div>
+                    <div class="cell c3">{{product.price|number:2}}<br>
+                    </div>
+                    <div class="cell c4">
+                        <div class="numbox">
+                            <button type="button" ng-style="{color: '#ddd',cursor: 'default'}" ng-disabled="isNoStockFlg">-</button>
+                            <input type="text"
+                                   ng-init="isNoStockFlg"
+                                   ng-disabled="isNoStockFlg"
+                                   ng-model="product.productNum">
+                            <button type="button" ng-style="{color:'#ddd',cursor: 'default'}" ng-disabled="isNoStockFlg">+</button>
+                        </div>
+                    </div>
+                    <div class="cell c5"><span>{{product.productNum}}</span></div>
+                    <div class="cell c55"><span>{{product.price*product.productNum}}</span></div>
+                    <div class="cell c6"><a href="javascript:void(0);" ng-click="removeCartItem($event, product)">删除</a></div>
+                </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="cart-bar">
+            <ul class="tool">
+                <li>
+                    <label for="checkBoxFoot" class="checkboxStyle">
+                        <input hidden id="checkBoxFoot" ng-checked="cartInfo.allCheckedFlg"
+                               ng-model="cartInfo.allCheckedFlg"
+                               ng-change="checkAll(cartInfo.allCheckedFlg,cartInfo)"
+                               class="chk chk-all checkBoxFoot"
+                               type="checkbox">
+                        <span></span>
+                    </label>
+                    <span>全选</span>
+                </li>
+                <li><a href="javascript:void(0)" ng-click="checkDeleteAll()">删除选中的商品</a></li>
+                <li><a href="javascript:void(0)" ng-click="checkFavoriteAll()">移入我的收藏</a></li>
+                <li><a href="javascript:void(0)" ng-click="removeDisabledItems()" ng-if="cartInfo.failureProducts.length>0">清除失效商品</a></li>
+            </ul>
+            <ul class="goslmt">
+                <li class="cart-totle">已选 <span>{{cartInfo.summary.totalNum}}</span>件商品</li>
+                <!--<li ng-show="cartInfo.summary.beforeAmount-cartInfo.summary.amount>0">已优惠：<span class="f23030 f18">{{cartInfo.summary.beforeAmount-cartInfo.summary.amount| currency:'￥'}}</span></li>-->
+                <li class="cart-totle">
+                    总价(不含运费)：<span class="f23030 font-price">{{cartInfo.summary.amount | currency:'￥'}}</span>
+                    <div>
+                        已节省：<span>-{{cartInfo.summary.discount | currency:'￥'}}</span>
+                    </div>
+                </li>
+                <li><a href="javascript:void(0)" class="btn f18" ng-click="initOrder()">去结算</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 未登录时显示 -->
+    <div id="cart-null" ng-if="!isLogin" >
+        <div class="cart-null-box">
+            <div class="fl cart-null-right">
+                <p>您还没有登录奥，快去登录吧～</p>
+                <p class="clearfix">
+                    <span class="no-login" ng-click="toLoginModal()">立即登录</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--空购物车提示页面-->
+    <div id="cart-null" ng-if="cartInfo===null" >
+        <div class="cart-null-box">
+            <div class="cart-icon-null">
+
+            </div>
+            <div class="fl cart-null-right">
+                <p>{{$parent.switchConfig.common.allCartBtnName}}还是空的呢，快去采购吧～</p>
+                <p class="clearfix">
+                    <span ng-if="!logonInfo.userInfo.mobile" class="go-login" ng-click="toLoginModal()">立即登录</span>
+                    <a class="go-shopping" href="../index.html">去逛逛</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 弹窗模板 -->
+    <div class="modal ng-scope" style="display: block" ng-show="giftHgUtil.show">
+        <div class="dialog" style="display: block;width: 740px;left:50%;top:10%;bottom:auto;margin-left: -439px;">
+            <div class="dialog-content">
+                <!--header-->
+                <div class="dialog-header">
+                    <div class="header-title fontWeight">{{giftHgUtil.title}}</div>
+                    <div class="header-title iconClick">
+                        <span class="iconYuan">
+                            <a href="javascript:;" ng-click="giftHgUtil.show=false">x</a>
+                        </span>
+                    </div>
+                </div>
+                <!--body-->
+                <div class="dialog-body_">
+                    <div class="row" ng-repeat="product in giftHgUtil.products.giftProducts track by $index">
+                        <div class="cell c0" ng-class="{'disabled':giftHgUtil.readOnly}">
+                            <input type="checkbox" ng-model="product.checked" ng-if="!giftHgUtil.readOnly"
+                                   ng-disabled="!product.checked && giftHgUtil.selectedNum()>=giftHgUtil.canSelectNum()">
+                        </div>
+                        <div class="cell c1">
+                            <a href="../../item.html?itemId={{product.mpId}}"><img width="100" height="100" ng-src="{{product.picUrl}}" alt=""></a>
+                        </div>
+                        <div class="cell c2">
+                            <div class="pname">
+                                <a href="">{{product.giftName}}</a>
+                            </div>
+                            <!--系列属性-->
+                            <div class="attr" ng-if="product.propertyTags.length>0"
+                                 ng-mouseenter="sp.getSerialProducts(product,'gift',giftHgUtil.promotion.promotionRuleId)">
+                                <span class="attrChange">修改</span>
+                                <div class="mgR20" ng-repeat="attr in product.propertyTags track by $index">
+                                    <span>{{attr.name}}：</span><span>{{attr.value}}</span>
+                                </div>
+                                <!--系列属性修改框-->
+                                <div class="willchoose" ng-show="product.edit" ng-class="" ng-if="product.propertyTags.length>0">
+                                    <dl ng-repeat="attr in sp.attributes">
+                                        <dt>{{attr.name}}：</dt>
+                                        <dd class="seriesinner">
+                                            <div class="series" ng-repeat="v in attr.values"
+                                                 ng-click="sp.selectSerialAttr(v,attr.values,attr,pcIteminfo.sp.attributes,$event)" attr_id="{{v.id}}">
+                                                {{v.value}}
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl >
+                                        <dt></dt>
+                                        <dd class="footBtn">
+                                            <div class="series1 series2" ng-class="" >
+                                                <a href="javascript:void(0)" ng-click="sp.updateSerial()">确定</a>
+                                            </div>
+                                            <!--<div class="series1 series3" ng-class="" >-->
+                                            <!--<a href="javascript:void(0)" ng-click="sp.rollback(product)">取消</a>-->
+                                            <!--</div>-->
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <!--暂无不支持功能-->
+                            <div class="privilegeAlter" ng-if="">
+                                <span>请在<span class="privilegeAlterTime">11:22</span>内提交订单并完成支付，可享优惠价格</span>
+                            </div>
+                            <div class="outPrivilegeAlter" ng-if="">
+                                <span>未在规定时间内提交订单，商品已回复原价</span>
+                            </div>
+                        </div>
+                        <div class="cell c3">{{product.price|number:2}}
+                        </div>
+                        <div class="cell c3">{{product.checkNum}}<br>
+                        </div>
+                    </div>
+                </div>
+                <!--footer-->
+                <div class="modal-footer">
+                    <button type="button" class="btn footBtn bgRed" ng-click="giftHgUtil.selectGift()">{{giftHgUtil.readOnly?'关闭':'确定'}}</button>
+                    <button type="button" class="btn footBtn bgWhite" ng-click="giftHgUtil.show=false" ng-if="!giftHgUtil.readOnly">取消</button>
+                </div>
+            </div>
+        </div>
+    <!--</div>-->
+    </div>
+</div>
+@@include("cart-footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/cart.js?v=${version}"></script>
+</body>
+</html>
+
+
+

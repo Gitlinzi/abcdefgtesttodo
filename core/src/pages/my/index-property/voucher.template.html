@@ -1,0 +1,112 @@
+<div id="voucher" class="award-page">
+
+    <div class="home-allTitle pdL20">
+        <span>{{i18n('优惠码')}}</span>
+    </div>
+    <div class="award-nav pdL20">
+        <span class="award-box">
+            <span ng-click="activeNum=1" ng-class="{'goods-active':activeNum==1}" class="text hand">{{i18n('推荐码')}}</span>
+            <span class="square" ng-show="rebate != 0">{{rebate}}</span>
+        </span>
+        <span class="line"></span>
+        <span class="award-box">
+            <span class="text hand" ng-click="activeNum=2" ng-class="{'goods-active':activeNum==2}">{{i18n('优惠码')}}</span>
+            <span class="square-two" ng-show="give != 0">{{give}}</span>
+        </span>
+      
+        <span class="line"></span>
+        <span class="text hand" ng-click="activeNum=3" ng-class="{'goods-active':activeNum==3}">{{i18n('添加优惠码')}}</span>
+    </div>
+
+    <!-- 没有优惠码的时候 end -->
+    <!-- 有优惠码的时候 begin -->
+    <!-- 返利优惠码 begin -->
+    <div class="voucher-bigBox clearfix" ng-if="activeNum==1">
+        <div class="voucher-box" ng-repeat="code in voucherList">
+            <div class="voucher-title">
+                <span>{{code.themeName}}</span>
+            </div>
+            <div class="voucher-main">
+                <dl class="one-dl">
+                    <dt>
+                        <span>{{i18n('推荐码')}}：<b>{{code.referralCode}}</b></span>
+                        <a class="clone already" ng-show="code.status != 1">{{i18n('不可用')}}</a>
+                        <a ng-show="code.status == 1" class="clone" current-code-id="tempCode.currentCodeId" copy-btn copy-text="code.referralCode" result="resultText">{{i18n('复制')}}</a>
+                        <span ng-show="code.referralCode == tempCode.currentCodeId">{{resultText}}</span>
+                    </dt>
+                    <dd>
+                        <span>{{i18n('优惠内容')}}：{{code.useRuleInfo}}</span>
+                    </dd>
+                    <dd>
+                        <span>{{i18n('返利说明')}}：{{code.rebateContent}}</span>
+                    </dd>
+                </dl>
+                <dl class="two-dl">
+                    <dt>
+                        <span>{{i18n('有效期')}}：{{code.startTime | date:'yyyy-MM-dd'}}——{{code.endTime | date:'yyyy-MM-dd'}}</span>
+                    </dt>
+                </dl>
+            </div>
+        </div>
+        <!-- 没有优惠码的时候 begin -->
+        <div class="award-none" ng-if="isShowIcon">
+            <div class="award-left mgR15">
+                <span></span>
+            </div>
+            <div class="award-right">
+                <span>{{i18n('暂无推荐码')}}~</span>
+            </div>
+        </div>
+    </div>
+    <!-- 返利优惠码 end -->
+    <!-- 赠送优惠码 begin -->
+    <div class="give-bigBox clearfix" ng-if="activeNum==2">
+        <div class="voucher-box" ng-repeat="code in voucherList">
+            <div class="voucher-title">
+                <span>{{code.themeName}}</span>
+            </div>
+            <div class="voucher-main">
+                <dl class="one-dl">
+                    <dt>
+                        <span>{{i18n('优惠码')}}：<b>{{code.referralCode}}</b></span>
+                        <a class="clone already" ng-show="code.status != 1">{{i18n('不可用')}}</a>
+                        <a ng-show="code.status == 1" class="clone" current-code-id="tempCode.currentCodeId" copy-btn copy-text="code.referralCode" result="resultText">{{i18n('复制')}}</a>
+                        <span ng-show="code.referralCode == tempCode.currentCodeId">{{resultText}}</span>
+                    </dt>
+                    <dd>
+                        <span>{{i18n('优惠内容')}}：{{code.useRuleInfo}}</span>
+                    </dd>
+                </dl>
+                <dl class="two-dl">
+                    <dt>
+                        <span>{{i18n('有效期')}}：{{code.startTime | date:'yyyy-MM-dd'}}——{{code.endTime | date:'yyyy-MM-dd'}}</span>
+                    </dt>
+                    <dd>
+                        <!-- <span>返利说明：{{code.rebateContent}}</span> -->
+                    </dd>
+                </dl>
+            </div>
+        </div>
+        <!-- 没有优惠码的时候 begin -->
+        <div class="award-none clearfix" ng-if="isShowIcon ">
+            <div class="award-left mgR15">
+                <span></span>
+            </div>
+            <div class="award-right">
+                <span>{{i18n('暂无优惠码')}}~</span>
+            </div>
+        </div>
+    </div>
+    <!-- 赠送优惠码 end -->
+    <!-- 添加优惠码 begin -->
+    <div class="add-bigBox" ng-if="activeNum==3">
+        <input class="input-text" type="text" placeholder="{{i18n('请输入优惠码')}}" ng-model="code">
+        <a class="sure-button" href="" ng-click="saveCode(code)">{{i18n('确定')}}</a>
+
+    </div>
+    <!-- 添加优惠码 end -->
+    <!-- 有优惠码的时候 end -->
+    <!-- 分页 end -->
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                total-page="totalPage" ng-if="isShowPage"></div>
+</div>

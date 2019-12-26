@@ -1,0 +1,74 @@
+<div id="pricentCard" class="pricentCard-page">
+    <div class="home-allTitle pdL20">
+        <span>{{i18n('礼品卡')}}</span>
+    </div>
+    <div class="pricentCard-content mgT20">
+        <span>{{i18n('余额')}}</span>
+        <span class="price">￥0.00</span>
+        <span class="pricentCard-btn bold" ng-click="goRecharge = true">{{i18n('去充值')}}</span>
+    </div>
+    <div class="c3 f14 mgT20 mgB20 pdL20">{{i18n("账单明细")}}</div>
+    <div class="evaluate-list mgT20">
+        <div class="list-title list-titleColor">
+            <span class="w40 align-center">{{i18n('时间')}}</span>
+            <span class="w20 align-center">{{i18n('收入/支出')}}</span>
+            <span class="w40 align-center">{{i18n('说明')}}</span>
+        </div>
+        <div class="order-group">
+            <div ng-if="1">
+                <div class="order-list all-table-color bb br bl bt pdL10 pdR10 pdB10 c3">
+                    <ul class="bb h50 lineH50" style="display: flex;">
+                        <li class="w40 align-center">{{i18n('2017-05-09 11:58:07')}}</li>
+                        <li class="w20 align-center f16 bold">{{i18n('+89')}}</li>
+                        <li class="w40 align-center">{{i18n('订单退款')}} <span class="c9">（订单编号：T1215614514）</span></li>
+                    </ul>
+                    <ul class="h50 lineH50" style="display: flex;">
+                        <li class="w40 align-center">{{i18n('2017-05-09 11:58:07')}}</li>
+                        <li class="w20 align-center f16 bold">{{i18n('+89')}}</li>
+                        <li class="w40 align-center">{{i18n('订单退款')}} <span class="c9">（订单编号：T1215614514）</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="none-order" ng-if="0">
+                <div class="none-right">
+                    <span>{{i18n('暂无数据')}}</span>
+                </div>
+            </div>
+        </div>
+        <!-- 页码 -->
+        <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+        total-page="totalPage"></div>
+    </div>
+    <!-- 去充值弹窗 -->
+    <div class="modal ng-scope" style="display: block" ng-show="goRecharge">
+        <div class="dialog location" style="display: block;width: 546px;left: 50%;top: 10%;bottom: auto;margin-left: -273px;">
+            <div class="dialog-content">
+                <!--header-->
+                <div class="dialog-header">
+                    <div class="header-title fontWeight">{{i18n('添加礼品卡')}}</div>
+                    <div class="header-title iconClick">
+                        <span class="iconYuan">
+                            <a href="javascript:;" ng-click="goRecharge=false">x</a>
+                        </span>
+                    </div>
+                </div>
+                <!--body-->
+                <div class="dialog-body_  align-center">
+                    <div class="row">
+                        <div class="mgT30">
+                            <label for="">{{i18n('卡号')}}<input type="text" class="input mgL10 pdL5" placeholder="请输入卡号"></label>
+                        </div>
+                        <div class="mgT20">
+                            <label for="">{{i18n('密码')}}<input type="password" class="input mgL10 pdL5" placeholder="请输入密码"></label>
+                        </div>
+                    </div>
+                </div>
+                <!--footer-->
+                <div class="modal-footer align-center mgB30">
+                    <button type="button" class="btn footBtn bgRed my-btn mgT30" ng-click="">{{i18n('添加并使用')}}</button>
+                </div>
+            </div>
+        </div>
+    <!--</div>-->
+    </div>
+</div>

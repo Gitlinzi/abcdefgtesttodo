@@ -1,0 +1,368 @@
+{
+  "code": "0",
+  "message": "请求成功",
+  "errMsg": null,
+  "data": {
+    "data": [
+      {
+        "values": [
+          {
+            "yearOrMonthOrDay": "10-13",
+            "picUrl": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "mpId": 15,
+            "price": 38,
+            "name": "獐子岛 獐子岛三文鱼饭伴侣盒装 40g*10袋",
+            "shelvesStatus": 1,
+            "seriesParentId": null,
+            "url120x120": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-13",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-13",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-13",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-13",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-13",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-13",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-13",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          }
+        ],
+        "name": "10-13"
+      },
+      {
+        "values": [
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "mpId": 15,
+            "price": 38,
+            "name": "獐子岛 獐子岛三文鱼饭伴侣盒装 40g*10袋",
+            "shelvesStatus": 1,
+            "seriesParentId": null,
+            "url120x120": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          }
+        ],
+        "name": "10-16"
+      },
+      {
+        "values": [
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "mpId": 15,
+            "price": 38,
+            "name": "獐子岛 獐子岛三文鱼饭伴侣盒装 40g*10袋",
+            "shelvesStatus": 1,
+            "seriesParentId": null,
+            "url120x120": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          }
+        ],
+        "name": "10-16"
+      },
+      {
+        "values": [
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "mpId": 15,
+            "price": 38,
+            "name": "獐子岛 獐子岛三文鱼饭伴侣盒装 40g*10袋",
+            "shelvesStatus": 1,
+            "seriesParentId": null,
+            "url120x120": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          }
+        ],
+        "name": "10-16"
+      },
+      {
+        "values": [
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "mpId": 15,
+            "price": 38,
+            "name": "獐子岛 獐子岛三文鱼饭伴侣盒装 40g*10袋",
+            "shelvesStatus": 1,
+            "seriesParentId": null,
+            "url120x120": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          }
+        ],
+        "name": "10-16"
+      },
+      {
+        "values": [
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "mpId": 15,
+            "price": 38,
+            "name": "獐子岛 獐子岛三文鱼饭伴侣盒装 40g*10袋",
+            "shelvesStatus": 1,
+            "seriesParentId": null,
+            "url120x120": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          }
+        ],
+        "name": "10-16"
+      },
+      {
+        "values": [
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "mpId": 15,
+            "price": 38,
+            "name": "獐子岛 獐子岛三文鱼饭伴侣盒装 40g*10袋",
+            "shelvesStatus": 1,
+            "seriesParentId": null,
+            "url120x120": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2015/1800124261/original_w_1800124261_1_1.jpg"
+          },
+          {
+            "yearOrMonthOrDay": "10-16",
+            "picUrl": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "mpId": 13,
+            "price": 50,
+            "name": "味丹 多喝水饮用水 450ml",
+            "shelvesStatus": 1,
+            "seriesParentId": 123456,
+            "url120x120": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url160x160": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url220x220": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url500x500": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url800x800": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url60x60": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg",
+            "url100x100": "http://p02.sfbest.com/2016/1400212435/original_1400212435_1_1.jpg"
+          }
+        ],
+        "name": "10-16"
+      }
+    ],
+    "totalCount": 0,
+    "pageSize": 0,
+    "totalPage": 0
+  },
+  "trace": "20!$6#@16%&172!$,null,61922216413606632022078"
+}

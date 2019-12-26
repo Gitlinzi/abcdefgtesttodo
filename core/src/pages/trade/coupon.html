@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>领券中心</title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/coupon#((skin)).css?v=${version}">
+</head>
+<body ng-app="appControllers" ng-controller="couponCtrl">
+@@include("header.html") @@include("global-nav.html")
+<div class="coupons-banner">
+    <div class="coupons-con">
+        <img width="1920" height="300" alt="" src="../../images/channel-banner.png">
+    </div>
+</div>
+<div class="coupons-box">
+    <div class="coupons-title">
+        <div class="container coupons-nav">
+            <ul ng-init="panicBuyNav=1">
+                <li ng-click="panicBuyNav=1">{{i18n('全部分类')}}</li>
+                <li class="active" ng-click="panicBuyNav=2">{{i18n('一级分类')}}</li>
+                <li ng-click="panicBuyNav=3">{{i18n('一级分类')}}</li>
+                <li ng-click="panicBuyNav=4">{{i18n('一级分类')}}</li>
+                <li ng-click="panicBuyNav=5">{{i18n('一级分类')}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="coupons-list-box">
+        <div class="coupons-list"  ng-show="panicBuyNav==1">
+            <ul class="coupons-list-ul">
+                <!--li ng-repeat的时候index 4的倍数时价格margin-right:0的样式-->
+                <!--<li class="begin-minute">
+                    <dl>
+                        <dt><img alt="" src="../../images/pro-img.png"></dt>
+                        <dd>
+                            <h4><label>{{i18n('自营')}}</label>{{i18n('台灯')}}-MZT360A-Y14-E27-{{i18n('艾莉芬')}}-{{i18n('无光源')}}</h4>
+                            <div class="coupons-list-infor">
+                                <h5>
+                                    <span><label>￥</label>29.00</span>
+                                    <cite>{{i18n('限量')}}：30<em>￥99.00</em></cite>
+                                </h5>
+                                <p>
+                                    {{i18n('今日')}}12：00{{i18n('准时开抢')}}
+                                </p>
+                            </div>
+                            <a class="panicBuyBtn" href="">{{i18n('即将开抢')}}</a>
+                        </dd>
+                    </dl>
+                </li>-->
+                <li class="begin-minute">
+                    <h4>
+                        <span><label>￥</label>29.00</span>
+                        <cite>{{i18n('满')}}100.00{{i18n('可用')}}</cite>
+                        <em>{{i18n('有效期')}}2017.10.15-2017.12.12</em>
+                    </h4>
+                    <p>
+                        {{i18n('已抢')}}33%
+                        <span><label style="width: 40px"></label></span>
+                    </p>
+                    <a class="default-btn btn-disabled disB" href="">{{i18n('已抢完')}}</a>
+                </li>
+                <li>
+                    <h4>
+                        <span><label>￥</label>29.00</span>
+                        <cite>{{i18n('满')}}100.00{{i18n('可用')}}</cite>
+                        <em>{{i18n('有效期')}}2017.10.15-2017.12.12</em>
+                    </h4>
+                    <p>
+                        {{i18n('已抢')}}33%
+                        <span><label style="width: 40px"></label></span>
+                    </p>
+                    <a class="default-btn btn-primary disB" href="">{{i18n('立即领取')}}</a>
+                </li>
+                <li>
+                    <h4>
+                        <span><label>￥</label>29.00</span>
+                        <cite>{{i18n('满')}}100.00{{i18n('可用')}}</cite>
+                        <em>{{i18n('有效期')}}2017.10.15-2017.12.12</em>
+                    </h4>
+                    <p>
+                        {{i18n('已抢')}}33%
+                        <span><label style="width: 40px"></label></span>
+                    </p>
+                    <a class="default-btn btn-primary disB" href="">{{i18n('立即领取')}}</a>
+                </li>
+                <li>
+                    <h4>
+                        <span><label>￥</label>29.00</span>
+                        <cite>{{i18n('满')}}100.00{{i18n('可用')}}</cite>
+                        <em>{{i18n('有效期')}}2017.10.15-2017.12.12</em>
+                    </h4>
+                    <p>
+                        {{i18n('已抢')}}33%
+                        <span><label style="width: 40px"></label></span>
+                    </p>
+                    <a class="default-btn btn-primary disB" href="">{{i18n('立即领取')}}</a>
+                </li>
+                <li>
+                    <h4>
+                        <span><label>￥</label>29.00</span>
+                        <cite>{{i18n('满')}}100.00{{i18n('可用')}}</cite>
+                        <em>{{i18n('有效期')}}2017.10.15-2017.12.12</em>
+                    </h4>
+                    <p>
+                        {{i18n('已抢')}}33%
+                        <span><label style="width: 40px"></label></span>
+                    </p>
+                    <a class="default-btn btn-primary disB" href="">{{i18n('立即领取')}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/coupon.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=coupon"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="heimdall" content="首页">
+	<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/search#((skin)).css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/index#((skin)).css?v=${version}">
+</head>
+
+<base/>
+<!-- ng-style="{'background-color':bgColor}" -->
+<body ng-app="appControllers" ng-controller="indexCtrl">
+@@include("header.html")
+@@include("global-nav.html")
+<!--首页弹框地址-->
+<dl ng-include="'includes/_location.html'"></dl>
+@@include("_jumbotron.html")
+<div class="index-main" ng-cloak>
+	<div class="my-collect index-floor" ng-if="favoriteGoods && favoriteGoods.length">
+		<div class="container">
+			<div class="col-title index-floor-title">
+				<h3>我的收藏<span>FAVORITE</span></h3>
+				<div class="more">
+					<a href="/home.html#/frequence" ng-if="favoriteGoods.length >5">
+						全部
+					</a>
+				</div>
+			</div>
+			<div class="col-info">
+				<ul class="clearfix" ng-style="{'width':favoriteGoods.length*242+10+'px','left':(-(favoriteObj.pageNo-1)*1210)+'px'}">
+					<li class="pro-list goods-item" ng-repeat="item in favoriteGoods">
+						<div class="img" ng-click="goToDetail(item.mpId)">
+							<img ng-src="{{item.picUrl}}" loading="lazy" width="154" height="154" alt="">
+						</div>
+<!--						<span ng-if="item.deliveryType == 1" style="background-color:#f23030;" class="self-sell">自</span>-->
+<!--						<span ng-if="item.deliveryType == 2" style="background-color:#0029ff;" class="self-sell">直</span>-->
+						<div class="name ui-nowrap-multi">{{item.chineseName}}</div>
+<!--						<div class="code">商品编码：{{item.mpCode}}</div>-->
+						<div class="price bold theme">{{item.realPrice | currency:'¥'}}</div>
+						<div class="index-addtocart">
+							<div mini-add-cart prod="item" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="index-control">
+				<div class="prev" ng-click="changeFavoritePage('prev')"></div>
+				<div class="next" ng-click="changeFavoritePage('next')"></div>
+			</div>
+		</div>
+	</div>
+	<div class="my-agreement index-floor" ng-if="agreementGoods && agreementGoods.length">
+		<div class="container">
+			<div class="agr-title index-floor-title" >
+				<h3>协议商品<span>SPECIAL</span></h3>
+				<div class="more">
+					<a href="/agreement.html?type=1" ng-if="agreementGoods.length>5">
+						全部
+					</a>
+				</div>
+			</div>
+			<div class="agr-info">
+				<ul class="clearfix">
+					<li class="pro-list goods-item" ng-repeat="item in agreementGoods | limitTo : 5" ng-if="$index <= 4">
+						<div class="img" ng-click="goToDetail(item.mpId)">
+							<img ng-src="{{item.picUrl}}" alt="">
+						</div>
+						<!--						<span ng-if="item.deliveryType == 1" style="background-color:#f23030;" class="self-sell">自</span>-->
+						<!--						<span ng-if="item.deliveryType == 2" style="background-color:#0029ff;" class="self-sell">直</span>-->
+						<div class="name ui-nowrap-multi">{{item.name}}</div>
+						<!--						<div class="code">商品编码：{{item.mpCode}}</div>-->
+						<div class="price bold theme">{{item.realPrice | currency:'¥'}}</div>
+						<div class="index-addtocart">
+							<div mini-add-cart prod="item" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	<div class="my-hotgoods index-floor" ng-if="hotGoods && hotGoods.length">
+		<div class="container">
+			<div class="hot-title index-floor-title" >
+				<h3>热销商品<span>HOT SALES</span></h3>
+				<div class="more">
+					<a href="/agreement.html?type=2" ng-if="hotGoods.length >5">
+						全部
+					</a>
+				</div>
+			</div>
+			<div class="hot-info">
+				<ul class="clearfix">
+					<li class="pro-list goods-item" ng-repeat="item in hotGoods | limitTo : 5" ng-if="$index <= 4">
+						<div class="img" ng-click="goToDetail(item.mpId)">
+							<img ng-src="{{item.mainPictureUrl}}" alt="">
+						</div>
+						<!--						<span ng-if="item.deliveryType == 1" style="background-color:#f23030;" class="self-sell">自</span>-->
+						<!--						<span ng-if="item.deliveryType == 2" style="background-color:#0029ff;" class="self-sell">直</span>-->
+						<div class="name ui-nowrap-multi">{{item.chineseName}}</div>
+						<!--						<div class="code">商品编码：{{item.mpCode}}</div>-->
+						<div class="price bold theme">{{item.salePriceWithTax | currency:'¥'}}</div>
+						<div class="index-addtocart">
+							<div mini-add-cart prod="item" cart-name="{{switchConfig.common.allCartBtnName}}"></div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+	<!--魔方-->
+	<!-- <div class="pc-cms">
+		<script>
+			var isPreview=false;
+			if (location.search.indexOf("isPreview=true")>-1){
+				isPreview=true;
+			}
+			document.write('<script src="/cms/view/page?pageType=1&viewMode=script_angular&preview=' + isPreview + '"><\/script>');
+		</script>
+	</div> -->
+</div>
+
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/index.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=index"></script>
+</body>
+</html>

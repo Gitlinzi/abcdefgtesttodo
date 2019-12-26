@@ -1,0 +1,114 @@
+<!-- 新写的代码 begin -->
+<div id="edou" class="integral-bigBox" ng-init="init()">
+    <div class="home-allTitle pdL20">
+        <span>{{i18n('佣金')}}</span>
+    </div>
+    <div class="integral-box clearfix">
+        <div class="integral-left">
+            <!-- 有佣金的时候 begin -->
+            <span>{{i18n('可用佣金')}}</span><b class="color-red">{{commissionSum| currency:'￥'}}</b>
+            <span class="padding40">{{i18n('冻结佣金')}}:{{edouFreezed | currency:'￥'}}</span>
+            <!--<span class="widthra">提现</span>-->
+            <!-- 有佣金的时候 end -->
+            <!-- 无佣金的时候 begin -->
+<!--             <span>可用佣金</span><b class="none-edou">0</b>
+            <span class="color-change">冻结佣金:0</span> -->
+            <!-- 无佣金的时候 end -->
+        </div>
+    </div>
+    <div class="main-more">
+        <div class="main-title pdL20" ng-init="activeNum=0;">
+            <span ng-click="activeNum=0;init()" ng-class="{'goods-active':activeNum==0}" class="text hand">{{i18n('全部')}}</span><span class="line"></span>
+            <span ng-click="activeNum=1;init(2)" ng-class="{'goods-active':activeNum==1}" class="text hand">{{i18n('收入')}}</span><span class="line"></span>
+            <span ng-click="activeNum=2;init(1)" ng-class="{'goods-active':activeNum==2}" class="text hand">{{i18n('支出')}}</span>
+        </div>
+
+        <!-- 全部 部分代码 begin -->
+        <div class="main-detail">
+            <dl class="clearfix">
+                <dt  class="detail-time">{{i18n('时间')}}</dt>
+                <dd  class="income-text">{{i18n('收入')}}/{{i18n('支出')}}</dd>
+                <dd  class="expend-text">{{i18n('说明')}}</dd>
+            </dl>
+        </div>
+        <div class="all-detail-box" ng-if="activeNum==0">
+            <!-- 当全部部分有内容的时候 begin -->
+            <dl class="clearfix pdT20" ng-repeat="edou in EdouList">
+                <dt class="time-text">
+                    <span>{{edou.createTime |date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                </dt>
+                <dd class="icome-detail">
+                    <span class="color-red">{{edou.commisionAmount | newCurrency}}</span>
+                </dd>
+                <dd class="expend-detail">
+                    <span>{{edou.outTransTypeText}}</span>
+                </dd>
+            </dl>
+            <!-- 当全部部分有内容的时候 end -->
+            <!-- 当全部部分 没有内容的时候 begin -->
+            <div class="main-none" ng-if="isShowIcon">
+                <div class="main-left mgR15">
+                    <span></span>
+                </div>
+                <div class="main-right">
+                    <span>{{i18n('暂无佣金')}}~</span>
+                </div>
+            </div>
+            <!-- 当全部部分 没有内容的时候 end -->
+        </div>
+        <!-- 全部 部分代码 end -->
+        <!-- 收入部分代码 begin -->
+        <div class="income-detail-box" ng-if="activeNum==1">
+            <dl class="clearfix pdT20"  ng-repeat="edou in EdouList">
+                <dt class="time-text">
+                    <span>{{edou.createTime |date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                </dt>
+                <dd class="icome-detail">
+                    <span class="color-red">{{edou.commisionAmount}}</span>
+                </dd>
+                <dd class="expend-detail">
+                   <span>{{edou.outTransTypeText}}</span>
+                </dd>
+            </dl>
+            <!-- 当全部部分 没有内容的时候 begin -->
+            <div class="main-none" ng-if="isShowIcon">
+                <div class="main-left mgR15">
+                    <span></span>
+                </div>
+                <div class="main-right">
+                    <span>{{i18n('暂无佣金')}}~</span>
+                </div>
+            </div>
+            <!-- 当全部部分 没有内容的时候 end -->
+        </div>
+        <!-- 收入部分代码 end -->
+        <!--  支付部分 begin  -->
+        <div class="expend-detail-box" ng-if="activeNum==2">
+            <dl class="clearfix pdT20" ng-repeat="edou in EdouList">
+                <dt class="time-text">
+                    <span>{{edou.createTime |date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                </dt>
+                <dd class="icome-detail">
+                    <span class="color-red">{{edou.commisionAmount }}</span>
+                </dd>
+                <dd class="expend-detail">
+                    <span>{{edou.outTransTypeText}}</span>
+                </dd>
+            </dl>
+            <!-- 当全部部分 没有内容的时候 begin -->
+            <div class="main-none" ng-if="isShowIcon">
+                <div class="main-left mgR15">
+                    <span></span>
+                </div>
+                <div class="main-right">
+                    <span>{{i18n('暂无佣金')}}~</span>
+                </div>
+            </div>
+            <!-- 当全部部分 没有内容的时候 end -->
+        </div>
+        <!-- 支付部分 end -->
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                total-page="totalPage" ng-if="isShowPage"></div>
+</div>
+<!-- 新写的代码 end -->

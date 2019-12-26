@@ -1,0 +1,270 @@
+@import url('../../common/css/i-var.less');
+@import url('../../common/css/i-base.less');
+@import url('../../common/css/i-popbox.less');
+@import url('../../common/css/i-button.less');
+@import url('../../common/css/i-address.less');
+@import url('../../common/css/i-icon.less');
+@import url('../../common/css/i-dropdown.less');
+@import url('../../common/css/i-header.less');
+@import url('../../common/css/i-footer.less');
+@import url('../../common/css/i-location.less');
+@import url('../../common/css/i-miniCart.less');
+@import url('../../common/css/i-global-nav.less');
+@import url('../../common/css/i-feedback.less');
+@import url('../../common/css/reset.less');
+// 弹框样式 begin
+.bg-modal{
+  z-index: 1000;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgb(0, 0, 0);    /*不支持rgba的浏览器*/
+  background: rgba(51, 51, 51, 0.3);  /*支持rgba的浏览器*/
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000,endColorstr=#B2000000);
+  filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000, endColorstr=#B2000000)";
+  background: none\9;
+}
+#settle{
+  width:370px;
+  border:5px solid @ddGreyColor;
+  background-color: @whiteColor;
+  position: fixed;
+  top:200px;
+  left:50%;
+  margin-left: -185px;
+  border-radius: 5px;
+}
+.settle-title{
+  background-color: @bodyBgColor;
+  padding: 12px 15px 12px 15px;
+  & .settle-close{
+    float: right;
+    width: 12px;
+    height: 12px;
+    //background: url('../../images/company/company-default.png') no-repeat -22px -256px;
+    .common-product-company-default(-22px,-256px);
+    cursor: pointer;
+  }
+}
+.settle-container{
+  & .settle-tips{
+    text-align: center;
+    padding:15px;
+  }
+  & .settle-btn{
+    text-align: center;
+    margin-bottom: 20px;
+    & button{
+      width:90px;
+      height:35px;
+      border-radius:@searchRadius;
+      line-height:35px;
+      background-color: @paymentColor;
+      color: @whiteColor;
+      text-align: center;
+      border:0;
+      margin: 0 10px;
+    }
+    & button:nth-child(2){
+      background-color: @whiteColor;
+      color: @fontColor;
+      border:1px solid @ddGreyColor;
+    }
+  }
+  & .settle-goods{
+    padding:15px;
+    & .settle-msg{
+      margin-bottom: 19px;
+    }
+    & ul li{
+      overflow: hidden;
+      padding:13px 0;
+      border-bottom: 1px solid @ddGreyColor;
+      & img{
+        float: left;
+        margin-right:15px;
+      }
+      & .goods-detail{
+        float: left;
+        & .goods-name{
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
+// 弹框样式 end
+.title-bigBox{
+  position: relative;
+}
+.f0{
+  font-size: 0;
+}
+.f12{
+  font-size: 12px;
+}
+.top-title-box{
+  position: absolute;
+  top: -76px;
+  left: 210px;
+  font-size: 20px;
+}
+.order-num-box{
+  height: 80px;
+  line-height: 80px;
+  background: @f5GreyColor;
+  padding: 0px 20px;
+  font-size: 16px;
+  color: @greyColor;
+  & .num-left{
+    float: left;
+  }
+  & .num-right{
+    float: right;
+    position: relative;
+    color: @themeColor;
+    padding-left: 41px;
+    & .qq-icon{
+      position: absolute;
+      //background: url('../../images/company/company-bitmap.png') no-repeat -36px -1px;
+      .common-product-company-bitmap(-36px,-1px);
+      height:30px;
+      width:30px;
+      top:25px;
+      left:0px;
+    }
+  }
+}
+.odrerMes-box{
+  margin-top: 20px;
+  & .top-title{
+    height: 40px;
+    line-height: 40px;
+    background: @f5GreyColor;
+    padding-left: 20px;
+    & .title-one{
+      width:314px;
+    }
+    & .title-two{
+      width:235px;
+    }
+    & .title-three{
+      width:360px;
+    }
+    & .title-fore{
+      width:130px;
+    }
+    & .title-five{
+      width:76px;
+    }
+  }
+  & .main-box{
+    border:1px solid @ddGreyColor;
+    & .main-left{
+      padding: 20px;
+      width: 153px;
+      & .user-addess{
+        display: block;
+        margin-top: 8px;
+      }
+    }
+    & .main-right{
+      border-left: 1px solid @ddGreyColor;
+      & .main-right-box{
+        padding: 14px 19px 14px 19px;
+        border-bottom: 1px solid @ddGreyColor;
+        &:nth-last-of-type(1) {
+          border-bottom: none;
+        }
+        & .error-text,& .money-color{
+          color: @starColor;
+        }
+      }
+      & .right-one{
+        width: 280px;
+        & .right-text-box{
+          width: 188px;
+          margin-left: 12px;
+          & .right-text{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          }
+        }
+      }
+      & .right-two{
+        width: 200px;
+        text-align: center;
+        margin-top: 35px;
+      }
+      & .right-three{
+        width: 190px;
+        text-align: right;
+        margin-top: 35px;
+      }
+      & .right-fore{
+        width: 85px;
+        text-align: right;
+        margin-top: 35px;
+      }
+      & .right-five{
+        width: 115px;
+        text-align: right;
+        margin-top: 35px;
+      }
+      & .right-six{
+        text-align: right;
+        width: 96px;
+        margin-top: 35px;
+      }
+    }
+  }
+  & .sureOrder-errror{
+    text-align: right;
+    color: @starColor;
+  }
+  & .bottom-box{
+    height: 60px;
+    background: @f5GreyColor;
+    margin-bottom: 50px;
+    & .bottom-left{
+      float: left;
+      padding-left: 20px;
+      padding-top: 13px;
+      font-size: 12px;
+      & .left-bottom-left{
+        display: block;
+        margin-top: 5px;
+      }
+    }
+    & .bottom-right{
+      float: right;
+      & .right-a-text{
+        border:none;
+        display: block;
+        width: 180px;
+        height: 60px;
+        background: @themeColor;
+        color: @whiteColor;
+        font-size: 20px;
+        text-align: center;
+        line-height: 60px;
+      }
+    }
+  }
+}
+.refresh-icon {
+  padding: 5px 10px 5px 10px;
+  background: @themeColor;
+  color: @whiteColor;
+  margin-left: 20px;
+  &:hover{
+    color: @whiteColor;
+  }
+}

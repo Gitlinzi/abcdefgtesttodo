@@ -1,0 +1,55 @@
+<div class="content">
+    <div class="module">
+        <div class="mt">
+            <div class="head"></div>
+            <h2>{{i18n('收货地址')}}</h2>
+        </div>
+        <div class="mc">
+            <div class="addaddress">
+                <a href="javascript:void(0)" class="btn" ng-click="address._showAddNewAddress()">{{i18n('新增收货地址')}}</a>
+                {{i18n('您已创建')}}<span class="bold">{{ allAddress.length }}</span>{{i18n('个收货地址')}}<!--，最多可创建<span class="bold">5</span>个-->
+            </div>
+            <div class="address" ng-repeat="ads in allAddress">
+                <a href="javascript:void(0)" class="del" ng-click="address._deleteAddress(ads.id, ads.defaultIs)">&times;</a>
+                <div class="title">
+                    {{ ads.provinceName + ads.cityName }}<span class="name">{{ ads.userName }}</span>
+                    <!-- <span ng-if="ads.defaultIs == 1" class="isDefault">默认地址</span> -->
+                </div>
+                <div class="row">
+                    <div class="cell c1">{{i18n('收货人')}}：</div>
+                    <div class="cell c2">{{ ads.userName }}</div>
+                </div>
+                <div class="row">
+                    <div class="cell c1">{{i18n('所在地区')}}：</div>
+                    <div class="cell c2">{{ ads.provinceName+ ads.cityName + ads.regionName}}</div>
+                </div>
+                <div class="row">
+                    <div class="cell c1">{{i18n('详细地址')}}：</div>
+                    <div class="cell c2">{{ ads.detailAddress }}</div>
+                </div>
+                <div class="row">
+                    <div class="cell c1">{{i18n('手机号码')}}：</div>
+                    <div class="cell c2">{{ ads.mobile }}</div>
+                </div>
+                <div class="opt">
+                    <!-- <a class="blue" href="javascript:void(0)" ng-click="address.setDefaultAddress(ads.id)">设为默认</a> -->
+                    <a class="blue" href="javascript:void(0)" ng-click="address._editAddress(ads, $index)">{{i18n('编辑')}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 新增收货地址 -->
+<div class="modal" style="display: block" ng-if="address.showAdsForm">
+    <div class="dialog" style="display: block;width: 878px;left:50%;top:50px;bottom:auto;margin-left: -439px;">
+        <a href="javascript:void(0)" style="position: absolute;right: 7px; font-size: 30px" ng-click="address._cleanStatus()">&times;</a>
+        <div class="dialog-content">
+            <div class="dialog-body">
+                <div class="banktransfer">
+                    <h2>{{i18n('新增收货地址')}}</h2>
+                    <div class="dialogForm" ng-include="'includes/_addressEdit.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="buy-service" ng-init="addBuying.init()">
+    <div class="home-allTitle pdL20">
+        <span>{{i18n('补购服务')}}</span>
+    </div>
+    <div class="buy-service-box" ng-show="addBuying.isHas">
+        <div class="service-title">
+            <span class="width480">{{i18n('商品')}}</span>
+            <span class="width315">{{i18n('规格')}}</span>
+            <span class="width161">{{i18n('单价')}}</span>
+            <span>{{i18n('数量')}}</span>
+        </div>
+        <div class="service-good-box">
+            <div ng-repeat="pro in addBuying.goodsList">
+                <dl class="clearfix">
+                    <dt>
+                    <div class="dt-left">
+                        <a href="item.html?itemId={{pro.seriesParentId||pro.mpId}}">
+                            <img height="80" width="80" ng-src="{{pro.picUrl}}" alt="{{pro.name}}">
+                        </a>
+                    </div>
+                    <div class="dt-right">
+                        <a href="item.html?itemId={{pro.seriesParentId||pro.mpId}}">{{pro.name}}</a>
+                    </div>
+                    </dt>
+                    <dd class="width235">
+                        <span ng-repeat="property in pro.propertyTags">{{property.name}}:{{property.value}}</span>
+                    </dd>
+                    <dd>
+                        <span>{{pro.price|currency:'￥'}}</span>
+                    </dd>
+                </dl>
+                <div class="service-good" ng-repeat="sg in pro.serviceList track by $index">
+                    <span class="width779">{{sg.chineseName}}</span>
+                    <span class="width141">{{sg.price |currency:'￥'}}</span>
+                    <div class="num-box clearfix">
+                        <!--<input type="button" value="-" ng-click="sg.buyNum = sg.buyNum-1" ng-disabled="sg.buyNum < 1">
+                        <input type="text" ng-model="sg.buyNum" ng-change="sg.buyNum=addBuying.checkNum(sg.buyNum,sg.stockNum)" >
+                        <input type="button" value="+" ng-click="sg.buyNum = sg.buyNum+1;addBuying" ng-disabled="sg.buyNum >= sg.stockNum">
+                        -->
+                        <input type="button" value="-" ng-click="addBuying.checkItem(sg,1,pro)">
+                        <input type="text" ng-model="sg.buyNum" ng-change="sg.buyNum=addBuying.checkNum(sg.buyNum,sg.stockNum,pro.num)" >
+                        <input type="button" value="+" ng-click="addBuying.checkItem(sg,2,pro)">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href=""  class="go-pay-text" ng-click="oneKey._buy()" ng-show="addBuying.isHas">{{i18n('去结算')}}</a>
+    <!--<a href="" class="go-pay-dis" >去结算</a>-->
+</div>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<div class="good-evaluate" ng-init="evaluate.init()">
+    <!-- <div crumb crumb-list="crumbList" active-attr="activeAttr" keyword="noResultKeyword" is-list="isList">
+    </div> -->
+    <div class="search">
+        <a ui-sref="index_comment" class="my-evalutate">{{i18n('评价晒单')}}</a>
+        <span>{{i18n('订单评价')}}</span>
+    </div>
+    <div class="evaluate-title pdL20 home-allTitle">
+        <span class="item-good">{{i18n('订单评价')}}</span>
+    </div>
+    <div class="evaluate-main clearfix">
+        <div class="evaluate-box">
+            <!-- <div class="evaluate-left">
+                <a class="img-box" href="item.html?itemId={{good.mpId}}">
+                    <img width="160" height="160" ng-src="{{good.mpPicPath}}">
+                </a>
+                <a class="fontSize" href="item.html?itemId={{good.mpId}}">{{good.mpName}}</a>
+                <p>{{good.realPrice | currency:'￥'}}</p>
+            </div> -->
+            <div class="evaluate-right">
+                <dl class="clearfix one-dl">
+                    <dt>{{i18n('服务评分')}}</dt>
+                    <!--  五角星只有star属性时为灰色  -->
+                    <!-- 添加 star-active属性时为红色 -->
+                    <dd ng-if="good.serviceRate == 0">
+                        <span class="star" ng-click="good.serviceRate=1"></span>
+                        <span class="star " ng-click="good.serviceRate=2"></span>
+                        <span class="star" ng-click="good.serviceRate=3"></span>
+                        <span class="star" ng-click="good.serviceRate=4"></span>
+                        <span class="star" ng-click="good.serviceRate=5"></span>
+                    </dd>
+                    <!--一星-->
+                    <dd ng-if="good.serviceRate == 1">
+                        <span class="star star-active" ng-click="good.serviceRate=1"></span>
+                        <span class="star " ng-click="good.serviceRate=2"></span>
+                        <span class="star" ng-click="good.serviceRate=3"></span>
+                        <span class="star" ng-click="good.serviceRate=4"></span>
+                        <span class="star" ng-click="good.serviceRate=5"></span>
+                    </dd>
+                    <!--二星-->
+                    <dd ng-if="good.serviceRate == 2">
+                        <span class="star star-active" ng-click="good.serviceRate=1"></span>
+                        <span class="star star-active" ng-click="good.serviceRate=2"></span>
+                        <span class="star" ng-click="good.serviceRate=3"></span>
+                        <span class="star" ng-click="good.serviceRate=4"></span>
+                        <span class="star" ng-click="good.serviceRate=5"></span>
+                    </dd>
+                    <!--三星-->
+                    <dd ng-if="good.serviceRate == 3">
+                        <span class="star star-active" ng-click="good.serviceRate=1"></span>
+                        <span class="star star-active" ng-click="good.serviceRate=2"></span>
+                        <span class="star star-active" ng-click="good.serviceRate=3"></span>
+                        <span class="star" ng-click="good.serviceRate=4"></span>
+                        <span class="star" ng-click="good.serviceRate=5"></span>
+                    </dd>
+                    <!--四星-->
+                    <dd ng-if="good.serviceRate == 4">
+                        <span class="star star-active" ng-click="good.serviceRate=1"></span>
+                        <span class="star star-active" ng-click="good.serviceRate=2"></span>
+                        <span class="star star-active" ng-click="good.serviceRate=3"></span>
+                        <span class="star star-active" ng-click="good.serviceRate=4"></span>
+                        <span class="star" ng-click="good.serviceRate=5"></span>
+                    </dd>
+                    <!--五星-->
+                    <dd ng-if="good.serviceRate == 5">
+                        <span class="star star-active" ng-click="good.serviceRate=1"></span>
+                        <span class="star star-active" ng-click="good.serviceRate=2"></span>
+                        <span class="star star-active" ng-click="good.serviceRate=3"></span>
+                        <span class="star star-active" ng-click="good.serviceRate=4"></span>
+                        <span class="star star-active" ng-click="good.serviceRate=5"></span>
+                    </dd>
+                    <dd class="colorB">{{good.serviceRate}}{{i18n('分')}}</dd>
+                </dl>
+                <dl class="clearfix one-dl">
+                    <dt>{{i18n('销售评分')}}</dt>
+                    <!--  五角星只有star属性时为灰色  -->
+                    <!-- 添加 star-active属性时为红色 -->
+                    <dd ng-if="good.saleRate == 0">
+                        <span class="star" ng-click="good.saleRate=1"></span>
+                        <span class="star " ng-click="good.saleRate=2"></span>
+                        <span class="star" ng-click="good.saleRate=3"></span>
+                        <span class="star" ng-click="good.saleRate=4"></span>
+                        <span class="star" ng-click="good.saleRate=5"></span>
+                    </dd>
+                    <!--一星-->
+                    <dd ng-if="good.saleRate == 1">
+                        <span class="star star-active" ng-click="good.saleRate=1"></span>
+                        <span class="star " ng-click="good.saleRate=2"></span>
+                        <span class="star" ng-click="good.saleRate=3"></span>
+                        <span class="star" ng-click="good.saleRate=4"></span>
+                        <span class="star" ng-click="good.saleRate=5"></span>
+                    </dd>
+                    <!--二星-->
+                    <dd ng-if="good.saleRate == 2">
+                        <span class="star star-active" ng-click="good.saleRate=1"></span>
+                        <span class="star star-active" ng-click="good.saleRate=2"></span>
+                        <span class="star" ng-click="good.saleRate=3"></span>
+                        <span class="star" ng-click="good.saleRate=4"></span>
+                        <span class="star" ng-click="good.saleRate=5"></span>
+                    </dd>
+                    <!--三星-->
+                    <dd ng-if="good.saleRate == 3">
+                        <span class="star star-active" ng-click="good.saleRate=1"></span>
+                        <span class="star star-active" ng-click="good.saleRate=2"></span>
+                        <span class="star star-active" ng-click="good.saleRate=3"></span>
+                        <span class="star" ng-click="good.saleRate=4"></span>
+                        <span class="star" ng-click="good.saleRate=5"></span>
+                    </dd>
+                    <!--四星-->
+                    <dd ng-if="good.saleRate == 4">
+                        <span class="star star-active" ng-click="good.saleRate=1"></span>
+                        <span class="star star-active" ng-click="good.saleRate=2"></span>
+                        <span class="star star-active" ng-click="good.saleRate=3"></span>
+                        <span class="star star-active" ng-click="good.saleRate=4"></span>
+                        <span class="star" ng-click="good.saleRate=5"></span>
+                    </dd>
+                    <!--五星-->
+                    <dd ng-if="good.saleRate == 5">
+                        <span class="star star-active" ng-click="good.saleRate=1"></span>
+                        <span class="star star-active" ng-click="good.saleRate=2"></span>
+                        <span class="star star-active" ng-click="good.saleRate=3"></span>
+                        <span class="star star-active" ng-click="good.saleRate=4"></span>
+                        <span class="star star-active" ng-click="good.saleRate=5"></span>
+                    </dd>
+                    <dd class="colorB">{{good.saleRate}}{{i18n('分')}}</dd>
+                </dl>
+                <dl class="clearfix one-dl">
+                        <dt>{{i18n('物流评分')}}</dt>
+                        <!--  五角星只有star属性时为灰色  -->
+                        <!-- 添加 star-active属性时为红色 -->
+                        <dd ng-if="good.logisticsRate == 0">
+                            <span class="star" ng-click="good.logisticsRate=1"></span>
+                            <span class="star " ng-click="good.logisticsRate=2"></span>
+                            <span class="star" ng-click="good.logisticsRate=3"></span>
+                            <span class="star" ng-click="good.logisticsRate=4"></span>
+                            <span class="star" ng-click="good.logisticsRate=5"></span>
+                        </dd>
+                        <!--一星-->
+                        <dd ng-if="good.logisticsRate == 1">
+                            <span class="star star-active" ng-click="good.logisticsRate=1"></span>
+                            <span class="star " ng-click="good.logisticsRate=2"></span>
+                            <span class="star" ng-click="good.logisticsRate=3"></span>
+                            <span class="star" ng-click="good.logisticsRate=4"></span>
+                            <span class="star" ng-click="good.logisticsRate=5"></span>
+                        </dd>
+                        <!--二星-->
+                        <dd ng-if="good.logisticsRate == 2">
+                            <span class="star star-active" ng-click="good.logisticsRate=1"></span>
+                            <span class="star star-active" ng-click="good.logisticsRate=2"></span>
+                            <span class="star" ng-click="good.logisticsRate=3"></span>
+                            <span class="star" ng-click="good.logisticsRate=4"></span>
+                            <span class="star" ng-click="good.logisticsRate=5"></span>
+                        </dd>
+                        <!--三星-->
+                        <dd ng-if="good.logisticsRate == 3">
+                            <span class="star star-active" ng-click="good.logisticsRate=1"></span>
+                            <span class="star star-active" ng-click="good.logisticsRate=2"></span>
+                            <span class="star star-active" ng-click="good.logisticsRate=3"></span>
+                            <span class="star" ng-click="good.logisticsRate=4"></span>
+                            <span class="star" ng-click="good.logisticsRate=5"></span>
+                        </dd>
+                        <!--四星-->
+                        <dd ng-if="good.logisticsRate == 4">
+                            <span class="star star-active" ng-click="good.logisticsRate=1"></span>
+                            <span class="star star-active" ng-click="good.logisticsRate=2"></span>
+                            <span class="star star-active" ng-click="good.logisticsRate=3"></span>
+                            <span class="star star-active" ng-click="good.logisticsRate=4"></span>
+                            <span class="star" ng-click="good.logisticsRate=5"></span>
+                        </dd>
+                        <!--五星-->
+                        <dd ng-if="good.logisticsRate == 5">
+                            <span class="star star-active" ng-click="good.logisticsRate=1"></span>
+                            <span class="star star-active" ng-click="good.logisticsRate=2"></span>
+                            <span class="star star-active" ng-click="good.logisticsRate=3"></span>
+                            <span class="star star-active" ng-click="good.logisticsRate=4"></span>
+                            <span class="star star-active" ng-click="good.logisticsRate=5"></span>
+                        </dd>
+                        <dd class="colorB">{{good.logisticsRate}}{{i18n('分')}}</dd>
+                    </dl>
+                <dl class="clearfix marginb">
+                    <dt class="mart14px">{{i18n('评论内容')}}</dt>
+                    <dd class="textarea-box">
+                        <textarea maxlength="500" class="textarea" placeholder="{{i18n('商品是否给力')}}？{{i18n('快分享您的购买心得吧')}}"
+                                  ng-model="good.content"></textarea>
+                        <span>{{i18n('还可以输入')}}{{500-good.content.length}}{{i18n('字')}}</span>
+                    </dd>
+                </dl>
+                <dl class="dl-three clearfix mgB10">
+                    <div pc-upload-more-image image-width="60" image-height="60" max-size="{{$parent.switchConfig.common.uploadingPicSize}}" image-url-list="good.mpcPicList" image-pattern="{{$parent.switchConfig.common.uploadingPicFormat}}" is-show-delete="true" image-max-length="10" is-show-tip="true"></div>
+                </dl>
+                <div style="height: 35px;line-height: 35px;background-color: #f8f8f8;padding-left: 20px"><span>订单时间：{{evaluate.allmproList[0].createTime | date : 'yyyy-MM-dd HH:mm:ss'}}</span><span style="margin-left: 10px">订单编号：{{evaluate.allmproList[0].orderCode}}</span></div>
+                <div class="mp-pro-list">
+                    <div class='show-good' style="margin-top: 20px">
+                        <!-- 无收藏商品的时候 end -->
+                        <!-- 有收藏商品的时候 begin -->
+                        <div class='goods-box'>
+                            <ul class='clearfix'>
+                                <li class='food-item' ng-repeat="pro in evaluate.currentmpoList">
+                                    <a class="pdT20">
+                                        <img width='210' height='210' ng-src="{{pro.mpPicPath}}" alt="{{pro.name}}">
+                                        <p>{{pro.mpName}}</p>
+                                        <h5>{{pro.realPrice | currency:"￥"}}</h5>                    
+                                        <!-- <span>来伊份 坚果炒货 休按时打算打算打算</span> -->
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- 有收藏商品的时候 end -->
+                    </div>
+                    <div class='arrow-box arrowLeft'>                            
+                        <span class="arrowLeft-icon" ng-class="{'arrowLeft-icon-disabled':evaluate.currentPageNo==1}" ng-click="evaluate.upPage('favorite')"></span>
+                    </div>
+                    <div class='arrow-box arrowRight'>    
+                        <span class="arrowRight-icon" ng-class="{'arrowRight-icon-disabled':evaluate.currentPageNo >= evaluate.totalPage}" ng-click="evaluate.nextPage('favorite')"></span>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    </div>
+    <div class="submit-box">
+        <input type="button" value="{{i18n('提交')}}" ng-click="evaluate.save()">
+        <!-- <input type="checkbox" name="" ng-model="evaluate.isHideUserName"> -->
+        <label for="userName" class="checkboxStyle-small hideUserName">
+            <input id="userName" type="checkbox" name="" ng-model="evaluate.isHideUserName">
+            <span style="padding-left: 0;"></span>
+        </label>
+        <span>{{i18n('匿名提交')}}</span>
+    </div>
+</div>

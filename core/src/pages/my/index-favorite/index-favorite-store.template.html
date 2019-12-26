@@ -1,0 +1,59 @@
+<div class="history" ng-init="init()">
+    <div class="home-allTitle pdL20">
+        <span>{{i18n('浏览历史')}}</span>
+    </div>
+    <div class="allChose-box">
+        <!--<input type="checkbox" ng-model="ck" ng-change="checkAll()">
+            <span>全选</sspan>-->
+        <!--<label class="checkboxStyle">-->
+            <!-- <input type="checkbox" ng-model="ck" ng-change="checkAll()"> -->
+            <label for="checkAllcheckBrowse" class="checkboxStyle-big checkBrowse">
+                <input id="checkAllcheckBrowse" type="checkbox" ng-model="ck" ng-change="checkAll()">
+                <span></span>
+            </label>
+            {{i18n('全选')}}
+        <!--</label>-->
+        <a href="" ng-click="batchDeleteFootList()">{{i18n('批量删除')}}</a>
+    </div>
+    <!-- 无浏览历史的情况下 end -->
+    <div class="history-none" ng-if="isShowIcon">
+        <div class="history-left">
+            <span></span>
+        </div>
+        <div class="history-right">
+            <span>{{i18n('暂无浏览历史')}}~</span>
+        </div>
+    </div>
+    <!-- 有浏览历史的情况下 begin -->
+    <div class="blue-line" ng-show="!isShowIcon"></div>
+    <div class="history-bigBox" ng-show="!isShowIcon">
+        <div class="history-box"  ng-repeat="foot in footList track by $index" when-scrolled="getFootList()">
+            <div class="history-box-title">
+                <span class="day-time">{{foot.name |formatTime:true }}</span>
+                <span class="title-text">{{foot.name | formatTime:false}}</span>
+            </div>
+            <div ng-mouseover="boxIsShow=true" ng-mouseleave="boxIsShow=false" class="history-good-box" ng-repeat="g in foot.values track by $index">
+                <div class="item-box">
+                    <a href="item.html?itemId={{g.mpId}}">
+                        <img width="212" height="214" ng-src="{{g.picUrl}}" alt="">
+                    </a>
+                    <a href="javascript:void(0);" class="item-text">{{g.name| textLengthFormat: 18: '...'}}</a>
+                    <div class="price">
+                        <span></span><span class="price-text">{{g.realPrice | currency:'￥'}}</span>
+                    </div>
+                </div>
+                <div class="cancel-chose" ng-show="boxIsShow" ng-click="deleteFootList(g.mpId)">
+                    <span>{{i18n('删除')}}</span>
+                </div>
+                <div class="square" ng-show="g.isChecked">
+                    <span class="square-right" ng-click="cancelFav(g)"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 有浏览历史的情况下 end -->
+    <!-- 无浏览历史的情况下 begin -->
+</div>
+<!--<div class="end-text" ng-if="!isShowIcon">
+    <span>{{i18n('已到最后')}}</span>
+</div>-->

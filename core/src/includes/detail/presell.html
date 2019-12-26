@@ -1,0 +1,55 @@
+<div ng-show="itemlist.isPresell">
+    <div class='seckill clearfix pre-sale'>
+        <div class='seckill-left'>
+            <span>{{i18n('预售')}}</span>
+        </div>
+        <div class='seckill-right' ng-if="preSalePromotion && preSalePromotion.endTime">
+                <span class="whiteColor">{{i18n('距离活动结束还剩')}}：</span>
+                <span count-down show-count-down="startPresellCountDown" current-time="getData" end-time="preSalePromotion.endTime"></span>
+            <i class="pre-sale-img" ng-click="iconShowBox()" ng-show="!$parent.hideProductPrice"></i>
+        </div>
+        <div class='seckill-right'>
+            <span class="whiteColor">{{i18n('已预订')}}: </span>
+            <span>{{itemlist.presellBookedNum||0}} {{i18n('件')}}</span>
+        </div>
+        <div ng-if="isShowBox" class="quessicon-text-triangle"></div>
+        <div ng-if="isShowBox" class="quessicon-text">
+            <span ng-click="iconCloseShow()" class="close-img"></span>
+            <div class="description" ng-if="preSalePromotion.description">{{i18n('说明')}}:
+                <span ng-if="showMoreDesc">{{preSalePromotion.description| textLengthFormat: 100: '...'}}<span class="mgL15"></span></span>
+                <span ng-if="!showMoreDesc">{{preSalePromotion.description}}<span class="mgL15"></span></span>
+                <span ng-class="{'trangle-down': showMoreDesc, 'trangle-up': !showMoreDesc}" ng-if="preSalePromotion.description >= 100" ng-click="changeShow()"></span>
+            </div>
+            <ul class="clearfix">
+                <li class="pay-img">
+                    <span class="pay-img-icon icon-one"></span>
+                    <span class="borderBlock">{{preSalePromotion.endTime|date:'MM.dd HH:mm'}}{{i18n('前')}}</span>
+                    <span class="borderBlock fontSizeB">{{i18n('支付定金')}}</span>
+                    <span>￥{{preSalePromotion.presellDownPrice}}{{i18n('抵扣')}}￥{{preSalePromotion.presellOffsetPrice}}</span>
+                </li>
+                <li class="line line-one"></li>
+                <li class="pay-img">
+                    <span class="pay-img-icon icon-two"></span>
+                    <span class="borderBlock">{{preSalePromotion.presellFinalEndTime | date : 'MM.dd HH:mm'}}{{i18n('前')}}</span>
+                    <span class="borderBlock fontSizeB">{{i18n('支付尾款')}}</span>
+                    <span class="borderBlock">￥{{itemlist.balancePayment}}</span>
+                </li>
+                <li class="line line-two"></li>
+                <li class="pay-img">
+                    <span class="pay-img-icon icon-three"></span>
+                    <span class="borderBlock">{{preSalePromotion.deliveryTime | date : 'MM.dd HH:mm'}}{{i18n('开始')}}</span>
+                    <span class="borderBlock  fontSizeB">{{i18n('立即发货')}}</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="price">
+        <!-- 商品价格开始  begin -->
+        @@include("detail/presellPrice.html")
+        <!-- 商品价格结束  begin -->
+        <div class="hezhifeng" w="50"></div>
+        <!-- 商品销量统计开始  begin -->
+        @@include("detail/presellSaleNum.html")
+        <!-- 商品销量统计开始结束  begin -->
+    </div>
+</div>

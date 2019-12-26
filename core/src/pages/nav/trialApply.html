@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>申请免费试用</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/trialApply#((skin)).css?v=${version}">
+
+</head>
+<base target="_blank"/>
+<body ng-app="appControllers" ng-controller="trialApplyCtrl">
+
+    @@include("header.html")
+    @@include("global-nav.html")
+    <dl ng-include="'includes/_location.html'"></dl>
+    <div class="trial-pop" ng-if="shareBox.box">
+        <h4>
+            {{i18n('提示')}}<span ng-click="shareBox.closeBox()">×</span>
+        </h4>
+        <div class="trial-box" >
+            <h5 ng-click="">
+                {{i18n('已提交申请')}}
+                <a href="/trial.html?trialTab=3">{{i18n('查看我的试用')}}</a>
+            </h5>
+            <p>
+                {{i18n('分享到')}}&nbsp;&nbsp;&nbsp;
+                <!-- <input name="shareType" type="radio" value="weibo" ng-model="$parent.shareType"/><i class="trial-icons1"></i> -->
+                <!--<input name="shareType" type="radio" value="weixin" ng-model="$parent.shareType"/><i class="trial-icons2"></i>-->
+                <!-- <input name="shareType" type="radio" value="qq" ng-model="$parent.shareType"/><i class="trial-icons3"></i> -->
+
+                <label for="shareWeibo" class="radioStyle-big shareTrial">
+                    <input id="shareWeibo" name="shareType" type="radio" value="weibo" ng-model="$parent.shareType">
+                    <span></span>
+                </label>
+                <i class="trial-icons1"></i>
+                <label for="shareQQ" class="radioStyle-big shareTrial">
+                    <input id="shareQQ" name="shareType" type="radio" value="qq" ng-model="$parent.shareType">
+                    <span></span>
+                </label>
+                <i class="trial-icons3"></i>
+            </p>
+            <textarea name="" rows="3" ng-model="shareBox.shareContent"></textarea>
+            <p class="text-right f12">{{i18n('还可以输入')}}{{shareBox.shareContent.length}}{{i18n('个字')}}</p>
+            <div class="img-list">
+                <span><img ng-src="{{trialDetail.trialInfo.picUrl}}" alt=""></span>
+            </div>
+            <p class="txtcenter mgT20">
+                <a class="share-btn" href="javascript:void(0)" ng-click="shareBox.toShare()">{{i18n('分享')}}</a>
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="navigation-nav"><a href="../index.html">{{i18n('首页')}}</a><i class="icon-arrow-right4 mgL10 mgR10"></i><a
+                ng-repeat-start="crumb in trialDetail.crumbList"
+                href="search.html?navCategoryIds={{crumb.categoryId}}">{{crumb.categoryName}}</a><i
+                class="icon-arrow-right4 mgL10 mgR10" ng-repeat-end></i>{{trialDetail.trialInfo.mpName|textLengthFormat:30}}
+        </div>
+        <div class="trial-apply">
+            <dl>
+                <dt>
+                    <img ng-src="{{trialDetail.trialInfo.picUrl}}" alt="">
+                    <a href="/item.html?itemId={{trialDetail.trialInfo.seriesParentId || trialDetail.trialInfo.mpId}}">{{i18n('商品详情')}}</a>
+                </dt>
+                <dd>
+                    <h4>{{trialDetail.trialInfo.mpName}}</h4><!--<h2 ng-click="shareBox.showBox()">分享</h2>-->
+                    <h5>{{i18n('价格')}}: <span>{{trialDetail.trialInfo.price|currency:'￥' }}</span></h5>
+                    <div class="trial-infor">
+                        <ul>
+                            <li>
+                                <em>{{i18n('免费提供')}}</em>
+                                <p><span class="f40">{{trialDetail.limitNum}}</span>{{i18n('份')}}</p>
+                            </li>
+                            <li>
+                                <em>{{i18n('已申请人数')}}</em>
+                                <p><span class="f40">{{trialDetail.trialInfo.hasApplicedCount}}</span>{{i18n('人')}}</p>
+                            </li>
+                            <li>
+                                <em>{{i18n('剩余时间')}}</em>
+                                <p class="f16 mgT20"><span ng-if="trialDetail.trialInfo.endTime && nowTime" count-down show-count-down="true" end-time="trialDetail.trialInfo.endTime" current-time="nowTime"></span></p>
+                            </li>
+                        </ul>
+                    </div>
+                </dd>
+            </dl>
+            <p><span>*{{i18n('试用人信息')}}</span>{{i18n('如果您的试用申请被通过')}}，{{i18n('试用品将寄送到此地址')}}，{{i18n('请认真填写')}}。</p>
+            <div class="dialogForm" ng-include="'includes/_addressEdit.html'" ng-if="toAddNewAddress"></div>
+            <div class="trial-address" ng-init="hideOtherAddress=true">
+                <h4>{{i18n('收货人信息')}}<a ng-click="address._showAddNewAddress()" ng-hide="allAddress.length>=20">{{i18n('新增收货地址')}}</a></h4>
+                <ul>
+                    <li ng-repeat="addr in allAddress | limitTo:20"
+                        ng-show="$first&&!address.selectedAddr.id||!hideOtherAddress||addr.id==address.selectedAddr.id">
+                        <div class="row">
+                            <div class="cell wordBreak">
+                                <span class="show-address" ng-class="{'active':addr.id==address.selectedAddr.id}"
+                                       name="address"
+                                       ng-value="addr.id"
+                                       ng-model="address.selectedAddr"
+                                       ng-click="address._changeSaveAddress(addr)">{{addr.userName}}<i></i></span>
+                            </div>
+                            {{addr.userName}} {{addr.provinceName}} {{addr.cityName}} {{addr.regionName}} {{addr.detailAddress}}
+                            <cite>{{addr.mobile| hidePhone}}</cite>
+                            <em ng-if="addr.isDefault">{{i18n('默认地址')}}</em>
+                            <address><a href="javascript:void(0)" ng-if="!addr.isDefault"
+                                        ng-click="address._updateAddressMo(addr,false,addr.id);">{{i18n('设为默认地址')}}</a>
+                                <a href="javascript:void(0)" ng-click="address._editAddress(addr,$index);">{{i18n('编辑')}}</a>
+                                <a href="javascript:void(0)"ng-click="address.confirmDeleteAddress(addr.id)">{{i18n('删除')}}</a>
+                            </address>
+                            <div class="dialogForm" ng-include="'includes/_addressEdit.html'" ng-show="showList[$index]"></div>
+                        </div>
+                    </li>
+                    <p style="cursor: pointer;" ng-click="hideOtherAddress=!hideOtherAddress"
+                       ng-show="allAddress.length>=2">{{hideOtherAddress?i18n('更多地址'):i18n('收起地址')}}<i class="icon-more-down mgL10"></i></p>
+                </ul>
+            </div>
+            <h6 class="mgT20"><button class="" type="button" name=""  ng-click="applyTrial(trialDetail.trialInfo.mpId,trialDetail.trialInfo.activityId)" ng-disabled="trialDetail.trialInfo.applicedFlag ===1">{{i18n('立即提交')}}</button></h6>
+        </div>
+    </div>
+    @@include("footer.html")
+    @@include("script.html")
+    <script type="text/javascript" src="/trialApply.js?v=${version}"></script>
+    <script src="http://connect.qq.com/widget/loader/loader.js" widget="shareqq" charset="utf-8"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=trialApply"></script>
+</body>
+</html>

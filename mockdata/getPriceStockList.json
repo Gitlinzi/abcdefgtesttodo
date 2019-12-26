@@ -1,0 +1,59 @@
+{
+  "code": "0",
+  "message": "",
+  "errMsg": null,
+  "data": {
+    "plist": [
+      {
+        "mpId": 1430069400000038,
+        "price": 25,
+        "marketPrice": 35,
+        "tax": 0,
+        "stockNum": 99,
+        "stockText": "99",
+        "lackOfStock": 0,
+        "promotionType": 1,
+        "promotionPrice": 0.01,
+        "preferentialPrice": 24.99,
+        "promotionId": 1673066300000080,
+        "promotionIcon": [
+          {
+            "iconText": "特价",
+            "iconUrl": "http://ody.cdn.oudianyun.com/saas/ic_special.png@base@tag=imgScale",
+            "bgColor": "f23030",
+            "fontColor": "ffffff",
+            "description": null,
+            "weight": 2
+          }
+        ],
+        "promotionIconUrls": [
+          "http://ody.cdn.oudianyun.com/saas/ic_special.png@base@tag=imgScale"
+        ],
+        "promotionIconTexts": [
+          "特价"
+        ],
+        "promotionStartTime": 1527133353000,
+        "promotionEndTime": 1533008554000,
+        "isSeckill": 0,
+        "individualLimitNum": -1,
+        "totalLimitNum": -1,
+        "memberPrice": null,
+        "availablePriceText": null,
+        "managementState": 1,
+        "isPresell": 0,
+        "presellDownPrice": null,
+        "presellOffsetPrice": null,
+        "presellTotalPrice": null,
+        "balancePayment": null,
+        "presellBookedNum": null,
+        "highestPrice": null,
+        "volume4sale": 0,
+        "availablePrice": 0.01,
+        "originalPrice": 25
+      }
+    ],
+    "timestamp": 1530617530167
+  },
+  "stackTrace": null,
+  "trace": "156!$9#@168%&192!$,1f7736b,t:social-d-1.1.7,v:prod1.8.7,http://192.168.9.216:8080/oma-monitor/email2Log.html?method=soaLinkRoute&traceId=64198752278801286921177"
+}

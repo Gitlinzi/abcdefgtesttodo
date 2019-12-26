@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <title>积分商城</title>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/integralSearch#((skin)).css?v=${version}">
+
+</head>
+<base target="_blank"/>
+<body ng-app="appControllers" ng-controller="integralSearchCtrl">
+
+    @@include("header.html")
+    @@include("global-nav.html")
+    <dl ng-include="'includes/_location.html'"></dl>
+    <div class="container" ng-init="getSearchList()">
+        <div class="navigation-nav" ng-if="false">
+            {{i18n('首页')}}<i class="icon-arrow-right4 mgL10"></i>
+            <span ng-class="{active:searchNav}"  ng-mouseenter="searchNav=true" ng-mouseleave="searchNav=false">
+                {{i18n('类目名称')}}<i class="icon-more-down mgL10"></i>
+                <div class="mask"></div>
+                <div class="searchBox" ng-style="{display:searchNav?'block':'none'}">
+                    <ul>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                    </ul>
+                </div>
+            </span>
+            <i class="icon-arrow-right4"></i>
+            <span ng-class="{active:searchNavTwo}"  ng-mouseenter="searchNavTwo=true" ng-mouseleave="searchNavTwo=false">
+                {{i18n('类目名称')}}<i class="icon-more-down mgL10"></i>
+                <div class="mask"></div>
+                <div class="searchBox" ng-style="{display:searchNavTwo?'block':'none'}">
+                    <ul>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                        <li><a href="#">{{i18n('类目名称')}}</a></li>
+                    </ul>
+                </div>
+            </span>
+        </div>
+        <div class="buy-content">
+            <ul>
+                <li ng-repeat="item in data.searchList">
+                    <a href="item.html?isPointPro=1&itemId={{item.mpId}}">
+                        <dl>
+                            <dt><img ng-src="{{item.url160x160}}" alt="">
+                                <span ng-if="item.scripts">
+                                    <img ng-src="{{item.scripts[0]}}" alt="">
+                                </span>
+                            </dt>
+                            <dd>
+                                <h4>{{item.name}}</h4>
+                                <h5><span class="span">{{i18n('积分')}}</span><em>{{item.pointPrice || 0}}</em> <span ng-if="item.price">+ <span class="span">￥</span><em>{{item.price}}</em></span></h5>
+                                <p>{{i18n('已购买人数')}}：{{item.volume4sale}}</p>
+                                <cite ng-if="item.realTimeStock != -1">{{i18n('库存')}}：{{item.realTimeStock}}</cite>
+                            </dd>
+                        </dl>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--搜索结果为无结果-->
+        <div id="noResult" ng-if="data.searchList.length == 0" >
+            <div class="noResult zero">
+                <div class="info">
+                    <span class="row ">{{i18n('很抱歉')}}~{{i18n('没有找到')}}<span class="keywords" ng-if="data.searchObj.searchword != ''">"{{data.searchObj.searchword}}"</span>{{i18n('相关的商品')}}
+                </div>
+            </div>
+            <!--<div recommend-goods class="recommend-goods" side="bottom" title="猜你喜欢" on-init="true" scene-no="0" options="{pageSize:6}"></div>-->
+        </div>
+        <div ng-if="data.searchList.length > 0" pagination page-size="data.searchObj.pageSize" page-no="data.searchObj.pageNo" total-count="data.searchObj.totalCount" total-page="data.searchObj.totalPage"></div>
+    </div>
+    @@include("footer.html")
+    @@include("script.html")
+    <script type="text/javascript" src="/integralSearch.js?v=${version}"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=intergralSearch"></script>
+</body>
+</html>

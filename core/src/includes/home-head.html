@@ -1,0 +1,58 @@
+<div class="memberInfo" ng-if="isCenter">
+    <div class="imgTitle transverse-inline-block clearfix">
+        <img ng-src="{{myHome.userInfo.headPicUrl}}" alt="">
+    </div>
+    <div class="info transverse-inline-block clearfix pdL15" ng-class="{changeTop:!$parent.switchConfig.center.userIndex.showUserRank}">
+        <span class="name">{{myHome.userInfo.nickname}}</span>
+        <div ng-if="$parent.switchConfig.center.userIndex.showUserRank && myHome.memberInfo.memberLevelName">
+            <span class="level">{{myHome.memberInfo.memberTypeName}}</span><span class='level-text'>{{myHome.memberInfo.memberLevelName}}</span>
+        </div>
+        <span class='account-save' ng-if="$parent.switchConfig.center.userIndex.showUserGrowUp">{{i18n('会员成长值')}}</span>
+        <span class='experience' ng-if="$parent.switchConfig.center.userIndex.showUserGrowUp">
+                <span class="progressText">{{myHome.memberInfo?myHome.memberInfo.growthBalence: 0}}/{{myHome.memberInfo ? myHome.memberInfo.growthReach : 0}}</span>
+                <span ng-init="progressFunction()" class="progressB"></span>
+            </span>
+        <span class="right-line"></span>
+    </div>
+    <div class='card-box transverse-inline-block clearfix'>
+        <a class='card-item' href="" ui-sref="index_orderList({activeNum:$parent.switchConfig.orderStatus.toPay})">
+            <span class='card-one'></span>
+            <p class="display-inline">{{i18n('待付款')}}</p>
+            <p class="c2f3235" ng-class="{'color-change':myHome.summary.unPay==0}">{{myHome.summary.unPay||0}}</p>
+        </a>
+        <a class='card-item' href="" ui-sref="index_orderList({activeNum:$parent.switchConfig.orderStatus.delivered})">
+            <span class='card-two'></span>
+            <p class="display-inline">{{i18n('待收货')}}</p>
+            <p class="c2f3235" ng-class="{'color-change':myHome.summary.unReceive==0}">{{myHome.summary.unReceive||0}}</p>
+        </a>
+        <a class='card-item' href="" ui-sref="index_orderList({activeNum:$parent.switchConfig.orderStatus.received})">
+            <span class='card-three'></span>
+            <p class="display-inline" >{{i18n('待评价')}}</p>
+            <p class="c2f3235" ng-class="{'color-change':myHome.summary.unEvaluate==0}">{{myHome.summary.unEvaluate||0}}</p>
+        </a>
+        <a href="" class="line-right"></a>
+        <!-- <a  class='card-item' ng-click="toEdou()" ui-sref="index_commission" ng-if="$parent.switchConfig.center.userIndex.showUserEdou">
+            <span class='card-fore'></span>
+            <p class="display-inline">{{i18n('佣金')}}</p>
+            <p class="change-color margin0" ng-class="{'color-change':myHome.commissionSum==0}">{{myHome.commissionSum | currency:'￥'}}</p> -->
+            <!--<b class="text-color">提现</b>-->
+        <!-- </a> -->
+        <a class='card-item item-five' ui-sref="index_points">
+            <span class='card-five'></span>
+            <p class="display-inline">{{i18n('积分')}}</p>
+            <p class="change-color margin0" ng-class="{'color-change':myHome.pointSum==0}">{{myHome.pointSum+myHome.pointFreezed}}</p>
+            <!-- <b class="color-text" v-if="myHome.pointFreezed">{{i18n('冻结积分')}}:{{myHome.pointFreezed}}</b> -->
+        </a>
+        <a class='card-item item-five' ui-sref="index_prisentCards">
+            <span class='card-seven'></span>
+            <p class="display-inline">{{i18n('礼品卡余额')}}</p>
+            <p class="change-color margin0" ng-class="{'color-change':myHome.pointSum==0}">{{myHome.pointSum+myHome.pointFreezed | currency:'￥'}}</p>
+            <!-- <b class="color-text">{{i18n('冻结积分')}}:{{myHome.pointFreezed}}</b> -->
+        </a>
+        <a ui-sref="index_coupons" class='card-item'>
+            <span class='card-six'></span>
+            <p class="display-inline">{{i18n('优惠券')}}</p>
+            <p class="change-color" ng-class="{'color-change':myHome.canUserCount==0}">{{myHome.canUserCount}}</p>
+        </a>
+    </div>
+</div>

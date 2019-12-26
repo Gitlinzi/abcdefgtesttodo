@@ -1,0 +1,16 @@
+{
+    "code": "0",
+    "message": null,
+    "data": {
+        "merchantProductId": 1247101609000192,
+        "type": 1,
+        "content": null,
+        "itemId": null
+    },
+    "trace": "b7f48410e79c2b45",
+    "gitInfo": {
+        "git.commit.id": "10475eed6558169d8cec714df238733b4971fdad",
+        "git.branch": "ouser-filter-d-2.51.1"
+    },
+    "errorMessage": null
+}

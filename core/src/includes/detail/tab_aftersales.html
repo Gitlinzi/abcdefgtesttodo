@@ -1,0 +1,6 @@
+<div id="aftersales" class="content" ng-if="$parent.switchConfig.guide.item.goodNavigation.goodAfterSales">
+    <div ng-if="itemService_afterService" ng-bind-html="itemService_afterService | trustHtml"></div>
+    <div ng-if="!itemService_afterService">
+        {{i18n('抱歉')}}，{{i18n('内容暂无')}}，{{i18n('商家还没有发布相关内容')}}
+    </div>
+</div>

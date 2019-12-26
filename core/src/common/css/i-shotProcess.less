@@ -1,0 +1,112 @@
+/*购物车结算页带数字的样式*/
+.buyStepNumBox{
+  margin:0 auto;
+  display:block;
+  height:60px;
+  clear: both;
+  width: 510px;
+  position: absolute;
+  top: -103px;
+  right: 0;
+  li{
+    // position:relative;
+    // width: 33.3333333333%;
+    text-align:center;
+    padding-top: 22px;
+    float: left;
+
+    h4,
+    span{
+      float: left;
+      margin-right: 8px;
+    }
+
+    &:last-child{
+      .lbg-r{
+        margin-right: 0;
+      }
+    }
+  }
+
+  h4{
+    // position: absolute!important;
+    // top: 50px;
+    // width: 100%;
+    text-align: center;
+    font-weight: normal;
+    margin:0;
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  .line_bg{
+    width: 48px;
+    height:1px;
+    background:@ddGreyColor;
+    // width:50%;
+    // top:34px;
+    // position:absolute;
+    // z-index:1;
+  }
+  .lbg-l{
+    // left:0;
+  }
+  .lbg-r{
+    // right:0;
+    margin-top: 14px;
+  }
+  .num{
+    // position:relative;
+    // z-index:2;
+    color: @themeColor;
+    background-color: @whiteColor;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align:center;
+    display:inline-block;
+    border-radius: 50%;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: '微软雅黑' !important;
+    border: 1px solid @themeColor;
+  }
+  .lbg-txt{
+    position:relative;
+    color:@99GreyColor;
+    font-size:12px;
+  }
+  .current{
+    .num{
+      background-color: @whiteColor;
+    }
+    .lbg-txt{
+      color:@themeColor;
+    }
+    .line_bg,.num em{
+      background:@themeColor;
+    }
+  }
+  .active{
+    .num{
+      color: @whiteColor;
+      background-color: @themeColor;
+    }
+    .lbg-txt{
+      color:@themeColor;
+    }
+    .line_bg,.num em{
+      background:@themeColor;
+    }
+  }
+  .f-r5{
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+  }
+}
+.bged8d8d{
+  background: #ed8d8d !important;
+}
+.ced8d8d{
+  color: #ed8d8d !important;
+}

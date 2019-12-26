@@ -1,0 +1,294 @@
+
+//购物车
+.shopCar {
+    position: absolute;
+    right: 0;
+    top: 30px; //width: 135px;
+    height: 40px;
+    cursor: pointer;
+    .mask{
+        display: block;
+        position: absolute;
+        top: 41px;
+        left: 0;
+        width: 116px;
+        height: 1px;
+        font-size: 0;
+        background-color: @whiteColor;
+        z-index: 1000;
+    }
+    & .car-shop {
+        position: relative;
+        display: block;
+        width: 114px;
+        height: 40px;
+        line-height: 40px;
+        border: 1px solid #DFDFDF;
+        font-style: normal;
+        font-size: 14px;
+        text-align: center;
+        color: @themeColor;
+        background-color: rgb(255,243,243) ;
+        border-radius: 2px;
+        &:hover{
+            color: @fontColor;
+            background-color: #fff;
+			border: 1px solid @themeColor;
+            z-index: 101;
+        }
+        i{
+            background: url('../../images/adv_ico_new.png') no-repeat -46px -20px;
+            background-size: 750px 1000px;
+            width: 14px;
+            height: 14px;
+            margin-left: 8px;
+        }
+    }
+    .cart-count {
+        position: absolute;
+        left: 88px;
+        top: 8px;
+        height: 15px;
+        width: auto;
+        background: @themeColor;
+        color: @whiteColor;
+        //padding: 1px 4px;
+        font-size: 12px; // border-radius: 7px 7px 7px 0;
+        border-radius: 7px;
+        padding: 0 4px;
+        box-sizing: border-box;
+        text-align: center;
+        line-height: 15px;
+        z-index: 102;
+    }
+}
+
+/* 迷你购物车 */
+#minicart {
+    display: none;
+    position: absolute;
+    top: 41px;
+    right: 0;
+    width: 300px;
+    background-color: @whiteColor;
+    //overflow: hidden; //z-index:999;
+    border: 1px solid @themeColor;
+    z-index: 100;
+    color: #333;
+    //&:before {
+    //    content: '';
+    //    position: absolute;
+    //    width: 100%;
+    //    height: 100%;
+    //    top: 0;
+    //    left: 0;
+    //    box-shadow: 0 0 10px 0 rgba(0,0,0,.3);
+    //    z-index: 0;
+    //}
+    //box-shadow:0 0 10px 0 rgba(0,0,0,.3);
+    & .cart-inner {
+        position: relative;
+        z-index: 10;
+        padding-bottom: 50px;
+        background-color: @backgroundColor;
+    }
+    & .cart-loading {
+        padding: 15px 0;
+        text-align: center;
+    }
+    & .cart-null {
+        padding: 30px 8px;
+        clear: both;
+        overflow: auto;
+        text-align: center;
+        color: @99GreyColor;
+        i{
+            display: block;
+            width: 42px;
+            height: 40px;
+            //background: url('../../images/company/company-icon.png') no-repeat -698px -119px;
+            .common-product-company-icon(-698px, -119px);
+            //margin-right: 15px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+    }
+    & .bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 50px;
+        padding-left: 10px;
+        line-height: 50px;
+        overflow: hidden;
+        color: @blackColor;
+        font-size: 12px;
+        & .btn-cart {
+            float: right;
+            width: 70px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 0;
+            background-color: @themeColor;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
+            margin-top: 10px;
+            margin-right: 20px;
+        }
+        & .red {
+            color: @clearColor;
+            font-size: 12px;
+        }
+        & .he{
+            font-size: 12px;
+        }
+        & .sum {
+            float: left;
+            margin-right: 10px;
+        }
+    }
+    & .gds {
+        clear: both;
+        max-height: 415px;
+        overflow: auto;
+        background-color: @whiteColor;
+        &::-webkit-scrollbar
+        {
+            width: 6px;
+            height: 6px;
+            background-color: @whiteColor;
+        }
+
+        /*定义滚动条轨道 内阴影+圆角*/
+        &::-webkit-scrollbar-track
+        {
+            /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 10px;*/
+            //background-color: @whiteColor;
+        }
+
+        /*定义滑块 内阴影+圆角*/
+        &::-webkit-scrollbar-thumb
+        {
+            //border-radius: 10px;
+            ///*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
+            //background-color: @themeColor;
+            -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
+            border-radius: 10px;
+            background: #ccc;
+
+        }
+        & .store {
+            & .title {
+                padding: 10px 10px 5px;
+                border-bottom: 2px solid @ccGreyColor;
+                overflow: hidden;
+            }
+            & h4 {
+                float: left;
+                margin: 0;
+                font-size: 14px;
+                font-weight: normal;
+            }
+        }
+        & .row {
+            height: 102px;
+            border-bottom: 1px solid @eeGreyColor;
+            &:hover {
+                background-color: @lightBackgroundColor;
+                .del-button {
+                    display: block;
+                }
+                .op-icons-del{
+                    //width:20px;
+                    //height: 20px;
+                    //background-position: -165px -139px;
+                }
+            }
+        }
+        & .c1 {
+            width: 80px;
+            height: 80px;
+            padding: 10px 15px;
+        }
+        & .c2 {
+            width: 165px;
+            padding-top: 15px;
+            position:relative;
+            .del-button {
+                display: none;
+                position: absolute;
+                top: 12px;
+                right: -20px;
+                transform: scale(.8);
+            }
+            .price {
+                color: @themeColor;
+                font-weight: bold;
+            }
+        }
+        & .c3 {
+            width: 80px;
+            padding-top: 15px;
+            text-align: right;
+        }
+        & .pic {
+            //要删
+            // width: 60px;
+            // height: 60px;
+            color: @themeColor;
+        }
+        & h5 {
+            //        height: 32px;
+            //        margin: 0 0 18px 0;
+            //        line-height: 16px;
+            //        font-size: 12px;
+            //        line-height: 16px;
+            //        font-weight: normal;
+            //        display: block;
+            //     overflow: hidden;
+            //white-space: nowrap;
+            //text-overflow: ellipsis;
+            //color: @blackColor;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp:2;
+            -webkit-box-orient: vertical;
+            margin: 0;
+            font-size: 12px;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+        & .m {
+            margin: 30px 0 10px 0;
+            color: @clearColor;
+            font-weight: bold;
+        }
+    }
+}
+
+.userHeader {
+    .container {
+        .shopCar {
+            top: 20px;
+        }
+    }
+}
+
+.default-pop-box {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height: 100%;
+    overflow: auto;
+    background: rgb(51, 51, 51);    /*不支持rgba的浏览器*/
+    background: rgba(51, 51, 51, 0.3);  /*支持rgba的浏览器*/
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99515151,endColorstr=#99515151);
+    filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2515151, endColorstr=#B2515151)";
+    background: none\9;
+    z-index: 99999;
+}

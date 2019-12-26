@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+<link rel="stylesheet" type="text/css" href="/complete#((skin)).css?v=${version}">
+<!--<link rel="stylesheet" type="text/css" href="/payment#((skin)).css?v=${version}">-->
+<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/5.11.2/css/all.min.css">
+</head>
+
+<body ng-app="appControllers" ng-controller="completeCtrl">
+
+<!-- 头部 -->
+@@include("trade-header.html")
+<span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+    @@include("global-nav.html")
+</span>
+<div class="container width1000">
+	<!--收银台 字-->
+	<div class="shopTitle">{{i18n('提交订单')}}</div>
+	<div class="pay-complete" ng-class="{'complete-marginB':!switchConfig.trade.complete.showBottomImage}">
+    <div class="pay-complete-tip">
+      <span>
+        <i class="fa fa-check-circle" aria-hidden="true"></i>
+  			<h1>{{!isPunchout ? i18n('提交成功') : i18n('提交成功') }}</h1>
+      </span>
+    </div>
+    <div class="pay-complete-order">
+			<div class="money">{{money||0 | currency:'￥'}}</div>
+			<h4>{{i18n('订单号')}}：{{detail.orderCode}}</h4>
+		</div>
+    <div class="pay-complete-control">
+      <a ng-if="detail.orderSource != baseConfig.orderSource.points" class="btn btn-com" href="./index.html">{{i18n('再去逛逛')}}</a>
+      <a ng-if="detail.orderSource == baseConfig.orderSource.points" class="btn btn-com" href="./integral.html">{{i18n('再去逛逛')}}</a>
+      <a class="btn btn-com btn-sign" href="./home.html#/orderList" ng-if="!isPunchout">{{i18n('查看订单')}}</a>
+    </div>
+		<!-- <div class="pay-complete-right">
+			<div ng-if="!isPunchout">
+				<h4>{{i18n('订单号')}}：{{detail.orderCode}}</h4>
+				<h4>{{i18n('收货人信息')}}</h4>
+				<div class="xinxi"><span class="name">{{detail.receiverPerson.receiverName}}</span><span class="tel">{{detail.receiverPerson.mobile}}</span></div>
+				<div class="address">{{detail.address.provinceName}}{{detail.address.cityName}}{{detail.address.regionName}}{{detail.address.detailAddress}}</div>
+			</div>
+			<h4 class="shop" ng-if="detail.nameStr&&detail.nameStr.length>0">{{i18n('商品名称')}}</h4>
+			<div class="jieshao" ng-repeat="item in detail.nameStr">
+				<span>{{item}}</span>
+			</div>
+		</div> -->
+	</div>
+  <div class="pay-information">
+    <div class="pay-information-box" ng-if="!isPunchout">
+      <h2>{{i18n('收货人信息')}}</h2>
+      <div>
+        <strong>{{detail.receiverPerson.receiverName}}</strong>
+        <em>{{detail.receiverPerson.mobile}}</em>
+      </div>
+      <div>
+        {{detail.address.provinceName}}{{detail.address.cityName}}{{detail.address.regionName}}{{detail.address.detailAddress}}
+      </div>
+    </div>
+    <div class="pay-information-box" ng-if="detail.nameStr&&detail.nameStr.length">
+      <h2>{{i18n('商品名称')}}</h2>
+      <div ng-repeat="item in detail.nameStr">
+        <span>{{item}}</span>
+      </div>
+    </div>
+    <!--
+    <div class="pay-information-box">
+      <h2>{{i18n('商品名称')}}</h2>
+      <div>
+        <span>怡宝  饮用纯净水350ml/瓶 24瓶/箱 整箱销售</span>
+      </div>
+      <div>
+        <span>怡宝  饮用纯净水350ml/瓶 24瓶/箱 整箱销售</span>
+      </div>
+    </div>
+    -->
+  </div>
+	<div class="footer-img" ng-if="switchConfig.trade.complete.showBottomImage">
+		<!-- <img src="../../images/oupu-success.png"> -->
+	</div>
+</div>
+
+@@include("cart-footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/complete.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=complete"></script>
+</body>
+</html>

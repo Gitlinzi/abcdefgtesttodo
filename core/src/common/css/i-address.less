@@ -1,0 +1,115 @@
+/*
+    地址框样式
+*/
+
+.add-user{
+    display: none;
+    position: fixed;
+    width: 750px!important;
+    border: 5px solid @ddGreyColor;
+    z-index: 200;
+    background: white;
+    left: 50%;
+    top:20%;
+    margin-left: -375px;
+    border-radius: 5px;
+    line-height: 1;
+    font-size: 12px;
+    & .add-title{
+        height: 25px;
+        background: @backgroundColor;
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-top: 10px;
+        & .title-text{
+            float: left;
+        }
+        & .close-img{
+            float: right;
+            display: block;
+            width: 12px;
+            height: 12px;
+            //background: url('../../images/company/company-default.png') no-repeat -22px -256px;
+            .common-product-company-default(-22px,-256px);
+            cursor: pointer;
+        }
+    }
+    & dl{
+        padding-top: 16px;
+        & dt{
+            float: left;
+            width: 87px;
+            margin-right: 11px;
+            text-align: right;
+            padding-top: 8px;
+        }
+        & select{
+            width: 110px;
+            height: 30px;
+            padding-left: 11px;
+        }
+        & .seem-height{
+            padding: 0;
+            width: 158px;
+            height: 28px;
+        }
+        & .no-height{
+            padding: 0;
+            height: 28px;
+            width: 298px;
+        }
+        & dd{
+            float: left;
+        }
+        & .left-right{
+            margin: 8px 10px 0px 23px;
+        }
+        & .pddleft{
+            padding-left: 32px;
+            position: relative;
+            right:0;
+            top:2px;
+            &::after{
+                content: '';
+                position: absolute;
+                width: 16px;
+                height: 16px;
+                //background: url('../../images/company/company-default.png') no-repeat -703px -101px;
+                .common-product-company-default(-703px,-101px);
+                left: 8px;
+                top:0;
+            }
+        }
+        .fl {
+            float: left;
+            margin: 3px 0;
+            margin-right: 11px;
+        }
+    }
+    & .add-bottom{
+        margin-left: 96px;
+        margin-bottom: 20px;
+        .btn{
+            min-width: 130px;
+            height: 36px;
+            border-radius: @searchRadius;
+        }
+        & span{
+            display: block;
+            margin-top: 8px;
+            margin-bottom: 21px;
+            color: @99GreyColor;
+        }
+        & input[type=button]{
+            border-top-style: none;
+            border-bottom-style: none;
+            border-right-style: none;
+            border-left-style: none;
+            min-width: 130px;
+            height: 35px;
+            background: @btnBgColor;
+            color: @whiteColor;
+            border-radius: @searchRadius;
+        }
+    }
+}

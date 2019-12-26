@@ -1,0 +1,156 @@
+/* 底部 */
+@import url('./i-button.less');
+.bgf8f8f8{
+	background-color: @backgroundColor;
+}
+
+#footer{
+	//margin-top: 36px;
+	//padding-top: 30px;
+	padding-bottom: 50px;
+	//border-top: 1px solid @eeGreyColor;
+	background-color: #f4f4f4;
+	overflow: hidden;
+	clear: both;
+	*zoom: 1;
+	.footer-top{
+		width: 100%;
+		padding: 40px 0 30px 0;
+		box-sizing: border-box;
+		.tel{
+			font-size: 14px;
+			display: inline-block;
+			font-size: 14px;
+			margin-left: 20px;
+			& li{
+				//margin-top: 10px;
+				p{
+					text-align: left;
+					font-size: 16px;
+					color: @fontColor;
+					font-weight: bold;
+				}
+				&:first-child{
+					p{
+						color: @fontColor;
+					}
+					color:@themeColor;
+					p:nth-child(2){
+						font-size: 14px;
+						font-weight: normal;
+					}
+				}
+				&:last-child{
+					p{
+						color: @fontColor;
+					}
+					color:@themeColor;
+					p:nth-child(2){
+						font-size: 14px;
+						font-weight: normal;
+					}
+				}
+			}
+		}
+	}
+	& .bt-nav{
+		position: relative;
+		float: left;
+		//width: 202px;
+		//height: 197px;
+		& .first-a {
+			display: block;
+			padding-left: 94px;
+			color: @fontColor;
+			font-size: 16px;
+			font-weight: bold;
+			margin-bottom: 19px;
+		}
+		& .common-ul{
+			padding-left: 94px;
+			font-size: 12px;
+			box-sizing: border-box;
+			// padding-top: 10px;
+		}
+		& .uls{
+			margin-left: 73px!important;
+		}
+		& li{
+			margin-bottom: 10px;
+
+
+		}
+		& i{
+			position: absolute;
+			top: -3px;
+			left: 0;
+			margin-top: -5px;
+			margin-right: 14px;
+		}
+		& a{
+			color: @fontColor;
+
+			&:hover{
+				color: @themeColor;
+			}
+		}
+	}
+	& .qrcode{
+		// float: right;
+		// width: 190px;
+		float: left;
+		width: 110px;
+		text-align: center;
+
+		& h5{
+			margin: 0;
+			font-size: 16px;
+			font-weight: normal;
+			padding-bottom: 10px;
+			color: @fontColor;
+			font-weight: bold;
+		}
+		& .icon-qrcode{
+			margin-top: 12px;
+		}
+		& p{
+			color: lighten(@fontColor, 20%);
+			font-size: 12px;
+			margin: 12px 0 0 0;
+		}
+	}
+	& p{
+		clear: both;
+		text-align: center;
+		font-size: 12px;
+		//margin: 0 0 14px 0;
+		margin: 0 0 12px 0;
+		color: @fontColor;
+	}
+	.footer-text{
+		min-width: 103px;
+	    height: 32px;
+	    display: inline-block;
+	    line-height: 32px;
+	    background: @eeGreyColor;
+	    padding: 0;
+	    text-align: left;
+		img{
+			vertical-align: middle;
+		    padding: 0;
+		    float: left;
+			margin-top: 2px;
+			margin-right: 5px;
+		}
+		.footer-text-img {
+			margin-top: 3px;
+			margin-left: 5px;
+		}
+		span{
+			float: left;
+		}
+	}
+}
+// .container{
+// 	padding: 0 15px;
+// }

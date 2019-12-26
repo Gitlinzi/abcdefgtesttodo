@@ -1,0 +1,43 @@
+<div class="home-head-box">
+    <div class="head-left dis">
+        <div class="left-img dis">
+            <img height="92" width="92" ng-src="{{myHome.userInfo.headPicUrl}}" alt="">
+        </div>
+        <div class="left-text dis">
+            <span class="text-name">{{myHome.userInfo.nickname||myHome.userInfo.mobile|hidePhone}}</span>
+        </div>
+    </div>
+    <div class="head-right dis">
+        <div class="right-left dis">
+            <div class="left-first dis">
+                <a ui-sref="index_orderList">
+                    <span class="wait-money-num"><i class="wait-icon"></i>{{myHome.summary.unpay}}</span>
+                    <span class="wait-money-text">待付款</span>
+                </a>
+            </div>
+            <div class="left-second dis">
+                <a ui-sref="index_orderList">
+                    <span class="wait-money-num"><i class="wait-icon-two"></i>{{myHome.summary.unreceive}}</span>
+                    <span class="wait-money-text">待收货</span>
+                </a>
+            </div>
+        </div>
+        <div class="right-right dis">
+            <p class="right-main">
+                <span class="top-first dis">预付款：</span>
+                <span class="top-first-money dis">{{cgMyHeadData.prepaidAmount| currency:'￥'}}</span>
+                <span class="top-first-time dis">同步时间：{{cgMyHeadData.syncTime | date:'yyyy.MM.dd HH:mm'}}</span>
+            </p>
+            <p class="right-main">
+                <span class="top-first dis">信用额度：</span>
+                <span class="main-money dis">{{cgMyHeadData.creditLinesAmount| currency:'￥'}}</span>
+                <span class="top-first-time dis">同步时间：{{cgMyHeadData.syncTime | date:'yyyy.MM.dd HH:mm'}}</span>
+            </p>
+            <p class="right-main">
+                <span class="top-first dis">欠款：</span>
+                <span class="lost-money dis">{{cgMyHeadData.debitAmount| currency:'￥'}}</span>
+                <span class="top-first-time dis">同步时间：{{cgMyHeadData.syncTime | date:'yyyy.MM.dd HH:mm'}}</span>
+            </p>
+        </div>
+    </div>
+</div>

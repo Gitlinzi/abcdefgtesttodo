@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="heimdall" content="首页">
+	<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/marketing#((skin)).css?v=${version}">
+	<meta name="heimdall" content="首页" >
+</head>
+<base target="_blank"/>
+<body ng-app="appControllers" ng-controller="indexCtrl" ng-style="{'background-color':bgColor}">
+
+@@include("header.html")
+@@include("global-nav.html")
+<!--首页弹框地址-->
+<dl ng-include="'includes/_location.html'"></dl>
+<div class="pt10 pb36" ng-cloak>
+	<!--魔方-->
+	<div class="pc-cms">
+
+		<script>
+            function paramsFormat(url) {
+                var url = url || location.href;
+                var qInd = url.indexOf('?');
+                var sharpInd = url.indexOf('#');
+                var search = "";
+                var paramsList = [];
+                var paramsObj = {};
+                if (qInd >= 0) {
+                    if (sharpInd > 0) {
+                        search = url.substring(qInd + 1, sharpInd);
+                    }
+                    else {
+                        search = url.substring(qInd + 1);
+                    }
+
+                    paramsList = search.toString().split('&');
+                    for (var ind in paramsList) {
+                        var vk = paramsList[ind].toString().split('=');
+                        if(vk.length>1){
+                            if (vk[0].length > 0 && vk[1].length > 0)
+                                paramsObj[vk[0]] = vk[1];
+                        }
+                    }
+                }
+                return paramsObj;
+            }
+            var urlParams = paramsFormat(location.search);
+            var pageId = urlParams.pageId;
+            var isPreview=urlParams.isPreview?true:false;
+            document.write('<script src="/cms/view/page?pageType=3&viewMode=script_angular&pageId='+pageId+'&preview=' + isPreview + '" ><\/script>');
+		</script>
+	</div>
+	<div class='container delicious' ng-show="magicPic.oneCube.length>0">
+		<div class='delicious-main'>
+			<div ng-repeat="v in magicPic.oneCube" class=img_op>
+				<a href="{{v.linkUrl}}">
+					<img ng-src="{{v.imageUrl}}" alt="" width=275 height=161>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+@@include("footer.html")
+@@include("script.html")
+<script type="text/javascript" src="/marketing.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=marketing"></script>
+</body>
+</html>

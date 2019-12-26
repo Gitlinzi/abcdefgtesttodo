@@ -1,0 +1,14 @@
+<div id="pointInfo" ng-if="isPointPro">
+    <div class="limit" ng-if="itemlist.individualLimit != -1">
+        <span class="info">{{i18n('每人限兑')}}</span>
+        <span class="content">{{itemlist.individualLimit}}{{i18n('件')}}</span>
+    </div>
+    <div class="limit">
+        <span class="info">{{i18n('当前可兑换')}}</span>
+        <span class="content">{{itemlist.stockNum}}{{i18n('件')}}</span>
+    </div>
+    <div class="limit" ng-if="itemlist.exchangeStartTime != -28800000 && itemlist.exchangeEndTime != 31556966400000">
+        <span class="info">{{i18n('兑换时间')}}</span>
+        <span class="content">{{itemlist.exchangeStartTime | date : 'yyyy-MM-dd'}}&nbsp;{{i18n('至')}}&nbsp;{{itemlist.exchangeEndTime | date : 'yyyy-MM-dd'}}</span>
+    </div>
+</div>

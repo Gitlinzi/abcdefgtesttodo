@@ -1,0 +1,37 @@
+<div class="credit-box" ng-init="init()">
+    <div class="credit-top">
+        <span class="top-text">我的收藏</span>
+        <div class="right-top">
+            <label for="coupon" class="checkboxStyle-big mgR10">
+                <input id="coupon" type="checkbox" ng-model="ck" ng-change="checkAll()">
+                <span></span>
+            </label>
+            <span class="all-chose">全选</span>
+            <span class="all-delete" ng-click="batchDeleteFavorite()">批量删除</span>
+        </div>
+    </div>
+    <div class="history-time">
+        <div class="goods-list-bigBox">
+            <a class="goods-list-box" href="item.html?itemId={{fg.mpId}}" ng-mouseover="boxIsShow=true" ng-mouseleave="boxIsShow=false" class="good-box"  ng-repeat="fg in favoriteGoods">
+                <img src="{{fg.picUrl}}" alt="" width="196" height="196">
+                <p class="goods-text">{{fg.name}}</p>
+                <span class="goods-num-text">{{fg.realPrice | currency:'￥'}}</span>
+                <div  ng-show="fg.isChecked">
+                    <span class="goods-list-box-cover goods-list-box-cover-height"></span>
+                    <span class="goods-list-box-cover-right"  ng-click="cancelFav(fg)"></span>
+                </div>
+                <span class="cancer-follow" ng-show="boxIsShow && !fg.isChecked" ng-click="deleteFavorite(fg.id, $event)">取消收藏</span>
+            </a>
+        </div>
+    </div>
+    <div class="collection-none" ng-if="isShowIcon">
+        <div class="collection-left">
+            <span></span>
+        </div>
+        <div class="collection-right">
+            <span>{{i18n('暂无收藏品')}}~</span>
+        </div>
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+         total-page="totalPage" ng-if="isShowPage"></div>
+</div>

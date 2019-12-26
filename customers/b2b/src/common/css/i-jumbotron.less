@@ -1,0 +1,226 @@
+/* 巨幕 */
+
+#jumbotron {
+    margin-bottom: 23px;
+    overflow: hidden;
+    *zoom: 1;
+    & .carousel {
+        min-width: 1200px;
+        max-width:1920px;
+        height: 400px;
+        position: relative;
+        top:0px;
+        left:0px;
+        @keyframes lunbo {
+            from {
+                transform: scale(1.05, 1.05);
+                -webkit-transform: scale(1.05, 1.05);
+            }
+            to {
+                transform: scale(1, 1);
+                -webkit-transform: scale(1, 1);
+            }
+        }
+        @-webkit-keyframes lunbo {
+            from {
+                transform: scale(1.05, 1.05);
+                -webkit-transform: scale(1.05, 1.05);
+            }
+            to {
+                transform: scale(1, 1);
+                -webkit-transform: scale(1, 1);
+            }
+        }
+        & img {
+            // animation: lunbo 5s linear;
+            // -webkit-animation: lunbo 5s linear;
+        }
+    }
+    & .advantage {
+        float: right;
+        width: 224px;
+        top: 6px;
+        & .logo-img {
+            width: 194px;
+            background-color: @whiteColor;
+            padding: 15px;
+            text-align: center;
+            & a {
+                display: inline-block; //width: 36px;
+                padding-top: 38px;
+                position: relative;
+                font-size: 12px;
+                width: 96px;
+                color: @greyColor;
+                & .my-icon {
+                    position: absolute;
+                    width: 35px;
+                    height: 35px;
+                    top: 0px;
+                    left: 30px;
+                }
+            }
+        } //height: 463px;
+        & .advantage-top {
+            width: 194px;
+            padding: 15px;
+            margin-bottom: 1px;
+            background-color: @whiteColor;
+            & .weclome {
+                font-size: 0;
+                height: 59px;
+                & .weclome-img {
+                    display: inline-block;
+                    height: 51px;
+                    width: 51px;
+                    vertical-align: middle; //background-color: red;
+                    margin-right: 8px;
+                    & a {
+                        display: block;
+                        img{
+                            border-radius: 50%;
+                        }
+                    }
+                }
+                & .weclome-text {
+                    display: inline-block;
+                    font-size: 12px;
+                    vertical-align: middle;
+                }
+            }
+            & .login {
+                font-size: 0;
+                text-align: center;
+                & .login-name-text-box{
+                    height:30px;
+                    line-height:30px;
+                    background: @f5GreyColor;
+                }
+                & .link {
+                    display: inline-block;
+                    width: 85px;
+                    height: 30px;
+                    background-color: @themeColor;
+                    text-align: center;
+                    line-height: 30px;
+                    color: @whiteColor;
+                    font-size: 14px;
+                    vertical-align: top;
+                    margin: 0 6px;
+                }
+                & .regis {
+                    margin-left: 6px;
+                    font-size: 14px;
+                    margin-left: 6px;
+                    font-size: 14px;
+                    background: @whiteColor;
+                    color: @themeColor;
+                    border: 1px solid @themeColor;
+                    width: 83px;
+                    height: 28px;
+                }
+                & .login-name-text{
+                    font-size: 14px;
+                    display: inline-block;
+                    text-align: center;
+                    margin-right: 15px;
+                }
+                & .userExit{
+                    cursor: pointer;
+                    font-size:14px;
+                    display: inline-block;
+                }
+            }
+        }
+        & .userInfo {
+            height: 50px;
+            content: @77GreyColor;
+            text-align: center;
+            line-height: 50px;
+            background-color: @bodyBgColor;
+        }
+        & .content {
+            clear: both;
+            width: 194px;
+            background-color: @whiteColor;
+            padding: 8px 15px 3px 15px;
+            margin-bottom: 1px;
+        }
+        & .notice {
+            & .active {
+                float: left;
+                margin-right: 24px;
+                font-size: 14px;
+                cursor: pointer;
+                font-weight: 900;
+                color: @greyColor ;
+                border-bottom: 2px solid @themeColor;
+                padding-bottom: 2px;
+            }
+            & .more {
+                float: right;
+            }
+        }
+        & .inner {
+            display: none;
+            height: 150px;
+            font-size: 0; //border-bottom: 1px solid @eeGreyColor;
+            overflow: hidden;
+            &.active {
+                display: block;
+            }
+            & .li {
+                display: block;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                font-size: 12px;
+                overflow: hidden;
+                margin-top: 12px;
+                color: @greyColor;
+            }
+        }
+    }
+    & .tenants {
+        float: right;
+        width: 695px;
+        margin-right: 10px;
+        & .tabcontents {
+            padding: 35px 30px;
+            background-color: @btnDBgColor;
+            & .content {
+                display: none;
+            }
+            & .active {
+                display: block;
+            }
+            & h3 {
+                margin: 0;
+                font-size: 16px;
+                font-weight: normal;
+            }
+            & ul {
+                margin: 20px 0 0 0;
+            }
+            & li {
+                margin-top: 10px;
+            }
+        }
+        & .title {
+            padding-left: 10px;
+            font-size: 16px;
+        }
+        & table {
+            width: 100%;
+        }
+        & .thead {
+            background-color: @bodyBgColor;
+        }
+        & td {
+            width: 50%;
+            height: 49px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid @btnDBgColor;
+        }
+    }
+}

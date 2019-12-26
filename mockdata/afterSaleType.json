@@ -1,0 +1,20 @@
+{
+  "code": "0",
+  "message": "操作成功!",
+  "errMsg": null,
+  "data": [
+    {
+      "operateType": 2,
+      "operateName": "退货退款"
+    },
+    {
+      "operateType": 4,
+      "operateName": "换货"
+    },
+    {
+      "operateType": 5,
+      "operateName": "仅退款"
+    }
+  ],
+  "trace": "56!$6#@16%&172!$,null,61646825178100334291331"
+}

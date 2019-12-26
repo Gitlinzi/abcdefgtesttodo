@@ -1,0 +1,51 @@
+<div class="credit-box">
+    <div class="credit-top">
+        <span class="top-text">批发收款单</span>
+        <span class="top-text-right"><i class="right-arrow"></i>收款单详情</span>
+    </div>
+    <div class="businessDetail-box">
+        <div class="detail-top">
+            <p class="top-first">
+                <span class="first-time dis f14 w260">业务日期：{{parentOrder.rzDate}}</span>
+                <span class="first-order dis f14 w260">单据号：{{parentOrder.pfBillNo}}</span>
+            </p>
+            <p class="top-second">
+                <span class="second-order-style dis f14 w260">本次应收金额：{{parentOrder.ysTotal |currencySymbol:'￥'}}</span>
+                <span class="second-discound-order dis f14 w260">预付款金额：{{parentOrder.prePay |currencySymbol:'￥'}}</span>
+                <span class="second-diiscound-num dis f14 w260">折让金额：{{parentOrder.zrTotal |currencySymbol:'￥'}}</span>
+                <span class="second-income dis f14">本次实收金额：{{ parentOrder.ssTotal | currencySymbol:'￥'}}</span>
+            </p>
+            <p class="top-three">
+                <span class="three-good-num f14">备注：{{parentOrder.remark}}</span>
+            </p>
+        </div>
+        <div class="businessDetail-main">
+            <div class="main-text">
+                <span>收款单明细</span>
+            </div>
+            <div class="main-top receivable-left">
+                <span class="receivable-serial f12 dis">相关单据号</span>
+                <span class="receivable-code f12 dis">单据类型</span>
+                <span class="receivable-wholesale f12 dis">本单应收金额</span>
+                <span class="receivable-wholesale-num f12 dis">折让金额</span>
+                <span class="receivable-wholesale-money f12 dis">本单实收金额</span>
+                <!--<span class="receivable-income-money f12 dis">备注</span>-->
+            </div>
+            <div class="main-detail receivable-detail" ng-repeat="dl in detail.list">
+                <span class="receivable-serial dis f12">{{dl.billNo}}</span>
+                <span class="receivable-wholesale dis f12">{{dl.billTypeText}}</span>
+                <span class="receivable-wholesale-num dis f12">{{dl.ysTotal | currencySymbol:'￥'}}</span>
+                <span class="receivable-wholesale-money dis f12">{{dl.zrTotal | currencySymbol:'￥'}}</span>
+                <span class="receivable-wholesale-income dis f12">{{dl.ssTotal | currencySymbol:'￥'}}</span>
+                <!--<span title="备注备注备注" class="receivable-gift-num dis f12">备注备注备注</span>-->
+            </div>
+        </div>
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+         total-page="totalPage" ng-if="isShowPage"></div>
+    <!-- 缺省图 -->
+    <div class="history-time-none" ng-if="isShowIcon">
+        <span class="none-img"></span>
+        <span class="none-text">暂无数据</span>
+    </div>
+</div>

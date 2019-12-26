@@ -1,0 +1,120 @@
+<div class="member">
+    <div class="member-title">{{i18n('渠道会员下单')}}</div>
+    <div class="member-collect">
+        <div class="member-search clearfix">
+            <label>{{i18n('商品名称')}}</label>
+            <input type="text" ng-model="channelMember.productName">
+        </div>
+        <div class="member-search clearfix">
+            <label>{{i18n('商品编码')}}</label>
+            <input type="text" ng-model="searchObj.code">
+        </div>
+        <div class="member-search clearfix">
+            <label>{{i18n('商品类目')}}</label>
+            <input type="text" id="categorySel" class="form-control input240" ng-click="categoryTreeShow()" readonly/>
+            <div class="category-ztree" ng-show="categoryContent.addborder"
+                 ng-mouseleave="categoryContent.addborder=false"
+                 ng-class="{'category-ztree-border':categoryContent.addborder}">
+                <ul id="categoryTree" class="ztree" style="margin-top:0; width:240px;"></ul>
+            </div>
+        </div>
+        <div class="member-search clearfix" id="memberAddress">
+            <dl class="clearfix">
+                <dt style="padding-top: 5px;float: left;margin-right: 27px">{{i18n('配送至')}}</dt>
+                <dd>
+                    <span class="spaddress" ng-click="localProvince.lvAreaObj.areaShow = true">{{localProvince.lvAreaObj.detail||localProvince.gotAreas.province.name}}<i class="icon-more-down"></i></span>
+                    <div class="adschange" ng-if="localProvince.lvAreaObj.areaShow">
+                        <span class="dialog-close-location"
+                           ng-click="localProvince.lvAreaObj.areaShow=false"
+                           style="line-height: 25px">&times;</span>
+                        <ul class="tab">
+                            <li ng-class="{active:localProvince.lvAreaObj.areaTab == 1}"
+                                ng-click="localProvince.lvAreaObj.areaTab=1">{{localProvince.gotAreas.province.name||i18n('请选择省份')}}</li>
+                            <li ng-class="{active:localProvince.lvAreaObj.areaTab == 2}"
+                                ng-if="localProvince.lvAreaObj.areaTab>1"
+                                ng-click="localProvince.lvAreaObj.areaTab=2">{{localProvince.gotAreas.city.name||i18n('请选择城市')}}</li>
+                            <li ng-class="{active:localProvince.lvAreaObj.areaTab == 3}"
+                                ng-if="localProvince.lvAreaObj.areaTab>2">{{localProvince.gotAreas.area.name||i18n('请选择区域')}}</li>
+                        </ul>
+                        <ul class="content-member" ng-class="{active:localProvince.lvAreaObj.areaTab == 1}">
+                            <li ng-repeat="prov in localProvince.gotAreas.provinces|orderBy:'name.length'"
+                                ng-click="localProvince._changeAddr(prov,2)"
+                                ng-class="{active:prov.id==localProvince.gotAreas.province.id,col2:prov.name.length > 7}">{{prov.name}}</li>
+                        </ul>
+                        <ul class="content-member" ng-class="{active:localProvince.lvAreaObj.areaTab == 2}">
+                            <li ng-repeat="city in localProvince.gotAreas.cities|orderBy:'name.length'"
+                                ng-click="localProvince._changeAddr(city,3)"
+                                ng-class="{active:city.id==localProvince.gotAreas.city.id,col2:city.name.length > 7}">{{city.name}}</li>
+                        </ul>
+                        <ul class="content-member" ng-class="{active:localProvince.lvAreaObj.areaTab == 3}">
+                            <li ng-repeat="area in localProvince.gotAreas.areas|orderBy:'name.length'"
+                                ng-click="localProvince._changeAddr(area,0)"
+                                ng-class="{col2:area.name.length > 7}">{{area.name}}</li>
+                        </ul>
+                    </div>
+                </dd>
+            </dl>
+        </div>
+        <div class="member-search merber-search-fr">
+            <div class="fr">
+                <input type="submit" value="{{i18n('查询')}}" class="btn" ng-click="channelMember.searchProduct()">
+                <input type="reset" value="{{i18n('重置')}}" class="btn" ng-click="channelMember.resetSearch()">
+            </div>
+
+        </div>
+    </div>
+    <div class="order-group  channelPosition">
+        <div class="left-all">
+            <span ng-click="batchToCart()">{{i18n('批量加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}</span>
+        </div>
+        <div class="member-nav">
+            <ul>
+                <!-- <li > <input type="checkbox" id="checkbox_a0" class="chk_1" ng-model="checkAll" ng-change="checkAllBtn();channelMember.putTempProduct()"/><label for="checkbox_a0"></label></li> -->
+                <li class="firstLi" align="center">
+                    <span class="paddr22">
+                        <label for="checkAllCollection" class="checkboxStyle-small checkCollection">
+                            <input id="checkAllCollection" type="checkbox" ng-model="checkAll" ng-change="checkAllBtn();channelMember.putTempProduct()">
+                            <span></span>
+                        </label>
+                        {{i18n('全选')}}
+                    </span>
+                </li>
+                <li class="n3 productLi">{{i18n('商品')}}</li>
+                <li class="n4" align="center">{{i18n('商品编号')}}</li>
+                <li class="n5">{{i18n('可售库存')}}</li>
+                <li class="n6 mgR20" align="right">{{i18n('价格')}}</li>
+                <li class="n8" align="center">{{i18n('操作')}}</li>
+            </ul>
+        </div>
+        <div class="member-box">
+            <div class="member-content" ng-repeat="pro in channelMember.list" ng-class="{pitchOnStatus:pro.isChecked}">
+                <ul>
+                    <li class="mgT30 twoLi" align="center">
+                        <!-- <input type="checkbox" id="checkbox_a{{$index+1}}" class="chk_1" ng-model="pro.isChecked" ng-change="checkAllBtn2();channelMember.putTempProduct()"/><label for="checkbox_a{{$index+1}}"></label> -->
+                        <label class="checkboxStyle-small">
+                                <input hidden id="checkBoxAll" ng-checked="pro.isChecked"
+                                ng-model="pro.isChecked"
+                                ng-change="checkAllBtn2();channelMember.putTempProduct()"
+                                class="chk chk-all checkBoxAll"
+                                type="checkbox">
+                            <span></span>
+                        </label>
+                    </li>
+                    <li class="n2" align="center"><a class="img-block" href="item.html?itemId={{pro.mpId}}"><img width="80" height="80" ng-src="{{pro.picUrl}}" alt=""></a></li>
+					<li class="n3">
+                        <a class="good-mes-title" href="item.html?itemId={{pro.mpId}}">{{pro.name}}</a>
+                        <span ng-repeat="tag in pro.attrVOS">{{tag.attrName.name}}:{{tag.attrVal.value}}</span>
+
+                    </li>                    <li class="n4" align="center"><span>{{pro.code}}</span></li>
+                    <li class="n5"><span>{{pro.stockNum}}</span></li>
+                    <li class="n6 red mgR20" align="right"><span>{{pro.availablePrice |currency:'￥'}}</span></li>
+                    <li class="n8" align="center"><a add-to-cart href="javascript:void(0)" prod="pro" handle="addCart" num="1" options="{isPresell:pro.isPresell}"><span>{{i18n('加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}</span></a>
+                        <span ng-click="oneBuy(pro.mpId)">{{i18n('立即购买')}}</span></li>
+                </ul>
+            </div>
+        </div>
+        <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                    total-page="totalPage" ng-if="channelMember.isShowPage"></div>
+
+    </div>
+</div>

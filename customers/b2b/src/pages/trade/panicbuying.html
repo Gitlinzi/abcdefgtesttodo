@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/plugins/jquery.calendar-1.4.1/css/jquery.cxcalendar.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" href="/panicbuying.css?v=${version}">
+</head>
+<base target="_blank"/>
+
+<body class="bgf8" ng-app="appControllers" ng-controller="panicbuyingCtrl">
+
+@@include("header.html")
+@@include("global-nav.html")
+
+<div class="serve-big">
+    <div class="channel-box">
+        <div class="channel-top">
+            <span class="time-limit">限时秒杀</span>
+            <span class="surplus-time" ng-if="currentPromotion.endTime">本场还剩</span>
+            <span class="surplus-time">
+                <span class="last-time" ng-if="currentPromotion.sysTime>0" count-down show-count-down="true" end-time="currentPromotion.endTime" current-time="currentPromotion.sysTime" no-font="true" ng-if="currentPromotion.endTime"></span>
+            </span>
+        </div>
+        <div class="channel-title">
+            <div class="container channel-nav">
+                <ul id="thumblist">
+                    <li class="imgLi normal-time" ng-repeat="time in purchaseTimeList" ng-class="{'have-hand':time.promotionId==promotionIdNum}" ng-click="purchaseBuy(time.promotionId)">
+                        <span ng-class="{'proceed-time':time.status == 2,'future-time':time.status == 1}">{{time.timeStr}} {{time.statusStr}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="leftGuide" ng-click="arrowLeftImg()" ng-show="isShowLeft"></div>
+            <div class="rightGuide" ng-click="arrowRightImg()" ng-show="isShowRight"></div>
+        </div>
+        <div class="channel-list-box">
+            <div class="channel-list" ng-if="purchaseBuyList.status == 2">
+                <ul class="channel-list-ul">
+                    <li ng-repeat="pro in purchaseBuyList.merchantProducts">
+                        <dl>
+                            <a target="_blank" href="/item.html?itemId={{pro.mpId}}">
+                                <img alt="" src="{{pro.picUrl}}" target="_blank">
+                            </a>
+                            <dd ng-if="(pro.totalLimit - pro.saleStock) > 0">
+                                <h4>
+                                    {{pro.name}}
+                                </h4>
+                                <div class="channel-list-future">
+                                    <div class="channel-list-future-left">
+                                        <h5>
+                                            <span ng-if="!$parent.hideProductPrice">
+                                              <label>￥</label>
+                                              <span class="high">{{pro.promotionPrice}}</span>
+                                              <span class="oldPrice">{{pro.originalPrice| currency:'￥'}}</span>
+                                            </span>
+                                            <span ng-if="$parent.hideProductPrice" class="hide-price">
+                                              {{$parent.switchConfig.common.showTextWhenHidePrice}}
+                                            </span>
+                                        </h5>
+                                        <p>
+                                            <span> 已售{{((pro.saleStock?pro.saleStock: 0)/(pro.totalLimit?pro.totalLimit: 0))*100 | currency:''}}%</span>
+                                            <span class="progress">
+                                                <label ng-style="{width:'{{((pro.saleStock)/pro.totalLimit)*90}}'}"></label>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <button class="futureBtn" ng-disabled="pro.status!=2" ng-click="toDetail(pro.mpId)">立即抢购</button>
+                                </div>
+                            </dd>
+                            <dd ng-if="(pro.totalLimit - pro.saleStock) <= 0">
+                                <h4>
+                                    {{pro.name}}
+                                </h4>
+                                <div class="channel-list-nothing">
+                                    <h5 class="nothingPrice">
+                                        <span ng-if="!$parent.hideProductPrice">
+                                          <label class="newPrice">￥</label>
+                                          <span style="margin-left:-10px;" class="newPrice">{{pro.promotionPrice}}</span>
+                                          <span class="oldPrice">{{pro.originalPrice| currency:'￥'}}</span>
+                                        </span>
+                                        <span ng-if="$parent.hideProductPrice" class="hide-price">
+                                          {{$parent.switchConfig.common.showTextWhenHidePrice}}
+                                        </span>
+                                    </h5>
+                                    <button class="nothingBtn">已抢完</button>
+                                </div>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="channel-list" ng-if="purchaseBuyList.status == 1">
+                <ul class="channel-list-ul">
+                    <li ng-repeat="pro in purchaseBuyList.merchantProducts">
+                        <dl>
+                            <a target="_blank" href="/item.html?itemId={{pro.mpId}}">
+                                <img alt="" src="{{pro.picUrl}}" target="_blank">
+                            </a>
+                            <dd>
+                                <h4>
+                                    {{pro.name}}
+                                </h4>
+                                <div class="channel-list-infor">
+                                    <div class="channel-list-infor-left">
+                                        <h5>
+                                            <span ng-if="!$parent.hideProductPrice">
+                                              <label>￥</label>
+                                              <span class="high">{{pro.promotionPrice}}</span>
+                                              <span class="oldPrice">{{pro.originalPrice| currency:'￥'}}</span>
+                                            </span>
+                                            <span ng-if="$parent.hideProductPrice" class="hide-price">
+                                              {{$parent.switchConfig.common.showTextWhenHidePrice}}
+                                            </span>
+                                        </h5>
+                                        <p>
+                                            {{purchaseBuyList.startTime| date:' HH:mm'}} 准时开抢
+                                        </p>
+                                    </div>
+                                    <button class="panicBuyBtn">即将开始</button>
+                                </div>
+
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@@include("footer.html") @@include("script.html")
+<script type="text/javascript" src="/panicbuying.js?v=${version}"></script>
+</body>
+
+</html>

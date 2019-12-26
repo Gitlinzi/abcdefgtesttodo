@@ -1,0 +1,22 @@
+{
+    "code": 0,
+    "message": null,
+    "data": {
+        "messageType": 1,
+        "unReadMsgCount": 3,
+        "msgTitle": "订单被退回",
+        "msgContent": "<p>尊敬的测试，您有一笔订单,订单号:190715806301632018被被测试退回，如要修改订单，请进入我的订单进行修改</p>",
+        "coverUrl": null,
+        "h5Url": null,
+        "appUrl": null,
+        "iconUrl": "http://cdn.oudianyun.com/lyf/branch/frontier-guide/1484728323583_4825_187.png",
+        "latestTime": 1575623683000,
+        "latestTimeStr": "昨天 17:14",
+        "labelName": "系统通知",
+        "categoryId": null,
+        "categoryName": null,
+        "categoryPic": null,
+        "sort": null,
+        "switchon": null
+    }
+}

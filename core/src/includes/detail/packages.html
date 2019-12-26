@@ -1,0 +1,169 @@
+<div ng-if="promotionType_Package.length>0&&itemlist.managementState&&itemlist.isAreaSale" class="package-box">
+    <!--商品选择系列品属性提示 弹窗 begin-->
+    <div ng-show="packageChoseAttrOne" class="prompt-bigBox">
+        <div class="prompt-box">
+            <div class="bomBox-title clearfix">
+                <div class="bomBox-left">
+                    <span>{{i18n('提示')}}</span>
+                </div>
+            </div>
+            <div class="prompt-container">
+                <dl ng-repeat="v in packageAttr" class="clearfix">
+                    <dt>{{v.name}}</dt>
+                    <dd class="good-attr">
+                        <input type="button" class="skuTwo sceneIpt" attr_id="{{s.id}}" ng-click="packageAttrs(s,v.values,$event)" ng-repeat="s in v.values" value="{{s.value}}">
+                    </dd>
+                </dl>
+                <dl class="clearfix">
+                    <dt>{{i18n('数量')}}</dt>
+                    <dd>
+                        <div class="count clearfix">
+                            <input type="button" class="sub" value="-" ng-class="{disable:$parent.packAgeItemAmount<=1}" ng-disabled="$parent.packAgeItemAmount<=1" ng-click="packageMethod.updateProduct(-1,three.canSaleNum)">
+                            <input class="num" data-min="1" data-max="9999" ng-model="$parent.packAgeItemAmount" ng-change="packageMethod.updateProduct(0,three.canSaleNum)">
+                            <input type="button" class="add" value="+" ng-class="{disable:$parent.packAgeItemAmount>=three.canSaleNum}" ng-disabled="$parent.packAgeItemAmount>=three.canSaleNum" ng-click="packageMethod.updateProduct(1,three.canSaleNum)">
+                        </div>
+                        <div>{{i18n('件')}}</div>
+                        <div ng-show="canSaleNum!=null" class="makeChose">{{i18n('可选购')}}{{canSaleNum}}{{i18n('件')}}</div>
+                    </dd>
+                </dl>
+                <dl ng-if="packageServiceList.length>0" class="clearfix">
+                    <dt>{{i18n('安装服务')}}</dt>
+                    <dd ng-repeat="v in packageServiceList">
+                            <span ng-click="packageMethod.chosePackageServiceGood(v.id,packageServiceList,v)" ng-class="{'disabled':!v.choseAdd,'disAbled':!v.choseAdd,'active-redLine':v.checked}" class="go-door">
+                                {{v.chineseName}}
+                            </span>
+                        <span ng-show="!v.choseAdd" style="border: none;">{{i18n('当前地区不支持安装服务')}}</span>
+                    </dd>
+                </dl>
+                <div class="button-box">
+                    <input ng-click="chosePackageSure()" class="input-one" type="button" value="{{i18n('确定')}}"/>
+                    <input style="border: 1px solid #DFDFDF;" ng-click="packageMethod.closePackageAttr()" class="input-two-box" type="button" value="{{i18n('取消')}}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--商品选择系列品属性提示 弹窗 end-->
+
+    <!--套餐商品选择属性 弹框2 begin-->
+    <div ng-show="packageChoseAttrTwo" class="prompt-bigBox">
+        <div class="prompt-box">
+            <div class="bomBox-title clearfix">
+                <div class="bomBox-left">
+                    <span>{{i18n('提示')}}</span>
+                </div>
+            </div>
+            <div class="prompt-container">
+                <dl class="clearfix">
+                    <dt>{{i18n('数量')}}</dt>
+                    <dd>
+                        <div class="count clearfix">
+                            <input type="button" class="sub" value="-" ng-class="{disable:$parent.packAgeItemAmount<=1}" ng-disabled="$parent.packAgeItemAmount<=1" ng-click="packageMethod.updateProduct(-1)"/>
+                            <input class="num" data-min="1" data-max="9999" ng-model="$parent.packAgeItemAmount" ng-change="packageMethod.updateProduct(0)"/>
+                            <input type="button" class="add" value="+" ng-class="{disable:$parent.packAgeItemAmount>=itemlist.stockNum}" ng-disabled="$parent.packAgeItemAmount>=itemlist.stockNum" ng-click="packageMethod.updateProduct(1)"/>
+                        </div>
+                        <div>{{i18n('件')}}</div>
+                        <div ng-show="canSaleNum!=null" class="makeChose">{{i18n('可选购')}}{{canSaleNum}}{{i18n('件')}}</div>
+                    </dd>
+                </dl>
+                <dl ng-if="packageServiceList.length>0" class="clearfix">
+                    <dt>{{i18n('送装服务')}}</dt>
+                    <dd ng-repeat="v in packageServiceList">
+                            <span ng-click="packageMethod.chosePackageServiceGood(v.id,packageServiceList,v)" ng-class="{'disabled':!v.choseAdd,'disAbled':!v.choseAdd,'active-redLine':v.checked}" class="go-door">
+                                {{v.chineseName}}
+                            </span>
+                        <span ng-show="!v.choseAdd" style="border: none;">{{i18n('当前地区不支持安装服务')}}</span>
+                    </dd>
+                </dl>
+                <div class="button-box">
+                    <input ng-click="chosePackageSure()" class="input-one" type="button" value="{{i18n('确定')}}"/>
+                    <input style="border: 1px solid #dfdfdf;" ng-click="packageMethod.closePackageAttr()" class="input-two-box" type="button" value="{{i18n('取消')}}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--套餐商品选择属性 弹框2 end-->
+
+    <!--商品套餐 begin-->
+    <div class="package-title">
+        <span ng-repeat="v in promotionType_Package track by $index" ng-click="packageMethod.chosePackage(promotionType_Package,v,v.promotionRuleList,false,$index)" ng-class="{'active-span':v.checked}">{{i18n('套餐')}}{{$index+1}}</span>
+    </div>
+    <div class="package-mes clearfix">
+        <div class="package-mes-ul-box">
+            <div class="package-mes-ul-box-position">
+                <ul class="clearfix package-left">
+                    <li ng-click="packageMethod.choseTeam(h)" ng-repeat="h in packageObject track by $index" class="taocan-two" ng-class="{'active-taocan':h.flag}">
+                        <span class="one">{{i18n('套餐组')}}{{$index+1}}</span>
+                        <span class="squ">{{h.packageChoseNum}}</span>
+                        <span class="two">{{i18n('至少选')}}{{h.conditionValue}}{{i18n('个')}}</span>
+                        <span class="jiahao-box" ng-class="{'jiahao-none':$index===packageObject.length - 1}">
+                            <span class="jiahao"></span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="arrow">
+            <span ng-class="{'arrow-left-img-two' : picNum>=(maxPicNum-1)}" ng-click="packageDownMove()" class="arrow-left-img"></span>
+            <span ng-class="{'arrow-right-img-two' :isPackageDownMove,'arrow-right-img':isPackageUpMove}" ng-click="packageUpMove()"></span>
+        </div>
+        <div class="package-right">
+            <div class="item-list-box">
+                <div ng-repeat="v in clickPackage track by $index" ng-show="v.level==0" class="package-main-good">
+                    <div class="package-main-good-box" ng-repeat="product in v.mpList track by $index" ng-show="v.level==0">
+                        <a href="javascript:void(0)">
+                            <img width="160" height="160" ng-src="{{product.picUrl}}" alt="image"/>
+                            <span class="good-text-flow">{{product.mpName}}</span>
+                        </a>
+                        <p ng-if="!$parent.hideProductPrice">
+                            {{product.promPrice|currency:"￥"}}<span>{{product.price|currency:"￥"}}</span>
+                        </p>
+                        <p ng-if="$parent.hideProductPrice">
+                            {{product.promPrice|currency:"￥"}}<span>{{product.price|currency:"￥"}}</span>
+                        </p>
+                        <span class="add-package-good"></span>
+                        <div class="position-Box">
+                            <input ng-model="product.mainIsChose" ng-click="packageMethod.choseCheckbox(product,$event,v, clickPackage)" type="checkbox">
+                            <span class="bottom-text">{{i18n('已选')}}<b>{{product.num || 0}}</b>{{i18n('个')}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-list">
+                    <ul id="packageGood" class="clearfix">
+                        <div class="packageGoodBox" ng-repeat="send in packageObject track by $index" ng-show="send.flag">
+                            <li class="liImg" ng-repeat="product in send.mpList">
+                                <a href="/item.html?itemId={{product.mpId}}">
+                                    <img width="160" height="160" ng-src="{{product.picUrl}}"/>
+                                    <span>{{product.mpName}}</span>
+                                </a>
+                                <p ng-if="!$parent.hideProductPrice">
+                                    {{product.promPrice|currency:"￥"}}<span>{{product.price|currency:"￥"}}</span>
+                                </p>
+                                <p ng-if="$parent.hideProductPrice">
+                                    {{product.promPrice|currency:"￥"}}<span>{{product.price|currency:"￥"}}</span>
+                                </p>
+                                <div class="position-Box">
+                                    <input ng-model="product.isChose" ng-click="packageMethod.choseCheckbox(product,$event,send)" type="checkbox"/>
+                                    <span class="bottom-text">{{i18n('已选')}}<b>{{product.num || 0}}</b>{{i18n('个')}}</span>
+                                </div>
+
+                            </li>
+                        </div>
+                    </ul>
+                </div >
+                <span ng-click="packageLeftMove($event)" class="arrow-box-ran arrow-left-ran" ng-class="{'arrow-left-ran-two':rightPicNum!=0}"></span>
+                <span ng-click="packageRightMove($event)" class="arrow-box-ran arrow-right-ran" ng-class="{'arrow-right-ran-two':rightPicNum<(rightLength-1)}"></span>
+            </div>
+            <div class="total-box">
+                <span class="etc"></span>
+                <p class="choose">{{i18n('已选择')}}<b>{{packageTotalNum}}</b>{{i18n('件')}}</p>
+                <p class="taocan">{{i18n('套餐价')}}<b>{{totalMoney|currency:"￥"}}</b></p>
+                <div class="buy-sure">
+                    <input ng-click="packageMethod.packageBuyNow(v,packageObject)" class="buy-sure-one" ng-class="{'buy-sure-red':isActive}" ng-disabled="isDisabled"  type="button" value="{{i18n('立即购买')}}"/>
+                </div>
+                <div class="plus">
+                    <input ng-click="packageMethod.addToCart()" ng-class="{'buy-sure-red':isActive}" ng-disabled="isDisabled" class="buy-sure-two" type="button" value="{{i18n('加入')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,243 @@
+<div class='name-prove'>
+    <p class='home-allTitle pdL20'>{{i18n('我的会员')}}</p>
+    <div class="name-prove-title pdL20" ng-if="userInfo.identityTypeCode != 43">
+        <span class="text" ng-click="changeTab(1)" ng-class="{'goods-active':activeNum==1}" ng-show="userInfo.identityTypeCode == $parent.switchConfig.common.defaultIdentityTypeCode">{{i18n('普通会员')}}</span>
+        <span class="line" ng-show="(userInfo.identityTypeCode == $parent.switchConfig.common.defaultIdentityTypeCode)"></span>
+        <span class="text" ng-click="changeTab(2)" ng-class="{'goods-active':activeNum==2}" ng-show="(userInfo.identityTypeCode == 4||userInfo.identityTypeCode==41)">{{i18n('内购会员')}}</span>
+        <span class="line" ng-show="(userInfo.identityTypeCode == $parent.switchConfig.common.defaultIdentityTypeCode)"></span>
+        <span class="text" ng-click="changeTab(3)" ng-class="{'goods-active':activeNum==3}" ng-show="(userInfo.identityTypeCode == 4||userInfo.identityTypeCode==42)">{{i18n('企业会员')}}</span>
+        <span class="line" ng-show="(userInfo.identityTypeCode == $parent.switchConfig.common.defaultIdentityTypeCode)"></span>
+        <span class="text" ng-click="changeTab(4)" ng-class="{'goods-active':activeNum==4}" ng-show="userInfo.identityTypeCode == 4||userInfo.identityTypeCode==43">{{i18n('渠道会员')}}</span>
+    </div>
+    <div class="name-prove-title pdL20" ng-if="userInfo.identityTypeCode == 43">
+        <span class="text" ng-show="userInfo.licenseAuditStatus==0">{{i18n('普通会员')}}</span>
+        <span class="text" ng-show="userInfo.licenseAuditStatus==0">{{i18n('内购会员')}}</span>
+        <span class="text" ng-show="userInfo.licenseAuditStatus==0">{{i18n('企业会员')}}</span>
+        <span class="text" ng-click="changeTab(4)" ng-class="{'goods-active':activeNum==4}">{{i18n('渠道会员')}}</span>
+    </div>
+    <div class="pt-member" ng-if="activeNum==1">
+        <!--<p class="member-title">{{memberInfo.memberTypeName}}</p>-->
+        <div class="pt-content">
+            <div class="pt-explain">
+                <h6>{{i18n('会员等级说明')}}</h6>
+                <p>1、{{i18n('会员等级可以升级或降级')}}，{{i18n('会员等级通过购物金额和会员活动等方式增加')}}。{{i18n('详细参见')}}：<span class="c0066cc">{{i18n('会员等级说明')}}</span></p>
+                <p>2、{{i18n('不同会员等级可购买的商品不同')}}，{{i18n('以及商品价格不同')}}。{{i18n('等级越高')}}，{{i18n('价格越优惠')}}</p>
+            </div>
+            <div class="pt-level">{{i18n('您当前的会员等级')}}：<span ng-show="memberInfo.memberLevelName">{{memberInfo.memberLevelName}}</span></div>
+            <div class="pt-come">{{i18n('会员成长值')}}
+                <div class="pt-progress">
+                    <span class="progress"></span>
+                    <span class="progress-text">{{memberInfo ? memberInfo.growthBalence: 0}}/{{memberInfo.growthReach}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nei-member" ng-show="activeNum==2||userInfo.identityTypeCode == 41" >
+        <!--<p class="member-title">内购会员</p>-->
+        <div class="nei-content" ng-if="userInfo.identityTypeCode != 41">
+            <div class="nei-explain">
+                <h6>{{i18n('内购会员说明')}}</h6>
+                <p>1、{{i18n('需先注册成为普通会员')}}，{{i18n($parent.switchConfig.common.companyName)}}{{i18n('员工及')}}{{i18n($parent.switchConfig.common.companyName)}}{{i18n('的亲友')}}，{{i18n('可申请成为内购会员')}}</p>
+                <p>2、{{i18n('内购会员可享有内购商品的优惠价格')}}</p>
+            </div>
+            <div class="no-member">{{i18n('您当前还未成为内购会员')}}</div>
+            <!--<div class="staff">内部员工</div>-->
+            <div class="staff" ng-click="neiCode()" ng-class="{'add-redLine':neiStatus}">
+                {{i18n('内部员工')}}
+                <span ng-class="{'icon-img':neiStatus}"></span>
+            </div>
+
+            <dl class="clearfix">
+                <dt>{{i18n('姓名')}}</dt>
+                <dd>
+                    <input ng-model="authentication.realName" type="text" class="detail-local">
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>{{i18n('身份证号')}}</dt>
+                <dd>
+                    <input ng-model="authentication.identityCardNo" type="text" class="detail-local" placeholder="{{i18n('请输入身份证后')}}4{{i18n('位')}}">
+                </dd>
+            </dl>
+            <dl class="clearfix">
+                <dt>{{i18n('工号')}}</dt>
+                <dd>
+                    <input ng-model="authentication.employeeNo" type="text" class="detail-local">
+                </dd>
+            </dl>
+            <!--<input type="button" value="申请" >-->
+            <input type="button"  ng-value="apply" ng-click="appUser()" ng-class="{active:applyStatus}" >
+            <span ng-show="msg" class="msg">{{msg}}</span>
+        </div>
+        <!--成为内购会员-->
+        <div class="inside" ng-if="userInfo.identityTypeCode == 41 && !isInviteUser">
+            <!--<p>您好！内购会员（亲友）</p>-->
+            <p>{{i18n('您好')}}！{{i18n('内购会员')}}</p>
+            <ul>
+                <li>{{i18n('任职状态')}}：<span>{{i18n('在职')}}</span></li>
+            </ul>
+            <ul ng-if="!userInfo.inviteInfo.inviteUserName" style="margin-bottom: 10px">
+                <li>{{i18n('亲友邀请码')}}</li>
+                <li>{{i18n('可将邀请码提供给亲友')}}，{{i18n('注册亲友号享有内购福利')}}</li>
+                <li>{{i18n('邀请人数')}}：<span>{{userInfo.invitedPersonsNum}}</span>/<span>{{userInfo.invitedPersonsTotalNum}}</span></li>
+                <!-- <li>{{i18n('邀请链接')}}：</li> -->
+            </ul>
+             <div class="invitationFriend" ng-if="getShareInformation.length>0">
+                 <div>已邀请亲友:</div>
+                 <table class="invitationMessage" border="1">
+                     <tr>
+                         <td>编号</td>
+                         <td>昵称</td>
+                         <td>手机号</td>
+                     </tr>
+                    <tr ng-repeat="information in getShareInformation track by $index">
+                        <td>{{$index+1}}</td>
+                        <td>{{information.nickname?information.nickname:information.mobile}}</td>
+                        <td>{{information.mobile}}</td>
+                    </tr>
+                 </table>
+             </div>
+            <div>
+                {{i18n('邀请链接')}}：
+            </div>
+            <div class="inside-url mgR20" ng-if="!userInfo.inviteInfo.inviteUserName">
+                <a>{{userInfo.invitationLink}}</a>
+                <!-- href="login.html?shareCode={{shareCode}}" -->
+            </div>
+            <p><span>{{i18n('姓名')}}</span>{{memberInfo.realName}}</p>
+            <p><span>{{i18n('身份证号')}}</span>{{memberInfo.identityCardNo}}</p>
+            <p><span>{{i18n('工号')}}</span>{{memberInfo.employeeNo}}</p>
+            <!-- <ul>
+                <li>{{i18n('您的限量限额为')}}</li>
+                <li>{{i18n('时间区间')}}：<span>{{userInfo.startingTime}}</span>{{i18n('至')}}<span>{{userInfo.endTime}}</span></li>
+                <li>{{i18n('限购金额')}}（{{i18n('元')}}）：<span>{{userInfo.buyMinMoney}}</span>/<span>{{userInfo.buyMaxMoney}}</span></li>
+            </ul> -->
+            <ul>
+                <li>{{i18n('内购会员规则说明')}}：</li>
+                <!-- <li>1.内购会员每年最多可购买x元商品</li>
+                <li>2.{{i18n('内购会员每')}}2{{i18n('天最多可下')}}y{{i18n('单')}}</li>
+                <li>3.{{i18n('内购会员从')}}<span>xxx</span>{{i18n('至')}}<span>xxxx</span>,{{i18n('购买商品有数量限制')}}</li>
+                <li>4.内购会员从xxxx起，最多可购买x元商品</li> -->
+
+                <li ng-repeat="item in restrictBuy" ng-if="restrictBuy.length>=1">
+                    {{$index+1}}：{{item.tradeLimitDetail}}
+                </li>
+            </ul>
+        </div>
+        <!--成为亲友内购会员-->
+        <div class="inside" ng-if="userInfo.identityTypeCode == 41 && isInviteUser">
+            <!--<p>您好！内购会员（亲友）</p>-->
+            <p>{{i18n('您好')}}！{{i18n('内购会员')}}({{i18n('亲友')}})</p>
+            <ul>
+                <!-- <li>邀请人：<span>{{inviteInfo.inviteUserName ? inviteInfo.inviteUserName: inviteInfo.inviteUserMobile}}</span></li> -->
+                <li>{{i18n('用户名')}}：<span>{{inviteInfo.inviteUserName ? inviteInfo.inviteUserName: inviteInfo.inviteUserMobile}}</span></li>
+                <li>{{i18n('任职状态')}}：<span>{{i18n('在职')}}</span></li>
+            </ul>
+
+            <!-- <ul>
+                <li>{{i18n('您的限量限额为')}}</li>
+                <li>{{i18n('时间区间')}}：<span>{{userInfo.startingTime}}</span>{{i18n('至')}}<span>{{userInfo.endTime}}</span></li>
+                <li>{{i18n('限购金额')}}（{{i18n('元')}}）：<span>{{userInfo.buyMinMoney}}</span>/<span>{{userInfo.buyMaxMoney}}</span></li>
+            </ul> -->
+            <ul>
+                <li>&nbsp;&nbsp;{{i18n('内购会员规则说明')}}：</li>
+                <!-- <li>1.内购会员每年最多可购买x元商品</li>
+                <li>2.{{i18n('内购会员每')}}2{{i18n('天最多可下')}}y{{i18n('单')}}</li>
+                <li>3.{{i18n('内购会员从')}}<span>xxx</span>{{i18n('至')}}<span>xxxx</span>,{{i18n('购买商品有数量限制')}}</li>
+                <li>4.{{i18n('内购会员从')}}xxxx{{i18n('起')}}，{{i18n('最多可购买')}}x{{i18n('元商品')}}</li>
+                -->
+                <li ng-repeat="item in restrictBuy" ng-if="restrictBuy.length>=1">
+                    {{$index+1}}：{{item.tradeLimitDetail}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="nei-member" ng-show="activeNum==3||userInfo.identityTypeCode == 42">
+        <!--<p class="member-title">企业会员</p>-->
+        <div class="nei-content" ng-if="userInfo.identityTypeCode != 42 || (userInfo.identityTypeCode == 42 && needChangeEnterprise)">
+            <div class="nei-explain">
+                <h6>{{i18n('企业会员说明')}}</h6>
+                <p>1、{{i18n('企业会员享有当前企业的优惠价格')}}</p>
+            </div>
+            <div class="no-member">{{i18n('您当前还未成为企业会员')}}</div>
+            <dl class="clearfix">
+                <dt>{{i18n('企业密令')}}</dt>
+                <dd>
+                    <input type="text" class="detail-local" ng-model="authentication.enterpriseSecret">
+                </dd>
+            </dl>
+            <input type="button" ng-click="company()"  ng-class="{active:applyStatus}" ng-value="apply" >
+            <span ng-show="msg" class="msg">{{msg}}</span>
+        </div>
+        <!--成为企业会员-->
+        <div class="company" ng-if="userInfo.identityTypeCode == 42 && !needChangeEnterprise">
+            <p>{{i18n('您好')}}！{{memberInfo.memberTypeName||i18n('企业会员')}}</p>
+            <ul>
+                <li>{{i18n('企业名称')}}：<span>{{memberInfo.enterpriseName || i18n($parent.switchConfig.common.companyName)}}</span></li>
+                <li>{{i18n('您当前的会员等级')}}：<span ng-show="memberInfo.memberLevelName">{{memberInfo.memberLevelName}}</span></li>
+                <li class="pt-come">{{i18n('会员成长值')}}
+                    <div class="pt-progress">
+                        <span class="progress"></span>
+                        <span class="progress-text">{{(memberInfo ? memberInfo.growthBalence: 0)||0}}/{{memberInfo.growthReach||0}}</span>
+                    </div>
+                </li>
+            </ul>
+            <a href="javascript:void(0)" class="changeEnterprise mgB15" ng-click="changeEnterprise()">{{i18n('更换企业')}}</a>
+        </div>
+    </div>
+
+    <div class="nei-member" ng-show="activeNum==4||userInfo.identityTypeCode == 43">
+        <!--<p class="member-title">渠道会员</p>-->
+        <div class="nei-content" ng-if="userInfo.identityTypeCode != 43 || userInfo.licenseAuditStatus == -1 || userInfo.licenseAuditStatus == 2" >
+            <div class="no-member qd-member">{{i18n('您还未成为渠道会员')}}</div>
+            <ul class="clearfix tax ">
+                <li class="item-img-box">
+                    <div pc-upload-image image-width="100" image-height="100" image-border="0" default-image="../../../images/photo.png" max-size="{{$parent.switchConfig.common.uploadingPicSize}}" image-url="$parent.businessLicencePhoto" image-pattern="{{$parent.switchConfig.common.uploadingPicFormat}}" is-show-delete="true"></div>
+                    <p>{{i18n('营业执照')}}</p>
+                </li>
+                <li class="item-img-box">
+                    <div pc-upload-image image-width="100" image-height="100" image-border="0" default-image="../../../images/photo.png" max-size="{{$parent.switchConfig.common.uploadingPicSize}}" image-url="$parent.taxRegistrationPhoto" image-pattern="{{$parent.switchConfig.common.uploadingPicFormat}}" is-show-delete="true"></div>
+                    <p>{{i18n('税务登记证')}}</p>
+                </li>
+                <li class="item-img-box">
+                    <div pc-upload-image image-width="100" image-height="100" image-border="0" default-image="../../../images/photo.png" max-size="{{$parent.switchConfig.common.uploadingPicSize}}" image-url="$parent.accountOpeningPhoto" image-pattern="{{$parent.switchConfig.common.uploadingPicFormat}}" is-show-delete="true"></div>
+                    <p>{{i18n('开户许可证')}}</p>
+                </li>
+            </ul>
+            <input type="button" ng-click="channel()"  ng-class="{active:applyStatus}" ng-value="apply" style="margin-left:0px" ng-disabled="applyStatus">
+            <span ng-show="msg" class="msg">{{msg}}</span>
+        </div>
+        <!--审核中-->
+        <div class="nei-content" ng-if="userInfo.identityTypeCode == 43 && userInfo.licenseAuditStatus == 0">
+            <div class="no-member qd-member">{{i18n('您还未成为渠道会员')}}</div>
+            <ul class="clearfix tax ">
+                <li class="item-img-box">
+                    <img width="100" height="100" src="../../../images/photo.png" ng-src="{{businessLicencePhoto}}">
+                    <p>{{i18n('营业执照')}}</p>
+                </li>
+                <li class="item-img-box">
+                    <img width="100" height="100" src="../../../images/photo.png" ng-src="{{taxRegistrationPhoto}}">
+                    <p>{{i18n('税务登记证')}}</p>
+                </li>
+                <li class="item-img-box">
+                    <img width="100" height="100" src="../../../images/photo.png" ng-src="{{accountOpeningPhoto}}">
+                    <p>{{i18n('开户许可证')}}</p>
+                </li>
+            </ul>
+            <input type="button" value="{{i18n('审核中')}}" class="active" style="margin-left:0px">
+        </div>
+        <!--成为渠道会员-->
+        <div class="ditch" ng-if="userInfo.identityTypeCode == 43 && userInfo.licenseAuditStatus == 1 ">
+            <p>{{i18n('您好')}}！{{memberInfo.memberTypeName||i18n('渠道会员')}}</p>
+            <ul>
+                <li>您当前的会员等级：<span ng-show="memberInfo.memberLevelName">{{memberInfo.memberLevelName}}</span>&nbsp;&nbsp;&nbsp;<!-- 会员状态 --></li>
+                <li class="pt-come">{{i18n('会员成长值')}}
+                    <div class="pt-progress">
+                        <span class="progress"></span>
+                        <span class="progress-text">{{(memberInfo ? memberInfo.growthBalence: 0)||0}}/{{memberInfo.growthReach||0}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

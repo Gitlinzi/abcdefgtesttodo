@@ -1,0 +1,155 @@
+<div id='apply-realName-auth' class="content mgT20" ng-cloak>
+    <div class="module add-ticket">
+        <div class='add-ticket-box'>
+            <div class="mc invoice add-padding ">
+               <div class="addadministration">
+                    <h3>{{i18n('实名认证')}}&nbsp;&nbsp;
+                        <span ng-if="methods.isAdd">({{i18n('未认证')}})</span>
+                        <span ng-if="methods.isEdit">({{i18n('认证不通过')}})</span>
+                        <span ng-if="methods.isWait">({{i18n('认证中')}})</span>
+                        <span ng-if="methods.isEnd">({{i18n('已认证')}})</span>
+                    </h3>
+               </div>
+               <div class="tips mgB10" ng-style="{display:msg?'block':'none'}">{{ msg }}</div>
+            </div>
+            <div class="invoiceShow">
+                <form name="passwdForm" novalidate ng-if="methods.isAdd || methods.isEdit || methods.isWait">
+                    <dl class="clearfix">
+                        <dt>
+                            {{i18n('真实姓名')}}：
+                        </dt>
+                        <dd>
+                            <input type="text" class="ticket-people" name="realName" ng-model="methods.identity.realName" ng-disabled="methods.isWait" required>
+                            <span class="tip err" ng-show="passwdForm.realName.$dirty && passwdForm.realName.$invalid">
+                                <span ng-show="passwdForm.realName.$error.required">{{i18n('真实姓名不能为空')}}</span>
+                            </span>
+                            <div class="clear"></div>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>
+                            {{i18n('身份证号')}}：
+                        </dt>
+                        <dd>
+                            <input class="ticket-people" type="text" name="certificateNo" ng-model="methods.identity.certificateNo" ng-disabled="methods.isWait" required>
+                            <span class="tip err" ng-show="passwdForm.certificateNo.$dirty && passwdForm.certificateNo.$invalid">
+                                <span>{{i18n('身份证号不能为空')}}</span>
+                            </span>
+                            <div class="clear"></div>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>
+                            {{i18n('银行卡号')}}：
+                        </dt>
+                        <dd>
+                            <input type="text" class="ticket-people" name="bankCardNo" ng-model="methods.identity.bankCardNo" ng-disabled="methods.isWait" required>
+                            <span class="tip err" ng-show="passwdForm.bankCardNo.$dirty && passwdForm.bankCardNo.$invalid">
+                                <span ng-show="passwdForm.bankCardNo.$error.required">{{i18n('银行卡号不能为空')}}</span>
+                            </span>
+                            <div class="clear"></div>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>
+                            {{i18n('预留手机号')}}：
+                        </dt>
+                        <dd>
+                            <input class="ticket-people" type="text" name="mobile" ng-model="methods.identity.mobile" ng-pattern="mobileReg" ng-disabled="methods.isWait" required ng-blur="methods.checkMobile()">
+                            <span class="tip err" ng-show="passwdForm.mobile.$dirty && passwdForm.mobile.$invalid">
+                                <span ng-show="passwdForm.mobile.$error.required">{{i18n('预留手机号不能为空')}}</span>
+                                <span ng-show="passwdForm.mobile.$error.pattern">{{i18n('手机号码不合法')}}</span>
+                            </span>
+                            <div class="clear"></div>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix" ng-if="needImgCaptcha">
+                        <dt>
+                            {{i18n('图片验证码')}}：
+                        </dt>
+                        <dd>
+                            <input type="text" class="ticket-people pull-left" name="imgCaptchaNum" placeholder="{{i18n('图片验证码')}}" ng-model="methods.needImgCaptchaNum" required style="width: 152px">
+                            <img width="88" height="34" class="pull-left" id="vicode" src="data:image/png;base64,{{checkImage}}" ng-click="getPicNum()">
+                            <span><a href="javascript:void(0)" ng-click="methods.getPicNum()">{{i18n('看不清换一张')}}</a></span>
+                            <span class="tip err" ng-show="passwdForm.imgCaptchaNum.$dirty && passwdForm.imgCaptchaNum.$invalid">
+                                <span ng-show="passwdForm.imgCaptchaNum.$error.required">{{i18n('图片验证码不能为空')}}</span>
+                            </span>
+                            <span class="tip err" ng-show="imgTips">
+                                <span>{{imgTips}}</span>
+                            </span>
+                        <dd>
+                    </dl>
+                    <dl class="clearfix" ng-if="!methods.isWait">
+                        <dt>
+                            {{i18n('验证码')}}：
+                        </dt>
+                        <dd>
+                            <input type="text" class="ticket-people" ng-model="methods.captcha" required style="width: 120px" ng-disabled="methods.isWait">
+                            <input type="button" id="smsBtn" class="smsBtn" value="{{i18n('获取验证码')}}" ng-click="methods.smsCode()" ng-disabled="(!methods.needImgCaptchaNum && needImgCaptcha) || !methods.identity.mobile">
+                            <span class="tip err" ng-show="checkSms">
+                                <span>{{i18n('验证码输入错误')}}！</span>
+                            </span>
+                            <span class="tip err" ng-show="sendErr">
+                                <span>{{i18n('验证码发送失败')}}！</span>
+                            </span>
+                            <div class="clear"></div>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>
+                        </dt>
+                        <dd>
+                            <span class="approveMsg">*{{i18n('银行卡信息仅作为实名认证使用')}}</span>
+                        </dd>
+                    </dl>
+                    <!--  -1未提交认证，3认证失败  0已提交待审核，1待认证，2认证成功 -->
+                    <input type="button" value="{{i18n('确认提交')}}" class='sumbit-box' ng-if="methods.isAdd" ng-click="methods.checkCaptchas('add')" ng-disabled="passwdForm.$invalid">
+                    <input type="button" value="{{i18n('确认提交')}}" class='sumbit-box' ng-if="methods.isEdit" ng-click="methods.checkCaptchas('update')" ng-disabled="passwdForm.$invalid">
+                    <!--  -1未提交认证，3认证失败  0已提交待审核，1待认证，2认证成功 -->
+                    <input type="button" value='{{methods.message}}' class='sumbit-box' ng-if="methods.isWait" ng-disabled="methods.isWait">
+                </form>
+                <form name="passwdForm" novalidate ng-if="methods.isEnd">
+                    <dl class="clearfix">
+                        <dt>
+                            {{i18n('真实姓名')}}：
+                        </dt>
+                        <dd class="pdT1">
+                            {{methods.identity.realName}}
+                            <div class="clear"></div>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>
+                            {{i18n('身份证号')}}：
+                        </dt>
+                        <dd class="pdT1">
+                            {{methods.identity.certificateNo | hideCertificateNo}}
+                            <div class="clear"></div>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>
+                            {{i18n('银行卡号')}}：
+                        </dt>
+                        <dd class="pdT1">
+                            {{methods.identity.bankCardNo | hideBankCardNo}}
+                            <div class="clear"></div>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>
+                            {{i18n('预留手机号')}}：
+                        </dt>
+                        <dd class="pdT1">
+                            {{methods.identity.mobile | hidePhone}}
+                            <div class="clear"></div>
+                        </dd>
+                    </dl>
+                    <div class="endMsg">
+                        <span>*{{i18n('银行卡信息仅作为实名认证使用')}}</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

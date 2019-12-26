@@ -1,0 +1,13 @@
+<div class="activity" ng-if="promotionId">
+    <!--<div class="activity-img"></div>-->
+    <div class="activity-box">
+        <div class="activity-box-self">
+            <div class="activity-time" ng-if="startTime">{{startTime | date: 'yyyy-MM-dd'}}-{{endTime | date: 'yyyy-MM-dd'}}</div>
+            <div class="activity-desc">{{description||'无促销信息'}}</div>
+            <div class="activity-content">赠完为止, 请在{{i18n($parent.switchConfig.common.allCartBtnName)}}领取</div>
+        </div>
+    </div>
+</div>
+<div class="promotion-cart-ext" ng-if="promotionCartExt.message && $parent.switchConfig.guide.search.showPromotionTip">
+    <span class="message">{{promotionCartExt.message}}</span>
+</div>

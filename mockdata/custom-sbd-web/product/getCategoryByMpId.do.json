@@ -1,0 +1,27 @@
+{
+    "gitVersion": {
+        "trace": "a630325d48723cf8",
+        "git.commit.id": "10475eed6558169d8cec714df238733b4971fdad",
+        "git.branch": "ouser-filter-d-2.51.1"
+    },
+    "code": "0",
+    "data": {
+        "fullIdPath": "7-2457097600000007-1010117800000000-1010117800000026",
+        "fullNamePath": "官网前台类目-办公用纸-复印纸-A5复印纸",
+        "mpId": 1247101609000192,
+        "type": 2,
+        "list": [{
+            "categoryName": "B2C前台类目",
+            "categoryId": 7
+        }, {
+            "categoryName": "办公用纸",
+            "categoryId": 2457097600000007
+        }, {
+            "categoryName": "复印纸",
+            "categoryId": 1010117800000000
+        }, {
+            "categoryName": "A5复印纸",
+            "categoryId": 1010117800000026
+        }]
+    }
+}

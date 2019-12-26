@@ -1,0 +1,31 @@
+<div class="consult" ng-init="init()">
+    <div class="home-allTitle pdL20">{{i18n('购买咨询')}}</div>
+    <div class="consult-content" ng-if="consultationText">
+        <div class="cont" ng-repeat="consult in consultationText">
+            <div class="tit clearfix">
+                <div class="def">
+                    <span class="time">{{consult.createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span>
+                </div>
+                <span class="icon_ask">{{i18n('问')}}</span>
+                <span class="tt">{{consult.content}}</span>
+            </div>
+            <div class="tic" >
+                <span class="icon_ask icon_ret">{{i18n('答')}}</span>
+                <span class="tt" ng-show="consult.listObj.length >0">{{consult.listObj[0].content}}</span>
+                <span class="tt" ng-show="consult.listObj.length ==0">{{i18n('客服会尽快回答您的问题')}}，{{i18n('请耐心等待')}}</span>
+            </div>
+            <div class="tib">
+                <span class="icon_ask"></span>
+                 <span class="tt" ng-show="consult.listObj.length >0">{{consult.listObj[0].userName}}&nbsp;&nbsp;&nbsp;<span class="time">{{consult.listObj[0].createTime|date:'yyyy-MM-dd HH:mm:ss'}}</span></span>
+            </div>
+        </div>
+    </div>
+    <!--没有咨询-->
+    <div class="consult-no" ng-if="isShowIcon" align='center'>
+        <i></i>
+        <span>{{i18n('没有咨询信息哦')}}~</span>
+    </div>
+
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                total-page="totalPage" ng-if="isShowPage"></div>
+</div>

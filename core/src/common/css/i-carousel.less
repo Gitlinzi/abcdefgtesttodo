@@ -1,0 +1,78 @@
+/* 轮播base */
+.carousel{
+	position: relative;
+
+	& .carousel-inner{
+		position: relative;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+	& a{
+		position: absolute;
+		display: none;
+		width: 100%;
+		height: 100%;
+	}
+	& .active{
+		display: block;
+	}
+	& .carousel-paging{
+		position: relative;
+	    bottom: 30px;
+	    left: 0;
+	    right: 0;
+	    display: table;
+	    _zoom: 1;
+	    margin: auto;
+
+		& li{
+			float: left;
+			width: 14px;
+			height: 14px;
+			margin-left: 15px;
+			_font-size: 0;
+			background-color: rgba(51, 51, 51, 0.3);
+			border-radius: 50%;
+			cursor: pointer;
+		}
+		& .active{
+			width: 14px;
+			height: 14px;
+			background-color: @themeColor;
+		}
+	}
+	& .carousel-btn{
+		display: none;
+		position: absolute;
+		top: 50%;
+		margin-top: -30px;
+		width: 50px;
+		height: 51px;
+		color: @whiteColor;
+		text-align: center;
+		line-height: 51px;
+		font-size: 16px;
+		background: ~"rgba(0, 0, 0)";
+		background: rgba(0, 0, 0, 0.4);
+		filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr=#66000000, endColorstr=#66000000)";
+		cursor: pointer;
+
+		&.prev{
+			left: 10px;
+		  	background: url('../../images/company/company-default.png') no-repeat -489px -11px;
+		  	opacity:0.2;
+			&:hover{
+			  opacity:1;
+			}
+		}
+		&.next{
+			right: 10px;
+		  	background: url('../../images/company/company-default.png') no-repeat -540px -11px;
+		  	opacity:0.2;
+			&:hover{
+			  opacity:1;
+			}
+		}
+	}
+}

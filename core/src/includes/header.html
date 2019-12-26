@@ -1,0 +1,554 @@
+<!--cms配置的自定义html内容-->
+<div login-bomb show-login-box="$parent.showLoginBox"></div>
+<!-- 显示loading -->
+<div ng-show="$parent.isShowProjectLoading" class="projectLoading">
+  <img
+    width="194"
+    height="82"
+    src="/images/company/loading.gif?v=${version}"
+    ng-src="{{ frontBasicSetting.websiteLoading }}"
+    alt="{{ i18n('等待') }}。。。"
+  />
+</div>
+<div class="notification with-nav"></div>
+<!-- #3a3f51 -->
+<div class="custom-header white">
+  <!--<style id="customHeaderCss"></style>-->
+  <!--<div id="customHeaderHtml"></div>-->
+  <div
+    class="wait"
+    ng-hide="true"
+    ng-style="{'background-image': 'url('+ frontBasicSetting.websiteLoading +')'}"
+  ></div>
+  <!-- 头部 -->
+  <div class="clearfix visual">
+    <visual-directive module-name="header"></visual-directive>
+    <div id="h-top">
+      <div class="container">
+        <ul class="ull" ng-init="logined=util.loggedIn()">
+          <!--<li ng-if="logined"><a href="/home.html">Hi, {{logonInfo.username||logonInfo.mobile}}</a></li>-->
+          <li
+            class="dropdown address"
+            ng-mouseenter="localProvince.headProvince=true"
+            ng-mouseleave="localProvince.headProvince=false"
+            ng-hide="hideHeadAddress"
+          >
+            <div
+              class="dt"
+              ng-class="{active:localProvince.headProvince}"
+            >
+              <a href="#"><span class="op-icons op-icons-gprs"></span><!--span>{{ i18n('送至') }}：</span-->{{ localProvince.province.provinceName }}<!--i class="icon-top-down"></i--></a>
+              <div class="mask"></div>
+              <div class="dd" ng-style="{display:localProvince.headProvince?'block':'none'}">
+                <!--<div class="dd" ng-style="{display:'block'}">-->
+                <ul class="area bl">
+                  <li ng-repeat="(letter,province) in localProvince.provinceList" ng-if="$index<7">
+                    <span>{{ letter }}</span>
+                    <div>
+                      <span
+                        class="small-location"
+                        ng-repeat="prov in province | orderBy:'isHot' track by $index"
+                        ng-class="{hot:prov.isHot}"
+                        ng-click="localProvince._setProvince(prov.provinceId,prov.provinceName,prov.provinceCode,[getCartTotal,getMiniCart])"
+                        >{{ prov.provinceName }}</span
+                      >
+                    </div>
+                  </li>
+                </ul>
+                <ul class="area">
+                  <li
+                    ng-repeat="(letter,province) in localProvince.provinceList"
+                    ng-if="$index>=7"
+                  >
+                    <span>{{ letter }}</span>
+                    <div>
+                      <span
+                        class="small-location"
+                        ng-repeat="prov in province | orderBy:'isHot' track by $index"
+                        ng-class="{hot:prov.isHot}"
+                        ng-click="localProvince._setProvince(prov.provinceId,prov.provinceName,prov.provinceCode,[getCartTotal,getMiniCart])"
+                        >{{ prov.provinceName }}</span
+                      >
+                    </div>
+                  </li>
+                </ul>
+                <div class="clear"></div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul class="ulr">
+          <li ng-if="!logined">
+            {{ i18n('您好，') }}{{ i18n('请先') }}
+            <a
+              target="_self"
+              class="mgR5"
+              href="javascript:void(0)"
+              ng-click="toLogin()"
+              style="color:#cc0000"
+              >{{ i18n('登录') }}</a
+            >/<a
+              target="_self"
+              class="mgL5"
+              href="/cregis.html"
+              style="color:#cc0000"
+              >{{ i18n('注册') }}</a
+            >
+          </li>
+          <!--<li ng-if="logined"><a target="_self" href="javascript:void(0)"
+                                                   ng-click="userExit()">退出登录</a></li>-->
+          <!-- <li ng-if="!logined"><a target="_self" class="theme" href="/cregis.html">{{i18n('注册')}}</a></li> -->
+          <!--  class="dropdown" -->
+          <li ng-if="logined">
+            <div class="fl current-username">
+              <a
+                class="current-username-info"
+                >{{ $root.userInfo.nickname || $root.userInfo.mobile }}
+                <!--i class="icon-top-down icon-person down-person"></i-->
+                <div class="mask"></div>
+                <ul class="current-username-list">
+                  <li ng-if="!relevanceAccount || relevanceAccount.length == 1">
+                    暂无关联账号~
+                  </li>
+                  <li
+                    ng-repeat="item in relevanceAccount"
+                    class="ui-nowrap"
+                    ng-click="switchAcount(item)"
+                    ng-if="item.isCurrent !=1"
+                  >
+                    {{ item.nickname }}
+                  </li>
+                  <li class="exit" ng-click="userExit()">
+                    {{ i18n('退出') }}
+                  </li>
+                </ul>
+              </a>
+            </div>
+            <!-- <div class="dt fl">
+              <span ng-if="$parent.switchConfig.center.userIndex.showUserRank">{{memberInfo.memberLevelName}}</span>
+              <a target="_self" href="/home.html" class="login-name"
+                >{{ i18n('欢迎光临') }}{{frontBasicSetting.websiteName}}
+                <a
+                  target="_self"
+                  href="javascript:void(0)"
+                  ng-if="logined"
+                  ng-click="userExit()"
+                  style="color: #cc0000"
+                  >{{ i18n('退出') }}</a
+                ></a
+              >
+              <i class="icon-top-down"></i>
+                            <div class="mask"></div>
+                            <div class="dd userinfo" >
+                                <div class="imgTitle">
+                                    <img ng-src="{{$root.userInfo.headPicUrl}}" alt="">
+                                </div>
+                                 <div class="info">
+                                    <div ng-if="$parent.switchConfig.center.userIndex.showUserRank">
+                                        <span class="level">{{memberInfo.memberLevelName}}</span><span ng-show="logonInfo.userLevel"
+                                            class="level-text">LV.{{logonInfo.userLevel}}</span>
+                                    </div>
+                                    <span class="account-save" ng-if="$parent.switchConfig.center.userIndex.showUserGrowUp">{{i18n('会员成长值')}}</span>
+                                    <div class="experience" ng-if="$parent.switchConfig.center.userIndex.showUserGrowUp">
+                                        <span class="experience-text">{{memberInfo ? memberInfo.growthBalence: 0}}/{{memberInfo.growthReach}}</span>
+                                        <span class="experience-bgc"></span>
+                                    </div>
+                                </div>
+                                <div class="close" ng-if="logined"><span ng-click="userExit()">{{i18n('退出')}}</span></div>
+                            </div>
+            </div> -->
+          </li>
+          <!--<li class="spacer"></li>-->
+          <!-- <li class="dropdown">
+                        <a target="_self" href="javascript:void(0)" ng-click="myOrder()" ng-if="$parent.switchConfig.headerRight.myOrder">{{i18n('我的订单')}}</a>
+                        <i class="icon-top-down icon-person down-person"></i>
+                        <div class="dd head-home">
+                            <div ng-if="$parent.switchConfig.headerRight.myCenter.pendingOrder">
+                                <a target="_self" href="/home.html#/orderList">{{i18n('订单查询')}}</a>
+                            </div>
+                        </div>
+                    </li> -->
+          <li
+            class="dropdown"
+            ng-if="$parent.switchConfig.headerRight.myCenter.show"
+          >
+            <div class="dt">
+              <!--<i class="icon-more-down icon-person"></i>-->
+              <!-- ng-click="myOrder()" -->
+              <a
+                target="_self"
+                href="javascript:void(0)"
+                ng-if="$parent.switchConfig.headerRight.myOrder"
+                >{{ i18n('我的订单') }}
+              </a>
+              <!--i class="icon-top-down icon-person down-person"></i-->
+              <div class="mask"></div>
+              <div class="dd head-home" style="height: auto">
+                <div
+                  ng-if="$parent.switchConfig.headerRight.myCenter.pendingOrder"
+                >
+                  <a target="_self" href="/home.html#/orderList">{{
+                    i18n('订单查询')
+                  }}</a>
+                  <!-- <span class="red">{{pendingOrderTotal}}</span> -->
+                </div>
+                <div ng-if="$parent.switchConfig.headerRight.myCenter.message">
+                  <a target="_self" href="/home.html#/advanceOrder">{{
+                    i18n('预置订单')
+                  }}</a>
+                  <!-- <span class="red">{{untreatedMesNum}}</span> -->
+                </div>
+                <div
+                  ng-if="$parent.switchConfig.headerRight.myCenter.myFavorite"
+                >
+                  <a target="_self" href="/home.html#/authorization">{{
+                    i18n('审批订单')
+                  }}</a>
+                  <!-- <span class="red">{{myCollectionNum}}</span> -->
+                </div>
+                <div
+                  ng-if="$parent.switchConfig.headerRight.myCenter.myFavorite"
+                >
+                  <a target="_self" href="/home.html#/quickOrder2">{{
+                    i18n('快速订单')
+                  }}</a>
+                  <!-- <span class="red">{{myCollectionNum}}</span> -->
+                </div>
+              </div>
+            </div>
+          </li>
+          <!--<li class="spacer"></li>-->
+          <!--<i class="icon-more-down icon-person"></i>-->
+
+          <!-- <li class="dropdown" ng-if="$parent.switchConfig.headerRight.myCenter.show">
+                        <div class="dt">
+                            <a target="_self" href="javascript:void(0)" style="padding-right:26px;" ng-click="PersonalCenter()">{{i18n('我的史泰博')}} </a>
+                            <i class="icon-top-down icon-person down-person"></i>
+                            <div class="mask"></div>
+                            <div class="dd head-home">
+                                <div ng-if="$parent.switchConfig.headerRight.myCenter.pendingOrder">
+                                    <a target="_self" href="/home.html#/orderList">{{i18n('待处理订单')}}</a>
+                                    <span class="red">{{pendingOrderTotal}}</span>
+                                </div>
+                                <div ng-if="$parent.switchConfig.headerRight.myCenter.message">
+                                    <a target="_self" href="/home.html#/message">{{i18n('消息')}}</a>
+                                    <span class="red">{{untreatedMesNum}}</span>
+                                </div>
+                                <div ng-if="$parent.switchConfig.headerRight.myCenter.myFavorite">
+                                    <a target="_self" href="/home.html#/frequence">{{i18n('我的收藏')}}</a>
+                                    <span class="red">{{myCollectionNum}}</span>
+                                </div>
+                                <div ng-if="$parent.switchConfig.headerRight.myCenter.myQA">
+                                    <a target="_self" href="/home.html#/questionList">{{i18n('我的问答')}}</a>
+                                    <span class="red">{{myQa}}</span>
+                                </div>
+                                <div ng-if="$parent.switchConfig.headerRight.myCenter.myCoupon">
+                                    <a target="_self" href="/home.html#/coupons">{{i18n('我的优惠券')}}</a>
+                                    <span class="red">{{validCouponNum}}</span>
+                                </div>
+                                <div ng-if="$parent.switchConfig.headerRight.myCenter.afterSalesService">
+                                    <a target="_self" href="/home.html#/afterSaleStateList">{{i18n('售后服务')}}</a>
+                                    <span class="red"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </li> -->
+          <!--<li class="spacer"></li>-->
+          <!--<li><a href="#">企业采购</a></li>-->
+          <!--<li class="spacer"></li>-->
+          <!-- <li><a href="#">积分商城</a></li>-->
+          <!--<li><a href="#">客户服务</a></li>-->
+          <!-- <li><a ng-href="{{linkUrl}}">{{i18n('福利商城')}}</a></li> -->
+          <li
+            class="dropdown"
+            ng-if="$parent.switchConfig.headerRight.myCenter.show"
+          >
+            <div class="dt">
+              <!--<i class="icon-more-down icon-person"></i>-->
+              <!-- ng-click="PersonalCenter()" -->
+              <a
+                target="_self"
+                href="javascript:void(0)"
+                >{{ i18n('我的账户') }}
+              </a>
+              <!--i class="icon-top-down icon-person down-person"></i-->
+              <div class="mask"></div>
+              <div class="dd head-home" style="height: auto">
+                <div ng-if="isAdmin == 1">
+                  <a target="_self" href="/costCenter.html">{{
+                    i18n('成本中心')
+                  }}</a>
+                  <!-- <span class="red">{{pendingOrderTotal}}</span> -->
+                </div>
+                <div ng-if="$parent.switchConfig.headerRight.myCenter.message">
+                  <a target="_self" href="/home.html#/baseInfo">{{
+                    i18n('个人信息')
+                  }}</a>
+                  <!-- <span class="red">{{untreatedMesNum}}</span> -->
+                </div>
+                <div ng-if="isAdmin == 1">
+                  <a target="_self" href="/home.html#/noticeBoard">{{
+                    i18n('公告栏')
+                  }}</a>
+                  <!-- <span class="red">{{myCollectionNum}}</span> -->
+                </div>
+              </div>
+            </div>
+          </li>
+          <li
+            class="dropdown"
+            ng-if="$parent.switchConfig.headerRight.myCenter.show && isShowStatement"
+          >
+            <div class="dt">
+              <!--<i class="icon-more-down icon-person"></i>-->
+              <a
+                target="_self"
+                href="javascript:void(0)"
+                >{{ i18n('报表中心') }}
+              </a>
+              <!--i class="icon-top-down icon-person down-person"></i-->
+              <div class="mask"></div>
+              <div class="dd head-home" style="height: auto;width: 120px">
+                <div ng-if="isAdmin == 1">
+                  <a target="_self" href="/home.html#/statementGoods">{{
+                    i18n('按商品统计')
+                  }}</a>
+                  <!-- <span class="red">{{pendingOrderTotal}}</span> -->
+                </div>
+                <div ng-if="$parent.switchConfig.headerRight.myCenter.message">
+                  <a target="_self" href="/home.html#/statementCategory">{{
+                    i18n('按商品分类统计')
+                  }}</a>
+                  <!-- <span class="red">{{untreatedMesNum}}</span> -->
+                </div>
+                <div>
+                  <a
+                    target="_self"
+                    href="/home.html#/index_statementPurchaseCost"
+                    >{{ i18n('按成本中心统计') }}</a
+                  >
+                  <!-- <span class="red">{{myCollectionNum}}</span> -->
+                </div>
+              </div>
+            </div>
+          </li>
+          <li
+            class="dropdown"
+            ng-if="$parent.switchConfig.headerRight.mobileService"
+          >
+            <div class="dt">
+              <a href="#">{{ i18n('手机服务') }}</a>
+              <div class="mask"></div>
+              <!--<div class="bor2"></div>-->
+              <div class="header-er">
+                <dl>
+                  <dd>
+                    <img
+                      ng-src="{{
+                        footerSetting.footerImageArray[0].footerImageURL
+                      }}"
+                      height="110"
+                      alt=""
+                      width="110"
+                    />
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </li>
+          <!-- <li class="dropdownLanguage dropdown" ng-click="changLanguage()" ng-if="switchConfig.common.switchoverLanguage">
+                        <div class="dt">{{localeName}}</div>
+                    </li> -->
+        </ul>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div id="h-banner" class="container">
+      <div class="logo">
+        <a target="_self" href="/index.html">
+          <img
+            src="../images/company/loading.gif"
+            ng-src="{{ frontBasicSetting.websiteLogo }}"
+            alt=""
+            id="g_logo"
+          />
+        </a>
+      </div>
+      <div class="logo2" ng-if="companyLogoUrl">
+        <a target="_self" href="/index.html">
+          <img
+            src="../images/company/loading.gif"
+            ng-src="{{ companyLogoUrl }}"
+            alt=""
+            id="g_logo2"
+          />
+        </a>
+      </div>
+      <p>{{ searcwordUrl.name }}</p>
+      <div
+        class="search"
+        ng-class="companyLogoUrl ? 'mgL60' : '' "
+        search-bar
+        shelper="searchHistory"
+        keyword="noResultKeyword"
+      >
+        <i></i>
+      </div>
+      <!--购物车图片-->
+      <div
+        class="shopCar"
+        mini-cart
+        ng-style="{top: switchConfig.common.showSearchCommodityTypes ? 49: 28}"
+      ></div>
+    </div>
+    <div class="fix-header-box">
+      <div id="fix-banner" class="container" ng-if="showFixHeader">
+        <div class="logo">
+          <a target="_self" href="/index.html">
+            <img
+                    src="../images/company/loading.gif"
+                    ng-src="{{ frontBasicSetting.websiteLogo }}"
+                    alt=""
+                    id="g_logo"
+            />
+          </a>
+        </div>
+        <div class="logo2" ng-if="companyLogoUrl">
+          <a target="_self" href="/index.html">
+            <img
+                    src="../images/company/loading.gif"
+                    ng-src="{{ companyLogoUrl }}"
+                    alt=""
+                    id="g_logo2"
+            />
+          </a>
+        </div>
+        <p>{{ searcwordUrl.name }}</p>
+        <div
+                class="search"
+                ng-class="companyLogoUrl ? 'mgL60' : '' "
+                search-bar
+                shelper="searchHistory"
+                keyword="noResultKeyword"
+        >
+          <i></i>
+        </div>
+        <!--购物车图片-->
+        <div
+                class="shopCar"
+                mini-cart
+                ng-style="{top: switchConfig.common.showSearchCommodityTypes ? 49: 28}"
+        ></div>
+      </div>
+    </div>
+
+    <!--</div>-->
+  </div>
+  <div id="h-nav">
+    <div class="container">
+      <div class="side-nav" ng-mouseleave="act=false" ng-mousemove="act=true">
+        <i class="category-icon"></i>{{ i18n('全部商品分类') }}
+        <!--<i class="icon-arrow-bottom"></i>-->
+        <ul class="side-ul" ng-class="{fixed:isIndex,active:act,unfold:unfoldNav}" style="background-color: #fff">
+          <li
+            ng-repeat="levels in categorylist"
+            ng-mousemove="_getCategorynextlevel(levels.id,$index);"
+          >
+            <a
+              class="ui-nowrap"
+              style="color: #666"
+              ng-style="{'height':518/navCategoryLength+'px','line-height':518/navCategoryLength+'px'}"
+              target="_self"
+              href="/{{
+                integralFlag ? 'integralSearch' : 'search'
+              }}.html?navCategoryIds={{ levels.id }}&categoryTreeNodeId={{
+                levels.id
+              }}{{
+                searchCategoryParams.categoryCode && searchCategoryParams.types
+                  ? '&types=6&categoryCode=' + searchCategoryParams.categoryCode
+                  : ''
+              }}"
+            >
+              <img
+                      ng-if="levels.pictureUrl"
+                      ng-src="{{ levels.pictureUrl }}"
+                      alt=""
+              />
+              {{ levels.name }}
+            </a>
+            <div class="nav-items">
+              <div
+                      class="nav-item"
+                      id="c{{ levels.id }}"
+                      ng-bind-compile="levels.tosafeHtml"
+              ></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <ul class="main-nav clearfix visual">
+        <visual-directive module-name="headerNav"></visual-directive>
+        <span head-menu module-name="index_entrance"></span>
+        <!-- <li class="pdL20"><a target="_blank"  href="/index.html">首页</a><i class="op-icons op-icons-new"></i></li> -->
+        <!--<li><a target="_blank" href="">超级预售</a><i class="op-icons op-icons-hot"></i></li>-->
+        <!--<li><a target="_blank" href="">积分商城</a></li>-->
+        <!-- <li><a target="_blank" href="/serve.html">服务中心</a></li> -->
+        <!--<li><a target="_blank" href="">特惠套餐</a></li>-->
+
+        <!--<li><a target="_blank"-->
+        <!--href="#">日用中心</a>-->
+        <!--<li><a target="_blank" href="${contextPath}/trial.html">试用中心</a></li>-->
+        <!--</li>-->
+        <!--<li><a target="_blank" href="/search.html?keyword=母婴">全球热销</a></li>-->
+        <!--<li><a target="_blank" href="/search.html?keyword=小熊">小熊Baby</a></li>-->
+        <!--<li><a target="_blank" href="/search.html?navCategoryIds=1003000130">宝宝用品</a>-->
+        <!--</li>-->
+        <!--<li><a target="_blank" href="/brand-list.html?brandIds=10030001">小米品牌</a>-->
+        <!--</li>-->
+        <!--<li><a target="_blank" href="手机购物更优惠://baidu.com">自定义</a></li>-->
+        <!--<li><a target="_blank" href="/search.html?keyword=蛋糕">搜索页</a></li>-->
+        <!--<li><a target="_blank" href="/?itemId=1019012900000113">商品</a></li>-->
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- 工业品验证码弹框 -->
+<div class="modal" style="display: block" ng-show="showIndustrialModel2">
+  <div
+    class="dialog"
+    style="display: block;width: 400px;left:50%;top:50px;bottom:auto;margin-left: -200px;"
+  >
+    <a
+      href="javascript:void(0)"
+      style="position: absolute;right: 7px; font-size: 30px"
+      ng-click="closeIndustrialAuthCode()"
+      >&times;</a
+    >
+    <div class="dialog-content">
+      <div class="dialog-body">
+        <div class="banktransfer">
+          <h4>{{ i18n('请输入验证码') }}</h4>
+          <input
+            type="text"
+            ng-model="IndustrialAuthCode.ownerIndustrialAuthCode"
+          />
+          <!-- <div class="dialogForm"></div> -->
+        </div>
+        <div style="margin-top: 10px">
+          <button
+            style="border: none;width: 60px;height: 30px;background-color:#f23030;color: #fff;margin-right:20px"
+            ng-click="confirmIndustrialAuthCode()"
+          >
+            确认
+          </button>
+          <button
+            style="border: none;width: 60px;height: 30px;background-color:#eee;"
+            ng-click="cancelIndustrialAuthCode()"
+          >
+            取消
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

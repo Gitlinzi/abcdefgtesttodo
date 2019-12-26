@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+<link rel="stylesheet" type="text/css" href="/payment#((skin)).css?v=${version}">
+</head>
+<body ng-app="appControllers" ng-controller="paymentCtrl">
+<!-- 头部 -->
+@@include("trade-header.html")
+<span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+    @@include("global-nav.html")
+</span>
+<!--5min轮询结束还没支付弹框-->
+<div bomb-box cart-data="payAgain"></div>
+<!--查询库存提示弹框-->
+<div bomb-box cart-data="stockError"></div>
+<div class="container width1000" ng-if="validPayment">
+	<!--购物进度-->
+	<div class="buyStepNumBox">
+		<ul>
+			<li class="current">
+				<span class="num">1</span>
+				<span class="line_bg lbg-l"></span>
+				<span class="line_bg lbg-r"></span>
+				<h4 class="lbg-txt">{{i18n('我的')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}</h4>
+			</li>
+			<li class="current">
+				<span class="num">2</span>
+				<span class="line_bg lbg-l"></span>
+				<span class="line_bg lbg-r"></span>
+				<h4 class="lbg-txt">{{i18n('填写核对订单信息')}}</h4>
+			</li>
+			<li class="active">
+				<span class="num">3</span>
+				<span class="line_bg lbg-l"></span>
+				<span class="line_bg lbg-r"></span>
+				<h4 class="lbg-txt">{{i18n('成功提交订单')}}</h4>
+			</li>
+		</ul>
+	</div>
+	<!--收银台 字-->
+	<div class="shopTitle">{{i18n('收银台')}}</div>
+	<!-- 付款确认的弹框 begin -->
+	<div class="order-sure">
+		<div class="title-box clearfix">
+			<span class="tittle-text">{{i18n('付款确认')}}</span>
+			<span class="close-img"></span>
+		</div>
+		<div class="title-bottom">
+			<div class="bottom-left">
+				<a href="" class="text16 success-pay">{{i18n('已完成支付')}}</a>
+				<a href="" class="text12">{{i18n('查看订单详情')}}</a>
+			</div>
+			<div class="bottom-right">
+				<a href="" class="text16">{{i18n('支付遇到问题')}}</a>
+				<a href="" class="text12 main-text">{{i18n('修改支付方式')}}</a>
+				<a href="" class="text12">{{i18n('查看支付帮助')}}</a>
+			</div>
+		</div>
+	</div>
+	<!-- 付款确认的弹框 end -->
+	<div ng-if="merchantOrderinfo&&(!merchantOrderinfo.countDownSeconds||merchantOrderinfo.countDownSeconds>0||surplus)">
+		<div class="order-success clearfix">
+			<div class="order-left">
+				<span class="success-text">{{i18n('订单提交成功')}}，{{i18n('请您尽快付款')}}！{{i18n('订单号')}}：{{merchantOrderinfo.orderCode }}</span>
+				<span class="place-text" ng-if="merchantOrderinfo.countDownType==0">{{i18n('请您在')}}<span class="colorRed" id="timer">{{surplus ? surplusTime:(merchantOrderinfo.countDownSeconds | timeFormat) }}</span>{{i18n('内完成支付')}}，{{i18n('否则订单会被自动取消')}}（{{i18n('库存紧俏商品支付时限以订单详情页为准')}}）。</span>
+			</div>
+			<div class="order-right">
+				<span class="should-pay" ng-if="merchantOrderinfo.orderSource!=baseConfig.orderSource.presell">{{i18n('应付金额')}}：<b>{{merchantOrderinfo.paymentAmount | currency:'￥'}}</b></span>
+				<span class="should-pay" ng-if="merchantOrderinfo.orderSource==baseConfig.orderSource.presell&&merchantOrderinfo.presell&&merchantOrderinfo.presell.status > 10">{{i18n('应付金额')}}：<b>{{merchantOrderinfo.presell.finalPayment | currency:'￥'}}</b></span>
+				<span class="should-pay" ng-if="merchantOrderinfo.orderSource==baseConfig.orderSource.presell&&merchantOrderinfo.presell&&merchantOrderinfo.presell.status <= 10">{{i18n('应付金额')}}：<b>{{merchantOrderinfo.presell.presellDownPrice | currency:'￥'}}</b></span>
+				<div class="order-detetil">
+					<span class="detetil-text" ng-click="detailChange()">{{i18n('订单详情')}}</span>
+					<span class="arrow-bottom"></span>
+				</div>
+			</div>
+		</div>
+		<ul class="order-mes payDetail">
+			<h4>{{i18n('收货人')}}</h4>
+			<p class="addressInfo">{{merchantOrderinfo.goodReceiverName}}&nbsp;{{merchantOrderinfo.goodReceiverMobile|hidePhone}}&nbsp;{{merchantOrderinfo.goodReceiverAddress}}</p>
+			<li ng-if="merchantOrderinfo.nameStr&&merchantOrderinfo.nameStr.length>0">
+				<span>{{i18n('商品名称')}}：</span>
+				<div class="order-mes-goods">
+					<p ng-repeat="item in merchantOrderinfo.nameStr">{{item}}</p>
+				</div>
+			</li>
+		</ul>
+		<div class="big-remind clearfix" ng-if="importantTip">
+			<span class="remind-text">【{{i18n('重要提醒')}}】：{{i18n($parent.switchConfig.trade.showCashierTheme)}}{{i18n('不会以订单异常')}}、{{i18n('系统升级等为由')}}，{{i18n('通过电话')}}、{{i18n('短信等方式要求您点击任何链接进行退款操作')}}。</span>
+			<span class="close-img" ng-click="closeImg()">
+
+			</span>
+		</div>
+		<div class="main-box">
+			<div class="main-box-two">
+				<div class="main-box-three">
+					<div class="three-top">
+						<span class="three-text">{{i18n('支付平台')}}</span>
+					</div>
+					<div class="pay-mode">
+						<div class="box way">
+							<div class="icon-box" ng-repeat="way in payGatewayList" ng-if="way.paymentThirdparty == '支付宝'||way.paymentThirdparty == '微信支付' || way.paymentThirdparty == '银联支付'" ng-class="{'red-border':way.isSelected}" ng-click="choosePayWay(way);">
+								<span ng-if="way.paymentThirdparty == '支付宝'" class="alipay-icon"></span>
+								<span ng-if="way.paymentThirdparty == '微信支付'" class="wechat-icon"></span>
+								<span ng-if="way.paymentThirdparty == '银联支付'" class="card-icon"></span>
+								<p ng-if="way.promLabel" class="icon-box-text">{{way.promLabel}}</p>
+							</div>
+
+						</div>
+						<form method="post" id="payWayForm" target="_blank">
+							<input type="hidden" name="orderNo" value="{{merchantOrderinfo.orderCode}}" />
+							<input type="hidden" ng-if="merchantOrderinfo.orderSource!=baseConfig.orderSource.presell" name="money" value="{{merchantOrderinfo.paymentAmount}}" />
+							<input type="hidden" ng-if="merchantOrderinfo.orderSource==baseConfig.orderSource.presell&&merchantOrderinfo.presell&&merchantOrderinfo.presell.status > 10" name="money" value="{{merchantOrderinfo.presell.finalPayment}}" />
+							<input type="hidden" ng-if="merchantOrderinfo.orderSource==baseConfig.orderSource.presell&&merchantOrderinfo.presell&&merchantOrderinfo.presell.status <= 10" name="money" value="{{merchantOrderinfo.presell.presellDownPrice}}" />
+							<input type="hidden" name="paymentConfigId" id="paymentConfigId" value="{{ checkedWay.paymentConfigId }}" />
+							<input type="hidden" name="promotionId" id="promotionId" value="{{ checkedWay.promotionId }}" />
+							<input type="hidden" name="ut" id="ut" value="{{ ut }}" />
+							<input type="hidden" name="returnUrl" id="returnUrl" value="http://mall.dev.op.com/complete.html" />
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="main-img" ng-show="weixinCode">
+				<div class="img-left">
+					<p>{{i18n('使用微信扫一扫即可付款')}}</p>
+					<img id="payCode" width="300" height="300">
+				</div>
+				<div class="img-right">
+					<img src="../../images/phone.png">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--订单失效后展示-->
+	<div id="payBox" ng-if="merchantOrderinfo.countDownType==0&&merchantOrderinfo.countDownSeconds<=0&&!surplus">
+		<div class="order-success clearfix" style="margin-bottom: 0;">
+			<div class="order-left">
+				<span class="success-text">{{i18n('超时未支付')}}，{{i18n('订单已关闭')}}！{{i18n('订单号')}}：{{merchantOrderinfo.orderCode }}</span>
+			</div>
+			<div class="order-right">
+				<span class="should-pay" ng-if="merchantOrderinfo.orderSource!=baseConfig.orderSource.presell">{{i18n('应付金额')}}：<b>{{merchantOrderinfo.paymentAmount | currency:'￥'}}</b></span>
+				<span class="should-pay" ng-if="merchantOrderinfo.orderSource==baseConfig.orderSource.presell&&merchantOrderinfo.presell&&merchantOrderinfo.presell.status > 10">{{i18n('应付金额')}}：<b>{{merchantOrderinfo.presell.finalPayment | currency:'￥'}}</b></span>
+				<span class="should-pay" ng-if="merchantOrderinfo.orderSource==baseConfig.orderSource.presell&&merchantOrderinfo.presell&&merchantOrderinfo.presell.status <= 10">{{i18n('应付金额')}}：<b>{{merchantOrderinfo.presell.presellDownPrice | currency:'￥'}}</b></span>
+				<div class="order-detetil">
+					<span class="detetil-text" ng-click="detailChange()">{{i18n('订单详情')}}</span>
+					<span class="arrow-bottom"></span>
+				</div>
+			</div>
+		</div>
+		<ul class="order-mes payDetail">
+			<li>{{i18n('收货人')}}：{{merchantOrderinfo.goodReceiverName}}&nbsp;{{merchantOrderinfo.goodReceiverMobile|hidePhone}}</li>
+			<li>{{i18n('收货地址')}}：{{merchantOrderinfo.goodReceiverAddress}}</li>
+			<li ng-if="merchantOrderinfo.productList.length>0">
+				<span>{{i18n('商品名称')}}：</span>
+				<div class="order-mes-goods">
+					<p ng-repeat="item in merchantOrderinfo.nameStr">{{item}}</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<!--失效账单提示-->
+<div class="container width1000" ng-if="invalidPayment">
+	<div class="pay-inner display">
+		<div class="title">
+			<h1>{{i18n('账单已失效')}}，{{i18n('请联系客服')}}！</h1>
+		</div>
+	</div>
+</div>
+
+<!-- 模态 -->
+<div class="modal" ng-style="{display: confirmPayment?'block':'none'}" ng-if="merchantOrderinfo.isBankTransfer!=1">
+	<!-- 款款确认 -->
+	<div class="dialog" style="display: block;width: 600px;left:50%;top:100px;bottom:auto;margin-left: -300px;">
+		<a href="javascript:void(0)" style="position: absolute;right: 7px; font-size: 30px" ng-click="confirmPayment=false;">&times;</a>
+		<div class="dialog-content">
+			<div class="dialog-body">
+				<div class="confirm-payment">
+					<h2>{{i18n('请您在新打开的页面上完成付款')}}。</h2>
+					<p>{{i18n('付款完成前请不要关闭此窗口')}}。</p>
+					<p>{{i18n('完成付款后请根据您的情况点击下面的按钮')}}：</p>
+					<a href="javascript:void(0)" ng-click="checkPayComplete()" class="btn">{{i18n('请确认完成')}}</a>
+					<!-- <a href="javascript:void(0)" class="btn">付款遇到问题</a> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--  error tooltip  -->
+<div cart-check-code-tip error-message-tip="errorMessageTip" error="error" btn-class="btn" is-ie="isIE"></div>
+@@include("script.html")
+@@include("cart-footer.html")
+<script type="text/javascript" src="/payment.js?v=${version}"></script>
+<script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=payment"></script>
+<script language="javascript">
+	//防止页面后退
+	history.pushState(null, null, document.URL);
+    if (window.addEventListener) {
+        history.pushState(null, null, document.URL);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    } else if (window.attachEvent) {
+        window.attachEvent('onpopstate', function () {
+            history.pushState(null, null, document.URL);
+        });
+    }
+</script>
+</body>
+</html>

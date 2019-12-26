@@ -1,0 +1,255 @@
+.disB {
+  display: block;
+}
+.disIB {
+  display: inline-block;
+}
+.fl {
+  float: left !important;
+}
+.fr {
+  float: right !important;
+}
+p {
+  margin: 0;
+}
+.border-box {
+  box-sizing: border-box;
+}
+.w10 {
+  width: 10%;
+}
+.w15 {
+  width: 15%;
+}
+.w20 {
+  width: 20%;
+}
+.w25 {
+  width: 25%;
+}
+.w30 {
+  width: 30%;
+}
+.w40 {
+  width: 40%;
+}
+.w50 {
+  width: 50% !important;
+}
+.c9 {
+  color: @99GreyColor;
+}
+.c2f3235 {
+  color: #2f3235;
+}
+.c013ca6 {
+  color: @pagingBtnColor;
+}
+.c0066cc {
+  color: #0066cc;
+}
+.f24 {
+  font-size: 24px;
+}
+.align-center {
+  text-align: center !important;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+
+.ui-nowrap {
+  overflow: hidden;
+  text-overflow:ellipsis;//文本溢出显示省略号
+  white-space:nowrap
+}
+
+.w160 {
+  width: 160px;
+}
+
+.mgL30 {
+  margin-left: 30px !important;
+}
+.mgL60 {
+  margin-left: 60px !important;
+}
+.mgT30 {
+  margin-top: 30px;
+}
+.mgB30 {
+  margin-bottom: 30px;
+}
+.mgR30 {
+  margin-right: 30px;
+}
+.mgR35 {
+  margin-right: 35px;
+}
+.mgL5 {
+  margin-left: 5px;
+}
+.mgR5 {
+  margin-right: 5px;
+}
+.mgT5 {
+  margin-top: 5px;
+}
+.mgB5 {
+  margin-bottom: 5px;
+}
+.pdT5 {
+  padding-top: 5px;
+}
+.pdB5 {
+  padding-bottom: 5px;
+}
+.pdL30 {
+  padding-left: 30px;
+}
+.pdR30 {
+  padding-right: 30px;
+}
+.pdT30 {
+  padding-top: 30px;
+}
+.pdB30 {
+  padding-bottom: 30px;
+}
+.bb {
+  border-bottom: 1px solid @ddGreyColor;
+}
+.br {
+  border-right: 1px solid @ddGreyColor;
+}
+.bt {
+  border-top: 1px solid @ddGreyColor;
+}
+.bl {
+  border-left: 1px solid @ddGreyColor;
+}
+.flex1 {
+  flex: 1;
+}
+.flex2 {
+  flex: 2;
+}
+.flex3 {
+  flex: 3;
+}
+.lineH0 {
+  line-height: 0;
+}
+.h50 {
+  height: 50px;
+}
+.lineH50 {
+  line-height: 50px;
+}
+.v-alignM {
+  vertical-align: middle;
+}
+.vertical-top {
+  vertical-align: top;
+}
+.posR {
+  position: relative;
+}
+.bgc {
+  background: @ccGreyColor;
+}
+.themeColor {
+  color: @themeColor;
+}
+// 快速订单和预置订单按钮样式
+.operation {
+  text-align: center;
+  button,
+  .button {
+    width: 70px;
+    height: 35px;
+    display: inline-block;
+    background: @themeColor;
+    color: @whiteColor;
+    border: none;
+    border-radius: 2px;
+  }
+  .reset,
+  .cancel {
+    background: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+  }
+  .w100-h40 {
+    width: 52px;
+    height: 32px;
+    line-height: 32px;
+  }
+}
+//模态框-->礼品卡
+.dialog-content {
+  .dialog-header {
+    background: @backgroundColor;
+    color: @fontColor;
+    //background: transparent !important;
+    //border-bottom: 2px solid @ccGreyColor !important;
+    .iconClick {
+      position: absolute;
+      right: 0;
+      top: 0;
+      //background: @eeGreyColor;
+      width: 30px;
+      height: 20px;
+      margin-right: 0;
+      border-bottom-left-radius: 50%;
+      border-top-left-radius: 50%;
+    }
+    .iconYuan {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      //background: @whiteColor;
+      margin-left: 2px;
+      text-align: center;
+      font-size: 18px;
+    }
+    .fontWeight {
+      font-weight: bold;
+      font-size: 15px;
+    }
+  }
+  .input {
+    height: 30px;
+    border: 1px solid @ddGreyColor;
+    width: 300px;
+  }
+  .modal-footer {
+    .my-btn {
+      width: 150px;
+      border-radius: 25px;
+    }
+  }
+}
+
+.consumable-products {
+  #jumbotron {
+    .carousel {
+      width: 100%;
+      height: 400px;
+      margin: 0 auto;
+      position: relative;
+      left: 0;
+      transform: translateX(0);
+
+      & img {
+        animation: none;
+        -webkit-animation: none;
+      }
+    }
+  }
+}

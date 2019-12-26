@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+    <!-- <title>帮助中心</title> -->
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script type="text/javascript" src="/cms/view/cms,frontier_guide/pc/templateJS.json"></script>
+	<link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+	<link rel="stylesheet" type="text/css" href="/help#((skin)).css?v=${version}">
+
+</head>
+<base target="_self"/>
+<body ng-app="appControllers" ng-controller="helpCtrl" class="help-page">
+	@@include("trade-header.html")
+    <div class="notification with-nav"></div><!-- #3a3f51 -->
+    <span ng-if="$parent.switchConfig.common.showAllGlobalNav">
+        @@include("global-nav.html")
+    </span>
+    <div class="help-top">
+        <div class="help-title">
+					<h1>
+							<a target="_self" href="/index.html">
+									<img class="headerImg" src="../images/company/loading.gif" width="180" alt="" id="g_logo" ng-src="{{frontBasicSetting.websiteLogo}}">
+							</a>
+							<a target="_self" href="/index.html">
+								<img
+									class="headerImg"
+									src="../images/stb_logo.png"
+									alt=""
+									width="142"
+									ng-src="{{ companyLogoUrl }}"
+								/>
+							</a>
+							<span class="help-center">{{i18n('帮助中心')}}</span>
+					</h1>
+            <p>
+                <input name="keyword" ng-model="keyword" ng-enter="searchList()" placeholder="{{i18n('输入问题的关键词')}}，{{i18n('比如‘审批订单’')}}"/>
+                <span ng-click="searchList()">{{i18n('搜索')}}</span>
+            </p>
+        </div>
+    </div>
+    <div class="container mgT20 mgB60 overHidden">
+        <div class="help-left">
+            <ul>
+                <li ng-repeat="cate in category.childCategoryVOList">
+                    <div class="help-list" ng-if="cate.id == 1007112400000012">
+                        <h4><a ng-href="/helpVideoList.html?objUser=1">{{cate.categoryName}}</a></h4>
+                        <ul ng-show="cate.pageArticleVOList.listObj.length > 0">
+                            <li ng-repeat="item in cate.pageArticleVOList.listObj"><a ng-href="/helpVideoList.html?objUser=1">{{item.displayTitle}}</a></li>
+                            <span><a ng-href="/helpVideoList.html?objUser=1">{{i18n('查看全部')}}<i class="icon-arrow-right4 mgL10"></i></a></span>
+                        </ul>
+                    </div>
+                    <div class="help-list" ng-if="cate.id != 1007112400000012">
+                        <h4><a ng-href="/helpList.html?categoryId={{cate.id}}">{{cate.categoryName}}</a></h4>
+                        <ul ng-show="cate.pageArticleVOList.listObj.length > 0">
+                            <li ng-repeat="item in cate.pageArticleVOList.listObj"><a ng-href="/helpDetail.html?id={{item.id}}">{{item.displayTitle}}</a></li>
+                            <span><a ng-href="/helpList.html?categoryId={{cate.id}}">{{i18n('查看全部')}}<i class="icon-arrow-right4 mgL10"></i></a></span>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="help-right">
+            <div class="help-list">
+                <h4>{{i18n('最多浏览的文档')}}</h4>
+                <ul>
+                    <li ng-repeat="e in articleViews">
+                        <a ng-if="e.articleType != 2" ng-href="/helpDetail.html?id={{e.id}}">{{e.displayTitle}}</a>
+                        <a ng-if="e.articleType == 2" ng-href="/helpVideoList.html?objUser=1">{{e.displayTitle}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    @@include("footer.html")
+    @@include("script.html")
+    <script type="text/javascript" src="/help.js?v=${version}"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=help"></script>
+</body>
+</html>

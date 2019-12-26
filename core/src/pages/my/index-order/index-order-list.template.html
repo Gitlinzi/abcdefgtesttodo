@@ -1,0 +1,302 @@
+<div id="order-us" class="content" ng-init="orders.init()">
+    <!-- 订单取消申请弹框  begin-->
+    <div class="cancel-close" ng-if="showCancelWindow.isShow">
+        <div class="cancel-bomb">
+            <div class="cancel-title clearfix">
+                <span class="title-text">{{i18n('提示')}}</span>
+                <span class="close-img" ng-click="showCancelWindow.noCancel()"></span>
+            </div>
+            <div class="cancel-main">
+                <div class="main-title">
+                    <span class="icon-text">{{i18n('订单取消申请?')}}</span>
+                </div>
+                <div class="main-select">
+                    <span>{{i18n('取消原因')}}</span>
+                    <select type="text" class="aftersalse-input"
+                            ng-options="cause as cause.name for cause in orderCommon.causes"
+                            ng-model="orderCommon.selectedCauses"></select>
+                </div>
+                <div class="main-content">
+                    <textarea class="textcontent" ng-model="orderCommon.cancelRemark"></textarea>
+                </div>
+                <div class="main-botton">
+                    <a class="button-sure" href="" ng-click="orderCommon.cancelOrder(order,true)">{{i18n('确定')}}</a>
+                    <a class="button-cancel" href="" ng-click="showCancelWindow.noCancel()">{{i18n('暂不取消')}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cancel-close" ng-if="showRefundWindow.isShow2">
+        <div class="cancel-bomb" ng-init="orderCommon.getcauses()">
+            <div class="cancel-title clearfix">
+                <span class="title-text">{{i18n('提示')}}</span>
+                <span class="close-img" ng-click="showRefundWindow.noRefund()"></span>
+            </div>
+            <div class="cancel-main">
+                <div class="main-title">
+                    <span class="icon-error"></span>
+                    <span class="icon-text">{{i18n('订单取消申请')}}</span>
+                </div>
+                <div class="main-select">
+                    <span>{{i18n('取消原因')}}</span>
+                    <select type="text" class="aftersalse-input"
+                            ng-options="cause as cause.name for cause in orderCommon.causes"
+                            ng-model="orderCommon.selectedCauses"></select>
+                </div>
+                <div class="main-content">
+                    <textarea class="textcontent" ng-model="orderCommon.cancelRemark"></textarea>
+                </div>
+                <div class="main-text">
+                    <span>{{i18n('温馨提示')}}：{{i18n('订单成功取消后无法恢复')}}。</span>
+                </div>
+                <div class="main-botton">
+                    <a href=""  class="button-sure" ng-click="orderCommon.refundOrder(order2,true)">{{i18n('确定')}}</a>
+                    <a href="" class="button-cancel" ng-click="showRefundWindow.noRefund()">{{i18n('暂不取消')}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 订单取消申请弹框  end -->
+    <!-- 物流跟踪弹框 end -->
+    <!-- 删除订单弹框 begin -->
+    <div ng-if="fasle" class="cancel-close">
+        <div class="delete-bomb">
+            <div class="cancel-title clearfix">
+                <span class="title-text">{{i18n('提示')}}</span>
+                <span class="close-img"></span>
+            </div>
+            <div class="delete-main">
+                <div class="delete-icon">
+                    <span class='icon-img'></span>
+                    <span class="icon-text">{{i18n('删除该订单')}}？</span>
+                </div>
+                <div class="button-two">
+                    <a href="" class="button-sure">{{i18n('确定')}}</a>
+                    <a href="" class="button-cancel">{{i18n('取消')}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 删除订单弹框 end -->
+    <!-- <p class='home-allTitle pdL20'>{{i18n('我的订单')}}</p> -->
+    <div class="module">
+        <div class="mc pdT20">
+            <ul class="input datetimepicker pdL20 clearfix"` style="margin-right: 0;padding-right: 15px">
+                <li>
+                    <span>{{i18n('订单编号')}}：</span>
+                    <input type="text" name="" ng-model="orders.searchOrderCode">
+                </li>
+                <li>
+                    <span>{{i18n('成本中心')}}：</span>
+                    <input type="text" name="" ng-model="orders.searchCostCenter">
+                </li>
+                <li>
+                    <span>{{i18n('收货人')}}：</span>
+                    <select name="" id="" ng-model="orders.searchOrderOwner" ng-options="item.id as item.receiverName for item in orders.merchantReceiverMumberList">
+                        <option value="" ng-if="orders.merchantReceiverMumberList.length">--请选择--</option>
+                        <option value="" ng-if="!orders.merchantReceiverMumberList.length">--暂无收货人--</option>
+                    </select>
+                </li>
+                <li style="margin-top: 15px">
+                    <div class="datetimepicker">
+                        <span class="date-title f14" style="margin-right: 5px">{{i18n('创建时间')}}：</span>
+                        <div class="dis datetimepicker-content">
+                            <div class="input-group">
+                                <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalFrom" options="options1" close="close(from)" max-date="orders.createTimeEnd"
+                                        ng-model="orders.createTimeStart">
+                                <span class="input-group-addon">至</span>
+                                <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalTo" options="options2" close="close(to)" min-date="orders.createTimeStart"
+                                        ng-model="orders.createTimeEnd">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="operation " style="margin-top: 15px">
+                    <button class="search mgR5" ng-click="orders.getOrderList()">{{i18n('查询')}}</button>
+                    <button class="reset" ng-click="orders.resetInfo()">{{i18n('重置')}}</button>
+                </li>
+            </ul>
+            <div class="follow clearfix">
+                <div class="order-left pdL20" style="padding-top: 15px;">
+                    <span ng-click="changeActiveNum('')" ng-class="{'goods-active':activeNum==''}">{{i18n('全部订单')}}</span>
+                    <b class="mgall0-10"></b>
+                    <!-- <span ng-click="changeActiveNum(baseConfig.orderStatus.toPay)" ng-class="{'goods-active':activeNum==baseConfig.orderStatus.toPay}">{{i18n('未审批')}}<span ng-if="orders.summary.unPay != null &&orders.summary.unPay != 0">({{orders.summary.unPay}})</span></span> -->
+                    <!-- b2b功能 -->
+                    <!-- <b ng-if="$parent.switchConfig.center.order.showConfirmTab" class="mgall0-10"></b> -->
+                    <!-- <span ng-if="$parent.switchConfig.center.order.showConfirmTab" ng-click="changeActiveNum(baseConfig.orderStatus.confirm)" ng-class="{'goods-active':activeNum==baseConfig.orderStatus.confirm}">{{i18n('审批中')}}<span ng-if="orders.summary.unConfirm != null &&orders.summary.unConfirm != 0">({{orders.summary.unConfirm}})</span></span> -->
+                    <span ng-click="changeActiveNum(5,1)" ng-class="{'goods-active':activeNum==5}">{{i18n('未审批')}}<span ng-if="orders.summary.unApproval != null &&orders.summary.unApproval != 0">({{orders.summary.unApproval}})</span></span>
+                    <b class="mgall0-10"></b>
+                    <span ng-click="changeActiveNum(1,1)" ng-class="{'goods-active':activeNum==1}">{{i18n('审批中')}}<span ng-if="orders.summary.approvaling  != null &&orders.summary.approvaling  != 0">({{orders.summary.approvaling}})</span></span>
+                    <b class="mgall0-10"></b>
+                    <span ng-click="changeActiveNum(2,1)" ng-class="{'goods-active':activeNum==2}">{{i18n('待确认')}}<span ng-if="orders.summary.approvalPass  != null &&orders.summary.approvalPass != 0">({{orders.summary.approvalPass}})</span></span>
+                    <b class="mgall0-10"></b>
+                    <span ng-click="changeActiveNum(baseConfig.orderStatus.delivery)" ng-class="{'goods-active':activeNum==baseConfig.orderStatus.delivery}">{{i18n('待发货')}}<span ng-if="orders.summary.unDelivery != null && orders.summary.unDelivery != 0">({{orders.summary.unDelivery}})</span></span>
+                    <b class="mgall0-10"></b>
+                    <span ng-click="changeActiveNum(baseConfig.orderStatus.delivered)" ng-class="{'goods-active':activeNum==baseConfig.orderStatus.delivered}">{{i18n('待收货')}}<span ng-if="orders.summary.unReceive != null && orders.summary.unReceive != 0">({{orders.summary.unReceive}})</span></span>
+                    <b class="mgall0-10"></b>
+                    <!-- <span ng-click="changeActiveNum(baseConfig.orderStatus.received)" ng-class="{'goods-active':activeNum==baseConfig.orderStatus.received}">{{i18n('待评价')}}<span ng-if="orders.summary.unEvaluate != null && orders.summary.unEvaluate != 0">({{orders.summary.unEvaluate}})</span></span> -->
+                    <!-- <b class="mgall0-10"></b> -->
+                    <span ng-click="changeActiveNum(4,1)" ng-class="{'goods-active':activeNum==4}">{{i18n('已退回')}}<span ng-if="orders.summary.approvalBack != null &&orders.summary.approvalBack != 0">({{orders.summary.approvalBack}})</span></span>
+                    <b class="mgall0-10"></b>
+                    <span ng-click="changeActiveNum(3,1)" ng-class="{'goods-active':activeNum==3}">{{i18n('已拒绝')}}<span ng-if="orders.summary.approvalNotPass != null &&orders.summary.approvalNotPass != 0">({{orders.summary.approvalNotPass}})</span></span>
+                    <b class="mgall0-10"></b>
+                    <span ng-click="changeActiveNum(baseConfig.orderStatus.closed)" ng-class="{'goods-active':activeNum==baseConfig.orderStatus.closed}">{{i18n('已取消')}}</span>
+                </div>
+                <div class="export-btn fr">
+                    <button ng-click="orders.downloadFileByGet(null,null,true)" ng-if="orders.exportOrderDetailAdmin == 1">导出订单明细</button>
+                    <button ng-click="orders.downloadFileByGet(null,null,false)" ng-if="orders.exportOrderAdmin == 1">导出订单</button>
+                </div>
+                <!-- <div class="follow clearfix queryOrderFloat" style="float: right"> -->
+                    <!-- <div class="follow-right pdL10 clearfix">
+                        <input type="text" name="" ng-model="orders.keyword" placeholder="{{i18n('商品名称')}}，{{i18n('商品编号')}}，{{i18n('订单编号')}}">
+                        <input type="button" value="{{i18n('搜索')}}" ng-click="changeActiveNum(activeNum)">
+                    </div> -->
+                    <!-- <div class="follow-right  clearfix pdL10" ng-if="$parent.switchConfig.center.order.orderType">{{i18n('订单类型')}}
+                        <select type="text" class="pdL10"
+                                ng-options="orderType as orderType.value for orderType in orders.orderType"
+                                ng-model="orders.selectedOrderType"></select>
+                    </div>
+                    <div class="follow-right pdL10  clearfix" ng-if="$parent.switchConfig.center.order.orderSysSource">{{i18n('订单来源')}}
+                        <select type="text"
+                                ng-options="sysSource as sysSource.value for sysSource in orders.sysSource"
+                                ng-model="orders.selectedSource"></select>
+                    </div> -->
+                <!-- </div> -->
+            </div>
+            <div class="clear"></div>
+            <div class="evaluate-list">
+                <div class="list-title pdL20 mgB10 list-titleColor">
+                    <span class="width518">{{i18n('订单')}}</span>
+                    <span class="width126">{{i18n('收货人')}}</span>
+                    <span class="width170">{{i18n('金额')}}</span>
+                    <span class="width110">{{i18n('成本中心')}}</span>
+                    <span class="width105">{{i18n('订单状态')}}</span>
+                    <span class="width120">{{i18n('操作')}}</span>
+                </div>
+            </div>
+            <div class="order-group">
+                <div class="suborder" ng-repeat="suborder in orders.list">
+                    <!--订单信息-->
+                    <div class="row order-title all-title-color">
+                        <!--订单生成时间-->
+                        <div class="cell c1">{{suborder.orderCreateTimeStr}}</div>
+                        <!--订单号-->
+                        <div class="cell c3-1">{{i18n('订单号')}}：<span>{{suborder.orderCode}}</span></div>
+                        <div class="cell">
+                            <!-- 这期不做搜索和展示 -->
+                            <!-- <span class="margin30" ng-if="$parent.switchConfig.center.order.orderType">{{i18n('订单类型')}}：{{suborder.orderType}}
+                            </span>
+                            <span class="margin30" ng-if="$parent.switchConfig.center.order.orderSysSource">{{i18n('订单来源')}}：{{suborder.orderSource}}
+                            </span> -->
+                            <!-- <span class="margin30">{{i18n('商家名称')}}：{{suborder.merchantName}}
+                            </span> -->
+                        </div>
+                        <div class="cell c4" ng-if="suborder.operations.canDelete"
+                             ng-click="orderCommon.deleteOrder(suborder.orderCode)">
+                            <a class='rubbish-icon' href="javascript:;"></a>
+                        </div>
+                    </div>
+                    <table class="order-list all-table-color">
+                        <tr ng-repeat="pro in suborder.itemList">
+                            <!--商品图片-->
+                            <td width="120" align="center" class="bl bb all-img-box"><a target="_blank" href="#/orderDetail?code={{suborder.orderCode}}"><img
+                                    width="80" height="80"
+                                    ng-src="{{pro.productPicPath}}"
+                                    alt="{{pro.productCname}}"></a></td>
+                            <!--商品名称-->
+                            <td width="308" class="bb">
+                                <a target="_blank" class="name" href="#/orderDetail?code={{suborder.orderCode}}">
+                                    <span class="colorB">{{pro.productCname}}</span>
+                                </a>
+                                <!--商品属性-->
+                                <ul class="seriesAttr bigUl">
+                                    <li ng-repeat="property in pro.attributes">{{property.name}}:{{property.value}}
+                                    </li>
+                                </ul>
+                            </td>
+                            <!--件数-->
+                            <td width="90" style="padding-right: 20px" align="right" class="bb">x{{pro.productItemNum}}</td>
+                            <!--收货人-->
+                            <td width="0" valign="top" align="center" class="bb br"
+                                rowspan="{{suborder.itemList.length}}" ng-if="$first">
+                            </td>
+                            <!--金额-->
+                            <td width="126" valign="top" align="center" class="bb br people-icon" ng-if="$first"
+                                rowspan="{{suborder.itemList.length}}">
+                                <!--<span>{{suborder.goodReceiverName}}</span>-->
+                                <span>{{suborder.receiverPerson.receiverName}}</span>
+                            </td>
+
+                            <!--订单状态-->
+                            <td width="170" valign="top" align="center" class="bb br" align="center" ng-if="$first"
+                                rowspan="{{suborder.itemList.length}}">
+                                <div class="all-cancel">{{i18n('总额')}}：{{ suborder.orderAmount| currency:'￥'}}
+                                </div>
+                                <!-- 待支付和已取消显示应付 -->
+                                <!-- ng-class="{'red': suborder.orderStatus === baseConfig.orderStatus.toPay,'all-cancel':suborder.orderStatus == baseConfig.orderStatus.closed}" -->
+                                <div class="state theme">
+                                    {{i18n('应付')}}：{{ suborder.paymentAmount| currency:'￥' }}
+                                </div>
+                                <a class="blue">{{suborder.orderPaymentTypeStr}}</a><br>
+                            </td>
+                            <td width="120" valign="top" align="center" class="bb br"
+                                rowspan="{{suborder.itemList.length}}" ng-if="$first">
+                                <span>{{suborder.costName}}</span>
+                            </td>
+                            <!--订单操作-->
+                            <td valign="top" width='120' align="center" class="bb br" ng-if="$first"
+                                rowspan="{{suborder.itemList.length}}">
+                                <div class="state-none">
+                                <!-- 订单状态 0:查询所有 1:待支付 2:待发货 3:待收货 4:待评价 8:已完成 10:已取消 13：已支付（只有拼团订单才会有）20:查询可售后订单 21:查询2/3/8状态的订单 -->
+
+                                    <a target="_blank" href="#/orderDetail?code={{suborder.orderCode}}" class='theme'
+                                       ng-class="{'all-cancel':suborder.orderStatus == baseConfig.orderStatus.closed, 'all-green':suborder.orderStatus == baseConfig.orderStatus.delivery || suborder.orderStatus == baseConfig.orderStatus.delivered || suborder.orderStatus == baseConfig.orderStatus.received}"
+                                       >{{suborder.orderStatusStr}}
+                                    </a>
+                                    <a href="" class='follow-order' ng-if="suborder.operations.canQueryShipping" ng-click="orderCommon.openDelivery(suborder)">{{i18n('跟踪')}}</a>
+                                    <a target="_blank" href="#/orderDetail?code={{suborder.orderCode}}">{{i18n('订单详情')}}</a>
+                                </div>
+                            </td>
+                            <td valign='top' width='120' align='center' class='bb br argin-box' ng-if="$first"
+                                rowspan="{{suborder.itemList.length}}">
+                                <div ng-if="suborder.orderStatus == baseConfig.orderStatus.toPay&&(suborder.orderSource != baseConfig.orderSource.presell||(suborder.orderSource == baseConfig.orderSource.presell&&(suborder.presell.status == 10||suborder.presell.status===30)))">
+                                    <span class="last-time" ng-if="suborder.countDownSeconds != null && suborder.countDownSeconds != 0"><span class="time-content"><span class="time-icon"></span>{{i18n('剩余')}} </span><span single-count-down single-count-down show-count-down="true" time-left="suborder.countDownSeconds*1000"></span></span>
+                                </div>
+                                <!--代付款支付尾款-->
+                                <div ng-if="suborder.orderStatus == baseConfig.orderStatus.toPay&&suborder.orderSource == baseConfig.orderSource.presell&&(suborder.presell.status == 20||suborder.presell.status == 25)">
+                                    <div class="time-pay" ng-if="suborder.presell.status == 20">
+                                        {{suborder.presell.presellStartTime |date:'MM月dd日 HH:mm:ss'}} {{i18n('开始支付尾款')}}
+                                    </div>
+                                    <div class='time-pay' ng-if="suborder.presell.status == 25">
+                                        {{suborder.presell.presellEndTime |date:'MM月dd日 HH:mm:ss'}} {{i18n('前支付尾款')}}
+                                    </div>
+                                </div>
+                                <div>
+                                    <span ng-repeat="btn in suborder.orderBtnList">
+                                        <span class="{{btn.className}}" ng-if="btn.type=='function'" ng-click="orders.clickFunction(btn.key,suborder)">{{i18n(btn.name)}}</span>
+                                        <a class="{{btn.className}}" ng-if="btn.type=='ui-sref'" ui-sref="{{btn.interactiveData}}">{{i18n(btn.name)}}</a>
+                                        <a class="{{btn.className}}" ng-if="btn.type=='href'" href="{{btn.interactiveData}}">{{i18n(btn.name)}}</a>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="none-order" ng-if="orders.isShowIcon">
+                    <div class="none-left mgR15">
+                        <span class="none-left-img"></span>
+                    </div>
+                    <div class="none-right">
+                        <span>{{i18n('没有订单哦')}}~</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+                total-page="totalPage" ng-if="orders.isShowPage"></div>
+    <!--物流信息-->
+    <ng-include src="'delivery'"></ng-include>
+</div>

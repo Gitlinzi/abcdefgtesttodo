@@ -1,0 +1,26 @@
+<div ng-if="itemlist.isSeckill">
+    <div class='seckill clearfix'>
+        <div class='seckill-left'>
+            <span>{{i18n('秒杀')}}</span>
+        </div>
+        <div class='seckill-right' ng-if="promotionInfo.promotions[0] && promotionInfo.promotions[0].endTime">
+            <span class="whiteColor">{{i18n('距离活动结束还剩')}}：</span>
+            <span count-down show-count-down="startCountDown" current-time="getData" end-time="promotionInfo.promotions[0].endTime"></span>
+        </div>
+    </div>
+    <div class="price">
+        <!-- 商品价格开始  begin -->
+        @@include("detail/seckillPrice.html")
+        <!-- 商品价格结束  begin -->
+        <dl>
+            <dt>{{i18n('已售')}}/{{i18n('限购')}}</dt>
+            <dd class="speedPro-box">
+                <span class="progressText">{{itemlist.saleStock||0}}/{{itemlist.totalLimitNum}}</span>
+                <span class="speedPro"></span>
+            </dd>
+        </dl>
+        <!-- 商品销量统计开始  begin -->
+        @@include("detail/seckillSaleNum.html")
+        <!-- 商品销量统计结束  begin -->
+    </div>
+</div>

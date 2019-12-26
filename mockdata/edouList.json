@@ -1,0 +1,25 @@
+{
+  "data": {
+    "commissionDetail": {
+      "listObj":  [{
+        "refNo": "170629982772925502",
+        "orderNo": "170629982772925502",
+        "ordersAmount": null,
+        "commisionAmount": -21.00,
+        "withdrawApplyAmount": 0.00,
+        "withdrawFee": 0.00,
+        "donationAmount": 0.00,
+        "withdrawActualAmount": 0.00,
+        "withdrawStatus": null,
+        "createTime": 1498725513000,
+        "orderType": 16,
+        "transSrcUserId": null
+      }
+      ],
+      "total": 885
+    },
+    "withdrawActualTotalAmount": 8904.63,
+    "commissionAmount": 28351.86
+  },
+  "code": "0"
+}

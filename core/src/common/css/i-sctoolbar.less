@@ -1,0 +1,222 @@
+/* 筛选工具条 */
+
+#sctoolbar {
+    height: 38px;
+    margin-bottom: 60px;
+    position: relative;
+    overflow: visible;
+    font-size: 12px;
+    line-height: 38px;
+    background-color: @backgroundColor;
+    *zoom: 1;
+    border-bottom: none;
+
+    & .sorting {
+        float: left;
+    }
+    .filter {
+        position: absolute;
+        top: 38px;
+        border: 1px solid @eeGreyColor;
+        border-top: none;
+        width: 100%;
+		box-sizing: border-box;
+        a {
+            margin-left: 20px;
+        }
+    }
+    .segmenting-line {
+        position: absolute;
+        top: 38px;
+        left: -1px;
+        border-bottom: 1px solid @ddGreyColor;
+        border-top: none;
+        width: 100%;
+		display: none;
+    }
+    .price-range {
+        .check {
+            z-index: 2;
+            bottom: -30px;
+        }
+    }
+    & .order {
+        float: left;
+        display: inline-block;
+        height: 38px;
+        padding: 0 20px;
+		&:hover {
+			color: @themeColor;
+
+			i {
+				background-position: -92px -164px;
+			}
+		}
+
+        & i {
+            width: 12px;
+            height: 11px;
+            //background: url('../../images/company/company-default.png') no-repeat -495px -67px;
+            // .common-product-company-default(-495px,-67px);
+			background: url('../../images/adv_ico_new.png') no-repeat -92px -144px;
+			background-size: 750px 1000px;
+            margin-left: 3px;
+        }
+        &.down-icon-two {
+			i {
+				background-position: -92px -224px;
+			}
+            //background: url('../../images/company/company-default.png') no-repeat -70px -302px;
+            //.common-product-company-default(-70px,-302px);
+        }
+        &.active {
+            color: @themeColor;
+            position: relative;
+            z-index: 100;
+            &:first-child {
+            }
+			&:before {
+				content: "";
+				display: block;
+				position: absolute;
+				width: 100%;
+				height: 2px;
+				bottom: 0;
+				left: 0;
+				box-sizing: border-box;
+				background: @themeColor;
+				border-left: 18px solid @backgroundColor;
+				border-right: 18px solid @backgroundColor;
+			}
+            & i {
+                //background: url('../../images/company/company-default.png') no-repeat -459px -67px;
+                //.common-product-company-default(-459px, -67px);
+				background-position: -92px -164px;
+            }
+			& .asc {
+				background-position: -92px -244px;
+			}
+			& .desc {
+				background-position: -92px -264px;
+			}
+        }
+    }
+    .price-range {
+        display: inline-block;
+        margin-left: 10px;
+        span{
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+        }
+        .from,
+        .to {
+            width: 55px;
+            height: 24px;
+            line-height: 24px;
+            border-radius: 2px;
+            padding: 0 8px;
+            box-sizing: border-box;
+            background-color: @whiteColor;
+        }
+        .check {
+            position: absolute;
+            height: 30px;
+            line-height: 20px; //padding-top: 3px;
+            background: @backgroundColor;
+            border: 1px solid @ddGreyColor;
+            border-top: none;
+            width: 140px;
+            display: block;
+            text-align: center;
+			margin-left: -5px;
+            button,
+            a {
+                margin: 0 15px;
+                border: none;
+                padding: 3px;
+                height: 23px;
+                line-height: 16px;
+				border-radius: 2px;
+            }
+        }
+    }
+
+    & .icon-checkbox {
+        margin-top: -3px;
+		opacity: 0.5;
+    }
+    & .condition {
+        margin-left: 30px;
+        &:hover .icon-checkbox,
+        &.active .icon-checkbox {
+            .icon-posi(-725px, -25px);
+			opacity: 1;
+        }
+        &.active {
+            color: @themeColor;
+        }
+    }
+    & .flip {
+        float: right;
+        position: relative;
+        span {
+            display: inline-block;
+            vertical-align: top;
+			b {
+				font-weight: normal;
+			}
+        }
+        .highlight {
+            color: @66GreyColor;
+            font-style: normal;
+        }
+        & .pag {
+            display: inline-block;
+            height: 38px;
+            color: @blackColor;
+            width: 40px;
+            vertical-align: top;
+            text-align: center;
+			line-height: 38px;
+
+			i {
+				width:24px;
+				height:24px;
+				line-height: 24px;
+				border: 1px solid @borderColor;
+				background: #fff;
+				border-radius: 2px;
+				cursor: pointer;
+
+				&:before {
+					content: "";
+					display: inline-block;
+					width: 8px;
+					height: 14px;
+					cursor: default;
+					vertical-align: top;
+					margin-top: 5px;
+				}
+			}
+
+            &.disable {
+                i {
+					background: @borderColor;
+                }
+            }
+        }
+        & .pag-two {
+            i:before {
+                //background: url('../../images/company/company-default.png') no-repeat -23px -126px;
+                .common-product-company-default(-23px,-126px);
+            }
+        }
+        & .pag-one {
+            i:before {
+                //background: url('../../images/company/company-default.png') no-repeat -23px -76px;
+                .common-product-company-default(-23px,-76px);
+            }
+        }
+    }
+}

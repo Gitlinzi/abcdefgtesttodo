@@ -1,0 +1,32 @@
+<div class="feedback">
+    <div class="home-allTitle">
+        <span>我的反馈</span>
+    </div>
+    <!-- 无消息记录的情况下 begin -->
+    <div ng-if="!feedback.list.length || feedback.list.length<0" class="message-none">
+        <div class="message-left">
+            <span></span>
+        </div>
+        <div class="message-right">
+            <span>暂无消反馈记录~</span>
+        </div>
+    </div>
+    <!-- 无消息记录的情况下 end -->
+    <!-- 有消息记录的情况下 begin -->
+    <div ng-if="feedback.list.length>0" class="container-bigBox">
+        <div class="container-box" ng-repeat="x in feedback.list">
+            <div class="container-left">
+                <span class="day">{{x.createTime | date:'yyyy-MM-dd'}}</span>
+                <span class="time">{{x.createTime | date:'HH:mm:ss'}}</span>
+            </div>
+            <div class="container-right">
+                <dl>
+                    <dt class="normal-font-weight">
+                        <span class="title-icon">{{x.content}}</span>
+                    </dt>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <!-- 有消息记录的情况下 end -->
+</div>

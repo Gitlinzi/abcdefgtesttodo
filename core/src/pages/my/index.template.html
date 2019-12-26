@@ -1,0 +1,221 @@
+<div class="content" ng-init="myHome.init();">
+    <!-- 删除订单 begin -->
+    <div class='delete-order'>
+        <div class='apply-cancel'>
+            <span class='apply-text'>{{i18n('提示')}}</span>
+            <span class='apply-icon'></span>
+        </div>
+        <div class='delete-text'>
+            <p class='sure-delete'>{{i18n('您确定要删除该订单吗')}}？</p>
+            <p class='delete-color'>{{i18n('删除后')}}，{{i18n('您可以在订单回收站还原该订单')}}，{{i18n('也可以做永久删除')}}。</p>
+            <div class='delete-button'>
+                <input class='button-one' type="button" value="{{i18n('确定')}}">
+                <input class='button-two' type="button" value="{{i18n('取消')}}">
+            </div>
+        </div>
+    </div>
+    <!-- 删除订单 end -->
+    <div class='order-cancel-apply'>
+        <!-- 取消订单申请 begin -->
+        <div class='apply-cancel'>
+            <span class='apply-text'>{{i18n('提示')}}</span>
+            <span class='apply-icon'></span>
+        </div>
+        <div class='cancel-content'>
+            <p class='cancel-title'>{{i18n('订单取消申请')}}</p>
+            <p>
+                {{i18n('取消原因')}}
+                <select name="" id="">
+                    <option value="">{{i18n('重复购买')}}</option>
+                    <option value="">{{i18n('再次购买')}}</option>
+                    <option value="">{{i18n('拍错了')}}</option>
+                </select>
+            </p>
+            <p class='cancel-color'>{{i18n('温馨提示')}}:{{i18n('订单成功取消后无法恢复')}}。</p>
+            <p>
+                <input type="button" value="{{i18n('确定')}}">
+                <input type="button" value="{{i18n('取消')}}">
+            </p>
+        </div>
+    </div>
+    <!-- 取消订单申请 end -->
+    <!-- @@include("home-head.html") -->
+
+    <div class="module person-center-color">
+        <div class="mc">
+
+            <div class="account-info clearfix">
+                <div class="account-info-left">
+                    <img ng-src="{{accountInfo.headPicUrl}}" />
+                </div>
+                <div class="account-info-left">
+                    <ul>
+                        <li class="clearfix">
+                            <div class="account-info-name">{{accountInfo.nickname}}</div>
+                        </li>
+                        <li class="clearfix" ng-repeat="costCenter in (accountInfo.costCenterArr | limitTo: showMoreCostCenter ? 1000 : 4)">
+                            <div class="account-info-costcenter">{{costCenter.costName}}</div>
+                        </li>
+                    </ul>
+                    <div ng-click="showMoreCostCenter=true" ng-show="!showMoreCostCenter&&accountInfo.costCenterArr.length>4" class="show-more-cost-center">{{i18n('显示更多')}}</div>
+                    <div ng-click="showMoreCostCenter=false" ng-show="showMoreCostCenter&&accountInfo.costCenterArr.length>4" class="show-more-cost-center">{{i18n('收回')}}</div>
+                </div>
+                <div class="account-info-right">
+                    <div class="mgB10">
+                        客户代表
+                    </div>
+                    <ul>
+                        <li class="clearfix mgB5">
+                            <div class="account-info-client">区域销售</div>
+                            <div class="account-info-client">{{regionList[0].delegateName}}</div>
+                            <div class="account-info-client">{{regionList[0].delegatePhone}}</div>
+                        </li>
+
+                        <li class="clearfix mgB5">
+                            <div class="account-info-client">对账人员</div>
+                            <div class="account-info-client">{{reconciliationList[0].delegateName}}</div>
+                            <div class="account-info-client">{{reconciliationList[0].delegatePhone}}</div>
+                        </li>
+
+                        <li class="clearfix">
+                            <div class="account-info-client">售后人员</div>
+                            <div class="account-info-client">{{saleafterList[0].delegateName}}</div>
+                            <div class="account-info-client">{{saleafterList[0].delegatePhone}}</div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="account-info-right straight-line">
+                </div>
+                <div class="account-info-right" ng-show="accountInfo.monthAmountLimitIs==1" style="margin-top: 20px">
+                    <p>{{i18n('月采购额')}}：<h5>{{(accountInfo.monthAmountLimit || 0) | currency:'￥'}}</h5></p>
+                </div>
+            </div>
+
+            <div class="module clearfix band mgB0 pdLR20">
+                <div class="c1">{{i18n('我的订单')}}</div>
+                <a class="band-right" ui-sref="index_orderList">{{i18n('查看全部')}}</a>
+            </div>
+            <div class="goodsItem-box mgB20">
+                <!-- 无订单的时候 begin -->
+                <div class="none-goodItem f0" ng-if="!myHome.list.length">
+                    <div class="none-left mgR15">
+                        <span class="none-left-img"></span>
+                    </div>
+                    <div class="none-right">
+                        <span>{{i18n('没有订单哦')}}~</span>
+                    </div>
+                </div>
+                <!-- 无订单的时候 end -->
+                <!-- 有订单的时候 begin -->
+                <dl class="clearfix img-box mgB15" ng-repeat="suborder in myHome.list | limitTo: 4">
+                    <dt>
+                        <a class="mgR15" href="#/orderDetail?code={{suborder.orderCode}}">
+                            <img height="80" width="80" ng-src="{{pro.productPicPath}}" alt="{{pro.productCname}}" ng-repeat="pro in suborder.itemList| limitTo: 4">
+                        </a>
+                    <div class="three-squire" ng-if="suborder.itemList>3">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    </dt>
+                    <dd class="part30 width147">{{suborder.goodReceiverName}}</dd>
+                    <dd class="part30 pay-money">
+                        <p>{{suborder.paymentAmount | currency:'￥'}}</p>
+                        <span>{{suborder.payMethod }}</span>
+                    </dd>
+                    <dd class="part30 time">
+                        <p>{{suborder.orderCreateTime|date:'yyyy-MM-dd '}}</p>
+                        <span>{{suborder.orderCreateTime|date:'HH:mm:ss'}}</span>
+                    </dd>
+                    <dd class="part30 wait-pay">
+                        <a href="#/orderDetail?code={{suborder.orderCode}}">
+                            {{suborder.orderStatusStr}}
+                        </a>
+                    </dd>
+                    <dd class="part30">
+                        <a href="#/orderDetail?code={{suborder.orderCode}}">{{i18n('查看')}}</a>
+                    </dd>
+                </dl>
+                <!-- 有订单的时候 end -->
+            </div>
+
+            <div class='goods-show'>
+                <div class='guess-you pdLR20 clearfix'>
+                    <span class="guess-like">{{i18n('我收藏的商品')}}</span>
+                    <span class="take-all"><a ui-sref="index_frequence">{{i18n('查看全部')}}</a></span>
+                </div>
+                <div class='show-good'>
+                    <!-- 无收藏商品的时候 begin -->
+                    <div class="none-goods-box f0" ng-if="myHome.favoriteGoods.length>0? false:true">
+                        <div class="collection-left mgR15">
+                            <span></span>
+                        </div>
+                        <div class="collection-right">
+                            <span>{{i18n('暂未收藏商品，可在商品详情页将喜欢的商品加入收藏哦')}}~</span>
+                        </div>
+                    </div>
+                    <!-- 无收藏商品的时候 end -->
+                    <!-- 有收藏商品的时候 begin -->
+                    <div class='goods-box'>
+                        <ul class='clearfix'>
+                            <li class='food-item' ng-repeat="pro in myHome.favoriteGoods">
+                                <a class="pdT20" href="item.html?itemId={{pro.mpId}}">
+                                    <img width='150' height='150' ng-src="{{pro.picUrl}}" alt="{{pro.name}}">
+                                    <h5>{{pro.realPrice|currency:"￥"}}</h5>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 有收藏商品的时候 end -->
+                </div>
+
+                <div ng-if="myHome.favoriteGoods.length>0? true:false" class='arrow-box arrowLeft'>
+                    <span class="arrowLeft-icon" ng-class="{'arrowLeft-icon-disabled':myHome.FavoriteGoodPageNo==1}" ng-click="upPage('favorite')"></span>
+                </div>
+                <div ng-if="myHome.favoriteGoods.length>0? true:false" class='arrow-box arrowRight'>
+                    <span class="arrowRight-icon" ng-class="{'arrowRight-icon-disabled':pageEnd()}" ng-click="nextPage('favorite')"></span>
+                </div>
+            </div>
+
+            <!-- 浏览商品历史 -->
+            <!-- <div class='goods-show mgB50'>
+                <div class='guess-you pdLR20'><span class="guess-like">{{i18n('浏览历史')}}</span>
+                    <span class="take-all"><a ui-sref="index_favoriteStore">{{i18n('查看全部')}}</a></span>
+                </div>
+
+                <div class='show-good'>
+                    <div class="none-favorite-box f0" ng-if="myHome.footList.length>0? false:true">
+                        <div class="collection-left mgR15">
+                            <span></span>
+                        </div>
+                        <div class="collection-right">
+                            <span>{{i18n('暂未浏览商品，去逛逛吧')}}~</span>
+                        </div>
+                    </div>
+                    <div class='goods-box'>
+                        <ul class='clearfix'>
+                            <li class='food-item' ng-repeat="foot in myHome.footList">
+                                <a class="pdT20" href="item.html?itemId={{foot.mpId}}">
+                                    <img width='150' height='150' ng-src="{{foot.picUrl}}" alt="{{foot.name}}">
+                                    <h5>{{foot.price | currency:'￥'}}</h5>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class='arrow-box arrowLeft'>
+                    <span ng-if="myHome.footList.length>6?true:false" ng-click="upPage('foot')"></span>
+                </div>
+                <div class='arrow-box arrowRight'>
+                    <span ng-if="myHome.footList.length>6?true:false" ng-click="nextPage('foot')"></span>
+                </div>
+
+            </div> -->
+
+        </div>
+
+        <!-- 新修改的代码 end -->
+    </div>
+</div>

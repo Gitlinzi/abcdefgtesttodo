@@ -1,0 +1,79 @@
+<div class="credit-box">
+    <div class="credit-top">
+        <span class="top-text">批发业务单</span>
+
+    </div>
+    <div class="businessList-top">
+        <div class="datetimepicker">
+            <span class="date-title f14">业务日期：</span>
+            <div class="dis datetimepicker-content">
+                <div class="input-group">
+                    <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalFrom" options="options1" close="close(from)" max-date="endDateStr"
+                           ng-model="obj.startTime">
+                    <span class="input-group-addon">至</span>
+                    <input type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalTo" options="options2" close="close(to)" min-date="startDateStr"
+                           ng-model="obj.endTime">
+                </div>
+            </div>
+
+            <div class="receivable-right receivable-right-two">
+                <span class="bill-text f14 dis">单据号：</span>
+                <input type="text" class="num-bill f14" ng-model="obj.pfBillNo">
+                <span class="bill-style f14">单据类型：</span>
+                <div class="dis bill-select-box">
+                    <select name="" class="bill-select f14"
+                    ng-options="billType as billType.value for billType in business.billTypeList"
+                    ng-model="business.selectBillType">
+                    </select>
+                    <i class="select-arrwo"></i>
+                </div>
+                <span class="bill-orign f14">单据来源：</span>
+                <div class="dis bill-select-box">
+                    <select name="" class="orign-select f14"
+                            ng-options="billFrom as billFrom.value for billFrom in business.billFromList"
+                            ng-model="business.selectBillFrom">
+                    </select>
+                    <i class="select-arrwo"></i>
+                </div>
+                <span class="search-text f14 dis" ng-click="init()">搜索</span>
+            </div>
+        </div>
+    </div>
+    <div class="businessList-container">
+        <div class="businessList-container-top">
+            <span class="top-title f12 dis">业务日期</span>
+            <span class="bill-num-title f12 dis">单据号</span>
+            <span class="of-bill-title f12 dis">相关单据号</span>
+            <span class="bill-orign-title f12 dis">单据来源</span>
+            <span class="bill-style-title f12 dis">单据类型</span>
+            <span class="discount-title f12 dis">整单折让金额</span>
+            <span class="discount-num-title f12 dis">整单折扣比例</span>
+            <span class="duscount-money f12 dis">整单应收金额</span>
+            <span class="goods-number f12 dis">商品数量</span>
+            <span class="operation-title f12 dis">操作</span>
+        </div>
+        <div class="businessList-main" ng-repeat="bl in business.list">
+            <span class="order-time f12 dis">{{bl.rzDate | date:'yyyy/MM/dd'}}</span>
+            <span class="order-num f12 dis">{{bl.pfBillNo}}</span>
+            <span class="order-of-num f12 dis">{{bl.billNo}}</span>
+            <span class="order-oring f12 dis">{{business.billFromStr[bl.billFrom]}}</span>
+            <span class="order-style f12 dis">{{business.billTypeStr[bl.billType]}}</span>
+            <span class="order-discount-num f12 dis">{{bl.billZrTotal | currencySymbol:'￥'}}</span>
+            <span class="discount-order f12 dis">{{bl.billZkRate | currencySymbol:'￥'}}</span>
+            <span class="order-income-num f12 dis">{{bl.ysTotal | currencySymbol:'￥'}}</span>
+            <span class="goods-number f12 dis">{{bl.counts}}</span>
+            <a ui-sref="index_businessDetail({pfBillNo:bl.pfBillNo})" href="" class="take-text f12 dis">查看</a>
+        </div>
+    </div>
+    <!-- 缺省图 -->
+    <div class="none-order" ng-if="isShowIcon">
+        <div class="none-left">
+            <span class="none-left-img"></span>
+        </div>
+        <div class="none-right">
+            <span>{{i18n('暂无数据')}}~</span>
+        </div>
+    </div>
+    <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+         total-page="totalPage" ng-if="isShowPage"></div>
+</div>

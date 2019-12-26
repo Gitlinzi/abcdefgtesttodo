@@ -1,0 +1,1674 @@
+ /* 弹出框 */
+ .dialogForm{
+	 z-index: 1000;
+	 overflow: auto;
+	 position: fixed;
+	 top: 0;
+	 left: 0;
+	 width: 100%;
+	 height: 100%;
+	 overflow: auto;
+	 background: rgb(0, 0, 0);    /*不支持rgba的浏览器*/
+	 background: rgba(51, 51, 51, 0.3);  /*支持rgba的浏览器*/
+	 filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000,endColorstr=#B2000000);
+	 filter:~"progid:DXImageTransform.Microsoft.gradient(startColorstr=#B2000000, endColorstr=#B2000000)";
+	 background: none\9;
+ }
+.dialog{
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 15%;
+	//bottom: 50%;
+	width: 200px;
+	margin-left: -100px;
+	background-color: @whiteColor;
+	box-shadow: 0 0 10px rgba(200,200,200,0.5);
+	*border:3px solid @ccGreyColor;
+	z-index: 1001;
+  	border-radius: 5px;
+	&.md{
+		width: 400px;
+		margin-left: -200px;
+	}
+	&.lg{
+		width: 800px;
+		margin-left: -400px;
+	}
+	&-content{
+		width: 100%;
+		height: 100%;
+	}
+	&-header{
+		color: @whiteColor;
+		text-align: left;
+		background-color: @themeColor;
+
+		& h5{
+			height: 37px !important;
+			margin: 0 !important;
+			padding-left: 10px !important;
+			line-height: 37px !important;
+			font-size: 14px !important;
+		}
+	  	&-notie{
+		  	border-top-left-radius: 5px;
+		  	border-top-right-radius: 5px;
+		}
+	}
+	&-body{
+		padding: 20px 10px;
+	}
+	&-footer{
+		padding-right: 10px;
+		padding-bottom: 10px;
+		text-align: right;
+
+		& .btn{
+			height: 34px;
+			padding: 0 20px;
+		}
+		& .cancel{
+			color: @fontColor;
+			background-color: @backgroundColor;
+		}
+	}
+	&-close{
+		//border: 3px solid @themeColor;
+		width: 25px;
+		height: 25px;
+		line-height: 21px;
+		position: absolute;
+		background: @bodyBgColor;
+		color: @themeColor;
+	  	font-size: 26px;
+		font-weight: bold;
+	  	text-align: center;
+	  	right: -8px;
+
+		&:hover{
+			color: @ccGreyColor;
+		}
+		&-ie{
+			top: 0;
+		  	right:0;
+		}
+		&-notie{
+			border-radius: 30px;
+			top: -8px;
+		}
+		&-location{
+			right: 8px;
+			font-size: 20px;
+			color: inherit;
+			top: 3px;
+			position: absolute;
+			font-weight: bold;
+			&:hover{
+				color: @ccGreyColor;
+			}
+		}
+	}
+}
+.dialog{
+	position: absolute;
+	left: 50%;
+	top: 15%;
+	width: 370px;
+	border: 5px solid @ddGreyColor;
+	margin-left: -185px;
+	background-color: @whiteColor;
+	box-shadow: 0 0 10px rgba(200, 200, 200, 0.5);
+	z-index: 1001;
+	border-radius: 8px;
+	& .dialog-close{
+		width: 25px;
+		height: 25px;
+		position: absolute;
+		background: @bodyBgColor;
+		color: @aaGreyColor;
+		font-size: 24px;
+		font-weight: normal;
+		text-align: center;
+		right: 4px;
+	}
+	& .dialog-close-notie{
+		border: none;
+	}
+	& .dialog-close-notie{
+		border-radius: 30px;
+		top: 4px;
+	}
+	& .dialog-header{
+		background-color: @bodyBgColor;
+		& h5{
+			color: @fontColor;
+		}
+	}
+	& .dialog-body{
+		text-align: center;
+	}
+	& .dialog-footer{
+		text-align: center;
+		& .btn{
+			border-radius: @searchRadius;
+		}
+	}
+}
+// 用户登录和修改密码的弹框
+.mnl-box {
+	display: block;
+	position: absolute;
+	left: 50%;
+	top: 20%;
+	margin-left: -175px;
+	.form-group {
+		margin-bottom: 16px;
+		padding: 0 20px;
+		text-align: center;
+		.smsBtn {
+		   float: left;
+			height: 40px;
+			width: 130px; //margin-left: 5px;
+			margin-left: 8px; //color: @77GreyColor;
+			font-size: 12px; //background-color: @eeGreyColor;
+			border-radius: 0;
+			background-color: @55GreyColor;
+		}
+ 		& button {
+			width: 120px;
+			height: 35px;
+			border: none;
+			border-radius: @searchRadius;
+			margin: 10px 4px;
+		}
+		& .sure {
+			background-color: @btnBgColor;
+			color: @whiteColor;
+		}
+		& .noSure {
+			background-color: @bodyBgColor;
+			color: @whiteColor;
+		}
+		& .remove {
+			background-color: @whiteColor;
+			border: 1px solid @ddGreyColor;
+			color: @fontColor;
+		}
+	}
+	#login-page {
+		border: 6px solid @99GreyColor;
+		border-color: transparent;
+		border-color: rgba(193, 193, 193, 0.8);
+		border-radius: 5px;
+		.input {
+			float: none;
+			width: 248px; //padding-left: 55px;
+		}
+		.user-phone {
+			padding-left: 130px!important;
+			width: 168px!important;
+		}
+		& .mnl-title {
+			height: 40px;
+			box-sizing: border-box; // line-height: 40px;
+			margin: 0;
+			padding: 11px 15px 0 15px;
+			background-color: @f5GreyColor;
+			cursor: pointer;
+			dt {
+				float: left;
+				font-size: 14px;
+				font-weight: bold;
+			}
+			& .mnl-close {
+				width: 16px;
+			    height: 16px;
+			    font-size: 22px;
+			    line-height: 18px;
+			    float: right;
+			}
+			.my-dt{
+				height: 40px;
+				line-height: 40px;
+				&.active{
+					background: @whiteColor;
+					color: @themeColor;
+				}
+			}
+		}
+		.login-form {
+			float: left;
+			width: 350px;
+			position: relative; // padding: 0 20px;
+			background-color: @whiteColor;
+			box-sizing: border-box; //border-radius: 3px;
+			// overflow: hidden;
+			& .mnl-title {
+				height: 40px;
+				box-sizing: border-box; // line-height: 40px;
+				margin: 0;
+				padding: 11px 15px 0 15px;
+				background-color: @bodyBgColor;
+				margin-bottom: 15px;
+				cursor: pointer;
+				dt {
+					float: left;
+					font-size: 14px;
+				}
+				& .mnl-close {
+					margin-top: 3px;
+					float: right;
+					width: 12px;
+					height: 12px;
+					//background: url('../../images/company/company-default.png') no-repeat -22px -256px;
+					.common-product-company-default(-22px,-256px);
+				}
+			}
+			& .you-tel {
+				padding: 0 20px 10px 20px;
+			}
+			& .pdMa{
+				padding-left: 20px;
+				margin-bottom: 15px;
+			}
+			& .login-active {
+				color: @themeColor;
+				font-weight: bold;
+			}
+			.login-active {
+				color: @themeColor;
+				font-weight: bold;
+			}
+
+			.msg-login{
+				height: 20px;
+				padding: 5px 0 5px 20px;
+				 height: 20px;
+				color: @clearColor;
+				font-size: 12px;
+				line-height: 20px;
+			}
+		}
+		.mgT25 {
+			margin-top: 25px;
+		}
+		.phoneText{
+			text-align: center;
+		}
+		.login-index {
+	        height: 56px;
+	        line-height: 1;
+	        font-size: 18px;
+	        font-weight: normal;
+	        margin: 0px;
+	        border-bottom: 1px solid @ccGreyColor;
+	        .login-line {
+	            padding: 20px 0;
+	            & span{
+	                width: 174px;
+	                cursor: pointer;
+	                display: inline-block;
+	                float: left;
+	                text-align: center;
+	            }
+	            & span:first-child {
+	                border-right: 1px solid @ddGreyColor;
+	            }
+	        }
+
+	    }
+		// & h2 {
+		// 	padding: 0 20px; // margin: 50px 0 25px 0;
+		// 	height: 56px;
+		// 	line-height: 56px;
+		// 	font-size: 18px;
+		// 	font-weight: normal;
+		// 	margin-top: 0px;
+		// 	margin-bottom: 8px;
+		// 	border-bottom: 1px solid @ccGreyColor;
+		// 	& span {
+		// 		padding: 0 39px;
+		// 		cursor: pointer;
+		// 	}
+		// 	& span:first-child {
+		// 		border-right: 1px solid @ddGreyColor;
+		// 	}
+		// }
+		.codeipt {
+			float: left;
+			width: 148px;
+		}
+
+		.vicode {
+			float: left;
+			width: 122px;
+			height: 40px;
+			margin-left: 8px;
+			cursor: pointer;
+		}
+		.updcode {
+			float: right;
+			width: 40px;
+			margin-left: 10px;
+			margin-top: 4px;
+			text-align: right;
+			font-size: 12px;
+		}
+		.btn {
+			height: 40px;
+		}
+		.btn-one {
+			width: 100%;
+			margin: 10px 0;
+			border-radius: 3px;
+		}
+		.msg {
+			display: none;
+			margin-bottom: 10px;
+			padding: 0 5px;
+			color: @clearColor;
+			font-size: 12px;
+			line-height: 25px;
+			border: 1px solid lighten(@clearColor, 30%);
+			background-color: lighten(@clearColor, 45%);
+		}
+		.regis {
+			float: right;
+			font-size: @fontSize;
+			color: @themeColor; //padding-top: 10px;
+		}
+		.forget {
+			float: right; //margin-top: 10px;
+			margin-right: 20px;
+		}
+		.union-login {
+			height: 50px;
+			background-color: @backgroundColor;
+			margin-bottom: 0px;
+			line-height: 50px;
+			padding: 0 20px;
+			a {
+				//margin-right: 20px;
+				img {
+					margin-right: 10px;
+					float: left;
+					padding-top: 10px;
+				}
+				span {
+					float: left;
+					margin-right: 20px;
+				}
+			}
+		}
+		.identity-login {
+			.icon-user-box {
+				width: 38px;
+				height: 38px;
+				line-height: 38px;
+				background-color: @backgroundColor;
+				position: absolute;
+				top: 1px;
+				left: 1px;
+				border-right: 1px solid @ddGreyColor;
+				text-align: center;
+				&-padL {
+					padding-left: 50px;
+				}
+			}
+			.phone-user {
+				padding-left: 12px;
+				width: 286px;
+			}
+			.phone-code {
+				position: absolute;
+				top: 1px;
+				right: 8px;
+				height: 38px;
+
+				img {
+					height: 38px;
+					width: 100px;
+				}
+				span {
+					display: inline-block;
+					width: 40px;
+					height: 28px;
+					margin-top: 1px;
+					margin-left: 15px;
+					float: right;
+					font-size: 12px;
+					color: @bbGreyColor;
+				}
+			}
+		}
+		.phone-login {
+			.phone-user {
+				padding-left: 12px;
+				width: 286px;
+			}
+			.phone-code {
+				position: absolute;
+				top: 1px;
+				right: 8px;
+				height: 38px;
+				img {
+					height: 38px;
+					width: 100px;
+				}
+				span {
+					display: inline-block;
+					width: 40px;
+					height: 28px;
+					margin-top: 1px;
+					margin-left: 15px;
+					float: right;
+					font-size: 12px;
+					color: @bbGreyColor;
+				}
+			}
+		}
+	}
+	.op-icons-regis {
+		margin-right: 5px;
+	}
+	.three-title {
+		line-height: 38px;
+		padding: 0 20px;
+		background-color: @whiteColor;
+	}
+	.btn {
+		border-radius: 0;
+	}
+}
+
+//订单取消申请弹框
+.cancel-bomb{
+    width: 400px;
+    border: 5px solid @ddGreyColor;
+    border-radius: 8px;
+    position: absolute;
+    background: white;
+    z-index: 9999;
+    top: 20%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    & .cancel-title{
+        height: 25px;
+        padding: 0px 15px;
+        background: @eeGreyColor;
+        padding-top: 10px;
+        & .title-text{
+            color: @fontColor;
+			float: left;
+        }
+        & .close-img{
+            float: right;
+            display: block;
+            width: 12px;
+            height: 12px;
+            //background: url('../../../images/company/company-default.png') no-repeat -22px -256px;
+			.common-product-company-default(-22px,-256px);
+            cursor: pointer;
+        }
+    }
+    & .cancel-main{
+      padding-top: 32px;
+      padding-left: 20px;
+        & .main-title{
+            font-size: 0;
+			margin-bottom: 20px;
+            & .icon-text{
+                font-size: 20px;
+                vertical-align: middle;
+                font-weight: 900;
+				color: @33GreyColor;
+            }
+        }
+        & .main-select{
+            font-size: 14px;
+            position: relative;
+            & select{
+                width: 180px;
+                height: 35px;
+                margin-left: 10px;
+                padding-left: 10px;
+            }
+			& .select-arrow{
+				height: 6px;
+				width: 10px;
+				position: absolute;
+				top: 15px;
+				right: 150px;
+				background: url('../../images/company/company-default.png') no-repeat -22px -34px;
+			}
+        }
+        & .main-content{
+            font-size: 14px;
+            position: relative;
+            margin-top: 10px;
+    		padding-right: 40px;
+            .textcontent {
+            	width: 100%;
+			    margin-right: 30px;
+			    border: none;
+			    background: #f8f8f8;
+			    resize: none;
+			    min-height: 100px;
+			    padding: 10px;
+            }
+        }
+        & .main-text{
+            padding-left: 60px;
+            font-size: 12px;
+            margin-top: 22px;
+            color: @themeOrangeColor;
+        }
+        & .main-botton{
+            font-size: 14px;
+            margin-top: 25px;
+			margin-bottom: 45px;
+			text-align: center;
+            & a{
+                display: inline-block;
+                line-height: 35px;
+                text-align: center;
+                margin-right: 10px;
+            }
+			& .button-sure{
+				width:98px;
+				height:33px;
+				background-color: @themeColor;
+				border:1px solid @themeColor;
+				color: @whiteColor;
+			}
+			& .button-cancel {
+				min-width:98px;
+				height:33px;
+				border:1px solid @ccGreyColor;
+				color: @greyColor;
+			}
+        }
+    }
+}
+
+//购物车 弹框组件
+.bomb-Box{
+	position: fixed;
+	width: 380px;
+	border:5px solid @ddGreyColor;
+	background-color: @whiteColor;
+	border-radius: 8px;
+	top:200px;
+	left:50%;
+	margin-left: -190px;
+	& .bomb-title{
+		padding-top: 12px;
+		height:23px;
+		background: @backgroundColor;
+		padding-left: 15px;
+		padding-right:15px;
+		font-size: 12px;
+		& .title-text{
+			float: left;
+		}
+		& .close-img{
+			float: right;
+			width: 12px;
+			height:12px;
+		  	//background: url('../../images/company/company-default.png') no-repeat -22px -256px;
+			.common-product-company-default(-22px,-256px);
+			cursor: pointer;
+		}
+	}
+	& .bomb-main{
+		font-size: 0;
+		padding-top: 30px;
+		padding-left: 31px;
+		padding-bottom: 40px;
+		& .top-vertical{
+			vertical-align: top;
+		}
+		& .middle-vertical{
+			vertical-align: middle;
+		}
+		& .main-left{
+			display: inline-block;
+			margin-right:20px;
+			& .error-img{
+				display: block;
+				width: 50px;
+				height:50px;
+			  	//background: url('../../images/company/company-icon.png') no-repeat -518px -126px;
+				.common-product-company-icon(-518px, -126px);
+			}
+			& .success-img{
+				display: block;
+				width: 50px;
+				height:50px;
+			  	//background: url('../../images/company/company-icon.png') no-repeat -447px -126px;
+				.common-product-company-icon(-447px, -126px);
+			}
+		}
+		& .main-right{
+			display: inline-block;
+			margin-top: 10px;
+			& .success-text{
+				color: @88GreenColor;
+			}
+			& .error-text{
+				color: @33GreyColor;
+			}
+			& .right-text{
+				font-weight: 900;
+				font-size: 20px;
+			}
+			& .chose-text{
+				font-size: 12px;
+				margin: 10px 0;
+			}
+			& .right-botton{
+				font-size: 12px;
+				padding-top:10px;
+				margin-top: 10px;
+				& a{
+					text-decoration: none;
+				}
+				& .one-button{
+					padding: 7px 15px;
+					background: @btnBgColor;
+					color: @whiteColor;
+					border-radius: @searchRadius;
+					text-align: center;
+					margin-right: 10px;
+				}
+				& .two-button{
+					padding: 7px 15px;
+					background: white;
+					border-radius: @searchRadius;
+					width: 80px;
+					border: 1px solid @ccGreyColor;
+					color: @99GreyColor;
+				}
+			}
+			& .integral{
+				font-size: 12px;
+				color: @00BlueColor;
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+//收藏的弹框
+#follow-box{
+	width: 368px;
+	border:5px solid @ddGreyColor;
+	background-color: @whiteColor;
+	position: absolute;
+	z-index: 100;
+	top:37%;
+	left:50%;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+	//top:330px;
+	//left:810px;
+	border-radius: 6px;
+	& .follow-title{
+		height: 24px;
+		margin: 0;
+		background: @bodyBgColor;
+		padding: 8px 10px 4px 10px;
+		font-size: 14px;
+		& dt{
+			float: left;
+		}
+		& dd{
+			cursor: pointer;
+			float: right;
+			width: 12px;
+			height: 12px;
+			//background: url('../../images/company/company-default.png') no-repeat -22px -256px;
+			.common-product-company-default(-22px,-256px);
+			top: 4px;
+		}
+	}
+	& .take-follow{
+		height: 50px;
+		width: 300px;
+		font-size: 0;
+		margin:31px 0 37px 80px;
+		& .take-follow-left{
+			display: inline-block;
+			margin-right: 13px;
+			& span{
+				display: block;
+				height: 50px;
+				width: 50px;
+			}
+			& .follow-yes{
+				//background: url('../../images/company/company-icon.png') no-repeat -447px -126px;
+				.common-product-company-icon(-447px, -126px);
+			}
+			& .follow-no{
+				//background: url('../../images/company/company-icon.png') no-repeat -518px -126px;
+				.common-product-company-icon(-518px, -126px);
+			}
+		}
+		& .take-follow-right{
+			display: inline-block;
+			vertical-align: top;
+			& span{
+				font-size: 20px;
+				font-weight: 900;
+				display: block;
+				height: 30px;
+			}
+			& .follow-success{
+				color: @88GreenColor;
+			}
+			& .follow-fair{
+				color: @blackColor;
+			}
+			& .chare-follow{
+				color: #0166CC;
+				font-size: 12px;
+			}
+		}
+	}
+}
+ //物流跟踪弹框
+ .logistics-bomb{
+	 width:400px;
+	 border:5px solid @ddGreyColor;
+	 background-color: @whiteColor;
+	 border-radius: 8px;
+	 top:50%;
+	 left:50%;
+	 min-height:520px;
+	 -webkit-transform: translateX(-50%) translateY(-50%);
+	 transform: translateX(-50%) translateY(-50%);
+	 position: absolute;
+	 & .logistics-bomb-box{
+		 padding: 20px;
+	 }
+	 & .icon-error{
+		 display: inline-block;
+		 width: 50px;
+		 height: 50px;
+		 //background: url('../../../images/company/company-icon.png') no-repeat -518px -126px;
+		 .common-product-company-icon(-518px, -126px);
+		 vertical-align: middle;
+		 margin-right: 10px;
+	 }
+	 & .icon-success{
+		 display: inline-block;
+		 width: 50px;
+		 height: 50px;
+		 //background: url('../../../images/company/company-icon.png') no-repeat -518px -126px;
+		 .common-product-company-icon(-447px, -126px);
+		 vertical-align: middle;
+		 margin-right: 10px;
+	 }
+	 & .icon-error-text{
+		 font-size: 18px;
+		 font-weight: 900;
+	 }
+	 & .cancel-title{
+		 height: 25px;
+		 padding: 0px 15px;
+		 background: @eeGreyColor;
+		 padding-top: 10px;
+		 & .title-text{
+			 color: @fontColor;
+			 float: left;
+		 }
+		 & .close-img{
+			 float: right;
+			 display: block;
+			 width: 12px;
+			 height: 12px;
+			 //background: url('../../images/company/company-default.png') no-repeat -22px -256px;
+			 .common-product-company-default(-22px,-256px);
+			 cursor: pointer;
+		 }
+	 }
+	 & .logistics-title{
+		 padding-left: 20px;
+		 padding-top: 0;
+		 margin-bottom: 15px;
+		 & a{
+			 display: inline-block;
+			 padding-bottom: 7px;
+			 font-size: 16px;
+			 color: @33GreyColor;
+			 padding:5px 10px 5px 10px;
+			 i{
+				 width: 20px;
+				 height: 20px;
+				 margin-right: 6px;
+				 margin-bottom: 4px;
+				//  background: url('../../images/company/company-icon.png') no-repeat -252px -301px;
+				 background: url(../../images/company/company-icon.png) no-repeat -252px -168px;
+				 .common-product-company-icon(-252px, -301px);
+			 }
+		 }
+		 & .a-active{
+			 color: @themeColor;
+			 padding:5px 10px 5px 10px;
+			 i{
+				 //background: url('../../images/company/company-icon.png') no-repeat -252px -168px;
+				 .common-product-company-icon(-252px, -168px);
+			 }
+		 }
+	 }
+	 & .logistics-main{
+		 padding-left: 20px;
+		 padding-right: 20px;
+		 position: relative;
+		 .logistics-state{
+			 border:1px solid @ddGreyColor;
+			 width: 340px;
+			 padding: 15px 0px 15px 20px;
+			 overflow: hidden;
+			 margin-bottom: 10px;
+			 .blue{
+				 color: @themeColor;
+			 }
+			 p{
+				 padding: 0;
+				 margin: 0 0 5px 0;
+				 span{
+					 display: inline-block;
+					 width: 84px;
+				 }
+			 }
+		 }
+		 .logistics-detail{
+			 width: 362px;
+			 overflow: hidden;
+			 ul{
+				 margin-bottom: 10px;
+				 li{
+					 color: @33GreyColor;
+					 padding: 6px 5px;
+					 display: inline-block;
+					 cursor: pointer;
+					 vertical-align: middle;
+					 &.active{
+						 border-bottom: 2px solid @themeColor;
+						 color: @themeColor;
+					 }
+				 }
+				 & .line-li{
+					 height: 12px;
+					 border: 1px solid #ccc;
+					 padding:0;
+					 margin:0px 15px;
+				 }
+			 }
+		 }
+		 & .big-box{
+			 position: relative;
+			 height: 100px;
+			 border-bottom: 1px solid @bodyBgColor;
+			 & .img-box{
+				 width:450px;
+				 overflow: hidden;
+				 & ul{
+					 width: 10000px;
+					 & li{
+						 float: left;
+						 margin-left:10px;
+						 & a{
+							 display: block;
+							 & img{
+								 display: block;
+							 }
+						 }
+					 }
+				 }
+			 }
+			 & .arrow-left{
+				 position: absolute;
+				 width:14px;
+				 height:24px;
+				 //background: url('../../images/company/company-default.png') no-repeat -277px -206px;
+				 .common-product-company-default(-277px,-206px);
+				 top:34%;
+				 margin-top:-7px;
+				 left:-12px;
+			 }
+			 & .arrow-right{
+				 position: absolute;
+				 width:14px;
+				 height:24px;
+				 //background: url('../../images/company/company-default.png') no-repeat -277px -100px;
+				 .common-product-company-default(-277px,-100px);
+				 top:34%;
+				 margin-top:-7px;
+				 right:-22px;
+			 }
+		 }
+		 & .mes-big-box{
+			 padding-left: 15px;
+			 padding-top: 15px;
+			 padding-right: 15px;
+			 height:255px;
+			 overflow-y: auto;
+			 border:1px solid @ddGreyColor;
+			 margin-bottom: 20px;
+			 overflow-x: hidden;
+			 &::-webkit-scrollbar {
+				 width: 4px;
+			 }
+			 &::-webkit-scrollbar-track {
+				 background-color: @whiteColor;
+				 -webkit-border-radius: 2em;
+				 -moz-border-radius: 2em;
+				 border-radius:2em;
+			 }
+			 &::-webkit-scrollbar-thumb {
+				 background-color:@ccGreyColor;
+				 -webkit-border-radius: 2em;
+				 -moz-border-radius: 2em;
+				 border-radius:2em;
+			 }
+			 & .mart24{
+				 margin-top: 24px;
+			 }
+			 ol{
+				 overflow: hidden;
+				 dl{
+					 overflow: hidden;
+					 margin-bottom: 12px;
+					 dt{
+						 width: 80px;
+						 height: 80px;
+						 float: left;
+						 margin-right: 10px;
+					 }
+					 dd{
+						 width: 240px;
+						 float: left;
+						 position: relative;
+						 min-height: 78px;
+						 h4{
+							 font-size: 12px;
+							 color: @33GreyColor;
+							 height: 32px;
+							 display: -webkit-box;
+							 word-wrap: break-word;
+							 word-break:break-all;
+							 -webkit-box-orient: vertical;
+							 -webkit-line-clamp: 2;
+							 overflow: hidden;
+							 margin: 0 0 5px 0;
+							 font-weight: normal;
+						 }
+						 p{
+							 margin: 0;
+							 font-size: 12px;
+							 color: @99GreyColor;
+							 span{
+								 display: inline-block;
+								 float: left;
+								 width: 264px;
+							 }
+							 em{
+								display: inline-block;
+								float: right;
+								width: 80px;
+								text-align: right;
+								font-style: normal;
+								position: absolute;
+								right:0px;
+								bottom: 5px;
+							 }
+						 }
+					 }
+				 }
+			 }
+			 & .colorA{
+				 color: @99GreyColor;
+				 font-size: 12px;
+			 }
+			 & span{
+				 display: block;
+				 margin-bottom:5px;
+			 }
+			 & div{
+				 padding-left: 15px;
+			 }
+			 & .mes-one{
+				 border-left: 2px solid @ddGreyColor;
+				 padding-bottom: 12px;
+				 &:nth-last-of-type(1) {
+					 border:none;
+					 padding-left: 17px;
+				 }
+				 & .first-span{
+					 color: @88GreenColor;
+					 position: relative;
+					 font-weight: 900;
+					 &::after{
+						 content: '';
+						 position: absolute;
+						 display: block;
+						 top:0px;
+						 left:-25px;
+						 width:18px;
+						 height:18px;
+						 //background: url('../../images/company/company-icon.png') no-repeat -565px -29px;
+						 .common-product-company-icon(-565px, -29px);
+					 }
+				 }
+				 & .two-span{
+					 position: relative;
+					 &::after{
+						 content: '';
+						 position: absolute;
+						 width:12px;
+						 height:12px;
+						 background-color: @ddGreyColor;
+						 top:0px;
+						 left:-22px;
+						 border-radius: 6px;
+					 }
+				 }
+			 }
+			 & .mes-two{
+				 border-left: 2px solid @ddGreyColor;
+				 padding-bottom: 25px;
+				 & .two-span{
+					 position: relative;
+					 &::after{
+						 content: '';
+						 position: absolute;
+						 width:12px;
+						 height:12px;
+						 background-color: @ddGreyColor;
+						 top:0px;
+						 left:-22px;
+						 border-radius: 6px;
+					 }
+				 }
+			 }
+			 & .line-right{
+				 width:4px;
+				 height:150px;
+				 background-color: @ccGreyColor;
+				 border-radius: 10px;
+				 padding:0;
+				 position: absolute;
+				 top: 125px;
+				 right: 4px;
+				 cursor: pointer;
+			 }
+		 }
+	 }
+ }
+ .bottom-text-position{
+      width:400px;
+	 position: absolute;
+	 border-radius: 5px;
+	 top:15x;
+	 left:0px;
+	 z-index: 1;
+	 padding: 14px 20px;
+	 border: 1px solid @9bGreenColor;
+	 background: @whiteColor;
+	 -webkit-box-shadow: 0px 0px 3px @9bGreenColor;
+	 -moz-box-shadow: 0px 0px 3px @9bGreenColor;
+	 box-shadow: 1px 0px 3px @9bGreenColor;
+	 & .close-bottom-position{
+		 width:12px;
+		 height:12px;
+		 background-position: -22px -256px;
+		 cursor: pointer;
+		 position: absolute;
+		 top: 6px;
+		 right: 8px;
+		 background: url('../../images/company/company-default.png');
+	 }
+ }
+ // 查看赠品弹框样式 begin
+ .see-gift{
+	 width: 400px;
+	 border: 5px solid @ddGreyColor;
+	 position: fixed;
+	 z-index: 100;
+	 background-color: @whiteColor;
+	 border-radius: 5px;
+	 top: 300px;
+	 left: 50%;
+	 margin-left: -260px;
+	 & .gift-bomBox-title{
+		 padding-left: 20px;
+	 }
+	 .gift-bottom-limit-height {
+		 max-height: 400px;
+		 overflow-y: auto;
+		 padding: 10px 0;
+	 }
+	 & .gift-bottom{
+		 padding-left: 20px;
+		 position: relative;
+		 .more-see{
+			 margin-left: 12px;
+			 color: @00BlueColor;
+			 cursor: pointer;
+		 }
+		 & .gift-arrow{
+			 position: absolute;
+			 display: block;
+			 width:14px;
+			 height:24px;
+			 top:60px;
+			 cursor: pointer;
+		 }
+		 & .gift-arrow-left{
+			 background: url('../../images/company/company-default.png') no-repeat -277px -206px;
+			 left:10px;
+		 }
+		 & .giftArrowLeft{
+			 background: url(../../images/company/company-default.png) no-repeat -277px -134px;
+			 left:10px;
+		 }
+		 & .gift-arrow-right{
+			 background: url('../../images/company/company-default.png') no-repeat -277px -34px;
+			 right:13px;
+		 }
+		 & .giftArrowRight{
+			 background: url(../../images/company/company-default.png) no-repeat -277px -99px;
+			 right:13px;
+		 }
+		 & .gift-top{
+			 margin-top: 12px;
+			 margin-bottom: 20px;
+			 & .full-gift{
+				 padding:5px;
+				 background-color: @88GreenColor;
+				 color: @whiteColor;
+			 }
+			 & .change-text{
+				 color: @blackColor;
+				 padding-left: 5px;
+			 }
+		 }
+		 & .gift-good-box{
+			 //width:455px;
+			 margin-bottom: 15px;
+			 position: relative;
+			 height:110px;
+			 overflow-x: auto;
+			 &::-webkit-scrollbar{
+				 width: 4px;
+				 height:5px;
+			 }
+			 &::-webkit-scrollbar-thumb{
+				 background-color: @ccGreyColor;
+				 -webkit-border-radius: 2em;
+				 -moz-border-radius: 2em;
+				 border-radius: 2em;
+			 }
+			 &::-webkit-scrollbar-track{
+				 background-color: @navColor;
+				 -webkit-border-radius: 2em;
+				 -moz-border-radius: 2em;
+				 border-radius: 2em;
+			 }
+			 & .gift-box{
+				 //width: 10000000px;
+				 //position: absolute;
+				 //left:0px;
+				 width: max-content;
+				 & li{
+					 float: left;
+					 margin-right: 11px;
+					 position: relative;
+					 & .gift-mask{
+						 position: absolute;
+						 background-color: @blackColor;
+						 width:80px;
+						 height:20px;
+						 text-align: center;
+						 line-height: 20px;
+						 color: @whiteColor;
+						 bottom:2px;
+						 left:0px;
+						 opacity: 0.5;
+					 }
+				 }
+			 }
+			 & .gift-line{
+				 display: block;
+				 width:300px;
+				 height:4px;
+				 background-color: @ddGreyColor;
+				 margin-top: 8px;
+				 cursor: pointer;
+				 margin-bottom: 8px;
+			 }
+		 }
+		 & .gift-more-good-box{
+			 margin-bottom: 15px;
+			 min-height:82px;
+			 margin-left: 40px;
+			 & .gift-box{
+				 left:0px;
+				 & li{
+					 float: left;
+					 margin-right: 11px;
+					 position: relative;
+					 & .gift-mask{
+						 position: absolute;
+						 background-color: @blackColor;
+						 width:80px;
+						 height:20px;
+						 text-align: center;
+						 line-height: 20px;
+						 color: @whiteColor;
+						 bottom:2px;
+						 left:0px;
+						 opacity: 0.5;
+					 }
+				 }
+			 }
+			 & .gift-line{
+				 display: block;
+				 width:300px;
+				 height:4px;
+				 background-color: @ddGreyColor;
+				 margin-top: 8px;
+				 cursor: pointer;
+				 margin-bottom: 8px;
+			 }
+		 }
+	 }
+ }
+ .see-more-gift{
+	 top: 200px;
+ }
+ .bomBox-title{
+	 height: 25px;
+	 padding-left: 15px;
+	 padding-right: 15px;
+	 padding-top:10px;
+	 background-color: @backgroundColor;
+	 & .bomBox-left{
+		 float: left;
+	 }
+	 & .bomBox-right{
+		 float: right;
+		 & span{
+			 display: block;
+			 width:12px;
+			 height:12px;
+			 background: url('../../images/company/company-default.png') no-repeat -22px -256px;
+			 cursor: pointer;
+		 }
+	 }
+ }
+// 查看赠品弹框样式 end
+
+// 预售活动说明样式 begin
+ .stepState-presell{
+	 left: 76px;
+	 display:block;
+	 position:relative;
+	 max-height:520px;
+	 width: 368px;
+	 top: 44px;
+	 padding:0px 15px;
+	 border: 1px solid @9bGreenColor;
+	 -webkit-box-shadow: 0px 0px 3px @9bGreenColor;
+	 -moz-box-shadow: 0px 0px 3px @9bGreenColor;
+	 box-shadow: 1px 0px 3px @9bGreenColor;
+	 ul {
+		 height:100px;
+	 }
+	 & .presell-title{
+		 margin:15px 0px 15px 0px;
+		 display: block;
+		 color: @99GreyColor;
+	 }
+	 li{
+		 position:relative;
+		 text-align:center;
+		 width: 33%;
+		 padding-top: 15px;
+		 float: left;
+		 i{
+			 width: 22px;
+			 height: 25px;
+			 z-index: 99;
+			 position: absolute;
+			 left: 55px;
+			 top:15px;
+			 background: @whiteColor url('../../../images/company/company-icon.png') no-repeat;
+		 }
+		 &.current{
+			 h4{
+				 color: @99GreyColor!important;
+			 }
+			 h5{
+				 address{
+					 background-color: @orderCurrentProgressBarColor;
+				 }
+				 cite{
+					 border-color: transparent transparent transparent @orderActiveProgressBarColor!important;
+				 }
+			 }
+		 }
+		 &.active{
+			 h5{
+				 address{
+					 background-color: @orderCurrentProgressBarColor!important;
+				 }
+				 cite{
+					 border-color: transparent transparent transparent @orderActiveProgressBarColor!important;
+				 }
+			 }
+		 }
+		 &.active-no-active-i {
+			 h5{
+				 address{
+					 background-color: @ccGreyColor!important;
+				 }
+				 cite{
+					 border-color: transparent transparent transparent @ccGreyColor!important;
+				 }
+			 }
+		 }
+		 &:nth-child(1){
+			 i{
+				 background-position: -76px -169px;
+			 }
+			 &.current{
+				 i{
+					 background-position: -76px 169!important;
+				 }
+			 }
+			 &.active{
+				 i{
+					 background-position: -132px 0!important;
+				 }
+			 }
+			 &.active-no-active-i {
+				 i{
+					 background-position: -132px 0!important;
+				 }
+			 }
+		 }
+		 &:nth-child(2){
+			 i{
+				 background-position: 0 -40px;
+			 }
+			 &.current{
+				 i{
+					 background-position: -107px -166px!important;
+				 }
+			 }
+			 &.active{
+				 i{
+					 background-position: -132px -40px!important;
+				 }
+			 }
+		 }
+		 &:nth-child(3){
+			 i{
+				 background-position: 0 -80px;
+			 }
+			 &.current{
+				 i{
+					 background-position: -138px -168px!important;
+				 }
+			 }
+			 &.active{
+				 i{
+					 background-position: -132px -80px!important;
+				 }
+			 }
+		 }
+		 &:nth-child(4){
+			 i{
+				 background-position: 0 -120px;
+			 }
+			 &.current{
+				 i{
+					 background-position: -66px -120px!important;
+				 }
+			 }
+			 &.active{
+				 i{
+					 background-position: -132px -120px!important;
+				 }
+			 }
+		 }
+		 &:nth-child(5){
+			 i{
+				 background-position: 0 -160px;
+			 }
+			 &.current{
+				 i{
+					 background-position: -66px -160px!important;
+				 }
+			 }
+			 &.active{
+				 i{
+					 background-position: -132px -160px!important;
+				 }
+			 }
+		 }
+		 span{
+			 position: absolute;
+			 left: 97px;
+			 top: 14px;
+			 z-index: 99;
+			 font-size: 12px;
+			 color: @33GreyColor;
+			 label{
+				 width: 10px;
+				 height: 10px;
+				 background-color: @ff69OrangeColor;
+				 border-radius: 50%;
+				 display: block;
+				 position: absolute;
+				 left: 50%;
+				 margin-left: -5px;
+				 top: 27px;
+			 }
+		 }
+		 h4{
+			 position: absolute!important;
+			 width: 100%;
+			 text-align: center;
+			 left: 5px;
+			 bottom: -65px;
+			 font-weight: normal;
+			 color: @33GreyColor;
+		 }
+		 p{
+			 position: absolute!important;
+			 width: 100%;
+			 text-align: center;
+			 left: 5px;
+			 bottom: -80px;
+			 color: @99GreyColor;
+		 }
+		 & .first-p{
+			 font-weight: 900;
+			 color: @33GreyColor;
+		 }
+		 & .second-p{
+			 bottom:-100px;
+		 }
+		 h5{
+			 width: 58%;
+			 height: 1px;
+			 position: absolute;
+			 top: 5px;
+			 left: 85px;
+			 address{
+				 width: 80%;
+				 background-color: @ccGreyColor;
+				 height: 1px;
+				 display: block;
+				 z-index: 9;
+				 position: absolute;
+				 margin: 0px 19%;
+			 }
+			 cite{
+				 position:absolute;
+				 top:-4px;
+				 *top:-6px;
+				 right: -5px;
+				 display:block;
+				 height:0;
+				 width:0;
+				 font-size: 0;
+				 line-height: 0;
+				 border-color: transparent transparent transparent @99GreyColor;
+				 border-style: dashed dashed dashed solid;
+				 border-width:5px;
+				 em{
+					 position:absolute;
+					 top:-10px;
+					 *top:-9px;
+					 left:-11px;
+					 display:block;
+					 height:0;
+					 width:0;
+					 font-size: 0;
+					 line-height: 0;
+					 border-color: transparent transparent transparent @whiteColor;
+					 border-style: dashed dashed dashed solid;
+					 border-width:10px;
+				 }
+			 }
+		 }
+	 }
+ }
+ .finish {
+	 position: relative;
+	 top: 50px;
+	 left: 50px;
+	 & .color-change{
+		 color: @99GreyColor;
+	 }
+	 .c {
+		 padding-right: 100px;
+		 span {
+			 display: block;
+		 }
+	 }
+	 .c1 {
+		 width: 90px;
+	 }
+	 .c2 {
+		 width: 94px;
+	 }
+	 .c3 {
+		 width: 96px;
+	 }
+	 .c4 {
+		 width: 90px;
+		 padding-right: 0;
+	 }
+	 .cancel {
+		 font-size: 17px;
+		 .ccc {
+			 color: @ccGreyColor;
+		 }
+	 }
+ }
+ .clearfix:after{
+	 content:"";
+	 height:0;
+	 line-height:0;
+	 display:block;
+	 visibility:hidden;
+	 clear:both;
+	 }
+ // 预售活动说明样式 end
+//  待付款订单弹框样式 begin
+ .order-sure{
+	 display: none;
+	 position: fixed;
+	 top: 50%;
+	 left: 50%;
+	 width: 390px;
+	 margin-left: -175px;
+	 border: 5px solid @ddGreyColor;
+	 margin-top: -98px;
+	 z-index: 100;
+	 border-radius: 8px;
+	 & .title-box{
+		 background: @eeGreyColor;
+		 height: 25px;
+		 padding: 0px 15px;
+		 padding-top: 10px;
+		 & .tittle-text{
+			 float: left;
+		 }
+		 & .close-img{
+			 float: right;
+			 display: block;
+			 width: 12px;
+			 height: 12px;
+			 background: url(../../images/company/company-default.png) no-repeat -22px -256px;
+			 cursor: pointer;
+		 }
+	 }
+	 & .title-bottom{
+		 font-size: 0;
+		 padding-top: 28px;
+		 padding-left: 23px;
+		 padding-bottom: 26px;
+		 background:@whiteColor;
+		 & div{
+			 display: inline-block;
+			 width: 146px;
+			 border: 1px solid @ccGreyColor;
+			 text-align: center;
+			 vertical-align: top;
+		 }
+		 & .text16{
+			 font-size: 16px;
+			 font-weight: 900;
+		 }
+		 & .main-text{
+			 margin: 6px 0px;
+		 }
+		 & a{
+			 display: block;
+		 }
+		 & .success-pay{
+			 margin-bottom: 15px;
+			 font-weight: 900;
+		 }
+		 & .text12{
+			 font-size: 12px;
+		 }
+		 & .bottom-left{
+			 margin-right: 22px;
+			 padding-top: 27px;
+			 height: 69px;
+			 & a:hover{
+               color: @themeColor;
+               text-decoration: underline;
+             }
+		 }
+		 & .bottom-right{
+			 padding-top: 20px;
+			 height: 76px;
+			 & a:hover{
+				 color: @themeColor;
+				 text-decoration: underline;
+			 }
+		 }
+	 }
+ }
+//  待付款订单弹框样式 end

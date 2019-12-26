@@ -1,0 +1,253 @@
+
+//购物车
+.shopCar {
+    position: absolute;
+    right: 0;
+    top: 30px; //width: 135px;
+    height: 40px;
+    cursor: pointer;
+
+    .mask{
+        display: block;
+        position: absolute;
+        top: 38px;
+        left: 0;
+        width: 128px;
+        height: 1px;
+        font-size: 0;
+        background-color: @whiteColor;
+        z-index: 1000;
+    }
+    & .car-shop {
+        display: block;
+        width: 148px;
+        height: 40px;
+        line-height: 40px;
+        border: 1px solid @ddGreyColor;
+        font-style: normal;
+        font-size: 16px;
+        text-align: center;
+        background-color: @whiteColor;
+        &:hover{
+            color: @fontColor;
+        }
+        i{
+            width: 26px;
+            height: 26px;
+            //background: url(../../images/company/company-default.png) no-repeat -221px -33px;
+          .common-product-company-default(-221px,-33px);
+          margin-right: 10px;
+        }
+    }
+    .cart-count {
+        position: absolute;
+        left: 115px;
+        left: 12px;
+        top: 3px;
+        background: @clearColor;
+        color: @whiteColor;
+        padding: 1px 4px;
+        font-size: 12px; // border-radius: 7px 7px 7px 0;
+        border-radius: 7px;
+        //width: 18px;
+        //height: 18px;
+        box-sizing: border-box;
+        text-align: center;
+        line-height: 13px;
+    }
+}
+.userHeader {
+    .container {
+        .shopCar {
+            top: 20px;
+            .mask{
+                width: 150px;
+            }
+        }
+        .cart-count {
+            left: 22px;
+            top: 5px;
+        }
+    }
+}
+#h-banner .top-right .self-shopCar {
+    padding-left: 0;
+    width: 128px;
+    top: 0;
+
+    .car-shop {
+        width: 126px;
+        height: 38px;
+        border: none;
+        color: @themeColor;
+    }
+    .cart-count {
+        left: 12px;
+        top: 3px;
+    }
+}
+
+/* 迷你购物车 */
+#minicart {
+    display: none;
+    position: absolute;
+    top: 38px;
+    right: -1px;
+    width: 408px;
+    background-color: @whiteColor;
+    overflow: hidden; //z-index:999;
+    border: 1px solid @themeColor;
+    z-index: 2;
+    & .cart-inner {
+        padding-bottom: 40px;
+        background-color: @backgroundColor;
+    }
+    & .cart-loading {
+        padding: 15px 0;
+        text-align: center;
+    }
+    & .cart-null {
+        padding: 7px 0;
+        clear: both;
+        overflow: hidden;
+        text-align: center;
+        color: @99GreyColor;
+        i{
+            width: 50px;
+            height: 44px;
+            background: url(../../images/company/company-icon.png) no-repeat -696px -119px;
+            margin-right: 15px;
+        }
+    }
+    & .bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 40px;
+        padding-left: 20px;
+        line-height: 40px;
+        overflow: hidden;
+        color: @blackColor;
+        & .btn-cart {
+            float: right;
+            width: 130px;
+            height:40px;
+            //margin-top: 9px;
+            line-height: 40px;
+            border-radius: 0;
+            background-color: @miniCartBtnColor;
+            text-align: center;
+            color: @whiteColor;
+            font-size: 16px;
+        }
+        & .red {
+            color: @clearColor;
+        }
+        & .he{
+            font-size: 18px;
+        }
+        & .sum {
+            float: left;
+            margin-right: 10px;
+        }
+    }
+    & .gds {
+        clear: both;
+        max-height: 415px;
+        overflow: auto;
+        background-color: @whiteColor;
+        /* &::-webkit-scrollbar
+            {
+              width: 12px;
+              height: 12px;
+              background-color: @whiteColor;
+            }
+
+        定义滚动条轨道 内阴影+圆角
+        &::-webkit-scrollbar-track
+            {
+              -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+              border-radius: 10px;
+              background-color: @whiteColor;
+            }
+
+        定义滑块 内阴影+圆角
+        &::-webkit-scrollbar-thumb
+            {
+              border-radius: 2px;
+              -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+              background-color: @themeColor;
+            } */
+        & .store {
+            & .title {
+                padding: 10px 10px 5px;
+                border-bottom: 2px solid @ccGreyColor;
+                overflow: hidden;
+            }
+            & h4 {
+                float: left;
+                margin: 0;
+                font-size: 14px;
+                font-weight: normal;
+            }
+        }
+        & .row {
+            height: 102px;
+            border-bottom: 1px solid @eeGreyColor;
+            &:hover {
+                background-color: @lightBackgroundColor;
+                .op-icons-del{
+                    width:20px;
+                    height: 20px;
+                    background-position: -165px -139px;
+                }
+            }
+        }
+        & .c1 {
+            width: 80px;
+            height: 80px;
+            padding: 10px 15px;
+        }
+        & .c2 {
+            width: 200px;
+            padding-top: 15px;
+        }
+        & .c3 {
+            width: 80px;
+            text-align: right;
+            line-height: 1;
+            margin-top: 15px;
+        }
+        & .pic {
+            //要删
+            // width: 60px;
+            // height: 60px;
+            color: @themeColor;
+        }
+        & h5 {
+            height: 32px;
+            margin: 0 0 18px 0;
+            line-height: 16px;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: normal;
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color: @blackColor;
+            width: 200px;
+            float: left;
+        }
+        .num {
+            float: left;
+            line-height: 1;
+        }
+        & .m {
+            margin: 30px 0 10px 0;
+            color: @clearColor;
+            font-weight: bold;
+        }
+    }
+}

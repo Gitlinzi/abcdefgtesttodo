@@ -1,0 +1,8 @@
+<div class="activity" ng-if="promotionId">
+    <!--<div class="activity-img"></div>-->
+    <div class="activity-title">{{i18n('活')}} / {{i18n('动')}} / {{i18n('凑')}} / {{i18n('单')}}</div>
+    <div class="activity-section">{{i18n('活动规则')}}：{{description||i18n('无促销信息')}}</div>
+</div>
+<div class="promotion-cart-ext" ng-if="promotionCartExt.message && $parent.switchConfig.guide.search.showPromotionTip">
+    <span class="message">{{promotionCartExt.message}}</span>
+</div>

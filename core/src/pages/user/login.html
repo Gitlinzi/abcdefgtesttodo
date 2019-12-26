@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="/view/cms,frontier_guide/pc/templateJS.json"></script>
+    <link rel="stylesheet" type="text/css" href="/common.css?v=${version}">
+    <link rel="stylesheet" type="text/css" href="/login.css?v=${version}">
+</head>
+
+<body ng-app="appControllers" ng-controller="loginCtrl">
+<!--    &lt;!&ndash; 头部 &ndash;&gt;-->
+<!--    @@include("userheader.html")-->
+
+<!--    <span ng-if="$parent.switchConfig.common.showAllGlobalNav">-->
+<!--        @@include("global-nav.html")-->
+<!--    </span>-->
+<!--    <div class="login-one login-cg">-->
+<!--    <div class="container login-top" ng-cloak>-->
+<!--        &lt;!&ndash; 字&ndash;&gt;-->
+<!--        <div class="loginTitle loginTitle-two">-->
+<!--            <span class="title">{{i18n('欢迎登录')}}</span>-->
+<!--            <ul class="outside-nav" ng-init = "showProd = false">-->
+<!--                <li class="nav" ng-repeat="(idx,item) in login_tab">                    -->
+<!--                    {{item.name}}-->
+<!--                    <ul class="inside-nav">-->
+<!--                        <li ng-repeat="prod in item.tabList" ng-click="goToUrl(prod.linkUrl)">{{prod.name}}</li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--            -->
+<!--        </div>-->
+<!--        -->
+<!--        <div id="login-page">-->
+<!--            &lt;!&ndash; <div class="topic" >-->
+<!--                <div ng-repeat="code in getCodeLoginData">-->
+<!--                    <img ng-src="{{code.imageUrl}}" alt="" width="600" height="400">-->
+<!--                </div>-->
+<!--            </div> &ndash;&gt;-->
+<!--            <div id="jumbotron">-->
+<!--                <div ody-carousel class="index-main-carousel" lunbo="lunbo" imgwidth="600" imgheight="400" main-dom="index-main-carousel" lunbo-time="5000"></div>-->
+<!--            </div>-->
+
+<!--            <h3 class="relationNum" ng-if="shareCode8 && sharename">{{i18n('登录成为')}}{{sharename}}{{i18n('的亲友号')}}</h3>-->
+<!--            <form class="login-form" ng-init="activeNum=1;">-->
+<!--                &lt;!&ndash; <div class="login-index">-->
+<!--                    <div class="clearfix login-line">-->
+<!--                        <span ng-class="{'login-active':activeNum==1}" ng-click="activeNum=1">{{i18n('账号登录')}}</span>-->
+<!--                        <span ng-class="{'login-active':activeNum==0}" ng-click="activeNum=0;checkPhone()">{{i18n('手机登录')}}</span>-->
+<!--                    </div>-->
+<!--                </div> &ndash;&gt;-->
+<!--                &lt;!&ndash;<div class="msg-login">{{ msg }}</div>&ndash;&gt;-->
+<!--                &lt;!&ndash;手机登录begin&ndash;&gt;-->
+<!--                &lt;!&ndash; <div class="phone-login" ng-if="activeNum==0">-->
+<!--                    <div class="msg-login">{{ msgPhone }}</div>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="has-prefix">-->
+<!--                            <input class="input big phone-user" autocomplete="off" pc-placeholder="i18n('手机号')" placeholder="{{i18n('手机号')}}"} type="text"  ng-model="loginInfo.phoneNumber" name="phoneNumber" id="phoneNumber" ng-blur="mobile_tip = false;checkPhone()" ng-change="mobile_tip = false;checkPhone()">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group"  ng-if="needImgCaptchaPhone">-->
+<!--                        <div class="has-prefix">-->
+<!--                            <input class="input big phone-user" pc-placeholder="i18n('图片验证码')" placeholder="{{i18n('图片验证码')}}" type="text" ng-model="loginInfo.vicode" name="vicode">-->
+<!--                            <div class="phone-code">-->
+<!--                                <img width="100" height="40" class="vicode" id="vicode" ng-src="{{ checkImage }}" ng-click="cantSee()">-->
+<!--                                <span><a href="javascript:void(0)" ng-click="cantSee()">{{i18n('看不清换一张')}}</a></span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input class="input big codeipt" pc-placeholder="i18n('短信验证码')" placeholder="{{i18n('短信验证码')}}" type="text" ng-model="loginInfo.phoneCaptcha" name="phoneCaptcha">-->
+<!--                        <input type="button" class="btn" ng-value="smsBtn" ng-click="smsSend($event)" ng-class="{'smsBtn': isNoExistPhone, 'smsBtnHigh': !isNoExistPhone}" ng-value="smsBtn" ng-disabled="isNoExistPhone">-->
+<!--                    </div>-->
+<!--                    <div class="form-group mgB0" >-->
+<!--                        <input type="button" id="loginBtn1" class="btn btn-one big red" ng-click="phoneLogin()" value="{{i18n('登录')}}">-->
+<!--                    </div>-->
+<!--                </div> &ndash;&gt;-->
+<!--                &lt;!&ndash;手机登录end&ndash;&gt;-->
+<!--                <div class="identity-login" ng-if="activeNum==1">&lt;!&ndash;账号登录begin&ndash;&gt;-->
+<!--                    <div class="msg-login" >{{ msg }}</div>-->
+<!--                    &lt;!&ndash;<div class="form-group">-->
+<!--                        <div class="has-prefix">-->
+<!--                            <div class="icon-user-box fl">-->
+<!--                                <i class="icon-user"></i>-->
+<!--                            </div>-->
+<!--                            <input class="input big icon-user-box-padL" placeholder={{i18n({{i18n('{{i18n('已验证手机')}}')}})}} type="text" ng-model="loginInfo.username" name="username">-->
+<!--                        </div>-->
+<!--                    </div>&ndash;&gt;-->
+<!--                    <div class="form-group">-->
+
+<!--                        <div class="has-prefix login-select">-->
+<!--                            <div class="icon-user-box fl">-->
+<!--                                <i class="icon-user"></i>-->
+<!--                                &lt;!&ndash; <i class="icon-more-down"></i> &ndash;&gt;-->
+<!--                            </div>-->
+<!--                            <select class="user-sele"  ng-model="loginInfo.user" ng-if="$parent.switchConfig.user.login.showJobNumber">-->
+<!--                                <option value="0">{{i18n('手机号')}}</option>-->
+<!--                                <option value="1">{{i18n('工号')}}</option>-->
+<!--                            </select>-->
+<!--                            &lt;!&ndash; $parent.switchConfig.user.login.showAccountLoginDesc &ndash;&gt;-->
+<!--                            <input class="input big icon-user-box-padL" pc-placeholder="i18n('账号')" placeholder="{{i18n('账号')}}" ng-class="{'user-phone': $parent.switchConfig.user.login.showJobNumber}" autocomplete="off" type="text" ng-model="loginInfo.employee" name="employee"  ng-blur="mobile_tip = false;check()" ng-change="mobile_tip = false;check()">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <div class="has-prefix">-->
+<!--                            <div class="icon-user-box fl">-->
+<!--                                <i class="icon-suo"></i>-->
+<!--                            </div>-->
+<!--                            <input class="input big icon-user-box-padL" pc-placeholder="i18n('密码')" placeholder="{{i18n('密码')}}" type="password" ng-model="loginInfo.password" name="password">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    &lt;!&ndash; <div class="form-group mgB10" ng-if="needImgCaptcha">-->
+<!--                        <div class="has-prefix">-->
+<!--                            <input class="input big phone-user" pc-placeholder="i18n('图片验证码')" placeholder="{{i18n('图片验证码')}}" type="text" ng-model="loginInfo.vicode" name="vicode">-->
+<!--                            <div class="phone-code">-->
+<!--                                <img width="100" height="40" class="vicode" id="vicode" ng-src="{{ checkImage }}" ng-click="cantSee()">-->
+<!--                                <span><a href="javascript:void(0)" ng-click="cantSee()">{{i18n('看不清换一张')}}</a></span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div> &ndash;&gt;-->
+<!--                    <a class="forget" href="forgot.html">{{i18n('忘记密码')}}</a>-->
+
+
+<!--                    &lt;!&ndash;<div class="form-group">-->
+<!--                        <input class="input big codeipt" placeholder={{i18n({{i18n('{{i18n('短信验证码')}}')}})}} type="text" ng-model="vicode" name="vicode">-->
+<!--                        <input type="button" class="btn smsBtn " value={{i18n({{i18n('{{i18n('获取短信验证码')}}')}})}} ng-model="captchaMsg" ng-click="smsSend($event)">-->
+<!--                    </div>&ndash;&gt;-->
+<!--                    -->
+<!--                    <div class="form-group check">-->
+<!--                        <input type="checkbox" name="isAutoName" ng-model="loginInfo.isAutoName"  value="0">{{i18n('记住用户名')}}-->
+<!--                        <input type="checkbox" name="isAuto" ng-model="loginInfo.isAuto" value="0">{{i18n('一个月内自动登录')}}-->
+<!--                    </div>-->
+<!--                    <div class="form-group" style="margin-bottom:0px">-->
+<!--                        <input type="button" id="loginBtn" class="btn btn-one big" ng-click="login()" value="{{i18n('登录')}}">-->
+<!--                    </div>                    -->
+<!--                </div>&lt;!&ndash;账号登录end&ndash;&gt;-->
+<!--                &lt;!&ndash; <div class="three-title" ng-if="isThirdOperation && $parent.switchConfig.user.login.showUnionLogin">{{i18n('第三方登录')}}</div> &ndash;&gt;-->
+<!--                &lt;!&ndash;<div class="union-login ng-cloak " ng-show="showUnionLogin">&ndash;&gt;-->
+<!--                &lt;!&ndash; <div class="union-login ng-cloak ">-->
+<!--                    <a href="javascript:void(0)" ng-click="weixinLogin()"  ng-if="showWeixin && $parent.switchConfig.user.login.showUnionLogin">-->
+<!--                        <img src="/images/weixin.png?v=${version}" alt="{{i18n('微信')}}" title="{{i18n('微信')}}"  width="31px" height="30px">-->
+<!--                    </a>-->
+<!--                    <a href="javascript:void(0)"  ng-click="qqLogin()"  ng-if="showQQ && $parent.switchConfig.user.login.showUnionLogin">-->
+<!--                        <img src="/images/qq.png?v=${version}" alt="QQ" title="QQ"  width="31px" height="30px">-->
+<!--                     </a>-->
+<!--                     <a href="javascript:void(0)"  ng-click="weiboLogin()"  ng-if="showWeibo && $parent.switchConfig.user.login.showUnionLogin">-->
+<!--                        <img src="/images/weibo.png?v=${version}" alt="{{i18n('微博')}}" title="{{i18n('微博')}}" width="31px" height="30px">-->
+<!--                    </a>-->
+<!--                    <a href="javascript:void(0)"  ng-click="alipayLogin()"  ng-if="showAlipay && $parent.switchConfig.user.login.showUnionLogin">-->
+<!--                        <img src="/images/zhifubao.png?v=${version}" alt="{{i18n('支付宝')}}" title="{{i18n('支付宝')}}" width="31px" height="30px">-->
+<!--                    </a>-->
+<!--                     <a class="regis" ng-href='{{sharenamelink}}'> <i class="op-icons op-icons-regis"></i>{{i18n('免费注册')}}</a>-->
+<!--                </div> &ndash;&gt;-->
+<!--            </form>-->
+<!--            <div class="clear"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    </div>-->
+<!--    @@include("footer.html")-->
+
+<div class="header">
+    <div class="container clearfix ng-cloak">
+        <div class="logo fl">
+            <img src="images/adv_logo2.png" alt="">
+        </div>
+        <div class="nav fr">
+            <ul class="nav-wrap">
+                <li ng-if="login_tab" class="nav-item" ng-repeat="item in login_tab">
+                    {{item.name}}
+                    <!-- img src="images/adv-arrow-down.png" alt="" ng-if="item.tabList" -->
+                    <ul class="sub-nav-wrap" ng-if="item.tabList">
+                        <li class="sub-nav-item" ng-repeat="childItem in item.tabList">
+                            <a ng-href="{{childItem.linkUrl}}">{{childItem.name}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+<!--         <div class="nav-right fr">
+            <a href="">申请成为史泰博合约客户</a> |
+            <div class="phones"> -->
+<!--                广告位读取-->
+<!--                <div ng-repeat="phoneNumber in footerSetting.footerPhoneArray track by $index">{{phoneNumber}}</div>-->
+<!--                 <div>政企客户专线：400-812-1818</div>
+                <div>企业客户专线：400-817-0808</div>
+            </div>
+        </div> -->
+    </div>
+</div>
+<div class="main container ng-cloak">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="img in lunbo"><img ng-src="{{img.imageUrl}}" alt=""></div>
+<!--            <div class="swiper-slide"><img src="images/adv_banner_2.png" alt=""></div>-->
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+
+    <div class="login">
+        <div class="form">
+            <div class="title">欢迎登陆
+                <span ng-if="msg"><b>{{msg}}</b></span>
+            </div>
+            <div class="username">
+                <!-- <label for="username">用户名：</label> -->
+                <input type="text" id="username"  autocomplete="off" type="text" placeholder="请输入用户名" ng-model="loginInfo.employee" name="employee" ng-blur="mobile_tip = false;check()" ng-change="mobile_tip = false;check()">
+            </div>
+            <div class="password">
+                <!-- <label for="password">密　码：</label> -->
+                <input type="password" id="password" name="password" placeholder="请输入密码" ng-model="loginInfo.password">
+            </div>
+            <div class="check">
+                <label>
+                    <input type="checkbox" name="isAutoName" ng-model="loginInfo.isAutoName" value="0" /> 记住用户名
+                </label>
+                <label>
+                    <input type="checkbox" name="isAuto" ng-model="loginInfo.isAuto" value="0"> 30天自动登录
+                </label>
+                <a href="/forgot.html">忘记密码 ?</a>
+                <!-- input type="checkbox" name="isAutoName" ng-model="loginInfo.isAutoName"  value="0">记住用户名
+                <input type="checkbox" name="isAuto" ng-model="loginInfo.isAuto" value="0">一个月内自动登录 -->
+            </div>
+            <div class="login-button">
+                <button class="login-btn" ng-click="login()" id="loginBtn">登录</button>
+            </div>
+            <div class="join">
+                <a href="">成为合约客户</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer ng-cloak">
+    <div>
+        <div class="contact">
+            <img src="/images/company/qrcode.jpg" />
+            <span>政企客户专线</span>
+            <b>400-812-1818</b>
+        </div>
+        <div class="info">
+            <p>
+                <a href="">购物指南</a>
+                <a href="">配送物流</a>
+                <a href="">售后服务</a>
+            </p>
+            <p>Copyright © 2019 史泰博电子商务（上海）有限公司 版权所有 沪ICP备17046864号-2</p>
+    <!--        <span><img src="images/adv_.png" alt="">沪公网安备 31010502002336号</span>-->
+        </div>
+    </div>
+</div>
+    @@include("script.html")
+    <script src="/plugins/swiper.min.js"></script>
+    <script type="text/javascript" src="/login.js?v=${version}"></script>
+    <script type="text/javascript" src="/api/i18n.do?response=angular&poolName=pc&group=login"></script>
+    <script type="text/javascript">
+    $(document).keydown(function(e) {
+        var currKey = e.keyCode || e.which;
+        if (currKey === 13) {
+            $('#loginBtn').click();
+        }
+    });
+    </script>
+</body>
+
+</html>

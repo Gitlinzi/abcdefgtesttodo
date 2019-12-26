@@ -1,0 +1,30 @@
+<dl class='first-dl'>
+    <dt>{{i18n('价格')}}</dt>
+    <dd>
+        <div class='money' ng-if="!isPointPro">
+            <span ng-show="itemlist.managementState && !$parent.hideProductPrice" class="num">
+                <span class='money-img'>￥</span>{{itemlist.availablePrice}}
+                <!-- <span class='money-img'>￥</span>6999 -->
+            </span>
+            <span ng-show="itemlist.managementState && $parent.hideProductPrice" class="num">
+                <span class='money-img'></span>{{$parent.switchConfig.common.showTextWhenHidePrice}}
+            </span>
+            <span style="color: #000;" ng-show="!itemlist.managementState">{{i18n('暂无价格')}}</span>
+            <span ng-show="itemlist.originalPrice && !$parent.hideProductPrice && mpItemStandardPriceDisplay == 1" class="originalPrice">{{itemlist.originalPrice | currency : "￥"}}</span>
+            <span class="member-price-box" ng-show="itemlist.availablePriceText">
+                <span class="member-price-text">{{itemlist.availablePriceText}}</span>
+            </span>
+            <span ng-show="code == 4 || code == 5" class="starDown">{{i18n('非卖品')}}</span>
+            <span ng-show="promotionType_s.iconText" class="starDown">{{promotionType_s.iconText}}</span>
+        </div>
+        <div class='money' ng-if="isPointPro">
+                <span ng-show="itemlist.managementState" ng-if="itemlist.price" class="num">
+                    <span class='money-img'>￥</span>{{itemlist.price}}
+                </span>
+            <span ng-if="itemlist.price && itemlist.pointPrice">+</span>
+            <span ng-show="itemlist.managementState" ng-if="itemlist.pointPrice" class="num">
+                    <span class='money-img jifen'>{{i18n('积分')}}</span>{{itemlist.pointPrice}}
+                </span>
+        </div>
+    </dd>
+</dl>
