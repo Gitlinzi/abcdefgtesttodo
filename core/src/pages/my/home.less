@@ -1,4 +1,4 @@
-@import url('../../common/css/i-var_${skin}.less');
+    @import url('../../common/css/i-var_${skin}.less');
 @import url('../../common/css/i-base.less');
 @import url('../../common/css/i-address.less');
 @import url('../../common/css/i-popbox.less');
@@ -12248,8 +12248,9 @@ div {
     text-indent: 5px;
 }
 .approve-list {
-  border: 1px solid #eee;
-  padding: 0 20px;
+  background: #fff;
+  border: 1px solid #FFF2F2;
+  padding: 12px 0;
   box-sizing: border-box;
     input {
         width: 240px;
@@ -12307,7 +12308,99 @@ div {
         background: #fff;
         .examines-title {
             width: 151px;
+            line-height: 20px;
             font-weight: bold;
+            color: #333;
+
+            &:before{
+              width: 4px;
+              height: 14px;
+              content: '';
+              float: left;
+              margin-top: 3px;
+              margin-right: 8px;
+              background: #cc0000;
+            }
+        }
+        .examines-content{
+          li{
+            height: 40px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            text-align: center;
+            position: relative;
+            clear: both;
+            color: #666;
+
+            span,
+            bdo,
+            em{
+              height: 40px;
+              line-height: 40px;
+              display: block;
+              float: left;
+            }
+            bdo,
+            em{
+              text-align: left;
+            }
+
+            span{
+              width: 45%;
+              text-align: right;
+              margin-right: 60px;
+              padding-left: 19px;
+            }
+            bdo{
+              width: 105px;
+              margin-right: 15px;
+              overflow: hidden;
+            }
+            em{
+              width: 4em;
+            }
+
+            &:before,
+            &:after{
+              content: '';
+              display: inline-block;
+              position: absolute;
+              left: 50%;
+              top: 18px;
+            }
+
+            &:before{
+              width: 6px;
+              height: 6px;
+              margin-left: -3px;
+              background: #FDFDFD;
+              border: 1px solid #979797;
+              border-radius: 50%;
+              z-index: 2;
+            }
+
+            &:after{
+              width: 1px;
+              height: 100%;
+              background: #E6E6E6;
+              z-index: 1;
+            }
+
+            &:last-child{
+              &:after{
+                display: none;
+              }
+            }
+
+            &.active{
+              color: #333;
+              &:before{
+                margin-left: -5px;
+                background: #CC0000;
+                border: 2px solid #EDB0B0;
+              }
+            }
+          }
         }
         .examines-info {
             .info-title {
