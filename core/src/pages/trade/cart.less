@@ -1101,7 +1101,7 @@ p{
 		& .tool{
 			float: left;
 			& li{
-				margin-right: 10px;
+				margin-right: 20px;
 				font-size: 12px;
 			}
 		}
@@ -1111,12 +1111,20 @@ p{
 
 			& li{
 				margin-left: 16px;
+
+				&.cart-totle{
+					line-height: 20px;
+					padding: 7px 0;
+					text-align: right;
+				}
 			}
+
 			& .btn{
 				height: 55px;
 				padding: 0 40px;
 				line-height: 55px;
-				font-weight: bold;
+				font-weight: 200;
+				font-size: 18px;
 				border-radius: 0;
 			}
 		}
@@ -1198,43 +1206,54 @@ p{
 	top: -30px;
 }
 .cart-search{
-	height: 50px;
-	width: 426px;
+	height: 70px;
+	width: 521px;
 	position: absolute;
 	right: 0;
-	top: 40px;
+	top: 28px;
 	overflow: hidden;
+	border-radius: 2px;
 	.cart-search-box{
 		float: right;
 	}
 	.cart-input{
-		width:296px;
-		height:31px;
-		border:2px solid @themeColor;
+		width:453px;
+		height:40px;
+		border:1px solid @themeColor;
 		float: left;
 		padding:0 0 0 15px;
 	}
 	.cart-button{
-		width:62px;
-		height:35px;
-		line-height:35px;
+		width:50px;
+		height:40px;
+		line-height:40px;
 		color: @whiteColor;
 		background-color: @themeColor;
 		float: left;
 		border:0;
 	}
+	.hotWords{
+		a{
+			margin-right: 20px;
+			font-size: 12px;
+			line-height: 16px;
+			color: #999;
+		}
+	}
 }
 .shopTitle{
 	//background: url("../images/shopTitle.png") no-repeat;
-	font-size: 20px;
+	font-size: 24px;
 	height: 50px;
 	width: 426px;
 	position: absolute;
 	left: 380px;
-	top: -68px;
+	top: -110px;
+	color: #666;
+	letter-spacing: 0.6px;
 }
 .container{
-	width:1000px;
+	width:1200px;
 	position: relative;
 }
 .color0721{

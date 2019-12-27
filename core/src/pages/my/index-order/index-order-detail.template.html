@@ -95,18 +95,23 @@
     <!--订单状态与操作-->
     <div class="module">
         <!--面包屑-->
-        <div class="module-title">
-            <a ui-sref="index_orderList" class="my-order">{{i18n('我的订单')}}</a>
-            <span class="center-crumb-arrowhead"></span>
-            <span ng-if="!detail.order.outOrderCode">{{i18n('订单号')}}：{{detail.order.orderCode}}</span>
+        <div class="module-title crumbs-nav">
+            <a ui-sref="index_orderList" class="my-order ">{{i18n('我的订单')}}</a>
+            <!-- <span class="center-crumb-arrowhead"></span> -->
+            <span ng-if="!detail.order.outOrderCode">{{i18n('订单详情')}}</span>
             <span ng-if="detail.order.outOrderCode">{{i18n('第三方订单号')}}：{{detail.order.outOrderCode}}</span>
         </div>
         <!--订单状态-->
-        <div class="order-details clearfix">
+
+        <div class="order-details">
+          <div class="order-details-title">
+            <p class="margin-style" ng-if="!detail.order.outOrderCode">{{i18n('订单号')}}：{{detail.order.orderCode}}</p>
+            <p class="margin-style" ng-if="detail.order.outOrderCode">{{i18n('第三方订单号')}}：{{detail.order.outOrderCode}}</p>
+          </div>
+          <div class="order-details-content clearfix">
+
             <!--左侧状态描述与操作链接-->
             <div class="order-details-left">
-                <p class="margin-style" ng-if="!detail.order.outOrderCode">{{i18n('订单号')}}：{{detail.order.orderCode}}</p>
-                <p class="margin-style" ng-if="detail.order.outOrderCode">{{i18n('第三方订单号')}}：{{detail.order.outOrderCode}}</p>
                 <div>
                     <p class='wait-send theme' ng-if="detail.order.orderStatusStr">{{i18n(detail.order.orderStatusStr)}}</p>
                     <div ng-if="(detail.order.orderStatus == baseConfig.orderStatus.toPay && (detail.order.orderSource == baseConfig.orderSource.presell && (detail.order.presell.status == 10 || detail.order.presell.status == 30)) || detail.order.orderSource != baseConfig.orderSource.presell)">
@@ -125,6 +130,7 @@
                             <span class="{{btn.className}}" ng-if="btn.type=='function'" ng-click="detail.clickFunction(btn.key)">{{i18n(btn.name)}}</span>
                             <a class="{{btn.className}}" ng-if="btn.type=='ui-sref'" ui-sref="{{btn.interactiveData}}">{{i18n(btn.name)}}</a>
                             <a class="{{btn.className}}" ng-if="btn.type=='href'" href="{{btn.interactiveData}}">{{i18n(btn.name)}}</a>
+                            <a class="detail-cancel" href="">取消订单</a>
                         </span>
                     </div>
                 </div>
@@ -133,6 +139,7 @@
             <div class="order-details-right">
                 @@include("order/orderProcess.html")
             </div>
+          </div>
         </div>
     </div>
     <!--取消原因-->
@@ -158,9 +165,9 @@
     </table>
     <!--订单商品-->
     <div class="order-good-box" style="border-bottom: 0; margin-bottom: 0" ng-repeat="suborder in detail.order.orders">
-        <div class="order-no-box">
+        <!-- <div class="order-no-box">
             <span class="pdL20 bold">{{i18n('订单')}}{{$index+1}}</span>
-        </div>
+        </div> -->
         <div class="order-title-box">
             <span class="title-one">{{i18n('商品')}}</span>
             <span class="title-two">{{i18n('单价')}}</span>
@@ -173,7 +180,7 @@
                 <dt>
                 <div class="dt-left">
                     <a href="item.html?itemId={{pro.seriesParentId||pro.mpId}}">
-                        <img width="80" height="80" ng-src="{{pro.productPicPath}}" alt="">
+                        <img width="50" height="50" ng-src="{{pro.productPicPath}}" alt="">
                     </a>
                 </div>
                 <div class="dt-right">
@@ -184,20 +191,20 @@
                 <dd class="width180">
                     <span>{{pro.productPriceFinal | currency:'￥'}}</span>
                 </dd>
-                <dd class="width80" ng-if="detail.approveOrders.approvalStatus != 4">
-                    <span>x{{pro.productItemNum}}</span>
+                <dd class="width100" ng-if="detail.approveOrders.approvalStatus != 4">
+                    <span>{{pro.productItemNum}}</span>
                 </dd>
-                
-                <dd class="width100" ng-if="detail.approveOrders.approvalStatus == 4">
+
+                <dd class="width180" ng-if="detail.approveOrders.approvalStatus == 4">
                     <div class="numbox">
-                        <button type="button" 
-                        ng-disabled="pro.productItemNum<=1" 
+                        <button type="button"
+                        ng-disabled="pro.productItemNum<=1"
                         ng-click="detail.decrease($event,pro)">-
                         </button>
                         <input type="text"
                                ng-model="pro.productItemNum"
                                ng-change="detail.changeNum(this, pro)">
-                        <button type="button" 
+                        <button type="button"
                                 ng-click="detail.increase($event,pro)">+
                         </button>
                     </div>
@@ -242,19 +249,19 @@
             </div> -->
             <!--待收货（服务订单）  end -->
         </div>
-        <table class="user-mes-box">
+        <table class="user-mes-box order-info">
             <tr>
                 <!-- 已退回状态 -->
-                <td class="one-user pdTB25LR20">
+                <td class="one-user">
                     <p>{{i18n('基本信息')}}</p>
-                    <dl class="clearfix" style="margin-top: 10px;">
-                        <dt style="width: 65px;text-align: right">{{i18n('创建人')}}：</dt>
+                    <dl class="clearfix">
+                        <dt style="width: 65px;">{{i18n('创建人')}}</dt>
                         <dd>{{detail.order.userName}}</dd>
                     </dl>
-                    <dl class="clearfix" style="line-height: 30px">
-                        <dt style="width: 65px;text-align: right">{{i18n('成本中心')}}：</dt>
+                    <dl class="clearfix">
+                        <dt style="width: 65px;">{{i18n('成本中心')}}</dt>
                         <dd class="width194">
-                            <div class="costcenter-info fl" ng-if="detail.approveOrders.approvalStatus != 4">{{detail.approveOrders.costName}}</div> 
+                            <div class="costcenter-info fl" ng-if="detail.approveOrders.approvalStatus != 4">{{detail.approveOrders.costName}}</div>
                             <select name="" id="" ng-model="detail.approveOrders.costCenterId" class="form-input" ng-if="detail.approveOrders.approvalStatus == 4">
                                 <option ng-repeat="item in detail.costCenterList" ng-selected="item.id == detail.approveOrders.costCenterId" value="{{item.id}}">{{item.costName}}</option>
                             </select>
@@ -263,87 +270,87 @@
                 </td>
                 <!--配送信息-->
                 <!-- 非已退回状态 -->
-                <td class="two-user pdTB25LR20" ng-if="detail.approveOrders.approvalStatus != 4">
+                <td class="two-user pdTB15LR15" ng-if="detail.approveOrders.approvalStatus != 4">
                     <p>{{i18n('收货信息')}}</p>
-                    <dl class="clearfix" style="line-height: 30px">
-                        <dt>{{i18n('收货人姓名')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('收货人姓名')}}</dt>
                         <dd>{{detail.order.receiverPerson && detail.order.receiverPerson.receiverName }}</dd>
                     </dl>
-                    <dl class="clearfix" style="line-height: 30px">
-                        <dt>{{i18n('收货地址')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('收货地址')}}</dt>
                         <dd>{{detail.order.fullGoodReceiverAddress}}</dd>
                     </dl>
-                    <dl class="clearfix" style="margin-top: 10px;">
-                        <dt>{{i18n('固定电话1')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('固定电话1')}}</dt>
                         <dd>{{detail.order.goodReceiverTel}}</dd>
                     </dl>
-                    <dl class="clearfix" style="margin-top: 10px;">
-                        <dt>{{i18n('固定电话2')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('固定电话2')}}</dt>
                         <dd>{{detail.order.goodReceiverTel2}}</dd>
                     </dl>
-                    <dl class="clearfix" style="margin-top: 10px;">
-                        <dt>{{i18n('手机号码')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('手机号码')}}</dt>
                         <dd>{{detail.receiverMobile}}</dd>
                     </dl>
-                    <dl class="clearfix" style="line-height: 30px">
-                        <dt>{{i18n('代收人')}}：</dt>
-                        <dd>{{detail.order.proxyReceiverName}}</dd>                       
+                    <dl class="clearfix">
+                        <dt>{{i18n('代收人')}}</dt>
+                        <dd>{{detail.order.proxyReceiverName}}</dd>
                     </dl>
-                    <dl class="clearfix" style="line-height: 30px">
-                        <dt>{{i18n('代收人手机号')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('代收人手机号')}}</dt>
                         <dd>{{detail.order.proxyReceiverMobile}}</dd>
                     </dl>
-                    <dl class="clearfix" style="line-height: 30px">
-                        <dt>{{i18n('预计发货日期')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('预计发货日期')}}</dt>
                        <dd>{{detail.approveOrders.shipmentDate}}</dd>
                     </dl>
                 </td>
                 <!-- 已退回状态 -->
-                <td class="two-user pdTB25LR20" ng-if="detail.approveOrders.approvalStatus == 4">
+                <td class="two-user pdTB15LR15" ng-if="detail.approveOrders.approvalStatus == 4">
                     <p>{{i18n('收货信息')}}</p>
-                    <dl class="clearfix" style="line-height: 30px">
-                        <dt>{{i18n('收货人姓名')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('收货人姓名')}}</dt>
                         <select class="form-input" name="" id="" ng-model="detail.approveOrders.goodReceiverPersonId" ng-change="detail.changeRecieiverName(detail.approveOrders.goodReceiverPersonId)">
                             <option ng-repeat="item in detail.merchantReceiverMumberList" ng-selected="item.id == detail.approveOrders.goodReceiverPersonId" value="{{item.id}}">{{item.receiverName}}</option>
-                        </select>                        
+                        </select>
                     </dl>
-                    <dl class="clearfix" style="line-height: 30px">
-                        <dt>{{i18n('收货地址')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('收货地址')}}</dt>
                         <select class="form-input" name="" id="" ng-model="detail.approveOrders.goodReceiverAddressId" ng-change="detail.changeReciveAdress(detail.approveOrders.goodReceiverAddressId)">
                             <option ng-repeat="item in detail.merchantReceiverAdressList" value="{{item.addressId}}" ng-selected="item.addressId == detail.approveOrders.goodReceiverAddressId">{{item.provinceName}}{{item.cityName}}{{item.regionName}}{{item.detailAddress}}</option>
                         </select>
                     </dl>
-                    <dl class="clearfix" style="margin-top: 10px;">
-                        <dt>{{i18n('固定电话1')}}：</dt>
+                    <dl class="clearfix"">
+                        <dt>{{i18n('固定电话1')}}</dt>
                         <dd>{{detail.approveOrders.goodReceiverTel}}</dd>
                     </dl>
-                    <dl class="clearfix" style="margin-top: 10px;">
-                        <dt>{{i18n('固定电话2')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('固定电话2')}}</dt>
                         <dd>{{detail.approveOrders.goodReceiverTel2}}</dd>
                     </dl>
-                    <dl class="clearfix" style="margin-top: 10px;">
-                        <dt>{{i18n('手机号码')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('手机号码')}}</dt>
                         <dd>{{detail.approveOrders.goodReceiverMobile}}</dd>
                     </dl>
-                    <dl class="clearfix" style="line-height: 30px">
-                        <dt>{{i18n('代收人')}}：</dt>
-                        <input class="form-input" type="text" ng-model="detail.approveOrders.proxyReceiverName">                        
+                    <dl class="clearfix">
+                        <dt>{{i18n('代收人')}}</dt>
+                        <input class="form-input" type="text" ng-model="detail.approveOrders.proxyReceiverName">
                     </dl>
-                    <dl class="clearfix" style="line-height: 30px">
-                        <dt>{{i18n('代收人手机号')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('代收人手机号')}}</dt>
                         <input class="form-input" type="text" ng-model="detail.approveOrders.proxyReceiverMobile">
                     </dl>
-                    <dl class="clearfix" style="line-height: 30px">
-                        <dt>{{i18n('预计发货日期')}}：</dt>
+                    <dl class="clearfix">
+                        <dt>{{i18n('预计发货日期')}}</dt>
                         <input class="form-input" type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalFrom" options="options1" close="close(from)"
                                         ng-model="detail.approveOrders.shipmentDate">
                     </dl>
                 </td>
                  <!--支付方式-->
-            <td class="three-user pdTB25LR20">
+            <td class="three-user pdTB15LR15">
                 <p>{{i18n('结算信息')}}</p>
                 <dl class="clearfix">
-                    <dt>{{i18n('付款方式')}}：</dt>
+                    <dt>{{i18n('付款方式')}}</dt>
                     <dd ng-if="detail.approveOrders.approvalStatus ==4">
                         <div class="applyMethod-info">
                             <label ng-if="canOwe == 1" for="female" class="radioStyle-big" style="margin-right: 30px;">
@@ -359,21 +366,21 @@
                     <dd ng-if="detail.approveOrders.approvalStatus != 4">{{detail.paymentType[detail.order.orderPaymentType]}}</dd>
                 </dl>
                 <dl class="clearfix" ng-if="$parent.switchConfig.center.orderDetail.showProductSum">
-                    <dt>{{i18n('商品数量')}}：</dt>
+                    <dt>{{i18n('商品数量')}}</dt>
                     <dd>{{detail.proAllNum}}</dd>
                 </dl>
                 <dl class="clearfix" ng-if="$parent.switchConfig.center.orderDetail.showFreight">
-                    <dt>{{i18n('运费')}}：</dt>
+                    <dt>{{i18n('运费')}}</dt>
                     <dd>¥{{detail.totalOrderDeliveryFee}}</dd>
                 </dl>
                 <dl class="clearfix">
-                    <dt>{{i18n('合计')}}：</dt>
+                    <dt>{{i18n('合计')}}</dt>
                     <dd class="theme bold">{{(detail.proAllPrice + detail.totalOrderDeliveryFee) | currency:'￥'}}</dd>
-                </dl>               
+                </dl>
             </td>
              <!--发票清单-->
              <!-- ng-if="suborder.invoiceType&&$parent.switchConfig.center.orderDetail.showInvoice&&suborder.invoiceType" -->
-             <td class="fore-user pdTB25LR20" ng-if="detail.approveOrders.approvalStatus !=4">
+             <td class="fore-user pdTB15LR15" ng-if="detail.approveOrders.approvalStatus !=4">
                 <p>{{i18n('发票信息')}}</p>
                 <div class="need-invoice">
                     <!-- ng-class="detail.approveOrders.isInvoice? invoice-sure:invoice-false" -->
@@ -384,30 +391,30 @@
                             ></span>
                     <span>{{i18n('暂不开票')}}</span>
                 </div>
-                <dl class="clearfix" style="line-height: 30px" ng-if="detail.approveOrders.isInvoice">
-                    <dt>{{i18n('发票类型')}}：</dt>
+                <dl class="clearfix" ng-if="detail.approveOrders.isInvoice">
+                    <dt>{{i18n('发票类型')}}</dt>
                     <dd>
                         {{detail.invoiceType[detail.approveOrders.invoiceType]}}
                     </dd>
                 </dl>
-                <dl class="clearfix" style="line-height: 30px" ng-if="detail.approveOrders.isInvoice">
+                <dl class="clearfix" ng-if="detail.approveOrders.isInvoice">
                     <dt>{{i18n('发票抬头')}}：</dt>
                     <dd>{{detail.approveOrders.invoiceTitleContent}}</dd>
                 </dl>
-                <dl class="clearfix" style="line-height: 30px" ng-if="detail.approveOrders.isInvoice">
+                <dl class="clearfix" ng-if="detail.approveOrders.isInvoice">
                     <dt>PO编号：</dt>
                     <dd>{{detail.approveOrders.poCode}}</dd>
                 </dl>
-                <dl class="clearfix" style="line-height: 30px" ng-if="detail.approveOrders.isInvoice">
+                <dl class="clearfix" ng-if="detail.approveOrders.isInvoice">
                     <dt>PO金额含税：</dt>
                     <dd>{{detail.approveOrders.poAmountFax}}</dd>
                 </dl>
-                <dl class="clearfix" style="line-height: 30px" ng-if="detail.approveOrders.isInvoice">
+                <dl class="clearfix" ng-if="detail.approveOrders.isInvoice">
                     <dt>PO金额不含税：</dt>
                     <dd>{{detail.approveOrders.poAmount}}</dd>
                 </dl>
             </td>
-            <td class="fore-user pdTB25LR20" ng-if="detail.approveOrders.approvalStatus == 4">
+            <td class="fore-user pdTB15LR15" ng-if="detail.approveOrders.approvalStatus == 4">
                 <p>{{i18n('发票信息')}}</p>
                 <div class="need-invoice">
                             <!-- ng-class="detail.approveOrders.isInvoice? invoice-sure:invoice-false" -->
@@ -418,7 +425,7 @@
                             ng-click="detail.approveOrders.isInvoice = !detail.approveOrders.isInvoice"></span>
                     <span>{{i18n('无需发票')}}</span>
                 </div>
-                <dl class="clearfix" style="line-height: 30px" ng-if="detail.approveOrders.isInvoice">
+                <dl class="clearfix" ng-if="detail.approveOrders.isInvoice">
                     <dt>{{i18n('发票类型')}}：</dt>
                     <dd>
                         <select class="form-input" ng-model="detail.approveOrders.invoiceType">
@@ -427,7 +434,7 @@
                         </select>
                     </dd>
                 </dl>
-                <dl class="clearfix" style="line-height: 30px" ng-if="detail.approveOrders.isInvoice">
+                <dl class="clearfix" ng-if="detail.approveOrders.isInvoice">
                     <dt>{{i18n('发票抬头')}}：</dt>
                     <dd>
                         <select class="form-input" name="" id="" ng-model="detail.approveOrders.invoiceTitleContent">
@@ -435,36 +442,38 @@
                         </select>
                     </dd>
                 </dl>
-                <dl class="clearfix" style="line-height: 30px" ng-if="detail.approveOrders.isInvoice">
+                <dl class="clearfix" ng-if="detail.approveOrders.isInvoice">
                     <dt>PO编号：</dt>
                     <dd>
                         <input class="form-input" type="text" ng-model="detail.approveOrders.poCode">
                     </dd>
                 </dl>
-                <dl class="clearfix" style="line-height: 30px" ng-if="detail.approveOrders.isInvoice">
+                <dl class="clearfix" ng-if="detail.approveOrders.isInvoice">
                     <dt>PO金额含税：</dt>
                     <dd>
                         <input class="form-input" type="text" ng-model="detail.approveOrders.poAmountFax">
                     </dd>
                 </dl>
-                <dl class="clearfix" style="line-height: 30px" ng-if="detail.approveOrders.isInvoice">
+                <dl class="clearfix" ng-if="detail.approveOrders.isInvoice">
                     <dt>PO金额不含税：</dt>
                     <dd>
                         <input class="form-input" type="text" ng-model="detail.approveOrders.poAmount">
                     </dd>
                 </dl>
                 <dl ng-if="detail.approveOrders.isInvoice">
-                    <div style='margin-top: 30px;'>
+                    <div>
                         <span class="select-file" href="javascript:;"name="certificate" ngf-select="detail.uploadImage()" ng-model="detail.invoiceUrl">选择文件</span>
-                    </span>
+                    </div>
+                    <div class="">
+
                         <span>{{i18n('审核文件上传')}}</span>
                         <img width="50px" style="margin-left: 30px" ng-src="{{userdetail.fileUrl}}" alt="">
-                    </li>
+                    </div>
                 </dl>
             </td>
             </tr>
         </table>
-    
+
         <table class="user-mes-box">
             <tr>
             <td class="one-user pdTB25LR20">
@@ -488,18 +497,26 @@
         </table>
     </div>
     <!-- 结算信息 -->
-    <div class="approve-list" style="margin-bottom: 50px;">
+    <div class="approve-list examines-box" style="margin-bottom: 50px;">
         <div class="examines clearfix">
-            <div class="examines-title">审批信息</div>
-            <div class="examines-info">
+            <div class="examines-title">审批进程</div>
+            <!-- <div class="examines-info">
                 <div class="info-title clearfix">
                     <span class="w15">审批人</span>
                     <span class="w35">审批结果</span>
                     <span class="w25">审批时间</span>
                     <span class="w25">备注</span>
                 </div>
-            </div> 
-            <table border="1px" bordercolor="#eee" cellspacing="0px" style="border-collapse:collapse">
+            </div> -->
+            <ul class="examines-content">
+
+              <li ng-repeat="item in detail.approveList">
+                <span>{{item.approvalDate}}</span>
+                <bdo>{{item.approvalUsername}}</bdo>
+                <em>{{item.apprStatusStr}}</em>
+              </li>
+            </ul>
+            <!-- <table border="1px" bordercolor="#eee" cellspacing="0px" style="border-collapse:collapse">
                 <tbody>
                     <tr ng-repeat="item in detail.approveList">
                         <td width="15" align="center">{{item.approvalUsername}}</td>
@@ -508,7 +525,7 @@
                         <td width="25" align="center">{{item.approvalRemark}}</td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </div>
     </div>
     <ng-include src="'delivery'"></ng-include>
