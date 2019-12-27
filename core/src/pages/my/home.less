@@ -4880,13 +4880,16 @@ input[class*='checkBox']:checked+label:after {
 .module{
   .order-form{
     li{
-      span{
+      & > span,
+      .date-title{
         width: 4em !important;
-        font-size: 12px;
       }
       input,
       select{
         font-size: 12px !important;
+      }
+      span{
+        font-size: 12px;
       }
     }
     .pdR20{
@@ -10768,9 +10771,13 @@ input[class*='checkBox']:checked+label:after {
               &:hover{
                 background: #FFF2F2;
               }
-                td{
-                    padding: 5px 0;
-                }
+              td{
+                  padding: 5px 0;
+
+                  input[type="checkbox"] {
+                    display: none;
+                  }
+              }
             }
 
         }
@@ -10913,6 +10920,13 @@ input[class*='checkBox']:checked+label:after {
         .list-title{
             span{
                 text-align: center;
+
+                &:first-child{
+                  padding: 4px 0;
+                }
+            }
+            input[type="checkbox"]{
+              display: none!important;
             }
         }
     }
@@ -10920,6 +10934,7 @@ input[class*='checkBox']:checked+label:after {
         tr{
             td{
                 padding: 5px 0;
+                border-right: 1px solid #f2f2f2;
             }
         }
 
@@ -12358,6 +12373,7 @@ div {
             }
             em{
               width: 4em;
+              font-style: normal;
             }
 
             &:before,
@@ -12578,4 +12594,26 @@ div {
 }
 .text-decoration {
     text-decoration: underline;
+}
+
+#advanceDetailOrder{
+  .numbox{
+    height: 28px;
+
+    input,
+    button{
+      height: 28px;
+      line-height: 28px;
+    }
+    input{
+      border-left: 1px solid #ddd;
+    }
+    button{
+      width: 28px;
+
+      &:first-child{
+        border-bottom: none;
+      }
+    }
+  }
 }

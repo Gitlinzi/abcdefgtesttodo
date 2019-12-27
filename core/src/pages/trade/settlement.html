@@ -49,7 +49,7 @@
             <span class="num">3</span>
             <h4 class="lbg-txt">{{i18n('成功提交订单')}}</h4>
             <!-- <span class="line_bg lbg-l"></span> -->
-            <span class="line_bg lbg-r"></span>
+            <!-- <span class="line_bg lbg-r"></span> -->
           </li>
         </ul>
       </div>
@@ -459,7 +459,7 @@
           </div>
         </div>
 
-        <div class="settlement-section">
+        <div class="settlement-section remarks">
           <h4 class="settlement-section-title">
             {{i18n('买家备注')}}
             <span
@@ -524,7 +524,7 @@
                       </span>
                       {{i18n('件商品')}}，
                     </span>
-                    {{sumOne.label}}：{{sumOne.operator}}{{sumOne.value|currency:'￥'}}
+                    {{sumOne.label}}<strong>{{sumOne.operator}}{{sumOne.value|currency:'￥'}}</strong>
                   </li>
                   <li ng-show="merchantProductList.businessType == 6">
                     {{i18n('已支付定金')}}
@@ -578,7 +578,7 @@
                   {{i18n('内完成订单')}}，{{i18n('可享受限时特价折扣')}}
                 </div>
                 <div class="settlement-pay">
-                  {{i18n('应付总额')}}：
+                  {{i18n('应付总额')}}
                   <strong>{{merchantProductList.amount|currency:'￥'}}</strong>
                   <span ng-if="merchantProductList.totalPoints">
                     +{{merchantProductList.totalPoints ?
