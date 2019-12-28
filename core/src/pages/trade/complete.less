@@ -12,7 +12,11 @@
 @import url("../../common/css/i-global-nav.less");
 @import url("../../common/css/i-feedback.less");
 @import url("../../common/css/reset.less");
+@import url("../../common/css/i-shotProcess");
 
+.cart-search{
+  display: none;
+}
 .flexible (@direction: column) {
   display: flex;
   flex-direction: @direction;
@@ -21,14 +25,16 @@
 
 .container {
   position: relative;
-  width: 1000px;
+  // width: 1000px;
+
   .shopTitle {
     height: 50px;
     width: 426px;
     position: absolute;
-    left: 380px;
-    top: -78px;
-    font-size: 20px;
+    left: 300px;
+    top: -105px;
+    font-size: 24px;
+    color: #666;
   }
   .pay-complete {
     width: 100%;
@@ -82,6 +88,10 @@
       a {
         margin: 0 16px;
         padding: 0 16px;
+
+        &:first-child{
+          font-weight: bold;
+        }
 
         &.btn-sign {
           color: #c00;

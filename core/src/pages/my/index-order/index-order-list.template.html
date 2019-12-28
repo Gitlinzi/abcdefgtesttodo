@@ -166,7 +166,7 @@
                 <!-- </div> -->
             </div>
             <div class="clear"></div>
-            <div class="evaluate-list">
+            <div class="evaluate-list evaluate-list-table">
                 <div class="list-title mgB10 list-titleColor">
                     <span class="width518" style="width: 375px;">{{i18n('商品')}}</span>
                     <span class="width126" style="width: 50px;">{{i18n('数量')}}</span>
@@ -199,7 +199,7 @@
                             <a class='rubbish-icon' href="javascript:;"></a>
                         </div>
                     </div>
-                    <table class="order-list all-table-color">
+                    <table class="order-list order-list-table all-table-color">
                         <tr ng-repeat="pro in suborder.itemList">
                             <!--商品图片-->
                             <td width="124" align="center" class="bl bb all-img-box"><a target="_blank" href="#/orderDetail?code={{suborder.orderCode}}"><img
@@ -220,7 +220,7 @@
                             <!--件数-->
                             <td width="90" style="padding-right: 20px" align="right" class="bb">x{{pro.productItemNum}}</td>
                             <!--收货人-->
-                            <td width="0" valign="top" align="center" class="bb br"
+                            <td width="0" valign="top" align="center" class="bb bl"
                                 rowspan="{{suborder.itemList.length}}" ng-if="$first">
                             </td>
                             <!--金额-->
