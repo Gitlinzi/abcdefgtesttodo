@@ -174,7 +174,7 @@
                     <img src="../images/company/loading.gif" alt="" id="g_logo2" ng-src="{{companyLogoUrl}}">
                 </a>
             </div>
-            <div class="cart-search" ng-if=" '@@isShowSearch' == 'true' ">
+            <!-- <div class="cart-search" ng-if=" '@@isShowSearch' == 'true' ">
                 <div class="cart-search-box">
                     <input class="cart-input" type="text"
                            ng-model="keyword"
@@ -182,8 +182,17 @@
                            placeholder="{{i18n('输入关键词')}}">
                     <input class="cart-button" type="button" value="{{i18n('搜索')}}" ng-click="search(keyword)">
                 </div>
+            </div> -->
+            <div
+              class="cart-search search"
+              ng-class="companyLogoUrl ? 'mgL60' : '' "
+              search-bar
+              shelper="searchHistory"
+              keyword="noResultKeyword"
+            >
+              <i></i>
             </div>
-            
+
         </div>
         <!--</div>-->
     </div>

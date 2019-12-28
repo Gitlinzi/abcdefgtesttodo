@@ -37,6 +37,14 @@
         </ul>
         <div class="evaluate-list mgT20">
             <div class="list-title list-titleColor">
+                <span class="" style="width: 50px;">
+                  <label for="checkBoxFoot" class="checkboxStyle-big checkbox-all checkboxMT">
+                      <input hidden id="checkBoxFoot"
+                             class="chk chk-all checkBoxFoot"
+                             type="checkbox">
+                      <span></span>
+                  </label>
+                </span>
                 <span class="w25">{{i18n('预置订单编号')}}</span>
                 <span class="w25">{{i18n('预置订单名称')}}</span>
                 <span class="w25">{{i18n('创建日期')}}</span>
@@ -46,6 +54,15 @@
                 <div ng-if="advanceOrder.advanceList.length>0">
                     <table class="order-list all-table-color">
                         <tr ng-repeat="item in advanceOrder.advanceList track by $index">
+                            <td width="50" align="center" class="bb">
+                              <label class="checkboxStyle-big">
+                                  <input  id="checkBoxName{{_index}}{{merchant.merchantId}}" hidden class="chk chk-all-grp checkBox"
+                                          type="checkbox"
+                                          >
+                                  <span></span>
+                              </label>
+                            </td>
+
                             <td width="300" align="center" class="bb bl text-decoration">
                                 <a href="#/advanceDetailOrder?id={{item.id}}" class="theme">{{item.id}}</a>
                             </td>

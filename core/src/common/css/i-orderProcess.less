@@ -5,10 +5,14 @@
     height: 100px;
     width: 920px;
     top: 44px;
+
+    ul{
+      margin-top: -45px;
+    }
     li{
         position:relative;
         text-align:center;
-        width: 16%;
+        width: 15%;
         padding-top: 22px;
         float: left;
         i{
@@ -20,45 +24,51 @@
             background: @whiteColor url('../../../images/company/company-step.png') no-repeat;
         }
         &.current{
-            h4,p{
-                color: @orderCurrentProgressBarColor!important;
+            h4{
+                color: #333!important;
+            }
+            p{
+              color: #999
             }
             h5{
                 address{
-                    background-color: @orderCurrentProgressBarColor;
+                    background-color: #C69163;
                 }
                 cite{
-                    border-color: transparent transparent transparent @orderActiveProgressBarColor!important;
+                    border-color: transparent transparent transparent #C69163!important;
                 }
             }
         }
         &.active{
-            h4,p{
-                color: @orderCurrentProgressBarColor!important;
+            h4{
+                color: #333!important;
+            }
+            p{
+              color: #999
             }
             h5{
                 address{
-                    background-color: @orderCurrentProgressBarColor!important;
+                    background-color: #C69163!important;
                 }
                 cite{
-                    border-color: transparent transparent transparent @orderActiveProgressBarColor!important;
+                    border-color: transparent transparent transparent #C69163!important;
                 }
             }
         }
         &.active-no-active-i {
             h5{
                 address{
-                    background-color: @orderCurrentProgressBarColor!important;
+                    background-color: #C69163!important;
                 }
                 cite{
-                    border-color: transparent transparent transparent @orderCurrentProgressBarColor!important;
+                    border-color: transparent transparent transparent #C69163!important;
                 }
             }
             h4{
-                color: @orderCurrentProgressBarColor;
+                color: #333!important;
             }
             p{
-                color: @orderCurrentProgressBarColor;
+              color: #999
             }
         }
         &:nth-child(1){
@@ -226,17 +236,18 @@
             width: 100%;
             text-align: center;
             left: -40px;
-            bottom: -88px;
+            bottom: -90px;
             font-weight: normal;
-            color: @33GreyColor;
+            color: @99GreyColor;
         }
         p{
             position: absolute!important;
             width: 100%;
             text-align: center;
             left: -40px;
-            bottom: -108px;
+            bottom: -92px;
             color: @99GreyColor;
+            font-size: 12px;
         }
         h5{
             width: 100%;
@@ -247,7 +258,7 @@
             address{
                 width: 80%;
                 background-color: @ccGreyColor;
-                height: 1px;
+                height: 2px;
                 display: block;
                 z-index: 9;
                 position: absolute;

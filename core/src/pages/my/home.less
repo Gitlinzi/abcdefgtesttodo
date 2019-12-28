@@ -1,4 +1,4 @@
-@import url('../../common/css/i-var_${skin}.less');
+    @import url('../../common/css/i-var_${skin}.less');
 @import url('../../common/css/i-base.less');
 @import url('../../common/css/i-address.less');
 @import url('../../common/css/i-popbox.less');
@@ -39,6 +39,13 @@ body {
 
     .home-container{
       width: 1220px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .custom-header{
+      position: relative;
+      z-index: 2;
     }
 }
 
@@ -630,7 +637,7 @@ body {
         background: @f5GreyColor;
         font-size: 12px;
         .c1 {
-            width: 150px;
+            width: 200px;
         }
         .c2 {
             //width: 157px; //text-align: center;
@@ -807,7 +814,8 @@ body {
             color: @ff69OrangeColor;
         }
         & .all-cancel {
-            color: @aaGreyColor;
+            color: #333;
+            font-weight: bold;
         }
         & .all-green {
             color: @99GreenColor;
@@ -838,6 +846,12 @@ body {
         .state-none a {
             display: block;
             height: 30px;
+            color: #666;
+
+            &.theme{
+              font-weight: bold;
+              color: #333;
+            }
         }
     }
     .all-table-color {
@@ -846,16 +860,19 @@ body {
         .argin-box{
             .ody-btn-xs-default-plain1{
                 display: inline-block;
-                height: 23px;
-                width: 78px;
+                height: 22px;
+                width: 64px;
                 border: 1px solid @ddGreyColor;
-                color: @66GreyColor;
+                color: #CC0000;
                 font-size: 12px;
                 line-height: 23px;
                 border-radius: @searchRadius;
                 margin-bottom: 10px;
                 margin-right: 8px;
                 cursor: pointer;
+
+                border: 1px solid #CC0000;
+                border-radius: 2px;
             }
             .ody-btn-xs-theme{
                 margin-right: 8px;
@@ -1232,7 +1249,7 @@ input[class*='checkBox']:checked+label:after {
 /* 个人中心 基本信息 begin */
 
 .base-mes-box {
-    width: 1000px;
+    width: 1080px;
     float: right;
     & .base-mes {
         min-height: 610px;
@@ -1378,7 +1395,7 @@ input[class*='checkBox']:checked+label:after {
 
 .address-manage {
     float: left;
-    width: 1000px;
+    width: 1080px;
     min-height: 920px;
     & .add-sup{
         border: 1px solid #e0e0e0;
@@ -1944,7 +1961,7 @@ input[class*='checkBox']:checked+label:after {
 
 //个人中心我的会员
 .name-prove {
-    width: 1000px;
+    width: 1080px;
     float: right;
     min-height: 920px;
     & .name-prove-title {
@@ -2252,7 +2269,7 @@ input[class*='checkBox']:checked+label:after {
 // 晨光 信用额度样式 begin
 .credit-box {
     float: left;
-    width:1000px;
+    width:1080px;
     margin-top:20px;
     & .credit-top{
         line-height: 49px;
@@ -3055,7 +3072,7 @@ input[class*='checkBox']:checked+label:after {
 //晨光批发业务单详情 end
 //晨光Home-head样式 begin
 .home-head-box{
-    width:1000px;
+    width:1080px;
     height:160px;
     background: url('../../images/company/home-head.png');
     font-size:0;
@@ -3288,7 +3305,7 @@ input[class*='checkBox']:checked+label:after {
 //我的反馈
 .feedback{
     float: right;
-    width: 1000px;
+    width: 1080px;
     margin-bottom: 56px;
     & .message-title{
         height: 35px;
@@ -3790,7 +3807,7 @@ input[class*='checkBox']:checked+label:after {
 /*我的收藏 原index-order-frequence.less begin*/
 .collection{
     float: right;
-    width: 1000px;
+    width: 1080px;
     & .collection-title{
         margin-top: 20px;
         height: 50px;
@@ -4150,21 +4167,41 @@ input[class*='checkBox']:checked+label:after {
 /*我的收藏 end*/
 
 /*订单详情 原index-order-detail.less begin*/
+
 .order-details {
-    border-top: 3px solid @bodyBgColor;
-    border-right: 1px solid @bodyBgColor;
-    border-bottom: 1px solid @bodyBgColor;
-    border-left: 1px solid @bodyBgColor;
+    border: 1px solid #f2f2f2;
     width: 1198px;
     background-color: @whiteColor;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+
+    &-title{
+      height: 40px;
+      line-height: 40px;
+      color: #666;
+      font-size: 12px;
+      border-bottom: 1px solid #f2f2f2;
+
+      &:before{
+        width: 4px;
+        height: 14px;
+        float: left;
+        content: '';
+        margin-top: 12px;
+        margin-right: 20px;
+        background: #CC0000;
+      }
+    }
+    &-content{
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
     .order-details-left {
         padding-bottom: 15px;
         width: 240px;
-        min-height: 210px;
+        min-height: 120px;
         text-align: center;
         float: left;
-        border-right: 1px solid #eee;
+        border-right: 1px solid #e6e6e6;
         .margin-style{
             margin: 0;
             margin-top: 15px;
@@ -4173,8 +4210,8 @@ input[class*='checkBox']:checked+label:after {
         }
         .wait-send{
             color: @themeColor;
-            font-size: 30px;
-            font-weight: 900;
+            font-size: 16px;
+            font-weight: 400;
             margin: 10px 0px;
         }
         .last-time{
@@ -4233,16 +4270,16 @@ input[class*='checkBox']:checked+label:after {
         .argin-box{
             .ody-btn-xs-default-plain1{
                 display: inline-block;
-                height: 23px;
+                height: 28px;
                 width: 78px;
-                border: 1px solid @ddGreyColor;
-                color: @66GreyColor;
+                border: 1px solid @themeColor;
+                color: #fff;
                 font-size: 12px;
-                line-height: 23px;
-                border-radius: @searchRadius;
+                line-height: 28px;
+                border-radius: 2px;
                 margin-bottom: 10px;
-                margin-right: 8px;
                 cursor: pointer;
+                background: @themeColor;
             }
             .ody-btn-xs-theme{
                 margin-right: 8px;
@@ -4262,16 +4299,27 @@ input[class*='checkBox']:checked+label:after {
             .ody-btn-xs-theme-plain1 {
                 margin-right: 8px;
                 display: inline-block;
-                height: 23px;
-                width: 78px;
+                height: 28px;
+                width: 68px;
                 border: 1px solid @themeColor;
-                color: @themeColor;
+                color: #fff;
                 font-size: 12px;
-                line-height: 23px;
-                border-radius: @searchRadius;
+                line-height: 28px;
+                border-radius: @themeColor;
                 margin-bottom: 10px;
                 margin-right: 8px;
                 cursor: pointer;
+                display: block;
+            }
+            .detail-cancel{
+              height: 28px;
+              line-height: 28px;
+              width: 68px;
+              color: #666666;
+              display: block;
+              margin: 0 auto;
+              font-size: 12px;
+              background: #fff;
             }
             .notBright {
                 border: none;
@@ -4289,8 +4337,29 @@ input[class*='checkBox']:checked+label:after {
 .module-title{
     padding-top: 26px;
     padding-bottom: 22px;
+
     span {
         color: @33GreyColor;
+    }
+
+    &.crumbs-nav{
+      a,
+      span{
+        font-size: 12px;
+      }
+      a{
+        color: #999;
+
+        &:after{
+            content: '/';
+            display: inline-block;
+            padding: 0 8px;
+            color: #d9d9d9;
+        }
+      }
+      span{
+        color: #666;
+      }
     }
 }
 .order-no-box{
@@ -4305,7 +4374,8 @@ input[class*='checkBox']:checked+label:after {
     line-height: 40px;
     font-size: 0;
     color: @33GreyColor;
-    border: 1px solid #eee;
+    border: 1px solid #f2f2f2;
+    border-bottom: none;
     & span{
         display: inline-block;
         font-size: 12px;
@@ -4486,24 +4556,74 @@ input[class*='checkBox']:checked+label:after {
     }
 }
 .goods-box-border {
-    border-left: 1px solid #eee;
+    width: 100%;
+    margin-bottom: 10px;
+    background: #fff;
+    border-left: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    display: table;
+    border-collapse:collapse;
     & .goods-box-dl {
         padding: 20px 0px 20px 0;
         margin-left: 20px;
         border-left: 0;
     }
+    dl{
+      padding: 20px;
+      &:hover{
+        background: #FFF9F9;
+      }
+    }
+    dt{
+      width: 645px;
+      float: none !important;
+
+      .dt-left{
+        padding: 20px;
+
+        img{
+          width: 50px;
+          height: 50px;
+          border: 1px solid #f2f2f2;
+        }
+      }
+    }
+    dl,
+    dt{
+      display: table-row;
+    }
+    dt > div,
+    dd{
+      display: table-cell !important;
+      float: none !important;
+      vertical-align: middle !important;
+    }
+
 }
 .user-mes-box{
-    border: 1px solid @bodyBgColor;
+    margin-bottom: 10px;
+    background: #fff;
+    border: 1px solid #f2f2f2;
     font-size: 0px;
     & td{
-        border: 1px solid @bodyBgColor;
-        padding-left: 20px!important;
+        border: 1px solid #f2f2f2;
         vertical-align: top;
-    }
-    & td p{
-        /*font-weight: bold;*/
-        color: @blackColor;
+        padding: 12px 15px !important;
+     p{
+      margin-bottom: 20px;
+      font-weight: bold;
+      font-size: 14px;
+      color: #333333;
+      &:before{
+        width: 4px;
+        height: 14px;
+        content: '';
+        float: left;
+        margin-left: -15px;
+        margin-top: 3px;
+        margin-right: 8px;
+        background: #cc0000;
+      }
     }
     & div{
         display: inline-block;
@@ -4511,6 +4631,17 @@ input[class*='checkBox']:checked+label:after {
         vertical-align: top;
         border-right: 1px solid @bodyBgColor;
     }
+  }
+}
+.order-info{
+  dl{
+    line-height: 32px;
+    margin-bottom: 0 !important;
+  }
+  dt{
+    margin-right: 20px;
+    text-align: left !important;
+  }
 }
 .one-user,.two-user{
     width: 282px;
@@ -4746,9 +4877,41 @@ input[class*='checkBox']:checked+label:after {
     }
 }
 
+.module{
+  .order-form{
+    li{
+      & > span,
+      .date-title{
+        width: 4em !important;
+      }
+      input,
+      select{
+        font-size: 12px !important;
+      }
+      span{
+        font-size: 12px;
+      }
+    }
+    .pdR20{
+      padding-right: 79px !important;
+    }
+  }
+}
+
+.order-nav,
+.suborder .order-title{
+  height: 40px;
+  line-height: 40px !important;
+  background: #fff !important;
+  border: 1px solid #F2F2F2;
+}
+.suborder .order-title{
+  border-bottom: none;
+}
+
 .order-left {
     float: left; // width: 330px;
-    padding-top: 3px;
+    // padding-top: 3px;
     b {
         display: inline-block;
         vertical-align: middle;
@@ -4764,11 +4927,20 @@ input[class*='checkBox']:checked+label:after {
     }
     & span {
         display: inline-block;
-        height: 24px;
+        height: 36px;
         text-align: center;
-        line-height: 24px;
+        line-height: 36px;
         margin-bottom: 15px;
+        padding: 0 10px;
         cursor: pointer;
+        color: #999;
+
+        & > span{
+          padding: 0 5px;
+        }
+    }
+    & > span:first-child{
+      margin: 0 15px;
     }
     & .active {
         color: @themeColor;
@@ -4810,7 +4982,7 @@ input[class*='checkBox']:checked+label:after {
 /*兑换的商品 原index-favorite-goods begin*/
 .always{
     float: left;
-    width: 1000px;
+    width: 1080px;
     & .follow-left{
         & span{
             display: inline-block;
@@ -5467,7 +5639,7 @@ input[class*='checkBox']:checked+label:after {
 /*浏览历史 原index-favorite-store.less begin*/
 .history{
     float: left;
-    width: 1000px;
+    width: 1080px;
     position: relative;
     margin-bottom: 70px;
     position: relative;
@@ -5634,7 +5806,7 @@ input[class*='checkBox']:checked+label:after {
 /*消息 原message.less begin*/
 .message{
     float: right;
-    width: 1000px;
+    width: 1080px;
     margin-bottom: 56px;
     & .message-title{
         height: 35px;
@@ -5859,14 +6031,16 @@ input[class*='checkBox']:checked+label:after {
 }
 .evaluate-list{
     & .list-title{
-        height: 30px;
+        height: 40px;
         background: #fff;
-        line-height: 30px;
+        line-height: 40px;
         font-size: 12px;
+        border: 1px solid #F2F2F2;
         & span{
             display: block;
             float: left;
             text-align: center;
+            color: #666;
             &:nth-child(1){
                 text-align: left;
             }
@@ -6192,7 +6366,7 @@ input[class*='checkBox']:checked+label:after {
 /*我的积分 原index-property-points.less begin*/
 .integral-bigBox{
     float: right;
-    width: 1000px;
+    width: 1080px;
     & .integral-box{
         height: 80px;
         background: @backgroundColor;
@@ -6333,7 +6507,7 @@ input[class*='checkBox']:checked+label:after {
 /*奖品 原award.less begin*/
 .award-page{
     float: right;
-    width: 1000px;
+    width: 1080px;
     & .award-title{
         height: 38px;
         & span{
@@ -6436,7 +6610,7 @@ input[class*='checkBox']:checked+label:after {
 /*领取奖品 原receive-award.less begin*/
 .receive-award{
     float: right;
-    width: 1000px;
+    width: 1080px;
     margin-top: 20px;
     & .receive-title{
         height: 34px;
@@ -7027,7 +7201,7 @@ input[class*='checkBox']:checked+label:after {
 /*购买咨询 原index-consult-list.less begin*/
 .consult {
     float: left;
-    width: 1000px;
+    width: 1080px;
     & .consult-title {
         font-size: 16px;
         margin-top: 20px;
@@ -7099,7 +7273,7 @@ input[class*='checkBox']:checked+label:after {
 /*我的问答 原index-question-list.less begin*/
 .question {
     float: left;
-    width: 1000px;
+    width: 1080px;
     & .question-content {
         & .question-left {
             height: 40px;
@@ -7292,7 +7466,7 @@ input[class*='checkBox']:checked+label:after {
 }
 .member {
     float: left;
-    width: 1000px;
+    width: 1080px;
     & .member-title{
         font-size: 16px;
         margin: 20px 0px 15px 0px;
@@ -7571,7 +7745,7 @@ input[class*='checkBox']:checked+label:after {
 /*补购服务 原index-order-subsidy.less begin*/
 .buy-service{
     float: right;
-    width: 1000px;
+    width: 1080px;
     & .buy-service-box{
         color: @blackColor;
         & .service-title{
@@ -9349,8 +9523,8 @@ input[class*='checkBox']:checked+label:after {
             background-color: @clearColor;
             color: @whiteColor;
             border-radius: 50%;
-            top: 20px;
-            left: 237px;
+            top: 8px;
+            right: 0;
             font-size: 14px;
             text-align: center;
             line-height: 20px;
@@ -9360,7 +9534,7 @@ input[class*='checkBox']:checked+label:after {
         .mylogo {
             float: left;
             width: 160px;
-            height: 80px;
+            height: 87px;
             &>a{
                 display: block;
                 height: 100%;
@@ -9371,6 +9545,17 @@ input[class*='checkBox']:checked+label:after {
                 position: relative;
             }
         }
+
+        .my-title{
+          float: left;
+          font-size: 24px;
+          color: #666666;
+          letter-spacing: 0.6px;
+          font-weight: normal;
+          padding: 0 20px;
+          margin: 0 20px;
+        }
+
         .goIndexButton{
             float: left;
             padding: 5px 10px 5px 10px;
@@ -9402,7 +9587,7 @@ input[class*='checkBox']:checked+label:after {
         }
         .funs {
             display: inline-block;
-            width: 240px;
+            // width: 240px;
             color: #333333;
             font-size: 16px;
             position: relative;
@@ -9411,6 +9596,7 @@ input[class*='checkBox']:checked+label:after {
             text-align: center;
             a {
                 color: #333333;
+                padding: 0 30px;
                 float: left;
                 width: 80px;
                 font-size: 14px;
@@ -9418,13 +9604,39 @@ input[class*='checkBox']:checked+label:after {
             .amountSet {
                 position: relative;
                 display: inline-block;
+                margin-right: 20px;
                 float: left;
                 width: 107px;
                 cursor: pointer;
                 .common-icons-down {
-                    transition: transform 0.5s;
-                    -moz-transition: transform 0.5s;
-                    -webkit-transition: transform 0.5s;
+                    &{
+                      transition: transform 0.5s;
+                      -moz-transition: transform 0.5s;
+                      -webkit-transition: transform 0.5s;
+                       position: absolute;
+                       top: 23px;
+                       margin-left: 10px;
+                       background: none;
+                       // transform:rotate(180deg);
+                    }
+                    &:before,
+                    &:after{
+                      position: absolute;
+                      content: '';
+                      display: block;
+                      border-bottom: 6px transparent dashed;
+                      border-left: 6px transparent dashed;
+                      border-right: 6px transparent dashed;
+                      border-top: 6px white solid;
+                      overflow: hidden;
+                    }
+                    &:before{
+                     top: 1px; /*覆盖并错开1px*/
+                     border-top: 6px #333333 solid;
+                    }
+                    &:after{
+                     border-top: 6px white solid;
+                    }
                 }
                 .amountHover {
                     line-height: 1;
@@ -9480,6 +9692,7 @@ input[class*='checkBox']:checked+label:after {
                 float: right;
                 display: inline-block;
                 width: 50px;
+                position: relative;
             }
         }
         .search {
@@ -9519,7 +9732,7 @@ input[class*='checkBox']:checked+label:after {
 /* 快速下单 begin*/
 .quick-order{
     float: left;
-    width:1000px;
+    width:1080px;
     min-height: 626px;
     margin-top:20px;
     .quick-order-top{
@@ -10072,7 +10285,6 @@ input[class*='checkBox']:checked+label:after {
             }
         }
     }
-
 }
 /* 快速下单 end*/
 //
@@ -10432,7 +10644,7 @@ input[class*='checkBox']:checked+label:after {
 }
 .pricentCard-page {
     float: right;
-    width: 1000px;
+    width: 1080px;
     .home-allTitle {
         margin-bottom: 0;
     }
@@ -10557,11 +10769,15 @@ input[class*='checkBox']:checked+label:after {
         .order-list{
             tr{
               &:hover{
-                background: #FFF2F2; 
+                background: #FFF2F2;
               }
-                td{
-                    padding: 5px 0;
-                }
+              td{
+                  padding: 5px 0;
+
+                  input[type="checkbox"] {
+                    display: none;
+                  }
+              }
             }
 
         }
@@ -10704,6 +10920,13 @@ input[class*='checkBox']:checked+label:after {
         .list-title{
             span{
                 text-align: center;
+
+                &:first-child{
+                  padding: 4px 0;
+                }
+            }
+            input[type="checkbox"]{
+              display: none!important;
             }
         }
     }
@@ -10711,6 +10934,7 @@ input[class*='checkBox']:checked+label:after {
         tr{
             td{
                 padding: 5px 0;
+                border-right: 1px solid #f2f2f2;
             }
         }
 
@@ -11083,7 +11307,7 @@ input[class*='checkBox']:checked+label:after {
 
 .statement-page{
     float: right;
-    width: 1000px;
+    width: 1080px;
     .query {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -11129,7 +11353,7 @@ input[class*='checkBox']:checked+label:after {
     }
     .graph {
         height: 430px;
-        width: 1000px;
+        width: 1080px;
         border: 1px solid #eee;
         /*.download {
             float: right;
@@ -11140,7 +11364,7 @@ input[class*='checkBox']:checked+label:after {
             right: 5px;
         }*/
         .chart {
-            width: 1000px;
+            width: 1080px;
             height: 430px;
         }
     }
@@ -12039,6 +12263,10 @@ div {
     text-indent: 5px;
 }
 .approve-list {
+  background: #fff;
+  border: 1px solid #FFF2F2;
+  padding: 12px 0;
+  box-sizing: border-box;
     input {
         width: 240px;
         height: 30px;
@@ -12056,9 +12284,6 @@ div {
     .wjx {
         color: #cc0000;
     }
-    border: 1px solid #eee;
-    padding: 0 20px;
-    box-sizing: border-box;
     .create {
         height: 70px;
         line-height: 70px;
@@ -12095,9 +12320,103 @@ div {
         // border-bottom: 1px solid #eee;
         position: relative;
         padding-bottom: 30px;
+        background: #fff;
         .examines-title {
             width: 151px;
+            line-height: 20px;
             font-weight: bold;
+            color: #333;
+
+            &:before{
+              width: 4px;
+              height: 14px;
+              content: '';
+              float: left;
+              margin-top: 3px;
+              margin-right: 8px;
+              background: #cc0000;
+            }
+        }
+        .examines-content{
+          li{
+            height: 40px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            text-align: center;
+            position: relative;
+            clear: both;
+            color: #666;
+
+            span,
+            bdo,
+            em{
+              height: 40px;
+              line-height: 40px;
+              display: block;
+              float: left;
+            }
+            bdo,
+            em{
+              text-align: left;
+            }
+
+            span{
+              width: 45%;
+              text-align: right;
+              margin-right: 60px;
+              padding-left: 19px;
+            }
+            bdo{
+              width: 105px;
+              margin-right: 15px;
+              overflow: hidden;
+            }
+            em{
+              width: 4em;
+              font-style: normal;
+            }
+
+            &:before,
+            &:after{
+              content: '';
+              display: inline-block;
+              position: absolute;
+              left: 50%;
+              top: 18px;
+            }
+
+            &:before{
+              width: 6px;
+              height: 6px;
+              margin-left: -3px;
+              background: #FDFDFD;
+              border: 1px solid #979797;
+              border-radius: 50%;
+              z-index: 2;
+            }
+
+            &:after{
+              width: 1px;
+              height: 100%;
+              background: #E6E6E6;
+              z-index: 1;
+            }
+
+            &:last-child{
+              &:after{
+                display: none;
+              }
+            }
+
+            &.active{
+              color: #333;
+              &:before{
+                margin-left: -5px;
+                background: #CC0000;
+                border: 2px solid #EDB0B0;
+              }
+            }
+          }
         }
         .examines-info {
             .info-title {
@@ -12275,4 +12594,26 @@ div {
 }
 .text-decoration {
     text-decoration: underline;
+}
+
+#advanceDetailOrder{
+  .numbox{
+    height: 28px;
+
+    input,
+    button{
+      height: 28px;
+      line-height: 28px;
+    }
+    input{
+      border-left: 1px solid #ddd;
+    }
+    button{
+      width: 28px;
+
+      &:first-child{
+        border-bottom: none;
+      }
+    }
+  }
 }

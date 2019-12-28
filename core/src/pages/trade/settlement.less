@@ -18,6 +18,9 @@
 @import url("../../common/css/i-shotProcess");
 
 /* 结算页 */
+.cart-search{
+  display: none;
+}
 .errorText {
   vertical-align: middle;
   display: inline-block;
@@ -1720,9 +1723,11 @@ p {
   height: 50px;
   width: 426px;
   position: absolute;
-  left: 350px;
-  top: -75px;
-  font-size: 20px;
+  left: 300px;
+  top: -105px;
+  font-size: 24px;
+  color: #666666;
+  letter-spacing: 0.6px;
 }
 #none-border {
   border: none;
@@ -2762,9 +2767,13 @@ div {
 /* Code By Joenix */
 .settlement {
   &-section {
-    border: 1px solid #f8f8f8;
+    border: 1px solid #f2f2f2;
     padding: 16px 0;
     margin-bottom: 20px;
+
+    &.remarks{
+      padding-bottom: 0;
+    }
 
     &-title,
     &-container {
@@ -2918,8 +2927,21 @@ div {
           text-align: center;
         }
       }
+      &-title{
+        line-height: 40px;
+        border-top: 1px dashed #f2f2f2;
+        border-bottom: 1px dashed #f2f2f2;
+
+        [class^="grid-col"]{
+          margin: 0;
+        }
+      }
       &-content {
         border-bottom: 1px dashed #f2f2f2;
+
+        &:last-child{
+          border-bottom: none;
+        }
 
         img {
           width: 80px;
@@ -2946,6 +2968,7 @@ div {
         width: 100%;
         min-height: 6rem;
         padding: 8px;
+        border: 1px solid transparent;
       }
 
       p {
@@ -2966,19 +2989,17 @@ div {
       .grid-col-4 {
         text-align: right;
         background-color: #fafafa;
+        border-left: 1px solid #f2f2f2;
+      }
+
+      li{
+        margin-bottom: 10px;
       }
       label {
         width: 100px;
         display: inline-block;
       }
       span {
-      }
-    }
-
-    .settlement-pay {
-      strong {
-        color: #c00;
-        font-size: 18px;
       }
     }
 
@@ -2990,6 +3011,7 @@ div {
         line-height: normal;
         padding: 10px 20px;
         font-size: 14px;
+        border-radius: 2px;
       }
     }
 
@@ -2997,6 +3019,7 @@ div {
       padding: 0;
 
       strong {
+        padding-left: 12px;
         color: #333;
       }
 
@@ -3008,6 +3031,13 @@ div {
       .grid-col-8 {
         margin: 0;
         padding: 20px;
+      }
+    }
+
+    .settlement-pay {
+      strong {
+        color: #cc0000;
+        font-size: 18px;
       }
     }
   }

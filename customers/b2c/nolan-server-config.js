@@ -1,7 +1,7 @@
 var _path=(__dirname.split('customers')[0]);
 module.exports = {
     hostname: "0.0.0.0",
-    port: "82",
+    port: "8080",
     logLevel: "debug",
     webPath: _path + "dist/b2c/pc_mall",
     mockPath: _path + "mockdata",
