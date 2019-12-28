@@ -520,12 +520,12 @@
                         <span>{{i18n('全选')}}</span>
                     </li>
                     <li><a href="javascript:void(0)" ng-click="checkDeleteAll()">{{i18n('删除选中的商品')}}</a></li>
-                    <!-- <li><a href="javascript:void(0)" ng-click="checkFavoriteAll()">{{i18n('移入我的收藏')}}</a></li> -->
+                    <li><a href="javascript:void(0)" ng-click="checkFavoriteAll()">{{i18n('移入我的收藏')}}</a></li>
                     <li><a href="javascript:void(0)" ng-click="downloadCartTemplate()">{{i18n('导入模板下载')}}</a></li>
                     <li><a href="javascript:void(0)" ngf-pattern="'.xlsx,.xls'" ng-model="obj.excelData" ngf-select="inportCartList()">{{i18n('导入购物车')}}</a></li>
                     <li><a href="javascript:void(0)" ng-click="exportCartList()">{{i18n('导出购物车')}}</a></li>
                     <li><a href="javascript:void(0)" ng-click="addAdvandeOrder()">{{i18n('添加预置订单')}}</a></li>
-                    <li><a href="javascript:void(0)" class="color0721" ng-click="removeDisabledItems()" ng-if="cartInfo.failureProducts.length>0">{{i18n('清除失效商品')}}</a></li>
+                    <!-- <li><a href="javascript:void(0)" class="color0721" ng-click="removeDisabledItems()" ng-if="cartInfo.failureProducts.length>0">{{i18n('清除失效商品')}}</a></li> -->
                 </ul>
                 <ul class="goslmt">
                     <li>{{i18n('已选')}} <span class="f23030">{{cartInfo.summary.totalNum}}</span>{{i18n('件商品')}}</li>
