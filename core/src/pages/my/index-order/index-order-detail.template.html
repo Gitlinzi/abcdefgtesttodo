@@ -508,8 +508,7 @@
                 </div>
             </div> -->
             <ul class="examines-content">
-
-              <li ng-repeat="item in detail.approveList">
+              <li ng-repeat="(index, item) in detail.approveList" ng-class="{active: index === 0}">
                 <span>{{item.approvalDate}}</span>
                 <bdo>{{item.approvalUsername}}</bdo>
                 <em>{{item.apprStatusStr}}</em>
