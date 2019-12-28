@@ -2294,7 +2294,7 @@ angular.module('directives')
         template: [
             '<div ng-mousemove="showCart=true" ng-mouseleave="showCart=false">',
             '   <span class="cart-count" ng-cloak ng-if="cartTotal">{{cartTotal}}</span>',
-            '   <a class="car-shop" href="/cart.html" ng-style="{backgroundColor:showCart?\'#fff\':\'#F9F9F9\',borderColor:showCart?\'#cc0000\':\'\'}">',
+            '   <a class="car-shop" href="/cart.html" ng-style="{backgroundColor:showCart?\'#fff\':\'#FFF6F6\',borderColor:showCart?\'#cc0000\':\'\'}">',
             '     {{i18n($parent.switchConfig.common.allCartBtnName)}}<i></i></a>',
             '   <span class="mask" ng-show="showCart"></span>',
             '   <div id="minicart" ng-style="{display:showCart?\'block\':\'none\'}" ng-mouseenter="showCart=true"',

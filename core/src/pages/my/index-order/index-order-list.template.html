@@ -167,7 +167,7 @@
             </div>
             <div class="clear"></div>
             <div class="evaluate-list">
-                <div class="list-title pdL20 mgB10 list-titleColor">
+                <div class="list-title mgB10 list-titleColor">
                     <span class="width518" style="width: 375px;">{{i18n('商品')}}</span>
                     <span class="width126" style="width: 50px;">{{i18n('数量')}}</span>
                     <span class="width126" style="width: 108px;">{{i18n('收货人')}}</span>
@@ -202,14 +202,14 @@
                     <table class="order-list all-table-color">
                         <tr ng-repeat="pro in suborder.itemList">
                             <!--商品图片-->
-                            <td width="120" align="center" class="bl bb all-img-box"><a target="_blank" href="#/orderDetail?code={{suborder.orderCode}}"><img
+                            <td width="124" align="center" class="bl bb all-img-box"><a target="_blank" href="#/orderDetail?code={{suborder.orderCode}}"><img
                                     width="80" height="80"
                                     ng-src="{{pro.productPicPath}}"
                                     alt="{{pro.productCname}}"></a></td>
                             <!--商品名称-->
                             <td width="308" class="bb">
                                 <a target="_blank" class="name" href="#/orderDetail?code={{suborder.orderCode}}">
-                                    <span class="colorB">{{pro.productCname}}</span>
+                                    <span class="">{{pro.productCname}}</span>
                                 </a>
                                 <!--商品属性-->
                                 <ul class="seriesAttr bigUl">
