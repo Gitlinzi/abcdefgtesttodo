@@ -19,6 +19,31 @@
     @@include("global-nav.html")
 </span>
 <div class="container width1000">
+  <!--购物进度-->
+  <div class="buyStepNumBox">
+    <ul class="clearfix">
+      <li class="current">
+        <span class="num">1</span>
+        <h4 class="lbg-txt">
+          {{i18n('我的')}}{{i18n($parent.switchConfig.common.allCartBtnName)}}
+        </h4>
+        <!-- <span class="line_bg lbg-l"></span> -->
+        <span class="line_bg lbg-r"></span>
+      </li>
+      <li class="current">
+        <span class="num">2</span>
+        <h4 class="lbg-txt">{{i18n('填写核对订单信息')}}</h4>
+        <!-- <span class="line_bg lbg-l"></span> -->
+        <span class="line_bg lbg-r"></span>
+      </li>
+      <li class="active">
+        <span class="num">3</span>
+        <h4 class="lbg-txt">{{i18n('成功提交订单')}}</h4>
+        <!-- <span class="line_bg lbg-l"></span> -->
+        <!-- <span class="line_bg lbg-r"></span> -->
+      </li>
+    </ul>
+  </div>
 	<!--收银台 字-->
 	<div class="shopTitle">{{i18n('提交订单')}}</div>
 	<div class="pay-complete" ng-class="{'complete-marginB':!switchConfig.trade.complete.showBottomImage}">

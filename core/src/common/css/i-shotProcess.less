@@ -4,7 +4,7 @@
   display:block;
   height:60px;
   clear: both;
-  width: 460px;
+  width: 505px;
   position: absolute;
   top: -125px;
   right: 0;
@@ -57,7 +57,7 @@
   .num{
     // position:relative;
     // z-index:2;
-    color: @themeColor;
+    color: #666;
     background-color: @whiteColor;
     width: 24px;
     height: 24px;
@@ -66,21 +66,23 @@
     display:inline-block;
     border-radius: 50%;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: normal;
     font-family: '微软雅黑' !important;
-    border: 1px solid @themeColor;
+    border: 1px solid #ddd;
   }
   .lbg-txt{
     position:relative;
-    color:@99GreyColor;
-    font-size:12px;
+    color:@66GreyColor;
+    font-size:14px;
   }
   .current{
     .num{
+      color: @themeColor;
       background-color: @whiteColor;
+      border: 1px solid @themeColor;
     }
     .lbg-txt{
-      color:@themeColor;
+      color:#333;
     }
     .line_bg,.num em{
       background:@themeColor;
@@ -92,10 +94,14 @@
       background-color: @themeColor;
     }
     .lbg-txt{
-      color:@themeColor;
+      color:#333;
+      font-weight: bold;
     }
-    .line_bg,.num em{
+    .num em{
       background:@themeColor;
+    }
+    .line_bg{
+      background: #d8d8d8;
     }
   }
   .f-r5{

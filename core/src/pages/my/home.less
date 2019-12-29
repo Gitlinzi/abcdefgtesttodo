@@ -914,7 +914,8 @@ body {
             font-size: 12px;
         }
         & .all-img-box img {
-            border: 1px solid @eeGreyColor;
+          vertical-align: middle;
+            border: 1px solid #f2f2f2;
         }
         /* 当有预售商品时候的css样式 begin */
         & .ready-buy {
@@ -944,8 +945,8 @@ body {
 
         td {
             vertical-align: top;
-            padding-top: 14px;
-            padding-bottom: 14px;
+            padding-top: 20px;
+            padding-bottom: 20px;
             .name {
                 max-height: 40px;
                 display: -webkit-box;
@@ -10934,7 +10935,7 @@ input[class*='checkBox']:checked+label:after {
         tr{
             td{
                 padding: 5px 0;
-                border-right: 1px solid #f2f2f2;
+                // border-right: 1px solid #f2f2f2;
             }
         }
 
@@ -12616,4 +12617,35 @@ div {
       }
     }
   }
+}
+
+
+/* Table Code By Joenix */
+.tape(@target, @space) {
+  thead {}
+  tfoot {}
+  tbody {}
+
+  .loop(@i) when (@i < length(@space)+1){
+    @{target}{
+      &:nth-child(@{i}) {
+        width: extract(@space, @i) !important;
+      }
+    }
+    .loop(@i+1);
+  }
+
+  .loop(1);
+}
+
+.order-list-table {
+  @spaces: 15%, 20%, 5%, 0%, 15%, 15%, 10%, 10%, 10%;
+
+  .tape(tr td, @spaces);
+}
+
+.evaluate-list-table {
+  @spaces: 35%, 5%, 15%, 15%, 10%, 10%, 10%;
+
+  .tape(div span, @spaces);
 }
