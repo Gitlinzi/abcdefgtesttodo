@@ -23,7 +23,8 @@
     // background-color: @loginBgColor;
     border-top: 1px solid @ddGreyColor;
     #bregis-page {
-        background-color: @loginBgColor;
+        background-color: #fff;
+		padding-top: 100px;
     }
     #cregis-page {
         // background-color: @loginBgColor;
@@ -405,4 +406,141 @@
         color: @themeColor;
         border-bottom: 1px solid @themeColor;
     }
+}
+
+
+#bregis-page {
+    & .form {
+        padding-bottom: 150px;
+    }
+
+	.buyStepNumBox {
+
+		margin-bottom: 50px;
+
+		li {
+			position: relative;
+
+			&:before {
+				content: "";
+				display: block;
+				height: 1px;
+				width: 100%;
+				background: #ddd;
+				border-left: #fff solid 20px;
+				border-right: #fff solid 20px;
+				position: absolute;
+				box-sizing: border-box;
+				left: -50%;
+				top: 35px;
+				z-index: 0;
+			}
+
+			&:first-child:before {
+				display: none;
+			}
+
+			.num {
+				display: block;
+				float: none;
+				margin: 0 auto;
+				font-size: 12px;
+				position: relative;
+				z-index: 1;
+				color: #999;
+			}
+
+			.lbg-txt {
+				float: none;
+				color: #333;
+				margin-top: 8px;
+			}
+
+			&.active {
+
+				&:before {
+					background: #cc0000;
+				}
+
+				.num {
+					border: #cc0000 solid 1px;
+					color: #fff;
+				}
+
+				.lbg-txt {
+					color: #333;
+					font-weight: normal;
+				}
+			}
+
+			&.complete {
+				.num {
+					border: #cc0000 solid 1px;
+					color: #cc0000;
+					font-size: 0;
+
+					&:before {
+						content:"√";
+						font-size: 12px;
+						font-family: Tahoma,Geneva,sans-serif;
+					}
+				}
+			}
+		}
+	}
+
+	.form-group {
+		border: 1px solid #ddd;
+		border-radius: 2px;
+		padding-left: 40px;
+		position: relative;
+
+		&.isbtn {
+			padding-left: 0;
+			border: 0;
+			margin-top: 45px;
+
+			&:before {
+				display: none;
+			}
+
+			.btn {
+				color: #fff;
+				border-radius: 2px;
+			}
+		}
+
+		&:before {
+			content: "";
+			display: block;
+			width: 40px;
+			height: 40px;
+			border-right: #ddd solid 1px;
+			left: 0;
+			top: 0;
+			position: absolute;
+		}
+
+		.input {
+			border: 0;
+			width: 278px;
+			padding: 0 20px;
+			line-height: 40px;
+			height: 40px;
+
+			&.sms {
+				width: 138px;
+			}
+		}
+
+		.smsBtn, .smsBtnHigh {
+			height: 40px;
+			line-height: 40px;
+			float: right;
+			border-left: #ddd solid 1px;
+			background: #fafafa;
+			color: #333;
+		}
+
+	}
 }

@@ -1250,7 +1250,7 @@ input[class*='checkBox']:checked+label:after {
 /* 个人中心 基本信息 begin */
 
 .base-mes-box {
-    width: 1080px;
+    width: 1000px;
     float: right;
     & .base-mes {
         min-height: 610px;
@@ -1395,8 +1395,8 @@ input[class*='checkBox']:checked+label:after {
 }
 
 .address-manage {
-    float: left;
-    width: 1080px;
+    float: right;
+    width: 1000px;
     min-height: 920px;
     & .add-sup{
         border: 1px solid #e0e0e0;
@@ -1962,7 +1962,7 @@ input[class*='checkBox']:checked+label:after {
 
 //个人中心我的会员
 .name-prove {
-    width: 1080px;
+    width: 1000px;
     float: right;
     min-height: 920px;
     & .name-prove-title {
@@ -2269,8 +2269,8 @@ input[class*='checkBox']:checked+label:after {
 }
 // 晨光 信用额度样式 begin
 .credit-box {
-    float: left;
-    width:1080px;
+    float: right;
+    width:1000px;
     margin-top:20px;
     & .credit-top{
         line-height: 49px;
@@ -3073,7 +3073,7 @@ input[class*='checkBox']:checked+label:after {
 //晨光批发业务单详情 end
 //晨光Home-head样式 begin
 .home-head-box{
-    width:1080px;
+    width:1000px;
     height:160px;
     background: url('../../images/company/home-head.png');
     font-size:0;
@@ -3306,7 +3306,7 @@ input[class*='checkBox']:checked+label:after {
 //我的反馈
 .feedback{
     float: right;
-    width: 1080px;
+    width: 1000px;
     margin-bottom: 56px;
     & .message-title{
         height: 35px;
@@ -3808,7 +3808,7 @@ input[class*='checkBox']:checked+label:after {
 /*我的收藏 原index-order-frequence.less begin*/
 .collection{
     float: right;
-    width: 1080px;
+    width: 1000px;
     & .collection-title{
         margin-top: 20px;
         height: 50px;
@@ -4982,8 +4982,8 @@ input[class*='checkBox']:checked+label:after {
 
 /*兑换的商品 原index-favorite-goods begin*/
 .always{
-    float: left;
-    width: 1080px;
+    float: right;
+    width: 1000px;
     & .follow-left{
         & span{
             display: inline-block;
@@ -5640,7 +5640,7 @@ input[class*='checkBox']:checked+label:after {
 /*浏览历史 原index-favorite-store.less begin*/
 .history{
     float: left;
-    width: 1080px;
+    width: 1000px;
     position: relative;
     margin-bottom: 70px;
     position: relative;
@@ -5807,7 +5807,7 @@ input[class*='checkBox']:checked+label:after {
 /*消息 原message.less begin*/
 .message{
     float: right;
-    width: 1080px;
+    width: 1000px;
     margin-bottom: 56px;
     & .message-title{
         height: 35px;
@@ -6367,7 +6367,7 @@ input[class*='checkBox']:checked+label:after {
 /*我的积分 原index-property-points.less begin*/
 .integral-bigBox{
     float: right;
-    width: 1080px;
+    width: 1000px;
     & .integral-box{
         height: 80px;
         background: @backgroundColor;
@@ -6508,7 +6508,7 @@ input[class*='checkBox']:checked+label:after {
 /*奖品 原award.less begin*/
 .award-page{
     float: right;
-    width: 1080px;
+    width: 1000px;
     & .award-title{
         height: 38px;
         & span{
@@ -6611,7 +6611,7 @@ input[class*='checkBox']:checked+label:after {
 /*领取奖品 原receive-award.less begin*/
 .receive-award{
     float: right;
-    width: 1080px;
+    width: 1000px;
     margin-top: 20px;
     & .receive-title{
         height: 34px;
@@ -7201,8 +7201,8 @@ input[class*='checkBox']:checked+label:after {
 
 /*购买咨询 原index-consult-list.less begin*/
 .consult {
-    float: left;
-    width: 1080px;
+    float: right;
+    width: 1000px;
     & .consult-title {
         font-size: 16px;
         margin-top: 20px;
@@ -7273,8 +7273,8 @@ input[class*='checkBox']:checked+label:after {
 
 /*我的问答 原index-question-list.less begin*/
 .question {
-    float: left;
-    width: 1080px;
+    float: right;
+    width: 1000px;
     & .question-content {
         & .question-left {
             height: 40px;
@@ -7466,8 +7466,8 @@ input[class*='checkBox']:checked+label:after {
     z-index: 100;
 }
 .member {
-    float: left;
-    width: 1080px;
+    float: right;
+    width: 1000px;
     & .member-title{
         font-size: 16px;
         margin: 20px 0px 15px 0px;
@@ -7746,7 +7746,7 @@ input[class*='checkBox']:checked+label:after {
 /*补购服务 原index-order-subsidy.less begin*/
 .buy-service{
     float: right;
-    width: 1080px;
+    width: 1000px;
     & .buy-service-box{
         color: @blackColor;
         & .service-title{
@@ -9540,7 +9540,12 @@ input[class*='checkBox']:checked+label:after {
                 display: block;
                 height: 100%;
                 line-height: 80px;
-                min-width: 160px;
+                max-width: 160px;
+                max-height: 80px;
+                img {
+                    max-width: 160px;
+                    max-height: 80px
+                }
             }
             & .funs{
                 position: relative;
@@ -9595,6 +9600,21 @@ input[class*='checkBox']:checked+label:after {
             line-height: 52px;
             margin-top: 30px;
             text-align: center;
+            &>a,&>div {
+                position: relative;
+                &.active:after {
+                    content: '';
+                    display: block;
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    bottom: -5px;
+                    left: 50%;
+                    margin-left: -9px;
+                    border: 9px solid;
+                    border-color: transparent transparent @themeColor transparent;
+                }
+            }
             a {
                 color: #333333;
                 padding: 0 30px;
@@ -9649,8 +9669,8 @@ input[class*='checkBox']:checked+label:after {
                     box-shadow: 5px 5px 5px #aaa;
                     position: absolute;
                     z-index: 10;
-                    top: 60px;
-                    left: -100px;
+                    top: 52px;
+                    left: -95px;
                     display: none; // overflow: hidden;
                     .left {
                         width: 115px;
@@ -9732,8 +9752,8 @@ input[class*='checkBox']:checked+label:after {
 /*维修 end*/
 /* 快速下单 begin*/
 .quick-order{
-    float: left;
-    width:1080px;
+    float: right;
+    width:1000px;
     min-height: 626px;
     margin-top:20px;
     .quick-order-top{
@@ -10645,7 +10665,7 @@ input[class*='checkBox']:checked+label:after {
 }
 .pricentCard-page {
     float: right;
-    width: 1080px;
+    width: 1000px;
     .home-allTitle {
         margin-bottom: 0;
     }
@@ -11308,7 +11328,7 @@ input[class*='checkBox']:checked+label:after {
 
 .statement-page{
     float: right;
-    width: 1080px;
+    width: 1000px;
     .query {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -11354,7 +11374,7 @@ input[class*='checkBox']:checked+label:after {
     }
     .graph {
         height: 430px;
-        width: 1080px;
+        width: 1000px;
         border: 1px solid #eee;
         /*.download {
             float: right;
@@ -11365,7 +11385,7 @@ input[class*='checkBox']:checked+label:after {
             right: 5px;
         }*/
         .chart {
-            width: 1080px;
+            width: 1000px;
             height: 430px;
         }
     }

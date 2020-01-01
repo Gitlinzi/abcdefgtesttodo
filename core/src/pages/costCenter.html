@@ -77,7 +77,7 @@
                     <span> <em ng-click='toedit(p.userId)'>编辑</em>  <em ng-click="tochosedepart(p.userId)">调整部门</em></span>
                 </li>
             </ul>
-            <div pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
+            <div style="margin-top: 40px;" pagination page-size="pageSize" page-no="pageNo" total-count="totalCount"
             total-page="totalPage"  ng-if="isShowPage"></div>
         </div>
         <!-- 编辑部门的页面 -->
@@ -143,12 +143,12 @@
                         </tr>
                         <tr ng-if='currentdata.approvalWay==1 && idshow'>
                             <td><span class='wjx'>*</span>{{i18n('审批金额')}} :</td>
-                            <td><input type="text" class="borderStyle" style="width: 279px!important;" placeholder="" ng-model='currentdata.approvalAmount'></td>
+                            <td><input type="text" maxlength="18" onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')" class="borderStyle" style="width: 279px!important;" placeholder="" ng-model='currentdata.approvalAmount'></td>
                             <td> <span class='danwei'>单位: 元</span> </td>
                         </tr>
                         <tr ng-if='addEquative.approvalWay==1 && !idshow'>
                             <td><span class='wjx'>*</span>{{i18n('审批金额')}} :</td>
-                            <td><input type="text" class="borderStyle" style="width: 279px !important; " placeholder="" ng-model='addEquative.approvalAmount'></td>
+                            <td><input type="text" maxlength="18" onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')" class="borderStyle" style="width: 279px !important; " placeholder="" ng-model='addEquative.approvalAmount'></td>
                             <td> <span class='danwei'>单位: 元</span> </td>
                         </tr>
                     </tbody>
@@ -285,7 +285,7 @@
                                                 <span>{{k.username}}</span> 
                                                 (<span>{{k.approveAmount}}</span>元)<img src="../images/editbtn.png" alt="" ng-click='showeditm($index)'><img src="../images/cancelbtn.png" alt="" ng-click='deleReal1(k.id)'></div>
                                             <span class='edit-person' ng-class="{'show':moneyid == ($index+1)}">{{k.username}} 
-                                                <input type="text" ng-model='k.money1'> 元
+                                                <input type="text" maxlength="18" ng-model='k.money1' onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')"> 元
                                                 <em ng-click='editconfirm(k)' style="cursor: pointer;">{{i18n('确定')}}</em>
                                                 <em ng-click='editcancel(k)' style="cursor: pointer;">{{i18n('取消')}}</em>
                                             </span></div> 
@@ -296,7 +296,7 @@
                             </tr>
                             <tr ng-if='custominfo.approveType==2'>
                                 <td><span class='wjx'>*</span>{{i18n('审批金额')}} :</td>
-                                <td><input type="text" ng-model='custominfo.approvalAmountLimit'></td>
+                                <td><input type="text" maxlength="18" onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')" ng-model='custominfo.approvalAmountLimit'></td>
                             </tr>
                             <tr>
                                 <td>{{i18n('财政年起始月')}} :</td>
@@ -325,7 +325,10 @@
                                         <input id="you" type="radio" ng-model='custominfo.soAmountLimitIs' value='1' name='soAmountLimitIs'>
                                         <span></span> {{i18n('有')}}
                                     </label>
-                                    <div class='minput fr' ng-show="custominfo.soAmountLimitIs == 1"><span class='wjx'>￥</span><input type="text" ng-model='custominfo.soAmountLimit' style='width: 192px;text-indent: 20px;'></div>
+                                    <div class='minput fr' ng-show="custominfo.soAmountLimitIs == 1">
+                                        <span class='wjx'>￥</span>
+                                        <input type="text" maxlength="18" onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')" ng-model='custominfo.soAmountLimit' style='width: 192px;text-indent: 20px;'>
+                                    </div>
                                     <!-- <div class='minput fr' ng-show="custominfo.soAmountLimitIs == 0"><span class='wjx'>￥</span><input type="text" value="0" disabled style='width: 192px;text-indent: 20px;'></div> -->
                                 </td>
                             </tr>
@@ -340,7 +343,10 @@
                                         <input id="you1" type="radio" ng-model='custominfo.itemAmountLimitIs' value='1' name='itemAmountLimitIs'>
                                         <span></span> {{i18n('有')}}
                                     </label>
-                                    <div class='minput fr' ng-show="custominfo.itemAmountLimitIs ==1"><span class='wjx'>￥</span><input type="text" ng-model='custominfo.itemAmountLimit' style='width: 192px;text-indent: 20px;'></div>
+                                    <div class='minput fr' ng-show="custominfo.itemAmountLimitIs ==1">
+                                        <span class='wjx'>￥</span>
+                                        <input type="text" maxlength="18" onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')" ng-model='custominfo.itemAmountLimit' style='width: 192px;text-indent: 20px;'>
+                                    </div>
                                     <!-- <div class='minput fr' ng-show="custominfo.itemAmountLimitIs ==0"><span class='wjx'>￥</span><input type="text" value="0" disabled style='width: 192px;text-indent: 20px;'></div> -->
                                 </td>
                             </tr>
@@ -355,7 +361,10 @@
                                         <input id="you2" type="radio" ng-model='custominfo.monthAmountLimitIs' value='1' name='monthAmountLimitIs'>
                                         <span></span> {{i18n('有')}}
                                     </label>
-                                    <div class='minput fr' ng-show="custominfo.monthAmountLimitIs == 1"><span class='wjx'>￥</span><input type="text" ng-model='custominfo.monthAmountLimit' style='width: 192px;text-indent: 20px;'></div>
+                                    <div class='minput fr' ng-show="custominfo.monthAmountLimitIs == 1">
+                                        <span class='wjx'>￥</span>
+                                        <input type="text" maxlength="18" onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')" ng-model='custominfo.monthAmountLimit' style='width: 192px;text-indent: 20px;'>
+                                    </div>
                                     <!-- <div class='minput fr' ng-show="custominfo.monthAmountLimitIs == 0"><span class='wjx'>￥</span><input type="text" value="0" disabled style='width: 192px;text-indent: 20px;'></div>                                     -->
                                 </td>
                             </tr>
@@ -372,12 +381,12 @@
                                     </label>
                                     <div class='minput1 fr' ng-show="custominfo.seasonAmountLimitIs ==1">
                                        <div style="white-space:nowrap;">
-                                            <span>Q1</span> <span class='wjx' style='left:24px;top:0px'>￥</span><input type="text" style='width: 60px;text-indent: 16px;margin-right: 21px;margin-bottom: 5px;'  ng-model='custominfo.seasonAmountLimitQ1'>
-                                            <span>Q2</span> <span class='wjx' style='left:134px;top:0px'>￥</span><input type="text" style='width: 60px;text-indent: 16px;margin-bottom: 5px;'  ng-model='custominfo.seasonAmountLimitQ2'>
+                                            <span>Q1</span> <span class='wjx' style='left:24px;top:0px'>￥</span><input type="text" maxlength="18" onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')" style='width: 60px;text-indent: 16px;margin-right: 21px;margin-bottom: 5px;'  ng-model='custominfo.seasonAmountLimitQ1'>
+                                            <span>Q2</span> <span class='wjx' style='left:134px;top:0px'>￥</span><input type="text" maxlength="18" onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')" style='width: 60px;text-indent: 16px;margin-bottom: 5px;'  ng-model='custominfo.seasonAmountLimitQ2'>
                                        </div>
                                        <div style="white-space:nowrap;">
-                                            <span>Q3</span> <span class='wjx' style='left:24px;top:26px'>￥</span><input type="text" style='width: 60px;text-indent: 16px;margin-right: 21px;margin-bottom: 5px;'  ng-model='custominfo.seasonAmountLimitQ3'>
-                                            <span>Q4</span> <span class='wjx' style='left:134px;top:26px'>￥</span><input type="text" style='width: 60px;text-indent: 16px;margin-bottom: 5px;'  ng-model='custominfo.seasonAmountLimitQ4'>
+                                            <span>Q3</span> <span class='wjx' style='left:24px;top:26px'>￥</span><input type="text" maxlength="18" onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')" style='width: 60px;text-indent: 16px;margin-right: 21px;margin-bottom: 5px;'  ng-model='custominfo.seasonAmountLimitQ3'>
+                                            <span>Q4</span> <span class='wjx' style='left:134px;top:26px'>￥</span><input type="text" maxlength="18" onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')" style='width: 60px;text-indent: 16px;margin-bottom: 5px;'  ng-model='custominfo.seasonAmountLimitQ4'>
                                        </div>
                                     </div>
                                     <!-- <div class='minput1 fr' ng-show="custominfo.seasonAmountLimitIs ==0">
@@ -403,7 +412,7 @@
                                         <input id="you4" type="radio" ng-model='custominfo.yearAmountLimitIs' value='1'>
                                         <span></span> {{i18n('有')}}
                                     </label>
-                                    <div class='minput fr' ng-show="custominfo.yearAmountLimitIs ==1"><span class='wjx'>￥</span><input type="text" ng-model='custominfo.yearAmountLimit' style='width: 192px;text-indent: 20px;'></div>
+                                    <div class='minput fr' ng-show="custominfo.yearAmountLimitIs ==1"><span class='wjx'>￥</span><input type="text" maxlength="18" onkeyup="value=value.replace(/[^1-9]{0,1}(\d*(?:\.\d{0,2})?).*$/g, '$1')" ng-model='custominfo.yearAmountLimit' style='width: 192px;text-indent: 20px;'></div>
                                     <!-- <div class='minput fr' ng-show="custominfo.yearAmountLimitIs ==0"><span class='wjx'>￥</span><input type="text" value="0" disabled style='width: 192px;text-indent: 20px;'></div>                                     -->
                                 </td>
                             </tr>

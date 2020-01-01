@@ -62,20 +62,20 @@
 
       <!-- Code By Joenix -->
       <div class="settlement">
-        <div class="settlement-section">
-          <h4 class="settlement-section-title">
-            {{i18n('已关联人')}} -- 接口未接
-          </h4>
-          <div class="settlement-section-container">
-            <div class="grid-row-12">
-              <span class="grid-col-6">
-                <select class="select" name="costDepartment" id="?" required="">
-                  <option value="">--{{i18n('请选择')}}--</option>
-                </select>
-              </span>
-            </div>
-          </div>
-        </div>
+<!--        <div class="settlement-section">-->
+<!--          <h4 class="settlement-section-title">-->
+<!--            {{i18n('已关联人')}} &#45;&#45; 接口未接-->
+<!--          </h4>-->
+<!--          <div class="settlement-section-container">-->
+<!--            <div class="grid-row-12">-->
+<!--              <span class="grid-col-6">-->
+<!--                <select class="select" name="costDepartment" id="?" required="">-->
+<!--                  <option value="">&#45;&#45;{{i18n('请选择')}}&#45;&#45;</option>-->
+<!--                </select>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="settlement-section">
           <h4 class="settlement-section-title">{{i18n('成本中心')}}</h4>
           <div class="settlement-section-container">
@@ -109,7 +109,7 @@
             </div>
             <div class="grid-row-12">
               <div class="grid-col-6">
-                <label class="must">{{i18n(' 收货人')}}</label>
+                <label class="must">{{i18n('收货人')}}</label>
                 <div>
                   <select
                     name="consSeleckedName"
@@ -288,7 +288,7 @@
                     <input
                       type="text"
                       name="PoAmount"
-                      ng-model="consignee.PoAmount"
+                      ng-model="invoice.PoAmount"
                       placeholder="{{i18n('请输入')}}"
                       ng-blur="invoice.saveinvoice()"
                     />
@@ -486,7 +486,7 @@
           <div class="settlement-section-container">
             <div class="grid-row-12 settlement-total">
               <div class="grid-col-8">
-                <ul>
+                <ul ng-show="consignee.consSelecked && consignee.AdreSelecked">
                   <li>
                     <label>{{i18n('寄送至')}}</label>
                     <strong>
@@ -497,19 +497,19 @@
                     <label>{{i18n('收货人')}}</label>
                     <strong>
                       {{consignee.consSelecked.receiverName}}
-                      {{consignee.consSelecked.mobile}}
+
                     </strong>
                   </li>
                   <li>
                     <label>{{i18n('联系电话')}}</label>
                     <strong>
-                      ？？？
+                      {{consignee.consSelecked.mobile}}
                     </strong>
                   </li>
                   <li>
                     <label>{{i18n('配送时间')}}</label>
                     <strong>
-                      ？？？
+                      {{consignee.orderDeliveryTimeStr}}
                     </strong>
                   </li>
                 </ul>

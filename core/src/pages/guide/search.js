@@ -166,6 +166,7 @@ appControllers.controller("searchCtrl", ['$log', '$rootScope', '$scope', '$locat
     //加入收藏
     $scope.addFavorite = function (product){
             $scope.params.itemId = product.mpId
+            $scope.getLabelList()
             $scope._checkFavorite();
             $scope.getItemCansale();
         };

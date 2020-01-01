@@ -290,7 +290,7 @@ appControllers
                 _fnE($scope.i18n('提示'), $scope.i18n('收货人信息为空'));
                 return; 
             }
-            if(!$scope.consignee.AdreSelecked.addressId){
+            if($scope.consignee.AdreSelecked && !$scope.consignee.AdreSelecked.addressId){
                 _fnE($scope.i18n('提示'), $scope.i18n('收货人地址信息为空'));
                 return;
             }

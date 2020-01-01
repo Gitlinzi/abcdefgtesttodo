@@ -142,7 +142,7 @@
 
                     <span ng-click="changeActiveNum(3,1)" ng-class="{'goods-active':activeNum==3}">{{i18n('已拒绝')}}<span ng-if="orders.summary.approvalNotPass != null &&orders.summary.approvalNotPass != 0">({{orders.summary.approvalNotPass}})</span></span>
 
-                    <span ng-click="changeActiveNum(baseConfig.orderStatus.closed)" ng-class="{'goods-active':activeNum==baseConfig.orderStatus.closed}">{{i18n('已取消')}}</span>
+                    <span ng-click="changeActiveNum(baseConfig.orderStatus.closed)" ng-class="{'goods-active':activeNum==baseConfig.orderStatus.closed}">{{i18n('已取消')}}<span ng-if="orders.summary.isCancel != null &&orders.summary.isCancel != 0">({{orders.summary.isCancel}})</span></span>
                 </div>
                 <div class="export-btn fr">
                     <button ng-click="orders.downloadFileByGet(null,null,true)" ng-if="orders.exportOrderDetailAdmin == 1">导出订单明细</button>

@@ -364,10 +364,8 @@
         <h2 class="my-title mgT30">我的智选</h2>
 
         <div class="funs">
-          <a href="javascript:void(0)" ng-click="PersonalCenter()">{{
-            i18n('个人中心')
-          }}</a>
-          <div class="amountSet">
+          <a href="javascript:void(0)"  ng-class="{'active':routerName == 'indexHome'}" ng-click="PersonalCenter()">{{i18n('首页')}}</a>
+          <div class="amountSet" ng-class="{'active':routerName == 'accountInfo'}">
             {{ i18n('账户设置') }}
             <i class="common-icons common-icons-down"></i>
             <div class="amountHover">
@@ -425,12 +423,8 @@
               </div>
             </div>
           </div>
-          <a ui-sref="message" class="message-num">
-            {{ i18n('消息') }}
-            <span ng-show="untreatedMesNum" class="square-text">{{
-              untreatedMesNum
-            }}</span>
-          </a>
+          <a ui-sref="message"  ng-class="{'active':routerName == 'messageInfo'}" class="message-num">{{ i18n('消息') }}</a>
+          <span ng-show="untreatedMesNum" class="square-text">{{untreatedMesNum}}</span>
         </div>
         <!--<div class="search">-->
         <!--<input class="searchInput" type="text">-->

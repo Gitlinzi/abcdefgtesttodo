@@ -29,9 +29,9 @@
             </li>
             <li ng-repeat="info in accountInfoList" class="row">
                 <div class="table-cell">{{info.nickname}}</div>
-                <div class="table-cell">{{info.monthAmount | currencySymbol:'¥'}}</div>
-                <div class="table-cell">{{info.quarterAmount | currencySymbol:'¥'}}</div>
-                <div class="table-cell">{{info.yearAmount | currencySymbol:'¥'}}</div>
+                <div class="table-cell">{{info.monthAmount > 0 ? info.monthAmount : 0 | currencySymbol:'¥'}}</div>
+                <div class="table-cell">{{info.quarterAmount  > 0 ? info.quarterAmount : 0  | currencySymbol:'¥'}}</div>
+                <div class="table-cell">{{info.yearAmount  > 0 ? info.yearAmount : 0  | currencySymbol:'¥'}}</div>
             </li>
         </ul>
     </div>

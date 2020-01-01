@@ -84,7 +84,7 @@ angular.module('appControllers').controller('consigneeCtrl', ['$scope', '$rootSc
                     return;
                 }
             }
-            if (!faxReg.test($scope.consignee.fax) && $scope.consignee.fax != '' && $scope.consignee.fax != NULL) {
+            if ( $scope.consignee.fax != null && $scope.consignee.fax != '' && !faxReg.test($scope.consignee.fax)) {
                 _fnE($scope.i18n('提示'), $scope.i18n('传真格式错误!'));
                 return;
             }

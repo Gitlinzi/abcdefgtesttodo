@@ -97,8 +97,8 @@ angular.module('directives')
             '           </div>',
             '        </div>',
             '        <h5 ng-style="{\'margin-bottom\': switchConfig.guide.search.showMiniCartBtn ? \'3px\' : \'5px\'}">',            //自营/直营 标签
-            '            <span ng-if="prod.adv_delivery_type==1" class="self-sell"></span>',
-            '            <span ng-if="prod.adv_delivery_type==2" class="direct-sell"></span>',
+            // '            <span ng-if="prod.adv_delivery_type==1" class="self-sell"></span>',
+            // '            <span ng-if="prod.adv_delivery_type==2" class="direct-sell"></span>',
             '           {{prod.name}}',
             '        </h5>',
             '    </a>',
@@ -248,8 +248,8 @@ angular.module('directives')
             '           </div>',
             '        </div>',
             '        <h5 ng-style="{\'margin-bottom\': switchConfig.guide.search.showMiniCartBtn ? \'3px\' : \'5px\'}">',            //自营/直营 标签
-            '            <span ng-if="prod.adv_delivery_type==1" class="self-sell"></span>',
-            '            <span ng-if="prod.adv_delivery_type==2" class="direct-sell"></span>',
+            // '            <span ng-if="prod.adv_delivery_type==1" class="self-sell"></span>',
+            // '            <span ng-if="prod.adv_delivery_type==2" class="direct-sell"></span>',
             '           {{prod.name}}',
             '        </h5>',
             '    </a>',
@@ -312,7 +312,7 @@ angular.module('directives')
         link: function (scope, elems, attrs, controller) {
             scope.i18n = function (key) {
                 return $window.i18n ? $window.i18n(key) : key;
-            };
+            };/**/
             //set default options
             scope.switchConfig = $rootScope.switchConfig;
             scope.opts = {
@@ -399,8 +399,8 @@ angular.module('directives')
                 '           </div>',
                 '        </div>',
                 '        <h5 ng-style="{\'margin-bottom\': switchConfig.guide.search.showMiniCartBtn ? \'3px\' : \'5px\'}">',            //自营/直营 标签
-                '            <span ng-if="prod.adv_delivery_type==1" class="self-sell"></span>',
-                '            <span ng-if="prod.adv_delivery_type==2" class="direct-sell"></span>',
+                // '            <span ng-if="prod.adv_delivery_type==1" class="self-sell"></span>',
+                // '            <span ng-if="prod.adv_delivery_type==2" class="direct-sell"></span>',
                 '           {{prod.name}}',
                 '        </h5>',
                 '    </a>',
@@ -989,7 +989,7 @@ angular.module('directives')
             '                        ng-click="opts.check(data)" title="{{data.name}}">',
             '                        <i class="icon-checkbox" ng-show="opts.isMulti"></i>',
             '                        <span ng-if="!data.logo" style="word-wrap: break-word;" ng-click="!opts.isMulti&&opts.singleSubmit(data)">{{data.name}}</span>',
-            '                        <img class="img-logo" height="50" width="90" ng-src="{{data.logo}}" ng-if="data.logo" ',
+            '                        <img class="img-logo" height="50" width="90" ng-src="{{data.logo}}" ng-if="data.logo" ng-click="!opts.isMulti&&opts.singleSubmit(data)"',
             '                           alt="{{data.name}}">',
             '                    </a>',
             '                </li>',
@@ -1166,8 +1166,7 @@ angular.module('directives')
                 '                        ng-class="{selected:data.checked}"',
                 '                        ng-click="opts.check(data)" title="{{data.name}}">',
                 '                        <span ng-if="!data.logo" style="word-wrap: break-word;" ng-click="!opts.isMulti&&opts.singleSubmit(data)">{{data.name}}</span>',
-                '                        <img class="img-logo" height="50" width="90" ng-src="{{data.logo}}" ng-if="data.logo" ',
-                '                           alt="{{data.name}}">',
+                '                        <img class="img-logo" height="50" width="90" ng-src="{{data.logo}}" ng-if="data.logo" ng-click="!opts.isMulti&&opts.singleSubmit(data)" alt="{{data.name}}">',
                 '                    </a>',
                 '                </li>',
                 '            </ul>',
@@ -1226,11 +1225,11 @@ angular.module('directives')
                     var options = scope.options || {};
                     return {
                         //过滤器最小值
-                        min: options.min || 8,
+                        min: options.min || 18,
                         //过滤器最大值
                         max: options.max || 1000,
                         //过滤器
-                        limit: options.min || 8,
+                        limit: options.min || 18,
                         //是否多选
                         isMulti: false,
                         //选中数量(多选时用)

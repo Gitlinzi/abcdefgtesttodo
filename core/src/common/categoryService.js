@@ -122,8 +122,8 @@ angular.module('services').service('categoryService', ['$rootScope','$sce','$com
             if(res.code==0) {
                 $rootScope.searchObj.totalCount = res.data.totalCount;
 
-                $rootScope.navCategoryLength = res.data.navCategoryTreeResult[0].children.length;
-                angular.forEach(res.data.navCategoryTreeResult[0].children, function (category, i) {
+                $rootScope.navCategoryLength = res.data.navCategoryTreeResult.length;
+                angular.forEach(res.data.navCategoryTreeResult, function (category, i) {
                     if (i <$rootScope.navCategoryLength) vm.categorylist[i] = category;
                     vm.categoryIDlist[category.id] = false;
                 })

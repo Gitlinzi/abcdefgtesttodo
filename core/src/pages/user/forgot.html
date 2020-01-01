@@ -56,22 +56,18 @@
 				</ul>-->
 				<form class="form" name="userForm" novalidate>
 				<!--忘记密码流程-->
-				<div class="buyStepNumBox">
-					<ul>
-						<li class="active">
-							<span class="num" ng-class="{'bged8d8d':step==1}">1</span>
-							<span class="line_bg lbg-l" ng-class="{'bged8d8d':step==1}"></span>
-							<span class="line_bg lbg-r" ng-class="{'bged8d8d':step==1}"></span>
-							<h4 class="lbg-txt">{{i18n('输入手机验证码')}}</h4>
-						</li>
-						<li>
-							<span class="num">2</span>
-							<span class="line_bg lbg-l"></span>
-							<span class="line_bg lbg-r"></span>
-							<h4 class="lbg-txt">{{i18n('重新设置密码')}}</h4>
-						</li>
-					</ul>
-				</div>
+                    <div class="buyStepNumBox">
+                        <ul>
+                            <li class="active">
+                                <span class="num">1</span>
+                                <h4 class="lbg-txt">{{i18n('输入手机验证码')}}</h4>
+                            </li>
+                            <li>
+                                <span class="num">2</span>
+                                <h4 class="lbg-txt">{{i18n('重新设置密码')}}</h4>
+                            </li>
+                        </ul>
+                    </div>
 					<!-- <img src="../../images/pwd.png" alt="" class="pwd-img"> -->
 					<!--<div class="form-group">-->
 					<!--<label>用户名：</label>-->
@@ -97,13 +93,14 @@
 						<div ng-show="sendErr" class="tip err">{{i18n('验证码发送失败')}}！</div>
 						<div class="clear"></div>
 					</div>
-					<div class="form-group">
+					<div class="form-group isbtn">
 						<!--<label></label>-->
 						<input type="button" id="nextStepBtn" class="btn" value="{{i18n('下一步')}}"  ng-disabled="userForm.$invalid" ng-click="checkCaptchas()" ng-class="{'smsBtnreg': userForm.$invalid}">
 						<div class="clear"></div>
 					</div>
 				</form>
 			</div>
+
 			<div ng-show="step == 1">
 				<!--<ul class="shaft listeps wider">
 					<li><span>1</span>{{i18n('验证信息')}}</li>
@@ -113,16 +110,12 @@
 					<!--忘记密码流程-->
 					<div class="buyStepNumBox">
 						<ul>
-							<li>
-								<span class="num" ng-class="{'bged8d8d':step==1}">1</span>
-								<span class="line_bg lbg-l" ng-class="{'bged8d8d':step==1}"></span>
-								<span class="line_bg lbg-r" ng-class="{'bged8d8d':step==1}"></span>
-								<h4 class="lbg-txt" ng-class="{'ced8d8d':step==4}">{{i18n('输入手机验证码')}}</h4>
+							<li class="complete">
+								<span class="num">1</span>
+								<h4 class="lbg-txt">{{i18n('输入手机验证码')}}</h4>
 							</li>
 							<li class="active">
 								<span class="num">2</span>
-								<span class="line_bg lbg-l"></span>
-								<span class="line_bg lbg-r"></span>
 								<h4 class="lbg-txt">{{i18n('重新设置密码')}}</h4>
 							</li>
 						</ul>
@@ -148,19 +141,21 @@
 						<div ng-show="passwdForm.password2.$dirty && passwdForm.password2.$invalid" class="tip err"><span>{{i18n('两次密码不一致')}}</span></div>
 						<div class="clear"></div>
 					</div>
-					<div class="form-group">
-						<label></label>
+					<div class="form-group isbtn">
+						<!--label></label-->
 						<input ng-disabled="passwdForm.$invalid || showTips" type="button" class="btn" value="{{i18n('完成')}}" ng-click="updPasswd()">
 						<div class="clear"></div>
 					</div>
 				</form>
 			</div>
+
 			<div ng-show="step == 2">
 				<div class="regis-success">
 					<p class="info1"><img width="38" height="36" src="/images/ok.png?v=${version}"> {{i18n('密码修改成功')}}！</p>
 					<p><a href="login.html" class="btn">{{i18n('去登录')}}</a></p>
 				</div>
 			</div>
+
 			<!-- 支持邮箱找回密码 step=3 第一步-->
 			<div ng-show="step == 3">
 				<form class="form" name="userEmail" novalidate>
@@ -168,15 +163,11 @@
 					<div class="buyStepNumBox">
 						<ul>
 							<li class="active">
-								<span class="num" ng-class="{'bged8d8d':step==4}">1</span>
-								<span class="line_bg lbg-l" ng-class="{'bged8d8d':step==4}"></span>
-								<span class="line_bg lbg-r" ng-class="{'bged8d8d':step==4}"></span>
-								<h4 class="lbg-txt" ng-class="{'ced8d8d':step==4}">{{i18n('输入用户名')}}</h4>
+								<span class="num">1</span>
+								<h4 class="lbg-txt">{{i18n('输入用户名')}}</h4>
 							</li>
 							<li>
 								<span class="num">2</span>
-								<span class="line_bg lbg-l"></span>
-								<span class="line_bg lbg-r"></span>
 								<h4 class="lbg-txt">{{i18n('重新设置密码')}}</h4>
 							</li>
 						</ul>
@@ -199,28 +190,25 @@
 						<div ng-show="userEmail.vicode.$dirty && userEmail.vicode.$invalid || checkVicode" class="tip err">{{checkVicode}}</div>
 						<div class="clear"></div>
 					</div>
-					<div class="form-group">
+					<div class="form-group isbtn">
 						<input type="button" id="nextStepBtn" class="btn" value="{{i18n('下一步')}}"  ng-disabled="userEmail.$invalid || !vicode" ng-click="nextStep()" ng-class="{'smsBtnreg': userEmail.$invalid}">
 						<div class="clear"></div>
 					</div>
 				</form>
 			</div>
+
 			<!-- 支持邮箱找回密码 step=4 第二步-->
 			<div ng-show="step == 4">
 				<form class="form" name="passwdForm2" novalidate>
 					<!--忘记密码流程-->
 					<div class="buyStepNumBox">
 						<ul>
-							<li>
-								<span class="num" ng-class="{'bged8d8d':step==4}">1</span>
-								<span class="line_bg lbg-l" ng-class="{'bged8d8d':step==4}"></span>
-								<span class="line_bg lbg-r" ng-class="{'bged8d8d':step==4}"></span>
-								<h4 class="lbg-txt" ng-class="{'ced8d8d':step==4}">{{i18n('输入邮箱地址')}}</h4>
+							<li class="complete">
+								<span class="num">1</span>
+								<h4 class="lbg-txt">{{i18n('输入邮箱地址')}}</h4>
 							</li>
 							<li class="active">
 								<span class="num">2</span>
-								<span class="line_bg lbg-l"></span>
-								<span class="line_bg lbg-r"></span>
 								<h4 class="lbg-txt">{{i18n('重新设置密码')}}</h4>
 							</li>
 						</ul>
@@ -245,13 +233,14 @@
 						<div ng-show="passwdForm2.password4.$dirty && passwdForm2.password4.$invalid" class="tip err"><span>{{i18n('两次密码不一致')}}</span></div>
 						<div class="clear"></div>
 					</div>
-					<div class="form-group">
-						<label></label>
+					<div class="form-group isbtn">
+						<!--label></label-->
 						<input ng-disabled="passwdForm2.$invalid || showTips2" type="button" class="btn" value="{{i18n('完成')}}" ng-click="updEmailPasswd()">
 						<div class="clear"></div>
 					</div>
 				</form>
 			</div>
+
 		</div>
 	</div>
 	@@include("footer.html") @@include("script.html")
