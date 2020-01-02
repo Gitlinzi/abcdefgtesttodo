@@ -339,10 +339,9 @@
                         <dt>{{i18n('代收人手机号')}}</dt>
                         <input class="form-input" type="text" ng-model="detail.approveOrders.proxyReceiverMobile">
                     </dl>
-                    <dl class="clearfix">
-                        <dt>{{i18n('预计发货日期')}}</dt>
-                        <input class="form-input" type="text" value="" class="timeiconbg date-time-picker-input" datetimepicker for-id="logListModalFrom" options="options1" close="close(from)"
-                                        ng-model="detail.approveOrders.shipmentDate">
+                    <dl class="clearfix" style="line-height: 30px">
+                        <dt>{{i18n('预计发货日期')}}：</dt>
+                        {{detail.approveOrders.shipmentDate}}
                     </dl>
                 </td>
                  <!--支付方式-->
@@ -356,10 +355,10 @@
                                 <input id="female" type="radio" ng-model="detail.order.orderPaymentType" value="4">
                                 <span></span> {{i18n('赊账')}}
                             </label>
-                            <label for="male" class="radioStyle-big">
+                            <!-- <label for="male" class="radioStyle-big">
                                 <input id="male" type="radio" ng-model="detail.order.orderPaymentType" value="3">
                                 <span></span> {{i18n('货到付款')}}
-                            </label>
+                            </label> -->
                         </div>
                     </dd>
                     <dd ng-if="detail.approveOrders.approvalStatus != 4">{{detail.paymentType[detail.order.orderPaymentType]}}</dd>

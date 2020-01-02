@@ -12,7 +12,7 @@ angular.module('appControllers').controller('advanceCreateOrderCtrl', ["$scope",
     // 商详页跳转过来需要回显商品编码
     $scope.proCode = urlParams.code
     // 商详页跳转过来需要回显商品数量
-    $scope.proNum = urlParams.num
+    $scope.proNum = +urlParams.num
 
     var _ut = $rootScope.util.getUserToken();
     var _fnP = $rootScope.ajax.post,

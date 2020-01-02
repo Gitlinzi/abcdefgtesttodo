@@ -24,7 +24,7 @@ angular.module("appControllers")
     orderList: "/oms-api/order/query/list",
     orderDetail: "/oms-api/order/so/getOrderDetailByCode",
     validateWarehouseStock: "/oms-api/order/so/validateWarehouseStock",
-    orderCancel: "/oms-api/so/cancel",
+    orderCancel: "/custom-sbd-web/order/cancelOrder.do ",
     //订单各状态数量
     orderSummary: "/oms-api/order/so/my/summary",
     newOrderMessage: "/oms-api/order/so/newOrderMessage",

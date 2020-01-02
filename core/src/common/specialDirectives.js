@@ -984,12 +984,12 @@ angular.module('directives')
                 addCompareBox:function ($event,product) {
                     $event.stopPropagation();
                     $event.preventDefault();
+                    scope.$emit('updateCompareBox',true)
                     if (!product.compare) {
                         var url = $rootScope.home + '/custom-sbd-web/product/addComparisonBox.do';
                         $rootScope.ajax.postJson(url,{mpIds:[product.mpId]}).then(res=>{
                             if (res.code == 0) {
                                 scope.$emit('getCompareBox')
-                                scope.$emit('updateCompareBox',true)
                             }else{
                                 $rootScope.error.checkCode(res.message,res.message,{
                                     type:'info'
@@ -1063,7 +1063,7 @@ angular.module('directives')
                 '    </div>',
                 // '    <a class="compare" ng-class="{checked: prod.compare}" ng-click="opts.addCompareBox($event,prod)">{{i18n("对比")}}</a>',
                 // '    <a class="favor" ng-class="{favored: prod.favored}" ng-click="opts.itemAddFavorite($event,prod)">{{i18n("收藏")}}</a>',
-                '    <a class="addCarts" style="margin-left: 110px;" href="javascript:void(0)" ng-if="prod.stockNum>0 || prod.virtualAvailableStockNum>0" num="pcIteminfo.itemAmount" ng-click="pcIteminfo._addToCart(prod)">',
+                '    <a class="addCarts" style="margin-left:10px;" href="javascript:void(0)" ng-if="prod.stockNum>0 || prod.virtualAvailableStockNum>0" num="pcIteminfo.itemAmount" ng-click="pcIteminfo._addToCart(prod)">',
                 '       {{i18n("加入")}}{{i18n(cartName)}}',
                 '    </a>',
                 '    <a class="addCarts disable" href="javascript:void(0)" ',

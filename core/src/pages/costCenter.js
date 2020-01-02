@@ -1193,7 +1193,7 @@ appControllers.controller("indexCtrl", ['$log', '$rootScope', '$scope', 'commonS
     })
 
     if ($scope.custominfo.approveType == 2)
-      if ($scope.authorizeSum < $scope.custominfo.approvalAmountLimit) {
+      if (+$scope.authorizeSum < +$scope.custominfo.approvalAmountLimit) {
         $rootScope.error.checkCode($scope.i18n('提示'), $scope.i18n('审批人金额小于审批金额，请重新填写'));
         console.log("cuowu")
         return;

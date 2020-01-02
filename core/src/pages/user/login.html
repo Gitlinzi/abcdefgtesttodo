@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/login.css?v=${version}">
 </head>
 
-<body ng-app="appControllers" ng-controller="loginCtrl">
+<body ng-app="appControllers" ng-controller="loginCtrl" class="ng-cloak">
 <!--    &lt;!&ndash; 头部 &ndash;&gt;-->
 <!--    @@include("userheader.html")-->
 
@@ -168,7 +168,7 @@
         <div class="nav fr">
             <ul class="nav-wrap">
                 <li ng-if="login_tab" class="nav-item" ng-repeat="item in login_tab">
-                    {{item.name}}
+                    <a style="color: #333" ng-href="{{item.linkUrl}}">{{item.name}}</a>
                     <!-- img src="images/adv-arrow-down.png" alt="" ng-if="item.tabList" -->
                     <ul class="sub-nav-wrap" ng-if="item.tabList">
                         <li class="sub-nav-item" ng-repeat="childItem in item.tabList">
@@ -231,24 +231,25 @@
         </div>
     </div>
 </div>
-<div class="footer ng-cloak">
-    <div>
-        <div class="contact">
-            <img src="/images/company/qrcode.jpg" />
-            <span>政企客户专线</span>
-            <b>400-812-1818</b>
-        </div>
-        <div class="info">
-            <p>
-                <a href="">购物指南</a>
-                <a href="">配送物流</a>
-                <a href="">售后服务</a>
-            </p>
-            <p>Copyright © 2019 史泰博电子商务（上海）有限公司 版权所有 沪ICP备17046864号-2</p>
-    <!--        <span><img src="images/adv_.png" alt="">沪公网安备 31010502002336号</span>-->
-        </div>
-    </div>
-</div>
+<!--<div class="footer ng-cloak">-->
+<!--    <div>-->
+<!--        <div class="contact">-->
+<!--            <img src="/images/company/qrcode.jpg" />-->
+<!--            <span>政企客户专线</span>-->
+<!--            <b>400-812-1818</b>-->
+<!--        </div>-->
+<!--        <div class="info">-->
+<!--            <p>-->
+<!--                <a href="">购物指南</a>-->
+<!--                <a href="">配送物流</a>-->
+<!--                <a href="">售后服务</a>-->
+<!--            </p>-->
+<!--            <p>Copyright © 2019 史泰博电子商务（上海）有限公司 版权所有 沪ICP备17046864号-2</p>-->
+<!--    &lt;!&ndash;        <span><img src="images/adv_.png" alt="">沪公网安备 31010502002336号</span>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+@@include("footer.html")
     @@include("script.html")
     <script src="/plugins/swiper.min.js"></script>
     <script type="text/javascript" src="/login.js?v=${version}"></script>

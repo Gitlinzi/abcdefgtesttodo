@@ -51,6 +51,7 @@ angular.module('appControllers').controller('modifyCtrl',['$scope','$rootScope',
             if (res.code == 0) {
                 $scope.resetInfo();
                 _fnE($scope.i18n('提示'),$scope.i18n('密码修改成功'));
+                $scope.showTips = false;
                 // $rootScope.util.deleteUserToken();
             }else{
                 if(res.message == '旧密码输入错误，请重试'){

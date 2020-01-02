@@ -58,6 +58,7 @@ angular.module('my',['ui.router', 'appControllers'])
             }
 
             scope.$on("$stateChangeStart", function (e, toState, toParams) {
+                scope.routerName = toState.menu
                 switch (toState.menu){
                     case 'indexHome':
                         scope.isHide = false;

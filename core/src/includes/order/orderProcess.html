@@ -14,7 +14,8 @@
             <h4>{{i18n('待审批')}}</h4>
             <p>{{detail.order.orderCreateTime|date:'yyyy-MM-dd HH:mm:ss'}}</p>
         </li>
-        <li ng-class="{'active':detail.approveOrders.approvalStatus != 0}">
+        <li ng-class="{'active':detail.approveOrders.approvalStatus != 0}" 
+            ng-show="(detail.order.orderStatus == 9000 && detail.approveOrders.approvalStatus == 3) || detail.order.orderStatus != 9000">
             <i></i>
             <h5>
                 <address></address>
@@ -25,7 +26,8 @@
             <h4>{{i18n('审批中')}}</h4>
             <p ng-if="detail.approveOrders.approvalStatus != 0 && detail.order.orderApprovingTime">{{detail.order.orderApprovingTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
         </li>
-        <li ng-class="{'active':detail.order.approvalStatus == 2}" ng-show="detail.order.approvalStatus != 3 && detail.order.approvalStatus != 4">
+        <li ng-class="{'active':detail.order.approvalStatus == 2}" ng-show="detail.order.approvalStatus != 3 && detail.order.approvalStatus != 4 &&
+        ((detail.order.orderStatus == 9000 && detail.order.approvalStatus == 2) || detail.order.orderStatus != 9000)">
             <i></i>
             <h5>
                 <address></address>
@@ -36,7 +38,8 @@
             <h4>{{i18n('待确认')}}</h4>
             <p ng-if="detail.order.approvalStatus == 2 && detail.order.orderConfiringTime">{{detail.order.orderConfiringTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
         </li>
-        <li ng-class="{'active': detail.approveOrders.approvalStatus == 4}" ng-show="detail.order.approvalStatus == 4">
+        <li ng-class="{'active': detail.approveOrders.approvalStatus == 4}" ng-show="detail.order.approvalStatus == 4 && 
+        ((detail.order.orderStatus == 9000 && detail.approveOrders.approvalStatus == 4) || detail.order.orderStatus != 9000)">
             <i></i>
             <h5>
                 <address></address>
@@ -47,7 +50,8 @@
             <h4>{{i18n('已退回')}}</h4>
             <p ng-if="detail.approveOrders.approvalStatus == 4 && detail.order.ordersendBackTime">{{detail.order.ordersendBackTime |  date:'yyyy-MM-dd HH:mm:ss'}}</p>
         </li>
-        <li ng-class="{'active': detail.approveOrders.approvalStatus == 3}" ng-show="detail.order.approvalStatus == 3">
+        <li ng-class="{'active': detail.approveOrders.approvalStatus == 3}" ng-show="detail.order.approvalStatus == 3"
+            ng-show="(detail.order.orderStatus == 9000 && detail.approveOrders.approvalStatus == 3) || detail.order.orderStatus != 9000">
             <i></i>
             <h5>
                 <address></address>
@@ -58,7 +62,8 @@
             <h4>{{i18n('已拒绝')}}</h4>
             <p ng-if="detail.approveOrders.approvalStatus == 3 && detail.order.orderRejectTime">{{detail.order.orderRejectTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
         </li>
-        <li ng-class="{'active':detail.order.orderStatus === baseConfig.orderStatus.received,'current':detail.order.orderStatus === baseConfig.orderStatus.received||detail.order.orderStatus === baseConfig.orderStatus.completed}">
+        <li ng-class="{'active':detail.order.orderStatus === baseConfig.orderStatus.received,'current':detail.order.orderStatus === baseConfig.orderStatus.received||detail.order.orderStatus === baseConfig.orderStatus.completed}"
+            ng-show="(detail.order.orderStatus == 9000 && detail.order.orderStatus === baseConfig.orderStatus.received) || detail.order.orderStatus != 9000">
             <i></i>
             <!-- <span ng-if="detail.order.orderStatus === baseConfig.orderStatus.received &&detail.order.orderType ==$parent.switchConfig.orderType.service">{{i18n('正在安装')}}<label></label></span>
             <span ng-if="detail.order.orderStatus === baseConfig.orderStatus.received &&detail.order.orderType ==$parent.switchConfig.orderType.general">{{i18n('配送中')}}<label></label></span> -->
@@ -71,7 +76,8 @@
             <h4>{{i18n('待发货')}}</h4>
             <p ng-if="detail.order.orderStatus === baseConfig.orderStatus.received && detail.order.orderDeliveryTime">{{detail.order.orderDeliveryTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
         </li>
-        <li ng-class="{'active':detail.order.orderStatus === baseConfig.orderStatus.received,'current':detail.order.orderStatus === baseConfig.orderStatus.received||detail.order.orderStatus === baseConfig.orderStatus.completed}">
+        <li ng-class="{'active':detail.order.orderStatus === baseConfig.orderStatus.received,'current':detail.order.orderStatus === baseConfig.orderStatus.received||detail.order.orderStatus === baseConfig.orderStatus.completed}"
+            ng-show="(detail.order.orderStatus == 9000 && detail.order.orderStatus === baseConfig.orderStatus.received) || detail.order.orderStatus != 9000">
             <i></i>
             <span ng-if="detail.order.orderStatus === baseConfig.orderStatus.received &&detail.order.orderType ==$parent.switchConfig.orderType.service">{{i18n('正在安装')}}<label></label></span>
             <span ng-if="detail.order.orderStatus === baseConfig.orderStatus.received &&detail.order.orderType ==$parent.switchConfig.orderType.general">{{i18n('配送中')}}<label></label></span>
@@ -84,10 +90,16 @@
             <h4>{{i18n('待收货')}}</h4>
             <!-- <p ng-if="detail.order.orderStatus === baseConfig.orderStatus.received">{{detail.order.orderDeliveryedTime | date:'yyyy-MM-dd HH:mm:ss'}}</p> -->
         </li>
-        <li ng-class="{'active':detail.order.orderStatus === baseConfig.orderStatus.completed}">
+        <li ng-class="{'active':detail.order.orderStatus === baseConfig.orderStatus.completed}" 
+            ng-show="(detail.order.orderStatus == 9000 && detail.order.orderStatus === baseConfig.orderStatus.completed) || detail.order.orderStatus != 9000">
             <i></i>
             <h4>{{i18n('完成')}}</h4>
             <p ng-if="detail.order.orderStatus === baseConfig.orderStatus.completed && detail.order.orderReceiveTime">{{detail.order.orderReceiveTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+        </li>
+        <li ng-class="{'active': detail.order.orderStatus == 9000}" ng-show="detail.order.orderStatus == 9000">
+            <i></i>
+            <h4>{{i18n('已关闭')}}</h4>
+            <p>{{detail.order.orderCancelDateStr}}</p>
         </li>
     </ul>
 </div>

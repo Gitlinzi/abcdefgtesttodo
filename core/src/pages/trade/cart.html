@@ -53,7 +53,7 @@
                                    ng-change="checkAll(cartInfo.allCheckedFlg,cartInfo)"
                                    class="chk chk-all checkBoxAll"
                                    type="checkbox">
-                            <span></span>
+                            <span ng-class="{active:cartInfo.allCheckedFlg}"></span>
                         </label>
                     </div>
                     <div class="cell c0" ng-if="isIE8">

@@ -2188,15 +2188,15 @@ appControllers
         function initCart(){
             var _$=angular.element;
             $scope.cartFoot= function(){
-                if(_$(window).scrollTop() + _$(window).height() >= cartHeight){
-                    _$('#cart-bar').removeClass('cart-bar-fixed');
-                    _$('#cart-bar').css({'border':'1px solid #e6e6e6'});
-                    _$('#cart-foot').hide();
-                }else{
-                    _$('#cart-bar').addClass('cart-bar-fixed');
-                    _$('#cart-bar').css({'border':'none'});
-                    _$('#cart-foot').show();
-                }
+                // if(_$(window).scrollTop() + _$(window).height() >= cartHeight){
+                //     _$('#cart-bar').removeClass('cart-bar-fixed');
+                //     _$('#cart-bar').css({'border':'1px solid #e6e6e6'});
+                //     _$('#cart-foot').hide();
+                // }else{
+                //     _$('#cart-bar').addClass('cart-bar-fixed');
+                //     _$('#cart-bar').css({'border':'none'});
+                //     _$('#cart-foot').show();
+                // }
             }
 
             _$(window).scroll(function(){

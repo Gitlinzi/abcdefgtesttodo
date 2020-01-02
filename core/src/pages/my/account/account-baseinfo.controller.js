@@ -184,18 +184,18 @@ angular.module('appControllers').controller('baseInfoCtrl', ["$scope", "$rootSco
                     _fnE($scope.i18n('提示'), $scope.i18n('请填写完整信息后保存'));
                     return;
                 }
-                if (userInfo.fixenPhone == '' || userInfo.fixenPhone == null) {
-                    _fnE($scope.i18n('提示'), $scope.i18n('请填写完整信息后保存'));
-                    return;
-                }
-                if (userInfo.fixenPhone2 == '' || userInfo.fixenPhone2 == null) {
-                    _fnE($scope.i18n('提示'), $scope.i18n('请填写完整信息后保存'));
-                    return;
-                }
-                if (userInfo.phoneNum == '' || userInfo.phoneNum == null) {
-                    _fnE($scope.i18n('提示'), $scope.i18n('请填写完整信息后保存'));
-                    return;
-                }
+                // if (userInfo.fixenPhone == '' || userInfo.fixenPhone == null) {
+                //     _fnE($scope.i18n('提示'), $scope.i18n('请填写完整信息后保存'));
+                //     return;
+                // }
+                // if (userInfo.fixenPhone2 == '' || userInfo.fixenPhone2 == null) {
+                //     _fnE($scope.i18n('提示'), $scope.i18n('请填写完整信息后保存'));
+                //     return;
+                // }
+                // if (userInfo.phoneNum == '' || userInfo.phoneNum == null) {
+                //     _fnE($scope.i18n('提示'), $scope.i18n('请填写完整信息后保存'));
+                //     return;
+                // }
                 if(userInfo.phoneNum){
                     if (!mobileReg.test(userInfo.phoneNum)) {
                         _fnE($scope.i18n('提示'), $scope.i18n('手机号格式错误!'));

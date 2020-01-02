@@ -85,11 +85,11 @@
         <!--导购属性/商品分类-->
         <div id="classify" ng-if="searchedObj.totalCount>0" ng-init="ngMin=4">
             <div search-property callback="getProduct()"  datas="searchedObj.brandResult" title="{{$parent.brandName}}"></div>
-            <div search-property callback="getProduct()" datas="attrs.attributeValues" title="{{attrs.name}}" options="{dataType:'list'}" ng-repeat="attrs in searchedObj.attributeResult|limitTo:ngMin"></div>
-            <div search-property callback="getProduct()" datas="cates.children" title="{{cates.name}}" options="{dataType:'search'}" ng-repeat="cates in searchedObj.navCategoryTreeResult[0].children|limitTo:ngMin" ng-if="!isList"></div>
-            <div class="type" ng-show="searchedObj.attributeResult.length>4||searchedObj.navCategoryTreeResult[0].children.length>4">
-                <a href="javascript:;" ng-click="ngMin=ngMin==4?1000:4" ng-bind="ngMin==4?i18n('展开更多选项'):i18n('收起')"></a><i ng-class="{'icon-top-up mgL10':ngMin>4,'icon-top-down mgL10':ngMin==4}"></i>
-            </div>
+<!--            <div search-property callback="getProduct()" datas="attrs.attributeValues" title="{{attrs.name}}" options="{dataType:'list'}" ng-repeat="attrs in searchedObj.attributeResult|limitTo:ngMin"></div>-->
+<!--            <div search-property callback="getProduct()" datas="cates.children" title="{{cates.name}}" options="{dataType:'search'}" ng-repeat="cates in searchedObj.navCategoryTreeResult[0].children|limitTo:ngMin" ng-if="!isList"></div>-->
+<!--            <div class="type" ng-show="searchedObj.attributeResult.length>4||searchedObj.navCategoryTreeResult[0].children.length>4">-->
+<!--                <a href="javascript:;" ng-click="ngMin=ngMin==4?1000:4" ng-bind="ngMin==4?i18n('展开更多选项'):i18n('收起')"></a><i ng-class="{'icon-top-up mgL10':ngMin>4,'icon-top-down mgL10':ngMin==4}"></i>-->
+<!--            </div>-->
         </div>
         <!--搜索结果大于0,显示结果-->
         <div class="container search-list" ng-if="searchedObj.zeroRecommendResult.length>0||searchedObj.productList.length>0">

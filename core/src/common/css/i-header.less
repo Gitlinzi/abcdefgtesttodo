@@ -86,10 +86,10 @@
 
 #h-top {
   position: relative;
-  height: 31px;
+  height: 30px;
   font-size: 12px;
   background-color: #fff;
-  border-bottom: #efefef solid 1px;
+  border-bottom: @borderColor solid 1px;
   z-index: 200;
   color: @fontColor;
   & .container {
@@ -388,11 +388,11 @@
 }
 
 /* 头部banner */
-
 #h-banner,
+#fix-banner,
 #bottomSearch {
   position: relative; //height: 90px;
-  height: 147px;
+  height: 110px;
   z-index: 130;
   background-color: inherit;
   &.bottom-h {
@@ -572,7 +572,7 @@
     .mgT30 {
       margin-top: 30px;
     }
-    .hotword {
+    & .hotword {
       margin: 8px 0px;
       position: absolute;
       & a {
@@ -606,7 +606,7 @@
         position: absolute;
         // top: -7px;
         left: 0px;
-        width: 520px;
+        width: 608px;
         background-color: @whiteColor;
         overflow: hidden;
         & li {
@@ -785,4 +785,46 @@
 .search-top-btn {
   background: url("../../images/search-btn.png") no-repeat;
   background-size: cover;
+}
+.fix-header-box {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 9999999;
+  box-shadow: 0 1px 10px 0 rgba(0,0,0,.1);
+  animation: showHeader .3s;
+  display: none;
+  #fix-banner {
+    margin: 0 auto;
+    height: 80px;
+    .logo {
+      margin: 14px 0 0;
+    }
+    .logo2 {
+      margin-top: 14px;
+    }
+    .search {
+      height: auto;
+      margin-top: 20px;
+      .hotword {
+        display: none;
+      }
+    }
+    .shopCar {
+      top: 20px !important;
+    }
+  }
+}
+
+@keyframes showHeader {
+  from {
+    opacity:.3;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity:1;
+    transform: translateY(0);
+  }
 }
