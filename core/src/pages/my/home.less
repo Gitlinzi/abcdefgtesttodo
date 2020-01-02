@@ -1,4 +1,4 @@
-    @import url('../../common/css/i-var_${skin}.less');
+@import url('../../common/css/i-var_${skin}.less');
 @import url('../../common/css/i-base.less');
 @import url('../../common/css/i-address.less');
 @import url('../../common/css/i-popbox.less');
@@ -10761,6 +10761,8 @@ input[class*='checkBox']:checked+label:after {
           button{
             width: 52px;
             height: 28px;
+            line-height: 28px;
+            font-size: 12px;
             border-radius: 2px;
 
             .button{
@@ -10768,7 +10770,7 @@ input[class*='checkBox']:checked+label:after {
               line-height: 30px;
             }
 
-            &.reset{
+            &.iconbutton{
               background: #fff;
               color: #cc0000;
               border: 1px solid transparent;
